@@ -22,18 +22,18 @@ public static class WaveBuilder
 
             // 조건에 맞는 몬스터 필터링
             List<MonsterData> valid = monsterPool.FindAll(m =>
-                m.spawnValue >= 1 &&
-                m.spawnValue <= maxAllowed
+                m.valueCost >= 1 &&
+                m.valueCost <= maxAllowed
             );
 
             // 유효 몬스터가 없으면 fallback
             if (valid.Count == 0)
             {
-                MonsterData fallback = monsterPool.Find(m => m.spawnValue == 1);
+                MonsterData fallback = monsterPool.Find(m => m.valueCost == 1);
                 if (fallback != null)
                 {
                     spawnQueue.Add(fallback);
-                    remainingValue -= fallback.spawnValue;
+                    remainingValue -= fallback.valueCost;
                     continue;
                 }
                 else
@@ -46,7 +46,7 @@ public static class WaveBuilder
             // 랜덤 선택
             MonsterData selected = valid[Random.Range(0, valid.Count)];
             spawnQueue.Add(selected);
-            remainingValue -= selected.spawnValue;
+            remainingValue -= selected.valueCost;
         }
 
         return spawnQueue;
