@@ -12,7 +12,7 @@ public class CursorWeapon : MonoBehaviour
     public LayerMask targetLayer;  //타겟을 레이어로 지정
 
     
-    private Dictionary<Monster, float> lastHitTimes = new Dictionary<Monster, float>();
+    //private Dictionary<Monster, float> lastHitTimes = new Dictionary<Monster, float>();
 
     private Camera cam;
 
@@ -39,20 +39,20 @@ public class CursorWeapon : MonoBehaviour
         foreach (Collider2D hit in hits)                              
         
         {
-            Monster monster = hit.GetComponent<Monster>();
-            if (monster == null) continue;
+            //Monster monster = hit.GetComponent<Monster>();
+            //if (monster == null) continue;
 
-            float lastHitTime;   
-            bool found = lastHitTimes.TryGetValue(monster, out lastHitTime); 
-            //몬스터가 딕셔너리에 있는지 파악하고 피격 여부를 통해 마지막으로 데미지가 들어간 시간을 정함
+            //float lastHitTime;   
+            //bool found = lastHitTimes.TryGetValue(monster, out lastHitTime); 
+            ////몬스터가 딕셔너리에 있는지 파악하고 피격 여부를 통해 마지막으로 데미지가 들어간 시간을 정함
 
-            if (Time.time - lastHitTime >= attackCooldown)      //쿨타임이 지났다면 다시 공격 가능
-            {
-                monster.TakeDamage(attackPower);
-                lastHitTimes[monster] = Time.time;
+            //if (Time.time - lastHitTime >= attackCooldown)      //쿨타임이 지났다면 다시 공격 가능
+            //{
+            //    monster.TakeDamage(attackPower);
+            //    lastHitTimes[monster] = Time.time;
             }
         }
     }
-}
+//}
     
 
