@@ -1,10 +1,10 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnMonster : MonoBehaviour
+public class MonsterAttackPattern : MonoBehaviour
 {
-    // 오로지 스폰관련 
+    // Start is called before the first frame update
     void Start()
     {
         
