@@ -2,14 +2,14 @@
 
 public class TestMonster : BaseMonster
 {
-    public GameObject fireballPrefab; // Inspector에서 지정
+    public GameObject TestMonsterPrefab; // Inspector에서 지정
     public Transform firePoint;       // 발사 위치
 
     protected override void Attack()
     {
-        if (fireballPrefab == null || firePoint == null) return;
+        if (TestMonsterPrefab == null || firePoint == null) return;
 
-        GameObject fireball = Instantiate(fireballPrefab, firePoint.position, Quaternion.identity);
+        GameObject fireball = Instantiate(TestMonsterPrefab, firePoint.position, Quaternion.identity);
 
         Rigidbody2D rb = fireball.GetComponent<Rigidbody2D>();
         if (rb != null)

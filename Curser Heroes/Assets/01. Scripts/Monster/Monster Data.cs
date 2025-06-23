@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-using UnityEngine;
+
 
 [CreateAssetMenu(menuName = "ScriptableObjects/MonsterData", order = 1)]
 public class MonsterData : ScriptableObject
