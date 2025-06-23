@@ -7,6 +7,8 @@ public class WaveData : ScriptableObject
 {
     public int wave;
     public int waveValue;
+    [Header("Possible Enemies in this stage")]
+    public List<MonsterData> spawnableEnemies;
 
     public int GetValueRange()
     {
