@@ -8,7 +8,7 @@ public class CursorWeapon : MonoBehaviour
 {
     public float attackRange = 0.5f;       //공격범위 0.5(기본설정)
     public int attackPower = 10;           //기본 데미지 10
-    public float attackCooldown = 0.2f;    // 어택 쿨타임 0.2초
+    public float attackCooldown = 0.5f;    // 어택 쿨타임 0.5초
     public LayerMask targetLayer;  //타겟을 레이어로 지정
 
 
