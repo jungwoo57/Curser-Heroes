@@ -32,15 +32,15 @@ public class WaveManager : MonoBehaviour
         for (int i = 0; i < monsters.Count; i++)
         {
             Vector3 spawnPos = spawnPoints[i % spawnPoints.Length].position;
-            GameObject go = Instantiate(monsters[i].prefab, spawnPos, Quaternion.identity);
+            //GameObject go = Instantiate(monsters[i].prefab, spawnPos, Quaternion.identity);
 
-            Monster monster = go.GetComponent<Monster>();
-            if (monster != null)
-            {
-                monster.Setup(monsters[i]);
-                monster.onDeath += OnMonsterKilled;  //몬스터가 죽었을 때 호출될 이벤트 등록
-            }
-            spawnedMonsters.Add(go); //몬스터 소환 확인용 코드
+            //Monster monster = go.GetComponent<Monster>();
+            //if (monster != null)
+            //{
+                //monster.Setup(monsters[i]);
+                //monster.onDeath += OnMonsterKilled;  //몬스터가 죽었을 때 호출될 이벤트 등록
+            //}
+            //spawnedMonsters.Add(go); //몬스터 소환 확인용 코드
         }
     }
 
