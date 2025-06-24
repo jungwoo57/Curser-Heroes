@@ -10,8 +10,8 @@ public class StageStartUI : MonoBehaviour
    [SerializeField] private TextMeshProUGUI stageText;
    [SerializeField] private TextMeshProUGUI countText;
 
-   private Vector2 startPos = new Vector2(1280, 0);        //스테이지 텍스트 시작 위치
-   private Vector2 endPos = new Vector2(-1280, 0);         //스테이지 텍스트 끝나는 위치
+   [SerializeField]private Vector2 startPos = new Vector2(1280, 0);        //스테이지 텍스트 시작 위치
+   [SerializeField]private Vector2 endPos = new Vector2(-1280, 0);         //스테이지 텍스트 끝나는 위치
 
    [Header("연출 시간")]
    [SerializeField] private float moveDurationTime;   //중앙 까지 움직이는 시간
@@ -41,25 +41,26 @@ public class StageStartUI : MonoBehaviour
    
    IEnumerator StageStartAnimation()
    {
+      startText.rectTransform.anchoredPosition = startPos;
+      yield return null;
       float time = 0;
       Debug.Log(startPos.x - slowStartPos.x);
       while (time < moveDurationTime)
       {
-         time += Time.deltaTime;
          float lerp = time / moveDurationTime;
-         //Debug.Log(stageText.rectTransform.anchoredPosition.x);
-         stageText.rectTransform.anchoredPosition = Vector2.MoveTowards(startPos, slowStartPos, lerp);
+         stageText.rectTransform.anchoredPosition = Vector2.Lerp(startPos, slowStartPos, lerp);
          yield return null;
+         time += Time.deltaTime;
       }
 
-      /*time = 0;
+      time = 0;
       while (time < slowDurationTime)
       {
          time += Time.deltaTime;
          float lerp = time / slowDurationTime;
          stageText.rectTransform.anchoredPosition = Vector2.Lerp(slowStartPos,slowEndPos, lerp);
          yield return null;
-      }*/
+      }
 
       time = 0;
       Debug.Log(slowEndPos.x - endPos.x);
