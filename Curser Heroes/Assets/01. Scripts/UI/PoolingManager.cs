@@ -10,13 +10,12 @@ public class PoolingManager : MonoBehaviour
 
     public GameObject[] monsterPrefabs;
     
-    public List<GameObject>[] pools; 
+    List<GameObject>[] pools; 
     void Awake()
     {
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {
