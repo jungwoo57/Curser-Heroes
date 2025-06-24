@@ -9,8 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f44a9dcb68dbb4a48aba01bdbc74ad52, type: 3}
-  m_Name: WaveData
+  m_Script: {fileID: 11500000, guid: a679e971d4790164f8d9e3ff6463d243, type: 3}
+  m_Name: New Monster Data
   m_EditorClassIdentifier: 
-  wave: 0
-  waveValue: 0
+  monsterPrefab: {fileID: 1570650610558602143, guid: 94795d1cd705428499f3183ee1bb591a, type: 3}
+  maxHP: 10
+  valueCost: 2
+  attackCooldown: 1
