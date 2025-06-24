@@ -11,4 +11,5 @@ public class MonsterData : ScriptableObject
     public int maxHP;
     public int valueCost;
     public float attackCooldown;
+    public int damage;
 }   
