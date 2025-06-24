@@ -1,12 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
     public List<MonsterData> allMonsters;
     public WaveGroupData waveGroupData;
-    public Transform[] spawnPoints;
     public GameManager gameManager;
+    public Spawner spawner; // Inspector에서 연결 필요
+
+
 
     private int currentWaveIndex = 0;
     private List<GameObject> spawnedMonsters = new List<GameObject>();
@@ -69,19 +72,7 @@ public class WaveManager : MonoBehaviour
 
     void SpawnMonsters(List<MonsterData> monsters)
     {
-        for (int i = 0; i < monsters.Count; i++)
-        {
-            Vector3 spawnPos = spawnPoints[i % spawnPoints.Length].position;
-            GameObject go = Instantiate(monsters[i].monsterPrefab, spawnPos, Quaternion.identity);
-
-            Monster monster = go.GetComponent<Monster>();
-            if (monster != null)
-           {
-                monster.Setup(monsters[i]);
-                monster.onDeath += OnMonsterKilled;  //몬스터가 죽었을 때 호출될 이벤트 등록
-            }
-           spawnedMonsters.Add(go); //몬스터 소환 확인용 코드
-        }
+        spawnedMonsters = spawner.SpawnMonsters(monsters, OnMonsterKilled);
     }
 
     void OnMonsterKilled(GameObject monster) // 몬스터 죽음 확인 부분
@@ -115,4 +106,5 @@ public class WaveManager : MonoBehaviour
 
         return newWave;
     }
+   
 }

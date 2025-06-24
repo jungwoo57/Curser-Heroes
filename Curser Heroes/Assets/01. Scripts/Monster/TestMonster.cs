@@ -3,7 +3,7 @@
 public class TestMonster : BaseMonster
 {
     public GameObject TestMonsterPrefab; // Inspector에서 지정
-    public Transform TestMonsterTransform;       // 발사 위치
+    public Transform TestMonsterTransform;       // 소환 위치
 
     protected override void Attack()
     {
