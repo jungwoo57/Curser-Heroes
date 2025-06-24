@@ -16,7 +16,7 @@ public class StageStartUI : MonoBehaviour
    [Header("연출 시간")]
    [SerializeField] private float moveDurationTime;   //중앙 까지 움직이는 시간
    [SerializeField] private float slowDurationTime;   // 중앙에서 느려지는 시간
-
+   [SerializeField] private float startTextScaleUpTime;
    [Header("슬로우 영역")] 
    [SerializeField] private Vector2 slowStartPos = new Vector2(150, 0);
    [SerializeField] private Vector2 slowEndPos = new Vector2(-150, 0);
@@ -32,22 +32,35 @@ public class StageStartUI : MonoBehaviour
    public void Init()
    {
       stageText.rectTransform.anchoredPosition =startPos;
-      startText.gameObject.SetActive(false);
    }
 
    [ContextMenu("애니메이션 시작")]
    public void StartAnimation()
    {
-      StartCoroutine(StageStartAnimation("STAGE 1")); // 해당 부분 현재 스테이지 이름이로 추후 이름변경
-      StartCoroutine(StageStartAnimation("1"));
-      StartCoroutine(StageStartAnimation("2"));
-      StartCoroutine(StageStartAnimation("3"));
+      StartCoroutine(AnimationSequence());
+   }
+
+   IEnumerator AnimationSequence()
+   {
+      Debug.Log("처음 텍스트시작");
+      yield return StartCoroutine(StageStartAnimation("STAGE 1")); // 해당 부분 현재 스테이지 이름이로 추후 이름변경
+      
+      Debug.Log("1 텍스트시작");
+      yield return StartCoroutine(StageStartAnimation("1"));
+      
+      Debug.Log("2 텍스트시작");
+      yield return StartCoroutine(StageStartAnimation("2"));
+      
+      Debug.Log("3 텍스트시작");
+      yield return StartCoroutine(StageStartAnimation("3"));
+
+      yield return StartCoroutine(StartTextAnimation());
    }
    
    IEnumerator StageStartAnimation(string letter)
    {
-      startText.rectTransform.anchoredPosition = startPos;
-      startText.text = letter;
+      stageText.rectTransform.anchoredPosition = startPos;
+      stageText.text = letter;
       yield return null;
       float time = 0;
       while (time < moveDurationTime)
@@ -75,8 +88,18 @@ public class StageStartUI : MonoBehaviour
          stageText.rectTransform.anchoredPosition = Vector2.Lerp(slowEndPos,endPos, lerp);
          yield return null;
       }
-
-      //Init();
    }
-   
+
+   IEnumerator StartTextAnimation()
+   {
+      float time = 0;
+      while (time < startTextScaleUpTime)
+      {
+         float lerp = time/startTextScaleUpTime;
+         startText.rectTransform.localScale = Vector2.Lerp(Vector2.zero, Vector2.one, lerp);
+         time += Time.deltaTime;
+         yield return null;
+      }
+      startText.rectTransform.localScale = Vector2.zero;
+   }
 }
