@@ -37,6 +37,7 @@ public class StageStartUI : MonoBehaviour
    [ContextMenu("애니메이션 시작")]
    public void StartAnimation()
    {
+      gameObject.SetActive(true);
       StartCoroutine(AnimationSequence());
    }
 
