@@ -16,4 +16,13 @@ public class GameManager : MonoBehaviour
         jewel += amount;
         Debug.Log($"쥬얼 획득: {amount} / 총 쥬얼: {jewel}");
     }
+    public int GetGold()
+    {
+        return gold;
+    }
+
+    public int GetJewel()
+    {
+        return jewel;
+    }
 }
