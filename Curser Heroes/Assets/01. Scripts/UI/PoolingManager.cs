@@ -10,7 +10,7 @@ public class PoolingManager : MonoBehaviour
 
     public GameObject[] monsterPrefabs;
     
-    List<GameObject>[] pools; 
+    public List<GameObject>[] pools; 
     void Awake()
     {
         if (instance == null)
@@ -58,8 +58,8 @@ public class PoolingManager : MonoBehaviour
             if (!obj)
             {
                 obj = Instantiate(monsterPrefabs[index], transform);
+                pools[index].Add(obj);
             }
-            
         }
 
         return obj;
