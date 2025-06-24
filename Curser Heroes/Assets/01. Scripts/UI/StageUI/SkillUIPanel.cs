@@ -8,13 +8,7 @@ public class SkillUIPanel : MonoBehaviour
 {
     [SerializeField] public SkillUI[] skills;
 
-    private void Awake()
-    {
-        for (int i = 0; i < skills.Length; i++)
-        {
-            skills[i] = GetComponent<SkillUI>();
-        }
-    }
+
 
     public void SkillUpdate()
     {

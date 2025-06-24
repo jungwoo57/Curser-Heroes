@@ -23,6 +23,9 @@ public class BattleUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI goldText;
     [SerializeField] private TextMeshProUGUI jewelText;
     
+    [Header("스킬UI")]
+    [SerializeField] public SkillUI[] skills;
+    [SerializeField] public int skillIndex;
     
     
     [Header("더미 데이터")]  // 테스트용 데이터 추후 삭제
@@ -31,7 +34,7 @@ public class BattleUI : MonoBehaviour
     public int playerMaxHelath;
 
 
-    private void Awake()
+    private void OnEnable()
     {
         Init();
     }
@@ -87,5 +90,13 @@ public class BattleUI : MonoBehaviour
         waveText.text = "Wave : " + 0; //매니저에게 스테이지 정보 가져와서 적용
         goldText.text = "Gold : " + 0 + "(" + 0 + ")";  //매니저에게 스테이지 정보 가져와서 적용
         jewelText.text = "Jewel : " + 0 + "(" + 0 + ")"; //매니저에게 스테이지 정보 가져와서 적용
+    }
+    
+    public void SkillUpdate()
+    {
+        for (int i = 0; i < skills.Length; i++)
+        {
+            skills[i].UpdateSkillUI();
+        }
     }
 }
