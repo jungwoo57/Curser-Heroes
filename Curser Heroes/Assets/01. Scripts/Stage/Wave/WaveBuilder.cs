@@ -3,11 +3,14 @@ using UnityEngine;
 
 public static class WaveBuilder
 {
-    public static List<MonsterData> BuildWave(WaveData waveData, List<MonsterData> monsterPool)
+    public static List<MonsterData> BuildWaveEntry(WaveEntry waveData, List<MonsterData> globalPool)
     {
-        int waveValue = waveData.waveValue;         // 예: 50
-        int valueRange = waveData.GetValueRange();  // 예: 4
+        int waveValue = waveData.WaveValue;
+        int valueRange = 2 + (waveData.wave / 10);
         int monsterCount = 10;
+
+        // 🔄 사용할 몬스터 풀 선택 (override > global)
+        List<MonsterData> usePool = waveData.HasOverrideEnemies ? waveData.overrideEnemies : globalPool;
 
         List<MonsterData> spawnQueue = new List<MonsterData>();
         int remainingValue = waveValue;
@@ -15,35 +18,24 @@ public static class WaveBuilder
         for (int i = 0; i < monsterCount; i++)
         {
             int remainingMonsters = monsterCount - i - 1;
-
-            // 다음 몬스터들이 최소 1씩 가질 수 있도록 최대값 제한
             int maxAllowed = Mathf.Min(valueRange, remainingValue - remainingMonsters);
             if (maxAllowed < 1) maxAllowed = 1;
 
-            // 조건에 맞는 몬스터 필터링
-            List<MonsterData> valid = monsterPool.FindAll(m =>
-                m.valueCost >= 1 &&
-                m.valueCost <= maxAllowed
-            );
-
-            // 유효 몬스터가 없으면 fallback
+            List<MonsterData> valid = usePool.FindAll(m => m.valueCost >= 1 && m.valueCost <= maxAllowed);
             if (valid.Count == 0)
             {
-                MonsterData fallback = monsterPool.Find(m => m.valueCost == 1);
+                MonsterData fallback = usePool.Find(m => m.valueCost == 1);
                 if (fallback != null)
                 {
                     spawnQueue.Add(fallback);
                     remainingValue -= fallback.valueCost;
                     continue;
                 }
-                else
-                {
-                    Debug.LogError("spawnValue = 1 몬스터가 없어 10마리 조합 불가");
-                    break;
-                }
+
+                Debug.LogError("valueCost = 1인 몬스터가 없어 10마리 조합 불가");
+                break;
             }
 
-            // 랜덤 선택
             MonsterData selected = valid[Random.Range(0, valid.Count)];
             spawnQueue.Add(selected);
             remainingValue -= selected.valueCost;
