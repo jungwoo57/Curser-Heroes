@@ -10,6 +10,7 @@ public abstract class BaseMonster : MonoBehaviour
     public int currentHP;              // 현재 체력
     public int valueCost;              // 밸류 시스템에서의 몬스터 비용
     public float attackCooldown = 2f;  // 공격 쿨다운 시간
+    public int damage;              
 
     protected float attackTimer;       // 쿨다운 타이머
 
