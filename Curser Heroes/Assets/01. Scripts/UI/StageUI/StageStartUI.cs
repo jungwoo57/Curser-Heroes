@@ -8,7 +8,6 @@ public class StageStartUI : MonoBehaviour
    [Header("텍스트")]
    [SerializeField] private TextMeshProUGUI startText;
    [SerializeField] private TextMeshProUGUI stageText;
-   [SerializeField] private TextMeshProUGUI countText;
 
    [SerializeField]private Vector2 startPos = new Vector2(1280, 0);        //스테이지 텍스트 시작 위치
    [SerializeField]private Vector2 endPos = new Vector2(-1280, 0);         //스테이지 텍스트 끝나는 위치
