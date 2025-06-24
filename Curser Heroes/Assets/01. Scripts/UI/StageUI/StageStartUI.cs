@@ -20,6 +20,8 @@ public class StageStartUI : MonoBehaviour
    [Header("슬로우 영역")] 
    [SerializeField] private Vector2 slowStartPos = new Vector2(150, 0);
    [SerializeField] private Vector2 slowEndPos = new Vector2(-150, 0);
+
+   
    
    private void Awake()
    {
@@ -36,15 +38,18 @@ public class StageStartUI : MonoBehaviour
    [ContextMenu("애니메이션 시작")]
    public void StartAnimation()
    {
-      StartCoroutine(StageStartAnimation());
+      StartCoroutine(StageStartAnimation("STAGE 1")); // 해당 부분 현재 스테이지 이름이로 추후 이름변경
+      StartCoroutine(StageStartAnimation("1"));
+      StartCoroutine(StageStartAnimation("2"));
+      StartCoroutine(StageStartAnimation("3"));
    }
    
-   IEnumerator StageStartAnimation()
+   IEnumerator StageStartAnimation(string letter)
    {
       startText.rectTransform.anchoredPosition = startPos;
+      startText.text = letter;
       yield return null;
       float time = 0;
-      Debug.Log(startPos.x - slowStartPos.x);
       while (time < moveDurationTime)
       {
          float lerp = time / moveDurationTime;
@@ -63,7 +68,6 @@ public class StageStartUI : MonoBehaviour
       }
 
       time = 0;
-      Debug.Log(slowEndPos.x - endPos.x);
       while (time < moveDurationTime)
       {
          time += Time.deltaTime;
