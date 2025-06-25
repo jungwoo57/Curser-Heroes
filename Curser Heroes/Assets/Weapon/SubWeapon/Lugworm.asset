@@ -9,12 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc9806310749ed24f98ef35b33734d7f, type: 3}
-  m_Name: New Wave Group Data
+  m_Script: {fileID: 11500000, guid: a595bcdfd8ab3e341af4dac3e68e0bbc, type: 3}
+  m_Name: Lugworm
   m_EditorClassIdentifier: 
-  globalMonsterPool:
-  - {fileID: 11400000, guid: 92671daf9ef2655419d715c46bbfc66c, type: 2}
-  waveEntries:
-  - wave: 0
-    overrideEnemies:
-    - {fileID: 0}
+  weaponName: Lugworm
+  baseDamage: 3
+  damagePerLevel: 1
+  weaponType: 0
+  effectType: 1

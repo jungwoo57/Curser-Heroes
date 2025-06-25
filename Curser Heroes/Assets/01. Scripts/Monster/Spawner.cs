@@ -22,11 +22,11 @@ public class Spawner : MonoBehaviour
             Vector3 spawnPos = spawnPositions[i];  // 미리 생성한 위치 가져오기
             GameObject go = Instantiate(data.monsterPrefab, spawnPos, Quaternion.identity);  // 몬스터 생성
 
-            Monster monster = go.GetComponent<Monster>();
-            if (monster != null)
+            BaseMonster baseMonster = go.GetComponent<BaseMonster>();
+            if (baseMonster != null)
             {
-                monster.Setup(data);  // 몬스터 정보 세팅
-                monster.onDeath += onDeathCallback;  // 죽음 이벤트에 콜백 등록
+                baseMonster.Setup(data);               // Setup 호출
+                baseMonster.onDeath += onDeathCallback;  // 이벤트 연결
             }
 
             spawned.Add(go);  // 리스트에 추가
