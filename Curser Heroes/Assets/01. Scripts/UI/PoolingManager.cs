@@ -21,6 +21,7 @@ public class PoolingManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+            return;
         }
 
         pools = new List<GameObject>[monsterPrefabs.Length];
@@ -63,6 +64,11 @@ public class PoolingManager : MonoBehaviour
             pools[index].Add(obj);
         }
         return obj;
+    }
+
+    public void ReturnMonster(GameObject monster)
+    {
+        monster.SetActive(false);
     }
     
 
