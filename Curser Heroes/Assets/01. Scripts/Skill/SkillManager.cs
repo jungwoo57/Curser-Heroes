@@ -36,7 +36,7 @@ public class SkillManager : MonoBehaviour
             .ToList();
 
         List<SkillData> selection = GetRandomSkills(availableSkills, 3);
-        Instantiate(skillSelectUIPrefab).GetComponent<SkillSelectUI>().Show(selection, OnSkillSelected);
+        //Instantiate(skillSelectUIPrefab).GetComponent<SkillSelectUI>().Show(selection, OnSkillSelected);
     }
 
     void OnSkillSelected(SkillData selected)
