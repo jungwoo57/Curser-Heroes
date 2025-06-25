@@ -43,8 +43,12 @@ public class UIManager : MonoBehaviour
     {
         battleUI.gameObject.SetActive(false);
         stageStartUI.gameObject.SetActive(false);
-    }    
-    
+    }
+
+    private void Start()
+    {
+        StageStart();
+    }
     
     [ContextMenu("스테이지시작")]
     public void StageStart()
