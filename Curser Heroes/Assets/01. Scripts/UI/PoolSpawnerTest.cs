@@ -22,6 +22,8 @@ public class PoolSpawnerTest : MonoBehaviour
 
             Vector3 spawnPos = spawnPositions[i];  // 미리 생성한 위치 가져오기
             GameObject go = PoolingManager.Instance.GetMonster(0);
+            go.transform.position = spawnPos;
+            go.transform.rotation = Quaternion.identity;
                 //Instantiate(data.monsterPrefab, spawnPos, Quaternion.identity);  // 몬스터 생성
 
             Monster monster = go.GetComponent<Monster>();

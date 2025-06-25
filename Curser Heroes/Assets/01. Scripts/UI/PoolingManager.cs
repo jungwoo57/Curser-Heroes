@@ -9,8 +9,9 @@ public class PoolingManager : MonoBehaviour
     private static PoolingManager instance;
 
     public GameObject[] monsterPrefabs;
-    
-    List<GameObject>[] pools; 
+
+    List<GameObject>[] pools;
+
     void Awake()
     {
         if (instance == null)
@@ -28,7 +29,7 @@ public class PoolingManager : MonoBehaviour
             pools[i] = new List<GameObject>();
         }
     }
-    
+
     public static PoolingManager Instance
     {
         get
@@ -37,10 +38,11 @@ public class PoolingManager : MonoBehaviour
             {
                 return null;
             }
+
             return instance;
         }
     }
-    
+
     public GameObject GetMonster(int index)
     {
         GameObject obj = null;
@@ -53,14 +55,13 @@ public class PoolingManager : MonoBehaviour
                 obj.SetActive(true);
                 break;
             }
-
-            if (!obj)
-            {
-                obj = Instantiate(monsterPrefabs[index], transform);
-                pools[index].Add(obj);
-            }
         }
 
+        if (!obj)
+        {
+            obj = Instantiate(monsterPrefabs[index], transform);
+            pools[index].Add(obj);
+        }
         return obj;
     }
     
