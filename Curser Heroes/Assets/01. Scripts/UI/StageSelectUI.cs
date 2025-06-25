@@ -83,6 +83,7 @@ public class StageSelectUI : MonoBehaviour
         public void ClickEnterButton()
         {
                 Debug.Log("게임 시작");                     // 테스트용 코드
+                StartCoroutine(LoadSceneAndStartUI());
         }
 
         public void ClickSkillListButton()
