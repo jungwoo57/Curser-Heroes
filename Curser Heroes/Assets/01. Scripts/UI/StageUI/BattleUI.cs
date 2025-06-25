@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class BattleUI : MonoBehaviour
 {
     public GameObject battlePanel;
+    private WeaponManager weaponManager;
     
     [Header("플레이어 체력 UI")]
     [SerializeField]private GameObject[] healthImage;
@@ -49,11 +50,13 @@ public class BattleUI : MonoBehaviour
     public void Init() // 스테이지 시작 시 초기화 함수
     {
         battlePanel.SetActive(true);
-        healthIndex = playerMaxHelath-1; // 더미 데이터 추후 변경            
+        healthIndex = playerMaxHelath - 1;// 더미 데이터 추후 변경  동료 데이터 추가 시 동료 데이터도 초기화     
+        //healthIndex = weaponManager.weaponLife.currentWeapon.maxLives; 변경할 코드   
         
-        for (int i = 0; i < healthImage.Length; i++) // 임시코드 추후 플레이어 maxHp로 로직 변경
+        for (int i = 0; i < playerMaxHelath; i++) // 임시코드 추후 플레이어 maxHp로 로직 변경
         {
             healthImage[i].GetComponent<Image>().sprite = activeHealthImage;
+            healthImage[i].SetActive(true);
         }
     }
     
@@ -71,7 +74,7 @@ public class BattleUI : MonoBehaviour
     [ContextMenu("힐하기")]
     public void Heal()
     {
-        if (healthIndex < playerMaxHelath)
+        if (healthIndex < playerMaxHelath-1)
         {
             healthIndex++;
         }

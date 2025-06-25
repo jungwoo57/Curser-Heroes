@@ -15,5 +15,6 @@ MonoBehaviour:
   globalMonsterPool:
   - {fileID: 11400000, guid: 92671daf9ef2655419d715c46bbfc66c, type: 2}
   waveEntries:
-  - wave: 1
-    overrideEnemies: []
+  - wave: 0
+    overrideEnemies:
+    - {fileID: 0}

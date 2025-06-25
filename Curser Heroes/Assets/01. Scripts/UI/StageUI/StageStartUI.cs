@@ -101,5 +101,6 @@ public class StageStartUI : MonoBehaviour
          yield return null;
       }
       startText.rectTransform.localScale = Vector2.zero;
+      gameObject.SetActive(false);
    }
 }

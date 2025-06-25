@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a679e971d4790164f8d9e3ff6463d243, type: 3}
-  m_Name: New Monster Data
+  m_Script: {fileID: 11500000, guid: a595bcdfd8ab3e341af4dac3e68e0bbc, type: 3}
+  m_Name: PieceofWood
   m_EditorClassIdentifier: 
-  monsterPrefab: {fileID: 0}
-  maxHP: 0
-  valueCost: 0
-  attackCooldown: 0
-  damage: 0
+  weaponName: PieceWood
+  baseDamage: 5
+  damagePerLevel: 1.5
+  weaponType: 0
+  effectType: 0
