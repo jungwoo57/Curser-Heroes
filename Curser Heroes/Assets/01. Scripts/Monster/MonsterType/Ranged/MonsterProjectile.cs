@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class MonsterProjectile : MonoBehaviour
 {
     public float speed = 10f;    // 투사체 이동 속도
     private Vector3 moveDirection;   // 이동 방향 (단위 벡터)

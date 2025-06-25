@@ -3,7 +3,7 @@
 [CreateAssetMenu(fileName = "SkillData", menuName = "Skill/SkillData")]
 public class SkillData : MonoBehaviour
 {
-    public string name;
+    public string skillName;
     public int damage;
     public int cooltime;
     public Sprite icon;

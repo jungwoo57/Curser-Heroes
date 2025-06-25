@@ -23,7 +23,7 @@ public class Ranged : BaseMonster
                 GameObject projectile = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
 
                 // 투사체 스크립트 초기화
-                Projectile projScript = projectile.GetComponent<Projectile>();
+                MonsterProjectile projScript = projectile.GetComponent<MonsterProjectile>();
                 if (projScript != null)
                 {
                     projScript.Initialize(direction, damage);
