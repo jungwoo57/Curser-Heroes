@@ -107,18 +107,15 @@ public class PoolingRefatory : MonoBehaviour
         {
             string key = pair.Key;
             Queue<GameObject> queue = pair.Value;
-
-            // 현재 풀에서 나가 사용 중인 오브젝트들을 추적하려면, 씬 전체 탐색 필요
+            
             GameObject[] allObjects = GameObject.FindObjectsOfType<GameObject>();
 
             int returnCount = 0;
 
             foreach (var obj in allObjects)
             {
-                // 아직 비활성화되지 않은 오브젝트만 찾는다
                 if (obj.activeInHierarchy && poolDataList.Find(p => p.key == key)?.prefab.name == obj.name.Replace("(Clone)", "").Trim())
                 {
-                    // 큐에 이미 들어있는 건 제외 (사용 중인 것만 처리)
                     if (!queue.Contains(obj))
                     {
                         obj.SetActive(false);
@@ -127,8 +124,6 @@ public class PoolingRefatory : MonoBehaviour
                     }
                 }
             }
-
-            Debug.Log($"{key} 활성화된 오브젝트 {returnCount}개 리턴함 (총 큐: {queue.Count})");
         }
     }
 }
