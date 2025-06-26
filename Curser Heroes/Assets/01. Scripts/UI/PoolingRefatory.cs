@@ -1,7 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -10,12 +7,12 @@ public class PoolData
 {
     public string key;
     public GameObject prefab;
-    public int count = 10;
+    public int count;
 }
 public class PoolingRefatory : MonoBehaviour
 {
     public List<PoolData> poolDataList;
-    public Transform monsterPool;
+    //public Transform monsterPool;  // 추후 부모 추가
     private Dictionary<string, Queue<GameObject>> poolDictionary = new Dictionary<string, Queue<GameObject>>();
     
     private static PoolingRefatory instance;
@@ -31,9 +28,9 @@ public class PoolingRefatory : MonoBehaviour
             Destroy(this.gameObject);
             return;
         }
-        GameObject MonsterPool = new GameObject("MonsterPool");
-        MonsterPool.transform.parent = this.transform;
-        monsterPool = MonsterPool.transform;
+        //GameObject MonsterPool = new GameObject("MonsterPool");
+        //MonsterPool.transform.parent = this.transform;
+       // monsterPool = MonsterPool.transform;
         InitPool();
     }
 
@@ -109,8 +106,7 @@ public class PoolingRefatory : MonoBehaviour
             Queue<GameObject> queue = pair.Value;
             
             GameObject[] allObjects = GameObject.FindObjectsOfType<GameObject>();
-
-            int returnCount = 0;
+            
 
             foreach (var obj in allObjects)
             {
@@ -120,7 +116,6 @@ public class PoolingRefatory : MonoBehaviour
                     {
                         obj.SetActive(false);
                         queue.Enqueue(obj);
-                        returnCount++;
                     }
                 }
             }
