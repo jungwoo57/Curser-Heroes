@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
-    public List<MonsterData> allMonsters;
     public WaveGroupData waveGroupData;
     public GameManager gameManager;
     public Spawner spawner; // Inspector에서 연결 필요
