@@ -9,6 +9,7 @@ public class Spawner : MonoBehaviour
     // 몬스터가 죽을 때 호출될 콜백 함수도 연결해줌
     public List<GameObject> SpawnMonsters(List<MonsterData> monsters, System.Action<GameObject> onDeathCallback)
     {
+
         List<GameObject> spawned = new List<GameObject>();  // 실제 소환된 몬스터 오브젝트 리스트
 
         // 몬스터 수만큼 겹치지 않는 유니크한 위치를 생성
