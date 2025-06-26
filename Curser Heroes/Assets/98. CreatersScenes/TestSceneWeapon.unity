@@ -215,38 +215,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1139831824867403890
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2419556335775619300}
-  - component: {fileID: 8517511056321423269}
-  m_Layer: 0
-  m_Name: WeaponManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2419556335775619300
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1139831824867403890}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.491003, y: 1.5182347, z: -0.041868072}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &3203119695227036981
 Transform:
   m_ObjectHideFlags: 0
@@ -257,7 +225,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5.491003, y: 1.5182347, z: -0.041868072}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -324,7 +292,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3203119695227036981}
   - component: {fileID: 6404073245969309040}
+  - component: {fileID: 6404073245969309041}
   - component: {fileID: 3851148532619543093}
+  - component: {fileID: 6404073245969309043}
+  - component: {fileID: 6404073245969309042}
   m_Layer: 0
   m_Name: TestCursorWeapon
   m_TagString: Untagged
@@ -344,32 +315,56 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81b2328b04340b4418ea5fa534d256dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentWeapon: {fileID: 0}
+  currentWeapon: {fileID: 11400000, guid: 39c7660aac374894eb131f61264f261b, type: 2}
   targetLayer:
     serializedVersion: 2
     m_Bits: 0
-  weaponLife: {fileID: 0}
-  weaponUpgrade: {fileID: 0}
---- !u!114 &8517511056321423269
+  weaponLife: {fileID: 6404073245969309043}
+  weaponUpgrade: {fileID: 6404073245969309042}
+--- !u!114 &6404073245969309041
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1139831824867403890}
+  m_GameObject: {fileID: 4322459493523971616}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6fcfa2354709db4bb6c5dcd31f23e24, type: 3}
+  m_Script: {fileID: 11500000, guid: d9e47a76ac5ee8540ba1eb327164a80a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedWeapon: {fileID: 0}
-  cursorWeapon: {fileID: 0}
-  weaponLife: {fileID: 0}
-  weaponUpgrade: {fileID: 0}
+  cursor: {fileID: 0}
+  cursorSpeed: 0.2
+--- !u!114 &6404073245969309042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4322459493523971616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0609a84b8f7eb045bfb5ab3556d44d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentWeapon: {fileID: 0}
+  weaponLevel: 0
+--- !u!114 &6404073245969309043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4322459493523971616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc4887a535d69c844a810199bba6312f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentWeapon: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1772333982}
   - {fileID: 3203119695227036981}
-  - {fileID: 2419556335775619300}
