@@ -15,6 +15,7 @@ public class WaveManager : MonoBehaviour
     private int currentWaveIndex = 0;
     private List<GameObject> spawnedMonsters = new List<GameObject>();
 
+    [ContextMenu("스폰시키기")]
     public void StartWave()
     {
         WaveEntry waveData;
