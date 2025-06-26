@@ -19,7 +19,7 @@ public class CursorWeapon : MonoBehaviour
     }
 
     void Update()
-    {
+    {      
         AutoAttackCursor();      //커서 근처에 있는 몬스터를 감지하고 쿨타임에 따라 자동으로 공격, 프레임마다 호출
     } 
 
@@ -28,6 +28,8 @@ public class CursorWeapon : MonoBehaviour
         Vector3 mousePos = Input.mousePosition;             
         Vector3 worldPos = cam.ScreenToWorldPoint(mousePos);
         Vector2 cursorPos = new Vector2(worldPos.x, worldPos.y);
+
+        if (currentWeapon == null || weaponUpgrade == null) return;
 
         float range = currentWeapon.attackRange;         //커서의 범위 값
         float cooldown = currentWeapon.attackCooldown;   //쿨타임 값
@@ -56,4 +58,15 @@ public class CursorWeapon : MonoBehaviour
     {
         currentWeapon = weaponData;
     }
+
+    private void OnDrawGizmos()       //레인지 범위 시각효과(에디터 전용) 
+    {
+        if (currentWeapon == null) return;
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, currentWeapon.attackRange);
+    }
+
+
+
 }
