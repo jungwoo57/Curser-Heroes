@@ -56,7 +56,7 @@ public class BattleUI : MonoBehaviour
         {
             healthIndex = playerMaxHelath;
         }
-        for (int i = 0; i < playerMaxHelath; i++) // 임시코드 추후 플레이어 maxHp로 로직 변경
+        for (int i = 0; i < healthIndex; i++) // 임시코드 추후 플레이어 maxHp로 로직 변경
         {
             healthImage[i].GetComponent<Image>().sprite = activeHealthImage;
             healthImage[i].SetActive(true);

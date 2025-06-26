@@ -12,7 +12,6 @@ public class StageSelectUI : MonoBehaviour
         [SerializeField] private Button stageChangeButtonright;
         
         
-        
         [Header("스테이지 정보")] 
         [SerializeField] private TextMeshProUGUI bestScoreText;
         [SerializeField] private TextMeshProUGUI bestWaveText;
@@ -22,6 +21,10 @@ public class StageSelectUI : MonoBehaviour
         [SerializeField] private Image partnerImage;
         [SerializeField] private Button skillListButton;
 
+        [Header("창 모음")] 
+        [SerializeField] private GameObject weaponSelectUI;
+        [SerializeField] private GameObject skillListPanel;
+        
         private int stageIndex;
         private int maxStageIndex;
 
@@ -69,6 +72,11 @@ public class StageSelectUI : MonoBehaviour
                 subWeaponImage = ;
                 partnerImage = ;*/
         }
+
+        public void ClickWeaponButton()
+        {
+                weaponSelectUI.SetActive(true);
+        }
         
         public void ClickStageSelectButton()
         {
@@ -100,5 +108,7 @@ public class StageSelectUI : MonoBehaviour
                 
                 yield return new WaitUntil(() => UIManager.Instance != null);
         }
+        
+        
 
 }
