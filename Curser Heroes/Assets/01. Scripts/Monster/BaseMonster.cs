@@ -12,9 +12,11 @@ public abstract class BaseMonster : MonoBehaviour
     protected int valueCost;
     protected Animator animator;
 
-    // bool 파라미터 해시 (이름이 'Atk'와 'Die'인 bool 타입)
+    // bool 파라미터 해시 (이름이 'Atk', 'Die', 'Damage', 'Spw'인 bool 타입)
     private static readonly int HashAtk = Animator.StringToHash("Atk");
     private static readonly int HashDie = Animator.StringToHash("Die");
+    private static readonly int HashDamage = Animator.StringToHash("Damage");
+    private static readonly int HashSpawn = Animator.StringToHash("Spw");
 
     public event Action<GameObject> onDeath;
 
@@ -24,6 +26,19 @@ public abstract class BaseMonster : MonoBehaviour
 
         if (animator == null)
             Debug.LogWarning($"{gameObject.name}에 Animator 컴포넌트가 없습니다!");
+
+        PlaySpawnAnimation();
+    }
+
+   
+    protected virtual void PlaySpawnAnimation()
+    {
+        if (animator != null)
+        {
+            animator.SetBool(HashSpawn, true);
+            //스폰에서 idle로 넘어가는 코드 
+           
+        }
     }
 
     public virtual void Setup(MonsterData data)
@@ -65,10 +80,26 @@ public abstract class BaseMonster : MonoBehaviour
     {
         currentHP -= amount;
 
+        if (animator != null)
+        {
+            // 데미지 입을 때 Damage bool true -> false 시퀀스
+            animator.SetBool(HashDamage, true);
+            // 코루틴으로 잠시 후 false로 변경
+            StopAllCoroutines();
+            StartCoroutine(ResetDamageBool());
+        }
+
         if (currentHP <= 0)
             Die();
         else
             PlayHitEffect();
+    }
+
+    private System.Collections.IEnumerator ResetDamageBool()
+    {
+        yield return new WaitForSeconds(0.3f); // 0.3초 후 데미지 애니메이션 해제
+        if (animator != null)
+            animator.SetBool(HashDamage, false);
     }
 
     protected virtual void PlayHitEffect()
