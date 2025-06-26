@@ -9,8 +9,8 @@ public class WaveManager : MonoBehaviour
     public GameManager gameManager;
     public Spawner spawner; // Inspector에서 연결 필요
     //public PoolSpawnerTest spawner; // Inspector에서 연결 필요
-    //public PoolRefactoryTestSpawn spawner;
 
+   
 
     private int currentWaveIndex = 0;
     private List<GameObject> spawnedMonsters = new List<GameObject>();
