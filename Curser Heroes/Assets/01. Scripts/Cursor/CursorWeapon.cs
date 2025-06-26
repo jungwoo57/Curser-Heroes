@@ -27,7 +27,7 @@ public class CursorWeapon : MonoBehaviour
     {
         Vector3 mousePos = Input.mousePosition;             
         Vector3 worldPos = cam.ScreenToWorldPoint(mousePos);
-        worldPos.z = 0f; //2D 게임이므로 Z축은 0으로 설정
+        
         Vector2 cursorPos = new Vector2(worldPos.x, worldPos.y);
 
         if (currentWeapon == null || weaponUpgrade == null) return;
