@@ -2,6 +2,8 @@
 
 public class WeaponManager : MonoBehaviour
 {
+    public static WeaponManager Instance { get; private set; }
+    
     [Header("선택된 무기")]
     public WeaponData selectedWeapon;   // 인스펙터나 캐릭터 선택에서 지정
 
@@ -9,7 +11,15 @@ public class WeaponManager : MonoBehaviour
     public CursorWeapon cursorWeapon;
     public WeaponLife weaponLife;
     public WeaponUpgrade weaponUpgrade;
-
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject); // 중복 제거
+            return;
+        }
+        Instance = this;
+    }
     void Start()
     {
         EquipWeapon(selectedWeapon);  // 게임 시작 시 한번만 호출됨
@@ -31,6 +41,7 @@ public class WeaponManager : MonoBehaviour
 
     public void TakeWeaponLifeDamage()  //데미지를 입었을 때 호출됨
     {
+       
         weaponLife.TakeLifeDamage();            //목숨을 1개 줄이고 0이 되면 끝남
     }
 }

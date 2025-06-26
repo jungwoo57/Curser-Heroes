@@ -525,8 +525,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dccaf9deee079b644a97b73d1ce95beb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allMonsters:
-  - {fileID: 11400000, guid: 92671daf9ef2655419d715c46bbfc66c, type: 2}
   waveGroupData: {fileID: 11400000, guid: 92b067e28f406544ba767168356ea310, type: 2}
   gameManager: {fileID: 977393865}
   spawner: {fileID: 887119352}
