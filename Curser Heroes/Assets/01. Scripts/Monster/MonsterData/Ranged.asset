@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a679e971d4790164f8d9e3ff6463d243, type: 3}
   m_Name: Ranged
   m_EditorClassIdentifier: 
-  monsterPrefab: {fileID: 0}
-  maxHP: 0
-  valueCost: 0
-  attackCooldown: 0
-  damage: 0
+  monsterPrefab: {fileID: 4289810650837296390, guid: f58f88c5ae7b6164292b51be741b74ff, type: 3}
+  maxHP: 1
+  valueCost: 1
+  attackCooldown: 5
+  damage: 1
+  index: 0
