@@ -4085,6 +4085,55 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillImage: {fileID: 0}
   skillName: {fileID: 0}
+--- !u!1 &1838205933
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1838205935}
+  - component: {fileID: 1838205934}
+  m_Layer: 0
+  m_Name: PoolManagerRefactor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1838205934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1838205933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8927fa7aa2765814996ee1ac1d687b0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolDataList:
+  - key: Enemy
+    prefab: {fileID: 1570650610558602143, guid: 94795d1cd705428499f3183ee1bb591a, type: 3}
+    count: 5
+  monsterPool: {fileID: 0}
+--- !u!4 &1838205935
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1838205933}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.491003, y: 1.5182347, z: -0.04186807}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1845343944
 GameObject:
   m_ObjectHideFlags: 0
@@ -4431,3 +4480,4 @@ SceneRoots:
   - {fileID: 1428538809}
   - {fileID: 706619676}
   - {fileID: 1208419052}
+  - {fileID: 1838205935}

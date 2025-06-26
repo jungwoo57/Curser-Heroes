@@ -9,12 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad7c51b5ed48a1447976c84327ca1842, type: 3}
-  m_Name: ButterKnife
+  m_Script: {fileID: 11500000, guid: bc9806310749ed24f98ef35b33734d7f, type: 3}
+  m_Name: New Wave Group Data
   m_EditorClassIdentifier: 
-  weaponName: ButterKnife
-  baseDamage: 4
-  damagePerLevel: 3.5
-  attackCooldown: 0.5
-  attackRange: 0.3
-  maxLives: 6
+  globalMonsterPool:
+  - {fileID: 11400000, guid: 7d77bee705647fc40a977fcd2ec84a8e, type: 2}
+  waveEntries: []

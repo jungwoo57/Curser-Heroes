@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class Spawner : MonoBehaviour
+public class PoolRefactoryTestSpawn : MonoBehaviour
 {
     public float spawnRadius = 5f;  // 몬스터가 소환될 반경 범위
 
@@ -9,7 +10,6 @@ public class Spawner : MonoBehaviour
     // 몬스터가 죽을 때 호출될 콜백 함수도 연결해줌
     public List<GameObject> SpawnMonsters(List<MonsterData> monsters, System.Action<GameObject> onDeathCallback)
     {
-
         List<GameObject> spawned = new List<GameObject>();  // 실제 소환된 몬스터 오브젝트 리스트
 
         // 몬스터 수만큼 겹치지 않는 유니크한 위치를 생성
@@ -21,16 +21,21 @@ public class Spawner : MonoBehaviour
             if (data == null || data.monsterPrefab == null) continue;  // 데이터나 프리팹 없으면 스킵
 
             Vector3 spawnPos = spawnPositions[i];  // 미리 생성한 위치 가져오기
-            GameObject go = Instantiate(data.monsterPrefab, spawnPos, Quaternion.identity);  // 몬스터 생성
+            GameObject go = PoolingRefatory.Instance.Get("Enemy");
+           
+                go.transform.position = spawnPos;
+                go.transform.rotation = Quaternion.identity;
 
-            BaseMonster baseMonster = go.GetComponent<BaseMonster>();
-            if (baseMonster != null)
-            {
-                baseMonster.Setup(data);               // Setup 호출
-                baseMonster.onDeath += onDeathCallback;  // 이벤트 연결
-            }
+                //Instantiate(data.monsterPrefab, spawnPos, Quaternion.identity);  // 몬스터 생성
 
-            spawned.Add(go);  // 리스트에 추가
+                Monster monster = go.GetComponent<Monster>();
+                if (monster != null)
+                {
+                    monster.Setup(data); // 몬스터 정보 세팅
+                    monster.onDeath += onDeathCallback; // 죽음 이벤트에 콜백 등록
+                }
+
+                spawned.Add(go); // 리스트에 추가
         }
 
         return spawned;  // 생성된 몬스터 리스트 반환
@@ -82,3 +87,4 @@ public class Spawner : MonoBehaviour
         return new Vector3(randomDir.x, randomDir.y, 0f) * radius;  
     }
 }
+
