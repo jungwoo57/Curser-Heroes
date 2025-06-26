@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "SkillData", menuName = "Skill/SkillData")]
-public class SkillData : MonoBehaviour
+public class SkillData : ScriptableObject
 {
     public string skillName;
     public int damage;
