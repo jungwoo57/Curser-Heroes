@@ -167,9 +167,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dccaf9deee079b644a97b73d1ce95beb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allMonsters:
-  - {fileID: 11400000, guid: 7d77bee705647fc40a977fcd2ec84a8e, type: 2}
-  - {fileID: 11400000, guid: 54638af21faef144fa40978387dc484f, type: 2}
   waveGroupData: {fileID: 11400000, guid: 9fa0573a5e50445489f8e2a2d6d96d27, type: 2}
   gameManager: {fileID: 1933670791}
   spawner: {fileID: 1013019305}
@@ -193,6 +190,14 @@ PrefabInstance:
       propertyPath: cursor
       value: 
       objectReference: {fileID: 484914514}
+    - target: {fileID: 5280744739267004475, guid: 7e17ee9ca96d47b4792f60664b467c41, type: 3}
+      propertyPath: currentWeapon
+      value: 
+      objectReference: {fileID: 11400000, guid: f96e6f2522ff2d344b6849023e1eb6f7, type: 2}
+    - target: {fileID: 5876902608647161431, guid: 7e17ee9ca96d47b4792f60664b467c41, type: 3}
+      propertyPath: currentWeapon
+      value: 
+      objectReference: {fileID: 11400000, guid: f96e6f2522ff2d344b6849023e1eb6f7, type: 2}
     - target: {fileID: 7805512865914524789, guid: 7e17ee9ca96d47b4792f60664b467c41, type: 3}
       propertyPath: targetLayer.m_Bits
       value: 128
