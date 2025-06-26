@@ -12,6 +12,12 @@ public static class WaveBuilder
         // 🔄 사용할 몬스터 풀 선택 (override > global)
         List<MonsterData> usePool = waveData.HasOverrideEnemies ? waveData.overrideEnemies : globalPool;
 
+        if (usePool == null || usePool.Count == 0)
+        {
+            Debug.LogError("Monster pool이 비어 있음. globalPool 또는 overrideEnemies 확인 필요");
+            return new List<MonsterData>();
+        }
+
         List<MonsterData> spawnQueue = new List<MonsterData>();
         int remainingValue = waveValue;
 
@@ -21,10 +27,10 @@ public static class WaveBuilder
             int maxAllowed = Mathf.Min(valueRange, remainingValue - remainingMonsters);
             if (maxAllowed < 1) maxAllowed = 1;
 
-            List<MonsterData> valid = usePool.FindAll(m => m.valueCost >= 1 && m.valueCost <= maxAllowed);
+            List<MonsterData> valid = usePool.FindAll(m => m != null && m.valueCost >= 1 && m.valueCost <= maxAllowed);
             if (valid.Count == 0)
             {
-                MonsterData fallback = usePool.Find(m => m.valueCost == 1);
+                MonsterData fallback = usePool.Find(m => m != null && m.valueCost == 1);
                 if (fallback != null)
                 {
                     spawnQueue.Add(fallback);
