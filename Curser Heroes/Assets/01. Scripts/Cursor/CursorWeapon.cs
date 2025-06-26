@@ -58,4 +58,15 @@ public class CursorWeapon : MonoBehaviour
     {
         currentWeapon = weaponData;
     }
+
+    private void OnDrawGizmos()       //레인지 범위 시각효과(에디터 전용) 
+    {
+        if (currentWeapon == null) return;
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, currentWeapon.attackRange);
+    }
+
+
+
 }
