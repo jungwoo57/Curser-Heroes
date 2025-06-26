@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6fcfa2354709db4bb6c5dcd31f23e24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedWeapon: {fileID: 0}
+  selectedWeapon: {fileID: 11400000, guid: 039fe819971c8b74cb9cf96f22319f8a, type: 2}
   cursorWeapon: {fileID: 0}
   weaponLife: {fileID: 0}
   weaponUpgrade: {fileID: 0}
