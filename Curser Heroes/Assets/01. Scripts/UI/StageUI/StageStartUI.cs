@@ -20,7 +20,7 @@ public class StageStartUI : MonoBehaviour
    [SerializeField] private Vector2 slowStartPos = new Vector2(150, 0);
    [SerializeField] private Vector2 slowEndPos = new Vector2(-150, 0);
 
-   
+   public WaveManager waveManager; // 추후 할당 바꾸기
    
    private void Awake()
    {
@@ -55,6 +55,7 @@ public class StageStartUI : MonoBehaviour
       yield return StartCoroutine(StageStartAnimation("3"));
 
       yield return StartCoroutine(StartTextAnimation());
+      
    }
    
    IEnumerator StageStartAnimation(string letter)
@@ -101,6 +102,8 @@ public class StageStartUI : MonoBehaviour
          yield return null;
       }
       startText.rectTransform.localScale = Vector2.zero;
+      waveManager.StartWave();
+      yield return null;
       gameObject.SetActive(false);
    }
 }
