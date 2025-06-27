@@ -42,16 +42,12 @@ public class StageStartUI : MonoBehaviour
 
    IEnumerator AnimationSequence()
    {
-      Debug.Log("처음 텍스트시작");
       yield return StartCoroutine(StageStartAnimation("STAGE 1")); // 해당 부분 현재 스테이지 이름이로 추후 이름변경
       
-      Debug.Log("1 텍스트시작");
       yield return StartCoroutine(StageStartAnimation("1"));
       
-      Debug.Log("2 텍스트시작");
       yield return StartCoroutine(StageStartAnimation("2"));
       
-      Debug.Log("3 텍스트시작");
       yield return StartCoroutine(StageStartAnimation("3"));
 
       yield return StartCoroutine(StartTextAnimation());
