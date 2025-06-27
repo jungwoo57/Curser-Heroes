@@ -49,12 +49,14 @@ public class GameManager : MonoBehaviour
     public void AddGold(int amount)
     {
         gold += amount;
+        UIManager.Instance.battleUI.TextUpdate();
         Debug.Log($"골드 획득: {amount} / 총 골드: {gold}");
     }
 
     public void AddJewel(int amount)
     {
         jewel += amount;
+        UIManager.Instance.battleUI.TextUpdate();
         Debug.Log($"쥬얼 획득: {amount} / 총 쥬얼: {jewel}");
     }
     public int GetGold()
