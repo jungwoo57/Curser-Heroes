@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class SkillSelectUI : MonoBehaviour
 {
-    /*public SkillSlot[] slots; // 3개의 UI 슬롯
+    public SkillSlot[] slots; // 3개의 UI 슬롯
     private Action<SkillData> onSelected;
 
     public void Show(List<SkillData> skills, Action<SkillData> onSelect)
@@ -29,5 +29,5 @@ public class SkillSelectUI : MonoBehaviour
     {
         onSelected?.Invoke(skill);
         Destroy(gameObject); // UI 닫기
-    }*/
+    }
 }

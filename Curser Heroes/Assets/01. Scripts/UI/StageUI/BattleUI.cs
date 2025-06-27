@@ -5,7 +5,8 @@ using UnityEngine.UI;
 public class BattleUI : MonoBehaviour
 {
     public GameObject battlePanel;
-    
+    public SkillManager skillManager;
+
     [Header("플레이어 체력 UI")]
     [SerializeField]private GameObject[] healthImage;
     [SerializeField]private Sprite activeHealthImage;
@@ -98,12 +99,20 @@ public class BattleUI : MonoBehaviour
         goldText.text = "Gold : " + 0 + "(" + 0 + ")";  //매니저에게 스테이지 정보 가져와서 적용
         jewelText.text = "Jewel : " + 0 + "(" + 0 + ")"; //매니저에게 스테이지 정보 가져와서 적용
     }
-    
+
     public void SkillUpdate()
     {
         for (int i = 0; i < skills.Length; i++)
         {
-            skills[i].UpdateSkillUI();
+            if (i < skillManager.ownedSkills.Count)
+            {
+                skills[i].SetSkill(skillManager.ownedSkills[i]);
+                skills[i].gameObject.SetActive(true);
+            }
+            else
+            {
+                skills[i].gameObject.SetActive(false);
+            }
         }
     }
 }
