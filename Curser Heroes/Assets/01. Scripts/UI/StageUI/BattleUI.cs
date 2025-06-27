@@ -34,7 +34,7 @@ public class BattleUI : MonoBehaviour
     public int playerMaxHelath;
 
 
-    private void OnEnable()
+    private void Start()
     {
         Init();
     }

@@ -33,7 +33,7 @@ public class WeaponScroll : MonoBehaviour
         while (showWeapons.Count < hasWeapons.Count) //갯수 부족 할 시 동적생성
         {
             GameObject obj = Instantiate(weaponImagePrefabs, content);
-            WeaponImage weaponImage = obj.AddComponent<WeaponImage>();
+            WeaponImage weaponImage = obj.GetComponent<WeaponImage>();
             showWeapons.Add(weaponImage);
         }
         for(int i = 0 ; i < hasWeaponCounts; i++)
