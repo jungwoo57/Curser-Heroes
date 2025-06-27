@@ -6,6 +6,9 @@ using static SkillData;
 
 public class SkillManager : MonoBehaviour
 {
+    [SerializeField] private GameObject rewardSelectUIPrefab;
+
+    public WaveManager waveManager;
     public List<SkillData> skillPool = new List<SkillData>(); // 12개 선택된 스킬
     public List<SkillInstance> ownedSkills = new List<SkillInstance>(); // 보유 중인 스킬
 
@@ -44,19 +47,30 @@ public class SkillManager : MonoBehaviour
     {
         var owned = ownedSkills.FirstOrDefault(s => s.skill == selected);
         if (owned != null)
-        {
             owned.level++;
-        }
         else
-        {
             ownedSkills.Add(new SkillInstance { skill = selected, level = 1 });
-        }
+
+        waveManager.StartWave(); // 선택 끝 → 다음 웨이브 시작
     }
 
     void ShowRewardSelection()
     {
-        // 보상 선택 UI로 연결
-        Debug.Log("모든 스킬이 최대레벨! 리워드 선택으로 전환");
+        GameObject ui = Instantiate(rewardSelectUIPrefab);
+        ui.GetComponent<RewardSelectUI>().Init(OnRewardSelected);
+    }
+
+    void OnRewardSelected(int index)
+    {
+        /*switch (index)
+        {
+            case 0: PlayerManager.Instance.Heal(); break;
+            case 1: CurrencyManager.Instance.AddGold(100); break;
+            case 2: CurrencyManager.Instance.AddJewel(10); break;
+        }
+        */
+
+        waveManager.StartWave();
     }
 
     List<SkillData> GetRandomSkills(List<SkillData> source, int count)
