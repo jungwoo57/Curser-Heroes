@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System;
+using System.Collections;
 
 public abstract class BaseMonster : MonoBehaviour
 {
@@ -12,7 +13,6 @@ public abstract class BaseMonster : MonoBehaviour
     protected int valueCost;
     protected Animator animator;
 
-    // bool 파라미터 해시 (이름이 'Atk', 'Die', 'Damage', 'Spw'인 bool 타입)
     private static readonly int HashAtk = Animator.StringToHash("Atk");
     private static readonly int HashDie = Animator.StringToHash("Die");
     private static readonly int HashDamage = Animator.StringToHash("Damage");
@@ -20,25 +20,27 @@ public abstract class BaseMonster : MonoBehaviour
 
     public event Action<GameObject> onDeath;
 
+    private SpriteRenderer spriteRenderer;
+    private Coroutine flashCoroutine;
+    private Coroutine attackColorCoroutine;
+
     protected virtual void Start()
     {
         animator = GetComponent<Animator>();
-
         if (animator == null)
             Debug.LogWarning($"{gameObject.name}에 Animator 컴포넌트가 없습니다!");
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        if (spriteRenderer == null)
+            Debug.LogWarning($"{gameObject.name}에 SpriteRenderer 컴포넌트가 없습니다!");
 
         PlaySpawnAnimation();
     }
 
-   
     protected virtual void PlaySpawnAnimation()
     {
         if (animator != null)
-        {
             animator.SetBool(HashSpawn, true);
-            //스폰에서 idle로 넘어가는 코드 
-           
-        }
     }
 
     public virtual void Setup(MonsterData data)
@@ -57,15 +59,35 @@ public abstract class BaseMonster : MonoBehaviour
         if (attackTimer > 0f)
             attackTimer -= Time.deltaTime;
 
+        // 공격 준비 시 색상 천천히 연한 빨강(분홍)으로 변화
         if (attackTimer <= 1.2f && attackTimer + Time.deltaTime > 1.2f)
         {
-            SetAttackBool(true); // 쿨다운 1.2초 남았을 때 공격 애니메이션 켜기
+            SetAttackBool(true);
+
+            if (spriteRenderer != null)
+            {
+                if (attackColorCoroutine != null)
+                    StopCoroutine(attackColorCoroutine);
+
+                Color softRed = new Color(1f, 0.5f, 0.7f); // 연한 빨강(분홍)
+                attackColorCoroutine = StartCoroutine(ChangeColorGradually(softRed, 1.2f));
+            }
         }
 
+        // 공격 실행 시 원래 색으로 복구
         if (attackTimer <= 0f)
         {
             Attack();
-            SetAttackBool(false); // 공격 후 애니메이션 끄기
+            SetAttackBool(false);
+
+            if (spriteRenderer != null)
+            {
+                if (attackColorCoroutine != null)
+                    StopCoroutine(attackColorCoroutine);
+
+                attackColorCoroutine = StartCoroutine(ChangeColorGradually(Color.white, 0.3f));
+            }
+
             attackTimer = attackCooldown;
         }
     }
@@ -82,12 +104,15 @@ public abstract class BaseMonster : MonoBehaviour
 
         if (animator != null)
         {
-            // 데미지 입을 때 Damage bool true -> false 시퀀스
             animator.SetBool(HashDamage, true);
-            // 코루틴으로 잠시 후 false로 변경
             StopAllCoroutines();
             StartCoroutine(ResetDamageBool());
         }
+
+        // 피격 시 알파 깜빡임 효과 실행
+        if (flashCoroutine != null)
+            StopCoroutine(flashCoroutine);
+        flashCoroutine = StartCoroutine(FlashAlpha(0.5f));
 
         if (currentHP <= 0)
             Die();
@@ -95,16 +120,54 @@ public abstract class BaseMonster : MonoBehaviour
             PlayHitEffect();
     }
 
-    private System.Collections.IEnumerator ResetDamageBool()
+    private IEnumerator ChangeColorGradually(Color targetColor, float duration)
     {
-        yield return new WaitForSeconds(0.3f); // 0.3초 후 데미지 애니메이션 해제
+        if (spriteRenderer == null) yield break;
+
+        float time = 0f;
+        Color startColor = spriteRenderer.color;
+
+        while (time < duration)
+        {
+            spriteRenderer.color = Color.Lerp(startColor, targetColor, time / duration);
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        spriteRenderer.color = targetColor;
+    }
+
+    private IEnumerator FlashAlpha(float duration)
+    {
+        if (spriteRenderer == null) yield break;
+
+        float time = 0f;
+        Color originalColor = spriteRenderer.color;
+
+        while (time < duration)
+        {
+            float alpha = Mathf.PingPong(time * 8f, 1f);
+            Color c = originalColor;
+            c.a = alpha;
+            spriteRenderer.color = c;
+
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        spriteRenderer.color = originalColor;
+    }
+
+    private IEnumerator ResetDamageBool()
+    {
+        yield return new WaitForSeconds(0.3f);
         if (animator != null)
             animator.SetBool(HashDamage, false);
     }
 
     protected virtual void PlayHitEffect()
     {
-        // 필요시 오버라이드해서 피격 효과 구현
+        // 필요시 오버라이드해서 추가 피격 효과 구현 가능
     }
 
     protected virtual void Die()
@@ -113,7 +176,7 @@ public abstract class BaseMonster : MonoBehaviour
             animator.SetBool(HashDie, true);
 
         onDeath?.Invoke(gameObject);
-        Destroy(gameObject, 1f); // 사망 애니메이션 재생 시간 확보
+        Destroy(gameObject, 1f);
     }
 
     protected abstract void Attack();
