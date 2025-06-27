@@ -5,8 +5,8 @@ using UnityEngine.UI;
 public class BattleUI : MonoBehaviour
 {
     public GameObject battlePanel;
-    public WeaponManager weaponManager;     // 추후 인스턴스로 변경 고려
-    
+    public SkillManager skillManager;
+
     [Header("플레이어 체력 UI")]
     [SerializeField]private GameObject[] healthImage;
     [SerializeField]private Sprite activeHealthImage;
@@ -51,10 +51,12 @@ public class BattleUI : MonoBehaviour
     {
         battlePanel.SetActive(true);
         //healthIndex = playerMaxHelath - 1;// 더미 데이터 추후 변경  동료 데이터 추가 시 동료 데이터도 초기화
-        healthIndex = weaponManager.weaponLife.currentWeapon.maxLives; //변경할 코드   
+       
+        healthIndex = WeaponManager.Instance.weaponLife.currentWeapon.maxLives; //변경할 코드   
+
         if (healthIndex > playerMaxHelath)
         {
-            healthIndex = playerMaxHelath;
+            healthIndex = playerMaxHelath-1;
         }
         for (int i = 0; i < healthIndex; i++) // 임시코드 추후 플레이어 maxHp로 로직 변경
         {
@@ -65,11 +67,11 @@ public class BattleUI : MonoBehaviour
     
     [ContextMenu("데미지주기")]
     public void TakeDamage()//데미지를 입었을 때
-    {
-        healthImage[healthIndex].GetComponent<Image>().sprite = inactiveHealthImage; // 임시 코드 
+    { 
         if (healthIndex > 0)
         {
             healthIndex--;
+            healthImage[healthIndex].GetComponent<Image>().sprite = inactiveHealthImage;
         }
     }
 
@@ -97,12 +99,20 @@ public class BattleUI : MonoBehaviour
         goldText.text = "Gold : " + 0 + "(" + 0 + ")";  //매니저에게 스테이지 정보 가져와서 적용
         jewelText.text = "Jewel : " + 0 + "(" + 0 + ")"; //매니저에게 스테이지 정보 가져와서 적용
     }
-    
+
     public void SkillUpdate()
     {
         for (int i = 0; i < skills.Length; i++)
         {
-            skills[i].UpdateSkillUI();
+            if (i < skillManager.ownedSkills.Count)
+            {
+                skills[i].SetSkill(skillManager.ownedSkills[i]);
+                skills[i].gameObject.SetActive(true);
+            }
+            else
+            {
+                skills[i].gameObject.SetActive(false);
+            }
         }
     }
 }
