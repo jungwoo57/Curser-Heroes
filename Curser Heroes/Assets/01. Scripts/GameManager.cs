@@ -1,10 +1,23 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    private int gold = 0;
-    private int jewel = 0;
+    private static GameManager instance;
+
+    public static GameManager Instance
+    {
+        get {
+            if (instance == null)
+            {
+                return null;
+            }
+            return instance;
+        }
+    }
+    
 
     [SerializeField] private List<WeaponData> _hasMainWeapon; // 보유 주무기
     public IReadOnlyList<WeaponData> hasMainWeapon => _hasMainWeapon;     // 다른 파일에서 보유 주무기 가져오기(수정 불가)
@@ -14,6 +27,25 @@ public class GameManager : MonoBehaviour
     
     [SerializeField] private List<WeaponData> _hasPartner; // 보유 동료
     public IReadOnlyList<WeaponData> hasPartner => _hasPartner;     // 다른 파일에서 보유 동료 가져오기(수정 불가)
+    
+     
+    private int gold = 0;
+    private int jewel = 0;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+
     public void AddGold(int amount)
     {
         gold += amount;
