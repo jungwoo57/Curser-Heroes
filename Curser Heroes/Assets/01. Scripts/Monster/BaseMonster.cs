@@ -20,6 +20,8 @@ public abstract class BaseMonster : MonoBehaviour
 
     public event Action<GameObject> onDeath;
 
+    private bool isDead = false; // 중복 사망 방지
+
     protected virtual void Start()
     {
         animator = GetComponent<Animator>();
@@ -30,14 +32,12 @@ public abstract class BaseMonster : MonoBehaviour
         PlaySpawnAnimation();
     }
 
-   
     protected virtual void PlaySpawnAnimation()
     {
         if (animator != null)
         {
             animator.SetBool(HashSpawn, true);
-            //스폰에서 idle로 넘어가는 코드 
-           
+            //스폰에서 idle로 넘어가는 코드
         }
     }
 
@@ -50,6 +50,7 @@ public abstract class BaseMonster : MonoBehaviour
         valueCost = data.valueCost;
 
         attackTimer = attackCooldown;
+        isDead = false; // 리셋
     }
 
     protected virtual void Update()
@@ -59,7 +60,7 @@ public abstract class BaseMonster : MonoBehaviour
 
         if (attackTimer <= 1.2f && attackTimer + Time.deltaTime > 1.2f)
         {
-            SetAttackBool(true); // 쿨다운 1.2초 남았을 때 공격 애니메이션 켜기
+            SetAttackBool(true);  // 쿨다운 1.2초 남았을 때 공격 애니메이션 켜기
         }
 
         if (attackTimer <= 0f)
@@ -78,6 +79,8 @@ public abstract class BaseMonster : MonoBehaviour
 
     public virtual void TakeDamage(int amount)
     {
+        if (isDead) return; // 이미 죽었으면 무시
+
         currentHP -= amount;
 
         if (animator != null)
@@ -98,6 +101,7 @@ public abstract class BaseMonster : MonoBehaviour
     private System.Collections.IEnumerator ResetDamageBool()
     {
         yield return new WaitForSeconds(0.3f); // 0.3초 후 데미지 애니메이션 해제
+
         if (animator != null)
             animator.SetBool(HashDamage, false);
     }
@@ -109,10 +113,14 @@ public abstract class BaseMonster : MonoBehaviour
 
     protected virtual void Die()
     {
+        if (isDead) return; // 중복 사망 방지
+        isDead = true;
+
         if (animator != null)
             animator.SetBool(HashDie, true);
 
         onDeath?.Invoke(gameObject);
+
         Destroy(gameObject, 1f); // 사망 애니메이션 재생 시간 확보
     }
 

@@ -51,7 +51,8 @@ public class SkillManager : MonoBehaviour
         else
             ownedSkills.Add(new SkillInstance { skill = selected, level = 1 });
 
-        waveManager.StartWave(); // 선택 끝 → 다음 웨이브 시작
+        waveManager.IncrementWaveIndex();  // 인덱스 올리기
+        waveManager.StartWave();            // 다음 웨이브 시작
     }
 
     void ShowRewardSelection()
@@ -68,10 +69,10 @@ public class SkillManager : MonoBehaviour
             case 1: CurrencyManager.Instance.AddGold(100); break;
             case 2: CurrencyManager.Instance.AddJewel(10); break;
         }
-        */
-
         waveManager.StartWave();
+        */
     }
+    
 
     List<SkillData> GetRandomSkills(List<SkillData> source, int count)
     {
