@@ -24,11 +24,10 @@ public class Monster : MonoBehaviour
             Die();
         }
     }
-
     private void Die()
     {
         Debug.Log($"{gameObject.name} 사망!");
-        onDeath?.Invoke(gameObject);
+        onDeath?.Invoke(transform.root.gameObject); // 🔧 루트 오브젝트를 넘기도록 수정
         Destroy(gameObject);
     }
     private void OnMouseDown()
