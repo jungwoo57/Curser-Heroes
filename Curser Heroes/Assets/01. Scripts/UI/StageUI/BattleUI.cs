@@ -55,7 +55,7 @@ public class BattleUI : MonoBehaviour
 
         if (healthIndex > playerMaxHelath)
         {
-            healthIndex = playerMaxHelath;
+            healthIndex = playerMaxHelath-1;
         }
         for (int i = 0; i < healthIndex; i++) // 임시코드 추후 플레이어 maxHp로 로직 변경
         {
@@ -66,11 +66,11 @@ public class BattleUI : MonoBehaviour
     
     [ContextMenu("데미지주기")]
     public void TakeDamage()//데미지를 입었을 때
-    {
-        healthImage[healthIndex].GetComponent<Image>().sprite = inactiveHealthImage; // 임시 코드 
+    { 
         if (healthIndex > 0)
         {
             healthIndex--;
+            healthImage[healthIndex].GetComponent<Image>().sprite = inactiveHealthImage;
         }
     }
 
