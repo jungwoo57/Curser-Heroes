@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,7 +14,7 @@ public class SkillUIPanel : MonoBehaviour
     {
         for (int i = 0; i < skills.Length; i++)
         {
-            skills[i].UpdateSkillUI();
+            //skills[i].UpdateSkillUI();
         }
     }
 }
