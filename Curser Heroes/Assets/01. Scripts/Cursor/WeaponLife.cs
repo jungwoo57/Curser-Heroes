@@ -14,8 +14,8 @@ public class WeaponLife : MonoBehaviour
     public void TakeLifeDamage()            //목숨이 감소했을 때 함수
     {
         currentLives--;                    //목숨 -1
+        UIManager.Instance.battleUI.TakeDamage();
         Debug.Log($"{currentWeapon.weaponName} 목숨 -1 → 현재: {currentLives}");
-
         if (currentLives <= 0)                    
             OnOutOfLives();                    //목숨이 0 이하가 되면 파괴 처리
     }
