@@ -78,7 +78,7 @@ public class Spawner : MonoBehaviour
     // 지정한 반경 내에서 위치 반환
     private static Vector3 GetSpawnPosition(float radius)
     {
-        Vector2 randomDir = Random.insideUnitCircle.normalized;
-        return new Vector3(randomDir.x, randomDir.y, 0f) * radius;  
+        Vector2 randomPos = Random.insideUnitCircle * radius;
+        return new Vector3(randomPos.x, randomPos.y, 0f);
     }
 }
