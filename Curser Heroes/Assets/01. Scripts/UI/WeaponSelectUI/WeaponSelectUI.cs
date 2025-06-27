@@ -6,6 +6,7 @@ public class WeaponSelectUI : MonoBehaviour
 {
     [Header("UI 요소")]
     [SerializeField] private GameObject weaponSelectUI;
+    [SerializeField] private WeaponScroll weaponScroll;
     [SerializeField] private Button mainWeaponSelectButton;
     [SerializeField] private Button subWeaponSelectButton;
     [SerializeField] private Button partnerSelectButton;
@@ -20,14 +21,19 @@ public class WeaponSelectUI : MonoBehaviour
         switch (buttonName)
         {
             case "main" :
+                Debug.Log("메인무기 열람");
+                weaponScroll.UpdateScroll();
                 // 주무기 업데이트
                 break;
             case "sub" : 
+                Debug.Log("보주무기 열람");
                 // 보조무기 업데이트
                 break;
             case "partner" :
+                Debug.Log("동료 열람");
                 // 동료무기 업데이트
                 break;
+            
         }
     }
     
