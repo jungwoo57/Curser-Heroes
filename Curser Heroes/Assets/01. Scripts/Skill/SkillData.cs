@@ -8,14 +8,5 @@ public class SkillData : ScriptableObject
     public int cooltime;
     public Sprite icon;
     public int maxLevel;
-    [TextArea] public string description;
-
-    [System.Serializable]
-    public class SkillInstance
-    {
-        public SkillData skill;
-        public int level;
-
-        public bool IsMaxed => level >= skill.maxLevel;
-    }
+    public string description;
 }

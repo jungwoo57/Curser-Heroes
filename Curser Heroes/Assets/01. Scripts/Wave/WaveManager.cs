@@ -113,6 +113,7 @@ public class WaveManager : MonoBehaviour
 
     void OnWaveCleared()
     {
+        Debug.Log("[WaveManager] OnWaveCleared 호출됨");
         gameManager.AddGold(currentWaveData.CalculateGoldReward());
         int? jewel = currentWaveData.TryGetJewelReward();
         if (jewel.HasValue)

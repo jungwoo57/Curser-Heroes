@@ -695,6 +695,56 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 147633101}
   m_CullTransparentMesh: 1
+--- !u!1 &182825875
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 182825877}
+  - component: {fileID: 182825876}
+  m_Layer: 0
+  m_Name: SkillManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &182825876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 182825875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7895063b1c1a45e4d81d6c646b94f95b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rewardSelectUIPrefab: {fileID: 7736518222571342954, guid: 7ec73d70dd63e9e43befba0d6f384234, type: 3}
+  waveManager: {fileID: 1657000541}
+  skillPool: []
+  ownedSkills: []
+  maxSkillCount: 6
+  skillSelectUIPrefab: {fileID: 2116206273608610595, guid: ac6fc6da8019b4d42bf807d62702b93b, type: 3}
+--- !u!4 &182825877
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 182825875}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 356.03735, y: 222.64345, z: -0.6366023}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &186317640
 GameObject:
   m_ObjectHideFlags: 0
@@ -2998,6 +3048,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   battlePanel: {fileID: 1499278490}
+  skillManager: {fileID: 182825876}
   healthImage:
   - {fileID: 1932962289}
   - {fileID: 186317640}
@@ -3291,6 +3342,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dccaf9deee079b644a97b73d1ce95beb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skillManager: {fileID: 182825876}
   waveGroupData: {fileID: 11400000, guid: 9fa0573a5e50445489f8e2a2d6d96d27, type: 2}
   gameManager: {fileID: 978114653}
   spawner: {fileID: 2021239203}
@@ -4914,3 +4966,4 @@ SceneRoots:
   - {fileID: 41921648}
   - {fileID: 3521251694906892393}
   - {fileID: 6731890394223706514}
+  - {fileID: 182825877}
