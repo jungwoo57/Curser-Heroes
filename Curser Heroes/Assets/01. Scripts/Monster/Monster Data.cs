@@ -11,4 +11,6 @@ public class MonsterData : ScriptableObject
     public int maxHP;
     public int valueCost;
     public float attackCooldown;
+    public int damage;
+    public int index; // 몬스터의 인덱스 번호
 }   

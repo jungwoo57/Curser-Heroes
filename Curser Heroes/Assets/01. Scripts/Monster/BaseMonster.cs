@@ -1,69 +1,128 @@
 ﻿using UnityEngine;
-
-// 모든 몬스터가 공통으로 상속받는 베이스 클래스.
-// 체력, 공격 쿨다운, 피격 처리 등을 포함.
+using System;
 
 public abstract class BaseMonster : MonoBehaviour
 {
-    [Header("스탯")]
-    public int maxHP;                  // 최대 체력
-    public int currentHP;              // 현재 체력
-    public int valueCost;              // 밸류 시스템에서의 몬스터 비용
-    public float attackCooldown = 2f;  // 공격 쿨다운 시간
+    protected int maxHP;
+    protected int currentHP;
+    protected int damage;
+    protected float attackCooldown;
+    protected float attackTimer;
 
-    protected float attackTimer;       // 쿨다운 타이머
+    protected int valueCost;
+    protected Animator animator;
 
-  
+    // bool 파라미터 해시 (이름이 'Atk', 'Die', 'Damage', 'Spw'인 bool 타입)
+    private static readonly int HashAtk = Animator.StringToHash("Atk");
+    private static readonly int HashDie = Animator.StringToHash("Die");
+    private static readonly int HashDamage = Animator.StringToHash("Damage");
+    private static readonly int HashSpawn = Animator.StringToHash("Spw");
+
+    public event Action<GameObject> onDeath;
+
+    private bool isDead = false; // 중복 사망 방지
+
     protected virtual void Start()
     {
+        animator = GetComponent<Animator>();
+
+        if (animator == null)
+            Debug.LogWarning($"{gameObject.name}에 Animator 컴포넌트가 없습니다!");
+
+        PlaySpawnAnimation();
+    }
+
+    protected virtual void PlaySpawnAnimation()
+    {
+        if (animator != null)
+        {
+            animator.SetBool(HashSpawn, true);
+            //스폰에서 idle로 넘어가는 코드
+        }
+    }
+
+    public virtual void Setup(MonsterData data)
+    {
+        maxHP = data.maxHP;
         currentHP = maxHP;
-        attackTimer = Random.Range(0f, attackCooldown); // 첫 공격 시간 랜덤화
+        damage = data.damage;
+        attackCooldown = data.attackCooldown;
+        valueCost = data.valueCost;
+
+        attackTimer = attackCooldown;
+        isDead = false; // 리셋
     }
 
     protected virtual void Update()
     {
-        attackTimer -= Time.deltaTime;
+        if (attackTimer > 0f)
+            attackTimer -= Time.deltaTime;
+
+        if (attackTimer <= 1.2f && attackTimer + Time.deltaTime > 1.2f)
+        {
+            SetAttackBool(true);  // 쿨다운 1.2초 남았을 때 공격 애니메이션 켜기
+        }
 
         if (attackTimer <= 0f)
         {
-            Attack();                           // 공격 실행
-            attackTimer = attackCooldown;       // 쿨다운 초기화
+            Attack();
+            SetAttackBool(false); // 공격 후 애니메이션 끄기
+            attackTimer = attackCooldown;
         }
     }
 
-  
-    // 데미지를 받았을 때 호출됨
-    
+    protected void SetAttackBool(bool value)
+    {
+        if (animator != null)
+            animator.SetBool(HashAtk, value);
+    }
+
     public virtual void TakeDamage(int amount)
     {
+        if (isDead) return; // 이미 죽었으면 무시
+
         currentHP -= amount;
 
+        if (animator != null)
+        {
+            // 데미지 입을 때 Damage bool true -> false 시퀀스
+            animator.SetBool(HashDamage, true);
+            // 코루틴으로 잠시 후 false로 변경
+            StopAllCoroutines();
+            StartCoroutine(ResetDamageBool());
+        }
+
         if (currentHP <= 0)
-            Die();              // 체력이 0 이하이면 사망 처리
+            Die();
         else
-            PlayHitEffect();    // 피격 연출
+            PlayHitEffect();
     }
 
-    
-    // 피격 이펙트나 연출 (예: 반짝임)
-    
+    private System.Collections.IEnumerator ResetDamageBool()
+    {
+        yield return new WaitForSeconds(0.3f); // 0.3초 후 데미지 애니메이션 해제
+
+        if (animator != null)
+            animator.SetBool(HashDamage, false);
+    }
+
     protected virtual void PlayHitEffect()
     {
-        // 피격 시 시각 효과
-        // 예: SpriteRenderer 색상 변경 등
+        // 필요시 오버라이드해서 피격 효과 구현
     }
 
-   
-    // 사망 처리
-   
     protected virtual void Die()
     {
-        // 사망 시 이펙트, 점수 처리 등 추가 가능
-        Destroy(gameObject); // 오브젝트 삭제
+        if (isDead) return; // 중복 사망 방지
+        isDead = true;
+
+        if (animator != null)
+            animator.SetBool(HashDie, true);
+
+        onDeath?.Invoke(gameObject);
+
+        Destroy(gameObject, 1f); // 사망 애니메이션 재생 시간 확보
     }
 
-  
-    // 개별 몬스터마다 공격 로직 다르게 구현
-    
     protected abstract void Attack();
 }

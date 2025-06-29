@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc9806310749ed24f98ef35b33734d7f, type: 3}
+  m_Name: New Wave Group Data
+  m_EditorClassIdentifier: 
+  globalMonsterPool:
+  - {fileID: 11400000, guid: 7d77bee705647fc40a977fcd2ec84a8e, type: 2}
+  - {fileID: 11400000, guid: 54638af21faef144fa40978387dc484f, type: 2}
+  waveEntries: []
