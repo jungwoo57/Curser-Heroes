@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
-
 [CreateAssetMenu(fileName = "NewWeapon", menuName = "Weapons/WeaponData")]      //무기선택과  무기설명
 public class WeaponData : ScriptableObject
 {
     [Header("기본 정보")]
     public string weaponName;
-
+    public Sprite wepaonImage;
+    public string weaponDesc;
+    
     [Header("공격력 관련")]
     public float baseDamage = 10;     
     public float damagePerLevel = 2f;  // 무기마다 다르게 설정 가능

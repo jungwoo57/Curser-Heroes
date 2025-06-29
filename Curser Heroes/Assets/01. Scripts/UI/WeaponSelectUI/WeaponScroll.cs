@@ -38,7 +38,7 @@ public class WeaponScroll : MonoBehaviour
         }
         for(int i = 0 ; i < hasWeaponCounts; i++)
          {
-              showWeapons[i].WeaponUpdate();          // WeaponImage 업데이트
+              showWeapons[i].WeaponUpdate(hasWeapons[i]);          // WeaponImage 업데이트
          }
          for(int i = hasWeapons.Count; i < showWeapons.Count; i++)
          {
