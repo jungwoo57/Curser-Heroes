@@ -1,46 +1,76 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using static SkillData;
 
 public class SkillManager : MonoBehaviour
 {
     [SerializeField] private GameObject rewardSelectUIPrefab;
+    [SerializeField] private GameObject skillSelectUIPrefab;
 
-    public WaveManager waveManager;
-    public List<SkillData> skillPool = new List<SkillData>(); // 12개 선택된 스킬
-    public List<SkillInstance> ownedSkills = new List<SkillInstance>(); // 보유 중인 스킬
+    public List<SkillData> allSkills;
+    public List<SkillData> skillPool = new List<SkillData>();
+    public List<SkillInstance> ownedSkills = new List<SkillInstance>();
 
     public int maxSkillCount = 6;
+    public WaveManager waveManager;
 
-    public GameObject skillSelectUIPrefab;
+    private GameObject skillSelectUIInstance;
+
+    [System.Serializable]
+    public class SkillInstance
+    {
+        public SkillData skill;
+        public int level;
+        public bool IsMaxed => level >= skill.maxLevel;
+    }
+
+    void Start()
+    {
+        Debug.Log($"[SkillManager] 등록된 스킬 개수: {allSkills.Count}");
+    }
 
     public void OnWaveEnd()
     {
-        // 모두 최대레벨이라면 리워드 선택으로
         if (ownedSkills.Count == maxSkillCount && ownedSkills.All(s => s.IsMaxed))
         {
-            ShowRewardSelection(); // 목숨, 골드, 쥬얼 중 하나 선택
+            ShowRewardSelection();
         }
         else
         {
-            ShowSkillSelection(); // 스킬 중 하나 선택
+            ShowSkillSelection();
         }
     }
 
     void ShowSkillSelection()
     {
+        if (skillSelectUIPrefab == null)
+        {
+            Debug.LogError("SkillSelectUIPrefab이 연결되어 있지 않습니다.");
+            return;
+        }
+
+        skillSelectUIInstance = Instantiate(skillSelectUIPrefab);
+        var canvas = GameObject.Find("Canvas");
+        if (canvas != null)
+        {
+            skillSelectUIInstance.transform.SetParent(canvas.transform, false);
+        }
+
+        var skillUI = skillSelectUIInstance.GetComponent<SkillSelectUI>();
+        if (skillUI == null)
+        {
+            Debug.LogError("SkillSelectUI 컴포넌트를 찾을 수 없습니다.");
+            return;
+        }
+
         List<SkillData> availableSkills = skillPool
             .Where(skill =>
                 !ownedSkills.Any(own => own.skill == skill && own.IsMaxed) &&
                 (ownedSkills.Count < maxSkillCount || ownedSkills.Any(own => own.skill == skill))
-            )
-            .ToList();
+            ).ToList();
 
         List<SkillData> selection = GetRandomSkills(availableSkills, 3);
-        GameObject ui = Instantiate(skillSelectUIPrefab);
-        ui.GetComponent<SkillSelectUI>().Show(selection, OnSkillSelected);
+        skillUI.Show(selection, OnSkillSelected);
     }
 
     void OnSkillSelected(SkillData selected)
@@ -51,7 +81,16 @@ public class SkillManager : MonoBehaviour
         else
             ownedSkills.Add(new SkillInstance { skill = selected, level = 1 });
 
-        waveManager.StartWave(); // 선택 끝 → 다음 웨이브 시작
+        UIManager.Instance.battleUI.SkillUpdate();
+
+        if (skillSelectUIInstance != null)
+        {
+            Destroy(skillSelectUIInstance);
+            skillSelectUIInstance = null;
+        }
+
+        waveManager.IncrementWaveIndex();
+        waveManager.StartWave();
     }
 
     void ShowRewardSelection()
@@ -68,11 +107,9 @@ public class SkillManager : MonoBehaviour
             case 1: CurrencyManager.Instance.AddGold(100); break;
             case 2: CurrencyManager.Instance.AddJewel(10); break;
         }
-        */
-
         waveManager.StartWave();
+        */
     }
-
     List<SkillData> GetRandomSkills(List<SkillData> source, int count)
     {
         return source.OrderBy(x => Random.value).Take(count).ToList();

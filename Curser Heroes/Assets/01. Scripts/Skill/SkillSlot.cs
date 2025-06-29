@@ -1,27 +1,39 @@
 ﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using UnityEngine;
 
 public class SkillSlot : MonoBehaviour
 {
-    public Image icon; // Icon 오브젝트
+    public Image icon;
     public TMP_Text skillNameText;
     public TMP_Text descriptionText;
 
     private Action onClick;
 
-    public void Set(SkillData skill, Action onClickCallback)
+    public void Set(SkillData skillData, Action onClickCallback)
     {
-        icon.sprite = skill.icon;
-        skillNameText.text = skill.skillName + " Lv.1"; // or use actual level
-        descriptionText.text = skill.description;
+        icon.sprite = skillData.icon;
+        skillNameText.text = $"{skillData.skillName} Lv.1";
+        descriptionText.text = skillData.description;
 
         onClick = onClickCallback;
 
-        // Button은 현재 이 오브젝트에 붙어 있음
-        GetComponent<Button>().onClick.RemoveAllListeners();
-        GetComponent<Button>().onClick.AddListener(() => onClick?.Invoke());
+        var btn = GetComponent<Button>();
+        btn.onClick.RemoveAllListeners();
+        btn.onClick.AddListener(() => onClick?.Invoke());
+    }
+
+    public void Set(SkillManager.SkillInstance skillInstance, Action onClickCallback)
+    {
+        icon.sprite = skillInstance.skill.icon;
+        skillNameText.text = $"{skillInstance.skill.skillName} Lv.{skillInstance.level}";
+        descriptionText.text = skillInstance.skill.description;
+
+        onClick = onClickCallback;
+
+        var btn = GetComponent<Button>();
+        btn.onClick.RemoveAllListeners();
+        btn.onClick.AddListener(() => onClick?.Invoke());
     }
 }
-
