@@ -22,13 +22,15 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<WeaponData> _hasMainWeapon; // 보유 주무기
     public IReadOnlyList<WeaponData> hasMainWeapon => _hasMainWeapon;     // 다른 파일에서 보유 주무기 가져오기(수정 불가)
  
-    [SerializeField] private List<WeaponData> _hasSubWeapon; // 보유 보조무기
-    public IReadOnlyList<WeaponData> hasSubWeapon => _hasSubWeapon;     // 다른 파일에서 보유 보조 무기 가져오기(수정 불가)
+    [SerializeField] private List<SubWeaponData> _hasSubWeapon; // 보유 보조무기
+    public IReadOnlyList<SubWeaponData> hasSubWeapon => _hasSubWeapon;     // 다른 파일에서 보유 보조 무기 가져오기(수정 불가)
     
     [SerializeField] private List<WeaponData> _hasPartner; // 보유 동료
     public IReadOnlyList<WeaponData> hasPartner => _hasPartner;     // 다른 파일에서 보유 동료 가져오기(수정 불가)
+
+    public WeaponData mainEquipWeapon;
+    public SubWeaponData subEquipWeapon; 
     
-     
     private int gold = 0;
     private int jewel = 0;
 
@@ -73,5 +75,27 @@ public class GameManager : MonoBehaviour
     {
         // 이미 보유중인 무기면 적용 안시킬 지는 무기 해금 코드 보고 결정
         _hasMainWeapon.Add(weaponData);              // 코드 구조 보고 보조무기 주무기 얻는 법 바꾸기
+    }
+    
+    public void EquipWeapon(WeaponData equipData)
+    {
+        if (equipData == null)
+        {
+            Debug.Log("데이터 없음");
+            return;
+        }
+
+        mainEquipWeapon= equipData;       // 메인 무기 장착만 작성 추후 보조 동료 추가
+    }
+    
+    public void EquipWeapon(SubWeaponData equipData)
+    {
+        if (equipData == null)
+        {
+            Debug.Log("데이터 없음");
+            return;
+        }
+
+        subEquipWeapon= equipData;       // 메인 무기 장착만 작성 추후 보조 동료 추가
     }
 }

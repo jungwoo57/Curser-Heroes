@@ -10,13 +10,25 @@ public class WaveManager : MonoBehaviour
     public WaveGroupData waveGroupData;
     public GameManager gameManager;
     public Spawner spawner;
-    
+    public static WaveManager Instance { get; private set; }
+
     //public PoolSpawnerTest spawner; // Inspector에서 연결 필요
 
     private WaveEntry currentWaveData;
     private int currentWaveIndex = 0;
     private List<GameObject> spawnedMonsters = new List<GameObject>();
     private bool waveCleared = false; // 중복 웨이브 클리어 방지
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject); // 중복 방지
+            return;
+        }
+
+        Instance = this;
+    }
 
     [ContextMenu("스폰시키기")]
     public void StartWave()

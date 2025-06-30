@@ -1,4 +1,4 @@
-
+﻿
 using System;
 using UnityEngine;
 
@@ -38,9 +38,6 @@ public class UIManager : MonoBehaviour
     public BattleUI battleUI;
     
     public StageStartUI stageStartUI;
-    
-    public WaveManager waveManager;  /// 추후 인스펙터에서 할당하지 않고 사용
-                                    
     private void Init()
     {
         battleUI.gameObject.SetActive(false);
