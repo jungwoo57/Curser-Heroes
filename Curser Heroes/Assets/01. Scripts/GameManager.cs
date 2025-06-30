@@ -27,7 +27,8 @@ public class GameManager : MonoBehaviour
     
     [SerializeField] private List<WeaponData> _hasPartner; // 보유 동료
     public IReadOnlyList<WeaponData> hasPartner => _hasPartner;     // 다른 파일에서 보유 동료 가져오기(수정 불가)
-    
+
+    public WeaponData[] equipWeapons;
      
     private int gold = 0;
     private int jewel = 0;
@@ -73,5 +74,16 @@ public class GameManager : MonoBehaviour
     {
         // 이미 보유중인 무기면 적용 안시킬 지는 무기 해금 코드 보고 결정
         _hasMainWeapon.Add(weaponData);              // 코드 구조 보고 보조무기 주무기 얻는 법 바꾸기
+    }
+    
+    public void EquipWeapon(WeaponData equipData)
+    {
+        if (equipData == null)
+        {
+            Debug.Log("데이터 없음");
+            return;
+        }
+
+        equipWeapons[0] = equipData;       // 메인 무기 장착만 작성 추후 보조 동료 추가
     }
 }

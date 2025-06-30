@@ -4,7 +4,7 @@ public class WeaponData : ScriptableObject
 {
     [Header("기본 정보")]
     public string weaponName;
-    public Sprite wepaonImage;
+    public Sprite weaponImage;
     public string weaponDesc;
     
     [Header("공격력 관련")]
