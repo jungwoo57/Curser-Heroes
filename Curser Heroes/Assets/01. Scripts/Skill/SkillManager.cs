@@ -12,7 +12,6 @@ public class SkillManager : MonoBehaviour
     public List<SkillInstance> ownedSkills = new List<SkillInstance>();
 
     public int maxSkillCount = 6;
-    public WaveManager waveManager;
 
     private GameObject skillSelectUIInstance;
 
@@ -100,8 +99,8 @@ public class SkillManager : MonoBehaviour
         Destroy(skillSelectUIInstance);
         skillSelectUIInstance = null;
 
-        waveManager.IncrementWaveIndex();
-        waveManager.StartWave();
+        WaveManager.Instance.IncrementWaveIndex();
+        WaveManager.Instance.StartWave();
     }
 
     void ShowRewardSelection()
