@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 public class WeaponSelectUI : MonoBehaviour
@@ -14,7 +13,7 @@ public class WeaponSelectUI : MonoBehaviour
     [SerializeField] private GameObject weaponInfoScroll;        // 무기 정보 보여주는 판넬
     [SerializeField] private GameObject ExitButton;
 
-
+    public static event Action OnEquipUIUpdate;
 
     public void ChangeWeaponPanel(string buttonName)  // 무기 선택 화면 바꾸기
     {
@@ -41,5 +40,6 @@ public class WeaponSelectUI : MonoBehaviour
     public void ClickExitButton()
     {
         weaponSelectUI.SetActive(false);
+        OnEquipUIUpdate?.Invoke();
     }
 }

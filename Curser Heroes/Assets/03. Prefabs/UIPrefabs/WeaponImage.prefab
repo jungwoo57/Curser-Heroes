@@ -205,8 +205,8 @@ MonoBehaviour:
   weaponSprite: {fileID: 8273858870516984858}
   bookmarkButton: {fileID: 6561233434317641212}
   isBookmark: 0
-  selectButton: {fileID: 0}
   data: {fileID: 0}
+  subData: {fileID: 0}
 --- !u!114 &3224647385106294603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -254,7 +254,7 @@ MonoBehaviour:
       - m_Target: {fileID: 2212180755978042095}
         m_TargetAssemblyTypeName: WeaponImage, Assembly-CSharp
         m_MethodName: OnClickWeaponButton
-        m_Mode: 1
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

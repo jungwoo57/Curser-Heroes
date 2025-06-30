@@ -292,7 +292,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &81744888
 RectTransform:
   m_ObjectHideFlags: 0
@@ -415,10 +415,10 @@ RectTransform:
   - {fileID: 907365099}
   m_Father: {fileID: 1241526912}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 365, y: -395}
+  m_SizeDelta: {x: 670, y: 210}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &83737107
 MonoBehaviour:
@@ -2291,10 +2291,10 @@ RectTransform:
   - {fileID: 1386662903}
   m_Father: {fileID: 1241526912}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 365, y: -655}
+  m_SizeDelta: {x: 670, y: 210}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &597642123
 MonoBehaviour:
@@ -2581,10 +2581,10 @@ RectTransform:
   - {fileID: 1072707354}
   m_Father: {fileID: 1241526912}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 365, y: -135}
+  m_SizeDelta: {x: 670, y: 210}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &636637963
 MonoBehaviour:
@@ -3654,8 +3654,9 @@ GameObject:
   - component: {fileID: 900988465}
   - component: {fileID: 900988467}
   - component: {fileID: 900988466}
+  - component: {fileID: 900988468}
   m_Layer: 5
-  m_Name: Organization
+  m_Name: EquipInfoUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3777,6 +3778,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 900988463}
   m_CullTransparentMesh: 1
+--- !u!114 &900988468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 900988463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfa2cb58c484ea14686675125e5757b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainWeaponImage: {fileID: 632721095}
+  subWeaponImage: {fileID: 1500992532}
+  partnerImage: {fileID: 579277356}
 --- !u!1 &901420002
 GameObject:
   m_ObjectHideFlags: 0
@@ -4304,8 +4320,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 213532044}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 0.5319215}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
