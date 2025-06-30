@@ -375,7 +375,7 @@ MonoBehaviour:
   subWeaponSelectButton: {fileID: 103173371}
   partnerSelectButton: {fileID: 642482663}
   selectScroll: {fileID: 2010720305}
-  weaponInfoScroll: {fileID: 0}
+  weaponInfoScroll: {fileID: 1241526911}
   ExitButton: {fileID: 379616820}
 --- !u!1 &83737105
 GameObject:
@@ -1092,8 +1092,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 955848514}
   m_HandleRect: {fileID: 955848513}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.4680785
+  m_Value: 0.9999998
+  m_Size: 0.4680784
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

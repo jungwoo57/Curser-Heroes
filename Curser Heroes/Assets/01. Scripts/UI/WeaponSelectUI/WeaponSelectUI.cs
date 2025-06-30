@@ -15,6 +15,11 @@ public class WeaponSelectUI : MonoBehaviour
 
     public static event Action OnEquipUIUpdate;
 
+    private void OnEnable()
+    {
+        ChangeWeaponPanel("main");
+    }
+
     public void ChangeWeaponPanel(string buttonName)  // 무기 선택 화면 바꾸기
     {
         switch (buttonName)

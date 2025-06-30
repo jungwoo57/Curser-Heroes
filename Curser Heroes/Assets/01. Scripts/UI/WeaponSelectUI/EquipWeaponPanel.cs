@@ -18,7 +18,14 @@ public class EquipmWeaponPanel : MonoBehaviour
     
     public void UpdatePanel()
     {
-        equipMainWeaponUi.UpdateUI(GameManager.Instance.mainEquipWeapon); // 주무기 업데이트 우선 제작
-        //equipSubWeaponUI.UpdateUI(GameManager.Instance.subEquipWeapon);
+        if (GameManager.Instance.mainEquipWeapon != null)
+        {
+            equipMainWeaponUi.UpdateUI(GameManager.Instance.mainEquipWeapon); // 주무기 업데이트 우선 제작
+        }
+
+        if (GameManager.Instance.subEquipWeapon != null)
+        {
+            equipSubWeaponUI.UpdateUI(GameManager.Instance.subEquipWeapon);
+        }
     }
 }
