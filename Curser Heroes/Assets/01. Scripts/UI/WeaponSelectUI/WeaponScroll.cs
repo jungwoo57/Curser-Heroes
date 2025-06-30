@@ -9,22 +9,23 @@ public class WeaponScroll : MonoBehaviour
     public int hasWeaponCounts;
     public Transform content;   // content아래 생성 하기위해서 부모 설정
     public ScrollRect scrollRect;
-    public int scrollCount;
+    public int scrollCount;     // 일정 갯 수 이하 스크롤 x
     public GameObject weaponImagePrefabs; // 더미 데이터
     
     public void UpdateScroll()
     {
-        if (showWeapons.Count > scrollCount) // 아이템이 일정 갯수 이하이면 스크롤 안되게 하기
-        {
-            scrollRect.vertical = false;
-        }
-        else
+        hasWeapons = GameManager.Instance.hasMainWeapon; //매니저에 있는 무기리스트 가져오기
+        hasWeaponCounts = GameManager.Instance.hasMainWeapon.Count;
+        
+        if (hasWeapons.Count > scrollCount) // 아이템이 일정 갯수 이하이면 스크롤 안되게 하기
         {
             scrollRect.vertical = true;
         }
+        else
+        {
+            scrollRect.vertical = false;
+        }
         
-        hasWeapons = GameManager.Instance.hasMainWeapon; //매니저에 있는 무기리스트 가져오기
-        hasWeaponCounts = GameManager.Instance.hasMainWeapon.Count;
         for (int i = 0; i < hasWeaponCounts; i++)
         {
             Debug.Log(hasWeapons[i].weaponName);

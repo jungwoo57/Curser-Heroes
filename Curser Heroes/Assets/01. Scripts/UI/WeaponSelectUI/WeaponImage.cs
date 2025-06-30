@@ -1,22 +1,29 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 public class WeaponImage : MonoBehaviour
 {
-    public Sprite weaponSprite;
+    public Image weaponSprite;
     public Image bookmarkButton; // 즐겨찾기 버튼
     public bool isBookmark;       // 북마크 체크
     public Button selectButton;  // 이미지에 추후 합치기
     public WeaponData data;
 
+    private void Awake()
+    {
+        //weaponSprite = GetComponentInChildren<SpriteRenderer>();
+    }
+
     public void WeaponUpdate(WeaponData recieveData) // 매게변수 받아야 할 확률 높음
     {
-        Debug.Log("테스트용 로그");
+        data = recieveData;
+        Debug.Log("업데이트" + data);
         this.gameObject.SetActive(true);
-        if (recieveData.wepaonImage != null)
+        if (data.wepaonImage != null)
         {
-            weaponSprite = recieveData.wepaonImage;
+            weaponSprite.sprite = data.wepaonImage;
         }
         else
         {
