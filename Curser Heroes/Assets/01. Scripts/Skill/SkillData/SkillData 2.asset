@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 313662ea31e2a54469b9f802318e0975, type: 3}
   m_Name: SkillData 2
   m_EditorClassIdentifier: 
-  skillName: "\uBAA8\uB798\uAC11\uC637"
-  damage: 0
+  skillName: "\uBCC4\uB3D9\uBCC4"
+  damage: 3
   cooltime: 5
-  icon: {fileID: 0}
-  maxLevel: 6
-  description: "\uBAA8\uB798\uB97C \uBAB8\uC5D0 \uB458\uB7EC \uACF5\uACA9\uC744 \uB9C9\uC544\uC900\uB2E4."
+  icon: {fileID: 21300000, guid: 3e350b2cc52a02a4caa67a27ab52ce44, type: 3}
+  maxLevel: 8
+  description: "\uC2A4\uC715 \uACF5\uACA9 \uC2DC, \uD655\uB960\uC801\uC73C\uB85C
+    \uB79C\uB364\uD55C \uBAAC\uC2A4\uD130\uC5D0\uAC8C \uD53C\uD574\uB97C \uC8FC\uB294
+    \uBCC4\uB625\uBCC4 \uB099\uD558"

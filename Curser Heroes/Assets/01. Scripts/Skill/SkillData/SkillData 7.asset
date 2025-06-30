@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 313662ea31e2a54469b9f802318e0975, type: 3}
-  m_Name: SkillData 3
+  m_Name: SkillData 7
   m_EditorClassIdentifier: 
-  skillName: "\uD654\uC5FC\uAD6C"
-  damage: 2
-  cooltime: 5
-  icon: {fileID: 21300000, guid: 5f642dec633d1c24e967aaa82cf08437, type: 3}
-  maxLevel: 8
-  description: "\uD074\uB9AD \uACF5\uACA9 \uC2DC, \uD655\uB960\uC801\uC73C\uB85C
-    \uAC00\uC7A5 \uAC00\uAE4C\uC6B4 \uBAAC\uC2A4\uD130\uB97C \uAD00\uD1B5\uD558\uB294
-    \uD654\uC5FC\uAD6C \uBC1C\uC0AC"
+  skillName: "\uAD6C\uC6D0"
+  damage: 0
+  cooltime: 0
+  icon: {fileID: 21300000, guid: bd781f1822f65f446840681604f78533, type: 3}
+  maxLevel: 1
+  description: "\uBAA9\uC228\uC774 \uBAA8\uB450 \uC18C\uC9C4\uB418\uC5C8\uC744 \uB54C,
+    \uBAA9\uC228\uC744 1 \uD68C\uBCF5\uD558\uACE0 5\uCD08 \uAC04 \uBB34\uC801 \uC0C1\uD0DC
+    \uC9C4\uC785"
