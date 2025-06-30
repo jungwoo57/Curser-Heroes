@@ -166,7 +166,6 @@ MonoBehaviour:
   icon: {fileID: 3895877417982195099}
   skillNameText: {fileID: 6142683092246942546}
   descriptionText: {fileID: 3346013994701514916}
-  selectButton: {fileID: 7429894035054682291}
 --- !u!1 &6482171307532018420
 GameObject:
   m_ObjectHideFlags: 0
@@ -202,7 +201,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5660584419738296302
 CanvasRenderer:
@@ -277,7 +276,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 400, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2290380361701386490
 CanvasRenderer:
@@ -411,7 +410,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 200, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8142447239348735962
 CanvasRenderer:
