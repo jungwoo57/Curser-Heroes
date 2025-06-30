@@ -4,8 +4,10 @@
 public class SubWeaponData : ScriptableObject
 {
     [Header("기본 정보")]
-    public string weaponName;    
-
+    public string weaponName;
+    public Sprite weaponImage;
+    public string weaponDesc;
+    
     [Header("기본 스탯")]
     public float baseDamage = 1f;
     public float damagePerLevel = 1f;
