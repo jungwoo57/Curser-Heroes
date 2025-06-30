@@ -81,13 +81,24 @@ public class SkillManager : MonoBehaviour
         else
             ownedSkills.Add(new SkillInstance { skill = selected, level = 1 });
 
-        UIManager.Instance.battleUI.SkillUpdate();
+        Debug.Log($"[SkillManager] 스킬 선택됨: {selected.skillName}");
 
-        if (skillSelectUIInstance != null)
+        if (UIManager.Instance == null)
         {
-            Destroy(skillSelectUIInstance);
-            skillSelectUIInstance = null;
+            Debug.LogError("UIManager.Instance is null!");
         }
+        else if (UIManager.Instance.battleUI == null)
+        {
+            Debug.LogError("UIManager.Instance.battleUI is null!");
+        }
+        else
+        {
+            Debug.Log("[SkillManager] SkillUpdate 호출");
+            UIManager.Instance.battleUI.SkillUpdate();
+        }
+
+        Destroy(skillSelectUIInstance);
+        skillSelectUIInstance = null;
 
         waveManager.IncrementWaveIndex();
         waveManager.StartWave();
