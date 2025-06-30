@@ -192,7 +192,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 771781596719720976, guid: 15246d8e67e7f9c45af87af9ab5c017b, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 120
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 771781596719720976, guid: 15246d8e67e7f9c45af87af9ab5c017b, type: 3}
       propertyPath: m_SizeDelta.y
@@ -246,6 +246,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 895437539512805637, guid: 15246d8e67e7f9c45af87af9ab5c017b, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1680088701902851731, guid: 15246d8e67e7f9c45af87af9ab5c017b, type: 3}
       propertyPath: m_Name
       value: SkillSlot (2)
@@ -289,6 +293,10 @@ PrefabInstance:
     - target: {fileID: 7416855481631743631, guid: 15246d8e67e7f9c45af87af9ab5c017b, type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7416855481631743631, guid: 15246d8e67e7f9c45af87af9ab5c017b, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 7416855481631743631, guid: 15246d8e67e7f9c45af87af9ab5c017b, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -407,6 +415,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 895437539512805637, guid: 15246d8e67e7f9c45af87af9ab5c017b, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1680088701902851731, guid: 15246d8e67e7f9c45af87af9ab5c017b, type: 3}
       propertyPath: m_Name
       value: SkillSlot
@@ -450,6 +462,10 @@ PrefabInstance:
     - target: {fileID: 7416855481631743631, guid: 15246d8e67e7f9c45af87af9ab5c017b, type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7416855481631743631, guid: 15246d8e67e7f9c45af87af9ab5c017b, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 7416855481631743631, guid: 15246d8e67e7f9c45af87af9ab5c017b, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -514,7 +530,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 771781596719720976, guid: 15246d8e67e7f9c45af87af9ab5c017b, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 120
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 771781596719720976, guid: 15246d8e67e7f9c45af87af9ab5c017b, type: 3}
       propertyPath: m_SizeDelta.y
@@ -568,6 +584,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 895437539512805637, guid: 15246d8e67e7f9c45af87af9ab5c017b, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1680088701902851731, guid: 15246d8e67e7f9c45af87af9ab5c017b, type: 3}
       propertyPath: m_Name
       value: SkillSlot (1)
@@ -611,6 +631,10 @@ PrefabInstance:
     - target: {fileID: 7416855481631743631, guid: 15246d8e67e7f9c45af87af9ab5c017b, type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7416855481631743631, guid: 15246d8e67e7f9c45af87af9ab5c017b, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 7416855481631743631, guid: 15246d8e67e7f9c45af87af9ab5c017b, type: 3}
       propertyPath: m_AnchoredPosition.x
