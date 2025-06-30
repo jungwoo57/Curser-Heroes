@@ -388,6 +388,7 @@ GameObject:
   - component: {fileID: 83737106}
   - component: {fileID: 83737108}
   - component: {fileID: 83737107}
+  - component: {fileID: 83737109}
   m_Layer: 5
   m_Name: SubWeaponInfo
   m_TagString: Untagged
@@ -457,6 +458,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 83737105}
   m_CullTransparentMesh: 1
+--- !u!114 &83737109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 83737105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba7e5edf65129964f9fa79876b7f282e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponImage: {fileID: 905626357}
+  nameText: {fileID: 988589237}
+  descriptionText: {fileID: 132627892}
+  attackTypeText: {fileID: 1593671110}
+  statusText: {fileID: 184441153}
 --- !u!1 &103173369
 GameObject:
   m_ObjectHideFlags: 0
@@ -1075,7 +1093,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 955848513}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.46807843
+  m_Size: 0.4680785
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2066,8 +2084,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ad89040aa703a48419f6395330ab660e, type: 2}
   _hasSubWeapon: []
   _hasPartner: []
-  equipWeapons:
-  - {fileID: 11400000, guid: 039fe819971c8b74cb9cf96f22319f8a, type: 2}
+  mainEquipWeapon: {fileID: 0}
+  subEquipWeapon: {fileID: 0}
 --- !u!4 &516545486
 Transform:
   m_ObjectHideFlags: 0
@@ -2534,6 +2552,7 @@ GameObject:
   - component: {fileID: 636637962}
   - component: {fileID: 636637964}
   - component: {fileID: 636637963}
+  - component: {fileID: 636637965}
   m_Layer: 5
   m_Name: MainWeaponInfo
   m_TagString: Untagged
@@ -2603,6 +2622,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 636637961}
   m_CullTransparentMesh: 1
+--- !u!114 &636637965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 636637961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33f090f3ce7740f4dabcee9a57e7712e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponImage: {fileID: 1106536695}
+  nameText: {fileID: 148695074}
+  descriptionText: {fileID: 1551800144}
+  attackTypeText: {fileID: 901420004}
+  statusText: {fileID: 1537935115}
 --- !u!1 &640872581
 GameObject:
   m_ObjectHideFlags: 0
@@ -3923,7 +3959,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5019,7 +5055,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5124,6 +5160,7 @@ GameObject:
   - component: {fileID: 1241526915}
   - component: {fileID: 1241526914}
   - component: {fileID: 1241526913}
+  - component: {fileID: 1241526916}
   m_Layer: 5
   m_Name: EquipInfoScroll
   m_TagString: Untagged
@@ -5215,6 +5252,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1241526911}
   m_CullTransparentMesh: 1
+--- !u!114 &1241526916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1241526911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 253b2ab0975365349a310b1919656920, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  equipMainWeaponUi: {fileID: 636637965}
+  equipSubWeaponUI: {fileID: 83737109}
 --- !u!1 &1275833024
 GameObject:
   m_ObjectHideFlags: 0
