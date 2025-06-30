@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1058003594154529957}
   - component: {fileID: 3769131935496143716}
   - component: {fileID: 3579374697869779376}
+  - component: {fileID: 9024204803949101483}
   m_Layer: 7
   m_Name: Boss
   m_TagString: Untagged
@@ -120,15 +121,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 734bbfebe4515a44b821aeed98f95f7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpWarningPrefab: {fileID: 3561622781303756646, guid: d33be569c400fe340ae3dccea29ea483, type: 3}
-  cursorTarget: {fileID: 0}
+  maxHP: 3500
+  pattern1Range: 2.5
+  pattern2Range: 3
+  pattern3Range: 1.5
   pattern1Delay: 6
   pattern2Delay: 20
   pattern3Delay: 5
   moveSpeed: 1.5
-  pattern1AttackRange: 2.5
-  pattern2AttackRange: 2
-  pattern3AttackRange: 1.5
+  cursorTarget: {fileID: 0}
+  jumpWarningPrefab: {fileID: 3561622781303756646, guid: d33be569c400fe340ae3dccea29ea483, type: 3}
 --- !u!70 &3579374697869779376
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -164,3 +166,25 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.54, y: 0.56}
   m_Direction: 0
+--- !u!114 &9024204803949101483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7941573157266922657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 734bbfebe4515a44b821aeed98f95f7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHP: 3500
+  pattern1Range: 2.5
+  pattern2Range: 3
+  pattern3Range: 1.5
+  pattern1Delay: 6
+  pattern2Delay: 19
+  pattern3Delay: 5
+  moveSpeed: 1.5
+  cursorTarget: {fileID: 0}
+  jumpWarningPrefab: {fileID: 3561622781303756646, guid: d33be569c400fe340ae3dccea29ea483, type: 3}
