@@ -87,4 +87,15 @@ public class GameManager : MonoBehaviour
 
         mainEquipWeapon= equipData;       // 메인 무기 장착만 작성 추후 보조 동료 추가
     }
+    
+    public void EquipWeapon(SubWeaponData equipData)
+    {
+        if (equipData == null)
+        {
+            Debug.Log("데이터 없음");
+            return;
+        }
+
+        subEquipWeapon= equipData;       // 메인 무기 장착만 작성 추후 보조 동료 추가
+    }
 }
