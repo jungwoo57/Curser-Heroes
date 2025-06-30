@@ -2082,7 +2082,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 039fe819971c8b74cb9cf96f22319f8a, type: 2}
   - {fileID: 11400000, guid: 133254ae2272caf40a2dcfe7c7cc5bdb, type: 2}
   - {fileID: 11400000, guid: ad89040aa703a48419f6395330ab660e, type: 2}
-  _hasSubWeapon: []
+  _hasSubWeapon:
+  - {fileID: 11400000, guid: a743b874776441044bf275c881e40cfd, type: 2}
+  - {fileID: 11400000, guid: 4a82d059c813e774998f2c9b4cb949eb, type: 2}
   _hasPartner: []
   mainEquipWeapon: {fileID: 0}
   subEquipWeapon: {fileID: 0}
