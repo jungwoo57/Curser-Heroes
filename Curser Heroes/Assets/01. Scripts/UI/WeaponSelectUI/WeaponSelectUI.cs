@@ -22,11 +22,12 @@ public class WeaponSelectUI : MonoBehaviour
         {
             case "main" :
                 Debug.Log("메인무기 열람");
-                weaponScroll.UpdateScroll();
+                weaponScroll.UpdateScroll("main");
                 // 주무기 업데이트
                 break;
             case "sub" : 
                 Debug.Log("보주무기 열람");
+                weaponScroll.UpdateScroll("sub");
                 // 보조무기 업데이트
                 break;
             case "partner" :

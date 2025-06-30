@@ -8,7 +8,7 @@ public class WeaponImage : MonoBehaviour
     public bool isBookmark;       // 북마크 체크// 이미지에 추후 합치기
     public WeaponData data;
 
-    public static event Action<int> OnWeaponPanelUpdate;
+    public static event Action OnWeaponPanelUpdate;
     
     public void WeaponUpdate(WeaponData recieveData) // 매게변수 받아야 할 확률 높음
     {
@@ -30,6 +30,6 @@ public class WeaponImage : MonoBehaviour
     public void OnClickWeaponButton()
     {
         GameManager.Instance.EquipWeapon(data);
-        OnWeaponPanelUpdate?.Invoke(0);        //우선 메인 무기만 변경 추후 변경
+        OnWeaponPanelUpdate?.Invoke();        //우선 메인 무기만 변경 추후 변경
     }
 }

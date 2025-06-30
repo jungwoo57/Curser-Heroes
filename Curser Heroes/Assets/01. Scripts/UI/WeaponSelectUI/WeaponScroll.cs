@@ -12,11 +12,25 @@ public class WeaponScroll : MonoBehaviour
     public int scrollCount;     // 일정 갯 수 이하 스크롤 x
     public GameObject weaponImagePrefabs; // 더미 데이터
     
-    public void UpdateScroll()
+    public void UpdateScroll(string weaponType)
     {
-        hasWeapons = GameManager.Instance.hasMainWeapon; //매니저에 있는 무기리스트 가져오기
+        hasWeapons = GameManager.Instance.hasMainWeapon; //매니저에 있는 주무기리스트 가져오기
         hasWeaponCounts = GameManager.Instance.hasMainWeapon.Count;
-        
+        /*switch (weaponType)
+        {
+            case "main" : 
+                hasWeapons = GameManager.Instance.hasMainWeapon; //매니저에 있는 주무기리스트 가져오기
+                hasWeaponCounts = GameManager.Instance.hasMainWeapon.Count;
+                break;
+            case "sub" : 
+                hasWeapons = GameManager.Instance.hasSubWeapon; //매니저에 있는 서브리스트 가져오기
+                hasWeaponCounts = GameManager.Instance.hasSubWeapon.Count;
+
+                break;
+            case "partner" : 
+                break;
+        }*/
+
         if (hasWeapons.Count > scrollCount) // 아이템이 일정 갯수 이하이면 스크롤 안되게 하기
         {
             scrollRect.vertical = true;

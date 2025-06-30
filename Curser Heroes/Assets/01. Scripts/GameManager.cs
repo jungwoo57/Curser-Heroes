@@ -22,14 +22,15 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<WeaponData> _hasMainWeapon; // 보유 주무기
     public IReadOnlyList<WeaponData> hasMainWeapon => _hasMainWeapon;     // 다른 파일에서 보유 주무기 가져오기(수정 불가)
  
-    [SerializeField] private List<WeaponData> _hasSubWeapon; // 보유 보조무기
-    public IReadOnlyList<WeaponData> hasSubWeapon => _hasSubWeapon;     // 다른 파일에서 보유 보조 무기 가져오기(수정 불가)
+    [SerializeField] private List<SubWeaponData> _hasSubWeapon; // 보유 보조무기
+    public IReadOnlyList<SubWeaponData> hasSubWeapon => _hasSubWeapon;     // 다른 파일에서 보유 보조 무기 가져오기(수정 불가)
     
     [SerializeField] private List<WeaponData> _hasPartner; // 보유 동료
     public IReadOnlyList<WeaponData> hasPartner => _hasPartner;     // 다른 파일에서 보유 동료 가져오기(수정 불가)
 
-    public WeaponData[] equipWeapons;
-     
+    public WeaponData mainEquipWeapon;
+    public SubWeaponData subEquipWeapon; 
+    
     private int gold = 0;
     private int jewel = 0;
 
@@ -84,6 +85,6 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        equipWeapons[0] = equipData;       // 메인 무기 장착만 작성 추후 보조 동료 추가
+        mainEquipWeapon= equipData;       // 메인 무기 장착만 작성 추후 보조 동료 추가
     }
 }

@@ -2,7 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-public class EquipWeaponUI : MonoBehaviour
+public class EquipMainWeaponUI : MonoBehaviour
 {
    [Header("구성요소")]
    public Image weaponImage;

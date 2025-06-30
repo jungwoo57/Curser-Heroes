@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class EquipWeaponPanel : MonoBehaviour
+public class EquipmWeaponPanel : MonoBehaviour
 {
-    public EquipWeaponUI[] EquipWeaponUis; // 0 주무기 1 보조 무기 2 파트너
-    
+    public EquipMainWeaponUI equipMainWeaponUi; // 0 주무기 1 보조 무기 2 파트너
+    public EquipSubWeaponUI equipSubWeaponUI;
     
     private void OnEnable()
     {
@@ -16,8 +16,9 @@ public class EquipWeaponPanel : MonoBehaviour
     }
 
     
-    public void UpdatePanel(int index)
+    public void UpdatePanel()
     {
-        EquipWeaponUis[index].UpdateUI(GameManager.Instance.equipWeapons[index]); // 주무기 업데이트 우선 제작
+        equipMainWeaponUi.UpdateUI(GameManager.Instance.mainEquipWeapon); // 주무기 업데이트 우선 제작
+        //equipSubWeaponUI.UpdateUI(GameManager.Instance.subEquipWeapon);
     }
 }
