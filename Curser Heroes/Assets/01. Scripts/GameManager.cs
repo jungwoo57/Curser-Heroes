@@ -28,8 +28,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<WeaponData> _hasPartner; // 보유 동료
     public IReadOnlyList<WeaponData> hasPartner => _hasPartner;     // 다른 파일에서 보유 동료 가져오기(수정 불가)
 
+    [SerializeField] private List<SkillData> _hasSkills;
+    public IReadOnlyList<SkillData> hasSkills => _hasSkills;
+    
     public WeaponData mainEquipWeapon;
-    public SubWeaponData subEquipWeapon; 
+    public SubWeaponData subEquipWeapon;
+    public List<SkillData> selectSkills;    //스킬 갯수가 정해져있어서 배열로 변경도 고려
     
     private int gold = 0;
     private int jewel = 0;
@@ -97,5 +101,14 @@ public class GameManager : MonoBehaviour
         }
 
         subEquipWeapon= equipData;       // 메인 무기 장착만 작성 추후 보조 동료 추가
+    }
+
+    public void EquipSkill(SkillData[] skilldatas)
+    {
+        selectSkills.Clear();                        //기존 스킬 초기화
+        for (int i = 0; i < skilldatas.Length; i++)
+        {
+            selectSkills.Add(skilldatas[i]);
+        }
     }
 }
