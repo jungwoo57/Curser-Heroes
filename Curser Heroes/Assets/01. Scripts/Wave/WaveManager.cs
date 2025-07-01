@@ -1,35 +1,58 @@
-﻿using System;
+﻿
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
+    [SerializeField] private SkillManager skillManager;
+
     public WaveGroupData waveGroupData;
     public GameManager gameManager;
-    public Spawner spawner; // Inspector에서 연결 필요
+    public Spawner spawner;
+    public static WaveManager Instance { get; private set; }
+
     //public PoolSpawnerTest spawner; // Inspector에서 연결 필요
 
     private WaveEntry currentWaveData;
     private int currentWaveIndex = 0;
     private List<GameObject> spawnedMonsters = new List<GameObject>();
+    private bool waveCleared = false; // 중복 웨이브 클리어 방지
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject); // 중복 방지
+            return;
+        }
+
+        Instance = this;
+    }
 
     [ContextMenu("스폰시키기")]
     public void StartWave()
     {
-        // 기존 웨이브 목록 내에 있으면 복사해서 사용
-        if (currentWaveIndex < waveGroupData.waveEntries.Count)
+        waveCleared = false; // 새 웨이브 시작 시 초기화
+
+        WaveEntry matched = waveGroupData.waveEntries.Find(w => w.wave == currentWaveIndex + 1);
+
+        if (matched != null)
         {
-            WaveEntry original = waveGroupData.waveEntries[currentWaveIndex];
             currentWaveData = new WaveEntry
             {
-                overrideEnemies = original.overrideEnemies,
-                wave = currentWaveIndex + 1
+                overrideEnemies = matched.overrideEnemies,
+                wave = matched.wave,
+                forceExactOverride = matched.forceExactOverride
             };
         }
         else
         {
             currentWaveData = GenerateDynamicWaveEntry(currentWaveIndex + 1);
         }
+
+        Debug.Log($"웨이브 시작: {currentWaveData.wave}");
 
         var spawnQueue = WaveBuilder.BuildWaveEntry(currentWaveData, waveGroupData.globalMonsterPool);
         SpawnMonsters(spawnQueue);
@@ -74,14 +97,20 @@ public class WaveManager : MonoBehaviour
     {
         Debug.Log($"[몬스터 사망 감지] {monster.name} / ID: {monster.GetInstanceID()}");
 
+        GameObject toRemove = null;
+
         foreach (var m in spawnedMonsters)
         {
-            Debug.Log($"[리스트에 있는 몬스터] {m.name} / ID: {m.GetInstanceID()}");
+            if (m == monster) // 참조 직접 비교
+            {
+                toRemove = m;
+                break;
+            }
         }
 
-        if (spawnedMonsters.Contains(monster))
+        if (toRemove != null)
         {
-            spawnedMonsters.Remove(monster);
+            spawnedMonsters.Remove(toRemove);
             Debug.Log($"[제거 성공] 남은 몬스터 수: {spawnedMonsters.Count}");
         }
         else
@@ -89,24 +118,35 @@ public class WaveManager : MonoBehaviour
             Debug.LogWarning($"[제거 실패] 리스트에 없는 몬스터: {monster.name}");
         }
 
-        if (spawnedMonsters.Count == 0)
+        if (!waveCleared && spawnedMonsters.Count == 0)
         {
+            waveCleared = true; // 중복 방지
             Debug.Log("[웨이브 클리어]");
-            OnWaveCleared();
+            StartCoroutine(DelayedWaveClear(2f)); // 2초 후 OnWaveCleared 호출
         }
+    }
+
+    IEnumerator DelayedWaveClear(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Debug.Log("[웨이브 클리어] 2초 딜레이 후 호출");
+        OnWaveCleared();
     }
 
     void OnWaveCleared()
     {
-        // 보상 지급
+        Debug.Log("[WaveManager] OnWaveCleared 호출됨");
         gameManager.AddGold(currentWaveData.CalculateGoldReward());
         int? jewel = currentWaveData.TryGetJewelReward();
         if (jewel.HasValue)
             gameManager.AddJewel(jewel.Value);
 
-        // 웨이브 인덱스 증가 후 다음 웨이브 시작
+        skillManager.OnWaveEnd(); // → 내부에서 스킬 또는 보상 선택 UI 표시
+    }
+
+    public void IncrementWaveIndex()
+    {
         currentWaveIndex++;
-        StartWave();
     }
 
     private WaveEntry GenerateDynamicWaveEntry(int waveNumber)

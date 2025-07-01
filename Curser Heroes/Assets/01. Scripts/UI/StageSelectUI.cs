@@ -97,7 +97,7 @@ public class StageSelectUI : MonoBehaviour
         public void ClickSkillListButton()
         {
                 Debug.Log("스킬창 출력");                   //테스트용 코드 
-                //skillListPanel.SetActive(true);
+                skillListPanel.SetActive(true);
         }
         
         IEnumerator LoadSceneAndStartUI()

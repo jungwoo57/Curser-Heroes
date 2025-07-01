@@ -1,21 +1,18 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
+
+public enum SkillType { Attack, Defense, Buff }
 
 [CreateAssetMenu(fileName = "SkillData", menuName = "Skill/SkillData")]
 public class SkillData : ScriptableObject
 {
     public string skillName;
-    public int damage;
-    public int cooltime;
     public Sprite icon;
+    public SkillType type;
     public int maxLevel;
-    [TextArea] public string description;
+    public string description;
 
-    [System.Serializable]
-    public class SkillInstance
-    {
-        public SkillData skill;
-        public int level;
+    public GameObject skillPrefab;
 
-        public bool IsMaxed => level >= skill.maxLevel;
-    }
+    public List<SkillLevelData> levelDataList; // 레벨 별 수치
 }

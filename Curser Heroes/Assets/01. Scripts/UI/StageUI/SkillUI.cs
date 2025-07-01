@@ -1,14 +1,15 @@
-﻿using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+
 public class SkillUI : MonoBehaviour
 {
-    [SerializeField] private Image skillImage;
-    [SerializeField] private TextMeshProUGUI skillName;
+    public Image icon;
+    public TMP_Text skillNameText;
 
-    public void SetSkill(SkillData.SkillInstance instance)
+    public void SetSkill(SkillManager.SkillInstance skillInstance)
     {
-        skillImage.sprite = instance.skill.icon;
-        skillName.text = $"{instance.skill.skillName} Lv.{instance.level}";
+        icon.sprite = skillInstance.skill.icon;
+        skillNameText.text = $"{skillInstance.skill.skillName} Lv.{skillInstance.level}";
     }
 }

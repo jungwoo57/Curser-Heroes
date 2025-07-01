@@ -24,10 +24,17 @@ public class Spawner : MonoBehaviour
             GameObject go = Instantiate(data.monsterPrefab, spawnPos, Quaternion.identity);  // 몬스터 생성
 
             BaseMonster baseMonster = go.GetComponent<BaseMonster>();
+            BossBaseMonster bossMonster = go.GetComponent<BossBaseMonster>();
+
             if (baseMonster != null)
             {
                 baseMonster.Setup(data);               // Setup 호출
                 baseMonster.onDeath += onDeathCallback;  // 이벤트 연결
+            }
+            else if (bossMonster != null)
+            {
+                bossMonster.Setup(data);
+                bossMonster.onDeath += onDeathCallback;
             }
 
             spawned.Add(go);  // 리스트에 추가

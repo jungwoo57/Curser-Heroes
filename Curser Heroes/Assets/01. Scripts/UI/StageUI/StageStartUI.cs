@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -19,8 +19,6 @@ public class StageStartUI : MonoBehaviour
    [Header("슬로우 영역")] 
    [SerializeField] private Vector2 slowStartPos = new Vector2(150, 0);
    [SerializeField] private Vector2 slowEndPos = new Vector2(-150, 0);
-
-   public WaveManager waveManager; // 추후 할당 바꾸기
    
    private void Awake()
    {
@@ -42,16 +40,12 @@ public class StageStartUI : MonoBehaviour
 
    IEnumerator AnimationSequence()
    {
-      Debug.Log("처음 텍스트시작");
       yield return StartCoroutine(StageStartAnimation("STAGE 1")); // 해당 부분 현재 스테이지 이름이로 추후 이름변경
       
-      Debug.Log("1 텍스트시작");
       yield return StartCoroutine(StageStartAnimation("1"));
       
-      Debug.Log("2 텍스트시작");
       yield return StartCoroutine(StageStartAnimation("2"));
       
-      Debug.Log("3 텍스트시작");
       yield return StartCoroutine(StageStartAnimation("3"));
 
       yield return StartCoroutine(StartTextAnimation());
@@ -102,7 +96,7 @@ public class StageStartUI : MonoBehaviour
          yield return null;
       }
       startText.rectTransform.localScale = Vector2.zero;
-      waveManager.StartWave();
+      WaveManager.Instance.StartWave();
       yield return null;
       gameObject.SetActive(false);
    }
