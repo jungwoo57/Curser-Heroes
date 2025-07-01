@@ -124,4 +124,15 @@ public class SkillManager : MonoBehaviour
     {
         return source.OrderBy(x => Random.value).Take(count).ToList();
     }
+    void StartWave()
+    {
+        foreach (var skill in skillManager.ownedSkills)
+        {
+            if (skill.skill.skillName == "매직 소드")
+            {
+                var obj = Instantiate(skill.skill.skillPrefab, player.transform.position, Quaternion.identity);
+                obj.GetComponent<RotatingSkill>().Init(skill);
+            }
+        }
+    }
 }
