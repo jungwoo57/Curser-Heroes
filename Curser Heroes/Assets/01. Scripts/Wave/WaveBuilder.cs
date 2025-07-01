@@ -9,6 +9,11 @@ public static class WaveBuilder
         int valueRange = 2 + (waveData.wave / 10);
         int monsterCount = 10;
 
+        if (waveData.forceExactOverride && waveData.HasOverrideEnemies)
+        {
+            return new List<MonsterData>(waveData.overrideEnemies);
+        }
+
         //사용할 몬스터 풀 선택 (override > global)
         List<MonsterData> usePool = waveData.HasOverrideEnemies ? waveData.overrideEnemies : globalPool;
 
