@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,9 +8,22 @@ public class StageSelectedSkillUI : MonoBehaviour
    public SkillData[] skills;
    public SkillUIImage[] skillImages;
    public Button applyButton;
-   
+   public bool isChange = false;
+   private SkillPanelUI skillPanelUI;
+
+   private void OnEnable()
+   {
+      isChange = false;
+   }
+
+   private void Start()
+   {
+      skillPanelUI = GetComponentInChildren<SkillPanelUI>();
+   }
+
    public void SelectSkill(SkillData skill)       //스킬창에 고른 스킬 보여주기
    {
+      isChange = true;
       for (int i = 0; i < skillImages.Length; i++)
       {
          if (skills[i] == skill)
@@ -37,5 +51,15 @@ public class StageSelectedSkillUI : MonoBehaviour
          }
       }
       GameManager.Instance.EquipSkill(skills);
+      isChange = false;
+   }
+
+   public void ClearData()
+   {
+      for (int i = 0; i < skills.Length; i++)
+      {
+         skills[i] = null;
+         skillImages[i].CancleSelect();
+      }
    }
 }
