@@ -31,7 +31,6 @@ public class SkillUIImage : MonoBehaviour
     {
         if (stageSkillSelectUI != null)
         {
-            Debug.Log("분기 테스트");
             stageSkillSelectUI.stageSelectedSkillUI.SelectSkill(data);
         }
         else

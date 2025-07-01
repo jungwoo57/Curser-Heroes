@@ -12,6 +12,11 @@ public class StageSelectedSkillUI : MonoBehaviour
    {
       for (int i = 0; i < skillImages.Length; i++)
       {
+         if (skills[i] == skill)
+         {
+            Debug.Log("동일한 스킬이 장착되어있습니다");
+            return;
+         }
          if (!skillImages[i].data)
          {
             skillImages[i].UpdateUI(skill);
