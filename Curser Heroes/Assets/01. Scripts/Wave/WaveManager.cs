@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -35,13 +36,15 @@ public class WaveManager : MonoBehaviour
     {
         waveCleared = false; // 새 웨이브 시작 시 초기화
 
-        if (currentWaveIndex < waveGroupData.waveEntries.Count)
+        WaveEntry matched = waveGroupData.waveEntries.Find(w => w.wave == currentWaveIndex + 1);
+
+        if (matched != null)
         {
-            WaveEntry original = waveGroupData.waveEntries[currentWaveIndex];
             currentWaveData = new WaveEntry
             {
-                overrideEnemies = original.overrideEnemies,
-                wave = currentWaveIndex + 1
+                overrideEnemies = matched.overrideEnemies,
+                wave = matched.wave,
+                forceExactOverride = matched.forceExactOverride
             };
         }
         else
@@ -49,7 +52,7 @@ public class WaveManager : MonoBehaviour
             currentWaveData = GenerateDynamicWaveEntry(currentWaveIndex + 1);
         }
 
-        Debug.Log($"웨이브 시작: {currentWaveData.wave} (인덱스: {currentWaveIndex})");
+        Debug.Log($"웨이브 시작: {currentWaveData.wave}");
 
         var spawnQueue = WaveBuilder.BuildWaveEntry(currentWaveData, waveGroupData.globalMonsterPool);
         SpawnMonsters(spawnQueue);
@@ -119,8 +122,15 @@ public class WaveManager : MonoBehaviour
         {
             waveCleared = true; // 중복 방지
             Debug.Log("[웨이브 클리어]");
-            OnWaveCleared();
+            StartCoroutine(DelayedWaveClear(2f)); // 2초 후 OnWaveCleared 호출
         }
+    }
+
+    IEnumerator DelayedWaveClear(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Debug.Log("[웨이브 클리어] 2초 딜레이 후 호출");
+        OnWaveCleared();
     }
 
     void OnWaveCleared()
