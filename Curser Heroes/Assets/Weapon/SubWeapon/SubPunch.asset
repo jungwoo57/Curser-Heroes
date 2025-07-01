@@ -15,5 +15,8 @@ MonoBehaviour:
   weaponName: SubPunch
   baseDamage: 1
   damagePerLevel: 2
+  cooldown: 0.5
   weaponType: 1
-  effectType: 0
+  effect: 0
+  rangeType: 1
+  projectilePrefab: {fileID: 0}

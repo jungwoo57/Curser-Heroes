@@ -15,5 +15,8 @@ MonoBehaviour:
   weaponName: PieceWood
   baseDamage: 5
   damagePerLevel: 1.5
-  weaponType: 0
-  effectType: 0
+  cooldown: 0.5
+  weaponType: 1
+  effect: 0
+  rangeType: 0
+  projectilePrefab: {fileID: 0}
