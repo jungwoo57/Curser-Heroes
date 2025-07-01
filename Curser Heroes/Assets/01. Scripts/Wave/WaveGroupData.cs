@@ -17,6 +17,8 @@ public class WaveEntry
     [Tooltip("특정 웨이브에서만 사용되는 몬스터 (없으면 globalMonsterPool 사용)")]
     public List<MonsterData> overrideEnemies;
 
+    public bool forceExactOverride; 
+
     public bool HasOverrideEnemies => overrideEnemies != null && overrideEnemies.Count > 0;
 
     public int WaveValue => 30 + (wave - 1) * 5;

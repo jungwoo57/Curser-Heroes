@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class AttachEffectSubWeapon : MonoBehaviour, ISubWeaponEffect
+public class AttachEffectSubWeapon : MonoBehaviour
 {
     public float attachDuration = 1.5f;
 
