@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -28,7 +25,12 @@ public class SkillUIImage : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
                 return;
             }
             skillImage.sprite = data.icon;
-        
+    }
+
+    public void CancleSelect()
+    {
+        data = null;
+        skillImage.sprite = null;
     }
 
     public void OnClickSkillButton()
@@ -43,7 +45,7 @@ public class SkillUIImage : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         }
         //데이터 넘겨주기
     }
-
+    
     public void OnPressSkillButton()
     {
         if (stageSkillSelectUI != null)

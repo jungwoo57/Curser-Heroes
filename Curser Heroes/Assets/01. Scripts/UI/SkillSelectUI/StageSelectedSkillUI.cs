@@ -10,17 +10,20 @@ public class StageSelectedSkillUI : MonoBehaviour
    
    public void SelectSkill(SkillData skill)       //스킬창에 고른 스킬 보여주기
    {
+      Debug.Log("ㅎㅇㅎㅇ");
       for (int i = 0; i < skillImages.Length; i++)
       {
          if (skills[i] == skill)
          {
-            Debug.Log("동일한 스킬이 장착되어있습니다");
+            skillImages[i].CancleSelect();
+            Debug.Log("동일한 스킬이 장착되어있습니다" + i);
             return;
          }
          if (!skillImages[i].data)
          {
             skillImages[i].UpdateUI(skill);
             skills[i] = skillImages[i].data;
+            Debug.Log(i);
             return;
          }
       }
