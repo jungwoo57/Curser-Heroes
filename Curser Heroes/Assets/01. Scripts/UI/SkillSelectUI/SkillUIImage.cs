@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,12 @@ public class SkillUIImage : MonoBehaviour
 {
     public Image skillImage;
     public SkillData data;
+    private StageSkillSelectUI stageSkillSelectUI;
+
+    private void Awake()
+    {
+        stageSkillSelectUI = GetComponentInParent<StageSkillSelectUI>();
+    }
 
     public void UpdateUI(SkillData skillData)
     {
@@ -22,6 +29,15 @@ public class SkillUIImage : MonoBehaviour
 
     public void OnClickSkillButton()
     {
+        if (stageSkillSelectUI != null)
+        {
+            Debug.Log("분기 테스트");
+            stageSkillSelectUI.stageSelectedSkillUI.SelectSkill(data);
+        }
+        else
+        {
+            Debug.Log("부모 오브젝트 못찾음");
+        }
         //데이터 넘겨주기
     }
 }

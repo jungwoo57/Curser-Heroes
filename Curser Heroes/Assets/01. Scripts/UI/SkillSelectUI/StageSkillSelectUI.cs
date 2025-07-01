@@ -8,7 +8,8 @@ public class StageSkillSelectUI : MonoBehaviour
     public IReadOnlyList<SkillData> hasSkills;
     public List<SkillUIImage> showSkills = new List<SkillUIImage>();
     public SkillUIImage skillUIImage;
-
+    public StageSelectedSkillUI stageSelectedSkillUI;
+    
     private void Start()
     {
         hasSkills = GameManager.Instance.hasSkills;
