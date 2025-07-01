@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -121,8 +122,15 @@ public class WaveManager : MonoBehaviour
         {
             waveCleared = true; // 중복 방지
             Debug.Log("[웨이브 클리어]");
-            OnWaveCleared();
+            StartCoroutine(DelayedWaveClear(2f)); // 2초 후 OnWaveCleared 호출
         }
+    }
+
+    IEnumerator DelayedWaveClear(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Debug.Log("[웨이브 클리어] 2초 딜레이 후 호출");
+        OnWaveCleared();
     }
 
     void OnWaveCleared()
