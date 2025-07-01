@@ -199,6 +199,81 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 14457969}
   m_CullTransparentMesh: 1
+--- !u!1 &30187582
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 30187583}
+  - component: {fileID: 30187585}
+  - component: {fileID: 30187584}
+  m_Layer: 5
+  m_Name: SkillIcon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &30187583
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 30187582}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1608189167}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 150, y: 0}
+  m_SizeDelta: {x: 250, y: 250}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &30187584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 30187582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &30187585
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 30187582}
+  m_CullTransparentMesh: 1
 --- !u!1 &39219880
 GameObject:
   m_ObjectHideFlags: 0
@@ -1170,7 +1245,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 80, y: -200}
+  m_AnchoredPosition: {x: 129.239, y: -200}
   m_SizeDelta: {x: 600, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &202944870
@@ -1474,7 +1549,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 80, y: -320}
+  m_AnchoredPosition: {x: 129.239, y: -320}
   m_SizeDelta: {x: 600, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &258006710
@@ -1690,6 +1765,7 @@ MonoBehaviour:
   showSkills: []
   skillUIImage: {fileID: 4381853689773395033, guid: 3b0fc1a1aff86d84d8474eae4b2aedb7, type: 3}
   stageSelectedSkillUI: {fileID: 1642185598}
+  skillInfoPanelUI: {fileID: 1608189168}
 --- !u!1 &309102756
 GameObject:
   m_ObjectHideFlags: 0
@@ -2601,7 +2677,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 80, y: -260}
+  m_AnchoredPosition: {x: 129.239, y: -260}
   m_SizeDelta: {x: 600, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &414091580
@@ -2712,6 +2788,7 @@ GameObject:
   - component: {fileID: 448122872}
   - component: {fileID: 448122874}
   - component: {fileID: 448122873}
+  - component: {fileID: 448122875}
   m_Layer: 5
   m_Name: SkillPanel
   m_TagString: Untagged
@@ -2783,6 +2860,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 448122871}
   m_CullTransparentMesh: 1
+--- !u!114 &448122875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 448122871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7b77d99f6d512c4bb9136792c2e9699, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  exitButton: {fileID: 1318461478}
 --- !u!1 &483889868
 GameObject:
   m_ObjectHideFlags: 0
@@ -3171,7 +3261,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 80, y: -380}
+  m_AnchoredPosition: {x: 129.239, y: -380}
   m_SizeDelta: {x: 600, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &573737475
@@ -5756,7 +5846,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 113.761, y: -120}
+  m_AnchoredPosition: {x: 163, y: -120}
   m_SizeDelta: {x: 591.228, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &978075750
@@ -7128,9 +7218,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 81744891}
-        m_TargetAssemblyTypeName: WeaponSelectUI, Assembly-CSharp
-        m_MethodName: ClickExitButton
+      - m_Target: {fileID: 448122875}
+        m_TargetAssemblyTypeName: SkillPanelUI, Assembly-CSharp
+        m_MethodName: OnClickExit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8826,6 +8916,7 @@ RectTransform:
   - {fileID: 414091579}
   - {fileID: 258006709}
   - {fileID: 573737474}
+  - {fileID: 30187583}
   m_Father: {fileID: 448122872}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -8850,7 +8941,8 @@ MonoBehaviour:
   skillBaseDamage: {fileID: 202944870}
   skillLevelPerDamage: {fileID: 414091580}
   skillMaxLevel: {fileID: 258006710}
-  skillAddEffect: {fileID: 0}
+  skillAddEffect: {fileID: 573737475}
+  skillIcon: {fileID: 30187584}
 --- !u!114 &1608189169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9788,6 +9880,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillImage: {fileID: 1136929188245010153}
   data: {fileID: 0}
+  holdTime: 0
 --- !u!114 &2168615392213916706
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9802,6 +9895,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillImage: {fileID: 767428563948242296}
   data: {fileID: 0}
+  holdTime: 0
 --- !u!114 &2340328867586768407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9816,6 +9910,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillImage: {fileID: 3802314307146655565}
   data: {fileID: 0}
+  holdTime: 0
 --- !u!114 &2410783369807044310
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9953,6 +10048,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillImage: {fileID: 3733998334438470057}
   data: {fileID: 0}
+  holdTime: 0
 --- !u!222 &2872255843725322462
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -10212,6 +10308,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillImage: {fileID: 2410783369807044310}
   data: {fileID: 0}
+  holdTime: 0
 --- !u!114 &3954007312276185865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10436,6 +10533,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillImage: {fileID: 6320137582479240192}
   data: {fileID: 0}
+  holdTime: 0
 --- !u!114 &4999683871077294476
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10450,6 +10548,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillImage: {fileID: 5898728145565694166}
   data: {fileID: 0}
+  holdTime: 0
 --- !u!114 &5001587862409315827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10494,6 +10593,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillImage: {fileID: 5836708691472329447}
   data: {fileID: 0}
+  holdTime: 0
 --- !u!114 &5148399070205198775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10575,6 +10675,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillImage: {fileID: 6896062399842732649}
   data: {fileID: 0}
+  holdTime: 0
 --- !u!1 &5658918956003762159
 GameObject:
   m_ObjectHideFlags: 0
@@ -10607,6 +10708,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillImage: {fileID: 6599460247243870429}
   data: {fileID: 0}
+  holdTime: 0
 --- !u!222 &5779388677360065816
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -10776,6 +10878,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillImage: {fileID: 5148399070205198775}
   data: {fileID: 0}
+  holdTime: 0
 --- !u!224 &6044898625122862688
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11257,6 +11360,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillImage: {fileID: 8660388049200497455}
   data: {fileID: 0}
+  holdTime: 0
 --- !u!224 &8035826400027055269
 RectTransform:
   m_ObjectHideFlags: 0

@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class SkillInfoPanelUI : MonoBehaviour
 {
     public TextMeshProUGUI skillName;
@@ -11,9 +12,12 @@ public class SkillInfoPanelUI : MonoBehaviour
     public TextMeshProUGUI skillLevelPerDamage;
     public TextMeshProUGUI skillMaxLevel;
     public TextMeshProUGUI skillAddEffect;
+    public Image skillIcon;
+    
     
     public void UpdateUI(SkillData data)
     {
+        skillIcon.sprite = data.icon;
         skillName.text = data.skillName;
         skillDescription.text= data.description;
         skillBaseDamage.text = data.damage.ToString();

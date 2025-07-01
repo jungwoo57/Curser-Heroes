@@ -9,6 +9,7 @@ public class StageSkillSelectUI : MonoBehaviour
     public List<SkillUIImage> showSkills = new List<SkillUIImage>();
     public SkillUIImage skillUIImage;
     public StageSelectedSkillUI stageSelectedSkillUI;
+    public SkillInfoPanelUI skillInfoPanelUI;
     
     private void Start()
     {
@@ -21,6 +22,11 @@ public class StageSkillSelectUI : MonoBehaviour
         {
             Debug.Log("데이터 없음");
         }
+    }
+
+    private void OnEnable()
+    {
+        skillInfoPanelUI.gameObject.SetActive(false);
     }
 
     public void UpdateUI()
