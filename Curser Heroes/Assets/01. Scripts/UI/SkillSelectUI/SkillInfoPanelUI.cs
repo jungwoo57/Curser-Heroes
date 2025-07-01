@@ -20,9 +20,9 @@ public class SkillInfoPanelUI : MonoBehaviour
         skillIcon.sprite = data.icon;
         skillName.text = data.skillName;
         skillDescription.text= data.description;
-        skillBaseDamage.text = data.damage.ToString();
+        skillBaseDamage.text = "Lv.1 피해랑: " + data.damage.ToString();
         //skillLevelPerDamage.text = data.   레벨당 데미지 추가
-        skillMaxLevel.text = data.maxLevel.ToString();
+        skillMaxLevel.text = "최대 레벨 : " + data.maxLevel.ToString();
         //skillAddEffect.text = data.        데이터 추가 효과 추가
     }
 }

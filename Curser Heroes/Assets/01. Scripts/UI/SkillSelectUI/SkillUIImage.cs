@@ -51,6 +51,7 @@ public class SkillUIImage : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         if (stageSkillSelectUI != null)
         {
             stageSkillSelectUI.skillInfoPanelUI.gameObject.SetActive(true);
+            stageSkillSelectUI.skillInfcoCloseButton.gameObject.SetActive(true);
             stageSkillSelectUI.skillInfoPanelUI.UpdateUI(data);
         }
         else

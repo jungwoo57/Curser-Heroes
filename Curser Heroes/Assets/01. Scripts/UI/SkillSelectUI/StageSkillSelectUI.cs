@@ -1,8 +1,6 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class StageSkillSelectUI : MonoBehaviour
 {
     public IReadOnlyList<SkillData> hasSkills;
@@ -10,6 +8,7 @@ public class StageSkillSelectUI : MonoBehaviour
     public SkillUIImage skillUIImage;
     public StageSelectedSkillUI stageSelectedSkillUI;
     public SkillInfoPanelUI skillInfoPanelUI;
+    public Button skillInfcoCloseButton;
     
     private void Start()
     {
@@ -27,6 +26,7 @@ public class StageSkillSelectUI : MonoBehaviour
     private void OnEnable()
     {
         skillInfoPanelUI.gameObject.SetActive(false);
+        skillInfcoCloseButton.gameObject.SetActive(false);
     }
 
     public void UpdateUI()
@@ -43,5 +43,11 @@ public class StageSkillSelectUI : MonoBehaviour
             showSkills[i].gameObject.SetActive(true);
             showSkills[i].UpdateUI(hasSkills[i]);
         }
+    }
+
+    public void ClickSkillInfcoCloseButton()
+    {
+        skillInfoPanelUI.gameObject.SetActive(false);
+        skillInfcoCloseButton.gameObject.SetActive(false);
     }
 }
