@@ -23,6 +23,7 @@ public abstract class BaseMonster : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Coroutine flashCoroutine;
     private Coroutine attackColorCoroutine;
+    private Animator effectAnimator;
 
     protected virtual void Start()
     {
@@ -33,6 +34,8 @@ public abstract class BaseMonster : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         if (spriteRenderer == null)
             Debug.LogWarning($"{gameObject.name}에 SpriteRenderer 컴포넌트가 없습니다!");
+        
+      
 
         PlaySpawnAnimation();
     }
@@ -87,6 +90,8 @@ public abstract class BaseMonster : MonoBehaviour
 
                 attackColorCoroutine = StartCoroutine(ChangeColorGradually(Color.white, 0.3f));
             }
+
+           
 
             attackTimer = attackCooldown;
         }
