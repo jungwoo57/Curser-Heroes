@@ -9,7 +9,7 @@ public class SkillUIImage : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     private StageSkillSelectUI stageSkillSelectUI;
 
     private float pressTime;     //누르고 있는 시간
-    private bool isHolding = false;
+    //private bool isHolding = false;
     [SerializeField]private float holdTime = 0.5f;     //눌러야하는 시간
     private void Awake()
     {
@@ -31,6 +31,7 @@ public class SkillUIImage : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     {
         data = null;
         skillImage.sprite = null;
+        return;
     }
 
     public void OnClickSkillButton()
@@ -62,12 +63,12 @@ public class SkillUIImage : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     public void OnPointerDown(PointerEventData eventData)
     {
         pressTime = Time.time;
-        isHolding = true;
+        //isHolding = true;
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        isHolding = true;
+        //isHolding = false;
         float duration = Time.time - pressTime;
 
         if (duration > holdTime)
