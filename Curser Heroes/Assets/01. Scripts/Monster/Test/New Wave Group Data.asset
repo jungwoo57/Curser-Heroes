@@ -17,7 +17,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 54638af21faef144fa40978387dc484f, type: 2}
   - {fileID: 11400000, guid: 4963c06c696edac40971bc2ab9568b12, type: 2}
   waveEntries:
-  - wave: 10
+  - wave: 20
+    overrideEnemies:
+    - {fileID: 11400000, guid: 4963c06c696edac40971bc2ab9568b12, type: 2}
+    forceExactOverride: 1
+  - wave: 40
     overrideEnemies:
     - {fileID: 11400000, guid: 4963c06c696edac40971bc2ab9568b12, type: 2}
     forceExactOverride: 1
