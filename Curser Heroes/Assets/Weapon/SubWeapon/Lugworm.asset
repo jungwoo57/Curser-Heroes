@@ -15,5 +15,8 @@ MonoBehaviour:
   weaponName: Lugworm
   baseDamage: 3
   damagePerLevel: 1
+  cooldown: 0.5
   weaponType: 0
-  effectType: 1
+  effect: 2
+  rangeType: 0
+  projectilePrefab: {fileID: 0}

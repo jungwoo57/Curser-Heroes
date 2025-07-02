@@ -1,27 +1,28 @@
-﻿using System.Collections;
-using UnityEngine;
-
-public class BurnEffect : MonoBehaviour, ISubWeaponEffect
+﻿public class BurnEffect : IEffect
 {
-    public float burnDamage = 0.5f;
-    public float duration = 3f;
-    public float interval = 0.5f;
+    private float duration = 5f;
+    private float interval = 1f;
+    private float timer = 0f;
+    private float tickTimer = 0f;
+    private int damagePerTick = 2;
+    private Monster target;
 
-    public void ApplyEffect(BaseMonster target, float damage)
+    public void Apply(Monster target)
     {
-        target.TakeDamage(Mathf.RoundToInt(damage));
-        target.StartCoroutine(ApplyBurn(target));         //데미지를 먼저 주고 상태이상(화상)부여
+        this.target = target;
     }
 
-    private IEnumerator ApplyBurn(BaseMonster target)
+    public void Tick(float deltaTime)
     {
-        float elapsed = 0f;
-        while (elapsed < duration)
+        timer += deltaTime;
+        tickTimer += deltaTime;
+
+        if (tickTimer >= interval)
         {
-            if (target == null) yield break;
-            target.TakeDamage(Mathf.RoundToInt(burnDamage));
-            elapsed += interval;
-            yield return new WaitForSeconds(interval);
+            target.TakeDamage(damagePerTick);
+            tickTimer = 0f;
         }
     }
+
+    public bool IsFinished => timer >= duration;
 }
