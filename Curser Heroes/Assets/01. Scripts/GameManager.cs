@@ -111,4 +111,18 @@ public class GameManager : MonoBehaviour
             selectSkills.Add(skilldatas[i]);
         }
     }
+
+    public void UpgradeWeapon(WeaponData data)
+    {
+        int index = _hasMainWeapon.FindIndex(w => w.name == data.name);
+        if (index >= 0)
+        {
+            _hasMainWeapon[index] = data;
+            Debug.Log(_hasMainWeapon[index].name+ "업그레이드 완료" + _hasMainWeapon[index].level);
+        }
+        else
+        {
+            Debug.Log("해당 데이터 없음");
+        }
+    }
 }

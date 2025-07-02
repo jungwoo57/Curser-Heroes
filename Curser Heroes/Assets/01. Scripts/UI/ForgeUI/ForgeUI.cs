@@ -21,8 +21,8 @@ public class ForgeUI : MonoBehaviour
     public void Init()
     {
         selectWeapon = GameManager.Instance.mainEquipWeapon;
-        
         TextUpdate();
+        ImageUpdate();
     }
 
     public void DisableReinforceButton()
@@ -32,6 +32,12 @@ public class ForgeUI : MonoBehaviour
 
     public void OnClickReinforceButton()
     {
+        if (GameManager.Instance.GetGold() >= selectWeapon.upgradeCost)
+        {
+            GameManager.Instance.AddGold(-selectWeapon.upgradeCost);
+            selectWeapon.level++;
+        }
+        
         Debug.Log("무기강화");       //weapondata에 레벨이 존재해야 할 것 같음
     }
 
@@ -42,7 +48,7 @@ public class ForgeUI : MonoBehaviour
         weaponAtk.text = selectWeapon.baseDamage.ToString();
         weaponHP.text = selectWeapon.maxLives.ToString();
         hasGoldText.text = GameManager.Instance.GetGold().ToString();
-        //useGoldText.text  업그레이드 비용 weaponData에 필요 
+        useGoldText.text = selectWeapon.upgradeCost.ToString();
     }
 
     public void ImageUpdate()
