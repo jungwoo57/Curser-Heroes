@@ -1,8 +1,13 @@
-﻿using UnityEngine;
+﻿// BearKingBoss.cs (unchanged except 패턴 내부 null 체크 유지)
+using UnityEngine;
 using System.Collections;
 
 public class BearKingBoss : BossBaseMonster
 {
+    private static readonly int HashP1 = Animator.StringToHash("Pattern1");
+    private static readonly int HashP2 = Animator.StringToHash("Pattern2");
+    private static readonly int HashP3 = Animator.StringToHash("Pattern3");
+
     [Header("Pattern1 - Linear Smash")]
     public GameObject linearWavePrefab;
     public Transform smashOrigin;
@@ -13,77 +18,98 @@ public class BearKingBoss : BossBaseMonster
 
     [Header("Pattern3 - Melee Swipe")]
     public float meleeRange = 1.5f;
-    public LayerMask targetLayer;
-
-    private static readonly int HashPattern1 = Animator.StringToHash("Pattern1");
-    private static readonly int HashPattern2 = Animator.StringToHash("Pattern2");
-    private static readonly int HashPattern3 = Animator.StringToHash("Pattern3");
 
     protected override IEnumerator Pattern1()
     {
-        animator?.SetBool(HashPattern1, true);
+        animator?.SetBool(HashP1, true);
+        if (smashOrigin == null || linearWavePrefab == null)
+            Debug.LogWarning("Pattern1: smashOrigin 또는 linearWavePrefab 미설정");
 
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(1f);
 
-        if (linearWavePrefab != null && smashOrigin != null)
-        {
+        if (smashOrigin != null && linearWavePrefab != null)
             Instantiate(linearWavePrefab, smashOrigin.position, Quaternion.identity);
+
+        if (smashOrigin != null)
+        {
+            var hits = Physics2D.OverlapCircleAll(smashOrigin.position, 2f, LayerMask.GetMask("Weapon"));
+            foreach (var c in hits)
+                WeaponManager.Instance?.TakeWeaponLifeDamage();
         }
 
-        yield return new WaitForSeconds(1.2f);
-        animator?.SetBool(HashPattern1, false);
+        yield return new WaitForSeconds(1f);
+        animator?.SetBool(HashP1, false);
     }
 
     protected override IEnumerator Pattern2()
     {
-        animator?.SetBool(HashPattern2, true);
-
-        yield return new WaitForSeconds(2f);
+        animator?.SetBool(HashP2, true);
+        yield return new WaitForSeconds(1.5f);
 
         Vector3 targetPos = transform.position;
-        if (GameObject.FindGameObjectWithTag("Weapon") != null)
+        var weaps = Physics2D.OverlapCircleAll(transform.position, 100f, LayerMask.GetMask("Weapon"));
+        float md = Mathf.Infinity;
+        foreach (var w in weaps)
         {
-            targetPos = GameObject.FindGameObjectWithTag("Weapon").transform.position;
+            if (w == null) continue;
+            float d = (w.transform.position - transform.position).sqrMagnitude;
+            if (d < md)
+            {
+                md = d;
+                targetPos = w.transform.position;
+            }
         }
 
         if (jumpIndicatorPrefab != null)
         {
-            GameObject indicator = Instantiate(jumpIndicatorPrefab, targetPos, Quaternion.identity);
-            Destroy(indicator, 1f);
+            var ind = Instantiate(jumpIndicatorPrefab, targetPos, Quaternion.identity);
+            Destroy(ind, 1f);
         }
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
 
+        Vector3 start = transform.position;
+        float t = 0f;
+        while (t < 1f)
+        {
+            transform.position = Vector3.Lerp(start, targetPos, t);
+            t += Time.deltaTime * 2f;
+            yield return null;
+        }
         transform.position = targetPos;
 
         if (jumpImpactPrefab != null)
-        {
             Instantiate(jumpImpactPrefab, targetPos, Quaternion.identity);
-        }
 
-        animator?.SetBool(HashPattern2, false);
+        var impactHits = Physics2D.OverlapCircleAll(targetPos, 2f, LayerMask.GetMask("Weapon"));
+        foreach (var c in impactHits)
+            WeaponManager.Instance?.TakeWeaponLifeDamage();
+
+        yield return new WaitForSeconds(0.5f);
+        animator?.SetBool(HashP2, false);
     }
 
     protected override IEnumerator Pattern3()
     {
-        animator?.SetBool(HashPattern3, true);
+        animator?.SetBool(HashP3, true);
+        yield return new WaitForSeconds(0.5f);
 
-        yield return new WaitForSeconds(1f);
+        if (meleeRange <= 0f)
+            Debug.LogWarning("Pattern3: meleeRange가 0 이하");
 
-        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, meleeRange, targetLayer);
-        foreach (var hit in hits)
-        {
-            Debug.Log("Hit: " + hit.name);
-        }
+        var hits = Physics2D.OverlapCircleAll(transform.position, meleeRange, LayerMask.GetMask("Weapon"));
+        foreach (var c in hits)
+            WeaponManager.Instance?.TakeWeaponLifeDamage();
 
-        yield return new WaitForSeconds(1f);
-
-        animator?.SetBool(HashPattern3, false);
+        yield return new WaitForSeconds(0.5f);
+        animator?.SetBool(HashP3, false);
     }
 
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
+        if (smashOrigin != null)
+            Gizmos.DrawWireSphere(smashOrigin.position, 2f);
         Gizmos.DrawWireSphere(transform.position, meleeRange);
     }
 }

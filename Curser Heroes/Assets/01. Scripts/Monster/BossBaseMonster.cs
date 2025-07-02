@@ -1,143 +1,132 @@
-﻿using UnityEngine;
+﻿// BossBaseMonster.cs
+using UnityEngine;
 using System;
 using System.Collections;
 
 public abstract class BossBaseMonster : MonoBehaviour
 {
+    [Header("Stats")]
+    [SerializeField] private MonsterData monsterData;
+    [Header("Movement")]
+    [SerializeField] private float moveSpeed = 1.5f;
+
+    [Header("Pattern Settings")]
+    [SerializeField] private float initialDelay = 3f;
+    [SerializeField] private float patternCooldown = 5f;
+    [SerializeField] private float preFlashDuration = 0.5f;
+
     protected int maxHP;
     protected int currentHP;
-    protected float attackCooldown;
-    protected float attackTimer;
-    protected int damage;
-    protected int valueCost;
-
     protected Animator animator;
     protected SpriteRenderer spriteRenderer;
+    protected Color originalColor;
+    protected Transform target;
 
+    private bool canMove = true;
+    private int weaponLayerMask;
     private Coroutine flashCoroutine;
-    private Coroutine patternCoroutine;
 
     private static readonly int HashDie = Animator.StringToHash("Die");
     private static readonly int HashDamage = Animator.StringToHash("Damage");
-    private static readonly int HashPattern1 = Animator.StringToHash("Pattern1");
-    private static readonly int HashPattern2 = Animator.StringToHash("Pattern2");
-    private static readonly int HashPattern3 = Animator.StringToHash("Pattern3");
     private static readonly int HashIsMoving = Animator.StringToHash("IsMoving");
 
     public event Action<GameObject> onDeath;
 
-    private Transform target;
-    public float moveSpeed = 1.5f;
-    private bool isAttacking = false;
-
     public virtual void Setup(MonsterData data)
     {
-        Debug.Log($"[Boss Spawn] {gameObject.name} Setup called: HP = {maxHP}, Damage = {damage}");
+        if (data == null)
+        {
+            Debug.LogWarning("MonsterData가 설정되지 않았습니다!");
+            return;
+        }
 
         maxHP = data.maxHP;
         currentHP = maxHP;
-        attackCooldown = data.attackCooldown;
-        damage = data.damage;
-        valueCost = data.valueCost;
-        attackTimer = attackCooldown;
+        weaponLayerMask = LayerMask.GetMask("Weapon");
     }
 
     protected virtual void Start()
     {
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        if (spriteRenderer != null)
+            originalColor = spriteRenderer.color;
 
-        GameObject targetObj = GameObject.FindGameObjectWithTag("Weapon");
-        if (targetObj != null)
-            target = targetObj.transform;
-
-        patternCoroutine = StartCoroutine(BossPatternLoop());
+        Setup(monsterData);
+        StartCoroutine(BossPatternLoop());
     }
 
     protected virtual void Update()
     {
-        HandleMovement();
-    }
-
-    private void HandleMovement()
-    {
-        if (target == null || isAttacking)
+        if (canMove)
         {
-            if (animator != null) animator.SetBool(HashIsMoving, false);
-            return;
+            if (target == null || !target.gameObject.activeInHierarchy)
+                FindClosestTarget();
+            MoveTowardsTarget();
         }
-
-        Vector3 direction = (target.position - transform.position).normalized;
-        transform.position += direction * moveSpeed * Time.deltaTime;
-
-        if (animator != null)
-            animator.SetBool(HashIsMoving, true);
+        else
+        {
+            animator?.SetBool(HashIsMoving, false);
+        }
     }
 
-    protected virtual IEnumerator BossPatternLoop()
+    private void MoveTowardsTarget()
     {
-        yield return new WaitForSeconds(3f);
+        if (target == null) return;
+        Vector3 dir = target.position - transform.position;
+        if (dir.sqrMagnitude > 0.01f)
+        {
+            dir.Normalize();
+            transform.position += dir * moveSpeed * Time.deltaTime;
+            animator?.SetBool(HashIsMoving, true);
+        }
+        else
+        {
+            animator?.SetBool(HashIsMoving, false);
+        }
+    }
+
+    private IEnumerator BossPatternLoop()
+    {
+        // 1) 초기 대기
+        yield return new WaitForSeconds(initialDelay);
 
         while (currentHP > 0)
         {
-            if (!isAttacking)
-            {
-                int pattern = UnityEngine.Random.Range(1, 4);
-                isAttacking = true;
+            // 2) 패턴 전 5초 쿨다운 (이동 가능)
+            canMove = true;
+            FindClosestTarget();
+            yield return new WaitForSeconds(patternCooldown);
 
-                switch (pattern)
-                {
-                    case 1:
-                        yield return Pattern1();
-                        yield return new WaitForSeconds(UnityEngine.Random.Range(5f, 7f));
-                        break;
-                    case 2:
-                        yield return Pattern2();
-                        yield return new WaitForSeconds(UnityEngine.Random.Range(18f, 20f));
-                        break;
-                    case 3:
-                        yield return Pattern3();
-                        yield return new WaitForSeconds(UnityEngine.Random.Range(4f, 6f));
-                        break;
-                }
+            // 3) 예고 플래시 & 정지
+            canMove = false;
+            animator?.SetBool(HashIsMoving, false);
+            yield return PreAttackFlash(preFlashDuration);
 
-                isAttacking = false;
-            }
-            yield return null;
+            // 4) 패턴 실행
+            int p = UnityEngine.Random.Range(1, 4);
+            yield return ExecutePattern(p);
         }
     }
 
-    protected virtual IEnumerator Pattern1()
+    private IEnumerator ExecutePattern(int p)
     {
-        animator.SetBool(HashPattern1, true);
-        yield return new WaitForSeconds(2f);
-        animator.SetBool(HashPattern1, false);
+        switch (p)
+        {
+            case 1: yield return Pattern1(); break;
+            case 2: yield return Pattern2(); break;
+            case 3: yield return Pattern3(); break;
+        }
     }
 
-    protected virtual IEnumerator Pattern2()
+    public virtual void TakeDamage(int amt)
     {
-        animator.SetBool(HashPattern2, true);
-        yield return new WaitForSeconds(3f);
-        animator.SetBool(HashPattern2, false);
-    }
-
-    protected virtual IEnumerator Pattern3()
-    {
-        animator.SetBool(HashPattern3, true);
-        yield return new WaitForSeconds(2f);
-        animator.SetBool(HashPattern3, false);
-    }
-
-    public virtual void TakeDamage(int amount)
-    {
-        currentHP -= amount;
-
+        currentHP -= amt;
         if (animator != null)
         {
             animator.SetBool(HashDamage, true);
             StartCoroutine(ResetDamageBool());
         }
-
         if (flashCoroutine != null)
             StopCoroutine(flashCoroutine);
         flashCoroutine = StartCoroutine(FlashAlpha(0.5f));
@@ -149,37 +138,64 @@ public abstract class BossBaseMonster : MonoBehaviour
     private IEnumerator FlashAlpha(float duration)
     {
         if (spriteRenderer == null) yield break;
-
-        float time = 0f;
-        Color originalColor = spriteRenderer.color;
-
-        while (time < duration)
+        float t = 0f;
+        while (t < duration)
         {
-            float alpha = Mathf.PingPong(time * 8f, 1f);
-            Color c = originalColor;
-            c.a = alpha;
+            float a = Mathf.PingPong(t * 8f, 1f);
+            var c = originalColor; c.a = a;
             spriteRenderer.color = c;
-
-            time += Time.deltaTime;
+            t += Time.deltaTime;
             yield return null;
         }
-
         spriteRenderer.color = originalColor;
     }
 
     private IEnumerator ResetDamageBool()
     {
         yield return new WaitForSeconds(0.3f);
-        if (animator != null)
-            animator.SetBool(HashDamage, false);
+        animator?.SetBool(HashDamage, false);
     }
 
     protected virtual void Die()
     {
-        if (animator != null)
-            animator.SetBool(HashDie, true);
-
+        animator?.SetBool(HashDie, true);
         onDeath?.Invoke(gameObject);
         Destroy(gameObject, 2f);
     }
+
+    private IEnumerator PreAttackFlash(float duration)
+    {
+        if (spriteRenderer == null) yield break;
+        float t = 0f;
+        while (t < duration)
+        {
+            float lerp = Mathf.PingPong(t * 2f, 1f);
+            spriteRenderer.color = Color.Lerp(originalColor, Color.magenta, lerp);
+            t += Time.deltaTime;
+            yield return null;
+        }
+        spriteRenderer.color = originalColor;
+    }
+
+    protected void FindClosestTarget()
+    {
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, 100f, weaponLayerMask);
+        float minDist = Mathf.Infinity;
+        Transform best = null;
+        foreach (var c in hits)
+        {
+            if (c == null || !c.gameObject.activeInHierarchy) continue;
+            float d = (c.transform.position - transform.position).sqrMagnitude;
+            if (d < minDist)
+            {
+                minDist = d;
+                best = c.transform;
+            }
+        }
+        target = best;
+    }
+
+    protected abstract IEnumerator Pattern1();
+    protected abstract IEnumerator Pattern2();
+    protected abstract IEnumerator Pattern3();
 }
