@@ -159,7 +159,7 @@ public class SkillManager : MonoBehaviour
         }
         else if (obj.TryGetComponent(out AoEFieldSkill aoe))
         {
-            aoe.Init(skillInstance);
+            aoe.Init(skillInstance,cursorWeapon.transform);
         }
         else
         {

@@ -2,15 +2,20 @@
 
 public class AoEFieldSkill : MonoBehaviour
 {
-    public Transform player;
+    [Header("설정")]
+    [SerializeField] private LayerMask monsterLayer;  // 몬스터만 감지
+
+    private Transform player;                         // 추적 대상 (플레이어)
     private float tickTimer;
     private SkillLevelData info;
-    private float offsetRadius = 1.5f;
+    private float offsetRadius = 0.5f;
 
-    public void Init(SkillManager.SkillInstance skillInstance)
+    // 초기화: 스킬 레벨 정보 + 플레이어 위치 받기
+    public void Init(SkillManager.SkillInstance skillInstance, Transform playerTransform)
     {
         info = skillInstance.skill.levelDataList[skillInstance.level - 1];
-        player = GameObject.FindWithTag("Player").transform;
+        player = playerTransform;
+
         transform.localScale = Vector3.one * info.sizeMultiplier;
     }
 
@@ -18,7 +23,6 @@ public class AoEFieldSkill : MonoBehaviour
     {
         if (player != null)
         {
-            // 플레이어 주위 고정
             transform.position = player.position;
         }
 
@@ -32,21 +36,33 @@ public class AoEFieldSkill : MonoBehaviour
 
     void DealDamage()
     {
-        Collider2D[] monsters = Physics2D.OverlapCircleAll(transform.position, 1.5f * info.sizeMultiplier);
+        float radius = offsetRadius * info.sizeMultiplier;
+
+        // 해당 레이어만 감지
+        Collider2D[] monsters = Physics2D.OverlapCircleAll(transform.position, radius, monsterLayer);
+
         foreach (var col in monsters)
         {
-            BaseMonster monster = col.GetComponent<BaseMonster>();
-            if (monster != null)
+            // 일반 몬스터 처리
+            if (col.TryGetComponent(out BaseMonster baseMonster))
             {
-                monster.TakeDamage(info.damage);
+                baseMonster.TakeDamage(info.damage);
                 continue;
             }
 
-            BossBaseMonster boss = col.GetComponent<BossBaseMonster>();
-            if (boss != null)
+            // 보스 몬스터 처리
+            if (col.TryGetComponent(out BossBaseMonster boss))
             {
                 boss.TakeDamage(info.damage);
             }
         }
+    }
+
+    // 디버그용 범위 표시
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.green;
+        float radius = offsetRadius * (info?.sizeMultiplier ?? 1f);
+        Gizmos.DrawWireSphere(transform.position, radius);
     }
 }
