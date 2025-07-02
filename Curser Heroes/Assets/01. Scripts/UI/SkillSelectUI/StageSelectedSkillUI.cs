@@ -23,14 +23,19 @@ public class StageSelectedSkillUI : MonoBehaviour
 
    public void SelectSkill(SkillData skill)       //스킬창에 고른 스킬 보여주기
    {
+      Debug.Log(skillImages.Length);
       isChange = true;
       for (int i = 0; i < skillImages.Length; i++)
       {
          if (skills[i] == skill)
          {
             skillImages[i].CancleSelect();
+            skills[i] = null;
             return;
          }
+      }
+      for (int i = 0; i < skillImages.Length; i++)
+      {
          if (!skillImages[i].data)
          {
             skillImages[i].UpdateUI(skill);
