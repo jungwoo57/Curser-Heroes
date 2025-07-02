@@ -17,5 +17,8 @@ MonoBehaviour:
   weaponDesc: 
   baseDamage: 2
   damagePerLevel: 1.65
+  cooldown: 0.5
   weaponType: 0
-  effectType: 1
+  effect: 1
+  rangeType: 0
+  projectilePrefab: {fileID: 0}

@@ -15,5 +15,8 @@ MonoBehaviour:
   weaponName: Torch
   baseDamage: 2
   damagePerLevel: 1.8
-  weaponType: 0
-  effectType: 3
+  cooldown: 0.5
+  weaponType: 2
+  effect: 3
+  rangeType: 1
+  projectilePrefab: {fileID: 0}

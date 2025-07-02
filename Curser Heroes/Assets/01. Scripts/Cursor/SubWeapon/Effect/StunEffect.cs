@@ -1,12 +1,23 @@
-﻿using UnityEngine;
-
-public class StunEffect : MonoBehaviour, ISubWeaponEffect
+﻿public class StunEffect : IEffect
 {
-    public float stunDuration = 2f;
+    private float duration = 2f;
+    private float timer = 0f;
+    private Monster target;
 
-    public void ApplyEffect(BaseMonster target, float damage)
+    public void Apply(Monster target)
     {
-        target.TakeDamage(Mathf.RoundToInt(damage));
-        //target.ApplyStun(stunDuration);
+        this.target = target;
+     // target.Stun();
     }
+
+    public void Tick(float deltaTime)
+    {
+        timer += deltaTime;
+        if (IsFinished)
+        {
+        //  target.UnStun();
+        }
+    }
+
+    public bool IsFinished => timer >= duration;
 }
