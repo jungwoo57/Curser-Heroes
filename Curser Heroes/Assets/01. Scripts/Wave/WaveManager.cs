@@ -7,6 +7,7 @@ using UnityEngine;
 public class WaveManager : MonoBehaviour
 {
     [SerializeField] private SkillManager skillManager;
+    [SerializeField] private CursorWeapon cursorWeapon;
 
     public WaveGroupData waveGroupData;
     public GameManager gameManager;
@@ -34,6 +35,7 @@ public class WaveManager : MonoBehaviour
     [ContextMenu("스폰시키기")]
     public void StartWave()
     {
+        Debug.Log($"[WaveManager] StartWave() 호출됨, currentWaveIndex = {currentWaveIndex}");
         waveCleared = false; // 새 웨이브 시작 시 초기화
 
         WaveEntry matched = waveGroupData.waveEntries.Find(w => w.wave == currentWaveIndex + 1);
@@ -56,6 +58,46 @@ public class WaveManager : MonoBehaviour
 
         var spawnQueue = WaveBuilder.BuildWaveEntry(currentWaveData, waveGroupData.globalMonsterPool);
         SpawnMonsters(spawnQueue);
+
+        TriggerPassiveSkills();
+    }
+    private void TriggerPassiveSkills()
+    {
+        Debug.Log("[WaveManager] TriggerPassiveSkills() 호출됨");
+
+        if (cursorWeapon == null)
+        {
+            Debug.LogWarning("CursorWeapon 참조가 없습니다.");
+            return;
+        }
+
+        Vector3 playerPos = cursorWeapon.transform.position;
+
+        foreach (var skill in skillManager.ownedSkills)
+        {
+            if (skill.skill.skillPrefab == null)
+            {
+                Debug.LogError($"[TriggerPassiveSkills] '{skill.skill.skillName}' 스킬의 skillPrefab이 할당되어 있지 않습니다!");
+                continue;
+            }
+
+            switch (skill.skill.skillName)
+            {
+                case "매직소드":
+                    Debug.Log($"[WaveManager] 매직소드 재배치 요청");
+                    skillManager.DeployPersistentSkill(skill);
+                    break;
+
+                case "포이즌필드":
+                    Debug.Log($"[WaveManager] 포이즌필드 재배치 요청");
+                    skillManager.DeployPersistentSkill(skill);
+                    break;
+
+                default:
+                    Debug.Log($"[TriggerPassiveSkills] 다른 스킬: {skill.skill.skillName}, 처리 없음");
+                    break;
+            }
+        }
     }
 
     void Update()

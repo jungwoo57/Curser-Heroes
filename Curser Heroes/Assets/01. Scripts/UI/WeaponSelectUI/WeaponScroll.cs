@@ -33,11 +33,6 @@ public class WeaponScroll : MonoBehaviour
                     scrollRect.vertical = false;
                 }
 
-                for (int i = 0; i < hasWeaponCounts; i++)
-                {
-                    Debug.Log(hasWeapons[i].weaponName);
-                }
-
                 while (showWeapons.Count < hasWeapons.Count) //갯수 부족 할 시 동적생성
                 {
                     GameObject obj = Instantiate(weaponImagePrefabs, content);
@@ -67,11 +62,6 @@ public class WeaponScroll : MonoBehaviour
                 else
                 {
                     scrollRect.vertical = false;
-                }
-
-                for (int i = 0; i < hasWeaponCounts; i++)
-                {
-                    Debug.Log(hasWeapons[i].weaponName);
                 }
 
                 while (showWeapons.Count < hasSubWeapons.Count) //갯수 부족 할 시 동적생성

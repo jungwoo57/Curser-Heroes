@@ -28,12 +28,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<WeaponData> _hasPartner; // 보유 동료
     public IReadOnlyList<WeaponData> hasPartner => _hasPartner;     // 다른 파일에서 보유 동료 가져오기(수정 불가)
 
-    [SerializeField] private List<SkillData> _hasSkills;
+    [SerializeField] private List<SkillData> _hasSkills;  // 플레이어가 해금하여 보유하고 있는 스킬
     public IReadOnlyList<SkillData> hasSkills => _hasSkills;
     
     public WeaponData mainEquipWeapon;
     public SubWeaponData subEquipWeapon;
-    public List<SkillData> selectSkills;    //스킬 갯수가 정해져있어서 배열로 변경도 고려
+    public List<SkillData> selectSkills;    //선택한 스킬(스테이지에 등장할 스킬), 스킬 갯수가 정해져있어서 배열로 변경도 고려
     
     private int gold = 0;
     private int jewel = 0;
