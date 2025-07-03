@@ -2481,32 +2481,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rewardSelectUIPrefab: {fileID: 7736518222571342954, guid: 7ec73d70dd63e9e43befba0d6f384234, type: 3}
   skillSelectUIPrefab: {fileID: 2116206273608610595, guid: ac6fc6da8019b4d42bf807d62702b93b, type: 3}
+  player: {fileID: 3521251694906892393}
+  cursorWeapon: {fileID: 3008519376834165207}
   allSkills:
   - {fileID: 11400000, guid: 72bfdbd50ec5c254cbb3f8147cafd490, type: 2}
-  - {fileID: 11400000, guid: 703781ae4a9d084438325b0dee1e77e3, type: 2}
-  - {fileID: 11400000, guid: 08a5e69e77ea9894ea498f742f018950, type: 2}
-  - {fileID: 11400000, guid: 0300678097c7bd64784f86957e42362f, type: 2}
-  - {fileID: 11400000, guid: c3582d5204fdb7442a57f6be865a232b, type: 2}
-  - {fileID: 11400000, guid: d71171562c7aae943bc0f4704839eb9d, type: 2}
-  - {fileID: 11400000, guid: 557483bd71cb5084586a3f5a4c2d629b, type: 2}
-  - {fileID: 11400000, guid: a33ab243f10681446a0e24176dc6f4be, type: 2}
-  - {fileID: 11400000, guid: cafc72613b41a6c4cb74bb8eda7e73d8, type: 2}
-  - {fileID: 11400000, guid: 62a3a2eee2d2a4e468393fadffa4afaa, type: 2}
-  - {fileID: 11400000, guid: 0104d9de62535264dacb7c6ecde70cdc, type: 2}
   - {fileID: 11400000, guid: f04c834df1cebbd4e8ab409149d7e159, type: 2}
-  skillPool:
-  - {fileID: 11400000, guid: 72bfdbd50ec5c254cbb3f8147cafd490, type: 2}
-  - {fileID: 11400000, guid: 703781ae4a9d084438325b0dee1e77e3, type: 2}
   - {fileID: 11400000, guid: 08a5e69e77ea9894ea498f742f018950, type: 2}
-  - {fileID: 11400000, guid: 0300678097c7bd64784f86957e42362f, type: 2}
-  - {fileID: 11400000, guid: c3582d5204fdb7442a57f6be865a232b, type: 2}
-  - {fileID: 11400000, guid: d71171562c7aae943bc0f4704839eb9d, type: 2}
-  - {fileID: 11400000, guid: 557483bd71cb5084586a3f5a4c2d629b, type: 2}
-  - {fileID: 11400000, guid: a33ab243f10681446a0e24176dc6f4be, type: 2}
-  - {fileID: 11400000, guid: cafc72613b41a6c4cb74bb8eda7e73d8, type: 2}
-  - {fileID: 11400000, guid: 62a3a2eee2d2a4e468393fadffa4afaa, type: 2}
-  - {fileID: 11400000, guid: 0104d9de62535264dacb7c6ecde70cdc, type: 2}
-  - {fileID: 11400000, guid: f04c834df1cebbd4e8ab409149d7e159, type: 2}
+  skillPool: []
   ownedSkills: []
   maxSkillCount: 6
 --- !u!4 &1128930534
@@ -3658,6 +3639,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillManager: {fileID: 1128930533}
+  cursorWeapon: {fileID: 3008519376834165207}
   waveGroupData: {fileID: 11400000, guid: 9fa0573a5e50445489f8e2a2d6d96d27, type: 2}
   gameManager: {fileID: 2139855845}
   spawner: {fileID: 2021239203}

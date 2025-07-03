@@ -5,9 +5,6 @@ public class SubWeaponData : ScriptableObject
 {
     [Header("기본 정보")]
     public string weaponName;
-
-
-
     public Sprite weaponImage;
     public string weaponDesc;
     
