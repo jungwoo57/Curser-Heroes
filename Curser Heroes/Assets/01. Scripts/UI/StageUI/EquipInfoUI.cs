@@ -22,7 +22,7 @@ public class EquipInfoUI : MonoBehaviour
     {
         if (GameManager.Instance.mainEquipWeapon != null)
         {
-            mainWeaponImage.sprite = GameManager.Instance.mainEquipWeapon.weaponImage;
+            mainWeaponImage.sprite = GameManager.Instance.mainEquipWeapon.data.weaponImage;
         }
 
         if (GameManager.Instance.subEquipWeapon != null)

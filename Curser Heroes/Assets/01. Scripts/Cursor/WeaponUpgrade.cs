@@ -4,7 +4,7 @@ public class WeaponUpgrade : MonoBehaviour
 {
     public WeaponData currentWeapon;           //무기 정보 확인
     public int weaponLevel = 0;                 //현재 무기 레벨 확인
-
+    
     public void Init(WeaponData weaponData)     //무기 장착시 초기화
     {
         currentWeapon = weaponData;          

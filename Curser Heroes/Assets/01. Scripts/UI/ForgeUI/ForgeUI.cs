@@ -15,9 +15,9 @@ public class ForgeUI : MonoBehaviour
     public TextMeshProUGUI weaponAtk;
     
     public Button reinforceButton;
-    public WeaponData selectWeapon;
+    public OwnedWeapon selectWeapon;
 
-    private void OnEnable()
+    private void Start()
     {
         Init();
     }
@@ -26,7 +26,8 @@ public class ForgeUI : MonoBehaviour
     {
         if (GameManager.Instance.mainEquipWeapon == null)     //장착 무기 없으면 1번 착용
         {
-            selectWeapon = GameManager.Instance.hasMainWeapon[0];
+            Debug.Log("무기가없긴함");
+            selectWeapon = GameManager.Instance.ownedWeapons[0];
         }
         else
         {
@@ -44,10 +45,9 @@ public class ForgeUI : MonoBehaviour
 
     public void OnClickReinforceButton()
     {
-        if (GameManager.Instance.GetGold() >= selectWeapon.upgradeCost)
+        if (GameManager.Instance.GetGold() >= selectWeapon.data.upgradeCost)
         {
-            selectWeapon.level++;
-            GameManager.Instance.UpgradeWeapon(selectWeapon);
+            GameManager.Instance.UpgradeWeapon(selectWeapon.data);
             TextUpdate();
         }
         
@@ -56,17 +56,17 @@ public class ForgeUI : MonoBehaviour
 
     public void TextUpdate()
     {
-        weaponName.text = selectWeapon.weaponName + "  (" + (selectWeapon.level+1) +")";
-        weaponDesc.text = selectWeapon.weaponDesc;
-        weaponAtk.text = (selectWeapon.baseDamage + selectWeapon.damagePerLevel *(selectWeapon.level+1)).ToString();
-        weaponHp.text = selectWeapon.maxLives.ToString();
+        weaponName.text = selectWeapon.data.weaponName + "  (" + (selectWeapon.level+1) +")";
+        weaponDesc.text = selectWeapon.data.weaponDesc;
+        weaponAtk.text = selectWeapon.levelDamage.ToString();
+        weaponHp.text = selectWeapon.data.maxLives.ToString();
         hasGoldText.text = GameManager.Instance.GetGold().ToString();
-        useGoldText.text = selectWeapon.upgradeCost.ToString();
+        useGoldText.text = selectWeapon.data.upgradeCost.ToString();
     }
 
     public void ImageUpdate()
     {
-        weaponImage.sprite = selectWeapon.weaponImage;
+        weaponImage.sprite = selectWeapon.data.weaponImage;
     }
 
     public void ClickExitButton()

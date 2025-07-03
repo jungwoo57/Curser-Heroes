@@ -4997,7 +4997,10 @@ MonoBehaviour:
   weaponHp: {fileID: 440641503}
   weaponAtk: {fileID: 1032018981}
   reinforceButton: {fileID: 105036001}
-  selectWeapon: {fileID: 0}
+  selectWeapon:
+    data: {fileID: 0}
+    level: 0
+    bookMark: 0
 --- !u!1 &440641501
 GameObject:
   m_ObjectHideFlags: 0
@@ -6031,10 +6034,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 208c4559dd3c577429f4303ef2830557, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hasMainWeapon:
-  - {fileID: 11400000, guid: 039fe819971c8b74cb9cf96f22319f8a, type: 2}
-  - {fileID: 11400000, guid: 133254ae2272caf40a2dcfe7c7cc5bdb, type: 2}
-  - {fileID: 11400000, guid: ad89040aa703a48419f6395330ab660e, type: 2}
   _hasSubWeapon:
   - {fileID: 11400000, guid: a743b874776441044bf275c881e40cfd, type: 2}
   - {fileID: 11400000, guid: 4a82d059c813e774998f2c9b4cb949eb, type: 2}
@@ -6052,7 +6051,20 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cafc72613b41a6c4cb74bb8eda7e73d8, type: 2}
   - {fileID: 11400000, guid: 62a3a2eee2d2a4e468393fadffa4afaa, type: 2}
   - {fileID: 11400000, guid: 0104d9de62535264dacb7c6ecde70cdc, type: 2}
-  mainEquipWeapon: {fileID: 0}
+  ownedWeapons:
+  - data: {fileID: 11400000, guid: 039fe819971c8b74cb9cf96f22319f8a, type: 2}
+    level: 0
+    bookMark: 0
+  - data: {fileID: 11400000, guid: 133254ae2272caf40a2dcfe7c7cc5bdb, type: 2}
+    level: 0
+    bookMark: 0
+  - data: {fileID: 11400000, guid: ad89040aa703a48419f6395330ab660e, type: 2}
+    level: 0
+    bookMark: 0
+  mainEquipWeapon:
+    data: {fileID: 0}
+    level: 0
+    bookMark: 0
   subEquipWeapon: {fileID: 0}
   selectSkills: []
   gold: 99999
