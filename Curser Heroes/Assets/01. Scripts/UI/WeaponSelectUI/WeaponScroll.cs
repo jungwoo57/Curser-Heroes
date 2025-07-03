@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class WeaponScroll : MonoBehaviour
 {
-    public IReadOnlyList<WeaponData> hasWeapons; // 매니저에 있는 무기 리스트 불러오기
+    public IReadOnlyList<OwnedWeapon> hasWeapons; // 매니저에 있는 무기 리스트 불러오기
     public IReadOnlyList<SubWeaponData> hasSubWeapons;
     public List<WeaponImage> showWeapons = new List<WeaponImage>(); // 스크롤에서 보여줄 무기들
     public int hasWeaponCounts;
@@ -22,8 +22,8 @@ public class WeaponScroll : MonoBehaviour
         switch (weaponType)
         {
             case "main":
-                hasWeapons = GameManager.Instance.hasMainWeapon; //매니저에 있는 주무기리스트 가져오기
-                hasWeaponCounts = GameManager.Instance.hasMainWeapon.Count;
+                hasWeapons = GameManager.Instance.ownedWeapons; //매니저에 있는 주무기리스트 가져오기
+                hasWeaponCounts = GameManager.Instance.ownedWeapons.Count;
                 if (hasWeapons.Count > scrollCount) // 아이템이 일정 갯수 이하이면 스크롤 안되게 하기
                 {
                     scrollRect.vertical = true;
@@ -31,11 +31,6 @@ public class WeaponScroll : MonoBehaviour
                 else
                 {
                     scrollRect.vertical = false;
-                }
-
-                for (int i = 0; i < hasWeaponCounts; i++)
-                {
-                    Debug.Log(hasWeapons[i].weaponName);
                 }
 
                 while (showWeapons.Count < hasWeapons.Count) //갯수 부족 할 시 동적생성
@@ -67,11 +62,6 @@ public class WeaponScroll : MonoBehaviour
                 else
                 {
                     scrollRect.vertical = false;
-                }
-
-                for (int i = 0; i < hasWeaponCounts; i++)
-                {
-                    Debug.Log(hasWeapons[i].weaponName);
                 }
 
                 while (showWeapons.Count < hasSubWeapons.Count) //갯수 부족 할 시 동적생성

@@ -19,23 +19,25 @@ public class GameManager : MonoBehaviour
     }
     
 
-    [SerializeField] private List<WeaponData> _hasMainWeapon; // 보유 주무기
-    public IReadOnlyList<WeaponData> hasMainWeapon => _hasMainWeapon;     // 다른 파일에서 보유 주무기 가져오기(수정 불가)
- 
+    [SerializeField] public List<WeaponData> allMainWeapons; // 모든 무기 원본
+    
     [SerializeField] private List<SubWeaponData> _hasSubWeapon; // 보유 보조무기
     public IReadOnlyList<SubWeaponData> hasSubWeapon => _hasSubWeapon;     // 다른 파일에서 보유 보조 무기 가져오기(수정 불가)
     
     [SerializeField] private List<WeaponData> _hasPartner; // 보유 동료
     public IReadOnlyList<WeaponData> hasPartner => _hasPartner;     // 다른 파일에서 보유 동료 가져오기(수정 불가)
 
-    [SerializeField] private List<SkillData> _hasSkills;
+    [SerializeField] private List<SkillData> _hasSkills;  // 플레이어가 해금하여 보유하고 있는 스킬
     public IReadOnlyList<SkillData> hasSkills => _hasSkills;
     
-    public WeaponData mainEquipWeapon;
-    public SubWeaponData subEquipWeapon;
-    public List<SkillData> selectSkills;    //스킬 갯수가 정해져있어서 배열로 변경도 고려
+    [SerializeField] public List<OwnedWeapon> ownedWeapons;   // 소유 메인 무기
+    //[SerializeField] public List<>                          // 소유 보조 무기
     
-    private int gold = 0;
+    public OwnedWeapon mainEquipWeapon;
+    public SubWeaponData subEquipWeapon;
+    public List<SkillData> selectSkills;    //선택한 스킬(스테이지에 등장할 스킬), 스킬 갯수가 정해져있어서 배열로 변경도 고려
+    
+    [SerializeField]private int gold = 9999;
     private int jewel = 0;
 
     private void Awake()
@@ -78,10 +80,10 @@ public class GameManager : MonoBehaviour
     public void UnlockWeapon(WeaponData weaponData)  //무기 해금 시 사용
     {
         // 이미 보유중인 무기면 적용 안시킬 지는 무기 해금 코드 보고 결정
-        _hasMainWeapon.Add(weaponData);              // 코드 구조 보고 보조무기 주무기 얻는 법 바꾸기
+        ownedWeapons.Add(new OwnedWeapon(weaponData));              // 코드 구조 보고 보조무기 주무기 얻는 법 바꾸기
     }
     
-    public void EquipWeapon(WeaponData equipData)
+    public void EquipWeapon(OwnedWeapon equipData)
     {
         if (equipData == null)
         {
@@ -109,6 +111,21 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < skilldatas.Length; i++)
         {
             selectSkills.Add(skilldatas[i]);
+        }
+    }
+
+    public void UpgradeWeapon(WeaponData data)
+    {
+        int index = ownedWeapons.FindIndex(w => w.data.weaponName == data.weaponName);
+        if (index >= 0)
+        {
+            gold -= data.upgradeCost;
+            ownedWeapons[index].level++;
+            Debug.Log(ownedWeapons[index].data.name+ "업그레이드 완료" + ownedWeapons[index].level);
+        }
+        else
+        {
+            Debug.Log("해당 데이터 없음");
         }
     }
 }

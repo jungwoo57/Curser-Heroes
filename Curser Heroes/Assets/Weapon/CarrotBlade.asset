@@ -15,6 +15,8 @@ MonoBehaviour:
   weaponName: CarrotBlade
   weaponImage: {fileID: 21300000, guid: 0a87083033aff8142ad77c8b34b248cf, type: 3}
   weaponDesc: "\uB2F9\uADFC\uB2F9\uADFC"
+  level: 11
+  upgradeCost: 20
   baseDamage: 6
   damagePerLevel: 3
   attackCooldown: 0.5
