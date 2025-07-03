@@ -52,6 +52,7 @@ public class CursorWeapon : MonoBehaviour
                 if (Time.time - lastHitTime >= cooldown)
                 {
                     monster.TakeDamage(Mathf.RoundToInt(damage));
+                    AudioManager.Instance.PlayHitSound(HitType.Cursor);
                     lastHitTimesBase[monster] = Time.time;
                 }
                 continue;
@@ -67,6 +68,7 @@ public class CursorWeapon : MonoBehaviour
                 if (Time.time - lastHitTime >= cooldown)
                 {
                     boss.TakeDamage(Mathf.RoundToInt(damage));
+                    AudioManager.Instance.PlayHitSound(HitType.Cursor);
                     lastHitTimesBoss[boss] = Time.time;
                 }
             }
