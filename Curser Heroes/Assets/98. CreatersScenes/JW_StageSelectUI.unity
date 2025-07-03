@@ -1327,7 +1327,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 105036002}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 434593590}
+        m_TargetAssemblyTypeName: ForgeUI, Assembly-CSharp
+        m_MethodName: OnClickReinforceButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &105036002
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1662,7 +1674,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 144974944}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1412893132}
+        m_TargetAssemblyTypeName: SettingPanelUI, Assembly-CSharp
+        m_MethodName: OnClickWindowScreenButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &144974944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4964,15 +4988,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e4d23ed3dea10d42b620f19fdf5242c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponImage: {fileID: 0}
-  WeaponTextInfo: {fileID: 0}
-  hasGoldText: {fileID: 0}
-  useGoldText: {fileID: 0}
-  weaponName: {fileID: 0}
-  weaponDesc: {fileID: 0}
-  weaponHP: {fileID: 0}
-  weaponAtk: {fileID: 0}
-  reinforceButton: {fileID: 0}
+  weaponImage: {fileID: 841363718}
+  WeaponTextInfo: {fileID: 1934274579}
+  hasGoldText: {fileID: 1539957881}
+  useGoldText: {fileID: 450038390}
+  weaponName: {fileID: 1662565395}
+  weaponDesc: {fileID: 2051208641}
+  weaponHp: {fileID: 440641503}
+  weaponAtk: {fileID: 1032018981}
+  reinforceButton: {fileID: 105036001}
   selectWeapon: {fileID: 0}
 --- !u!1 &440641501
 GameObject:
@@ -4986,7 +5010,7 @@ GameObject:
   - component: {fileID: 440641504}
   - component: {fileID: 440641503}
   m_Layer: 5
-  m_Name: WeaponNameText (2)
+  m_Name: WeaponHPText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6031,6 +6055,7 @@ MonoBehaviour:
   mainEquipWeapon: {fileID: 0}
   subEquipWeapon: {fileID: 0}
   selectSkills: []
+  gold: 99999
 --- !u!4 &516545486
 Transform:
   m_ObjectHideFlags: 0
@@ -11391,7 +11416,7 @@ GameObject:
   - component: {fileID: 1032018982}
   - component: {fileID: 1032018981}
   m_Layer: 5
-  m_Name: WeaponNameText (3)
+  m_Name: WeaponAtkText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14637,6 +14662,7 @@ MonoBehaviour:
   mainSlider: {fileID: 1852613293}
   bgmSlider: {fileID: 1417288713}
   sfxSlider: {fileID: 1070164431}
+  isFullScreen: 0
 --- !u!1 &1413000842
 GameObject:
   m_ObjectHideFlags: 0
@@ -14719,7 +14745,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1413000845}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1468856889}
+        m_TargetAssemblyTypeName: VillageUI, Assembly-CSharp
+        m_MethodName: OpenForgeEntryPanel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1413000845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15381,9 +15419,9 @@ MonoBehaviour:
   menuButton: {fileID: 1755424455}
   menuImage: {fileID: 832840150}
   stageEntryPanel: {fileID: 1057799095}
-  laboratoryEntryPanel: {fileID: 434593586}
+  laboratoryEntryPanel: {fileID: 0}
   barEntryPanel: {fileID: 0}
-  forgeEntryPanel: {fileID: 0}
+  forgeEntryPanel: {fileID: 434593586}
   menuPanel: {fileID: 832840148}
 --- !u!1 &1484311721
 GameObject:
@@ -20242,7 +20280,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1985938553}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1412893132}
+        m_TargetAssemblyTypeName: SettingPanelUI, Assembly-CSharp
+        m_MethodName: OnClickFullScreenButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1985938553
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20951,7 +21001,7 @@ GameObject:
   - component: {fileID: 2051208642}
   - component: {fileID: 2051208641}
   m_Layer: 5
-  m_Name: WeaponNameText (1)
+  m_Name: WeaponDescText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -5,7 +5,8 @@ public class SettingPanelUI : MonoBehaviour
     public Slider mainSlider;
     public Slider bgmSlider;
     public Slider sfxSlider;
-
+    public bool isFullScreen;
+    
     void Start()
     {
         mainSlider.onValueChanged.AddListener(SetMainVolume);
@@ -36,10 +37,12 @@ public class SettingPanelUI : MonoBehaviour
     public void OnClickFullScreenButton()
     {
         Screen.fullScreen = true;
+        Debug.Log(Screen.fullScreen);
     }
 
     public void OnClickWindowScreenButton()
     {
         Screen.fullScreen = false;
+        Debug.Log(Screen.fullScreen);
     }
 }

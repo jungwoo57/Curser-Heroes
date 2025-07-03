@@ -1,4 +1,3 @@
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,15 +11,28 @@ public class ForgeUI : MonoBehaviour
     public TextMeshProUGUI useGoldText;
     public TextMeshProUGUI weaponName;
     public TextMeshProUGUI weaponDesc;
-    public TextMeshProUGUI weaponHP;
+    public TextMeshProUGUI weaponHp;
     public TextMeshProUGUI weaponAtk;
     
     public Button reinforceButton;
     public WeaponData selectWeapon;
 
+    private void OnEnable()
+    {
+        Init();
+    }
+
     public void Init()
     {
-        selectWeapon = GameManager.Instance.mainEquipWeapon;
+        if (GameManager.Instance.mainEquipWeapon == null)     //장착 무기 없으면 1번 착용
+        {
+            selectWeapon = GameManager.Instance.hasMainWeapon[0];
+        }
+        else
+        {
+            selectWeapon = GameManager.Instance.mainEquipWeapon;
+        }
+
         TextUpdate();
         ImageUpdate();
     }
@@ -34,8 +46,9 @@ public class ForgeUI : MonoBehaviour
     {
         if (GameManager.Instance.GetGold() >= selectWeapon.upgradeCost)
         {
-            GameManager.Instance.AddGold(-selectWeapon.upgradeCost);
             selectWeapon.level++;
+            GameManager.Instance.UpgradeWeapon(selectWeapon);
+            TextUpdate();
         }
         
         Debug.Log("무기강화");       //weapondata에 레벨이 존재해야 할 것 같음
@@ -43,10 +56,10 @@ public class ForgeUI : MonoBehaviour
 
     public void TextUpdate()
     {
-        weaponName.text = selectWeapon.weaponName;
+        weaponName.text = selectWeapon.weaponName + "  (" + (selectWeapon.level+1) +")";
         weaponDesc.text = selectWeapon.weaponDesc;
-        weaponAtk.text = selectWeapon.baseDamage.ToString();
-        weaponHP.text = selectWeapon.maxLives.ToString();
+        weaponAtk.text = (selectWeapon.baseDamage + selectWeapon.damagePerLevel *(selectWeapon.level+1)).ToString();
+        weaponHp.text = selectWeapon.maxLives.ToString();
         hasGoldText.text = GameManager.Instance.GetGold().ToString();
         useGoldText.text = selectWeapon.upgradeCost.ToString();
     }
@@ -54,5 +67,10 @@ public class ForgeUI : MonoBehaviour
     public void ImageUpdate()
     {
         weaponImage.sprite = selectWeapon.weaponImage;
+    }
+
+    public void ClickExitButton()
+    {
+        gameObject.SetActive(false);
     }
 }

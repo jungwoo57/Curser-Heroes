@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
     public SubWeaponData subEquipWeapon;
     public List<SkillData> selectSkills;    //선택한 스킬(스테이지에 등장할 스킬), 스킬 갯수가 정해져있어서 배열로 변경도 고려
     
-    private int gold = 0;
+    [SerializeField]private int gold = 9999;
     private int jewel = 0;
 
     private void Awake()
@@ -117,6 +117,7 @@ public class GameManager : MonoBehaviour
         int index = _hasMainWeapon.FindIndex(w => w.name == data.name);
         if (index >= 0)
         {
+            gold -= data.upgradeCost;
             _hasMainWeapon[index] = data;
             Debug.Log(_hasMainWeapon[index].name+ "업그레이드 완료" + _hasMainWeapon[index].level);
         }

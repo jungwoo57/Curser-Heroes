@@ -12,7 +12,7 @@ public class WeaponData : ScriptableObject
     [Header("공격력 관련")]
     public float baseDamage = 10;     
     public float damagePerLevel = 2f;  // 무기마다 다르게 설정 가능
-
+    
     [Header("고정 스탯")]
     public float attackCooldown = 0.5f;   //쿨타임
     public float attackRange = 0.5f;      // 공격 범위
