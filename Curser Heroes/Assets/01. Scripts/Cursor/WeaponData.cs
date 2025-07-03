@@ -6,7 +6,6 @@ public class WeaponData : ScriptableObject
     public string weaponName;
     public Sprite weaponImage;
     public string weaponDesc;
-    public int level;
     public int upgradeCost;
     
     [Header("공격력 관련")]

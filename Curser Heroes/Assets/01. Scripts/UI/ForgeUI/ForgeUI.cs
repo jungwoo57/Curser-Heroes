@@ -1,3 +1,4 @@
+using System.Security.Cryptography;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,10 +14,14 @@ public class ForgeUI : MonoBehaviour
     public TextMeshProUGUI weaponDesc;
     public TextMeshProUGUI weaponHp;
     public TextMeshProUGUI weaponAtk;
+
+    [Header("무기 선택 이미지")] 
+    public ForgeWeaponUI[] weaponUIs;
     
     public Button reinforceButton;
     public OwnedWeapon selectWeapon;
-
+    
+    
     private void OnEnable()
     {
         Init();
@@ -34,8 +39,8 @@ public class ForgeUI : MonoBehaviour
             selectWeapon = GameManager.Instance.mainEquipWeapon;
         }
 
-        TextUpdate();
-        ImageUpdate();
+        UIUpdate();
+        UpdateSelectUI();
     }
 
     public void DisableReinforceButton()
@@ -48,29 +53,41 @@ public class ForgeUI : MonoBehaviour
         if (GameManager.Instance.GetGold() >= selectWeapon.data.upgradeCost)
         {
             GameManager.Instance.UpgradeWeapon(selectWeapon.data);
-            TextUpdate();
+            UIUpdate();
         }
         
         Debug.Log("무기강화");       //weapondata에 레벨이 존재해야 할 것 같음
     }
 
-    public void TextUpdate()
+    public void UIUpdate()
     {
-        weaponName.text = selectWeapon.data.weaponName + "  (" + (selectWeapon.level+1) +")";
+        weaponName.text = selectWeapon.data.weaponName + "   (" + (selectWeapon.level+1) +")";
         weaponDesc.text = selectWeapon.data.weaponDesc;
-        weaponAtk.text = selectWeapon.levelDamage.ToString();
-        weaponHp.text = selectWeapon.data.maxLives.ToString();
+        weaponAtk.text = ("공격력 : ") + selectWeapon.levelDamage.ToString();
+        weaponHp.text = ("체력 : ") + selectWeapon.data.maxLives.ToString();
         hasGoldText.text = GameManager.Instance.GetGold().ToString();
         useGoldText.text = selectWeapon.data.upgradeCost.ToString();
-    }
-
-    public void ImageUpdate()
-    {
         weaponImage.sprite = selectWeapon.data.weaponImage;
+        if (GameManager.Instance.GetGold() < selectWeapon.data.upgradeCost)
+        {
+            //버튼 비활성화
+        }
     }
-
+    
     public void ClickExitButton()
     {
         gameObject.SetActive(false);
+    }
+
+    public void UpdateSelectUI()
+    {
+        for (int i = 0; i < GameManager.Instance.allMainWeapons.Count; i++)
+        {
+            weaponUIs[i].UpdateUI(GameManager.Instance.allMainWeapons[i]);
+        }
+    }
+    public void ClickWeaponChangeButton()
+    {
+        
     }
 }
