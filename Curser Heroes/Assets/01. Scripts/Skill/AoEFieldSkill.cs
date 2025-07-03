@@ -8,7 +8,7 @@ public class AoEFieldSkill : MonoBehaviour
     private Transform player;                         // 추적 대상 (플레이어)
     private float tickTimer;
     private SkillLevelData info;
-    private float offsetRadius = 0.5f;
+    private float offsetRadius = 0.8f;
 
     // 초기화: 스킬 레벨 정보 + 플레이어 위치 받기
     public void Init(SkillManager.SkillInstance skillInstance, Transform playerTransform)
@@ -16,7 +16,10 @@ public class AoEFieldSkill : MonoBehaviour
         info = skillInstance.skill.levelDataList[skillInstance.level - 1];
         player = playerTransform;
 
-        transform.localScale = Vector3.one * info.sizeMultiplier;
+        float diameter = offsetRadius * 2f * info.sizeMultiplier;
+        float visualScaleMultiplier = 5f; // 원하는 시각적 크기 배율
+
+        transform.localScale = Vector3.one * diameter * visualScaleMultiplier;
     }
 
     void Update()
