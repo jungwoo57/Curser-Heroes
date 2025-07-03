@@ -74,9 +74,9 @@ public class SubWeaponManager : MonoBehaviour
         areaEffect.Init(equippedSubWeapon);
     }
 
-    Monster FindNearestMonster(Vector3 from)
+    Monster FindNearestMonster(Vector3 from)     //가장 가까운 몬스터 탐색
     {
-        Monster[] monsters = FindObjectsOfType<Monster>();
+        Monster[] monsters = FindObjectsOfType<Monster>();    
         Monster nearest = null;
         float minDist = Mathf.Infinity;
 
