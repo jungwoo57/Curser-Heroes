@@ -9,14 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a595bcdfd8ab3e341af4dac3e68e0bbc, type: 3}
-  m_Name: SubPunch
+  m_Script: {fileID: 11500000, guid: cc276f35149a968458549e6e12e1bf91, type: 3}
+  m_Name: HunterFriend
   m_EditorClassIdentifier: 
-  weaponName: SubPunch
-  baseDamage: 1
-  damagePerLevel: 2
-  cooldown: 0.5
-  weaponType: 1
-  effect: 0
-  rangeType: 1
-  projectilePrefab: {fileID: 0}
+  fellowName: HunterFriend
+  fellowImage: {fileID: 0}
+  description: 
+  specialType: 0
+  specialDuration: 0
+  fellowPrefab: {fileID: 0}

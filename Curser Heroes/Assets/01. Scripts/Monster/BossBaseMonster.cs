@@ -81,6 +81,7 @@ public abstract class BossBaseMonster : MonoBehaviour
     public virtual void TakeDamage(int amt)
     {
         currentHP -= amt;
+        AudioManager.Instance.PlayHitSound(HitType.Monster);
         if (animator != null)
         {
             animator.SetBool(HashDamage, true);

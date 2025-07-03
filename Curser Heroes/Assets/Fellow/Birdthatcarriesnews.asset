@@ -9,11 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a595bcdfd8ab3e341af4dac3e68e0bbc, type: 3}
-  m_Name: SmallCarrot
+  m_Script: {fileID: 11500000, guid: cc276f35149a968458549e6e12e1bf91, type: 3}
+  m_Name: Birdthatcarriesnews
   m_EditorClassIdentifier: 
-  weaponName: SmallCarot
-  baseDamage: 4
-  damagePerLevel: 1.4
-  weaponType: 1
-  effectType: 0
+  fellowName: Birdthatcarriesnews
+  fellowImage: {fileID: 0}
+  description: 
+  specialType: 3
+  specialDuration: 7
+  fellowPrefab: {fileID: 0}

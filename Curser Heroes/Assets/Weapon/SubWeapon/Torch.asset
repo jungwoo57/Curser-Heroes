@@ -13,10 +13,14 @@ MonoBehaviour:
   m_Name: Torch
   m_EditorClassIdentifier: 
   weaponName: Torch
+  weaponImage: {fileID: 0}
+  weaponDesc: 
   baseDamage: 2
   damagePerLevel: 1.8
   cooldown: 0.5
-  weaponType: 2
   effect: 3
-  rangeType: 1
+  weaponType: 2
+  rangeShape: 1
+  speed: 1
+  rotateWithDirection: 0
   projectilePrefab: {fileID: 0}

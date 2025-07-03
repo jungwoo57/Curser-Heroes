@@ -10,15 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a595bcdfd8ab3e341af4dac3e68e0bbc, type: 3}
-  m_Name: Butter
+  m_Name: ShotPut
   m_EditorClassIdentifier: 
-  weaponName: Butter
-  weaponImage: {fileID: 21300000, guid: 5d7f2bb155758bd42b033153c300b8b7, type: 3}
+  weaponName: SubPunch
+  weaponImage: {fileID: 0}
   weaponDesc: 
-  baseDamage: 2
-  damagePerLevel: 1.65
+  baseDamage: 1
+  damagePerLevel: 2
   cooldown: 0.5
-  weaponType: 0
-  effect: 1
-  rangeType: 0
+  effect: 0
+  weaponType: 1
+  rangeShape: 0
+  speed: 2
+  rotateWithDirection: 0
   projectilePrefab: {fileID: 0}

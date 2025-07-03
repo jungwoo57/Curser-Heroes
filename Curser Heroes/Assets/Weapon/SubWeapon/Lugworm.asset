@@ -13,10 +13,14 @@ MonoBehaviour:
   m_Name: Lugworm
   m_EditorClassIdentifier: 
   weaponName: Lugworm
+  weaponImage: {fileID: 0}
+  weaponDesc: 
   baseDamage: 3
   damagePerLevel: 1
   cooldown: 0.5
+  effect: 1
   weaponType: 0
-  effect: 2
-  rangeType: 0
+  rangeShape: 0
+  speed: 0
+  rotateWithDirection: 0
   projectilePrefab: {fileID: 0}
