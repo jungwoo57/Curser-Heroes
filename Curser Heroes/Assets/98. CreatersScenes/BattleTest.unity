@@ -931,7 +931,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 242314293}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2a1cbe739a632d4da5d3a421cedd697, type: 3}
+  m_Script: {fileID: 11500000, guid: b1bc79f58a809804ca917e483b81a1f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &242314295
@@ -3433,7 +3433,6 @@ MonoBehaviour:
   waveGroupData: {fileID: 11400000, guid: 9fa0573a5e50445489f8e2a2d6d96d27, type: 2}
   gameManager: {fileID: 2139855845}
   spawner: {fileID: 2021239203}
-  bossTestData: {fileID: 11400000, guid: 4963c06c696edac40971bc2ab9568b12, type: 2}
 --- !u!4 &1657000542
 Transform:
   m_ObjectHideFlags: 0
@@ -4473,7 +4472,7 @@ GameObject:
   - component: {fileID: 2021239203}
   m_Layer: 0
   m_Name: Spawner
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4816,8 +4815,10 @@ MonoBehaviour:
   _hasMainWeapon: []
   _hasSubWeapon: []
   _hasPartner: []
+  _hasSkills: []
   mainEquipWeapon: {fileID: 0}
   subEquipWeapon: {fileID: 0}
+  selectSkills: []
 --- !u!4 &2139855846
 Transform:
   m_ObjectHideFlags: 0

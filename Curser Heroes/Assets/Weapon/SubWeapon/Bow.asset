@@ -17,5 +17,10 @@ MonoBehaviour:
   weaponDesc: 
   baseDamage: 3
   damagePerLevel: 1.5
-  weaponType: 0
-  effectType: 0
+  cooldown: 0.5
+  effect: 0
+  weaponType: 1
+  rangeShape: 0
+  speed: 2
+  rotateWithDirection: 1
+  projectilePrefab: {fileID: 6799365641447161135, guid: 50037e3df02511e4788bcf3f475c0d3c, type: 3}

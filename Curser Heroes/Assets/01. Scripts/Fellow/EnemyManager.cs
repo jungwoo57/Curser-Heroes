@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyManager : MonoBehaviour
+public class EnemyManager : MonoBehaviour    //글로벌 데미지와 효과를 위한 임시클래스
 {
     public static EnemyManager Instance { get; private set; }
 
