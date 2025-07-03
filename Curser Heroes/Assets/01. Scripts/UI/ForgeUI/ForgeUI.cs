@@ -17,14 +17,14 @@ public class ForgeUI : MonoBehaviour
     public Button reinforceButton;
     public OwnedWeapon selectWeapon;
 
-    private void Start()
+    private void OnEnable()
     {
         Init();
     }
 
     public void Init()
     {
-        if (GameManager.Instance.mainEquipWeapon == null)     //장착 무기 없으면 1번 착용
+        if (GameManager.Instance.mainEquipWeapon.data == null)     //장착 무기 없으면 1번 착용
         {
             Debug.Log("무기가없긴함");
             selectWeapon = GameManager.Instance.ownedWeapons[0];
