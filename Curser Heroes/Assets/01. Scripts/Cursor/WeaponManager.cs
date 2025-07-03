@@ -41,7 +41,7 @@ public class WeaponManager : MonoBehaviour
 
     public void TakeWeaponLifeDamage()  //데미지를 입었을 때 호출됨
     {
-       
+        AudioManager.Instance.PlayHitSound(HitType.Monster);
         weaponLife.TakeLifeDamage();            //목숨을 1개 줄이고 0이 되면 끝남
     }
 }
