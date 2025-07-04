@@ -2,43 +2,26 @@
 
 public class ShortRangeProjectile : SubProjectile
 {
-    public float maxDistance = 2f;
-    private Vector3 startPosition;
-    private Rigidbody2D rb;
+    private float lifeTime = 1.5f;
+    private float timer = 0f;
 
-    void Start()
+     void newUpdate()
     {
-        startPosition = transform.position;
-        rb = GetComponent<Rigidbody2D>();
+        timer += Time.deltaTime;
 
-        Vector2 dir = (targetPosition - transform.position).normalized;
-        float speed = SubWeaponUtils.GetSpeed(weaponData.speed);
-        rb.velocity = dir * speed;
-
-       
-    }
-
-    void Update()
-    {
-        if (Vector3.Distance(transform.position, startPosition) >= maxDistance)
+        if (target == null || target.IsDead || timer > lifeTime)
         {
             Destroy(gameObject);
+            return;
         }
-    }
 
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Monster"))
+        // 느리게 이동 (단거리용)
+        Vector3 dir = (target.transform.position - transform.position).normalized;
+        transform.position += dir * (subweaponData.projectileSpeed * 0.5f) * Time.deltaTime;
+
+        if (Vector3.Distance(transform.position, target.transform.position) < 0.25f)
         {
-            Monster monster = other.GetComponent<Monster>();
-
-            if (monster != null)
-            {
-                ApplyDamage(monster);
-                ApplyEffect(monster);
-            }
-
-            Destroy(gameObject);
+            OnHit();
         }
     }
 }

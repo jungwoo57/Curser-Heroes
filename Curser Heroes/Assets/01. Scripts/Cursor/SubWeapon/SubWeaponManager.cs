@@ -6,7 +6,7 @@ public class SubWeaponManager : MonoBehaviour
 {
     public SubWeaponData equippedSubWeapon;    //현재 장착중인 보조무기 데이터
     private float currentCooldown = 0f;      //현재 쿨타임 남은시간
-
+    public LayerMask monsterLayer;
     void Update()
     {
         if (currentCooldown > 0f)
@@ -42,7 +42,7 @@ public class SubWeaponManager : MonoBehaviour
         Vector3 cursorPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);   //메인카메라에서 커서의 좌표
         cursorPos.z = 0f;
 
-        Monster target = FindNearestMonster(cursorPos);    //커서 주변에서 가장 가까운 몬스터 탐색
+        BaseMonster target = FindNearestAliveMonster(cursorPos);    //커서 주변에서 가장 가까운 몬스터 탐색
         if (target == null)
         {
             Debug.LogWarning("타겟 몬스터 없음");
@@ -69,33 +69,50 @@ public class SubWeaponManager : MonoBehaviour
         Vector3 cursorPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         cursorPos.z = 0f;
 
-        GameObject area = Instantiate(equippedSubWeapon.projectilePrefab, cursorPos, Quaternion.identity);  //데미지존 프리팹 생성
-        SubAreaAttack areaEffect = area.GetComponent<SubAreaAttack>();  //범위공격 컴포터를 받아서 무기 데이터로 초기화
-        areaEffect.Init(equippedSubWeapon);
+        int damage = Mathf.RoundToInt(equippedSubWeapon.GetDamage());
+        float radius = equippedSubWeapon.projectileMaxDistance;
+
+        // Layer 설정: "Monster" 레이어에만 영향
+        LayerMask monsterLayer = LayerMask.GetMask("Monster");
+
+        // ForceEffect 인스턴스 생성 (이름 없이 순서대로)
+        IEffect forceEffect = new ForceEffect(cursorPos, damage, radius, monsterLayer);
+
+        // EffectManager를 담은 임시 오브젝트 생성
+        GameObject effectObj = new GameObject("ForceEffectHost");
+        effectObj.transform.position = cursorPos;
+
+        EffectManager effectManager = effectObj.AddComponent<EffectManager>();
+        effectManager.Init(null); // 포스 이펙트는 특정 몬스터와 연결 없음
+        effectManager.AddEffect(forceEffect);
+
+        // 이펙트 종료 후 오브젝트 삭제
+        Destroy(effectObj, 0.5f);
     }
 
-    Monster FindNearestMonster(Vector3 from)     //가장 가까운 몬스터 탐색
+
+
+    BaseMonster FindNearestAliveMonster(Vector3 from)     //가장 가까운 몬스터 탐색
     {
-        Collider2D[] hits = Physics2D.OverlapCircleAll(from, 20f, monsterLayer); // 범위는 적절히 조정
-        Monster nearest = null;
-        float minDist = Mathf.Infinity;
+        BaseMonster[] monsters = FindObjectsOfType<BaseMonster>();    
+        BaseMonster nearest = null;      
+        float minDist = Mathf.Infinity;         //가장 가까운 거리(처음엔 무한대)
 
-
-
-        foreach (var hit in hits)
+        foreach (var m in monsters)
         {
-            Monster m = hit.GetComponent<Monster>();
-            if (m != null && !m.IsDead)
+            if (m.IsDead) continue;   //이미 죽은 상태면 패스
+
+            float dist = Vector2.Distance(from, m.transform.position);  //커서의 위치와 몬스터의 현재 거리를 계산
+            if (dist < minDist)
             {
-                float dist = Vector2.Distance(from, m.transform.position);
-                if (dist < minDist)
-                {
-                    minDist = dist;
-                    nearest = m;
-                }
+                minDist = dist;  //최소 거리 갱신
+                nearest = m;     //가장 가까운 몬스터 저장
             }
         }
 
         return nearest;
     }
+
+   
+
 }

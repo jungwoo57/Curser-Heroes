@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1363672529361250790}
   - component: {fileID: 7386682379840476848}
+  - component: {fileID: -5775179606432198142}
   m_Layer: 0
   m_Name: SubWeaponManager
   m_TagString: Untagged
@@ -45,3 +46,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   equippedSubWeapon: {fileID: 11400000, guid: 4a82d059c813e774998f2c9b4cb949eb, type: 2}
+  monsterLayer:
+    serializedVersion: 2
+    m_Bits: 0
+--- !u!114 &-5775179606432198142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4439627713812376070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a721e591cd8d76448b4f1bc43d16e351, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentSubWeapon: {fileID: 0}
+  weaponLevel: 0

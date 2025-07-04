@@ -9,9 +9,11 @@ public abstract class BaseMonster : MonoBehaviour
     protected int damage;
     protected float attackCooldown;
     protected float attackTimer;
+    
 
     protected int valueCost;
     protected Animator animator;
+    
 
     private static readonly int HashAtk = Animator.StringToHash("Atk");
     private static readonly int HashDie = Animator.StringToHash("Die");
@@ -24,6 +26,8 @@ public abstract class BaseMonster : MonoBehaviour
     private Coroutine flashCoroutine;
     private Coroutine attackColorCoroutine;
     private Animator effectAnimator;
+    protected EffectManager effectManager;  
+    public bool IsDead => currentHP <= 0;
 
     protected virtual void Start()
     {
@@ -38,6 +42,7 @@ public abstract class BaseMonster : MonoBehaviour
       
 
         PlaySpawnAnimation();
+        effectManager = GetComponent<EffectManager>();
     }
 
     protected virtual void PlaySpawnAnimation()
@@ -103,9 +108,20 @@ public abstract class BaseMonster : MonoBehaviour
             animator.SetBool(HashAtk, value);
     }
 
-    public virtual void TakeDamage(int amount)
+    public virtual void TakeDamage(int amount, SubWeaponData weaponData = null)
     {
         currentHP -= amount;
+
+        // 이펙트 적용
+        if (weaponData != null && effectManager != null)
+        {
+            IEffect effect = EffectFactory.CreateEffect(weaponData.effect);
+            if (effect != null)
+            {
+                effectManager.AddEffect(effect);
+            }
+        }
+
 
         if (animator != null)
         {
@@ -121,8 +137,8 @@ public abstract class BaseMonster : MonoBehaviour
 
         if (currentHP <= 0)
             Die();
-        else
-            PlayHitEffect();
+        //else
+        //    PlayHitEffect();     
     }
 
     private IEnumerator ChangeColorGradually(Color targetColor, float duration)
@@ -169,10 +185,17 @@ public abstract class BaseMonster : MonoBehaviour
         if (animator != null)
             animator.SetBool(HashDamage, false);
     }
+  
 
-    protected virtual void PlayHitEffect()
+    public virtual void Stun()     //이펙트 추가
     {
-        // 필요시 오버라이드해서 추가 피격 효과 구현 가능
+     
+        Debug.Log($"{gameObject.name} 몬스터 기절!");
+    }
+
+    public virtual void UnStun()
+    {
+        Debug.Log($"{gameObject.name} 기절 해제됨");
     }
 
     protected virtual void Die()
