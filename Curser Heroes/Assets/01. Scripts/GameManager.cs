@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
     //[SerializeField] public List<>                          // 소유 보조 무기
     
     public OwnedWeapon mainEquipWeapon;
+    public OwnedSubWeapon subEquipWeapons;
     public SubWeaponData subEquipWeapon;
     public List<SkillData> selectSkills;    //선택한 스킬(스테이지에 등장할 스킬), 스킬 갯수가 정해져있어서 배열로 변경도 고려
     

@@ -18,9 +18,15 @@ public class ForgeUI : MonoBehaviour
     [Header("무기 선택 이미지")] 
     public ForgeWeaponUI[] weaponUIs;
     
+    [Header("버튼 목록")]
     public Button reinforceButton;
-    public OwnedWeapon selectWeapon;
+    public Button mainWeaponButton;
+    public Button subWeaponButton;
+
+    public bool isMain = true;
     
+    public OwnedWeapon selectWeapon;
+    public OwnedSubWeapon selectSubWeapon;
     
     private void OnEnable()
     {
@@ -42,12 +48,7 @@ public class ForgeUI : MonoBehaviour
         UIUpdate();
         UpdateSelectUI();
     }
-
-    public void DisableReinforceButton()
-    {
-        reinforceButton.interactable = false;
-    }
-
+    
     public void OnClickReinforceButton()
     {
         if (GameManager.Instance.GetGold() >= selectWeapon.data.upgradeCost)
@@ -70,7 +71,7 @@ public class ForgeUI : MonoBehaviour
         weaponImage.sprite = selectWeapon.data.weaponImage;
         if (GameManager.Instance.GetGold() < selectWeapon.data.upgradeCost)
         {
-            //버튼 비활성화
+            reinforceButton.interactable = false;
         }
     }
     
@@ -86,8 +87,8 @@ public class ForgeUI : MonoBehaviour
             weaponUIs[i].UpdateUI(GameManager.Instance.allMainWeapons[i]);
         }
     }
-    public void ClickWeaponChangeButton()
+    public void ClickWeaponChangeButton()        //무기 변경
     {
-        
+        isMain = !isMain;
     }
 }
