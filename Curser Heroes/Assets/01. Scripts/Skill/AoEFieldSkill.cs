@@ -8,7 +8,7 @@ public class AoEFieldSkill : MonoBehaviour
     private Transform player;                         // 추적 대상 (플레이어)
     private float tickTimer;
     private SkillLevelData info;
-    private float offsetRadius = 0.8f;
+    private float offsetRadius = 0.6f;
 
     // 초기화: 스킬 레벨 정보 + 플레이어 위치 받기
     public void Init(SkillManager.SkillInstance skillInstance, Transform playerTransform)
@@ -16,10 +16,15 @@ public class AoEFieldSkill : MonoBehaviour
         info = skillInstance.skill.levelDataList[skillInstance.level - 1];
         player = playerTransform;
 
-        float diameter = offsetRadius * 2f * info.sizeMultiplier;
-        float visualScaleMultiplier = 5f; // 원하는 시각적 크기 배율
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        if (sr == null || sr.sprite == null)
+        {
+            Debug.LogWarning("SpriteRenderer 또는 Sprite가 없습니다.");
+            return;
+        }
 
-        transform.localScale = Vector3.one * diameter * visualScaleMultiplier;
+        float baseSpriteDiameter = sr.sprite.bounds.size.x;
+        transform.localScale = Vector3.one * offsetRadius * 2f * info.sizeMultiplier / baseSpriteDiameter;
     }
 
     void Update()
@@ -64,8 +69,10 @@ public class AoEFieldSkill : MonoBehaviour
     // 디버그용 범위 표시
     void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.green;
+        Gizmos.color = Color.magenta;
         float radius = offsetRadius * (info?.sizeMultiplier ?? 1f);
         Gizmos.DrawWireSphere(transform.position, radius);
     }
+
+
 }
