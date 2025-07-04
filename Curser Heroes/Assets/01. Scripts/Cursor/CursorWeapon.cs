@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CursorWeapon : MonoBehaviour
@@ -54,6 +55,8 @@ public class CursorWeapon : MonoBehaviour
                     monster.TakeDamage(Mathf.RoundToInt(damage));
                     AudioManager.Instance.PlayHitSound(HitType.Cursor);
                     lastHitTimesBase[monster] = Time.time;
+
+                    TryTriggerMeteorSkill();
                 }
                 continue;
             }
@@ -70,11 +73,24 @@ public class CursorWeapon : MonoBehaviour
                     boss.TakeDamage(Mathf.RoundToInt(damage));
                     AudioManager.Instance.PlayHitSound(HitType.Cursor);
                     lastHitTimesBoss[boss] = Time.time;
+
+                    TryTriggerMeteorSkill();
                 }
             }
         }
 
 
+    }
+    private void TryTriggerMeteorSkill()
+    {
+        var skillManager = FindObjectOfType<SkillManager>();
+        if (skillManager == null) return;
+
+        var meteorSkill = skillManager.ownedSkills.FirstOrDefault(s => s.skill.skillName == "별동별");
+        if (meteorSkill != null)
+        {
+            skillManager.TrySpawnMeteorSkill(meteorSkill);
+        }
     }
     public void SetWeapon(WeaponData weaponData)     //외부에서 무기를 장착할 수 있게 해주는 초기화 함수
     {
