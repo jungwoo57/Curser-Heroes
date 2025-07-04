@@ -10,7 +10,7 @@ public class CursorWeapon : MonoBehaviour
     public WeaponUpgrade weaponUpgrade;      // 무기 레벨 관리
 
     private Dictionary<BaseMonster, float> lastHitTimesBase = new Dictionary<BaseMonster, float>();
-    private Dictionary<BossBaseMonster, float> lastHitTimesBoss = new Dictionary<BossBaseMonster, float>();
+   
 
     //공격 쿨타임을 위해 몬스터 별로 마지막 공격한 시간을 저장, 몬스터 마다 각각 쿨타임을 적용할 수 있다.
 
@@ -62,21 +62,21 @@ public class CursorWeapon : MonoBehaviour
             }
 
             // 보스 몬스터 감지
-            BossBaseMonster boss = hit.GetComponent<BossBaseMonster>();
-            if (boss != null)
-            {
-                if (!lastHitTimesBoss.TryGetValue(boss, out float lastHitTime))
-                    lastHitTime = 0f;
+            //BossBaseMonster boss = hit.GetComponent<BossBaseMonster>();
+            //if (boss != null)
+            //{
+            //    if (!lastHitTimesBoss.TryGetValue(boss, out float lastHitTime))
+            //        lastHitTime = 0f;
 
-                if (Time.time - lastHitTime >= cooldown)
-                {
-                    boss.TakeDamage(Mathf.RoundToInt(damage));
-                    AudioManager.Instance.PlayHitSound(HitType.Cursor);
-                    lastHitTimesBoss[boss] = Time.time;
+            //    if (Time.time - lastHitTime >= cooldown)
+            //    {
+            //        boss.TakeDamage(Mathf.RoundToInt(damage));
+            //        AudioManager.Instance.PlayHitSound(HitType.Cursor);
+            //        lastHitTimesBoss[boss] = Time.time;
 
-                    TryTriggerMeteorSkill();
-                }
-            }
+            //        TryTriggerMeteorSkill();
+            //    }
+            //}
         }
 
 
