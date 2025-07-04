@@ -188,4 +188,34 @@ public class SkillManager : MonoBehaviour
     {
         return source.OrderBy(x => Random.value).Take(count).ToList();
     }
+    public void TrySpawnMeteorSkill(SkillManager.SkillInstance skillInstance)
+    {
+        float procChance = 0.25f;
+
+        if (Random.value > procChance)
+            return;
+
+        // 씬 내 몬스터 리스트 가져오기 (기본/보스 모두)
+        List<Transform> monsters = new List<Transform>();
+
+        foreach (var monster in FindObjectsOfType<BaseMonster>())
+            monsters.Add(monster.transform);
+
+        foreach (var boss in FindObjectsOfType<BossBaseMonster>())
+            monsters.Add(boss.transform);
+
+        if (monsters.Count == 0)
+            return;
+
+        // 랜덤 몬스터 선택
+        Transform target = monsters[Random.Range(0, monsters.Count)];
+
+        // 별똥별 생성
+        GameObject meteorPrefab = skillInstance.skill.skillPrefab; 
+        GameObject meteorObj = Instantiate(meteorPrefab);
+
+        var meteor = meteorObj.GetComponent<MeteorSkill>();
+        var levelData = skillInstance.skill.levelDataList[skillInstance.level - 1];
+        meteor.Init(levelData.damage, target.position);
+    }
 }
