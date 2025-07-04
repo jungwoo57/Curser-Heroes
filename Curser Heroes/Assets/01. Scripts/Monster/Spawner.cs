@@ -25,12 +25,8 @@ public class Spawner : MonoBehaviour
 
             MonoBehaviour comp = go.GetComponent<MonoBehaviour>();
 
-            if (comp is BossBaseMonster boss)
-            {
-                boss.Setup(data);
-                boss.onDeath += onDeathCallback;
-            }
-            else if (comp is BaseMonster baseM)
+           
+            if (comp is BaseMonster baseM)
             {
                 baseM.Setup(data);
                 baseM.onDeath += onDeathCallback;

@@ -5169,15 +5169,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allMainWeapons: []
-  _hasSubWeapon: []
+  allSubWeapons: []
   _hasPartner: []
   _hasSkills: []
   ownedWeapons: []
+  ownedSubWeapons: []
   mainEquipWeapon:
     data: {fileID: 0}
     level: 0
     bookMark: 0
-  subEquipWeapon: {fileID: 0}
+  subEquipWeapon:
+    data: {fileID: 0}
+    level: 0
+    bookMark: 0
   selectSkills: []
   gold: 9999
 --- !u!4 &2139855846
@@ -5243,6 +5247,7 @@ MonoBehaviour:
     m_Bits: 128
   weaponLife: {fileID: 2086191848478865172}
   weaponUpgrade: {fileID: 8714767504411606639}
+  weaponSprite: {fileID: 4930801601067558546}
 --- !u!4 &3521251694906892393
 Transform:
   m_ObjectHideFlags: 0

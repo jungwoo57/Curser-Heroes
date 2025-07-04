@@ -512,6 +512,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4581653016877156417, guid: 07dca9be3ae09394e8c4dee942769a0c, type: 3}
+      propertyPath: forgeUI
+      value: 
+      objectReference: {fileID: 434593590}
     - target: {fileID: 7693586619190859948, guid: 07dca9be3ae09394e8c4dee942769a0c, type: 3}
       propertyPath: m_Name
       value: ForgeWeaponUI (11)
@@ -1730,6 +1734,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4581653016877156417, guid: 07dca9be3ae09394e8c4dee942769a0c, type: 3}
+      propertyPath: forgeUI
+      value: 
+      objectReference: {fileID: 434593590}
     - target: {fileID: 7693586619190859948, guid: 07dca9be3ae09394e8c4dee942769a0c, type: 3}
       propertyPath: m_Name
       value: ForgeWeaponUI (7)
@@ -1956,7 +1964,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 955848513}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.46807843
+  m_Size: 0.4680785
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4313,7 +4321,14 @@ MonoBehaviour:
   - {fileID: 510109189}
   - {fileID: 850584469}
   reinforceButton: {fileID: 105036001}
+  mainWeaponButton: {fileID: 813982044}
+  subWeaponButton: {fileID: 549322939}
+  isMain: 1
   selectWeapon:
+    data: {fileID: 0}
+    level: 0
+    bookMark: 0
+  selectSubWeapon:
     data: {fileID: 0}
     level: 0
     bookMark: 0
@@ -5284,9 +5299,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3c5de675841d1894f906beb96949b960, type: 2}
   - {fileID: 11400000, guid: 29c08a302b336cb4999431b9059938fb, type: 2}
   - {fileID: 11400000, guid: f96e6f2522ff2d344b6849023e1eb6f7, type: 2}
-  _hasSubWeapon:
+  allSubWeapons:
   - {fileID: 11400000, guid: a743b874776441044bf275c881e40cfd, type: 2}
   - {fileID: 11400000, guid: 4a82d059c813e774998f2c9b4cb949eb, type: 2}
+  - {fileID: 11400000, guid: 73586edf04a11e34ba24dc127036cb73, type: 2}
   _hasPartner: []
   _hasSkills:
   - {fileID: 11400000, guid: f04c834df1cebbd4e8ab409149d7e159, type: 2}
@@ -5311,11 +5327,21 @@ MonoBehaviour:
   - data: {fileID: 11400000, guid: ad89040aa703a48419f6395330ab660e, type: 2}
     level: 0
     bookMark: 0
+  ownedSubWeapons:
+  - data: {fileID: 11400000, guid: a743b874776441044bf275c881e40cfd, type: 2}
+    level: 0
+    bookMark: 0
+  - data: {fileID: 11400000, guid: 4a82d059c813e774998f2c9b4cb949eb, type: 2}
+    level: 0
+    bookMark: 0
   mainEquipWeapon:
     data: {fileID: 0}
     level: 0
     bookMark: 0
-  subEquipWeapon: {fileID: 0}
+  subEquipWeapon:
+    data: {fileID: 0}
+    level: 0
+    bookMark: 0
   selectSkills: []
   gold: 99999
 --- !u!4 &516545486
@@ -5457,6 +5483,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4581653016877156417, guid: 07dca9be3ae09394e8c4dee942769a0c, type: 3}
+      propertyPath: forgeUI
+      value: 
+      objectReference: {fileID: 434593590}
     - target: {fileID: 7693586619190859948, guid: 07dca9be3ae09394e8c4dee942769a0c, type: 3}
       propertyPath: m_Name
       value: ForgeWeaponUI (3)
@@ -5640,7 +5670,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 549322940}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 434593590}
+        m_TargetAssemblyTypeName: ForgeUI, Assembly-CSharp
+        m_MethodName: ClickWeaponChangeButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &549322940
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8248,7 +8290,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 813982045}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 434593590}
+        m_TargetAssemblyTypeName: ForgeUI, Assembly-CSharp
+        m_MethodName: ClickWeaponChangeButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &813982045
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9093,6 +9147,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4581653016877156417, guid: 07dca9be3ae09394e8c4dee942769a0c, type: 3}
+      propertyPath: forgeUI
+      value: 
+      objectReference: {fileID: 434593590}
     - target: {fileID: 7693586619190859948, guid: 07dca9be3ae09394e8c4dee942769a0c, type: 3}
       propertyPath: m_Name
       value: ForgeWeaponUI (10)
@@ -9190,6 +9248,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4581653016877156417, guid: 07dca9be3ae09394e8c4dee942769a0c, type: 3}
+      propertyPath: forgeUI
+      value: 
+      objectReference: {fileID: 434593590}
     - target: {fileID: 7693586619190859948, guid: 07dca9be3ae09394e8c4dee942769a0c, type: 3}
       propertyPath: m_Name
       value: ForgeWeaponUI (8)
@@ -11176,6 +11238,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4581653016877156417, guid: 07dca9be3ae09394e8c4dee942769a0c, type: 3}
+      propertyPath: forgeUI
+      value: 
+      objectReference: {fileID: 434593590}
     - target: {fileID: 7693586619190859948, guid: 07dca9be3ae09394e8c4dee942769a0c, type: 3}
       propertyPath: m_Name
       value: ForgeWeaponUI (2)
@@ -11988,6 +12054,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4581653016877156417, guid: 07dca9be3ae09394e8c4dee942769a0c, type: 3}
+      propertyPath: forgeUI
+      value: 
+      objectReference: {fileID: 434593590}
     - target: {fileID: 7693586619190859948, guid: 07dca9be3ae09394e8c4dee942769a0c, type: 3}
       propertyPath: m_Name
       value: ForgeWeaponUI (5)
@@ -13859,6 +13929,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4581653016877156417, guid: 07dca9be3ae09394e8c4dee942769a0c, type: 3}
+      propertyPath: forgeUI
+      value: 
+      objectReference: {fileID: 434593590}
     - target: {fileID: 7693586619190859948, guid: 07dca9be3ae09394e8c4dee942769a0c, type: 3}
       propertyPath: m_Name
       value: ForgeWeaponUI (4)
@@ -18494,6 +18568,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4581653016877156417, guid: 07dca9be3ae09394e8c4dee942769a0c, type: 3}
+      propertyPath: forgeUI
+      value: 
+      objectReference: {fileID: 434593590}
     - target: {fileID: 7693586619190859948, guid: 07dca9be3ae09394e8c4dee942769a0c, type: 3}
       propertyPath: m_Name
       value: ForgeWeaponUI (1)
@@ -19067,6 +19145,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a8a617196ce4e5428f239694f96148a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasWeapons: []
+  hasSubWeapons: []
   showWeapons: []
   hasWeaponCounts: 0
   content: {fileID: 1524711823}
@@ -19161,6 +19241,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4581653016877156417, guid: 07dca9be3ae09394e8c4dee942769a0c, type: 3}
+      propertyPath: forgeUI
+      value: 
+      objectReference: {fileID: 434593590}
     - target: {fileID: 7693586619190859948, guid: 07dca9be3ae09394e8c4dee942769a0c, type: 3}
       propertyPath: m_Name
       value: ForgeWeaponUI (6)
@@ -19695,6 +19779,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4581653016877156417, guid: 07dca9be3ae09394e8c4dee942769a0c, type: 3}
+      propertyPath: forgeUI
+      value: 
+      objectReference: {fileID: 434593590}
     - target: {fileID: 7693586619190859948, guid: 07dca9be3ae09394e8c4dee942769a0c, type: 3}
       propertyPath: m_Name
       value: ForgeWeaponUI (9)
@@ -19800,6 +19888,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4581653016877156417, guid: 07dca9be3ae09394e8c4dee942769a0c, type: 3}
+      propertyPath: forgeUI
+      value: 
+      objectReference: {fileID: 434593590}
     - target: {fileID: 7693586619190859948, guid: 07dca9be3ae09394e8c4dee942769a0c, type: 3}
       propertyPath: m_Name
       value: ForgeWeaponUI

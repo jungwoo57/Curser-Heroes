@@ -59,10 +59,10 @@ public class AoEFieldSkill : MonoBehaviour
             }
 
             // 보스 몬스터 처리
-            if (col.TryGetComponent(out BossBaseMonster boss))
-            {
-                boss.TakeDamage(info.damage);
-            }
+            //if (col.TryGetComponent(out BossBaseMonster boss))
+            //{
+            //    boss.TakeDamage(info.damage);
+            //}
         }
     }
 
