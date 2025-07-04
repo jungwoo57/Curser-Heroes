@@ -8,7 +8,7 @@ public class CursorWeapon : MonoBehaviour
     public LayerMask targetLayer;       //공격대상 설정
     public WeaponLife weaponLife;       // 분리된 목숨 관리 
     public WeaponUpgrade weaponUpgrade;      // 무기 레벨 관리
-
+    public SpriteRenderer weaponSprite;
     private Dictionary<BaseMonster, float> lastHitTimesBase = new Dictionary<BaseMonster, float>();
     private Dictionary<BossBaseMonster, float> lastHitTimesBoss = new Dictionary<BossBaseMonster, float>();
 
@@ -95,6 +95,7 @@ public class CursorWeapon : MonoBehaviour
     public void SetWeapon(WeaponData weaponData)     //외부에서 무기를 장착할 수 있게 해주는 초기화 함수
     {
         currentWeapon = weaponData;
+        weaponSprite.sprite = currentWeapon.weaponImage;
     }
 
     private void OnDrawGizmos()       //레인지 범위 시각효과(에디터 전용) 

@@ -8,7 +8,7 @@ public class WeaponUpgrade : MonoBehaviour
     public void Init(WeaponData weaponData)     //무기 장착시 초기화
     {
         currentWeapon = weaponData;          
-        weaponLevel = 0;                       //무기 초기 레벨은 0
+        weaponLevel = GameManager.Instance.mainEquipWeapon.level;                       //무기 초기 레벨은 0
     }
 
     public void Upgrade()             //무기 강화시 호출
