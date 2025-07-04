@@ -201,8 +201,8 @@ public class SkillManager : MonoBehaviour
         foreach (var monster in FindObjectsOfType<BaseMonster>())
             monsters.Add(monster.transform);
 
-        foreach (var boss in FindObjectsOfType<BossBaseMonster>())
-            monsters.Add(boss.transform);
+        //foreach (var boss in FindObjectsOfType<BossBaseMonster>())
+        //    monsters.Add(boss.transform);
 
         if (monsters.Count == 0)
             return;

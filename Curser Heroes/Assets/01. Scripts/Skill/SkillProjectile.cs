@@ -40,13 +40,13 @@ public class SkillProjectile : MonoBehaviour
         }
 
         // 보스 몬스터 감지
-        BossBaseMonster boss = other.GetComponent<BossBaseMonster>();
-        if (boss != null)
-        {
-            boss.TakeDamage(damage);
+        //BossBaseMonster boss = other.GetComponent<BossBaseMonster>();
+        //if (boss != null)
+        //{
+        //    boss.TakeDamage(damage);
 
-            if (destroyOnHit)
-                Destroy(gameObject);
-        }
+        //    if (destroyOnHit)
+        //        Destroy(gameObject);
+        //}
     }
 }
