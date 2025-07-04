@@ -1956,7 +1956,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 955848513}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.46807843
+  m_Size: 0.4680785
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4313,7 +4313,14 @@ MonoBehaviour:
   - {fileID: 510109189}
   - {fileID: 850584469}
   reinforceButton: {fileID: 105036001}
+  mainWeaponButton: {fileID: 0}
+  subWeaponButton: {fileID: 0}
+  isMain: 1
   selectWeapon:
+    data: {fileID: 0}
+    level: 0
+    bookMark: 0
+  selectSubWeapon:
     data: {fileID: 0}
     level: 0
     bookMark: 0
@@ -5284,9 +5291,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3c5de675841d1894f906beb96949b960, type: 2}
   - {fileID: 11400000, guid: 29c08a302b336cb4999431b9059938fb, type: 2}
   - {fileID: 11400000, guid: f96e6f2522ff2d344b6849023e1eb6f7, type: 2}
-  _hasSubWeapon:
-  - {fileID: 11400000, guid: a743b874776441044bf275c881e40cfd, type: 2}
-  - {fileID: 11400000, guid: 4a82d059c813e774998f2c9b4cb949eb, type: 2}
   _hasPartner: []
   _hasSkills:
   - {fileID: 11400000, guid: f04c834df1cebbd4e8ab409149d7e159, type: 2}
@@ -5311,11 +5315,24 @@ MonoBehaviour:
   - data: {fileID: 11400000, guid: ad89040aa703a48419f6395330ab660e, type: 2}
     level: 0
     bookMark: 0
+  ownedSubWeapons:
+  - data: {fileID: 11400000, guid: a743b874776441044bf275c881e40cfd, type: 2}
+    level: 0
+    bookMark: 0
+  - data: {fileID: 11400000, guid: 4a82d059c813e774998f2c9b4cb949eb, type: 2}
+    level: 0
+    bookMark: 0
+  - data: {fileID: 11400000, guid: 73586edf04a11e34ba24dc127036cb73, type: 2}
+    level: 0
+    bookMark: 0
   mainEquipWeapon:
     data: {fileID: 0}
     level: 0
     bookMark: 0
-  subEquipWeapon: {fileID: 0}
+  subEquipWeapon:
+    data: {fileID: 0}
+    level: 0
+    bookMark: 0
   selectSkills: []
   gold: 99999
 --- !u!4 &516545486
@@ -19067,6 +19084,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a8a617196ce4e5428f239694f96148a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasWeapons: []
+  hasSubWeapons: []
   showWeapons: []
   hasWeaponCounts: 0
   content: {fileID: 1524711823}

@@ -27,7 +27,7 @@ public class EquipInfoUI : MonoBehaviour
 
         if (GameManager.Instance.subEquipWeapon != null)
         {
-            subWeaponImage.sprite = GameManager.Instance.subEquipWeapon.weaponImage;
+            subWeaponImage.sprite = GameManager.Instance.subEquipWeapon.data.weaponImage;
         }
         //파트너 이미지 추후 추가
     }

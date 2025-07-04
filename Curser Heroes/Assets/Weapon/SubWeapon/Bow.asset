@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Bow
   m_EditorClassIdentifier: 
   weaponName: Bow
-  weaponImage: {fileID: 21300000, guid: 0f18a0f667d2b1f45aab57a92422fec0, type: 3}
+  weaponImage: {fileID: 21300000, guid: dfbb2891ae38ba94f9674b253a07af38, type: 3}
   weaponDesc: 
   baseDamage: 3
   damagePerLevel: 1.5
@@ -24,3 +24,6 @@ MonoBehaviour:
   speed: 2
   rotateWithDirection: 1
   projectilePrefab: {fileID: 6799365641447161135, guid: 50037e3df02511e4788bcf3f475c0d3c, type: 3}
+  projectileSpeed: 10
+  projectileMaxDistance: 8
+  rangeType: 0
