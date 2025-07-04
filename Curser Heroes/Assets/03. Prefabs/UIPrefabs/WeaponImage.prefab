@@ -203,10 +203,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponSprite: {fileID: 8273858870516984858}
-  bookmarkButton: {fileID: 6561233434317641212}
+  bookmarkImage: {fileID: 6561233434317641212}
   isBookmark: 0
-  data: {fileID: 0}
-  subData: {fileID: 0}
+  data:
+    data: {fileID: 0}
+    level: 0
+    bookMark: 0
+  subData:
+    data: {fileID: 0}
+    level: 0
+    bookMark: 0
   num: 0
 --- !u!114 &3224647385106294603
 MonoBehaviour:

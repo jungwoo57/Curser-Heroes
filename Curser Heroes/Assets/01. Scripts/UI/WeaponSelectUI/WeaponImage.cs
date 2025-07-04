@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class WeaponImage : MonoBehaviour
 {
     public Image weaponSprite;
-    public Image bookmarkButton; // 즐겨찾기 버튼
+    public Image bookmarkImage; // 즐겨찾기 체크모양
     public bool isBookmark;       // 북마크 체크// 이미지에 추후 합치기
     public OwnedWeapon data;
     public OwnedSubWeapon subData;
@@ -14,6 +14,14 @@ public class WeaponImage : MonoBehaviour
     public void WeaponUpdate(OwnedWeapon recieveData) // 매게변수 받아야 할 확률 높음
     {
         data = recieveData;
+        if (data.bookMark)
+        {
+            bookmarkImage.gameObject.SetActive(true);
+        }
+        else
+        {
+            bookmarkImage.gameObject.SetActive(false);
+        }
         subData = null;
         num = 0;
         Debug.Log("업데이트" + data);
