@@ -3,12 +3,12 @@
 public class WeaponUpgrade : MonoBehaviour
 {
     public WeaponData currentWeapon;           //무기 정보 확인
-    public int weaponLevel = 0;                 //현재 무기 레벨 확인
+    public int weaponLevel;                 //현재 무기 레벨 확인
     
     public void Init(WeaponData weaponData)     //무기 장착시 초기화
     {
         currentWeapon = weaponData;          
-        weaponLevel = GameManager.Instance.mainEquipWeapon.level;                       //무기 초기 레벨은 0
+        weaponLevel = GameManager.Instance.mainEquipWeapon.level;  
     }
 
     public void Upgrade()             //무기 강화시 호출

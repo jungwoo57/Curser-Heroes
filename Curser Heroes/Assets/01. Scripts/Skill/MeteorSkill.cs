@@ -11,7 +11,7 @@ public class MeteorSkill : MonoBehaviour
         damage = dmg;
         targetPosition = targetPos;
         // 시작 위치는 targetPosition의 오른쪽 위(사선방향), 예를 들어 y + 10f
-        transform.position = new Vector3(targetPos.x + 3, targetPos.y + 3f, targetPos.z);
+        transform.position = new Vector3(targetPos.x + 5f, targetPos.y + 5f, targetPos.z);
     }
 
     void Update()
