@@ -17,10 +17,8 @@ public class GameManager : MonoBehaviour
     }
     
 
-    [SerializeField] public List<WeaponData> allMainWeapons; // 모든 무기 원본
-    
-    //[SerializeField] private List<SubWeaponData> _hasSubWeapon; // 보유 보조무기
-    //public IReadOnlyList<SubWeaponData> hasSubWeapon => _hasSubWeapon;     // 다른 파일에서 보유 보조 무기 가져오기(수정 불가)
+     public List<WeaponData> allMainWeapons; // 모든 무기 원본
+     public List<SubWeaponData> allSubWeapons; // 모든 보조 무기 원본
     
     [SerializeField] private List<WeaponData> _hasPartner; // 보유 동료
     public IReadOnlyList<WeaponData> hasPartner => _hasPartner;     // 다른 파일에서 보유 동료 가져오기(수정 불가)
@@ -33,7 +31,6 @@ public class GameManager : MonoBehaviour
     
     public OwnedWeapon mainEquipWeapon;
     public OwnedSubWeapon subEquipWeapon;
-    //public SubWeaponData subEquipWeapon;
     public List<SkillData> selectSkills;    //선택한 스킬(스테이지에 등장할 스킬), 스킬 갯수가 정해져있어서 배열로 변경도 고려
     
     [SerializeField]private int gold = 9999;
