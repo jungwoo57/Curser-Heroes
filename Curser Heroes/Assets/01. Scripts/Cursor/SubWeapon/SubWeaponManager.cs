@@ -9,10 +9,10 @@ public class SubWeaponManager : MonoBehaviour
 
     void Update()
     {
-        if (currentCooldown > 0f)    
+        if (currentCooldown > 0f)
             currentCooldown -= Time.deltaTime;     //쿨타임이 남아있다면 프레임마다 감소
 
-        if (Input.GetMouseButtonDown(0) && CanUseSubWeapon())    
+        if (Input.GetMouseButtonDown(0) && CanUseSubWeapon())
         {
             UseSubWeapon();
         }              //마우스 좌클릭시 보조무기를 사용할 수 있는지 체크하고 사용
@@ -40,7 +40,7 @@ public class SubWeaponManager : MonoBehaviour
     void ShootToNearestEnemy()   //자동조준 발사
     {
         Vector3 cursorPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);   //메인카메라에서 커서의 좌표
-        cursorPos.z = 0f;     
+        cursorPos.z = 0f;
 
         Monster target = FindNearestMonster(cursorPos);    //커서 주변에서 가장 가까운 몬스터 탐색
         if (target == null)
@@ -49,13 +49,13 @@ public class SubWeaponManager : MonoBehaviour
             return;
         }
 
-        Vector3 targetPos = target.transform.position;    //타겟 위치 설정
+       
 
         GameObject proj = Instantiate(equippedSubWeapon.projectilePrefab, cursorPos, Quaternion.identity);   //투사체 프리팹을 커서 위치에 생성
         SubProjectile sub = proj.GetComponent<SubProjectile>();    //생성된 투사체 프리팹 가져오기
         if (sub != null)
         {
-            sub.Init(equippedSubWeapon, targetPos);   //타켓 좌표와 장착된 보조무기 정보를 넘기고 초기화
+            sub.Init(equippedSubWeapon, target);   //타켓 좌표와 장착된 보조무기 정보를 넘기고 초기화
         }
         else
         {
@@ -76,19 +76,23 @@ public class SubWeaponManager : MonoBehaviour
 
     Monster FindNearestMonster(Vector3 from)     //가장 가까운 몬스터 탐색
     {
-        Monster[] monsters = FindObjectsOfType<Monster>();    
+        Collider2D[] hits = Physics2D.OverlapCircleAll(from, 20f, monsterLayer); // 범위는 적절히 조정
         Monster nearest = null;
         float minDist = Mathf.Infinity;
 
 
 
-        foreach (var m in monsters)
+        foreach (var hit in hits)
         {
-            float dist = Vector2.Distance(from, m.transform.position);
-            if (dist < minDist)
+            Monster m = hit.GetComponent<Monster>();
+            if (m != null && !m.IsDead)
             {
-                minDist = dist;
-                nearest = m;
+                float dist = Vector2.Distance(from, m.transform.position);
+                if (dist < minDist)
+                {
+                    minDist = dist;
+                    nearest = m;
+                }
             }
         }
 

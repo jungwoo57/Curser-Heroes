@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FireBomb
   m_EditorClassIdentifier: 
   weaponName: Butter
-  weaponImage: {fileID: 21300000, guid: 5d7f2bb155758bd42b033153c300b8b7, type: 3}
+  weaponImage: {fileID: 21300000, guid: 35781731b5eb98a41b56fa6263a8c190, type: 3}
   weaponDesc: 
   baseDamage: 2
   damagePerLevel: 1.65
@@ -24,3 +24,6 @@ MonoBehaviour:
   speed: 1
   rotateWithDirection: 0
   projectilePrefab: {fileID: 0}
+  projectileSpeed: 10
+  projectileMaxDistance: 8
+  rangeType: 0

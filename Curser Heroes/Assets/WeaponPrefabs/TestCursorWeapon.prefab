@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 1642492000538173402}
   - component: {fileID: 2591964270934495513}
   - component: {fileID: -4036853144578566046}
-  - component: {fileID: -1765991879870008054}
   - component: {fileID: 5354276171672231563}
   - component: {fileID: 5797237286889915505}
   - component: {fileID: 5828419350783545557}
@@ -136,18 +135,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentWeapon: {fileID: 0}
   weaponLevel: 0
---- !u!114 &-1765991879870008054
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8496301729986911370}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37795c23a1a067d4c9bc21edda5219f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &5354276171672231563
 MonoBehaviour:
   m_ObjectHideFlags: 0
