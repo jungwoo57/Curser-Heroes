@@ -20,14 +20,14 @@ public class EquipInfoUI : MonoBehaviour
 
     public void EquipUIUpdate()
     {
-        if (GameManager.Instance.mainEquipWeapon != null)
+        if (GameManager.Instance.mainEquipWeapon.data != null)
         {
             mainWeaponImage.sprite = GameManager.Instance.mainEquipWeapon.data.weaponImage;
         }
 
-        if (GameManager.Instance.subEquipWeapon != null)
+        if (GameManager.Instance.subEquipWeapon.data != null)
         {
-            subWeaponImage.sprite = GameManager.Instance.subEquipWeapon.weaponImage;
+            subWeaponImage.sprite = GameManager.Instance.subEquipWeapon.data.weaponImage;
         }
         //파트너 이미지 추후 추가
     }

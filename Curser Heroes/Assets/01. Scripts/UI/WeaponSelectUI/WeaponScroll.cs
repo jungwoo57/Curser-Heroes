@@ -4,8 +4,8 @@ using UnityEngine.UI;
 
 public class WeaponScroll : MonoBehaviour
 {
-    public IReadOnlyList<OwnedWeapon> hasWeapons; // 매니저에 있는 무기 리스트 불러오기
-    public IReadOnlyList<SubWeaponData> hasSubWeapons;
+    public List<OwnedWeapon> hasWeapons; // 매니저에 있는 무기 리스트 불러오기
+    public List<OwnedSubWeapon> hasSubWeapons;
     public List<WeaponImage> showWeapons = new List<WeaponImage>(); // 스크롤에서 보여줄 무기들
     public int hasWeaponCounts;
     public Transform content;   // content아래 생성 하기위해서 부모 설정
@@ -53,8 +53,8 @@ public class WeaponScroll : MonoBehaviour
                 break;
 
             case "sub":
-                hasSubWeapons = GameManager.Instance.hasSubWeapon; //매니저에 있는 서브리스트 가져오기
-                hasWeaponCounts = GameManager.Instance.hasSubWeapon.Count;
+                hasSubWeapons = GameManager.Instance.ownedSubWeapons; //매니저에 있는 서브리스트 가져오기
+                hasWeaponCounts = GameManager.Instance.ownedSubWeapons.Count;
                 if (hasSubWeapons.Count > scrollCount) // 아이템이 일정 갯수 이하이면 스크롤 안되게 하기
                 {
                     scrollRect.vertical = true;

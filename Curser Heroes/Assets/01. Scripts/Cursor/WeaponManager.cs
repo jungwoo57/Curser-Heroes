@@ -22,6 +22,7 @@ public class WeaponManager : MonoBehaviour
     }
     void Start()
     {
+        selectedWeapon = GameManager.Instance.mainEquipWeapon.data;
         EquipWeapon(selectedWeapon);  // 게임 시작 시 한번만 호출됨
     }
 
@@ -30,7 +31,7 @@ public class WeaponManager : MonoBehaviour
         cursorWeapon.SetWeapon(weaponData);   
         weaponLife.Init(weaponData);        //무기 목숨 초기화
         weaponUpgrade.Init(weaponData);     //무기 레벨 초기화
-
+        
         Debug.Log($"무기 장착 완료: {weaponData.weaponName}");
     }
 

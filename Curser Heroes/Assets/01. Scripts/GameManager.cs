@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -19,10 +17,8 @@ public class GameManager : MonoBehaviour
     }
     
 
-    [SerializeField] public List<WeaponData> allMainWeapons; // 모든 무기 원본
-    
-    [SerializeField] private List<SubWeaponData> _hasSubWeapon; // 보유 보조무기
-    public IReadOnlyList<SubWeaponData> hasSubWeapon => _hasSubWeapon;     // 다른 파일에서 보유 보조 무기 가져오기(수정 불가)
+     public List<WeaponData> allMainWeapons; // 모든 무기 원본
+     public List<SubWeaponData> allSubWeapons; // 모든 보조 무기 원본
     
     [SerializeField] private List<WeaponData> _hasPartner; // 보유 동료
     public IReadOnlyList<WeaponData> hasPartner => _hasPartner;     // 다른 파일에서 보유 동료 가져오기(수정 불가)
@@ -30,11 +26,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<SkillData> _hasSkills;  // 플레이어가 해금하여 보유하고 있는 스킬
     public IReadOnlyList<SkillData> hasSkills => _hasSkills;
     
-    [SerializeField] public List<OwnedWeapon> ownedWeapons;   // 소유 메인 무기
-    //[SerializeField] public List<>                          // 소유 보조 무기
+    [SerializeField]public List<OwnedWeapon> ownedWeapons;   // 소유 메인 무기
+    [SerializeField]public List<OwnedSubWeapon> ownedSubWeapons;    // 소유 보조 무기
     
     public OwnedWeapon mainEquipWeapon;
-    public SubWeaponData subEquipWeapon;
+    public OwnedSubWeapon subEquipWeapon;
     public List<SkillData> selectSkills;    //선택한 스킬(스테이지에 등장할 스킬), 스킬 갯수가 정해져있어서 배열로 변경도 고려
     
     [SerializeField]private int gold = 9999;
@@ -94,7 +90,7 @@ public class GameManager : MonoBehaviour
         mainEquipWeapon= equipData;       // 메인 무기 장착만 작성 추후 보조 동료 추가
     }
     
-    public void EquipWeapon(SubWeaponData equipData)
+    public void EquipWeapon(OwnedSubWeapon equipData)
     {
         if (equipData == null)
         {
