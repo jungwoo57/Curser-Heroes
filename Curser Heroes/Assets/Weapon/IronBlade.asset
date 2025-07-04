@@ -13,6 +13,10 @@ MonoBehaviour:
   m_Name: IronBlade
   m_EditorClassIdentifier: 
   weaponName: IronBlade
+  weaponImage: {fileID: 21300000, guid: b44c6e47ef894514c8aa56b440b87c67, type: 3}
+  weaponDesc: 
+  level: 0
+  upgradeCost: 40
   baseDamage: 5
   damagePerLevel: 3
   attackCooldown: 0.5

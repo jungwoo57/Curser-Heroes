@@ -11,6 +11,9 @@ public abstract class SubProjectile : MonoBehaviour
         targetPosition = targetPos;
     }
 
+
+
+
     protected void ApplyDamage(Monster monster)
     {
         int dmg = Mathf.RoundToInt(weaponData.GetDamage());

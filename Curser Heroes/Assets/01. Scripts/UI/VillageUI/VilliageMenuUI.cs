@@ -1,6 +1,5 @@
-using System;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class VilliageMenuUI : MonoBehaviour
 {
     public GameObject settingPanel;
@@ -27,6 +26,7 @@ public class VilliageMenuUI : MonoBehaviour
 
     public void ClickTitleButton()
     {
+        SceneManager.LoadScene("TitleSceneTest");
         Debug.Log("타이틀화면으로 돌아가기");   // 추후 타이틀씬으로 변경
     }
     

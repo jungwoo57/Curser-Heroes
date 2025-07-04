@@ -54,7 +54,7 @@ public class VillageUI : MonoBehaviour
 
     public void OpenForgeEntryPanel()
     {
-        Debug.Log("강화소 판넬 켜기");
+        forgeEntryPanel.SetActive(true);
     }
 
     public void OpenMenuPanel()

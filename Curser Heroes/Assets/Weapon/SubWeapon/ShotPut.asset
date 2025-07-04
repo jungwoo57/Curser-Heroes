@@ -10,13 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a595bcdfd8ab3e341af4dac3e68e0bbc, type: 3}
-  m_Name: SubPunch
+  m_Name: ShotPut
   m_EditorClassIdentifier: 
   weaponName: SubPunch
+  weaponImage: {fileID: 0}
+  weaponDesc: 
   baseDamage: 1
   damagePerLevel: 2
   cooldown: 0.5
-  weaponType: 1
   effect: 0
-  rangeType: 1
+  weaponType: 1
+  rangeShape: 0
+  speed: 2
+  rotateWithDirection: 0
   projectilePrefab: {fileID: 0}

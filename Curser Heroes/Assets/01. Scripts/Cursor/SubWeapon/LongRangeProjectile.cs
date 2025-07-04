@@ -2,21 +2,33 @@
 
 public class LongRangeProjectile : SubProjectile
 {
-    public float speed = 10f;
+    private Rigidbody2D rb;
 
-    void Update()
+    void Start()
     {
-        Vector3 dir = (targetPosition - transform.position).normalized;
-        transform.position += dir * speed * Time.deltaTime;
+        rb = GetComponent<Rigidbody2D>();
+
+        Vector2 dir = (targetPosition - transform.position).normalized;
+        float speed = SubWeaponUtils.GetSpeed(weaponData.speed);
+        rb.velocity = dir * speed;
+
+        // 회전 유무
+        if (weaponData.rotateWithDirection)
+            transform.right = dir;
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Monster"))
         {
-            Monster m = other.GetComponent<Monster>();
-            ApplyDamage(m);
-            ApplyEffect(m);
+            Monster monster = other.GetComponent<Monster>();
+
+            if (monster != null)
+            {
+                ApplyDamage(monster);
+                ApplyEffect(monster);
+            }
+
             Destroy(gameObject);
         }
     }
