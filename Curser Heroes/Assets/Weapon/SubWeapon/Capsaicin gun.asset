@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Capsaicin gun
   m_EditorClassIdentifier: 
   weaponName: SmallCarot
-  weaponImage: {fileID: 0}
+  weaponImage: {fileID: 21300000, guid: de26be81c08de9f418302e72b69efce1, type: 3}
   weaponDesc: 
   baseDamage: 4
   damagePerLevel: 1.4
@@ -24,3 +24,6 @@ MonoBehaviour:
   speed: 1
   rotateWithDirection: 0
   projectilePrefab: {fileID: 8863693051383856762, guid: baa01d2f56b25754fa95a48ba4d486db, type: 3}
+  projectileSpeed: 10
+  projectileMaxDistance: 8
+  rangeType: 0

@@ -2,6 +2,6 @@
 {
     public void Execute(float duration)
     {
-        EnemyManager.Instance?.StunAllEnemies(duration);
+        //EnemyManager.Instance?.StunAllEnemies(duration);
     }
 }

@@ -1,6 +1,6 @@
 ﻿public interface IEffect
 {
-    void Apply(Monster target);
-    void Tick(float deltaTime);
+    void Apply(BaseMonster target);
+    void Update(float deltaTime);
     bool IsFinished { get; }
 }

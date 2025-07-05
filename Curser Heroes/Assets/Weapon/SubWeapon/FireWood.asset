@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a595bcdfd8ab3e341af4dac3e68e0bbc, type: 3}
-  m_Name: Bow
+  m_Name: FireWood
   m_EditorClassIdentifier: 
-  weaponName: Bow
-  weaponImage: {fileID: 21300000, guid: dfbb2891ae38ba94f9674b253a07af38, type: 3}
+  weaponName: FireWood
+  weaponImage: {fileID: 21300000, guid: bbc6fc2635d7b504b8cc2f04e3e0fbc7, type: 3}
   weaponDesc: 
-  baseDamage: 3
+  baseDamage: 5
   damagePerLevel: 1.5
   cooldown: 0.5
   effect: 0
   weaponType: 1
   rangeShape: 0
-  speed: 2
-  rotateWithDirection: 1
-  projectilePrefab: {fileID: 6799365641447161135, guid: 50037e3df02511e4788bcf3f475c0d3c, type: 3}
+  speed: 0
+  rotateWithDirection: 0
+  projectilePrefab: {fileID: 0}
   projectileSpeed: 10
   projectileMaxDistance: 8
   rangeType: 0
