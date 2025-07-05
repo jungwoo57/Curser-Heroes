@@ -14,6 +14,7 @@ public class WaveManager : MonoBehaviour
     public Spawner spawner;
     public static WaveManager Instance { get; private set; }
 
+    public int clearGold;
     //public PoolSpawnerTest spawner; // Inspector에서 연결 필요
 
     public WaveEntry currentWaveData;
@@ -30,6 +31,7 @@ public class WaveManager : MonoBehaviour
         }
 
         Instance = this;
+        gameManager  = GameManager.Instance;
     }
 
     [ContextMenu("스폰시키기")]
@@ -179,6 +181,7 @@ public class WaveManager : MonoBehaviour
     void OnWaveCleared()
     {
         Debug.Log("[WaveManager] OnWaveCleared 호출됨");
+        clearGold = currentWaveData.CalculateGoldReward();
         gameManager.AddGold(currentWaveData.CalculateGoldReward());
         int? jewel = currentWaveData.TryGetJewelReward();
         if (jewel.HasValue)
