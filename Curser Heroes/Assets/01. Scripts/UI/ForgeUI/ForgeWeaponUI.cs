@@ -107,6 +107,10 @@ public class ForgeWeaponUI : MonoBehaviour
                 forgeUI.selectWeapon = hasData;
                 forgeUI.UIUpdate();
             }
+            else
+            {
+                
+            }
         }
         else
         {

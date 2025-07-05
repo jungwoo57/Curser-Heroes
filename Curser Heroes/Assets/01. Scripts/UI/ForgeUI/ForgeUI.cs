@@ -21,7 +21,7 @@ public class ForgeUI : MonoBehaviour
     public Button reinforceButton;
     public Button mainWeaponButton;
     public Button subWeaponButton;
-
+    public Button unlockButton;
     public bool isMain = true;
     
     public OwnedWeapon selectWeapon;
@@ -37,7 +37,6 @@ public class ForgeUI : MonoBehaviour
     {
         if (GameManager.Instance.mainEquipWeapon.data == null)     //장착 무기 없으면 1번 착용
         {
-            Debug.Log("무기가없긴함");
             selectWeapon = GameManager.Instance.ownedWeapons[0];
             selectSubWeapon = GameManager.Instance.ownedSubWeapons[0];
         }
@@ -46,7 +45,6 @@ public class ForgeUI : MonoBehaviour
             selectWeapon = GameManager.Instance.mainEquipWeapon;
             selectSubWeapon = GameManager.Instance.subEquipWeapon;
         }
-
         UIUpdate();
         UpdateSelectUI();
     }
@@ -62,6 +60,10 @@ public class ForgeUI : MonoBehaviour
         Debug.Log("무기강화");       //weapondata에 레벨이 존재해야 할 것 같음
     }
 
+    public void OnClickUnlockWeapon()
+    {
+        
+    }
     public void UIUpdate()
     {
         if (isMain)
@@ -137,5 +139,11 @@ public class ForgeUI : MonoBehaviour
         
         UIUpdate();
         UpdateSelectUI();
+    }
+
+    public void UnlockUI()
+    {
+        unlockButton.gameObject.SetActive(true);
+        reinforceButton.gameObject.SetActive(false);
     }
 }

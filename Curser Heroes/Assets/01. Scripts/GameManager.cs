@@ -124,4 +124,9 @@ public class GameManager : MonoBehaviour
             Debug.Log("해당 데이터 없음");
         }
     }
+
+    public void UnlockWeapon()
+    {
+        
+    }
 }
