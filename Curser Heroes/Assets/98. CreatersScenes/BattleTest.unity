@@ -5365,30 +5365,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allMainWeapons: []
-<<<<<<< HEAD
-  _hasSubWeapon: []
-  _hasPartner: []
-  _hasSkills: []
-  ownedWeapons: []
-=======
   allSubWeapons: []
   _hasPartner: []
   _hasSkills: []
   ownedWeapons: []
   ownedSubWeapons: []
->>>>>>> Develope
+
   mainEquipWeapon:
     data: {fileID: 0}
     level: 0
     bookMark: 0
-<<<<<<< HEAD
-  subEquipWeapon: {fileID: 0}
-=======
   subEquipWeapon:
     data: {fileID: 0}
     level: 0
     bookMark: 0
->>>>>>> Develope
   selectSkills: []
   gold: 9999
 --- !u!4 &2139855846
