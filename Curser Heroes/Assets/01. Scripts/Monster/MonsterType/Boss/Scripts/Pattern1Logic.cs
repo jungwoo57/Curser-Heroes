@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+//
 public class Pattern1Logic : PatternLogicBase
 {
     [Header("Pattern1 부모 오브젝트 (Pattern 1)")]
