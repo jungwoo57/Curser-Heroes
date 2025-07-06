@@ -26,6 +26,9 @@ public class ForgeUI : MonoBehaviour
     
     public OwnedWeapon selectWeapon;
     public OwnedSubWeapon selectSubWeapon;
+	public WeaponData selectData;
+	public SubWeaponData selectSubData;
+
     
     private void OnEnable()
     {
@@ -39,6 +42,8 @@ public class ForgeUI : MonoBehaviour
         {
             selectWeapon = GameManager.Instance.ownedWeapons[0];
             selectSubWeapon = GameManager.Instance.ownedSubWeapons[0];
+            selectData = selectWeapon.data;
+            selectSubData = selectSubWeapon.data;
         }
         else
         {
@@ -62,20 +67,36 @@ public class ForgeUI : MonoBehaviour
 
     public void OnClickUnlockWeapon()
     {
-        
+        if (isMain)
+        {
+            GameManager.Instance.UnlockWeapon(selectData);
+        }
     }
     public void UIUpdate()
     {
         if (isMain)
         {
-            weaponName.text = selectWeapon.data.weaponName + "   (" + (selectWeapon.level + 1) + ")";
-            weaponDesc.text = selectWeapon.data.weaponDesc;
-            weaponAtk.text = ("공격력 : ") + selectWeapon.levelDamage.ToString();
-            weaponHp.text = ("체력 : ") + selectWeapon.data.maxLives.ToString();
+            weaponDesc.text = selectData.weaponDesc;
+            weaponHp.text = ("체력 : ") + selectData.maxLives.ToString();
             hasGoldText.text = GameManager.Instance.GetGold().ToString();
-            useGoldText.text = selectWeapon.data.upgradeCost.ToString();
-            weaponImage.sprite = selectWeapon.data.weaponImage;
+            useGoldText.text = selectData.upgradeCost.ToString();
+            weaponImage.sprite = selectData.weaponImage;
+            if (selectWeapon != null)
+            {
+                weaponAtk.text = ("공격력 : ") + selectWeapon.levelDamage.ToString();
+                weaponName.text = selectData.weaponName + "   (" + (selectWeapon.level + 1) + ")";
+            }
+            else
+            {
+                weaponAtk.text = ("공격력 : ") + selectData.baseDamage.ToString();
+                weaponName.text = selectData.weaponName;
+            }
+            if (GameManager.Instance.GetGold() < selectData.upgradeCost)
+            {
+                reinforceButton.interactable = false;
+            }
         }
+            
         else
         {
             weaponName.text = selectSubWeapon.data.weaponName + "   (" + (selectWeapon.level + 1) + ")";
@@ -85,10 +106,7 @@ public class ForgeUI : MonoBehaviour
             hasGoldText.text = GameManager.Instance.GetGold().ToString();
             useGoldText.text = selectWeapon.data.upgradeCost.ToString();
             weaponImage.sprite = selectSubWeapon.data.weaponImage;
-        }
-        if (GameManager.Instance.GetGold() < selectWeapon.data.upgradeCost)
-        {
-            reinforceButton.interactable = false;
+            
         }
     }
     
@@ -140,10 +158,5 @@ public class ForgeUI : MonoBehaviour
         UIUpdate();
         UpdateSelectUI();
     }
-
-    public void UnlockUI()
-    {
-        unlockButton.gameObject.SetActive(true);
-        reinforceButton.gameObject.SetActive(false);
-    }
+    
 }
