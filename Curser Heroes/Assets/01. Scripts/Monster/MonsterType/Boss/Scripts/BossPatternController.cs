@@ -4,9 +4,7 @@ using System.Collections.Generic;
 
 public class BossPatternController : MonoBehaviour
 {   
-    public BossData data;
-
-    public PatternLogicBase[] patternLogics;   // 인스펙터에서 순서대로 연결
+    public BossData data;                  
 
     private Animator animator;
     public BossPatternDamage[] patternDamage;  // 히트박스 스크립트 배열
@@ -52,68 +50,30 @@ public class BossPatternController : MonoBehaviour
                 continue;
             }
 
-            //패턴 중 하나를 랜덤 선택
+            // 가능한 패턴 중 하나를 랜덤 선택
             int randIdx = available[Random.Range(0, available.Count)];
             string trigger = "Pattern" + (randIdx + 1);
 
-           
+            // 히트박스 활성화/비활성화
             foreach (var d in patternDamage) d.Deactivate();
             if (randIdx < patternDamage.Length)
-                   patternDamage[randIdx].Activate();
+                patternDamage[randIdx].Activate();
 
+            // 애니메이터 트리거 발동
             animator.SetTrigger(trigger);
 
-            if (patternLogics != null && randIdx < patternLogics.Length && patternLogics[randIdx] != null)
-            {
-                // 각 패턴 로직 스크립트의 Execute() 코루틴을 실행
-                yield return StartCoroutine(patternLogics[randIdx].Execute(this));
-            }
+            //// 6) 선택된 패턴의 쿨타임 설정
+            //float cd = data.patternCooldown[randIdx];
+            //nextAvailableTime[randIdx] = Time.time + cd;
 
-            //애니메이션 재생 완료까지 대기
-            yield return WaitForAnimationEnd(trigger);
-            // 히트박스 끄기
-            foreach (var d in patternDamage) d.Deactivate();
+            //// 7) 쿨타임만큼 대기 (패턴 재생 시간 + 추가 대기)
+            //yield return new WaitForSeconds(0);
 
-            animator.SetTrigger("BossIdle");
+            //// 8) 히트박스 비활성화, Idle 복귀
+            //if (randIdx < patternDamage.Length)
+            //    patternDamage[randIdx].Deactivate();
+            //animator.SetTrigger("BossIdle");
 
-            // 공용 쿨타임만큼 대기 
-            yield return new WaitForSeconds(data.allpatternCooldown);
-
-            // 9) 이번 패턴의 다음 실행 가능 시간 갱신
-            nextAvailableTime[randIdx] = Time.time + data.patternCooldown[randIdx];
         }
     }
-
-
-    // 특정 애니메이션 상태가 끝날 때까지 대기하는 유틸
-    private IEnumerator WaitForAnimationEnd(string stateName, float timeout = 5f)
-    {
-        int layer = 0;
-        float start = Time.time;
-
-        // 1) 상태 진입 대기
-        while (!animator.GetCurrentAnimatorStateInfo(layer).IsName(stateName))
-        {
-            if (Time.time - start > timeout)
-            {                
-                yield break;
-            }
-            yield return null;
-        }
-
-        // 2) 재생 완료 대기
-        while (animator.GetCurrentAnimatorStateInfo(layer).normalizedTime < 1f)
-        {
-            if (Time.time - start > timeout)
-            {
-               
-                break;
-            }
-            yield return null;
-        }
-    }   
-
 }
-    
-
-
