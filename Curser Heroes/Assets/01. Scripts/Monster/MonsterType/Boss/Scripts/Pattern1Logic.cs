@@ -1,10 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-/// <summary>
-/// Pattern1 하위 자식들을 순차적으로 켜고,
-/// 마지막에 한 번에 모두 끄는 로직입니다.
-/// </summary>
 public class Pattern1Logic : PatternLogicBase
 {
     [Header("Pattern1 부모 오브젝트 (Pattern 1)")]
