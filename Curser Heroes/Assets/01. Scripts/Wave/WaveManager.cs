@@ -16,7 +16,7 @@ public class WaveManager : MonoBehaviour
 
     //public PoolSpawnerTest spawner; // Inspector에서 연결 필요
 
-    private WaveEntry currentWaveData;
+    public WaveEntry currentWaveData;
     private int currentWaveIndex = 0;
     private List<GameObject> spawnedMonsters = new List<GameObject>();
     private bool waveCleared = false; // 중복 웨이브 클리어 방지
@@ -55,6 +55,7 @@ public class WaveManager : MonoBehaviour
         }
 
         Debug.Log($"웨이브 시작: {currentWaveData.wave}");
+        FindObjectOfType<BattleUI>()?.TextUpdate();
 
         var spawnQueue = WaveBuilder.BuildWaveEntry(currentWaveData, waveGroupData.globalMonsterPool);
         SpawnMonsters(spawnQueue);

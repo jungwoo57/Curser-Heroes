@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CursorWeapon : MonoBehaviour
@@ -7,9 +8,9 @@ public class CursorWeapon : MonoBehaviour
     public LayerMask targetLayer;       //공격대상 설정
     public WeaponLife weaponLife;       // 분리된 목숨 관리 
     public WeaponUpgrade weaponUpgrade;      // 무기 레벨 관리
-
+    public SpriteRenderer weaponSprite;
     private Dictionary<BaseMonster, float> lastHitTimesBase = new Dictionary<BaseMonster, float>();
-    private Dictionary<BossBaseMonster, float> lastHitTimesBoss = new Dictionary<BossBaseMonster, float>();
+   
 
     //공격 쿨타임을 위해 몬스터 별로 마지막 공격한 시간을 저장, 몬스터 마다 각각 쿨타임을 적용할 수 있다.
 
@@ -54,31 +55,47 @@ public class CursorWeapon : MonoBehaviour
                     monster.TakeDamage(Mathf.RoundToInt(damage));
                     AudioManager.Instance.PlayHitSound(HitType.Cursor);
                     lastHitTimesBase[monster] = Time.time;
+
+                    TryTriggerMeteorSkill();
                 }
                 continue;
             }
 
             // 보스 몬스터 감지
-            BossBaseMonster boss = hit.GetComponent<BossBaseMonster>();
-            if (boss != null)
-            {
-                if (!lastHitTimesBoss.TryGetValue(boss, out float lastHitTime))
-                    lastHitTime = 0f;
+            //BossBaseMonster boss = hit.GetComponent<BossBaseMonster>();
+            //if (boss != null)
+            //{
+            //    if (!lastHitTimesBoss.TryGetValue(boss, out float lastHitTime))
+            //        lastHitTime = 0f;
 
-                if (Time.time - lastHitTime >= cooldown)
-                {
-                    boss.TakeDamage(Mathf.RoundToInt(damage));
-                    AudioManager.Instance.PlayHitSound(HitType.Cursor);
-                    lastHitTimesBoss[boss] = Time.time;
-                }
-            }
+            //    if (Time.time - lastHitTime >= cooldown)
+            //    {
+            //        boss.TakeDamage(Mathf.RoundToInt(damage));
+            //        AudioManager.Instance.PlayHitSound(HitType.Cursor);
+            //        lastHitTimesBoss[boss] = Time.time;
+
+            //        TryTriggerMeteorSkill();
+            //    }
+            //}
         }
 
 
     }
+    private void TryTriggerMeteorSkill()
+    {
+        var skillManager = FindObjectOfType<SkillManager>();
+        if (skillManager == null) return;
+
+        var meteorSkill = skillManager.ownedSkills.FirstOrDefault(s => s.skill.skillName == "별동별");
+        if (meteorSkill != null)
+        {
+            skillManager.TrySpawnMeteorSkill(meteorSkill);
+        }
+    }
     public void SetWeapon(WeaponData weaponData)     //외부에서 무기를 장착할 수 있게 해주는 초기화 함수
     {
         currentWeapon = weaponData;
+        weaponSprite.sprite = currentWeapon.weaponImage;
     }
 
     private void OnDrawGizmos()       //레인지 범위 시각효과(에디터 전용) 

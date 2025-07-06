@@ -2,20 +2,29 @@
 {
     private float duration = 2f;
     private float timer = 0f;
-    private Monster target;
+    private BaseMonster target;
+    private bool hasStunned = false;
 
-    public void Apply(Monster target)
+    public void Apply(BaseMonster target)
     {
         this.target = target;
-     // target.Stun();
+        if (target != null && !target.IsDead)
+        {
+            target.Stun();   
+            hasStunned = true;
+        }
     }
 
-    public void Tick(float deltaTime)
+    public void Update(float deltaTime)
     {
+        if (target == null || target.IsDead) return;
+
         timer += deltaTime;
-        if (IsFinished)
+
+        if (IsFinished && hasStunned)
         {
-        //  target.UnStun();
+            target.UnStun();   
+            hasStunned = false;
         }
     }
 
