@@ -5723,10 +5723,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4a82d059c813e774998f2c9b4cb949eb, type: 2}
   - {fileID: 11400000, guid: 73586edf04a11e34ba24dc127036cb73, type: 2}
   _hasPartner: []
-  _hasSkills:
+  allSkills:
   - {fileID: 11400000, guid: f04c834df1cebbd4e8ab409149d7e159, type: 2}
-  - {fileID: 11400000, guid: 72bfdbd50ec5c254cbb3f8147cafd490, type: 2}
   - {fileID: 11400000, guid: 703781ae4a9d084438325b0dee1e77e3, type: 2}
+  - {fileID: 11400000, guid: 72bfdbd50ec5c254cbb3f8147cafd490, type: 2}
   - {fileID: 11400000, guid: 08a5e69e77ea9894ea498f742f018950, type: 2}
   - {fileID: 11400000, guid: 0300678097c7bd64784f86957e42362f, type: 2}
   - {fileID: 11400000, guid: c3582d5204fdb7442a57f6be865a232b, type: 2}
@@ -5736,6 +5736,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cafc72613b41a6c4cb74bb8eda7e73d8, type: 2}
   - {fileID: 11400000, guid: 62a3a2eee2d2a4e468393fadffa4afaa, type: 2}
   - {fileID: 11400000, guid: 0104d9de62535264dacb7c6ecde70cdc, type: 2}
+  _hasSkills: []
+  selectSkills: []
+  skillPool: []
   ownedWeapons:
   - data: {fileID: 11400000, guid: 039fe819971c8b74cb9cf96f22319f8a, type: 2}
     level: 0
@@ -5761,7 +5764,6 @@ MonoBehaviour:
     data: {fileID: 0}
     level: 0
     bookMark: 0
-  selectSkills: []
   gold: 99999
 --- !u!4 &516545486
 Transform:
