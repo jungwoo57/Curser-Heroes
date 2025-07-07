@@ -7,6 +7,7 @@ public class WeaponData : ScriptableObject
     public Sprite weaponImage;
     public string weaponDesc;
     public int upgradeCost;
+    public int unlockCost;
     
     [Header("공격력 관련")]
     public float baseDamage = 10;     

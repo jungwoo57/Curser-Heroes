@@ -56,24 +56,41 @@ public class ForgeUI : MonoBehaviour
     
     public void OnClickReinforceButton()
     {
-        if (GameManager.Instance.GetGold() >= selectWeapon.data.upgradeCost)
+        if (isMain)
         {
-            GameManager.Instance.UpgradeWeapon(selectWeapon.data);
-            UIUpdate();
+            if (GameManager.Instance.GetGold() >= selectWeapon.data.upgradeCost)
+            {
+                GameManager.Instance.UpgradeWeapon(selectWeapon.data);
+                UIUpdate();
+            }
+            Debug.Log("무기강화");       //we
         }
-        
-        Debug.Log("무기강화");       //weapondata에 레벨이 존재해야 할 것 같음
+        else
+        {
+            if (GameManager.Instance.GetGold() >= selectWeapon.data.upgradeCost)
+            {
+                GameManager.Instance.UpgradeWeapon(selectWeapon.data);
+                UIUpdate();
+            }
+            Debug.Log("보조무기강화");    
+        } //weapondata에 레벨이 존재해야 할 것 같음
     }
 
     public void OnClickUnlockWeapon()
     {
-        if (isMain)
+        if (isMain)/// 주무기 추가
         {
-           // if (GameManager.Instance.GetJewel() >= selectData.unlockCost)
+            if (GameManager.Instance.GetJewel() >= selectData.unlockCost)
             {
                 GameManager.Instance.UnlockWeapon(selectData);
             }
-
+        }
+        else ///보조 무기 추가
+        {
+            if (GameManager.Instance.GetJewel() >= selectSubData.unlockCost)
+            {
+                GameManager.Instance.UnlockWeapon(selectSubData);
+            }
         }
         unlockButton.gameObject.SetActive(false);
         reinforceButton.gameObject.SetActive(true);
@@ -107,14 +124,23 @@ public class ForgeUI : MonoBehaviour
             
         else
         {
-            weaponName.text = selectSubWeapon.data.weaponName + "   (" + (selectWeapon.level + 1) + ")";
-            weaponDesc.text = selectSubWeapon.data.weaponDesc;
-            weaponAtk.text = ("공격력 : ") + selectSubWeapon.levelDamage.ToString();
-           // weaponHp.text = ("체력 : ") + selectSubWeapon.data.maxLives.ToString();
+            weaponDesc.text = selectSubData.weaponDesc;
             hasGoldText.text = GameManager.Instance.GetGold().ToString();
-            useGoldText.text = selectWeapon.data.upgradeCost.ToString();
-            weaponImage.sprite = selectSubWeapon.data.weaponImage;
-            
+            useGoldText.text = selectSubData.upgradeCost.ToString();
+            weaponImage.sprite = selectSubData.weaponImage;
+            if (selectSubWeapon != null)
+            {
+                weaponName.text = selectSubData.weaponName + "   (" + (selectWeapon.level + 1) + ")";
+                weaponAtk.text = ("공격력 : ") + selectSubWeapon.levelDamage.ToString();
+            }
+            else
+            {
+                weaponAtk.text = ("공격력 : ") + selectSubData.baseDamage.ToString();
+            }
+            if (GameManager.Instance.GetGold() < selectSubData.upgradeCost)
+            {
+                reinforceButton.interactable = false;
+            }
         }
     }
     

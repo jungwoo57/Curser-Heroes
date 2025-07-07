@@ -18,38 +18,39 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
+    [Header("모든 무기 및 스킬")]
     public List<WeaponData> allMainWeapons; // 모든 무기 원본
     public List<SubWeaponData> allSubWeapons; // 모든 보조 무기 원본
-
+    public List<SkillData> allSkills;// 모든 스킬
+    
+    
+    
     [SerializeField] private List<WeaponData> _hasPartner; // 보유 동료
     public IReadOnlyList<WeaponData> hasPartner => _hasPartner; // 다른 파일에서 보유 동료 가져오기(수정 불가)
+    
 
-    public List<SkillData> allSkills;        // 인스펙터에서 모든 스킬 할당
-    [SerializeField] private List<SkillData> _hasSkills = new List<SkillData>();
-    public IReadOnlyList<SkillData> hasSkills => _hasSkills;
-
-    public List<SkillData> selectSkills = new List<SkillData>(); // 플레이어가 선택한 스킬 12개
-
-    public List<SkillData> skillPool = new List<SkillData>();
-
+    [Header("보유 중인 무기 및 스킬")]
     [SerializeField] public List<OwnedWeapon> ownedWeapons; // 소유 메인 무기
     [SerializeField] public List<OwnedSubWeapon> ownedSubWeapons; // 소유 보조 무기
+    [SerializeField] public List<SkillData> hasSkills;
 
+    public List<SkillData> skillPool = new List<SkillData>();
+    
+    [Header("장착 및 선택한 스킬")]
     public OwnedWeapon mainEquipWeapon;
     public OwnedSubWeapon subEquipWeapon;
+    public List<SkillData> selectSkills; //선택한 스킬(스테이지에 등장할 스킬), 스킬 갯수가 정해져있어서 배열로 변경도 고려
 
+    [Header("기타 데이터")]
     [SerializeField] private int gold = 9999;
     private int jewel = 0;
-
+    public int bestScore;
     private void Awake()
     {
         if (instance == null)
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
-
-            _hasSkills = new List<SkillData>(allSkills);
         }
         else
         {
@@ -88,6 +89,12 @@ public class GameManager : MonoBehaviour
         ownedWeapons.Add(new OwnedWeapon(weaponData)); // 코드 구조 보고 보조무기 주무기 얻는 법 바꾸기
     }
 
+    public void UnlockWeapon(SubWeaponData weaponData) //무기 해금 시 사용
+    {
+        // 이미 보유중인 무기면 적용 안시킬 지는 무기 해금 코드 보고 결정
+        ownedSubWeapons.Add(new OwnedSubWeapon(weaponData)); // 코드 구조 보고 보조무기 주무기 얻는 법 바꾸기
+    }
+    
     public void EquipWeapon(OwnedWeapon equipData)
     {
         if (equipData == null)
@@ -112,14 +119,11 @@ public class GameManager : MonoBehaviour
 
     public void EquipSkill(SkillData[] skilldatas)
     {
-        selectSkills.Clear();
-        selectSkills.AddRange(skilldatas);
-
-        // 선택한 스킬 12개를 skillPool에 복사(게임 내 사용용)
-        skillPool.Clear();
-        skillPool.AddRange(selectSkills);
-
-        Debug.Log($"[GameManager] skillPool에 {skillPool.Count}개 스킬 저장됨");
+        selectSkills.Clear(); //기존 스킬 초기화
+        for (int i = 0; i < skilldatas.Length; i++)
+        {
+            selectSkills.Add(skilldatas[i]);
+        }
     }
 
     public void UpgradeWeapon(WeaponData data)
@@ -130,6 +134,21 @@ public class GameManager : MonoBehaviour
             gold -= data.upgradeCost;
             ownedWeapons[index].level++;
             Debug.Log(ownedWeapons[index].data.name + "업그레이드 완료" + ownedWeapons[index].level);
+        }
+        else
+        {
+            Debug.Log("해당 데이터 없음");
+        }
+    }
+    
+    public void UpgradeWeapon(SubWeaponData data)
+    {
+        int index = ownedSubWeapons.FindIndex(w => w.data.weaponName == data.weaponName);
+        if (index >= 0)
+        {
+            gold -= data.upgradeCost;
+            ownedSubWeapons[index].level++;
+            Debug.Log(ownedSubWeapons[index].data.name + "업그레이드 완료" + ownedSubWeapons[index].level);
         }
         else
         {

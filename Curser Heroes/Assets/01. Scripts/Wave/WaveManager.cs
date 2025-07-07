@@ -39,6 +39,7 @@ public class WaveManager : MonoBehaviour
     public void StartWave()
     {
         Debug.Log($"[WaveManager] StartWave() 호출됨, currentWaveIndex = {currentWaveIndex}");
+        if(currentWaveIndex > gameManager.bestScore) gameManager.bestScore = currentWaveIndex;
         waveCleared = false; // 새 웨이브 시작 시 초기화
 
         WaveEntry matched = waveGroupData.waveEntries.Find(w => w.wave == currentWaveIndex + 1);

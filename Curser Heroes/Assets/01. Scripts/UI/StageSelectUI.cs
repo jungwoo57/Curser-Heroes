@@ -62,7 +62,7 @@ public class StageSelectUI : MonoBehaviour
         {
               Debug.Log("UI업데이트 임시 출력");   // TEST용 코드
               //  bestScoreText.text = stage[index].maxScore.ToString()     예시 코드 스테이지 제작 후 결정
-              //bestWaveText.text = stage[index].ToString();                예시 코드 스테이지 제작 후 결정
+              bestWaveText.text = GameManager.Instance.bestScore.ToString(); // 가장 높은 웨이브 설정
               //stageNameText.text = stage[index].name;                     예시 코드 스테이지 제작 후 결정
         }
 
