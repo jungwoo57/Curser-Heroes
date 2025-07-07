@@ -14,6 +14,8 @@ public class WaveManager : MonoBehaviour
     public Spawner spawner;
     public static WaveManager Instance { get; private set; }
 
+    public int clearGold;
+    public int clearJewel;
     //public PoolSpawnerTest spawner; // Inspector에서 연결 필요
 
     public WaveEntry currentWaveData;
@@ -30,12 +32,14 @@ public class WaveManager : MonoBehaviour
         }
 
         Instance = this;
+        gameManager  = GameManager.Instance;
     }
 
     [ContextMenu("스폰시키기")]
     public void StartWave()
     {
         Debug.Log($"[WaveManager] StartWave() 호출됨, currentWaveIndex = {currentWaveIndex}");
+        if(currentWaveIndex > gameManager.bestScore) gameManager.bestScore = currentWaveIndex;
         waveCleared = false; // 새 웨이브 시작 시 초기화
 
         WaveEntry matched = waveGroupData.waveEntries.Find(w => w.wave == currentWaveIndex + 1);
@@ -179,10 +183,18 @@ public class WaveManager : MonoBehaviour
     void OnWaveCleared()
     {
         Debug.Log("[WaveManager] OnWaveCleared 호출됨");
+        clearGold = currentWaveData.CalculateGoldReward();
         gameManager.AddGold(currentWaveData.CalculateGoldReward());
         int? jewel = currentWaveData.TryGetJewelReward();
         if (jewel.HasValue)
+        {
             gameManager.AddJewel(jewel.Value);
+            clearJewel = jewel.Value;
+        }
+        else
+        {
+            clearJewel = 0;
+        }
 
         skillManager.OnWaveEnd(); // → 내부에서 스킬 또는 보상 선택 UI 표시
     }

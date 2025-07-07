@@ -2210,6 +2210,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8106626357475462994, guid: 1d55c9599b8c1fe4b867dea25946a537, type: 3}
+      propertyPath: cursorTransform
+      value: 
+      objectReference: {fileID: 6731890394223706514}
     - target: {fileID: 8495714850120982396, guid: 1d55c9599b8c1fe4b867dea25946a537, type: 3}
       propertyPath: m_Name
       value: SubWeaponVisual
@@ -2227,6 +2231,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -5775179606432198142, guid: 5263ae6509a44d54cb65ed7e0a07701d, type: 3}
+      propertyPath: currentSubWeapon
+      value: 
+      objectReference: {fileID: 11400000, guid: 88561bc56f42f0e46b8b20e3390ff37b, type: 2}
     - target: {fileID: 1363672529361250790, guid: 5263ae6509a44d54cb65ed7e0a07701d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1
@@ -2274,7 +2282,7 @@ PrefabInstance:
     - target: {fileID: 7386682379840476848, guid: 5263ae6509a44d54cb65ed7e0a07701d, type: 3}
       propertyPath: equippedSubWeapon
       value: 
-      objectReference: {fileID: 11400000, guid: a743b874776441044bf275c881e40cfd, type: 2}
+      objectReference: {fileID: 11400000, guid: 88561bc56f42f0e46b8b20e3390ff37b, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -2755,10 +2763,6 @@ MonoBehaviour:
   skillSelectUIPrefab: {fileID: 2116206273608610595, guid: ac6fc6da8019b4d42bf807d62702b93b, type: 3}
   player: {fileID: 3521251694906892393}
   cursorWeapon: {fileID: 3008519376834165207}
-  allSkills:
-  - {fileID: 11400000, guid: 72bfdbd50ec5c254cbb3f8147cafd490, type: 2}
-  - {fileID: 11400000, guid: f04c834df1cebbd4e8ab409149d7e159, type: 2}
-  - {fileID: 11400000, guid: 703781ae4a9d084438325b0dee1e77e3, type: 2}
   skillPool: []
   ownedSkills: []
   maxSkillCount: 6
@@ -3020,8 +3024,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -250, y: -150}
-  m_SizeDelta: {x: 400, y: 50}
+  m_AnchoredPosition: {x: -304.362, y: -150}
+  m_SizeDelta: {x: 508.723, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1260554212
 MonoBehaviour:
@@ -3043,7 +3047,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 9999(+423)
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5f562ed7f1f4a4c488f5c6f3b11798d1, type: 2}
   m_sharedMaterial: {fileID: -6390403767302270384, guid: 5f562ed7f1f4a4c488f5c6f3b11798d1, type: 2}
@@ -3106,7 +3110,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -102.73245, y: 0, z: 0, w: 0}
+  m_margin: {x: -676.58545, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -3915,6 +3919,12 @@ MonoBehaviour:
   waveGroupData: {fileID: 11400000, guid: 9fa0573a5e50445489f8e2a2d6d96d27, type: 2}
   gameManager: {fileID: 2139855845}
   spawner: {fileID: 2021239203}
+  clearGold: 0
+  clearJewel: 0
+  currentWaveData:
+    wave: 0
+    overrideEnemies: []
+    forceExactOverride: 0
 --- !u!4 &1657000542
 Transform:
   m_ObjectHideFlags: 0
@@ -5365,32 +5375,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allMainWeapons: []
-<<<<<<< HEAD
-  _hasSubWeapon: []
-  _hasPartner: []
-  _hasSkills: []
-  ownedWeapons: []
-=======
   allSubWeapons: []
+  allSkills: []
   _hasPartner: []
   _hasSkills: []
   ownedWeapons: []
   ownedSubWeapons: []
->>>>>>> Develope
+  skillPool: []
   mainEquipWeapon:
     data: {fileID: 0}
     level: 0
     bookMark: 0
-<<<<<<< HEAD
-  subEquipWeapon: {fileID: 0}
-=======
   subEquipWeapon:
     data: {fileID: 0}
     level: 0
     bookMark: 0
->>>>>>> Develope
   selectSkills: []
   gold: 9999
+  bestScore: 0
 --- !u!4 &2139855846
 Transform:
   m_ObjectHideFlags: 0

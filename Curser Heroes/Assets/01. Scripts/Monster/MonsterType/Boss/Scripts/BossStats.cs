@@ -1,16 +1,18 @@
 ﻿// BossStats.cs
 using UnityEngine;
 using System.Collections;
+using Unity.VisualScripting;
 
 // 보스의 체력, 피격, 사망 처리를 담당하는 스크립트
 public class BossStats : MonoBehaviour
 {
     public BossData data;           // ScriptableObject 참조
-    private int currentHP;          // 현재 체력
+   private int currentHP;          // 현재 체력
 
     private Animator animator;
     private SpriteRenderer spriteRenderer;
     private Color originalColor;
+    BossPatternController BossPatternController; // 보스 패턴 컨트롤러 참조
 
     private void Awake()
     {
@@ -25,6 +27,7 @@ public class BossStats : MonoBehaviour
     // 외부에서 호출하여 데미지를 입힐 때 쓰는 함수
     public void TakeDamage(int amount)
     {
+        
         if (currentHP <= 0) return;  // 이미 죽었으면 무시
 
         currentHP -= amount;
@@ -33,6 +36,7 @@ public class BossStats : MonoBehaviour
 
         if (currentHP <= 0)
             Die();
+        
     }
     // 투명도를 깜빡이며 피격 효과
     private IEnumerator FlashEffect()
@@ -42,7 +46,7 @@ public class BossStats : MonoBehaviour
 
         while (timer < duration)
         {
-            float alpha = Mathf.PingPong(timer * 8f, 1f);
+            float alpha = Mathf.PingPong(timer * 4f, 1f);
             var c = originalColor;
             c.a = alpha;
             spriteRenderer.color = c;
@@ -54,9 +58,9 @@ public class BossStats : MonoBehaviour
     }
 
     // 죽었을 때 호출
-    private void Die()
+    public void Die()
     {
         animator.SetTrigger("BossRun");  // 여기서는 보스 사망 애니메이션으로 사용
-        Destroy(gameObject, 3f);         // 3초 뒤 오브젝트 제거
+        Destroy(gameObject, 5f);         // 5초 뒤 오브젝트 제거
     }
 }

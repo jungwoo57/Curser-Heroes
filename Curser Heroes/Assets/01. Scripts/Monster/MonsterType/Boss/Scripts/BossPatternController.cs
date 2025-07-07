@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 //
 public class BossPatternController : MonoBehaviour
-{   
+{
+
     public BossData data;
 
     public PatternLogicBase[] patternLogics;   // 인스펙터에서 순서대로 연결
@@ -11,11 +13,15 @@ public class BossPatternController : MonoBehaviour
     private Animator animator;
     public BossPatternDamage[] patternDamage;  // 히트박스 스크립트 배열
     private float[] nextAvailableTime;         // 패턴별 다음 실행 가능 시간
+    public bool IsInPattern { get; private set; }
+    public bool IsInSpawn { get; private set; } // 보스가 스폰 중인지 여부
 
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
         patternDamage = GetComponentsInChildren<BossPatternDamage>();
+                         
+        
 
         int count = data.patternCooldown.Length;
         nextAvailableTime = new float[count];
@@ -27,17 +33,21 @@ public class BossPatternController : MonoBehaviour
 
     private void Start()
     {
-       
+
         StartCoroutine(PatternLoop());
     }
 
-    private IEnumerator PatternLoop()
+   public IEnumerator PatternLoop()
     {
+        IsInSpawn = true;
+        animator.SetTrigger("BossSpawn");
+        
         // 초기 지연: 보스 등장 후 첫 패턴 전 대기
         yield return new WaitForSeconds(data.initialDelay);
-
-        while (true)
+        IsInSpawn = false;
+        while (true)  // 보스가 살아있는 동안 패턴 반복
         {
+            IsInPattern = true;
             // 실행 가능(쿨타임이 지난) 패턴만 골라 리스트에 추가
             List<int> available = new List<int>();
             for (int i = 0; i < nextAvailableTime.Length; i++)
@@ -45,25 +55,25 @@ public class BossPatternController : MonoBehaviour
                 if (Time.time >= nextAvailableTime[i])
                     available.Add(i);
             }
-
+            
             // 실행 가능 패턴이 없으면 짧게 대기 후 재시도
             if (available.Count == 0)
             {
                 yield return new WaitForSeconds(0.1f);
                 continue;
             }
-
+           
             //패턴 중 하나를 랜덤 선택
             int randIdx = available[Random.Range(0, available.Count)];
             string trigger = "Pattern" + (randIdx + 1);
 
-           
+
             foreach (var d in patternDamage) d.Deactivate();
             if (randIdx < patternDamage.Length)
-                   patternDamage[randIdx].Activate();
+                patternDamage[randIdx].Activate();
 
             animator.SetTrigger(trigger);
-
+            
             if (patternLogics != null && randIdx < patternLogics.Length && patternLogics[randIdx] != null)
             {
                 // 각 패턴 로직 스크립트의 Execute() 코루틴을 실행
@@ -74,15 +84,19 @@ public class BossPatternController : MonoBehaviour
             yield return WaitForAnimationEnd(trigger);
             // 히트박스 끄기
             foreach (var d in patternDamage) d.Deactivate();
+            
 
             animator.SetTrigger("BossIdle");
+            yield return new WaitForSeconds(0.5f);
+            IsInPattern = false;
 
             // 공용 쿨타임만큼 대기 
             yield return new WaitForSeconds(data.allpatternCooldown);
 
             // 9) 이번 패턴의 다음 실행 가능 시간 갱신
-            nextAvailableTime[randIdx] = Time.time + data.patternCooldown[randIdx];
+            nextAvailableTime[randIdx] = Time.time + data.patternCooldown[randIdx];         
         }
+        
     }
 
 
@@ -96,7 +110,7 @@ public class BossPatternController : MonoBehaviour
         while (!animator.GetCurrentAnimatorStateInfo(layer).IsName(stateName))
         {
             if (Time.time - start > timeout)
-            {                
+            {
                 yield break;
             }
             yield return null;
@@ -107,14 +121,20 @@ public class BossPatternController : MonoBehaviour
         {
             if (Time.time - start > timeout)
             {
-               
+
                 break;
             }
             yield return null;
         }
-    }   
+    }
 
 }
     
 
+
+
+
+
+    
+    
 

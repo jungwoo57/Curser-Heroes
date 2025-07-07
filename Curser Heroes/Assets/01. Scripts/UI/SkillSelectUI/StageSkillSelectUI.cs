@@ -1,9 +1,9 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 public class StageSkillSelectUI : MonoBehaviour
 {
-    public IReadOnlyList<SkillData> hasSkills;
+    public List<SkillData> hasSkills;
     public List<SkillUIImage> showSkills = new List<SkillUIImage>();
     public SkillUIImage skillUIImage;
     public StageSelectedSkillUI stageSelectedSkillUI;

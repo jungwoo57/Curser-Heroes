@@ -9,7 +9,6 @@ public class SkillManager : MonoBehaviour
     [SerializeField] private Transform player;
     [SerializeField] private CursorWeapon cursorWeapon;
 
-    public List<SkillData> allSkills;
     public List<SkillData> skillPool = new List<SkillData>();
     public List<SkillInstance> ownedSkills = new List<SkillInstance>();
 
@@ -29,8 +28,15 @@ public class SkillManager : MonoBehaviour
 
     void Start()
     {
-        Debug.Log($"[SkillManager] 등록된 스킬 개수: {allSkills.Count}");
-        skillPool = new List<SkillData>(allSkills);
+        if (GameManager.Instance == null)
+        {
+            Debug.LogError("GameManager.Instance가 null입니다.");
+            return;
+        }
+        // skillPool을 GameManager의 skillPool과 동기화
+        skillPool = new List<SkillData>(GameManager.Instance.skillPool);
+
+        Debug.Log($"[SkillManager] skillPool 크기: {skillPool.Count}");
     }
 
     public void OnWaveEnd()
@@ -166,7 +172,17 @@ public class SkillManager : MonoBehaviour
             Debug.LogWarning($"[SkillManager] {skillData.skillName}에 맞는 SkillBehaviour가 없습니다.");
         }
     }
+    public void OnMonsterKilled(Vector3 deathPosition)
+    {
+        SkillInstance explodeSkill = ownedSkills.Find(s => s.skill.skillName == "장렬한 퇴장");
+        if (explodeSkill == null) return;
 
+        SkillLevelData data = explodeSkill.skill.levelDataList[explodeSkill.level - 1];
+        int damage = data.damage; // 또는 damage 필드 하나만 써도 됨
+        float radius = 1.5f; // 폭발 범위 (필요시 SkillData에 설정 가능)
+
+        ExplodeOnKillSkill.TriggerExplosion(deathPosition, damage, radius, LayerMask.GetMask("Monster"));
+    }
     void ShowRewardSelection()
     {
         GameObject ui = Instantiate(rewardSelectUIPrefab);
@@ -175,14 +191,14 @@ public class SkillManager : MonoBehaviour
 
     void OnRewardSelected(int index)
     {
-        /*switch (index)
+        switch (index)
         {
-            case 0: PlayerManager.Instance.Heal(); break;
-            case 1: CurrencyManager.Instance.AddGold(100); break;
-            case 2: CurrencyManager.Instance.AddJewel(10); break;
+            //case 0: BattleUI.Heal(); break;
+            case 1: GameManager.Instance.AddGold(100); break;
+            case 2: GameManager.Instance.AddJewel(10); break;
         }
-        waveManager.StartWave();
-        */
+        WaveManager.Instance.StartWave();
+        
     }
     List<SkillData> GetRandomSkills(List<SkillData> source, int count)
     {

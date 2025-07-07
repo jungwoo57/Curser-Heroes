@@ -9,7 +9,9 @@ public class SubWeaponData : ScriptableObject
     public string weaponName;
     public Sprite weaponImage;
     public string weaponDesc;
-
+    public int upgradeCost;
+    public int unlockCost;
+    
     [Header("기본 스탯")]
     public float baseDamage = 1f;
     public float damagePerLevel = 1f;
