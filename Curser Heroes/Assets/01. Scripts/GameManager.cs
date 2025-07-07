@@ -33,6 +33,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] public List<OwnedWeapon> ownedWeapons; // 소유 메인 무기
     [SerializeField] public List<OwnedSubWeapon> ownedSubWeapons; // 소유 보조 무기
     [SerializeField] public List<SkillData> hasSkills;
+
+    public List<SkillData> skillPool = new List<SkillData>();
     
     [Header("장착 및 선택한 스킬")]
     public OwnedWeapon mainEquipWeapon;
