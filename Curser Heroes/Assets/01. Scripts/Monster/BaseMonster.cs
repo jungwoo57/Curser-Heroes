@@ -206,5 +206,6 @@ public abstract class BaseMonster : MonoBehaviour
         Destroy(gameObject, 1f);
     }
 
+   
     protected abstract void Attack();
 }

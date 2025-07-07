@@ -172,7 +172,17 @@ public class SkillManager : MonoBehaviour
             Debug.LogWarning($"[SkillManager] {skillData.skillName}에 맞는 SkillBehaviour가 없습니다.");
         }
     }
+    public void OnMonsterKilled(Vector3 deathPosition)
+    {
+        SkillInstance explodeSkill = ownedSkills.Find(s => s.skill.skillName == "장렬한 퇴장");
+        if (explodeSkill == null) return;
 
+        SkillLevelData data = explodeSkill.skill.levelDataList[explodeSkill.level - 1];
+        int damage = data.damage; // 또는 damage 필드 하나만 써도 됨
+        float radius = 1.5f; // 폭발 범위 (필요시 SkillData에 설정 가능)
+
+        ExplodeOnKillSkill.TriggerExplosion(deathPosition, damage, radius, LayerMask.GetMask("Monster"));
+    }
     void ShowRewardSelection()
     {
         GameObject ui = Instantiate(rewardSelectUIPrefab);
