@@ -5,6 +5,7 @@ using UnityEngine;
 public class BossPatternDamage : MonoBehaviour
 {
     private Collider2D col;
+    
 
     private void Awake()
     {
@@ -19,14 +20,28 @@ public class BossPatternDamage : MonoBehaviour
     {
         col.enabled = false;
     }
-    private void OnTriggerEnter2D(Collider2D other)
+    private void Update()
     {
-        if (!other.CompareTag("Weapon"))
-            return;
-        
-       WeaponLife weapon = other.GetComponent<WeaponLife>();
-        if (weapon != null)
-            weapon.TakeLifeDamage(); 
+        if (col.enabled)
+        {
+            Attack(); // 콜라이더가 활성화 되어 있으면 공격 함수 호출
+        }
+    }
 
+    protected void Attack()
+     {
+        Collider2D weaponCollider = Physics2D.OverlapCircle(transform.position,  LayerMask.GetMask("Weapon"));
+        if (weaponCollider != null)
+        {
+            if (WeaponManager.Instance != null)
+            {
+                WeaponManager.Instance.TakeWeaponLifeDamage();
+                Debug.Log("근접 공격으로 무기 내구도 감소!");
+            }
+            else
+            {
+                Debug.LogWarning("WeaponManager 인스턴스를 찾을 수 없습니다!");
+            }
+        }
     }
 }
