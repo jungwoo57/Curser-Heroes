@@ -56,24 +56,41 @@ public class ForgeUI : MonoBehaviour
     
     public void OnClickReinforceButton()
     {
-        if (GameManager.Instance.GetGold() >= selectWeapon.data.upgradeCost)
+        if (isMain)
         {
-            GameManager.Instance.UpgradeWeapon(selectWeapon.data);
-            UIUpdate();
+            if (GameManager.Instance.GetGold() >= selectWeapon.data.upgradeCost)
+            {
+                GameManager.Instance.UpgradeWeapon(selectWeapon.data);
+                UIUpdate();
+            }
+            Debug.Log("무기강화");       //we
         }
-        
-        Debug.Log("무기강화");       //weapondata에 레벨이 존재해야 할 것 같음
+        else
+        {
+            if (GameManager.Instance.GetGold() >= selectWeapon.data.upgradeCost)
+            {
+                GameManager.Instance.UpgradeWeapon(selectWeapon.data);
+                UIUpdate();
+            }
+            Debug.Log("보조무기강화");    
+        } //weapondata에 레벨이 존재해야 할 것 같음
     }
 
     public void OnClickUnlockWeapon()
     {
-        if (isMain)
+        if (isMain)/// 주무기 추가
         {
-           // if (GameManager.Instance.GetJewel() >= selectData.unlockCost)
+            if (GameManager.Instance.GetJewel() >= selectData.unlockCost)
             {
                 GameManager.Instance.UnlockWeapon(selectData);
             }
-
+        }
+        else ///보조 무기 추가
+        {
+            if (GameManager.Instance.GetJewel() >= selectSubData.unlockCost)
+            {
+                GameManager.Instance.UnlockWeapon(selectSubData);
+            }
         }
         unlockButton.gameObject.SetActive(false);
         reinforceButton.gameObject.SetActive(true);

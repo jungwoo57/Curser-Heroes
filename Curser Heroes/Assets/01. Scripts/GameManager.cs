@@ -82,6 +82,12 @@ public class GameManager : MonoBehaviour
         ownedWeapons.Add(new OwnedWeapon(weaponData)); // 코드 구조 보고 보조무기 주무기 얻는 법 바꾸기
     }
 
+    public void UnlockWeapon(SubWeaponData weaponData) //무기 해금 시 사용
+    {
+        // 이미 보유중인 무기면 적용 안시킬 지는 무기 해금 코드 보고 결정
+        ownedSubWeapons.Add(new OwnedSubWeapon(weaponData)); // 코드 구조 보고 보조무기 주무기 얻는 법 바꾸기
+    }
+    
     public void EquipWeapon(OwnedWeapon equipData)
     {
         if (equipData == null)
@@ -121,6 +127,21 @@ public class GameManager : MonoBehaviour
             gold -= data.upgradeCost;
             ownedWeapons[index].level++;
             Debug.Log(ownedWeapons[index].data.name + "업그레이드 완료" + ownedWeapons[index].level);
+        }
+        else
+        {
+            Debug.Log("해당 데이터 없음");
+        }
+    }
+    
+    public void UpgradeWeapon(SubWeaponData data)
+    {
+        int index = ownedSubWeapons.FindIndex(w => w.data.weaponName == data.weaponName);
+        if (index >= 0)
+        {
+            gold -= data.upgradeCost;
+            ownedSubWeapons[index].level++;
+            Debug.Log(ownedSubWeapons[index].data.name + "업그레이드 완료" + ownedSubWeapons[index].level);
         }
         else
         {
