@@ -21,11 +21,14 @@ public class ForgeUI : MonoBehaviour
     public Button reinforceButton;
     public Button mainWeaponButton;
     public Button subWeaponButton;
-
+    public Button unlockButton;
+   
     public bool isMain = true;
-    
     public OwnedWeapon selectWeapon;
     public OwnedSubWeapon selectSubWeapon;
+	public WeaponData selectData;
+	public SubWeaponData selectSubData;
+
     
     private void OnEnable()
     {
@@ -37,16 +40,16 @@ public class ForgeUI : MonoBehaviour
     {
         if (GameManager.Instance.mainEquipWeapon.data == null)     //장착 무기 없으면 1번 착용
         {
-            Debug.Log("무기가없긴함");
             selectWeapon = GameManager.Instance.ownedWeapons[0];
             selectSubWeapon = GameManager.Instance.ownedSubWeapons[0];
+            selectData = selectWeapon.data;
+            selectSubData = selectSubWeapon.data;
         }
         else
         {
             selectWeapon = GameManager.Instance.mainEquipWeapon;
             selectSubWeapon = GameManager.Instance.subEquipWeapon;
         }
-
         UIUpdate();
         UpdateSelectUI();
     }
@@ -62,18 +65,46 @@ public class ForgeUI : MonoBehaviour
         Debug.Log("무기강화");       //weapondata에 레벨이 존재해야 할 것 같음
     }
 
+    public void OnClickUnlockWeapon()
+    {
+        if (isMain)
+        {
+           // if (GameManager.Instance.GetJewel() >= selectData.unlockCost)
+            {
+                GameManager.Instance.UnlockWeapon(selectData);
+            }
+
+        }
+        unlockButton.gameObject.SetActive(false);
+        reinforceButton.gameObject.SetActive(true);
+        UpdateSelectUI();
+        UIUpdate();
+    }
     public void UIUpdate()
     {
         if (isMain)
         {
-            weaponName.text = selectWeapon.data.weaponName + "   (" + (selectWeapon.level + 1) + ")";
-            weaponDesc.text = selectWeapon.data.weaponDesc;
-            weaponAtk.text = ("공격력 : ") + selectWeapon.levelDamage.ToString();
-            weaponHp.text = ("체력 : ") + selectWeapon.data.maxLives.ToString();
+            weaponDesc.text = selectData.weaponDesc;
+            weaponHp.text = ("체력 : ") + selectData.maxLives.ToString();
             hasGoldText.text = GameManager.Instance.GetGold().ToString();
-            useGoldText.text = selectWeapon.data.upgradeCost.ToString();
-            weaponImage.sprite = selectWeapon.data.weaponImage;
+            useGoldText.text = selectData.upgradeCost.ToString();
+            weaponImage.sprite = selectData.weaponImage;
+            if (selectWeapon != null)
+            {
+                weaponAtk.text = ("공격력 : ") + selectWeapon.levelDamage.ToString();
+                weaponName.text = selectData.weaponName + "   (" + (selectWeapon.level + 1) + ")";
+            }
+            else
+            {
+                weaponAtk.text = ("공격력 : ") + selectData.baseDamage.ToString();
+                weaponName.text = selectData.weaponName;
+            }
+            if (GameManager.Instance.GetGold() < selectData.upgradeCost)
+            {
+                reinforceButton.interactable = false;
+            }
         }
+            
         else
         {
             weaponName.text = selectSubWeapon.data.weaponName + "   (" + (selectWeapon.level + 1) + ")";
@@ -83,10 +114,7 @@ public class ForgeUI : MonoBehaviour
             hasGoldText.text = GameManager.Instance.GetGold().ToString();
             useGoldText.text = selectWeapon.data.upgradeCost.ToString();
             weaponImage.sprite = selectSubWeapon.data.weaponImage;
-        }
-        if (GameManager.Instance.GetGold() < selectWeapon.data.upgradeCost)
-        {
-            reinforceButton.interactable = false;
+            
         }
     }
     
@@ -138,4 +166,5 @@ public class ForgeUI : MonoBehaviour
         UIUpdate();
         UpdateSelectUI();
     }
+    
 }

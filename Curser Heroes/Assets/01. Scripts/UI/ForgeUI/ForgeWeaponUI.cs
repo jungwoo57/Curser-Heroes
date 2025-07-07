@@ -105,6 +105,18 @@ public class ForgeWeaponUI : MonoBehaviour
             {
                 if (hasData == null) return;
                 forgeUI.selectWeapon = hasData;
+                forgeUI.selectData = hasData.data;
+                forgeUI.reinforceButton.gameObject.SetActive(true);
+                forgeUI.unlockButton.gameObject.SetActive(false);
+                forgeUI.UIUpdate();
+            }
+            else
+            {
+                if (mainData == null) return;
+                forgeUI.selectWeapon = null;
+                forgeUI.selectData = mainData;
+                forgeUI.reinforceButton.gameObject.SetActive(false);
+                forgeUI.unlockButton.gameObject.SetActive(true);
                 forgeUI.UIUpdate();
             }
         }

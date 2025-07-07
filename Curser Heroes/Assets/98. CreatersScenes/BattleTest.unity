@@ -3020,8 +3020,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -250, y: -150}
-  m_SizeDelta: {x: 400, y: 50}
+  m_AnchoredPosition: {x: -304.362, y: -150}
+  m_SizeDelta: {x: 508.723, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1260554212
 MonoBehaviour:
@@ -3043,7 +3043,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 9999(+423)
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5f562ed7f1f4a4c488f5c6f3b11798d1, type: 2}
   m_sharedMaterial: {fileID: -6390403767302270384, guid: 5f562ed7f1f4a4c488f5c6f3b11798d1, type: 2}
@@ -3106,7 +3106,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -102.73245, y: 0, z: 0, w: 0}
+  m_margin: {x: -676.58545, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -3915,6 +3915,11 @@ MonoBehaviour:
   waveGroupData: {fileID: 11400000, guid: 9fa0573a5e50445489f8e2a2d6d96d27, type: 2}
   gameManager: {fileID: 2139855845}
   spawner: {fileID: 2021239203}
+  clearGold: 0
+  currentWaveData:
+    wave: 0
+    overrideEnemies: []
+    forceExactOverride: 0
 --- !u!4 &1657000542
 Transform:
   m_ObjectHideFlags: 0
@@ -5365,30 +5370,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allMainWeapons: []
-<<<<<<< HEAD
-  _hasSubWeapon: []
-  _hasPartner: []
-  _hasSkills: []
-  ownedWeapons: []
-=======
   allSubWeapons: []
   _hasPartner: []
   _hasSkills: []
   ownedWeapons: []
   ownedSubWeapons: []
->>>>>>> Develope
   mainEquipWeapon:
     data: {fileID: 0}
     level: 0
     bookMark: 0
-<<<<<<< HEAD
-  subEquipWeapon: {fileID: 0}
-=======
   subEquipWeapon:
     data: {fileID: 0}
     level: 0
     bookMark: 0
->>>>>>> Develope
   selectSkills: []
   gold: 9999
 --- !u!4 &2139855846
