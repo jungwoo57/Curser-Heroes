@@ -27,6 +27,7 @@ public class BossPatternController : MonoBehaviour
 
     private void Start()
     {
+       
         StartCoroutine(PatternLoop());
     }
 
