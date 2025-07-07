@@ -15,21 +15,41 @@ public class BossFollowWeapon : MonoBehaviour
 
     private Rigidbody2D rb;
     private Transform targetWeapon;
-
+    private BossPatternController patternController;
+    private Animator animator;
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         rb.freezeRotation = true;
+        patternController = GetComponent<BossPatternController>();
+        animator = GetComponentInChildren<Animator>();
+
     }
 
     private void FixedUpdate()
     {
+        if (patternController.IsInPattern)
+        {
+            rb.velocity = Vector2.zero;
+            animator.SetBool("BossMove", false);
+            return;
+            
+        }
+      
+        if (patternController.IsInSpawn)
+        {
+            rb.velocity = Vector2.zero;
+            animator.SetBool("BossMove", false);
+            return;
+            
+        }
         FindWeaponByLayer();
-
+        animator.SetBool("BossMove", true);
         if (targetWeapon != null)
         {
             Vector2 direction = (targetWeapon.position - transform.position).normalized;
             rb.velocity = direction * speed;
+           
         }
         else
         {
@@ -61,7 +81,7 @@ public class BossFollowWeapon : MonoBehaviour
                 closest = col.transform;
             }
         }
-
+       
         targetWeapon = closest;
     }
 

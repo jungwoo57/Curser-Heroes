@@ -46,7 +46,7 @@ public class BossStats : MonoBehaviour
 
         while (timer < duration)
         {
-            float alpha = Mathf.PingPong(timer * 8f, 1f);
+            float alpha = Mathf.PingPong(timer * 4f, 1f);
             var c = originalColor;
             c.a = alpha;
             spriteRenderer.color = c;
