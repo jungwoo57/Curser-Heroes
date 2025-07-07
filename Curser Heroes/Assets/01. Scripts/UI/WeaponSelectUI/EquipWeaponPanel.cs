@@ -7,6 +7,7 @@ public class EquipmWeaponPanel : MonoBehaviour
     
     private void OnEnable()
     {
+        UpdatePanel();
         WeaponImage.OnWeaponPanelUpdate += UpdatePanel;
     }
 
