@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-
+//
 public class BossPatternController : MonoBehaviour
 {   
     public BossData data;                  
@@ -25,6 +25,7 @@ public class BossPatternController : MonoBehaviour
 
     private void Start()
     {
+       
         StartCoroutine(PatternLoop());
     }
 

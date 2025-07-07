@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+//
 public class BossFollowWeapon : MonoBehaviour
 {
     public float speed = 5f; // 무기 따라가는 속도
