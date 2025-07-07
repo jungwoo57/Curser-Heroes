@@ -25,15 +25,19 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<WeaponData> _hasPartner; // 보유 동료
     public IReadOnlyList<WeaponData> hasPartner => _hasPartner; // 다른 파일에서 보유 동료 가져오기(수정 불가)
 
-    [SerializeField] private List<SkillData> _hasSkills; // 플레이어가 해금하여 보유하고 있는 스킬
+    public List<SkillData> allSkills;        // 인스펙터에서 모든 스킬 할당
+    [SerializeField] private List<SkillData> _hasSkills = new List<SkillData>();
     public IReadOnlyList<SkillData> hasSkills => _hasSkills;
+
+    public List<SkillData> selectSkills = new List<SkillData>(); // 플레이어가 선택한 스킬 12개
+
+    public List<SkillData> skillPool = new List<SkillData>();
 
     [SerializeField] public List<OwnedWeapon> ownedWeapons; // 소유 메인 무기
     [SerializeField] public List<OwnedSubWeapon> ownedSubWeapons; // 소유 보조 무기
 
     public OwnedWeapon mainEquipWeapon;
     public OwnedSubWeapon subEquipWeapon;
-    public List<SkillData> selectSkills; //선택한 스킬(스테이지에 등장할 스킬), 스킬 갯수가 정해져있어서 배열로 변경도 고려
 
     [SerializeField] private int gold = 9999;
     private int jewel = 0;
@@ -44,6 +48,8 @@ public class GameManager : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+
+            _hasSkills = new List<SkillData>(allSkills);
         }
         else
         {
@@ -106,11 +112,14 @@ public class GameManager : MonoBehaviour
 
     public void EquipSkill(SkillData[] skilldatas)
     {
-        selectSkills.Clear(); //기존 스킬 초기화
-        for (int i = 0; i < skilldatas.Length; i++)
-        {
-            selectSkills.Add(skilldatas[i]);
-        }
+        selectSkills.Clear();
+        selectSkills.AddRange(skilldatas);
+
+        // 선택한 스킬 12개를 skillPool에 복사(게임 내 사용용)
+        skillPool.Clear();
+        skillPool.AddRange(selectSkills);
+
+        Debug.Log($"[GameManager] skillPool에 {skillPool.Count}개 스킬 저장됨");
     }
 
     public void UpgradeWeapon(WeaponData data)
