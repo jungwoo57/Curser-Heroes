@@ -5,7 +5,7 @@ using UnityEngine;
 public class SubWeaponManager : MonoBehaviour
 {
     public SubWeaponData equippedSubWeapon;    //현재 장착중인 보조무기 데이터
-    private float currentCooldown = 0f;      //현재 쿨타임 남은시간
+    [SerializeField]private float currentCooldown = 0f;      //현재 쿨타임 남은시간
     public LayerMask monsterLayer;
     void Update()
     {

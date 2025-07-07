@@ -157,4 +157,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void UnlockSkill(SkillData skilldata)
+    {
+        _hasSkills.Add(skilldata);
+    }
 }
