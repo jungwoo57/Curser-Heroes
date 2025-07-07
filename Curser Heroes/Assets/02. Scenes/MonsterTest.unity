@@ -246,8 +246,8 @@ GameObject:
   - component: {fileID: 456739454}
   - component: {fileID: 456739458}
   - component: {fileID: 456739456}
-  - component: {fileID: 456739459}
   - component: {fileID: 456739460}
+  - component: {fileID: 456739461}
   m_Layer: 7
   m_Name: Boss
   m_TagString: Untagged
@@ -375,27 +375,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: b632e75ab71c5bd459ce0387d2fffa89, type: 2}
   patternLogics:
-  - {fileID: 456739459}
+  - {fileID: 456739461}
   - {fileID: 456739460}
   patternDamage:
   - {fileID: 1444083385}
   - {fileID: 977718498}
   - {fileID: 1447740359}
---- !u!114 &456739459
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 456739452}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1c7095fd0ea9ab49bc23b271b631e9e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  patternParent: {fileID: 1444083383}
-  startDelay: 1
-  activationInterval: 0.05
 --- !u!114 &456739460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -410,6 +395,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startDelay: 1
   detectionRadius: 10
+--- !u!114 &456739461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 456739452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f711606e571dab4382e68190bb00e01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  patternParent: {fileID: 1444083383}
+  startDelay: 1
+  activationInterval: 0.05
 --- !u!1 &977718495
 GameObject:
   m_ObjectHideFlags: 0
@@ -982,7 +982,10 @@ MonoBehaviour:
   allMainWeapons: []
   allSubWeapons: []
   _hasPartner: []
+  allSkills: []
   _hasSkills: []
+  selectSkills: []
+  skillPool: []
   ownedWeapons: []
   ownedSubWeapons: []
   mainEquipWeapon:
@@ -993,7 +996,6 @@ MonoBehaviour:
     data: {fileID: 0}
     level: 0
     bookMark: 0
-  selectSkills: []
   gold: 9999
 --- !u!1 &41761825822308916
 GameObject:
