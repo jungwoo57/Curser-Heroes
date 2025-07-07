@@ -51,7 +51,6 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
 
             _hasSkills = new List<SkillData>(allSkills);
-            skillPool = new List<SkillData>(_hasSkills);
         }
         else
         {
@@ -120,11 +119,12 @@ public class GameManager : MonoBehaviour
 
     public void EquipSkill(SkillData[] skilldatas)
     {
-        selectSkills.Clear(); //기존 스킬 초기화
+        selectSkills.Clear();
         for (int i = 0; i < skilldatas.Length; i++)
         {
             selectSkills.Add(skilldatas[i]);
         }
+        skillPool = new List<SkillData>(selectSkills);
     }
 
     public void UpgradeWeapon(WeaponData data)
