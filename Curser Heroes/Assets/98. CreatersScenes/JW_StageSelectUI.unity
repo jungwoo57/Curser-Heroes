@@ -6701,6 +6701,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 88561bc56f42f0e46b8b20e3390ff37b, type: 2}
   - {fileID: 11400000, guid: 7c5bc041035cbb541b849b963e7c3ad5, type: 2}
   - {fileID: 11400000, guid: 4a82d059c813e774998f2c9b4cb949eb, type: 2}
+  - {fileID: 11400000, guid: 58d3f8a445bf9c5479bf00118682c7e0, type: 2}
+  - {fileID: 11400000, guid: 73586edf04a11e34ba24dc127036cb73, type: 2}
+  - {fileID: 11400000, guid: e5248aa6e5928bf42bf90b1f521750d4, type: 2}
+  - {fileID: 11400000, guid: 09172d192ac30d344926996232c9a952, type: 2}
+  - {fileID: 11400000, guid: 88b16acc185bc80438b61be32ab457ff, type: 2}
   allSkills:
   - {fileID: 11400000, guid: f04c834df1cebbd4e8ab409149d7e159, type: 2}
   - {fileID: 11400000, guid: 703781ae4a9d084438325b0dee1e77e3, type: 2}
@@ -6739,12 +6744,12 @@ MonoBehaviour:
     level: 0
     bookMark: 0
   subEquipWeapon:
-    data: {fileID: 0}
+    data: {fileID: 11400000, guid: 88561bc56f42f0e46b8b20e3390ff37b, type: 2}
     level: 0
     bookMark: 0
   selectSkills: []
   gold: 99999
-  bestScore: 0
+  bestScore: 5
 --- !u!4 &516545486
 Transform:
   m_ObjectHideFlags: 0
