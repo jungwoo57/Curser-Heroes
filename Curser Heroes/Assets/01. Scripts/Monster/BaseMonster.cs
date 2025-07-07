@@ -25,7 +25,6 @@ public abstract class BaseMonster : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Coroutine flashCoroutine;
     private Coroutine attackColorCoroutine;
-    private Animator effectAnimator;
     protected EffectManager effectManager;  
     public bool IsDead => currentHP <= 0;
 

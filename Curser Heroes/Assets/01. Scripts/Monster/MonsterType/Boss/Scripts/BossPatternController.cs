@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 //
 public class BossPatternController : MonoBehaviour
-{   
+{
 
     public BossData data;
 
@@ -12,11 +13,15 @@ public class BossPatternController : MonoBehaviour
     private Animator animator;
     public BossPatternDamage[] patternDamage;  // 히트박스 스크립트 배열
     private float[] nextAvailableTime;         // 패턴별 다음 실행 가능 시간
+        public bool IsInPattern { get; private set; }
+
 
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
         patternDamage = GetComponentsInChildren<BossPatternDamage>();
+                         
+        
 
         int count = data.patternCooldown.Length;
         nextAvailableTime = new float[count];
@@ -32,13 +37,15 @@ public class BossPatternController : MonoBehaviour
         StartCoroutine(PatternLoop());
     }
 
-    private IEnumerator PatternLoop()
+   public IEnumerator PatternLoop()
     {
+        animator.SetTrigger("BossSpawn");
         // 초기 지연: 보스 등장 후 첫 패턴 전 대기
         yield return new WaitForSeconds(data.initialDelay);
-
-        while (true)
+        
+        while (true)  // 보스가 살아있는 동안 패턴 반복
         {
+            
             // 실행 가능(쿨타임이 지난) 패턴만 골라 리스트에 추가
             List<int> available = new List<int>();
             for (int i = 0; i < nextAvailableTime.Length; i++)
@@ -46,14 +53,14 @@ public class BossPatternController : MonoBehaviour
                 if (Time.time >= nextAvailableTime[i])
                     available.Add(i);
             }
-
+            
             // 실행 가능 패턴이 없으면 짧게 대기 후 재시도
             if (available.Count == 0)
             {
                 yield return new WaitForSeconds(0.1f);
                 continue;
             }
-
+           
             //패턴 중 하나를 랜덤 선택
             int randIdx = available[Random.Range(0, available.Count)];
             string trigger = "Pattern" + (randIdx + 1);
@@ -64,7 +71,7 @@ public class BossPatternController : MonoBehaviour
                 patternDamage[randIdx].Activate();
 
             animator.SetTrigger(trigger);
-
+         
             if (patternLogics != null && randIdx < patternLogics.Length && patternLogics[randIdx] != null)
             {
                 // 각 패턴 로직 스크립트의 Execute() 코루틴을 실행
@@ -82,8 +89,9 @@ public class BossPatternController : MonoBehaviour
             yield return new WaitForSeconds(data.allpatternCooldown);
 
             // 9) 이번 패턴의 다음 실행 가능 시간 갱신
-            nextAvailableTime[randIdx] = Time.time + data.patternCooldown[randIdx];
+            nextAvailableTime[randIdx] = Time.time + data.patternCooldown[randIdx];         
         }
+        
     }
 
 

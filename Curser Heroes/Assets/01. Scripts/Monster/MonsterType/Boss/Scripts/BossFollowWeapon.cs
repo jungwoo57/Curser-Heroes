@@ -1,50 +1,68 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//
+
 public class BossFollowWeapon : MonoBehaviour
 {
-    public float speed = 5f; // 무기 따라가는 속도
+    [Header("무기 레이어 마스크")]
+    public LayerMask weaponLayerMask;   
+
+    [Header("무기 탐지 반경")]
+    public float detectionRadius = 10f;
+
+    [Header("추적 속도")]
+    public float speed = 1f;
 
     private Rigidbody2D rb;
     private Transform targetWeapon;
-    public float detectionRadius = 10f;
 
     private void Awake()
     {
-        // Rigidbody2D 컴포넌트 가져와서 회전 고정
         rb = GetComponent<Rigidbody2D>();
         rb.freezeRotation = true;
     }
-    void Update()
+
+    private void FixedUpdate()
     {
-        FindWeapon();
-       if (targetWeapon == null)
+        FindWeaponByLayer();
+
+        if (targetWeapon != null)
         {
-            return;
-        }
-       if(targetWeapon != null)
-        {
-            // 무기를 향해 이동
             Vector2 direction = (targetWeapon.position - transform.position).normalized;
             rb.velocity = direction * speed;
         }
         else
         {
-            rb.velocity = Vector2.zero; // 무기가 없으면 정지
+            rb.velocity = Vector2.zero;
         }
     }
-    private void FindWeapon()
+
+    private void FindWeaponByLayer()
     {
-        // "Weapon" 태그를 가진 오브젝트 찾기
-        GameObject weaponObject = GameObject.FindGameObjectWithTag("Weapon");
-        if (weaponObject != null)
+        // 지정한 반경 내에서 Weapon 레이어에 속한 Collider2D 모두 탐색
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, detectionRadius, weaponLayerMask);
+
+        if (hits.Length == 0)
         {
-            targetWeapon = weaponObject.transform; // 무기의 Transform 저장
+            targetWeapon = null;
+            return;
         }
-        else
+
+        // 그중 가장 가까운 무기 선택
+        float minDist = float.MaxValue;
+        Transform closest = null;
+
+        foreach (var col in hits)
         {
-            targetWeapon = null; // 무기가 없으면 null로 설정
+            float dist = Vector2.Distance(transform.position, col.transform.position);
+            if (dist < minDist)
+            {
+                minDist = dist;
+                closest = col.transform;
+            }
         }
+
+        targetWeapon = closest;
     }
+
 }

@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class Pattern2Logic : PatternLogicBase
 {
-    [Header("패턴 시작 전 지연 (초)")]
-    public float startDelay = 1.0f;          // 패턴이 시작되기 전 기다릴 시간
+    [Header("패턴 시작 중 지연 (초)")]
+    public float startDelay = 1.0f;     
 
     [Header("순간이동 감지 반경 (Unity 단위)")]
     public float detectionRadius = 10f;
@@ -35,11 +35,10 @@ public class Pattern2Logic : PatternLogicBase
                 nearest = hit.transform;
             }
         }
-
+        yield return new WaitForSeconds(startDelay);
         // 4) 대상이 있으면 보스를 해당 위치로 순간이동
         if (nearest != null)
         {
-            yield return new WaitForSeconds(startDelay);
             controller.transform.position = nearest.position;
         }
         else

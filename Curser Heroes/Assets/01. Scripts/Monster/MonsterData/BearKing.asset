@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36438cb0c778cdb4a9eed9ca26941c4f, type: 3}
   m_Name: BearKing
   m_EditorClassIdentifier: 
-  maxHP: 200
+  maxHP: 2147483647
   initialDelay: 5
   allpatternCooldown: 5
   patternCooldown: 070000001400000006000000
