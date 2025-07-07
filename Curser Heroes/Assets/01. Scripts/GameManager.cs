@@ -22,24 +22,22 @@ public class GameManager : MonoBehaviour
     public List<WeaponData> allMainWeapons; // 모든 무기 원본
     public List<SubWeaponData> allSubWeapons; // 모든 보조 무기 원본
     public List<SkillData> allSkills;// 모든 스킬
-    
-    
-    
-    [SerializeField] private List<WeaponData> _hasPartner; // 보유 동료
     public IReadOnlyList<WeaponData> hasPartner => _hasPartner; // 다른 파일에서 보유 동료 가져오기(수정 불가)
-    
 
+    [SerializeField] private List<WeaponData> _hasPartner; // 보유 동료
+    [SerializeField] private List<SkillData> _hasSkills = new List<SkillData>();
+    
     [Header("보유 중인 무기 및 스킬")]
     [SerializeField] public List<OwnedWeapon> ownedWeapons; // 소유 메인 무기
     [SerializeField] public List<OwnedSubWeapon> ownedSubWeapons; // 소유 보조 무기
-    [SerializeField] public List<SkillData> hasSkills;
-
+    
+    public List<SkillData> hasSkills => _hasSkills;
     public List<SkillData> skillPool = new List<SkillData>();
     
     [Header("장착 및 선택한 스킬")]
     public OwnedWeapon mainEquipWeapon;
     public OwnedSubWeapon subEquipWeapon;
-    public List<SkillData> selectSkills; //선택한 스킬(스테이지에 등장할 스킬), 스킬 갯수가 정해져있어서 배열로 변경도 고려
+    public List<SkillData> selectSkills = new List<SkillData>(); // 플레이어가 선택한 스킬 12개 //선택한 스킬(스테이지에 등장할 스킬), 스킬 갯수가 정해져있어서 배열로 변경도 고려
 
     [Header("기타 데이터")]
     [SerializeField] private int gold = 9999;
@@ -51,6 +49,9 @@ public class GameManager : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+
+            _hasSkills = new List<SkillData>(allSkills);
+            skillPool = new List<SkillData>(_hasSkills);
         }
         else
         {
