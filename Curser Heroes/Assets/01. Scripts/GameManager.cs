@@ -21,8 +21,8 @@ public class GameManager : MonoBehaviour
     [Header("모든 무기 및 스킬")]
     public List<WeaponData> allMainWeapons; // 모든 무기 원본
     public List<SubWeaponData> allSubWeapons; // 모든 보조 무기 원본
-    [SerializeField] private List<SkillData> _hasSkills; // 플레이어가 해금하여 보유하고 있는 스킬
-    public IReadOnlyList<SkillData> hasSkills => _hasSkills;
+    public List<SkillData> allSkills;// 모든 스킬
+    
     
     
     [SerializeField] private List<WeaponData> _hasPartner; // 보유 동료
@@ -32,7 +32,8 @@ public class GameManager : MonoBehaviour
     [Header("보유 중인 무기 및 스킬")]
     [SerializeField] public List<OwnedWeapon> ownedWeapons; // 소유 메인 무기
     [SerializeField] public List<OwnedSubWeapon> ownedSubWeapons; // 소유 보조 무기
-
+    [SerializeField] public List<SkillData> hasSkills;
+    
     [Header("장착 및 선택한 스킬")]
     public OwnedWeapon mainEquipWeapon;
     public OwnedSubWeapon subEquipWeapon;
