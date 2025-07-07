@@ -1,3 +1,4 @@
+﻿
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -38,6 +39,7 @@ public class Pattern2Logic : PatternLogicBase
         // 4) 대상이 있으면 보스를 해당 위치로 순간이동
         if (nearest != null)
         {
+            yield return new WaitForSeconds(startDelay);
             controller.transform.position = nearest.position;
         }
         else

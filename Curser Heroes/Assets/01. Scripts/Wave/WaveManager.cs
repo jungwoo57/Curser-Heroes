@@ -187,8 +187,14 @@ public class WaveManager : MonoBehaviour
         gameManager.AddGold(currentWaveData.CalculateGoldReward());
         int? jewel = currentWaveData.TryGetJewelReward();
         if (jewel.HasValue)
+        {
             gameManager.AddJewel(jewel.Value);
-        clearJewel = jewel.Value;
+            clearJewel = jewel.Value;
+        }
+        else
+        {
+            clearJewel = 0;
+        }
 
         skillManager.OnWaveEnd(); // → 내부에서 스킬 또는 보상 선택 UI 표시
     }

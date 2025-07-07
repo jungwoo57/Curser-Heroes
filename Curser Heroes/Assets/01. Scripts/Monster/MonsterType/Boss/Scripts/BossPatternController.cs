@@ -4,6 +4,7 @@ using System.Collections.Generic;
 //
 public class BossPatternController : MonoBehaviour
 {   
+
     public BossData data;
 
     public PatternLogicBase[] patternLogics;   // 인스펙터에서 순서대로 연결
@@ -27,7 +28,7 @@ public class BossPatternController : MonoBehaviour
 
     private void Start()
     {
-       
+
         StartCoroutine(PatternLoop());
     }
 
@@ -57,10 +58,10 @@ public class BossPatternController : MonoBehaviour
             int randIdx = available[Random.Range(0, available.Count)];
             string trigger = "Pattern" + (randIdx + 1);
 
-           
+
             foreach (var d in patternDamage) d.Deactivate();
             if (randIdx < patternDamage.Length)
-                   patternDamage[randIdx].Activate();
+                patternDamage[randIdx].Activate();
 
             animator.SetTrigger(trigger);
 
@@ -96,7 +97,7 @@ public class BossPatternController : MonoBehaviour
         while (!animator.GetCurrentAnimatorStateInfo(layer).IsName(stateName))
         {
             if (Time.time - start > timeout)
-            {                
+            {
                 yield break;
             }
             yield return null;
@@ -107,14 +108,20 @@ public class BossPatternController : MonoBehaviour
         {
             if (Time.time - start > timeout)
             {
-               
+
                 break;
             }
             yield return null;
         }
-    }   
+    }
 
 }
     
 
+
+
+
+
+    
+    
 
