@@ -2755,10 +2755,6 @@ MonoBehaviour:
   skillSelectUIPrefab: {fileID: 2116206273608610595, guid: ac6fc6da8019b4d42bf807d62702b93b, type: 3}
   player: {fileID: 3521251694906892393}
   cursorWeapon: {fileID: 3008519376834165207}
-  allSkills:
-  - {fileID: 11400000, guid: 72bfdbd50ec5c254cbb3f8147cafd490, type: 2}
-  - {fileID: 11400000, guid: f04c834df1cebbd4e8ab409149d7e159, type: 2}
-  - {fileID: 11400000, guid: 703781ae4a9d084438325b0dee1e77e3, type: 2}
   skillPool: []
   ownedSkills: []
   maxSkillCount: 6
@@ -3916,6 +3912,7 @@ MonoBehaviour:
   gameManager: {fileID: 2139855845}
   spawner: {fileID: 2021239203}
   clearGold: 0
+  clearJewel: 0
   currentWaveData:
     wave: 0
     overrideEnemies: []
@@ -5371,10 +5368,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allMainWeapons: []
   allSubWeapons: []
+  allSkills: []
   _hasPartner: []
   _hasSkills: []
   ownedWeapons: []
   ownedSubWeapons: []
+  skillPool: []
   mainEquipWeapon:
     data: {fileID: 0}
     level: 0
@@ -5385,6 +5384,7 @@ MonoBehaviour:
     bookMark: 0
   selectSkills: []
   gold: 9999
+  bestScore: 0
 --- !u!4 &2139855846
 Transform:
   m_ObjectHideFlags: 0
