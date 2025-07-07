@@ -1,4 +1,3 @@
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,19 +13,15 @@ public class LabPanel : MonoBehaviour
 
     private void OnEnable()
     {
-        UpdateSkillScroll();
+        UpdateSkillScroll(SkillType.Attack);
     }
 
-    public void ClickTypeButton()
+    public void ClickTypeButton(int num)
     {
-        
+        SkillType type = (SkillType)num;
+        UpdateSkillScroll(type);
     }
-
-    public void ShowAttackSkill()
-    {
-        
-    }
-
+    
     public void UpdateSkillInfo()
     {
         if (!selectSkill) return;
@@ -35,13 +30,19 @@ public class LabPanel : MonoBehaviour
         //skillEffect.text = selectSkill. 효과는 뭐라넣어야하지
     }
 
-    public void UpdateSkillScroll()
+    public void UpdateSkillScroll(SkillType type)
     {
-        for (int i = 0; i < GameManager.Instance.allSkills.Count; i++)
+        int skillindex = 0;
+        for (int i = 0; i < skillButton.Length; i++)  //이미지 초기화
         {
-            if (GameManager.Instance.allSkills[i])
+            skillButton[i].image.sprite = null;
+        }
+        
+        for (int i = 0; i < GameManager.Instance.allSkills.Count; i++)  // 타입별로 정렬
+        {
+            if (GameManager.Instance.allSkills[i]&&GameManager.Instance.allSkills[i].type==type)
             {
-                skillButton[i].image.sprite = GameManager.Instance.allSkills[i].icon;
+                skillButton[skillindex].image.sprite = GameManager.Instance.allSkills[i].icon;
                 if (GameManager.Instance.hasSkills.Find(n => n.skillName == GameManager.Instance.allSkills[i].name))
                 {
                     skillButton[i].image.color = new Color(1f, 1f, 1f, 0.5f);
@@ -50,6 +51,7 @@ public class LabPanel : MonoBehaviour
                 {
                     skillButton[i].image.color = new Color(1f, 1f, 1f, 1.0f);
                 }
+                skillindex++;
             }
         }
     }
