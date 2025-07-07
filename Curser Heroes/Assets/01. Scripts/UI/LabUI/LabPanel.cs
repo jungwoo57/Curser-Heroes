@@ -14,6 +14,7 @@ public class LabPanel : MonoBehaviour
     private void OnEnable()
     {
         UpdateSkillScroll(SkillType.Attack);
+        unlockButton.interactable = false;
     }
 
     public void ClickTypeButton(int num)
@@ -81,5 +82,10 @@ public class LabPanel : MonoBehaviour
             GameManager.Instance.UnlockSkill(selectSkill);
             unlockButton.interactable = false;
         }
+    }
+
+    public void ClickExitButton()
+    {
+        gameObject.SetActive(false);
     }
 }

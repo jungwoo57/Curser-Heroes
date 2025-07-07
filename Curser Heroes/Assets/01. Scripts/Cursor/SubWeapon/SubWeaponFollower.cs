@@ -9,6 +9,10 @@ public class SubWeaponFollower : MonoBehaviour
     [Header("설정")]
     public float radius = 1.5f;             // 커서를 중심으로 한 거리
 
+    void Start()
+    {
+        
+    }
     void Update()
     {
         if (cursorTransform == null) return;

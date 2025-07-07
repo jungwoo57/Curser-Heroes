@@ -41,14 +41,23 @@ public class ForgeUI : MonoBehaviour
         if (GameManager.Instance.mainEquipWeapon.data == null)     //장착 무기 없으면 1번 착용
         {
             selectWeapon = GameManager.Instance.ownedWeapons[0];
-            selectSubWeapon = GameManager.Instance.ownedSubWeapons[0];
             selectData = selectWeapon.data;
-            selectSubData = selectSubWeapon.data;
         }
         else
         {
             selectWeapon = GameManager.Instance.mainEquipWeapon;
+            selectData = selectWeapon.data;
+        }
+
+        if (GameManager.Instance.subEquipWeapon.data == null)
+        {
+            selectSubWeapon = GameManager.Instance.ownedSubWeapons[0];
+            selectSubData = selectSubWeapon.data;
+        }
+        else
+        {
             selectSubWeapon = GameManager.Instance.subEquipWeapon;
+            selectSubData = selectSubWeapon.data;
         }
         UIUpdate();
         UpdateSelectUI();
