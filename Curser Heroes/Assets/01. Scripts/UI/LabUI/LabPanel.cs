@@ -78,7 +78,7 @@ public class LabPanel : MonoBehaviour
         }
         else
         {
-            GameManager.Instance.hasSkills.Add(selectSkill);
+            GameManager.Instance.UnlockSkill(selectSkill);
             unlockButton.interactable = false;
         }
     }
