@@ -44,7 +44,7 @@ public class VillageUI : MonoBehaviour
 
     public void OpenLaboratoryEntryPanel()
     {
-        Debug.Log("연구실 판넬 켜기");
+        laboratoryEntryPanel.SetActive(true);
     }
 
     public void OpenBarEntryPanel()

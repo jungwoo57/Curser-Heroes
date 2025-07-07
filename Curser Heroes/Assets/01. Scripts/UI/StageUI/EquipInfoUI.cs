@@ -11,6 +11,14 @@ public class EquipInfoUI : MonoBehaviour
     private void OnEnable()
     {
         WeaponSelectUI.OnEquipUIUpdate += EquipUIUpdate;
+        if (GameManager.Instance.mainEquipWeapon.data)
+        {
+            mainWeaponImage.sprite = GameManager.Instance.mainEquipWeapon.data.weaponImage;
+        }
+        if (GameManager.Instance.subEquipWeapon.data)
+        {
+            subWeaponImage.sprite = GameManager.Instance.subEquipWeapon.data.weaponImage;
+        }
     }
     
     private void OnDisable()

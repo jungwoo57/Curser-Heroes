@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: SkillData 10
   m_EditorClassIdentifier: 
   skillName: "\uB290\uAE0B\uD55C \uD589\uB3D9"
-  damage: 0
-  cooltime: 0
   icon: {fileID: 21300000, guid: 8a6be8fff56dca44681a25f1bdf5d4c0, type: 3}
+  type: 0
   maxLevel: 6
   description: "\uCEE4\uC11C\uC758 \uBB34\uC801 \uC2DC\uAC04 \uC99D\uAC00."
+  skillPrefab: {fileID: 0}
+  levelDataList: []
