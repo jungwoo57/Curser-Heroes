@@ -22,8 +22,8 @@ public class ForgeUI : MonoBehaviour
     public Button mainWeaponButton;
     public Button subWeaponButton;
     public Button unlockButton;
+   
     public bool isMain = true;
-    
     public OwnedWeapon selectWeapon;
     public OwnedSubWeapon selectSubWeapon;
 	public WeaponData selectData;
@@ -69,8 +69,16 @@ public class ForgeUI : MonoBehaviour
     {
         if (isMain)
         {
-            GameManager.Instance.UnlockWeapon(selectData);
+           // if (GameManager.Instance.GetJewel() >= selectData.unlockCost)
+            {
+                GameManager.Instance.UnlockWeapon(selectData);
+            }
+
         }
+        unlockButton.gameObject.SetActive(false);
+        reinforceButton.gameObject.SetActive(true);
+        UpdateSelectUI();
+        UIUpdate();
     }
     public void UIUpdate()
     {

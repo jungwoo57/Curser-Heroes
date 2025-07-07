@@ -15,6 +15,7 @@ public class WaveManager : MonoBehaviour
     public static WaveManager Instance { get; private set; }
 
     public int clearGold;
+    public int clearJewel;
     //public PoolSpawnerTest spawner; // Inspector에서 연결 필요
 
     public WaveEntry currentWaveData;
@@ -186,6 +187,7 @@ public class WaveManager : MonoBehaviour
         int? jewel = currentWaveData.TryGetJewelReward();
         if (jewel.HasValue)
             gameManager.AddJewel(jewel.Value);
+        clearJewel = jewel.Value;
 
         skillManager.OnWaveEnd(); // → 내부에서 스킬 또는 보상 선택 UI 표시
     }

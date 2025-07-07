@@ -1,4 +1,4 @@
-﻿using System;
+﻿
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -98,7 +98,7 @@ public class BattleUI : MonoBehaviour
         stageText.text = "Stage : " + 0; // 매니저에게 스테이지 정보 가져와서 적용
         waveText.text = "Wave : " + WaveManager.Instance.currentWaveData.wave;
         goldText.text = "Gold : " + GameManager.Instance.GetGold() + "(" + WaveManager.Instance.clearGold + ")";  //매니저에게 스테이지 정보 가져와서 적용
-        jewelText.text = "Jewel : " + GameManager.Instance.GetJewel() + "(" + 0 + ")"; //매니저에게 스테이지 정보 가져와서 적용
+        jewelText.text = "Jewel : " + GameManager.Instance.GetJewel() + "(" + WaveManager.Instance.clearJewel + ")"; //매니저에게 스테이지 정보 가져와서 적용
     }
 
     public void SkillUpdate()
