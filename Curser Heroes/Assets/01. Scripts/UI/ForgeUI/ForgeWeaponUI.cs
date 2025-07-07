@@ -128,6 +128,15 @@ public class ForgeWeaponUI : MonoBehaviour
                 forgeUI.selectSubWeapon = hasSubData;
                 forgeUI.UIUpdate();
             }
+            else
+            {
+                if (subData == null) return;
+                forgeUI.selectSubWeapon = null;
+                forgeUI.selectSubData = subData;
+                forgeUI.reinforceButton.gameObject.SetActive(false);
+                forgeUI.unlockButton.gameObject.SetActive(true);
+                forgeUI.UIUpdate();
+            }
         }
         //가지고 있으면 무기 변경 아니면 무기 해금 일단 무기 변경만
     }
