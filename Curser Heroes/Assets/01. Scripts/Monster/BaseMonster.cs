@@ -19,7 +19,7 @@ public abstract class BaseMonster : MonoBehaviour
     private static readonly int HashDie = Animator.StringToHash("Die");
     private static readonly int HashDamage = Animator.StringToHash("Damage");
     private static readonly int HashSpawn = Animator.StringToHash("Spw");
-
+    private float minAttackCooldown = 2f,maxAttackCooldown = 4f;
     public event Action<GameObject> onDeath;
 
     private SpriteRenderer spriteRenderer;
@@ -95,9 +95,9 @@ public abstract class BaseMonster : MonoBehaviour
                 attackColorCoroutine = StartCoroutine(ChangeColorGradually(Color.white, 0.3f));
             }
 
-           
 
-            attackTimer = attackCooldown;
+
+            attackTimer = UnityEngine.Random.Range(minAttackCooldown, maxAttackCooldown);
         }
     }
 
