@@ -10,9 +10,9 @@ public abstract class BasePartner : MonoBehaviour
     public float gaugePerMonsterHit = 2f;
 
     // 현재 게이지 값 (0 ~ data.gaugeMax)
-    private float currentGauge;
+    public float currentGauge;
 
-    // 게이지 및 초상화를 표시할 UI 컴포넌트
+    // 게이지 UI 컴포넌트
     private PartnerUI ui;
 
     // Awake 단계에서 UI를 찾아 초기 설정
@@ -22,7 +22,6 @@ public abstract class BasePartner : MonoBehaviour
         ui = GetComponentInChildren<PartnerUI>(true);
         if (ui == null)
             Debug.LogError("PartnerUI를 자식 오브젝트에 꼭 부착해주세요.");
-
         // 초상화 설정 및 게이지 초기화
         ui.Configure(data.portraitSprite);
         ui.UpdateGauge(0f);
@@ -32,12 +31,15 @@ public abstract class BasePartner : MonoBehaviour
     protected virtual void OnEnable()
     {
         BaseMonster.OnAnyMonsterDamaged += HandleMonsterDamaged;
+        BossStats.OnAnyMonsterDamaged += HandleMonsterDamaged;
     }
 
     // 비활성화 시 이벤트 구독 해제
     protected virtual void OnDisable()
     {
         BaseMonster.OnAnyMonsterDamaged -= HandleMonsterDamaged;
+        BossStats.OnAnyMonsterDamaged -= HandleMonsterDamaged;
+
     }
 
     // 몬스터가 피해를 입을 때마다 호출되는 핸들러
@@ -50,7 +52,20 @@ public abstract class BasePartner : MonoBehaviour
         // 게이지가 가득 차면 스킬 발동 후 게이지 리셋
         if (currentGauge >= data.gaugeMax)
         {
-            ActivateSkill();
+         
+            currentGauge = 0f;
+            ui.UpdateGauge(0f);
+        }
+    }
+    private void HandleMonsterDamaged(BossStats boss)
+    {
+        // 보스가 피해를 입을 때도 동일하게 게이지를 채움
+        currentGauge = Mathf.Min(currentGauge + gaugePerMonsterHit, data.gaugeMax);
+        ui.UpdateGauge(currentGauge / data.gaugeMax);
+        // 게이지가 가득 차면 스킬 발동 후 게이지 리셋
+        if (currentGauge >= data.gaugeMax)
+        {
+           
             currentGauge = 0f;
             ui.UpdateGauge(0f);
         }

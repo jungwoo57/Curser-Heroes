@@ -7,7 +7,13 @@ public class Hunter : BasePartner
 {
     public float skillRange = 20f;
 
-
+    private void Update()
+    {
+        if(currentGauge >= data.gaugeMax)
+        {
+            ActivateSkill();
+        }
+    }
     protected override void ActivateSkill()
     {
         Collider2D weaponCollider = Physics2D.OverlapCircle(transform.position, skillRange, LayerMask.GetMask("Weapon"));
@@ -16,7 +22,7 @@ public class Hunter : BasePartner
             if (WeaponManager.Instance != null)
             {
                 WeaponManager.Instance.TakeWeaponLifeDamage();
-                Debug.Log("근접 공격으로 무기 내구도 감소!");
+                Debug.Log("스킬발동 ! ");
             }
             else
             {
