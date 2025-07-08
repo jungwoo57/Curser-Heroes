@@ -51,6 +51,7 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
 
             _hasSkills = new List<SkillData>(allSkills);
+            skillPool = new List<SkillData>(allSkills); //테스트 편의를 위해 잠시 모든 스킬의 데이터를 가져와 사용 
         }
         else
         {
