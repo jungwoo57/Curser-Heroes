@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 //
 public class BossPatternController : MonoBehaviour
 {
-
+    
     public BossData data;
 
     public PatternLogicBase[] patternLogics;   // 인스펙터에서 순서대로 연결
@@ -16,12 +16,11 @@ public class BossPatternController : MonoBehaviour
     public bool IsInPattern { get; private set; }
     public bool IsInSpawn { get; private set; } // 보스가 스폰 중인지 여부
 
+    public int CheckDie = 0;
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
         patternDamage = GetComponentsInChildren<BossPatternDamage>();
-                         
-        
 
         int count = data.patternCooldown.Length;
         nextAvailableTime = new float[count];
@@ -30,10 +29,19 @@ public class BossPatternController : MonoBehaviour
         for (int i = 0; i < count; i++)
             nextAvailableTime[i] = Time.time + data.initialDelay;
     }
-
+    void Update()
+    {
+        BossStats boss = GetComponent<BossStats>();
+        boss.currentHP = CheckDie;
+        if (CheckDie <= 0)
+        {
+            StopCoroutine(PatternLoop()); // 보스가 죽으면 코루틴 종료
+        }
+    }
     private void Start()
     {
-
+       
+        
         StartCoroutine(PatternLoop());
     }
 
@@ -46,8 +54,9 @@ public class BossPatternController : MonoBehaviour
         yield return new WaitForSeconds(data.initialDelay);
         IsInSpawn = false;
         while (true)  // 보스가 살아있는 동안 패턴 반복
-        {
+        {            
             IsInPattern = true;
+
             // 실행 가능(쿨타임이 지난) 패턴만 골라 리스트에 추가
             List<int> available = new List<int>();
             for (int i = 0; i < nextAvailableTime.Length; i++)
