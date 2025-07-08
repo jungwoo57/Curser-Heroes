@@ -61,6 +61,8 @@ public class BossStats : MonoBehaviour
     public void Die()
     {
         animator.SetTrigger("BossRun");  // 여기서는 보스 사망 애니메이션으로 사용
+
+        WaveManager.Instance?.OnMonsterKilled(this.gameObject);
         Destroy(gameObject, 5f);         // 5초 뒤 오브젝트 제거
     }
 }
