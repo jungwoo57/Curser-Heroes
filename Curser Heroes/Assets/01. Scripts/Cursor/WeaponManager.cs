@@ -56,19 +56,23 @@ public class WeaponManager : MonoBehaviour
     private IEnumerator OnInvincible()
     {
         isInvincible = true;
-        //SpriteRenderer cursorImage = cursorWeapon.GetComponent<SpriteRenderer>();
+        SpriteRenderer cursorImage = cursorWeapon.GetComponent<SpriteRenderer>();
+        Material cursorMaterial = cursorImage.material;
         float elapsedTime = 0f;
-        float duration = 0.1f;
+        float duration = 0.2f;
         bool isBlink = false;
-        /*
+        
         while(elapsedTime < invincibilityTime)
         {
-            if (!cursorImage)
+            if (cursorImage)
             {
-               
+                isBlink = !isBlink; 
+                cursorMaterial.SetFloat("_FlashAmount", isBlink ? 1.0f:0f);
+                elapsedTime += Time.deltaTime;
+                yield return new WaitForSeconds(duration);
             }
-        }*/
-        yield return new WaitForSeconds(invincibilityTime);
+        }
+        cursorMaterial.SetFloat("_FlashAmount", 0f);
         isInvincible = false;
     }
     
