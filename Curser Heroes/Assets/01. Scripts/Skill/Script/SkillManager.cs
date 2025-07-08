@@ -102,7 +102,7 @@ public class SkillManager : MonoBehaviour
         }
 
         // 레벨업 또는 신규 습득 후 자동 배치
-        if (selected.skillName == "매직소드" || selected.skillName == "포이즌필드")
+        if (selected.skillName == "매직소드" || selected.skillName == "포이즌필드" || selected.skillName == "수호의 방패")
         {
             DeployPersistentSkill(owned);
         }
@@ -155,7 +155,14 @@ public class SkillManager : MonoBehaviour
             {
                 rotating.UpdateSwords(skillInstance); // 상태 갱신
             }
-
+            else if (existingObj.TryGetComponent(out AoEFieldSkill aoe))
+            {
+                aoe.Init(skillInstance, cursorWeapon.transform);
+            }
+            else if (existingObj.TryGetComponent(out RotatingShieldSkill shield))
+            {
+                shield.UpdateShields(skillInstance);
+            }
             return; // 새 오브젝트 생성 방지
         }
 
@@ -164,13 +171,18 @@ public class SkillManager : MonoBehaviour
         GameObject obj = Instantiate(skillData.skillPrefab, spawnPos, Quaternion.identity);
         persistentSkillObjects[skillData] = obj;
 
-        if (obj.TryGetComponent(out RotatingSkill newRotating))
+        if (obj.TryGetComponent(out RotatingShieldSkill shieldSkill))
         {
-            newRotating.Init(skillInstance, cursorWeapon.transform);
+            Debug.Log("[SkillManager] 수호의 방패 Init 호출됨");
+            shieldSkill.Init(skillInstance, cursorWeapon.transform);
         }
-        else if (obj.TryGetComponent(out AoEFieldSkill aoe))
+        else if (obj.TryGetComponent(out RotatingSkill rotatingSkill))
         {
-            aoe.Init(skillInstance,cursorWeapon.transform);
+            rotatingSkill.Init(skillInstance, cursorWeapon.transform);
+        }
+        else if (obj.TryGetComponent(out AoEFieldSkill aoeSkill))
+        {
+            aoeSkill.Init(skillInstance, cursorWeapon.transform);
         }
         else
         {

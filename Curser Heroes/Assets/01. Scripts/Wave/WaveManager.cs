@@ -85,6 +85,7 @@ public class WaveManager : MonoBehaviour
             {
                 case "매직소드":
                 case "포이즌필드":
+                case "수호의 방패":
                     skillManager.DeployPersistentSkill(skill);
                     break;
             }

@@ -10,12 +10,19 @@ public class RotatingShieldSkill : MonoBehaviour
 
     public void Init(SkillManager.SkillInstance skillInstance, Transform playerTransform)
     {
-        var levelData = skillInstance.skill.levelDataList[skillInstance.level - 1];
+        
         player = playerTransform;
 
-        int shieldCount = (skillInstance.level >= skillInstance.skill.maxLevel) ? 2 : 1;
+        if (player == null)
+        {
+            return;
+        }
+
+        var levelData = skillInstance.skill.levelDataList[skillInstance.level - 1];
+
+        int shieldCount = levelData.count;
         float angleStep = 360f / shieldCount;
-        float scaleMultiplier = Mathf.Pow(1.1f, skillInstance.level - 1);
+        float scaleMultiplier = levelData.sizeMultiplier;
 
         for (int i = 0; i < shieldCount; i++)
         {
@@ -29,6 +36,7 @@ public class RotatingShieldSkill : MonoBehaviour
 
             // ⚠️ 프리팹에 DestroyProjectileOnContact + Collider (isTrigger) 필요
         }
+        Debug.Log($"[RotatingShieldSkill] Init 완료 - 방패 {shieldCount}개 배치됨");
     }
 
     void Update()
@@ -37,6 +45,10 @@ public class RotatingShieldSkill : MonoBehaviour
         {
             transform.position = player.position;
             transform.Rotate(Vector3.forward, rotateSpeed * Time.deltaTime);
+        }
+        else
+        {
+            Debug.LogWarning("[RotatingShieldSkill] player가 null입니다.");
         }
     }
 
