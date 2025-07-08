@@ -6,7 +6,7 @@ using UnityEngine;
 public class BossPatternDamage : MonoBehaviour
 {
     private Collider2D col;
-    public float cooldown = 1;
+    public float cooldown = 0.5f;
 
     private void Awake()
     {
@@ -16,22 +16,13 @@ public class BossPatternDamage : MonoBehaviour
     public void Activate()
     {
         col.enabled = true;  // 패턴이 활성화 되면 콜라이더 활성 
-       
+        Attack();
     }
     public void Deactivate() // 패턴이 비활성화 되면 콜라이더 비활성
     {
         col.enabled = false;
     }
-    public void Update()
-    {
-        if(col.enabled = true)
-        {
-            cooldown -= Time.deltaTime;
-            if(cooldown <= 0)
-            Attack(); // 활성화 시 공격 실행
-            cooldown = 1;
-        }
-    }
+   
 
     protected void Attack()
      {

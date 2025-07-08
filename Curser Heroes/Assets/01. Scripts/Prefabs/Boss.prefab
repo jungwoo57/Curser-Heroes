@@ -186,6 +186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87b476af721acb14ca318290589176c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cooldown: 0.5
 --- !u!1 &516661987287440696
 GameObject:
   m_ObjectHideFlags: 0
@@ -360,6 +361,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87b476af721acb14ca318290589176c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cooldown: 0.5
 --- !u!1 &908137102209997149
 GameObject:
   m_ObjectHideFlags: 0
@@ -1623,6 +1625,7 @@ MonoBehaviour:
   - {fileID: 1811837008767771538}
   - {fileID: 3481062758182705230}
   - {fileID: 7609914265077726511}
+  CheckDie: 0
 --- !u!114 &8632058700948958466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1636,6 +1639,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: b632e75ab71c5bd459ce0387d2fffa89, type: 2}
+  currentHP: 0
 --- !u!114 &5779125574102272480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1665,7 +1669,11 @@ MonoBehaviour:
   patternParent: {fileID: 6042935593672361283}
   activationInterval: 0.05
   firePoint: {fileID: 6042935593672361283}
-  weaponTransform: {fileID: 0}
+  weaponLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  detectionRadius: 10
+  targetWeapon: {fileID: 0}
 --- !u!114 &2862775590602846437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3448,6 +3456,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87b476af721acb14ca318290589176c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cooldown: 0.5
 --- !u!1 &7179096278220319392
 GameObject:
   m_ObjectHideFlags: 0
