@@ -37,6 +37,7 @@ public class StageSelectUI : MonoBehaviour
         {
                 stageIndex = 1;
                 maxStageIndex = 5; // 해당 부분 스테이지 구현 후 변경
+                UpdateStageInfoUI();
         }
 
         public void ClickNextStageButton(int value)
@@ -55,14 +56,14 @@ public class StageSelectUI : MonoBehaviour
                 }    // 해당 함수 부분 기획 의견 듣고 결정 (마지막 스테이지에서 처음 스테이지로 이동할지 아니면 넘어가 지지 않을지)
                 
                 Debug.Log(stageIndex);
-                UpdateStageInfoUI(stageIndex);
+                UpdateStageInfoUI();
         }
 
-        public void UpdateStageInfoUI(int index) // 해당 인덱스의 스테이지 정보 UPDATE
+        public void UpdateStageInfoUI() // 해당 인덱스의 스테이지 정보 UPDATE
         {
               Debug.Log("UI업데이트 임시 출력");   // TEST용 코드
               //  bestScoreText.text = stage[index].maxScore.ToString()     예시 코드 스테이지 제작 후 결정
-              bestWaveText.text = GameManager.Instance.bestScore.ToString(); // 가장 높은 웨이브 설정
+              bestWaveText.text = GameManager.Instance.bestScore.ToString() + " WAVE"; // 가장 높은 웨이브 설정
               //stageNameText.text = stage[index].name;                     예시 코드 스테이지 제작 후 결정
         }
 
