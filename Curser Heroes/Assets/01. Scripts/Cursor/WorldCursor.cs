@@ -12,7 +12,6 @@ public class WorldCursor : MonoBehaviour
 
     void Update()
     {
-        if (WeaponManager.Instance.isDie) return;
         Vector3 mousePos = Input.mousePosition;
         Vector3 worldPos = cam.ScreenToWorldPoint(mousePos);
         transform.position = new Vector3(worldPos.x, worldPos.y, 0f); 

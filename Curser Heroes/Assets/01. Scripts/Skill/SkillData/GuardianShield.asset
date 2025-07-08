@@ -23,25 +23,25 @@ MonoBehaviour:
   levelDataList:
   - level: 1
     damage: 0
-    sizeMultiplier: 0
+    sizeMultiplier: 5
     count: 1
     duration: 0
     cooldown: 0
   - level: 2
     damage: 0
-    sizeMultiplier: 1.1
+    sizeMultiplier: 5.2
     count: 1
     duration: 0
     cooldown: 0
   - level: 3
     damage: 0
-    sizeMultiplier: 1.2
+    sizeMultiplier: 5.4
     count: 1
     duration: 0
     cooldown: 0
   - level: 4
     damage: 0
-    sizeMultiplier: 1.3
+    sizeMultiplier: 5.8
     count: 2
     duration: 0
     cooldown: 0

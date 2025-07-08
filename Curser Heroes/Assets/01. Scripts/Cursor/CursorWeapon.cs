@@ -22,8 +22,7 @@ public class CursorWeapon : MonoBehaviour
     }
 
     void Update()
-    {
-        if (WeaponManager.Instance.isDie) return;
+    {      
         AutoAttackCursor();      //커서 근처에 있는 몬스터를 감지하고 쿨타임에 따라 자동으로 공격, 프레임마다 호출
     } 
 

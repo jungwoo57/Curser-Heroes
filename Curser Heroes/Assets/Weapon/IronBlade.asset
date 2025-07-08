@@ -15,8 +15,8 @@ MonoBehaviour:
   weaponName: IronBlade
   weaponImage: {fileID: 21300000, guid: b44c6e47ef894514c8aa56b440b87c67, type: 3}
   weaponDesc: 
-  upgradeCost: fa0000004c010000b90100004a0200000b0300000c040000610500002707000083090000a60c0000
-  unlockCost: 0
+  level: 0
+  upgradeCost: 40
   baseDamage: 5
   damagePerLevel: 3
   attackCooldown: 0.5

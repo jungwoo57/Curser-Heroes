@@ -16,25 +16,13 @@ public class BossPatternDamage : MonoBehaviour
     public void Activate()
     {
         col.enabled = true;  // 패턴이 활성화 되면 콜라이더 활성 
-        
+        Attack();
     }
     public void Deactivate() // 패턴이 비활성화 되면 콜라이더 비활성
     {
         col.enabled = false;
     }
-
-    public void Update()
-    {
-        if (col.enabled)
-        {
-            cooldown -= Time.deltaTime; // 쿨타임 감소
-            if (cooldown <= 0f)
-            {
-                Attack(); // 쿨타임이 끝나면 비활성화
-                cooldown = 0.5f; // 쿨타임 초기화
-            }
-        }
-    }
+   
 
     protected void Attack()
      {
@@ -45,7 +33,7 @@ public class BossPatternDamage : MonoBehaviour
             if (WeaponManager.Instance != null)
             {
                 WeaponManager.Instance.TakeWeaponLifeDamage();
-                Debug.Log("보스 공격으로 무기 내구도 감소!");
+                Debug.Log("근접 공격으로 무기 내구도 감소!");
             }
             else
             {
