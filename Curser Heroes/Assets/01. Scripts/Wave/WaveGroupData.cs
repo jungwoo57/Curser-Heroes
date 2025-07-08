@@ -4,9 +4,10 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "ScriptableObjects/WaveGroupData")]
 public class WaveGroupData : ScriptableObject
 {
-    [Header("전체 웨이브 몬스터 풀")]
+    [Header("전체 몬스터 풀")]
     public List<MonsterData> globalMonsterPool;
 
+    [Header("개별 웨이브 설정")]
     public List<WaveEntry> waveEntries = new List<WaveEntry>();
 }
 
@@ -14,12 +15,15 @@ public class WaveGroupData : ScriptableObject
 public class WaveEntry
 {
     public int wave;
-    [Tooltip("특정 웨이브에서만 사용되는 몬스터 (없으면 globalMonsterPool 사용)")]
-    public List<MonsterData> overrideEnemies;
 
-    public bool forceExactOverride; 
+    [Tooltip("이 웨이브에 등장할 보스 (보스 웨이브일 때만 사용)")]
+    public List<BossData> overrideBosses;
 
-    public bool HasOverrideEnemies => overrideEnemies != null && overrideEnemies.Count > 0;
+    public bool isBossWave;
+
+    //public bool forceExactOverride; (추후에 사용될 수 있어 보류)
+
+    public bool HasBosses => overrideBosses != null && overrideBosses.Count > 0;
 
     public int WaveValue => 30 + (wave - 1) * 5;
 

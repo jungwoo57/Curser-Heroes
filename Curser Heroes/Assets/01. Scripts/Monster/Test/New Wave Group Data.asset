@@ -17,11 +17,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 54638af21faef144fa40978387dc484f, type: 2}
   - {fileID: 11400000, guid: e06972eac5f4f5f4ba95a1104c48f2ee, type: 2}
   waveEntries:
-  - wave: 20
-    overrideEnemies:
-    - {fileID: 11400000, guid: 4963c06c696edac40971bc2ab9568b12, type: 2}
-    forceExactOverride: 1
-  - wave: 40
-    overrideEnemies:
-    - {fileID: 11400000, guid: 4963c06c696edac40971bc2ab9568b12, type: 2}
-    forceExactOverride: 1
+  - wave: 5
+    overrideBosses:
+    - {fileID: 11400000, guid: b632e75ab71c5bd459ce0387d2fffa89, type: 2}
+    isBossWave: 1
