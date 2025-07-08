@@ -50,7 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 7933783360421492996, guid: 6f1091c47f5491045aa7b82cffd414ec, type: 3}
   firePoint: {fileID: 3173297446982568087}
-  attackRange: 3
+  attackRange: 10
 --- !u!212 &8795086367357238258
 SpriteRenderer:
   m_ObjectHideFlags: 0
