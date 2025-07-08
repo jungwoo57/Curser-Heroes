@@ -56,6 +56,18 @@ public class WeaponManager : MonoBehaviour
     private IEnumerator OnInvincible()
     {
         isInvincible = true;
+        //SpriteRenderer cursorImage = cursorWeapon.GetComponent<SpriteRenderer>();
+        float elapsedTime = 0f;
+        float duration = 0.1f;
+        bool isBlink = false;
+        /*
+        while(elapsedTime < invincibilityTime)
+        {
+            if (!cursorImage)
+            {
+               
+            }
+        }*/
         yield return new WaitForSeconds(invincibilityTime);
         isInvincible = false;
     }
@@ -72,11 +84,10 @@ public class WeaponManager : MonoBehaviour
             else cursorWeapon.transform.position += Vector3.down * moveSpeed * Time.deltaTime;
             float angle = rotationSpeed * Time.deltaTime;
             cursorWeapon.transform.rotation *= Quaternion.Euler(0, 0, -angle);
-            Debug.Log("회전중"  + -angle);
             elaspedTime += Time.deltaTime;
             yield return null;
-
         }
+        UIManager.Instance.StageEnd();
     }
 }
         

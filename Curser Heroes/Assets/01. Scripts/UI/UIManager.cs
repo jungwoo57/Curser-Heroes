@@ -1,7 +1,8 @@
 ﻿
-using System;
+using System.Collections;
 using UnityEngine;
-
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 public class UIManager : MonoBehaviour
 {
 
@@ -34,7 +35,8 @@ public class UIManager : MonoBehaviour
     }
 
    
-
+    public Image gameOverPanel;
+    
     public BattleUI battleUI;
     
     public StageStartUI stageStartUI;
@@ -57,5 +59,27 @@ public class UIManager : MonoBehaviour
         stageStartUI.StartAnimation();
     }
     
+    public void StageEnd()
+    {
+        StartCoroutine(StageEndCoroutine());
+    }
+    private IEnumerator StageEndCoroutine()
+    {
+        float durationTime = 3.0f;
+        float elapsedTime = 0.0f;
+        gameOverPanel.gameObject.SetActive(true);
+
+        Color startColor = new Color(1,1,1,0);
+        Color endColor = new Color(1,1,1,1);
+
+        while (elapsedTime < durationTime)
+        {
+            float time = elapsedTime / durationTime;
+            gameOverPanel.color = Color.Lerp(startColor, endColor, time);
+            elapsedTime+= Time.deltaTime;
+            yield return null;
+        }
+        SceneManager.LoadScene("JW_StageSelectUI");
+    }
     
 }
