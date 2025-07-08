@@ -1625,7 +1625,10 @@ MonoBehaviour:
   - {fileID: 1811837008767771538}
   - {fileID: 3481062758182705230}
   - {fileID: 7609914265077726511}
-  CheckDie: 0
+  hitboxStartDelays:
+  - 1
+  - 1
+  - 0.1
 --- !u!114 &8632058700948958466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1652,7 +1655,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fccd8aa3cdbf10b4190fb387f0d55934, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startDelay: 1
+  startDelay: 0
   detectionRadius: 10
 --- !u!114 &145762067170016620
 MonoBehaviour:
@@ -1672,7 +1675,7 @@ MonoBehaviour:
   weaponLayerMask:
     serializedVersion: 2
     m_Bits: 64
-  detectionRadius: 10
+  detectionRadius: 40
   targetWeapon: {fileID: 0}
 --- !u!114 &2862775590602846437
 MonoBehaviour:
