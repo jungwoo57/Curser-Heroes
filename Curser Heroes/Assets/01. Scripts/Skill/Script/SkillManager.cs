@@ -8,6 +8,7 @@ public class SkillManager : MonoBehaviour
     [SerializeField] private GameObject skillSelectUIPrefab;
     [SerializeField] private Transform player;
     [SerializeField] private CursorWeapon cursorWeapon;
+    [SerializeField] private GameObject explosionPrefab;
 
     public List<SkillData> skillPool = new List<SkillData>();
     public List<SkillInstance> ownedSkills = new List<SkillInstance>();
@@ -24,6 +25,10 @@ public class SkillManager : MonoBehaviour
         public SkillData skill;
         public int level;
         public bool IsMaxed => level >= skill.maxLevel;
+    }
+    private void Awake()
+    {
+        ExplodeOnKillSkill.explosionPrefab = explosionPrefab;
     }
 
     void Start()
