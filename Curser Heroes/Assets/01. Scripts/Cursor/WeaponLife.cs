@@ -20,8 +20,13 @@ public class WeaponLife : MonoBehaviour
             OnOutOfLives();                    //목숨이 0 이하가 되면 파괴 처리
     }
 
+    [ContextMenu("사망 애니메이션")]
     private void OnOutOfLives()           //목숨이 0일 때 호출되는 함수
     {
-        Debug.Log($"{currentWeapon.weaponName} 파괴됨 (목숨 0)");  //  목숨이 0이되면 디버그로그로 확인    
+        Debug.Log($"{currentWeapon.weaponName} 파괴됨 (목숨 0)");  //  목숨이 0이되면 디버그로그로 확인  
+        WeaponManager.Instance.isDie = true;
+        WeaponManager.Instance.StartCoroutine("DieAnimation");
     }
+
+    
 }

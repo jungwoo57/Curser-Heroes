@@ -27,13 +27,14 @@ public class MonsterProjectile : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Weapon"))
         {
             // 무기 내구도 감소
-            if (WeaponManager.Instance != null)
+            if (WeaponManager.Instance != null && !WeaponManager.Instance.isInvincible)
             {
                 WeaponManager.Instance.TakeWeaponLifeDamage();
                 Debug.Log("투사체 충돌: 무기 내구도 감소!");
+                Destroy(gameObject); // 즉시 파괴, 충돌했을 때만
             }
 
-            Destroy(gameObject); // 즉시 파괴
+            //Destroy(gameObject); // 즉시 파괴
         }
     }
 }
