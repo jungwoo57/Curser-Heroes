@@ -42,7 +42,7 @@ public class ForgeWeaponUI : MonoBehaviour
     public void UpdateUI(WeaponData weaponData)
     {
         mainData = weaponData;
-        
+
         CheckMainLock();
         if (mainData != null)
         {
@@ -126,6 +126,9 @@ public class ForgeWeaponUI : MonoBehaviour
             {
                 if (hasSubData == null) return;
                 forgeUI.selectSubWeapon = hasSubData;
+                forgeUI.selectSubData = hasSubData.data;
+                forgeUI.reinforceButton.gameObject.SetActive(true);
+                forgeUI.unlockButton.gameObject.SetActive(false);
                 forgeUI.UIUpdate();
             }
             else
