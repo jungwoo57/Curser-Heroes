@@ -28,6 +28,7 @@ public class WeaponManager : MonoBehaviour
 
     void Start()
     {
+        Cursor.visible = false; 
         selectedWeapon = GameManager.Instance.mainEquipWeapon.data;
         EquipWeapon(selectedWeapon); // 게임 시작 시 한번만 호출됨
     }
@@ -48,9 +49,15 @@ public class WeaponManager : MonoBehaviour
 
     public void TakeWeaponLifeDamage() //데미지를 입었을 때 호출됨
     {
-        AudioManager.Instance.PlayHitSound(HitType.Monster);
-        StartCoroutine(OnInvincible());
-        weaponLife.TakeLifeDamage(); //목숨을 1개 줄이고 0이 되면 끝남
+        if (!isDie)
+        {
+            AudioManager.Instance.PlayHitSound(HitType.Monster);
+            weaponLife.TakeLifeDamage(); //목숨을 1개 줄이고 0이 되면 끝남
+            if (!isDie)
+            {
+                StartCoroutine(OnInvincible());
+            }
+        }
     }
 
     private IEnumerator OnInvincible()
@@ -61,15 +68,21 @@ public class WeaponManager : MonoBehaviour
         float elapsedTime = 0f;
         float duration = 0.2f;
         bool isBlink = false;
+        float blinkTime = 0.5f;
         
         while(elapsedTime < invincibilityTime)
         {
             if (cursorImage)
             {
-                isBlink = !isBlink; 
-                cursorMaterial.SetFloat("_FlashAmount", isBlink ? 1.0f:0f);
+                isBlink = !isBlink;
+                if (duration - blinkTime <= 0)
+                {
+                    cursorMaterial.SetFloat("_FlashAmount", isBlink ? 1.0f : 0f);
+                    blinkTime = 0;
+                }
+                yield return null;
+                blinkTime += Time.deltaTime;
                 elapsedTime += Time.deltaTime;
-                yield return new WaitForSeconds(duration);
             }
         }
         cursorMaterial.SetFloat("_FlashAmount", 0f);
@@ -85,13 +98,14 @@ public class WeaponManager : MonoBehaviour
         while (cursorWeapon.transform.position.y > fallPosition.y)
         {
             if (elaspedTime < 0.5) cursorWeapon.transform.position += Vector3.up * moveSpeed * Time.deltaTime;
-            else cursorWeapon.transform.position += Vector3.down * moveSpeed * Time.deltaTime;
+            else cursorWeapon.transform.position += Vector3.down * moveSpeed * Time.deltaTime * (elaspedTime*2.0f);
             float angle = rotationSpeed * Time.deltaTime;
             cursorWeapon.transform.rotation *= Quaternion.Euler(0, 0, -angle);
             elaspedTime += Time.deltaTime;
             yield return null;
         }
         UIManager.Instance.StageEnd();
+        Cursor.visible = true;
     }
 }
         
