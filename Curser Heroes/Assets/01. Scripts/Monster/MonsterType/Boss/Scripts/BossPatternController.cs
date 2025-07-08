@@ -29,15 +29,7 @@ public class BossPatternController : MonoBehaviour
         for (int i = 0; i < count; i++)
             nextAvailableTime[i] = Time.time + data.initialDelay;
     }
-    void Update()
-    {
-        BossStats boss = GetComponent<BossStats>();
-        boss.currentHP = CheckDie;
-        if (CheckDie <= 0)
-        {
-            StopCoroutine(PatternLoop()); // 보스가 죽으면 코루틴 종료
-        }
-    }
+   
     private void Start()
     {
        
