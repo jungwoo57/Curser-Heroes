@@ -11,18 +11,23 @@ public class Pattern1Logic : PatternLogicBase
 
     [Header("발사 위치 기준(Weapon 방향)")]
     public Transform firePoint;
-
-    public Transform weaponTransform;
-
-
+    public LayerMask weaponLayerMask;
+    public float detectionRadius = 10f;
+    public Transform targetWeapon;
+   
+    void Start()
+    {
+        FindWeaponByLayer();
+    }
     public override IEnumerator Execute(BossPatternController controller)
     {
-        if (patternParent == null || firePoint == null || weaponTransform == null)
+        
+        if (patternParent == null || firePoint == null || targetWeapon == null)
         {
             Debug.LogWarning("Pattern1Logic: 필수 Transform이 할당되지 않았습니다.");
             yield break;
         }
-        Vector2 dir = (weaponTransform.position - patternParent.position).normalized;
+        Vector2 dir = (targetWeapon.position - patternParent.position).normalized;
         patternParent.up = -dir;
 
         int childCount = patternParent.childCount;
@@ -48,5 +53,32 @@ public class Pattern1Logic : PatternLogicBase
         // 4) 애니메이션 종료 후(또는 여기에 추가 대기) 한 번에 모두 끄고 마무리
         for (int i = 0; i < childCount; i++)
             patternParent.GetChild(i).gameObject.SetActive(false);
+    }
+    private void FindWeaponByLayer()
+    {
+        // 지정한 반경 내에서 Weapon 레이어에 속한 Collider2D 모두 탐색
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, detectionRadius, weaponLayerMask);
+
+        if (hits.Length == 0)
+        {
+            targetWeapon = null;
+            return;
+        }
+
+        // 그중 가장 가까운 무기 선택
+        float minDist = float.MaxValue;
+        Transform closest = null;
+
+        foreach (var col in hits)
+        {
+            float dist = Vector2.Distance(transform.position, col.transform.position);
+            if (dist < minDist)
+            {
+                minDist = dist;
+                closest = col.transform;
+            }
+        }
+
+        targetWeapon = closest;
     }
 }
