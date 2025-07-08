@@ -31,33 +31,34 @@ public class LabPanel : MonoBehaviour
         skillName.text = selectSkill.skillName;
         skillDescription.text = selectSkill.description;
         //skillEffect.text = selectSkill. 효과는 뭐라넣어야하지
-        hasJewelText.text = GameManager.Instance.GetGold().ToString();
+        hasJewelText.text = GameManager.Instance.GetJewel().ToString();
         useJewelText.text = selectSkill.unlockCost.ToString();
         
     }
 
     public void UpdateSkillScroll(SkillType type)
     {
-        int skillindex = 0;
+       // int skillindex = 0;
         for (int i = 0; i < skillButton.Length; i++)  //이미지 초기화
         {
-            skillButton[i].image.sprite = null;
+            skillButton[i].image.gameObject.SetActive(false);
         }
         
         for (int i = 0; i < GameManager.Instance.allSkills.Count; i++)  // 타입별로 정렬
         {
             if (GameManager.Instance.allSkills[i]&&GameManager.Instance.allSkills[i].type==type)
             {
-                skillButton[skillindex].image.sprite = GameManager.Instance.allSkills[i].icon;
-                if (GameManager.Instance.hasSkills.Find(n => n.skillName == GameManager.Instance.allSkills[i].name))
-                {
-                    skillButton[i].image.color = new Color(1f, 1f, 1f, 0.5f);
-                }
-                else
+                skillButton[i].image.gameObject.SetActive(true);
+                skillButton[i].image.sprite = GameManager.Instance.allSkills[i].icon;
+                if (GameManager.Instance.hasSkills.Find(n => n.skillName == GameManager.Instance.allSkills[i].skillName))
                 {
                     skillButton[i].image.color = new Color(1f, 1f, 1f, 1.0f);
                 }
-                skillindex++;
+                else
+                {
+                    skillButton[i].image.color = new Color(1f, 1f, 1f, 0.2f);
+                }
+                //skillindex++;
             }
         }
     }
