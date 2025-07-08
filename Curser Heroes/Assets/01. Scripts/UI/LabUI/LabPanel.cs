@@ -9,12 +9,14 @@ public class LabPanel : MonoBehaviour
     public SkillData selectSkill;
     public Button[] skillButton;
     public Button unlockButton;
-
-
+    public TextMeshProUGUI hasJewelText;
+    public TextMeshProUGUI useJewelText;
     private void OnEnable()
     {
         UpdateSkillScroll(SkillType.Attack);
         unlockButton.interactable = false;
+        hasJewelText.text = GameManager.Instance.GetJewel().ToString();
+        useJewelText.text = "";
     }
 
     public void ClickTypeButton(int num)
@@ -29,6 +31,9 @@ public class LabPanel : MonoBehaviour
         skillName.text = selectSkill.skillName;
         skillDescription.text = selectSkill.description;
         //skillEffect.text = selectSkill. 효과는 뭐라넣어야하지
+        hasJewelText.text = GameManager.Instance.GetGold().ToString();
+        useJewelText.text = selectSkill.unlockCost.ToString();
+        
     }
 
     public void UpdateSkillScroll(SkillType type)
@@ -61,7 +66,8 @@ public class LabPanel : MonoBehaviour
     {
         selectSkill = GameManager.Instance.allSkills[skillIndex];
         UpdateSkillInfo();
-        if(GameManager.Instance.hasSkills.Find(n => n.skillName == selectSkill.skillName))
+        if(GameManager.Instance.hasSkills.Find(n => n.skillName == selectSkill.skillName)
+           && GameManager.Instance.GetJewel() >= selectSkill.unlockCost)
         {
             unlockButton.interactable = false;
         }
