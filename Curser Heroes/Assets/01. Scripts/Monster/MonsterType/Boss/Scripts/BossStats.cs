@@ -2,12 +2,15 @@
 using UnityEngine;
 using System.Collections;
 using Unity.VisualScripting;
+using System;
 
 // 보스의 체력, 피격, 사망 처리를 담당하는 스크립트
 public class BossStats : MonoBehaviour
 {
     public BossData data;           // ScriptableObject 참조
-   private int currentHP;          // 현재 체력
+    private int currentHP;          // 현재 체력
+
+    public static event Action<BossStats> OnAnyMonsterDamaged;
 
     private Animator animator;
     private SpriteRenderer spriteRenderer;
@@ -31,6 +34,7 @@ public class BossStats : MonoBehaviour
         if (currentHP <= 0) return;  // 이미 죽었으면 무시
 
         currentHP -= amount;
+        OnAnyMonsterDamaged?.Invoke(this);
         animator.SetTrigger("BossDamage");  // 피격 애니메이션
         StartCoroutine(FlashEffect());
 

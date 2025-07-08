@@ -9,7 +9,9 @@ public abstract class BaseMonster : MonoBehaviour
     protected int damage;
     protected float attackCooldown;
     protected float attackTimer;
-    
+
+    public static event Action<BaseMonster> OnAnyMonsterDamaged;
+
 
     protected int valueCost;
     protected Animator animator;
@@ -110,7 +112,7 @@ public abstract class BaseMonster : MonoBehaviour
     public virtual void TakeDamage(int amount, SubWeaponData weaponData = null)
     {
         currentHP -= amount;
-
+        OnAnyMonsterDamaged?.Invoke(this);
         // 이펙트 적용
         if (weaponData != null && effectManager != null)
         {
