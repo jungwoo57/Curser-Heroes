@@ -8,7 +8,7 @@ using System;
 public class BossStats : MonoBehaviour
 {
     public BossData data;           // ScriptableObject 참조
-    private int currentHP;          // 현재 체력
+    public int currentHP;          // 현재 체력
 
     public static event Action<BossStats> OnAnyMonsterDamaged;
 
