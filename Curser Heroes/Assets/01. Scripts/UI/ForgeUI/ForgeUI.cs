@@ -70,7 +70,7 @@ public class ForgeUI : MonoBehaviour
     {
         if (isMain)
         {
-            if (GameManager.Instance.GetGold() >= selectWeapon.data.upgradeCost[0])
+            if (GameManager.Instance.GetGold() >= selectWeapon.data.upgradeCost[selectWeapon.level])
             {
                 GameManager.Instance.UpgradeWeapon(selectWeapon.data);
                 UIUpdate();
@@ -79,9 +79,9 @@ public class ForgeUI : MonoBehaviour
         }
         else
         {
-            if (GameManager.Instance.GetGold() >= selectWeapon.data.upgradeCost[0])
+            if (GameManager.Instance.GetGold() >= selectSubWeapon.data.upgradeCost)
             {
-                GameManager.Instance.UpgradeWeapon(selectWeapon.data);
+                GameManager.Instance.UpgradeWeapon(selectSubWeapon.data);
                 UIUpdate();
             }
             Debug.Log("보조무기강화");    
@@ -116,7 +116,7 @@ public class ForgeUI : MonoBehaviour
             weaponDesc.text = selectData.weaponDesc;
             weaponHp.text = ("체력 : ") + selectData.maxLives.ToString();
             hasGoldText.text = GameManager.Instance.GetGold().ToString();
-            useGoldText.text = selectData.upgradeCost[0].ToString();
+            //useGoldText.text = selectData.upgradeCost[0].ToString();
             hasJewelText.text = GameManager.Instance.GetJewel().ToString();
             useJewelText.text = selectData.unlockCost.ToString();
             weaponImage.sprite = selectData.weaponImage;
@@ -124,15 +124,20 @@ public class ForgeUI : MonoBehaviour
             {
                 weaponAtk.text = ("공격력 : ") + selectWeapon.levelDamage.ToString();
                 weaponName.text = selectData.weaponName + "   (" + (selectWeapon.level + 1) + ")";
+                useGoldText.text = selectData.upgradeCost[selectWeapon.level].ToString();
+                if (GameManager.Instance.GetGold() < selectData.upgradeCost[selectWeapon.level])
+                {
+                    reinforceButton.interactable = false;
+                }
             }
             else
             {
                 weaponAtk.text = ("공격력 : ") + selectData.baseDamage.ToString();
                 weaponName.text = selectData.weaponName;
-            }
-            if (GameManager.Instance.GetGold() < selectData.upgradeCost[0])
-            {
-                reinforceButton.interactable = false;
+                if (GameManager.Instance.GetJewel() < selectData.unlockCost)
+                {
+                    unlockButton.interactable = false;
+                }
             }
         }
             
