@@ -1,0 +1,462 @@
+fileFormatVersion: 2
+guid: 366b02c68251b4546bea7e55bedaf04d
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Effect_2005_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 264
+        width: 128
+        height: 132
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 52e6982407a6bf04c9ab5e0983a5eb7b
+      internalID: -2252171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Effect_2005_1
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 264
+        width: 128
+        height: 132
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7188a331affac84d8e3a5781b512838
+      internalID: 231426464
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Effect_2005_2
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 264
+        width: 128
+        height: 132
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e7009059a8c5014a84e4143d03f2939
+      internalID: -420446815
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Effect_2005_3
+      rect:
+        serializedVersion: 2
+        x: 385
+        y: 264
+        width: 127
+        height: 132
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f9f50a3c8e1fd4f48a2f77f98cab37c0
+      internalID: -1569321629
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Effect_2005_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 132
+        width: 128
+        height: 132
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 468f3535fbe639b44a4434fca3f05fd2
+      internalID: 449063605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Effect_2005_5
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 132
+        width: 128
+        height: 132
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f9a1a8df6b91b9944800bacc0c3d37b7
+      internalID: 1881707233
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Effect_2005_6
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 132
+        width: 128
+        height: 132
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b70340b0bb88074fbac044bb6e4eda2
+      internalID: -1679132821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Effect_2005_7
+      rect:
+        serializedVersion: 2
+        x: 380
+        y: 132
+        width: 128
+        height: 132
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6eef97a8c2e271f4b942be8a854c3371
+      internalID: 501801685
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Effect_2005_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 128
+        height: 132
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b677b849e8c93f346bd6c901961d19af
+      internalID: 764467190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Effect_2005_9
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 0
+        width: 128
+        height: 132
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0bd540797663eda4681b81acbd4e0f18
+      internalID: -356225902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Effect_2005_10
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 0
+        width: 128
+        height: 132
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c0d7a6048d64d74f98f979dedf8690d
+      internalID: -1863866588
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Effect_2005_11
+      rect:
+        serializedVersion: 2
+        x: 380
+        y: 0
+        width: 128
+        height: 132
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6951d2fbd20aa8044b358ac81e796e5a
+      internalID: -845513562
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Effect_2005_0: -2252171
+      Effect_2005_1: 231426464
+      Effect_2005_10: -1863866588
+      Effect_2005_11: -845513562
+      Effect_2005_12: 955643246
+      Effect_2005_13: 1465830792
+      Effect_2005_14: 1087213090
+      Effect_2005_15: -1884933513
+      Effect_2005_16: -1885775926
+      Effect_2005_17: -845257421
+      Effect_2005_18: 1301084901
+      Effect_2005_19: 440184118
+      Effect_2005_2: -420446815
+      Effect_2005_20: -288130317
+      Effect_2005_21: -420960471
+      Effect_2005_22: -318301355
+      Effect_2005_23: 2120553194
+      Effect_2005_24: -524020277
+      Effect_2005_25: -1356625724
+      Effect_2005_26: 1708619640
+      Effect_2005_27: 1796858824
+      Effect_2005_28: 1366858986
+      Effect_2005_29: -416246218
+      Effect_2005_3: -1569321629
+      Effect_2005_30: -1566073397
+      Effect_2005_31: -1080044451
+      Effect_2005_32: 165211868
+      Effect_2005_33: 2009990208
+      Effect_2005_34: 1990583201
+      Effect_2005_35: 848266059
+      Effect_2005_36: 679385872
+      Effect_2005_37: 1234025116
+      Effect_2005_38: 1117271912
+      Effect_2005_39: 963828003
+      Effect_2005_4: 449063605
+      Effect_2005_40: -1320653224
+      Effect_2005_41: 903228786
+      Effect_2005_42: -2086721617
+      Effect_2005_43: 1050941014
+      Effect_2005_44: 147028506
+      Effect_2005_45: -1513065548
+      Effect_2005_46: -526280410
+      Effect_2005_47: 1240494270
+      Effect_2005_48: 1031950532
+      Effect_2005_49: 651974350
+      Effect_2005_5: 1881707233
+      Effect_2005_50: -1139073100
+      Effect_2005_51: -1999692959
+      Effect_2005_52: -744299345
+      Effect_2005_53: 1789425482
+      Effect_2005_54: -1131199367
+      Effect_2005_55: -720352983
+      Effect_2005_56: -1532878604
+      Effect_2005_57: 1768304050
+      Effect_2005_58: -974623899
+      Effect_2005_59: 407495431
+      Effect_2005_6: -1679132821
+      Effect_2005_60: 2121905576
+      Effect_2005_61: -1212282934
+      Effect_2005_62: 1938170657
+      Effect_2005_63: -307733524
+      Effect_2005_64: -1110488565
+      Effect_2005_65: -776007480
+      Effect_2005_66: -533868236
+      Effect_2005_67: -717735239
+      Effect_2005_68: -24173404
+      Effect_2005_69: 1944197481
+      Effect_2005_7: 501801685
+      Effect_2005_70: 1632658705
+      Effect_2005_71: 1071730204
+      Effect_2005_72: 805401149
+      Effect_2005_73: -201294357
+      Effect_2005_74: 406231487
+      Effect_2005_75: -1907616377
+      Effect_2005_76: -363292383
+      Effect_2005_77: -1879990979
+      Effect_2005_78: 572682948
+      Effect_2005_79: 1701169158
+      Effect_2005_8: 764467190
+      Effect_2005_80: -1296522942
+      Effect_2005_81: -1567921578
+      Effect_2005_82: 282008565
+      Effect_2005_9: -356225902
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
