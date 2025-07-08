@@ -9,7 +9,9 @@ public abstract class BaseMonster : MonoBehaviour
     protected int damage;
     protected float attackCooldown;
     protected float attackTimer;
-    
+
+    public static event Action<BaseMonster> OnAnyMonsterDamaged;
+
 
     protected int valueCost;
     protected Animator animator;
@@ -19,7 +21,7 @@ public abstract class BaseMonster : MonoBehaviour
     private static readonly int HashDie = Animator.StringToHash("Die");
     private static readonly int HashDamage = Animator.StringToHash("Damage");
     private static readonly int HashSpawn = Animator.StringToHash("Spw");
-
+    private float minAttackCooldown = 2f,maxAttackCooldown = 4f;
     public event Action<GameObject> onDeath;
 
     private SpriteRenderer spriteRenderer;
@@ -95,9 +97,9 @@ public abstract class BaseMonster : MonoBehaviour
                 attackColorCoroutine = StartCoroutine(ChangeColorGradually(Color.white, 0.3f));
             }
 
-           
 
-            attackTimer = attackCooldown;
+
+            attackTimer = UnityEngine.Random.Range(minAttackCooldown, maxAttackCooldown);
         }
     }
 
@@ -110,7 +112,7 @@ public abstract class BaseMonster : MonoBehaviour
     public virtual void TakeDamage(int amount, SubWeaponData weaponData = null)
     {
         currentHP -= amount;
-
+        OnAnyMonsterDamaged?.Invoke(this);
         // 이펙트 적용
         if (weaponData != null && effectManager != null)
         {
