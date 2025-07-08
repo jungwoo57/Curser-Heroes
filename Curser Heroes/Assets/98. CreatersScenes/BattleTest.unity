@@ -3923,7 +3923,8 @@ MonoBehaviour:
   clearJewel: 0
   currentWaveData:
     wave: 0
-    overrideEnemies: []
+    overrideBosses: []
+    isBossWave: 0
     forceExactOverride: 0
 --- !u!4 &1657000542
 Transform:

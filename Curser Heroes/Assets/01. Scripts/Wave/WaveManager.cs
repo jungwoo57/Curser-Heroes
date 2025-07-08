@@ -1,6 +1,4 @@
-﻿
-using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,175 +14,104 @@ public class WaveManager : MonoBehaviour
 
     public int clearGold;
     public int clearJewel;
-    //public PoolSpawnerTest spawner; // Inspector에서 연결 필요
-
     public WaveEntry currentWaveData;
+
     private int currentWaveIndex = 0;
     private List<GameObject> spawnedMonsters = new List<GameObject>();
-    private bool waveCleared = false; // 중복 웨이브 클리어 방지
+    private bool waveCleared = false;
 
     private void Awake()
     {
         if (Instance != null && Instance != this)
         {
-            Destroy(gameObject); // 중복 방지
+            Destroy(gameObject);
             return;
         }
-
         Instance = this;
-        gameManager  = GameManager.Instance;
+        gameManager = GameManager.Instance;
     }
 
     [ContextMenu("스폰시키기")]
     public void StartWave()
     {
-        Debug.Log($"[WaveManager] StartWave() 호출됨, currentWaveIndex = {currentWaveIndex}");
-        if(currentWaveIndex > gameManager.bestScore) gameManager.bestScore = currentWaveIndex;
-        waveCleared = false; // 새 웨이브 시작 시 초기화
+        waveCleared = false;
+        int waveNum = currentWaveIndex + 1;
+        WaveEntry matched = waveGroupData.waveEntries.Find(w => w.wave == waveNum);
 
-        WaveEntry matched = waveGroupData.waveEntries.Find(w => w.wave == currentWaveIndex + 1);
+        currentWaveData = matched != null ? matched : new WaveEntry { wave = waveNum };
 
-        if (matched != null)
+        Debug.Log($"웨이브 시작: {currentWaveData.wave}");
+
+        FindObjectOfType<BattleUI>()?.TextUpdate();
+
+        if (currentWaveData.isBossWave && currentWaveData.HasBosses)
         {
-            currentWaveData = new WaveEntry
-            {
-                overrideEnemies = matched.overrideEnemies,
-                wave = matched.wave,
-                forceExactOverride = matched.forceExactOverride
-            };
+            SpawnBosses(currentWaveData.overrideBosses);
         }
         else
         {
-            currentWaveData = GenerateDynamicWaveEntry(currentWaveIndex + 1);
+            var spawnQueue = WaveBuilder.BuildWaveEntry(currentWaveData, waveGroupData.globalMonsterPool);
+            SpawnMonsters(spawnQueue);
         }
-
-        Debug.Log($"웨이브 시작: {currentWaveData.wave}");
-        FindObjectOfType<BattleUI>()?.TextUpdate();
-
-        var spawnQueue = WaveBuilder.BuildWaveEntry(currentWaveData, waveGroupData.globalMonsterPool);
-        SpawnMonsters(spawnQueue);
 
         TriggerPassiveSkills();
     }
-    private void TriggerPassiveSkills()
+
+    // 소환된 몬스터 리스트 초기화 및 추가,보스 데이터가 있으면 소환 
+    private void SpawnBosses(List<BossData> bosses)
     {
-        Debug.Log("[WaveManager] TriggerPassiveSkills() 호출됨");
-
-        if (cursorWeapon == null)
+        spawnedMonsters.Clear();
+        foreach (var bossData in bosses)
         {
-            Debug.LogWarning("CursorWeapon 참조가 없습니다.");
-            return;
-        }
+            if (bossData == null || bossData.BossPrefab == null) continue;
 
-        Vector3 playerPos = cursorWeapon.transform.position;
-
-        foreach (var skill in skillManager.ownedSkills)
-        {
-            if (skill.skill.skillPrefab == null)
-            {
-                Debug.LogError($"[TriggerPassiveSkills] '{skill.skill.skillName}' 스킬의 skillPrefab이 할당되어 있지 않습니다!");
-                continue;
-            }
-
-            switch (skill.skill.skillName)
-            {
-                case "매직소드":
-                    Debug.Log($"[WaveManager] 매직소드 재배치 요청");
-                    skillManager.DeployPersistentSkill(skill);
-                    break;
-
-                case "포이즌필드":
-                    Debug.Log($"[WaveManager] 포이즌필드 재배치 요청");
-                    skillManager.DeployPersistentSkill(skill);
-                    break;
-
-                default:
-                    Debug.Log($"[TriggerPassiveSkills] 다른 스킬: {skill.skill.skillName}, 처리 없음");
-                    break;
-            }
+            GameObject bossObj = Instantiate(bossData.BossPrefab, Vector3.zero, Quaternion.identity);
+            spawnedMonsters.Add(bossObj);
         }
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            DebugCurrentStatus();
-        }
-    }
-
-    void DebugCurrentStatus()
-    {
-        Debug.Log($"[상태 확인]");
-
-        if (currentWaveData == null)
-        {
-            Debug.LogWarning("currentWaveData가 설정되지 않았습니다.");
-            return;
-        }
-
-        Debug.Log($"현재 웨이브: {currentWaveData.wave} (인덱스: {currentWaveIndex})");
-        Debug.Log($"WaveValue: {currentWaveData.WaveValue}");
-        Debug.Log($"ValueRange: ±{2 + (currentWaveData.wave / 10)}");
-        Debug.Log($"살아있는 몬스터 수: {spawnedMonsters.Count}");
-
-        if (gameManager != null)
-        {
-            Debug.Log($"보유 골드: {gameManager.GetGold()}");
-            Debug.Log($"보유 쥬얼: {gameManager.GetJewel()}");
-        }
-    }
-
-    void SpawnMonsters(List<MonsterData> monsters)
+    private void SpawnMonsters(List<MonsterData> monsters)
     {
         spawnedMonsters = spawner.SpawnMonsters(monsters, OnMonsterKilled);
     }
 
-    void OnMonsterKilled(GameObject monster)
+    private void TriggerPassiveSkills()
     {
-        Debug.Log($"[몬스터 사망 감지] {monster.name} / ID: {monster.GetInstanceID()}");
-
-        GameObject toRemove = null;
-
-        foreach (var m in spawnedMonsters)
+        foreach (var skill in skillManager.ownedSkills)
         {
-            if (m == monster) // 참조 직접 비교
+            if (skill.skill.skillPrefab == null) continue;
+
+            switch (skill.skill.skillName)
             {
-                toRemove = m;
-                break;
+                case "매직소드":
+                case "포이즌필드":
+                    skillManager.DeployPersistentSkill(skill);
+                    break;
             }
         }
+    }
 
-        if (toRemove != null)
-        {
-            spawnedMonsters.Remove(toRemove);
-            Debug.Log($"[제거 성공] 남은 몬스터 수: {spawnedMonsters.Count}");
-        }
-        else
-        {
-            Debug.LogWarning($"[제거 실패] 리스트에 없는 몬스터: {monster.name}");
-        }
-
+    public void OnMonsterKilled(GameObject monster)
+    {
+        spawnedMonsters.Remove(monster);
         if (!waveCleared && spawnedMonsters.Count == 0)
         {
-            waveCleared = true; // 중복 방지
-            Debug.Log("[웨이브 클리어]");
-            StartCoroutine(DelayedWaveClear(2f)); // 2초 후 OnWaveCleared 호출
+            waveCleared = true;
+            StartCoroutine(DelayedWaveClear(2f));
         }
     }
 
     IEnumerator DelayedWaveClear(float delay)
     {
         yield return new WaitForSeconds(delay);
-        Debug.Log("[웨이브 클리어] 2초 딜레이 후 호출");
         OnWaveCleared();
     }
 
     void OnWaveCleared()
     {
-        Debug.Log("[WaveManager] OnWaveCleared 호출됨");
         clearGold = currentWaveData.CalculateGoldReward();
-        gameManager.AddGold(currentWaveData.CalculateGoldReward());
+        gameManager.AddGold(clearGold);
+
         int? jewel = currentWaveData.TryGetJewelReward();
         if (jewel.HasValue)
         {
@@ -196,20 +123,11 @@ public class WaveManager : MonoBehaviour
             clearJewel = 0;
         }
 
-        skillManager.OnWaveEnd(); // → 내부에서 스킬 또는 보상 선택 UI 표시
+        skillManager.OnWaveEnd();
     }
 
     public void IncrementWaveIndex()
     {
         currentWaveIndex++;
-    }
-
-    private WaveEntry GenerateDynamicWaveEntry(int waveNumber)
-    {
-        return new WaveEntry
-        {
-            wave = waveNumber,
-            overrideEnemies = new List<MonsterData>()
-        };
     }
 }
