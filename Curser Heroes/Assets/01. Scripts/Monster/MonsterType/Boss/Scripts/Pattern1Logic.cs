@@ -14,14 +14,14 @@ public class Pattern1Logic : PatternLogicBase
     public LayerMask weaponLayerMask;
     public float detectionRadius = 10f;
     public Transform targetWeapon;
-
+   
     void Start()
     {
         FindWeaponByLayer();
     }
     public override IEnumerator Execute(BossPatternController controller)
     {
-
+        
         if (patternParent == null || firePoint == null || targetWeapon == null)
         {
             Debug.LogWarning("Pattern1Logic: 필수 Transform이 할당되지 않았습니다.");
