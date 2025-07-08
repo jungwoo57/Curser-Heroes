@@ -43,7 +43,7 @@ public class BattleUI : MonoBehaviour
 
     private void Update()
     {
-        PartnerHealthUpdate();
+        //PartnerHealthUpdate();
     }
 
 
