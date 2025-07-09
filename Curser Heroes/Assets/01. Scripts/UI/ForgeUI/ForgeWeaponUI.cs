@@ -42,7 +42,7 @@ public class ForgeWeaponUI : MonoBehaviour
     public void UpdateUI(WeaponData weaponData)
     {
         mainData = weaponData;
-        
+
         CheckMainLock();
         if (mainData != null)
         {
@@ -108,6 +108,10 @@ public class ForgeWeaponUI : MonoBehaviour
                 forgeUI.selectData = hasData.data;
                 forgeUI.reinforceButton.gameObject.SetActive(true);
                 forgeUI.unlockButton.gameObject.SetActive(false);
+                forgeUI.GoldImage.gameObject.SetActive(true);
+                forgeUI.JewelImage.gameObject.SetActive(false);
+                forgeUI.hasGoldText.gameObject.SetActive(true);
+                forgeUI.hasJewelText.gameObject.SetActive(false);
                 forgeUI.UIUpdate();
             }
             else
@@ -117,6 +121,10 @@ public class ForgeWeaponUI : MonoBehaviour
                 forgeUI.selectData = mainData;
                 forgeUI.reinforceButton.gameObject.SetActive(false);
                 forgeUI.unlockButton.gameObject.SetActive(true);
+                forgeUI.GoldImage.gameObject.SetActive(false);
+                forgeUI.JewelImage.gameObject.SetActive(true);
+                forgeUI.hasGoldText.gameObject.SetActive(false);
+                forgeUI.hasJewelText.gameObject.SetActive(true);
                 forgeUI.UIUpdate();
             }
         }
@@ -126,6 +134,15 @@ public class ForgeWeaponUI : MonoBehaviour
             {
                 if (hasSubData == null) return;
                 forgeUI.selectSubWeapon = hasSubData;
+                forgeUI.selectSubData = hasSubData.data;
+                forgeUI.reinforceButton.gameObject.SetActive(true);
+                forgeUI.unlockButton.gameObject.SetActive(false);
+                forgeUI.GoldImage.gameObject.SetActive(true);
+                forgeUI.JewelImage.gameObject.SetActive(false);
+                forgeUI.hasGoldText.gameObject.SetActive(true);
+                forgeUI.hasJewelText.gameObject.SetActive(false);
+                forgeUI.useGoldText.gameObject.SetActive(true);
+                forgeUI.useJewelText.gameObject.SetActive(false);
                 forgeUI.UIUpdate();
             }
             else
@@ -135,6 +152,12 @@ public class ForgeWeaponUI : MonoBehaviour
                 forgeUI.selectSubData = subData;
                 forgeUI.reinforceButton.gameObject.SetActive(false);
                 forgeUI.unlockButton.gameObject.SetActive(true);
+                forgeUI.GoldImage.gameObject.SetActive(false);
+                forgeUI.JewelImage.gameObject.SetActive(true);
+                forgeUI.hasGoldText.gameObject.SetActive(false);
+                forgeUI.hasJewelText.gameObject.SetActive(true);
+                forgeUI.useGoldText.gameObject.SetActive(false);
+                forgeUI.useJewelText.gameObject.SetActive(true);
                 forgeUI.UIUpdate();
             }
         }
