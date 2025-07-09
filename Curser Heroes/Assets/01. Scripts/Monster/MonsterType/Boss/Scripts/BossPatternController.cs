@@ -16,8 +16,7 @@ public class BossPatternController : MonoBehaviour
     public bool IsInPattern { get; private set; }
     public bool IsInSpawn { get; private set; } // 보스가 스폰 중인지 여부
 
-    
-    public float[] hitboxStartDelays;
+    public int CheckDie = 0;
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
@@ -69,20 +68,13 @@ public class BossPatternController : MonoBehaviour
             int randIdx = available[Random.Range(0, available.Count)];
             string trigger = "Pattern" + (randIdx + 1);
 
+
+            foreach (var d in patternDamage) d.Deactivate();
+            if (randIdx < patternDamage.Length)
+                patternDamage[randIdx].Activate();
+
             animator.SetTrigger(trigger);
-
-            if (randIdx < hitboxStartDelays.Length)
-            {
-                float delay = hitboxStartDelays[randIdx];
-                yield return new WaitForSeconds(delay);
-
-                if (randIdx < patternDamage.Length)
-                {
-                    
-                    patternDamage[randIdx].Activate();
-                }
-            }
-
+            
             if (patternLogics != null && randIdx < patternLogics.Length && patternLogics[randIdx] != null)
             {
                 // 각 패턴 로직 스크립트의 Execute() 코루틴을 실행
