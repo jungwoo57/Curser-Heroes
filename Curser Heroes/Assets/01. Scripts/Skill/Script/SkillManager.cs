@@ -9,7 +9,9 @@ public class SkillManager : MonoBehaviour
     [SerializeField] private Transform player;
     [SerializeField] private CursorWeapon cursorWeapon;
     [SerializeField] private GameObject explosionPrefab;
+    [SerializeField] private GameObject explodeOnKillSkillPrefab;
 
+    public static SkillManager Instance { get; private set; }
     public List<SkillData> skillPool = new List<SkillData>();
     public List<SkillInstance> ownedSkills = new List<SkillInstance>();
 
@@ -19,6 +21,9 @@ public class SkillManager : MonoBehaviour
     private GameObject skillSelectUIInstance;
     private Dictionary<SkillData, GameObject> persistentSkillObjects = new Dictionary<SkillData, GameObject>();
 
+    // ExplodeOnKillSkill 인스턴스 캐싱
+    private ExplodeOnKillSkill explodeSkillComponent;
+
     [System.Serializable]
     public class SkillInstance
     {
@@ -26,9 +31,24 @@ public class SkillManager : MonoBehaviour
         public int level;
         public bool IsMaxed => level >= skill.maxLevel;
     }
+
     private void Awake()
     {
+        if (Instance == null)
+            Instance = this;
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         ExplodeOnKillSkill.explosionPrefab = explosionPrefab;
+
+        // 자동 생성
+        if (FindObjectOfType<ExplodeOnKillSkill>() == null && explodeOnKillSkillPrefab != null)
+        {
+            Instantiate(explodeOnKillSkillPrefab);
+        }
     }
 
     void Start()
@@ -38,7 +58,7 @@ public class SkillManager : MonoBehaviour
             Debug.LogError("GameManager.Instance가 null입니다.");
             return;
         }
-        // skillPool을 GameManager의 skillPool과 동기화
+        // skillPool 동기화
         skillPool = new List<SkillData>(GameManager.Instance.skillPool);
 
         Debug.Log($"[SkillManager] skillPool 크기: {skillPool.Count}");
@@ -54,6 +74,11 @@ public class SkillManager : MonoBehaviour
         {
             ShowSkillSelection();
         }
+    }
+
+    public bool HasSkill(string skillName)
+    {
+        return ownedSkills.Any(s => s.skill.skillName == skillName);
     }
 
     void ShowSkillSelection()
@@ -136,6 +161,7 @@ public class SkillManager : MonoBehaviour
             Debug.LogError("WaveManager.Instance가 null입니다.");
         }
     }
+
     public void DeployPersistentSkill(SkillInstance skillInstance)
     {
         if (cursorWeapon == null)
@@ -146,14 +172,13 @@ public class SkillManager : MonoBehaviour
 
         SkillData skillData = skillInstance.skill;
 
-        //SkillData 객체를 키로 사용
         if (persistentSkillObjects.TryGetValue(skillData, out GameObject existingObj))
         {
             Debug.Log($"[SkillManager] 지속형 스킬 이미 설치됨: {skillData.skillName}");
 
             if (existingObj.TryGetComponent(out RotatingSkill rotating))
             {
-                rotating.UpdateSwords(skillInstance); // 상태 갱신
+                rotating.UpdateSwords(skillInstance);
             }
             else if (existingObj.TryGetComponent(out AoEFieldSkill aoe))
             {
@@ -163,7 +188,7 @@ public class SkillManager : MonoBehaviour
             {
                 shield.UpdateShields(skillInstance);
             }
-            return; // 새 오브젝트 생성 방지
+            return;
         }
 
         Vector3 spawnPos = cursorWeapon.transform.position;
@@ -189,6 +214,7 @@ public class SkillManager : MonoBehaviour
             Debug.LogWarning($"[SkillManager] {skillData.skillName}에 맞는 SkillBehaviour가 없습니다.");
         }
     }
+
     public void OnMonsterKilled(Vector3 deathPosition)
     {
         SkillInstance explodeSkill = ownedSkills.Find(s => s.skill.skillName == "장렬한 퇴장");
@@ -198,11 +224,26 @@ public class SkillManager : MonoBehaviour
         int damage = data.damage;
         float radius = 1.5f;
 
-        ExplodeOnKillSkill.TriggerExplosion(deathPosition, damage, radius, LayerMask.GetMask("Monster"));
+        if (explodeSkillComponent != null)
+        {
+            explodeSkillComponent.TriggerExplosion(deathPosition, damage, radius, LayerMask.GetMask("Monster"));
+        }
+        else
+        {
+            Debug.LogWarning("ExplodeOnKillSkill 컴포넌트가 없습니다!");
+        }
     }
+
     void ShowRewardSelection()
     {
-        GameObject ui = Instantiate(rewardSelectUIPrefab);
+        GameObject canvas = GameObject.Find("Canvas"); 
+        if (canvas == null)
+        {
+            Debug.LogError("Canvas를 찾을 수 없습니다.");
+            return;
+        }
+
+        GameObject ui = Instantiate(rewardSelectUIPrefab, canvas.transform, false);
         ui.GetComponent<RewardSelectUI>().Init(OnRewardSelected);
     }
 
@@ -214,37 +255,33 @@ public class SkillManager : MonoBehaviour
             case 1: GameManager.Instance.AddGold(100); break;
             case 2: GameManager.Instance.AddJewel(10); break;
         }
+        WaveManager.Instance.IncrementWaveIndex();
         WaveManager.Instance.StartWave();
-        
     }
+
     List<SkillData> GetRandomSkills(List<SkillData> source, int count)
     {
         return source.OrderBy(x => Random.value).Take(count).ToList();
     }
-    public void TrySpawnMeteorSkill(SkillManager.SkillInstance skillInstance)
+
+    public void TrySpawnMeteorSkill(SkillInstance skillInstance)
     {
         float procChance = 0.25f;
 
         if (Random.value > procChance)
             return;
 
-        // 씬 내 몬스터 리스트 가져오기 (기본/보스 모두)
         List<Transform> monsters = new List<Transform>();
 
         foreach (var monster in FindObjectsOfType<BaseMonster>())
             monsters.Add(monster.transform);
 
-        //foreach (var boss in FindObjectsOfType<BossBaseMonster>())
-        //    monsters.Add(boss.transform);
-
         if (monsters.Count == 0)
             return;
 
-        // 랜덤 몬스터 선택
         Transform target = monsters[Random.Range(0, monsters.Count)];
 
-        // 별똥별 생성
-        GameObject meteorPrefab = skillInstance.skill.skillPrefab; 
+        GameObject meteorPrefab = skillInstance.skill.skillPrefab;
         GameObject meteorObj = Instantiate(meteorPrefab);
 
         var meteor = meteorObj.GetComponent<MeteorSkill>();

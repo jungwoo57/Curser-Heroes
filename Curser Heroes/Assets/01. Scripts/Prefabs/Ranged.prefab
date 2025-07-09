@@ -48,6 +48,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 563665610ee2d744d9267dc7c607120b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MonsterLayer:
+    serializedVersion: 2
+    m_Bits: 128
   projectilePrefab: {fileID: 7933783360421492996, guid: 6f1091c47f5491045aa7b82cffd414ec, type: 3}
   firePoint: {fileID: 3173297446982568087}
   attackRange: 10

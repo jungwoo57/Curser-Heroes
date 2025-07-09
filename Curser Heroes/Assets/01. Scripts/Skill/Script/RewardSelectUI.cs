@@ -22,6 +22,6 @@ public class RewardSelectUI : MonoBehaviour
     private void Select(int choice)
     {
         onSelect?.Invoke(choice);
-        Destroy(transform.parent.gameObject); // Panel 전체를 제거
+        Destroy(gameObject);
     }
 }

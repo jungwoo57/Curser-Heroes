@@ -10,8 +10,11 @@ public abstract class BaseMonster : MonoBehaviour
     protected float attackCooldown;
     protected float attackTimer;
 
+    public int CurrentHP => currentHP;
+
     public static event Action<BaseMonster> OnAnyMonsterDamaged;
 
+    [SerializeField] private LayerMask MonsterLayer;
 
     protected int valueCost;
     protected Animator animator;
@@ -22,6 +25,8 @@ public abstract class BaseMonster : MonoBehaviour
     private static readonly int HashDamage = Animator.StringToHash("Damage");
     private static readonly int HashSpawn = Animator.StringToHash("Spw");
     private float minAttackCooldown = 2f,maxAttackCooldown = 4f;
+    private bool isDead = false;
+
     public event Action<GameObject> onDeath;
 
     private SpriteRenderer spriteRenderer;
@@ -201,8 +206,33 @@ public abstract class BaseMonster : MonoBehaviour
 
     protected virtual void Die()
     {
+        if (isDead) return;  // 이미 죽었으면 실행 안 함
+        isDead = true;
+
         if (animator != null)
             animator.SetBool(HashDie, true);
+
+        SkillManager.SkillInstance explodeSkill = SkillManager.Instance.ownedSkills.Find(s => s.skill.skillName == "장렬한 퇴장");
+
+        if (explodeSkill != null)
+        {
+            SkillLevelData data = explodeSkill.skill.levelDataList[explodeSkill.level - 1];
+            int explosionDamage = data.damage;
+            float explosionRadius = 1f;
+
+            Vector2 offset = UnityEngine.Random.insideUnitCircle * 1f;
+            Vector3 explosionPos = transform.position + new Vector3(offset.x, offset.y, 0f);
+
+            var explodeSkillComponent = FindObjectOfType<ExplodeOnKillSkill>();
+            if (explodeSkillComponent != null)
+            {
+                explodeSkillComponent.TriggerExplosion(explosionPos, explosionDamage, explosionRadius, MonsterLayer);
+            }
+            else
+            {
+                Debug.LogWarning("씬에 ExplodeOnKillSkill 컴포넌트가 없습니다!");
+            }
+        }
 
         onDeath?.Invoke(gameObject);
         Destroy(gameObject, 1f);
