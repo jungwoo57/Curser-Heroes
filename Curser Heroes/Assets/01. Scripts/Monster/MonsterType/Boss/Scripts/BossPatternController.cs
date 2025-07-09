@@ -69,18 +69,8 @@ public class BossPatternController : MonoBehaviour
 
             animator.SetTrigger(trigger);
 
-            if (randIdx < hitboxStartDelays.Length)
-            {
-                float delay = hitboxStartDelays[randIdx];
-                yield return new WaitForSeconds(delay);
+            StartCoroutine(HitboxDelayAndActivate(randIdx));
 
-                if (randIdx < patternDamage.Length)
-                {
-
-                    patternDamage[randIdx].Activate();
-                }
-            }
-            
             if (patternLogics != null && randIdx < patternLogics.Length && patternLogics[randIdx] != null)
             {
                 // 각 패턴 로직 스크립트의 Execute() 코루틴을 실행
@@ -133,6 +123,16 @@ public class BossPatternController : MonoBehaviour
             }
             yield return null;
         }
+    }
+    private IEnumerator HitboxDelayAndActivate(int index)
+    {
+        if (index >= hitboxStartDelays.Length || index >= patternDamage.Length)
+            yield break;
+
+        float delay = hitboxStartDelays[index];
+        yield return new WaitForSeconds(delay);
+
+        patternDamage[index].Activate();
     }
 
 }
