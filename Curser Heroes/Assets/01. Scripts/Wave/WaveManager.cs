@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
-    [SerializeField] private SkillManager skillManager;
     [SerializeField] private CursorWeapon cursorWeapon;
 
     public WaveGroupData waveGroupData;
@@ -77,7 +76,7 @@ public class WaveManager : MonoBehaviour
 
     private void TriggerPassiveSkills()
     {
-        foreach (var skill in skillManager.ownedSkills)
+        foreach (var skill in SkillManager.Instance.ownedSkills)
         {
             if (skill.skill.skillPrefab == null) continue;
 
@@ -86,7 +85,7 @@ public class WaveManager : MonoBehaviour
                 case "매직소드":
                 case "포이즌필드":
                 case "수호의 방패":
-                    skillManager.DeployPersistentSkill(skill);
+                    SkillManager.Instance.DeployPersistentSkill(skill);
                     break;
             }
         }
@@ -124,7 +123,7 @@ public class WaveManager : MonoBehaviour
             clearJewel = 0;
         }
 
-        skillManager.OnWaveEnd();
+        SkillManager.Instance.OnWaveEnd();
     }
 
     public void IncrementWaveIndex()

@@ -83,13 +83,12 @@ public class CursorWeapon : MonoBehaviour
     }
     private void TryTriggerMeteorSkill()
     {
-        var skillManager = FindObjectOfType<SkillManager>();
-        if (skillManager == null) return;
+        if (SkillManager.Instance == null) return;
 
-        var meteorSkill = skillManager.ownedSkills.FirstOrDefault(s => s.skill.skillName == "별동별");
+        var meteorSkill = SkillManager.Instance.ownedSkills.FirstOrDefault(s => s.skill.skillName == "별동별");
         if (meteorSkill != null)
         {
-            skillManager.TrySpawnMeteorSkill(meteorSkill);
+            SkillManager.Instance.TrySpawnMeteorSkill(meteorSkill);
         }
     }
     public void SetWeapon(WeaponData weaponData)     //외부에서 무기를 장착할 수 있게 해주는 초기화 함수
