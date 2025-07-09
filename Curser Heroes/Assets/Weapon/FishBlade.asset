@@ -14,9 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: FishBlade
   weaponImage: {fileID: 21300000, guid: 0f18a0f667d2b1f45aab57a92422fec0, type: 3}
-  weaponDesc: 
-  level: 0
-  upgradeCost: 20
+  weaponDesc: "\uC7A5\uB09C\uCE58\uAE30 \uC88B\uC544\uD558\uB294 \uBAAC\uC2A4\uD130\uB4E4\uC774
+    \uB09A\uC2DC\uAFBC\uC758 \uB09A\uC2DC\uB300\uB97C \uD6D4\uCCD0\uAC14\uB2E4. \uD654\uAC00
+    \uB09C \uB09A\uC2DC\uAFBC\uC740 \uB09A\uC544 \uC62C\uB9B0 \uAC00\uC7A5 \uCEE4\uB2E4\uB780
+    \uC0DD\uC120\uC744 \uC190\uC5D0 \uB4E4\uACE0 \uD718\uB450\uB974\uBA70 \uB09A\uC2DC\uB300\uB97C
+    \uCC3E\uC73C\uB7EC \uAC04\uB2E4."
+  upgradeCost: f40100009902000074030000970400001a0600001d080000ca0a0000590e00001513000061190000
+  unlockCost: 1500
   baseDamage: 5
   damagePerLevel: 3.2
   attackCooldown: 0.5

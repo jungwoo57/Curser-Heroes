@@ -15,13 +15,18 @@ public class Pattern1Logic : PatternLogicBase
     public float detectionRadius = 10f;
     public Transform targetWeapon;
 
+    [Header("경고 이펙트")]
+    public WarningIndicator warningIndicator;
+    public float warningTime = 0.6f;
+
+
     void Start()
     {
         FindWeaponByLayer();
     }
     public override IEnumerator Execute(BossPatternController controller)
     {
-
+        
         if (patternParent == null || firePoint == null || targetWeapon == null)
         {
             Debug.LogWarning("Pattern1Logic: 필수 Transform이 할당되지 않았습니다.");
@@ -29,19 +34,27 @@ public class Pattern1Logic : PatternLogicBase
         }
         Vector2 dir = (targetWeapon.position - patternParent.position).normalized;
         patternParent.up = -dir;
-
+        if (warningIndicator != null)
+        {
+            warningIndicator.transform.position = patternParent.position;  // 위치 그대로
+            warningIndicator.transform.rotation = patternParent.rotation;  // 회전만 복사
+            warningIndicator.duration = warningTime;
+            warningIndicator.gameObject.SetActive(true);
+        }
         int childCount = patternParent.childCount;
         if (childCount == 0)
         {
             Debug.LogWarning("Pattern1Logic: 자식 오브젝트가 없습니다.");
             yield break;
         }
-        yield return new WaitForSeconds(0);
-        // 2) 모든 자식 비활성화 (초기화)
+        
+        //  모든 자식 비활성화 (초기화)
         for (int i = 0; i < childCount; i++)
             patternParent.GetChild(i).gameObject.SetActive(false);
-        
-        // 3) 자식 하나씩 순차 활성화 (켜진 것은 유지)
+
+        yield return new WaitForSeconds(1);
+
+        // 자식 하나씩 순차 활성화 (켜진 것은 유지)
         for (int i = 0; i < childCount; i++)
         {
             GameObject child = patternParent.GetChild(i).gameObject;

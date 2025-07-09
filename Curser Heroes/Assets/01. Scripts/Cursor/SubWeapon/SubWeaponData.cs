@@ -9,7 +9,7 @@ public class SubWeaponData : ScriptableObject
     public string weaponName;
     public Sprite weaponImage;
     public string weaponDesc;
-    public int upgradeCost;
+    public int[] upgradeCost;
     public int unlockCost;
     
     [Header("기본 스탯")]

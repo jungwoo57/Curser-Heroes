@@ -14,9 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: FryPan
   weaponImage: {fileID: 21300000, guid: a1ddd6eeeee9970468dc67efa5846b1e, type: 3}
-  weaponDesc: 
-  level: 0
-  upgradeCost: 20
+  weaponDesc: "\uC7A5\uB09C\uCE58\uAE30 \uC88B\uC544\uD558\uB294 \uBAAC\uC2A4\uD130\uB4E4\uC774
+    \uC694\uB9AC\uC0AC\uC758 \uC8FC\uBC29\uC5D0\uC11C \uAC13 \uB9CC\uB4E0 \uC74C\uC2DD\uC744
+    \uD6D4\uCCD0\uAC14\uB2E4. \uD654\uAC00 \uB09C \uC694\uB9AC\uC0AC\uB294 \uD504\uB77C\uC774\uD32C\uC744
+    \uD718\uB450\uB978\uB2E4."
+  upgradeCost: f40100009902000074030000970400001a0600001d080000ca0a0000590e00001513000061190000
+  unlockCost: 1500
   baseDamage: 4
   damagePerLevel: 4
   attackCooldown: 0.5

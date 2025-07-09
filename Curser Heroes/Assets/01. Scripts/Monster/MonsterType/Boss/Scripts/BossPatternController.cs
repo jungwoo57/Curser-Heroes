@@ -15,8 +15,6 @@ public class BossPatternController : MonoBehaviour
     private float[] nextAvailableTime;         // 패턴별 다음 실행 가능 시간
     public bool IsInPattern { get; private set; }
     public bool IsInSpawn { get; private set; } // 보스가 스폰 중인지 여부
-
-    
     public float[] hitboxStartDelays;
     private void Awake()
     {
@@ -78,11 +76,11 @@ public class BossPatternController : MonoBehaviour
 
                 if (randIdx < patternDamage.Length)
                 {
-                    
+
                     patternDamage[randIdx].Activate();
                 }
             }
-
+            
             if (patternLogics != null && randIdx < patternLogics.Length && patternLogics[randIdx] != null)
             {
                 // 각 패턴 로직 스크립트의 Execute() 코루틴을 실행
