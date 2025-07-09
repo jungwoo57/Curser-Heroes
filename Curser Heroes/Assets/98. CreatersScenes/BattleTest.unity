@@ -2873,11 +2873,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7895063b1c1a45e4d81d6c646b94f95b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rewardSelectUIPrefab: {fileID: 7736518222571342954, guid: 7ec73d70dd63e9e43befba0d6f384234, type: 3}
+  rewardSelectUIPrefab: {fileID: 6658593358364688965, guid: 7ec73d70dd63e9e43befba0d6f384234, type: 3}
   skillSelectUIPrefab: {fileID: 2116206273608610595, guid: ac6fc6da8019b4d42bf807d62702b93b, type: 3}
   player: {fileID: 3521251694906892393}
   cursorWeapon: {fileID: 3008519376834165207}
-  explosionPrefab: {fileID: 0}
+  explosionPrefab: {fileID: 8286058134636732423, guid: e7b1031d9bfd92844b762023fd3ce9c5, type: 3}
+  explodeOnKillSkillPrefab: {fileID: 7016513973741314053, guid: e2810a143be39594e9c8da3b00d7cbe3, type: 3}
   skillPool: []
   ownedSkills: []
   maxSkillCount: 6
@@ -3650,7 +3651,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   battlePanel: {fileID: 1499278490}
-  skillManager: {fileID: 1128930533}
   healthImage:
   - {fileID: 1932962289}
   - {fileID: 186317640}
@@ -4060,7 +4060,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dccaf9deee079b644a97b73d1ce95beb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillManager: {fileID: 1128930533}
   cursorWeapon: {fileID: 3008519376834165207}
   waveGroupData: {fileID: 11400000, guid: 9fa0573a5e50445489f8e2a2d6d96d27, type: 2}
   gameManager: {fileID: 2139855845}
