@@ -124,7 +124,7 @@ public class ForgeUI : MonoBehaviour
             {
                 weaponAtk.text = ("공격력 : ") + selectWeapon.levelDamage.ToString();
                 weaponName.text = selectData.weaponName + "   (" + (selectWeapon.level + 1) + ")";
-                useGoldText.text = selectData.upgradeCost[selectWeapon.level].ToString();
+                //useGoldText.text = selectData.upgradeCost[selectWeapon.level].ToString();
                 if (GameManager.Instance.GetGold() < selectData.upgradeCost[selectWeapon.level])
                 {
                     reinforceButton.interactable = false;
