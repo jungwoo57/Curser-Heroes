@@ -452,6 +452,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0f69ff19838662478f46adf504a049d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameOverPanel: {fileID: 0}
   battleUI: {fileID: 1499278492}
   stageStartUI: {fileID: 800217685}
 --- !u!4 &41921648
@@ -5700,7 +5701,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 24a36c54999c5594892b4828b0293119, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5876,6 +5877,9 @@ MonoBehaviour:
   cursorWeapon: {fileID: 3008519376834165207}
   weaponLife: {fileID: 2086191848478865172}
   weaponUpgrade: {fileID: 8714767504411606639}
+  isDie: 0
+  isInvincible: 0
+  invincibilityTime: 3
 --- !u!222 &7512273768933806429
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -14,14 +14,14 @@ public class Pattern1Logic : PatternLogicBase
     public LayerMask weaponLayerMask;
     public float detectionRadius = 10f;
     public Transform targetWeapon;
-
+   
     void Start()
     {
         FindWeaponByLayer();
     }
     public override IEnumerator Execute(BossPatternController controller)
     {
-
+        
         if (patternParent == null || firePoint == null || targetWeapon == null)
         {
             Debug.LogWarning("Pattern1Logic: 필수 Transform이 할당되지 않았습니다.");
@@ -36,7 +36,7 @@ public class Pattern1Logic : PatternLogicBase
             Debug.LogWarning("Pattern1Logic: 자식 오브젝트가 없습니다.");
             yield break;
         }
-        yield return new WaitForSeconds(0);
+        yield return new WaitForSeconds(1f);
         // 2) 모든 자식 비활성화 (초기화)
         for (int i = 0; i < childCount; i++)
             patternParent.GetChild(i).gameObject.SetActive(false);

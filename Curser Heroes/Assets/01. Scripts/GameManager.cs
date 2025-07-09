@@ -133,7 +133,7 @@ public class GameManager : MonoBehaviour
         int index = ownedWeapons.FindIndex(w => w.data.weaponName == data.weaponName);
         if (index >= 0)
         {
-            gold -= data.upgradeCost;
+            gold -= data.upgradeCost[0];
             ownedWeapons[index].level++;
             Debug.Log(ownedWeapons[index].data.name + "업그레이드 완료" + ownedWeapons[index].level);
         }
