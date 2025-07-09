@@ -131,7 +131,7 @@ public class GameManager : MonoBehaviour
     public void UpgradeWeapon(WeaponData data)
     {
         int index = ownedWeapons.FindIndex(w => w.data.weaponName == data.weaponName);
-        if (index >= 0)
+        if (index >= 0 && ownedWeapons[index].level+1 <10)
         {
             gold -= data.upgradeCost[0];
             ownedWeapons[index].level++;
@@ -139,7 +139,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("해당 데이터 없음");
+            Debug.Log("해당 데이터 없거나 레벨이 만랩");
         }
     }
     
@@ -148,7 +148,7 @@ public class GameManager : MonoBehaviour
         int index = ownedSubWeapons.FindIndex(w => w.data.weaponName == data.weaponName);
         if (index >= 0)
         {
-            gold -= data.upgradeCost;
+            gold -= data.upgradeCost[ownedSubWeapons[index].level];
             ownedSubWeapons[index].level++;
             Debug.Log(ownedSubWeapons[index].data.name + "업그레이드 완료" + ownedSubWeapons[index].level);
         }
