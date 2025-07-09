@@ -80,8 +80,6 @@ public class BossPatternController : MonoBehaviour
                     patternDamage[randIdx].Activate();
                 }
             }
-
-            animator.SetTrigger(trigger);
             
             if (patternLogics != null && randIdx < patternLogics.Length && patternLogics[randIdx] != null)
             {

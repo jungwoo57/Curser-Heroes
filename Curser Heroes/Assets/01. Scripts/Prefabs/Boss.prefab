@@ -1677,6 +1677,9 @@ MonoBehaviour:
     m_Bits: 64
   detectionRadius: 10
   targetWeapon: {fileID: 0}
+  warningObject: {fileID: 691074080759415936, guid: 5070f03b0f0cdde46a1b70353c4cbabd, type: 3}
+  warningDuration: 0.6
+  referenceCollider: {fileID: 7652959362264223662}
 --- !u!114 &2862775590602846437
 MonoBehaviour:
   m_ObjectHideFlags: 0
