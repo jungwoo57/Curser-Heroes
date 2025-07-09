@@ -15,8 +15,7 @@ public class BossPatternController : MonoBehaviour
     private float[] nextAvailableTime;         // 패턴별 다음 실행 가능 시간
     public bool IsInPattern { get; private set; }
     public bool IsInSpawn { get; private set; } // 보스가 스폰 중인지 여부
-
-    public int CheckDie = 0;
+    public float[] hitboxStartDelays;
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
@@ -68,10 +67,19 @@ public class BossPatternController : MonoBehaviour
             int randIdx = available[Random.Range(0, available.Count)];
             string trigger = "Pattern" + (randIdx + 1);
 
+            animator.SetTrigger(trigger);
 
-            foreach (var d in patternDamage) d.Deactivate();
-            if (randIdx < patternDamage.Length)
-                patternDamage[randIdx].Activate();
+            if (randIdx < hitboxStartDelays.Length)
+            {
+                float delay = hitboxStartDelays[randIdx];
+                yield return new WaitForSeconds(delay);
+
+                if (randIdx < patternDamage.Length)
+                {
+
+                    patternDamage[randIdx].Activate();
+                }
+            }
 
             animator.SetTrigger(trigger);
             
