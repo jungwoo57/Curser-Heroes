@@ -10,7 +10,9 @@ public class Pattern2Logic : PatternLogicBase
 
     [Header("순간이동 감지 반경 (Unity 단위)")]
     public float detectionRadius = 10f;
-
+   
+    public WarningIndicator warningIndicator;     // 인스펙터에 연결
+    public Transform targetWeapon;
     public override IEnumerator Execute(BossPatternController controller)
     {
         // 1) Weapon 레이어만 필터링하기 위한 LayerMask
@@ -33,13 +35,18 @@ public class Pattern2Logic : PatternLogicBase
             {
                 minDistSqr = distSqr;
                 nearest = hit.transform;
+                targetWeapon = nearest; // 가장 가까운 무기를 타겟으로 설정
             }
         }
+        warningIndicator.target = targetWeapon;        // 무기 따라다님
+        warningIndicator.duration = 1f;              // 얼마나 유지될지
+        warningIndicator.gameObject.SetActive(true);   // 빨간 원 켜짐!
+
         yield return new WaitForSeconds(startDelay);
         // 4) 대상이 있으면 보스를 해당 위치로 순간이동
         if (nearest != null)
         {
-            controller.transform.position = nearest.position;
+            controller.transform.position = targetWeapon.position;
         }
         else
         {
