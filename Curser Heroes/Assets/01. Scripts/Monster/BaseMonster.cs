@@ -66,6 +66,7 @@ public abstract class BaseMonster : MonoBehaviour
         valueCost = data.valueCost;
 
         attackTimer = attackCooldown;
+        attackTimer = UnityEngine.Random.Range(minAttackCooldown, maxAttackCooldown);
     }
 
     protected virtual void Update()
