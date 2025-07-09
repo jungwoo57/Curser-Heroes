@@ -24,6 +24,8 @@ public class SkillManager : MonoBehaviour
     // ExplodeOnKillSkill 인스턴스 캐싱
     private ExplodeOnKillSkill explodeSkillComponent;
 
+    private const string FIREBALL_SKILL_NAME = "화염구";
+
     [System.Serializable]
     public class SkillInstance
     {
@@ -212,6 +214,58 @@ public class SkillManager : MonoBehaviour
         else
         {
             Debug.LogWarning($"[SkillManager] {skillData.skillName}에 맞는 SkillBehaviour가 없습니다.");
+        }
+    }
+
+    public void TryShootFireball()
+    {
+        SkillInstance fireballSkill = ownedSkills.FirstOrDefault(s => s.skill.skillName == FIREBALL_SKILL_NAME);
+        if (fireballSkill == null)
+            return;
+
+        float procChance = 0.4f;
+        if (Random.value > procChance)
+            return;
+
+        BaseMonster[] allMonsters = FindObjectsOfType<BaseMonster>();
+        BaseMonster nearest = null;
+        float minDist = Mathf.Infinity;
+
+        // 마우스 커서 월드 좌표 얻기
+        Vector3 cursorPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        cursorPos.z = 0f;
+
+        foreach (var monster in allMonsters)
+        {
+            if (monster.IsDead) continue;
+
+            float dist = Vector2.Distance(cursorPos, monster.transform.position);
+            if (dist < minDist)
+            {
+                minDist = dist;
+                nearest = monster;
+            }
+        }
+
+        if (nearest == null) return;
+
+        SkillLevelData levelData = fireballSkill.skill.levelDataList[fireballSkill.level - 1];
+        int damage = levelData.damage;
+
+        GameObject prefab = fireballSkill.skill.skillPrefab;
+
+        // 마우스 커서 위치에서 발사
+        GameObject fireball = Instantiate(prefab, cursorPos, Quaternion.identity);
+
+        if (fireball.TryGetComponent(out FireballSkill fireballComp))
+        {
+            // 방향 계산: 타겟 위치 - 커서 위치
+            Vector3 direction = (nearest.transform.position - cursorPos).normalized;
+            fireballComp.Init(damage, direction);
+        }
+        else
+        {
+            Debug.LogWarning("FireballSkill 컴포넌트를 찾을 수 없습니다.");
         }
     }
 
