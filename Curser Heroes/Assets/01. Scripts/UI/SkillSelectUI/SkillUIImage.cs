@@ -18,6 +18,7 @@ public class SkillUIImage : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 
     public void UpdateUI(SkillData skillData)
     {
+            if (skillData == null) return;
             data = skillData;
             if (data.icon == null)
             {

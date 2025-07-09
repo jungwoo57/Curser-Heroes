@@ -15,6 +15,8 @@ public class SubWeaponManager : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && CanUseSubWeapon())
         {
             UseSubWeapon();
+
+            SkillManager.Instance.TryShootFireball(); // 클릭 공격 시 화염구 스킬 발동을 위해 추가
         }              //마우스 좌클릭시 보조무기를 사용할 수 있는지 체크하고 사용
     }
 

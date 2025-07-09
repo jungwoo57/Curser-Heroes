@@ -10,10 +10,16 @@ public class StageSelectedSkillUI : MonoBehaviour
    public Button applyButton;
    public bool isChange = false;
    private SkillPanelUI skillPanelUI;
-
+   public SkillData[] previousSkills;        //추가 코드
+   
    private void OnEnable()
    {
       isChange = false;
+      for (int i = 0; i < previousSkills.Length; i++)
+      {
+         previousSkills[i] = skills[i];
+         skillImages[i].UpdateUI(previousSkills[i] );
+      }
    }
 
    private void Start()
@@ -65,6 +71,11 @@ public class StageSelectedSkillUI : MonoBehaviour
       {
          skills[i] = null;
          skillImages[i].CancleSelect();
+      }
+
+      for (int i = 0; i < skills.Length; i++)
+      {
+         skills[i] = previousSkills[i];
       }
    }
 }
