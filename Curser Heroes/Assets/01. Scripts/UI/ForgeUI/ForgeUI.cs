@@ -156,14 +156,21 @@ public class ForgeUI : MonoBehaviour
             {
                 weaponName.text = selectSubData.weaponName + "   (" + (selectWeapon.level + 1) + ")";
                 weaponAtk.text = ("공격력 : ") + selectSubWeapon.levelDamage.ToString();
+                useGoldText.gameObject.SetActive(true);
+                useJewelText.gameObject.SetActive(false);
+                useGoldText.text = selectSubData.upgradeCost[selectSubWeapon.level].ToString();
+                if (GameManager.Instance.GetGold() < selectSubData.upgradeCost[selectSubWeapon.level+1] ||selectSubWeapon.level+1 >=10)
+                {
+                    reinforceButton.interactable = false;
+                }
             }
             else
             {
                 weaponAtk.text = ("공격력 : ") + selectSubData.baseDamage.ToString();
-            }
-            if (GameManager.Instance.GetGold() < selectSubData.upgradeCost[selectSubWeapon.level+1] ||selectSubWeapon.level+1 >=10)
-            {
-                reinforceButton.interactable = false;
+                weaponName.text = selectSubData.weaponName;
+                useGoldText.gameObject.SetActive(false);
+                useJewelText.gameObject.SetActive(true);
+                weaponAtk.text = ("공격력 : ") + selectSubData.baseDamage.ToString();
             }
         }
     }

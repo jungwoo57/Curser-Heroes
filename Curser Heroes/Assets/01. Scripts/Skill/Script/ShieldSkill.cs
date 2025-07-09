@@ -44,7 +44,7 @@ public class RotatingShieldSkill : MonoBehaviour
         if (player != null)
         {
             transform.position = player.position;
-            transform.Rotate(Vector3.forward, rotateSpeed * Time.deltaTime);
+            transform.Rotate(Vector3.forward, -rotateSpeed * Time.deltaTime);
         }
         else
         {

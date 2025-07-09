@@ -5,7 +5,6 @@ using UnityEngine.UI;
 public class BattleUI : MonoBehaviour
 {
     public GameObject battlePanel;
-    public SkillManager skillManager;
 
     [Header("플레이어 체력 UI")]
     [SerializeField]private GameObject[] healthImage;
@@ -105,9 +104,9 @@ public class BattleUI : MonoBehaviour
     {
         for (int i = 0; i < skills.Length; i++)
         {
-            if (i < skillManager.ownedSkills.Count)
+            if (i < SkillManager.Instance.ownedSkills.Count)
             {
-                skills[i].SetSkill(skillManager.ownedSkills[i]);
+                skills[i].SetSkill(SkillManager.Instance.ownedSkills[i]);
                 skills[i].gameObject.SetActive(true);
             }
             else
