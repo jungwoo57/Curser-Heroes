@@ -1625,7 +1625,10 @@ MonoBehaviour:
   - {fileID: 1811837008767771538}
   - {fileID: 3481062758182705230}
   - {fileID: 7609914265077726511}
-  CheckDie: 0
+  hitboxStartDelays:
+  - 1
+  - 1
+  - 0.1
 --- !u!114 &8632058700948958466
 MonoBehaviour:
   m_ObjectHideFlags: 0
