@@ -20,6 +20,15 @@ public class WeaponLife : MonoBehaviour
         if (currentLives <= 0)                    
             OnOutOfLives();                    //목숨이 0 이하가 되면 파괴 처리
     }
+    public void RecoverLife()
+    {
+        if (currentLives < currentWeapon.maxLives)
+        {
+            currentLives++;
+            UIManager.Instance.battleUI.Heal();
+            Debug.Log($"[구원] 목숨 1 회복됨 → 현재: {currentLives}");
+        }
+    }
 
     [ContextMenu("사망 애니메이션")]
     private void OnOutOfLives()           //목숨이 0일 때 호출되는 함수
