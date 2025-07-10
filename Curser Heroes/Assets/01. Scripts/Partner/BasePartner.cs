@@ -36,17 +36,17 @@ public abstract class BasePartner : MonoBehaviour
    
     protected virtual void OnEnable()
     {
-        BaseMonster.OnAnyMonsterDamaged += HandleMonsterDamaged;
+        CursorWeapon.OnAnyMonsterDamaged += HandleMonsterDamaged;
     }
 
     
     protected virtual void OnDisable()
     {
-        BaseMonster.OnAnyMonsterDamaged -= HandleMonsterDamaged;
+        CursorWeapon.OnAnyMonsterDamaged -= HandleMonsterDamaged;
     }
 
    
-    private void HandleMonsterDamaged(BaseMonster monster)
+    private void HandleMonsterDamaged(CursorWeapon monster)
     {
         if (currentGauge >= data.gaugeMax)
             return; // 중복 발동 방지
