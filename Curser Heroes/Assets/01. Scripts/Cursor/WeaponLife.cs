@@ -9,16 +9,16 @@ public class WeaponLife : MonoBehaviour
     {
         currentWeapon = weaponData;               //무기 정보 저장
         currentLives = currentWeapon.maxLives;     // 목숨 초기화
+        Debug.Log($"Init: {currentWeapon.weaponName} 목숨 {currentLives}");
     }
 
-    public void TakeLifeDamage()            //목숨이 감소했을 때 함수
+    public void TakeLifeDamage()
     {
         if (currentLives <= 0) return;
-        currentLives--;                    //목숨 -1
+
+        currentLives--;
         UIManager.Instance.battleUI.TakeDamage();
         Debug.Log($"{currentWeapon.weaponName} 목숨 -1 → 현재: {currentLives}");
-        if (currentLives <= 0)                    
-            OnOutOfLives();                    //목숨이 0 이하가 되면 파괴 처리
     }
     public void RecoverLife()
     {
@@ -31,12 +31,14 @@ public class WeaponLife : MonoBehaviour
     }
 
     [ContextMenu("사망 애니메이션")]
-    private void OnOutOfLives()           //목숨이 0일 때 호출되는 함수
+    private void OnOutOfLives()
     {
-        Debug.Log($"{currentWeapon.weaponName} 파괴됨 (목숨 0)");  //  목숨이 0이되면 디버그로그로 확인  
+        Debug.Log($"OnOutOfLives 호출! 현재 목숨: {currentLives}");
+        Debug.Log($"{currentWeapon.weaponName} 파괴됨 (목숨 0)");
+
         WeaponManager.Instance.isDie = true;
         WeaponManager.Instance.StartCoroutine("DieAnimation");
     }
 
-    
+
 }

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: "\uC57D\uC810 \uD3EC\uCC29"
   icon: {fileID: 21300000, guid: 44c9250151ccbc844bb0065e702d270f, type: 3}
-  type: 0
+  type: 2
   maxLevel: 5
   description: "n\uBC88\uC9F8 \uC2A4\uC715 \uACF5\uACA9\uB9C8\uB2E4, \uC2A4\uC715
     \uACF5\uACA9 \uD53C\uD574\uB7C9 2\uBC30"
@@ -50,3 +50,4 @@ MonoBehaviour:
     count: 16
     duration: 0
     cooldown: 0
+  unlockCost: 0

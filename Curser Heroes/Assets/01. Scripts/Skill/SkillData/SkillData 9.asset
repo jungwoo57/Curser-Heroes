@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: "\uC9D1\uC911 \uD6C8\uB828"
   icon: {fileID: 21300000, guid: c1409de7545395f47a4efcbda761ace9, type: 3}
-  type: 0
+  type: 2
   maxLevel: 8
   description: "\uCEE4\uC11C\uC758 \uBCF4\uC870 \uACF5\uACA9\uB825 \uC99D\uAC00"
   skillPrefab: {fileID: 0}
   levelDataList: []
+  unlockCost: 0
