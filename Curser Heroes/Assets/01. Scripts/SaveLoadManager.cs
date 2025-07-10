@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using UnityEngine;
 
@@ -8,6 +9,12 @@ public class SaveLoadManager : MonoBehaviour
     public static SaveLoadManager instance;
 
     private SaveData saveData;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
     void Start()
     {
         path = Application.persistentDataPath + "/save.data";
