@@ -18,5 +18,53 @@ MonoBehaviour:
   maxLevel: 8
   description: "\uCEE4\uC11C\uC758 \uBCF4\uC870 \uACF5\uACA9\uB825 \uC99D\uAC00"
   skillPrefab: {fileID: 0}
-  levelDataList: []
+  levelDataList:
+  - level: 1
+    damage: 3
+    sizeMultiplier: 0
+    count: 0
+    duration: 0
+    cooldown: 0
+  - level: 2
+    damage: 6
+    sizeMultiplier: 0
+    count: 0
+    duration: 0
+    cooldown: 0
+  - level: 3
+    damage: 9
+    sizeMultiplier: 0
+    count: 0
+    duration: 0
+    cooldown: 0
+  - level: 4
+    damage: 12
+    sizeMultiplier: 0
+    count: 0
+    duration: 0
+    cooldown: 0
+  - level: 5
+    damage: 15
+    sizeMultiplier: 0
+    count: 0
+    duration: 0
+    cooldown: 0
+  - level: 6
+    damage: 18
+    sizeMultiplier: 0
+    count: 0
+    duration: 0
+    cooldown: 0
+  - level: 7
+    damage: 21
+    sizeMultiplier: 0
+    count: 0
+    duration: 0
+    cooldown: 0
+  - level: 8
+    damage: 24
+    sizeMultiplier: 0
+    count: 0
+    duration: 0
+    cooldown: 0
   unlockCost: 0
