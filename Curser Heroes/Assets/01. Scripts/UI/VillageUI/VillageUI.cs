@@ -21,6 +21,10 @@ public class VillageUI : MonoBehaviour
     private void Start()
     {
         Init();
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlayBgm(false);
+        }
     }
     
     private void OnEnable()
