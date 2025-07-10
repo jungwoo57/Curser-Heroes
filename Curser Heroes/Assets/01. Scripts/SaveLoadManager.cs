@@ -29,12 +29,17 @@ public class SaveLoadManager : MonoBehaviour
         Debug.Log(path + "저장완료" + json);    
     }
 
-   
-
     public SaveData Load()
     {
+        if(!File.Exists(path)) return null;
         SaveData loadData = JsonUtility.FromJson<SaveData>(File.ReadAllText(path));
         Debug.Log("데이터 로드" + loadData);
         return loadData;
+    }
+
+    [ContextMenu("삭제")]
+    public void Delete()
+    {
+        File.Delete(path);
     }
 }

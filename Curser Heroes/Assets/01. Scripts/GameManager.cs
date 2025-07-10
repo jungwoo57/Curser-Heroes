@@ -198,6 +198,7 @@ public class GameManager : MonoBehaviour
     {
         SaveData loadData = new SaveData();
         loadData = SaveLoadManager.instance.Load();
+        if (loadData == null) return;
         _hasSkills = loadData.hasSkills;
         ownedWeapons = loadData.ownedWeapons;
         ownedSubWeapons = loadData.ownedSubWeapons;
