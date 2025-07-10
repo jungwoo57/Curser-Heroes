@@ -20,6 +20,7 @@ public class StageSelectedSkillUI : MonoBehaviour
          previousSkills[i] = skills[i];
          skillImages[i].UpdateUI(previousSkills[i] );
       }
+      InteractApplyButton();
    }
 
    private void Start()
@@ -46,6 +47,7 @@ public class StageSelectedSkillUI : MonoBehaviour
          {
             skillImages[i].UpdateUI(skill);
             skills[i] = skillImages[i].data;
+            InteractApplyButton();
             return;
          }
       }
@@ -77,5 +79,18 @@ public class StageSelectedSkillUI : MonoBehaviour
       {
          skills[i] = previousSkills[i];
       }
+   }
+   
+   public void InteractApplyButton()
+   {
+      for (int i = 0; i < skills.Length; i++)   //스킬 12개 이하면 리턴
+      {
+         if (!skills[i])
+         {
+            applyButton.interactable = false;
+            return;
+         }
+      }
+      applyButton.interactable = true;
    }
 }
