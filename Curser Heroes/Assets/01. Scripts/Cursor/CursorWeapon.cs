@@ -43,6 +43,15 @@ public class CursorWeapon : MonoBehaviour
         float cooldown = currentWeapon.attackCooldown;   //쿨타임 값
         float damage = currentWeapon.GetDamage(weaponUpgrade.weaponLevel); // 강화레벨을 포함 시킨 무기 공격력 값
 
+        var strengthSkill = SkillManager.Instance.ownedSkills
+            .Find(s => s.skill.skillName == "근력 훈련");
+
+        if (strengthSkill != null)
+        {
+            int bonusDamage = strengthSkill.skill.levelDataList[strengthSkill.level - 1].damage;
+            damage += bonusDamage;
+        }
+
         Collider2D[] hits = Physics2D.OverlapCircleAll(cursorPos, range, targetLayer);   // 커서 위치를 중심으로 원으로 범위 탐지
 
         foreach (var hit in hits)

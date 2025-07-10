@@ -98,7 +98,32 @@ public class WeaponManager : MonoBehaviour
         cursorMaterial.SetFloat("_FlashAmount", 0f);
         isInvincible = false;
     }
-    
+    // 아래 코드는 구원 스킬 사용 시 무적판정을 위해 사용됨
+    public IEnumerator OnTemporaryInvincible(float duration)
+    {
+        isInvincible = true;
+
+        SpriteRenderer cursorImage = cursorWeapon.GetComponent<SpriteRenderer>();
+        Material cursorMaterial = cursorImage.material;
+        float elapsedTime = 0f;
+        bool isBlink = false;
+
+        while (elapsedTime < duration)
+        {
+            isBlink = !isBlink;
+            if (cursorImage)
+                cursorMaterial.SetFloat("_FlashAmount", isBlink ? 1f : 0f);
+
+            yield return new WaitForSeconds(0.1f);
+            elapsedTime += 0.1f;
+        }
+
+        if (cursorImage)
+            cursorMaterial.SetFloat("_FlashAmount", 0f);
+
+        isInvincible = false;
+    }
+
     private IEnumerator DieAnimation()         //커서 죽었을때 호출
     {
         float rotationSpeed = 720.0f; // 초당 회전수
