@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -41,7 +42,7 @@ public class GameManager : MonoBehaviour
 
     [Header("기타 데이터")]
     [SerializeField] private int gold = 9999;
-    private int jewel = 0;
+    [SerializeField]private int jewel = 0;
     public int bestScore;
     private void Awake()
     {
@@ -86,14 +87,21 @@ public class GameManager : MonoBehaviour
 
     public void UnlockWeapon(WeaponData weaponData) //무기 해금 시 사용
     {
-        // 이미 보유중인 무기면 적용 안시킬 지는 무기 해금 코드 보고 결정
-        ownedWeapons.Add(new OwnedWeapon(weaponData)); // 코드 구조 보고 보조무기 주무기 얻는 법 바꾸기
+        if (weaponData.unlockCost <= jewel)
+        {
+            jewel -= weaponData.unlockCost;
+            ownedWeapons.Add(new OwnedWeapon(weaponData));
+        }
     }
 
     public void UnlockWeapon(SubWeaponData weaponData) //무기 해금 시 사용
     {
-        // 이미 보유중인 무기면 적용 안시킬 지는 무기 해금 코드 보고 결정
-        ownedSubWeapons.Add(new OwnedSubWeapon(weaponData)); // 코드 구조 보고 보조무기 주무기 얻는 법 바꾸기
+
+        if (weaponData.unlockCost <= jewel)
+        {
+            jewel -= weaponData.unlockCost;
+            ownedSubWeapons.Add(new OwnedSubWeapon(weaponData));
+        }
     }
     
     public void EquipWeapon(OwnedWeapon equipData)
@@ -131,9 +139,9 @@ public class GameManager : MonoBehaviour
     public void UpgradeWeapon(WeaponData data)
     {
         int index = ownedWeapons.FindIndex(w => w.data.weaponName == data.weaponName);
-        if (index >= 0 && ownedWeapons[index].level+1 <10)
+        if (index >= 0 && ownedWeapons[index].level<10)
         {
-            gold -= data.upgradeCost[0];
+            gold -= data.upgradeCost[ownedWeapons[index].level];
             ownedWeapons[index].level++;
             Debug.Log(ownedWeapons[index].data.name + "업그레이드 완료" + ownedWeapons[index].level);
         }
@@ -160,14 +168,19 @@ public class GameManager : MonoBehaviour
 
     public void UnlockSkill(SkillData skilldata)
     {
-        _hasSkills.Add(skilldata);
+        if (skilldata.unlockCost <= jewel)
+        {
+            jewel -= skilldata.unlockCost;
+            _hasSkills.Add(skilldata);
+        }
     }
 
     [ContextMenu("TestSave")]
     public void Save()
     {
+        if (!SaveLoadManager.instance) return;
         SaveData data = new SaveData();
-        data.hasSkills = hasSkills;
+        data.hasSkills = _hasSkills;
         data.ownedWeapons = ownedWeapons;
         data.ownedSubWeapons = ownedSubWeapons;
         data.mainEquipWeapon = mainEquipWeapon;
@@ -186,6 +199,21 @@ public class GameManager : MonoBehaviour
         SaveData loadData = new SaveData();
         loadData = SaveLoadManager.instance.Load();
         _hasSkills = loadData.hasSkills;
-        
+        ownedWeapons = loadData.ownedWeapons;
+        ownedSubWeapons = loadData.ownedSubWeapons;
+        mainEquipWeapon = loadData.mainEquipWeapon;
+        subEquipWeapon = loadData.subEquipWeapon;
+        selectSkills =  loadData.selectedSkills;
+        gold = loadData.gold;
+        jewel = loadData.jewel;
+        bestScore = loadData.bestScore;
+    }
+
+    public void OnApplicationQuit()      //마을에서 게임 껏을 시 자동 저장
+    {
+        if (SaveLoadManager.instance != null)
+        {
+            Save();
+        }
     }
 }

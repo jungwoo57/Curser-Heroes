@@ -111,6 +111,7 @@ public class ForgeUI : MonoBehaviour
     }
     public void UIUpdate()
     {
+        reinforceButton.interactable = true;
         if (isMain)
         {
             weaponDesc.text = selectData.weaponDesc;
@@ -122,11 +123,20 @@ public class ForgeUI : MonoBehaviour
             if (selectWeapon != null)
             {
                 weaponAtk.text = ("공격력 : ") + selectWeapon.levelDamage.ToString();
-                weaponName.text = selectData.weaponName + "   (" + (selectWeapon.level + 1) + ")";
+                if(selectWeapon.level <= 0) weaponName.text = selectData.weaponName;
+                else weaponName.text = selectData.weaponName + "   (" + (selectWeapon.level) + ")";
                 useGoldText.gameObject.SetActive(true);
                 useJewelText.gameObject.SetActive(false);
-                useGoldText.text = selectData.upgradeCost[selectWeapon.level].ToString();
-                if (GameManager.Instance.GetGold() < selectData.upgradeCost[selectWeapon.level] || selectWeapon.level+1 >=10)
+                if (selectWeapon.level < 10)
+                {
+                    useGoldText.text = selectData.upgradeCost[selectWeapon.level].ToString();
+                }
+                else
+                {
+                    useGoldText.text = "최대레벨";
+                }
+
+                if (GameManager.Instance.GetGold() < selectData.upgradeCost[selectWeapon.level >= 10 ? 9 : selectWeapon.level] || selectWeapon.level >=10)
                 {
                     reinforceButton.interactable = false;
                 }
@@ -154,12 +164,22 @@ public class ForgeUI : MonoBehaviour
             useJewelText.text = selectSubData.unlockCost.ToString();
             if (selectSubWeapon != null)
             {
-                weaponName.text = selectSubData.weaponName + "   (" + (selectWeapon.level + 1) + ")";
+                if(selectSubWeapon.level <= 0) weaponName.text = selectSubData.weaponName;
+                else weaponName.text = selectSubData.weaponName + "   (" + (selectSubWeapon.level) + ")";
+                
                 weaponAtk.text = ("공격력 : ") + selectSubWeapon.levelDamage.ToString();
                 useGoldText.gameObject.SetActive(true);
                 useJewelText.gameObject.SetActive(false);
-                useGoldText.text = selectSubData.upgradeCost[selectSubWeapon.level].ToString();
-                if (GameManager.Instance.GetGold() < selectSubData.upgradeCost[selectSubWeapon.level+1] ||selectSubWeapon.level+1 >=10)
+                if (selectSubWeapon.level < 10)
+                {
+                    useGoldText.text = selectSubData.upgradeCost[selectSubWeapon.level].ToString();
+                }
+                else
+                {
+                    useGoldText.text = "최대레벨";
+                }
+
+                if (GameManager.Instance.GetGold() < selectSubData.upgradeCost[selectSubWeapon.level >= 10 ? 9 : selectSubWeapon.level] || selectSubWeapon.level >=10)
                 {
                     reinforceButton.interactable = false;
                 }
