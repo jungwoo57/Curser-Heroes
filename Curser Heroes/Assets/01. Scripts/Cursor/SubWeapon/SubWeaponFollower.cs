@@ -18,7 +18,7 @@ public class SubWeaponFollower : MonoBehaviour
     
     void Start()
     {
-        weaponType = subWeaponManager.equippedSubWeapon.weaponType;
+       // weaponType = subWeaponManager.equippedSubWeapon.weaponType;
     }
     void Update()
     {

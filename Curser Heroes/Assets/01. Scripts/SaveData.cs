@@ -5,14 +5,14 @@ using UnityEngine;
 [System.Serializable]
 public class SaveData
 {
-    private List<SkillData> hasSkills;
-    private List<OwnedWeapon> ownedWeapons;
-    private List<OwnedSubWeapon> ownedSubWeapons;
-    private OwnedWeapon mainEquipWeapon;
-    private OwnedSubWeapon subEquipWeapon;
-    private List<SkillData> selectedSkills;
+    public List<SkillData> hasSkills;
+    public List<OwnedWeapon> ownedWeapons;
+    public List<OwnedSubWeapon> ownedSubWeapons;
+    public OwnedWeapon mainEquipWeapon;
+    public OwnedSubWeapon subEquipWeapon;
+    public List<SkillData> selectedSkills;
     
-    private int gold;
-    private int jewel;
-    private int bsetScore;
+    public int gold;
+    public int jewel;
+    public int bestScore;
 }
