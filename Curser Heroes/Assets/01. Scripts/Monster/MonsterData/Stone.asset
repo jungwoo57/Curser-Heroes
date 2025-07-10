@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36438cb0c778cdb4a9eed9ca26941c4f, type: 3}
-  m_Name: BearKing
+  m_Script: {fileID: 11500000, guid: a679e971d4790164f8d9e3ff6463d243, type: 3}
+  m_Name: Stone
   m_EditorClassIdentifier: 
-  BossPrefab: {fileID: 4205844832606816636, guid: 1f9009c6a305634458063348f123d290, type: 3}
+  monsterPrefab: {fileID: 9160837163091615608, guid: 549fc2ff2eb92e24ab5f8d3df6da4db9, type: 3}
   maxHP: 10
-  initialDelay: 5
-  allpatternCooldown: 5
-  patternCooldown: 070000001400000006000000
-  WakeupStage: 10
+  valueCost: 1
+  attackCooldown: 5
+  damage: 1
+  index: 0

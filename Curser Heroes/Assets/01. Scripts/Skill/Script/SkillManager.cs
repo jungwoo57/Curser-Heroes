@@ -131,7 +131,16 @@ public class SkillManager : MonoBehaviour
             owned = new SkillInstance { skill = selected, level = 1 };
             ownedSkills.Add(owned);
         }
-
+        if (selected.skillName == "근력 강화")
+        {
+            var strengthSkill = FindObjectOfType<StrengthTrainingSkill>();
+            if (strengthSkill == null)
+            {
+                GameObject obj = new GameObject("StrengthTrainingSkill");
+                strengthSkill = obj.AddComponent<StrengthTrainingSkill>();
+            }
+            strengthSkill.Init(owned);
+        }
         // 레벨업 또는 신규 습득 후 자동 배치
         if (selected.skillName == "매직소드" || selected.skillName == "포이즌필드" || selected.skillName == "수호의 방패" || selected.skillName == "불굴")
         {
