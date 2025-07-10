@@ -38,6 +38,7 @@ public class StageSelectedSkillUI : MonoBehaviour
          {
             skillImages[i].CancleSelect();
             skills[i] = null;
+            InteractApplyButton();
             return;
          }
       }
