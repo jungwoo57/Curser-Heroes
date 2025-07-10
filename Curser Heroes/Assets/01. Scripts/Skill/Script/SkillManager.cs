@@ -203,6 +203,14 @@ public class SkillManager : MonoBehaviour
             }
             return;
         }
+        if (skillData.skillName == "구원")
+        {
+            GameObject go = Instantiate(skillData.skillPrefab);
+            SalvationSkill salvation = go.GetComponent<SalvationSkill>();
+            salvation.Init(skillInstance, WeaponManager.Instance.cursorWeapon.transform);
+
+            WeaponManager.Instance.salvationSkillInstance = salvation;
+        }
 
         if (persistentSkillObjects.TryGetValue(skillData, out GameObject existingObj))
         {
