@@ -162,4 +162,30 @@ public class GameManager : MonoBehaviour
     {
         _hasSkills.Add(skilldata);
     }
+
+    [ContextMenu("TestSave")]
+    public void Save()
+    {
+        SaveData data = new SaveData();
+        data.hasSkills = hasSkills;
+        data.ownedWeapons = ownedWeapons;
+        data.ownedSubWeapons = ownedSubWeapons;
+        data.mainEquipWeapon = mainEquipWeapon;
+        data.subEquipWeapon = subEquipWeapon;
+        data.selectedSkills = selectSkills;
+        data.gold = gold; 
+        data.jewel = jewel;
+        data.bestScore = bestScore;
+
+        SaveLoadManager.instance.Save(data);
+    }
+
+    [ContextMenu("Load")]
+    public void Load()
+    {
+        SaveData loadData = new SaveData();
+        loadData = SaveLoadManager.instance.Load();
+        _hasSkills = loadData.hasSkills;
+        
+    }
 }

@@ -4,7 +4,7 @@ public class WeaponLife : MonoBehaviour
 {
     public WeaponData currentWeapon;       //현재 장착된 무기 데이터 
     public int currentLives { get; private set; }   //남은 목숨 확인(외부에서 읽기 전용)
-
+    
     public void Init(WeaponData weaponData)       //무기 장착시 초기화
     {
         currentWeapon = weaponData;               //무기 정보 저장
