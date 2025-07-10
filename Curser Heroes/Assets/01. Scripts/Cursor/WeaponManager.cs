@@ -51,25 +51,31 @@ public class WeaponManager : MonoBehaviour
         weaponUpgrade.Upgrade(); //외부에서 함수를 호출 하면 강화를 1회 한다.
     }
 
-    public void TakeWeaponLifeDamage() //데미지를 입었을 때 호출됨
+    public void TakeWeaponLifeDamage()
     {
         if (isDie) return;
+        if (isInvincible) return;
 
-        if (!isInvincible && salvationSkillInstance != null && salvationSkillInstance.TryActivate())
-        {
-            Debug.Log("[WeaponManager] 구원 스킬로 피해 방지!");
-            return;
-        }
-        // 불굴 스킬이 있는 경우 피해 방어 시도
-        if (!isInvincible && indomitableSkillInstance != null && indomitableSkillInstance.TryBlockDamage())
+        // 불굴은 선제적으로 막음 (맞기 전에)
+        if (indomitableSkillInstance != null && indomitableSkillInstance.TryBlockDamage())
         {
             Debug.Log("[WeaponManager] 불굴로 피해 무효화!");
             return;
         }
 
         AudioManager.Instance.PlayHitSound(HitType.Monster);
+
+        // 🔥 실제로 체력 깎기
         weaponLife.TakeLifeDamage();
 
+        // ⚠️ 체력 0이 된 뒤 구원 시도
+        if (weaponLife.currentLives <= 0 && salvationSkillInstance != null && salvationSkillInstance.TryActivate())
+        {
+            Debug.Log("[WeaponManager] 구원 스킬로 사망 방지!");
+            return; // 구원 발동으로 인해 죽음 회피됨
+        }
+
+        // 죽지 않았으면 무적 처리
         if (!isDie)
         {
             StartCoroutine(OnInvincible());

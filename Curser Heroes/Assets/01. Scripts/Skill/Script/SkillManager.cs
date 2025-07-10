@@ -142,7 +142,7 @@ public class SkillManager : MonoBehaviour
             strengthSkill.Init(owned);
         }
         // 레벨업 또는 신규 습득 후 자동 배치
-        if (selected.skillName == "매직소드" || selected.skillName == "포이즌필드" || selected.skillName == "수호의 방패" || selected.skillName == "불굴")
+        if (selected.skillName == "매직소드" || selected.skillName == "포이즌필드" || selected.skillName == "수호의 방패" || selected.skillName == "불굴" || selected.skillName == "구원")
         {
             DeployPersistentSkill(owned);
         }
@@ -210,6 +210,8 @@ public class SkillManager : MonoBehaviour
             salvation.Init(skillInstance, WeaponManager.Instance.cursorWeapon.transform);
 
             WeaponManager.Instance.salvationSkillInstance = salvation;
+
+            return;
         }
 
         if (persistentSkillObjects.TryGetValue(skillData, out GameObject existingObj))

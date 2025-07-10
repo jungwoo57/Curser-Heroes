@@ -50,6 +50,12 @@ public class CursorWeapon : MonoBehaviour
         {
             int bonusDamage = strengthSkill.skill.levelDataList[strengthSkill.level - 1].damage;
             damage += bonusDamage;
+
+            Debug.Log($"[CursorWeapon] 근력 훈련 보너스 포함 최종 공격력: {damage} (기본: {currentWeapon.GetDamage(weaponUpgrade.weaponLevel)}, 보너스: {bonusDamage})");
+        }
+        else
+        {
+            Debug.Log($"[CursorWeapon] 근력 훈련 미보유 - 현재 공격력: {damage}");
         }
 
         Collider2D[] hits = Physics2D.OverlapCircleAll(cursorPos, range, targetLayer);   // 커서 위치를 중심으로 원으로 범위 탐지
