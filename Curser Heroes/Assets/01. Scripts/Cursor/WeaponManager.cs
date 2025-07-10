@@ -11,6 +11,9 @@ public class WeaponManager : MonoBehaviour
     public WeaponLife weaponLife;
     public WeaponUpgrade weaponUpgrade;
 
+    [Header("스킬 시스템")]
+    public IndomitableSkill indomitableSkillInstance;
+
     [Header("기타 정보")]
     public bool isDie= false;
     public bool isInvincible = false;
@@ -49,14 +52,21 @@ public class WeaponManager : MonoBehaviour
 
     public void TakeWeaponLifeDamage() //데미지를 입었을 때 호출됨
     {
+        if (isDie) return;
+
+        // 불굴 스킬이 있는 경우 피해 방어 시도
+        if (!isInvincible && indomitableSkillInstance != null && indomitableSkillInstance.TryBlockDamage())
+        {
+            Debug.Log("[WeaponManager] 불굴로 피해 무효화!");
+            return;
+        }
+
+        AudioManager.Instance.PlayHitSound(HitType.Monster);
+        weaponLife.TakeLifeDamage();
+
         if (!isDie)
         {
-            AudioManager.Instance.PlayHitSound(HitType.Monster);
-            weaponLife.TakeLifeDamage(); //목숨을 1개 줄이고 0이 되면 끝남
-            if (!isDie)
-            {
-                StartCoroutine(OnInvincible());
-            }
+            StartCoroutine(OnInvincible());
         }
     }
 

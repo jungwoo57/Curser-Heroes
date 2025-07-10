@@ -22,11 +22,11 @@ public class ExplodeOnKillSkill : MonoBehaviour
 
         foreach (var hit in hits)
         {
-            Debug.Log($"▶ 감지된 오브젝트: {hit.name}, Tag: {hit.tag}, Layer: {LayerMask.LayerToName(hit.gameObject.layer)}");
+            Debug.Log($"감지된 오브젝트: {hit.name}, Tag: {hit.tag}, Layer: {LayerMask.LayerToName(hit.gameObject.layer)}");
 
             if (hit.TryGetComponent(out BaseMonster monster))
             {
-                Debug.Log($"✔ {monster.name} 은(BaseMonster) 맞음! 데미지 입힘");
+                Debug.Log($"{monster.name} 은(BaseMonster) 맞음! 데미지 입힘");
                 monster.TakeDamage(damage);
             }
         }

@@ -53,10 +53,10 @@ public class BattleUI : MonoBehaviour
        
         healthIndex = WeaponManager.Instance.weaponLife.currentWeapon.maxLives; //변경할 코드   
 
-        if (healthIndex > playerMaxHelath)
+       /* if (healthIndex > playerMaxHelath)
         {
             healthIndex = playerMaxHelath-1;
-        }
+        }*/
         for (int i = 0; i < healthIndex; i++) // 임시코드 추후 플레이어 maxHp로 로직 변경
         {
             healthImage[i].GetComponent<Image>().sprite = activeHealthImage;

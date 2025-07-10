@@ -3,6 +3,7 @@ using UnityEngine;
 
 public enum SkillType { Attack, Defense, Buff }
 
+[System.Serializable]
 [CreateAssetMenu(fileName = "SkillData", menuName = "Skill/SkillData")]
 public class SkillData : ScriptableObject
 {
