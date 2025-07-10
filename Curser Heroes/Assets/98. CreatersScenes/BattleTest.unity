@@ -2879,6 +2879,7 @@ MonoBehaviour:
   cursorWeapon: {fileID: 3008519376834165207}
   explosionPrefab: {fileID: 8286058134636732423, guid: e7b1031d9bfd92844b762023fd3ce9c5, type: 3}
   explodeOnKillSkillPrefab: {fileID: 7016513973741314053, guid: e2810a143be39594e9c8da3b00d7cbe3, type: 3}
+  indomitableSkillPrefab: {fileID: 2558407994215219693, guid: c97e698a1a5b4c4438bcf6d0a8e65049, type: 3}
   skillPool: []
   ownedSkills: []
   maxSkillCount: 6
@@ -5876,6 +5877,7 @@ MonoBehaviour:
   cursorWeapon: {fileID: 3008519376834165207}
   weaponLife: {fileID: 2086191848478865172}
   weaponUpgrade: {fileID: 8714767504411606639}
+  indomitableSkillInstance: {fileID: 0}
   isDie: 0
   isInvincible: 0
   invincibilityTime: 3

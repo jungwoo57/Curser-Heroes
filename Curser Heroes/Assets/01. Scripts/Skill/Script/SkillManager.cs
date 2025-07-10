@@ -10,6 +10,7 @@ public class SkillManager : MonoBehaviour
     [SerializeField] private CursorWeapon cursorWeapon;
     [SerializeField] private GameObject explosionPrefab;
     [SerializeField] private GameObject explodeOnKillSkillPrefab;
+    [SerializeField] private GameObject indomitableSkillPrefab; 
 
     public static SkillManager Instance { get; private set; }
     public List<SkillData> skillPool = new List<SkillData>();
@@ -23,8 +24,8 @@ public class SkillManager : MonoBehaviour
 
     // ExplodeOnKillSkill 인스턴스 캐싱
     private ExplodeOnKillSkill explodeSkillComponent;
-
     private const string FIREBALL_SKILL_NAME = "화염구";
+    private IndomitableSkill indomitableSkillInstance;
 
     [System.Serializable]
     public class SkillInstance
@@ -64,6 +65,9 @@ public class SkillManager : MonoBehaviour
         skillPool = new List<SkillData>(GameManager.Instance.skillPool);
 
         Debug.Log($"[SkillManager] skillPool 크기: {skillPool.Count}");
+
+        if (player == null)
+            Debug.LogError("SkillManager의 player Transform이 null입니다!");
     }
 
     public void OnWaveEnd()
@@ -129,7 +133,7 @@ public class SkillManager : MonoBehaviour
         }
 
         // 레벨업 또는 신규 습득 후 자동 배치
-        if (selected.skillName == "매직소드" || selected.skillName == "포이즌필드" || selected.skillName == "수호의 방패")
+        if (selected.skillName == "매직소드" || selected.skillName == "포이즌필드" || selected.skillName == "수호의 방패" || selected.skillName == "불굴")
         {
             DeployPersistentSkill(owned);
         }
@@ -174,6 +178,23 @@ public class SkillManager : MonoBehaviour
 
         SkillData skillData = skillInstance.skill;
 
+        if (skillData.skillName == "불굴")
+        {
+            if (indomitableSkillInstance == null)
+            {
+                // WeaponManager.Instance.cursorWeapon.transform 으로 변경
+                GameObject obj = Instantiate(indomitableSkillPrefab, WeaponManager.Instance.cursorWeapon.transform.position, Quaternion.identity);
+                indomitableSkillInstance = obj.GetComponent<IndomitableSkill>();
+                indomitableSkillInstance.Init(skillInstance, WeaponManager.Instance.cursorWeapon.transform);
+                WeaponManager.Instance.indomitableSkillInstance = indomitableSkillInstance;
+            }
+            else
+            {
+                Debug.Log("[SkillManager] 불굴 스킬 이미 존재");
+            }
+            return;
+        }
+
         if (persistentSkillObjects.TryGetValue(skillData, out GameObject existingObj))
         {
             Debug.Log($"[SkillManager] 지속형 스킬 이미 설치됨: {skillData.skillName}");
@@ -194,20 +215,18 @@ public class SkillManager : MonoBehaviour
         }
 
         Vector3 spawnPos = cursorWeapon.transform.position;
+        GameObject newObj = Instantiate(skillData.skillPrefab, spawnPos, Quaternion.identity);
+        persistentSkillObjects[skillData] = newObj;
 
-        GameObject obj = Instantiate(skillData.skillPrefab, spawnPos, Quaternion.identity);
-        persistentSkillObjects[skillData] = obj;
-
-        if (obj.TryGetComponent(out RotatingShieldSkill shieldSkill))
+        if (newObj.TryGetComponent(out RotatingShieldSkill shieldSkill))
         {
-            Debug.Log("[SkillManager] 수호의 방패 Init 호출됨");
             shieldSkill.Init(skillInstance, cursorWeapon.transform);
         }
-        else if (obj.TryGetComponent(out RotatingSkill rotatingSkill))
+        else if (newObj.TryGetComponent(out RotatingSkill rotatingSkill))
         {
             rotatingSkill.Init(skillInstance, cursorWeapon.transform);
         }
-        else if (obj.TryGetComponent(out AoEFieldSkill aoeSkill))
+        else if (newObj.TryGetComponent(out AoEFieldSkill aoeSkill))
         {
             aoeSkill.Init(skillInstance, cursorWeapon.transform);
         }
@@ -216,6 +235,7 @@ public class SkillManager : MonoBehaviour
             Debug.LogWarning($"[SkillManager] {skillData.skillName}에 맞는 SkillBehaviour가 없습니다.");
         }
     }
+
 
     public void TryShootFireball()
     {
