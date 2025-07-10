@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -11,6 +12,7 @@ public class CursorWeapon : MonoBehaviour
     public SpriteRenderer weaponSprite;
     private Dictionary<BaseMonster, float> lastHitTimesBase = new Dictionary<BaseMonster, float>();
     private Dictionary<BossStats, float> lastHitTimesBoss = new Dictionary<BossStats, float>();
+    public static event Action<CursorWeapon> OnAnyMonsterDamaged;
 
     //공격 쿨타임을 위해 몬스터 별로 마지막 공격한 시간을 저장, 몬스터 마다 각각 쿨타임을 적용할 수 있다.
 
@@ -35,7 +37,8 @@ public class CursorWeapon : MonoBehaviour
         Vector2 cursorPos = new Vector2(worldPos.x, worldPos.y);
 
         if (currentWeapon == null || weaponUpgrade == null) return;
-
+       
+       
         float range = currentWeapon.attackRange;         //커서의 범위 값
         float cooldown = currentWeapon.attackCooldown;   //쿨타임 값
         float damage = currentWeapon.GetDamage(weaponUpgrade.weaponLevel); // 강화레벨을 포함 시킨 무기 공격력 값
@@ -58,7 +61,10 @@ public class CursorWeapon : MonoBehaviour
                     lastHitTimesBase[monster] = Time.time;
 
                     TryTriggerMeteorSkill();
+
+                    OnAnyMonsterDamaged?.Invoke(this);
                 }
+
                 continue;
             }
 
@@ -76,8 +82,12 @@ public class CursorWeapon : MonoBehaviour
                     lastHitTimesBoss[boss] = Time.time;
 
                     TryTriggerMeteorSkill();
+
+                    OnAnyMonsterDamaged?.Invoke(this);
                 }
+
             }
+           
         }
 
 
