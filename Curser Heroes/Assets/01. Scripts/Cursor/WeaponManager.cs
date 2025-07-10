@@ -13,6 +13,7 @@ public class WeaponManager : MonoBehaviour
 
     [Header("스킬 시스템")]
     public IndomitableSkill indomitableSkillInstance;
+    public SalvationSkill salvationSkillInstance;
 
     [Header("기타 정보")]
     public bool isDie= false;
@@ -54,6 +55,11 @@ public class WeaponManager : MonoBehaviour
     {
         if (isDie) return;
 
+        if (!isInvincible && salvationSkillInstance != null && salvationSkillInstance.TryActivate())
+        {
+            Debug.Log("[WeaponManager] 구원 스킬로 피해 방지!");
+            return;
+        }
         // 불굴 스킬이 있는 경우 피해 방어 시도
         if (!isInvincible && indomitableSkillInstance != null && indomitableSkillInstance.TryBlockDamage())
         {
