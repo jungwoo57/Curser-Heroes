@@ -17,6 +17,8 @@ public class BossStats : MonoBehaviour
     private Color originalColor;
     BossPatternController BossPatternController; // 보스 패턴 컨트롤러 참조
 
+    
+    
     private void Awake()
     {
         // 초기 체력 세팅
@@ -64,9 +66,9 @@ public class BossStats : MonoBehaviour
     // 죽었을 때 호출
     public void Die()
     {
-        animator.SetTrigger("BossRun");  // 여기서는 보스 사망 애니메이션으로 사용
-
         WaveManager.Instance?.OnMonsterKilled(this.gameObject);
-        Destroy(gameObject, 5f);         // 5초 뒤 오브젝트 제거
+        Destroy(gameObject, 4f);  
+        animator.SetTrigger("BossRun");  // 여기서는 보스 사망 애니메이션으로 사용
+              // 5초 뒤 오브젝트 제거
     }
 }
