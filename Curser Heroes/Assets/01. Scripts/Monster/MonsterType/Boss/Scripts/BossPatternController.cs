@@ -16,6 +16,7 @@ public class BossPatternController : MonoBehaviour
     public bool IsInPattern { get; private set; }
     public bool IsInSpawn { get; private set; } // 보스가 스폰 중인지 여부
     public float[] hitboxStartDelays;
+    
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
