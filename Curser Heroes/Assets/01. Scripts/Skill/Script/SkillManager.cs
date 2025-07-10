@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.XR;
 
 public class SkillManager : MonoBehaviour
 {
@@ -26,6 +27,9 @@ public class SkillManager : MonoBehaviour
     private ExplodeOnKillSkill explodeSkillComponent;
     private const string FIREBALL_SKILL_NAME = "화염구";
     private IndomitableSkill indomitableSkillInstance;
+
+    private float bonusSubWeaponDamage = 0f;
+    public float BonusSubWeaponDamage => bonusSubWeaponDamage;
 
     [System.Serializable]
     public class SkillInstance
@@ -170,6 +174,8 @@ public class SkillManager : MonoBehaviour
         {
             WaveManager.Instance.IncrementWaveIndex();
             WaveManager.Instance.StartWave();
+
+            ApplySkillEffects();
         }
         else
         {
@@ -254,7 +260,20 @@ public class SkillManager : MonoBehaviour
             Debug.LogWarning($"[SkillManager] {skillData.skillName}에 맞는 SkillBehaviour가 없습니다.");
         }
     }
+    public void ApplySkillEffects()
+    {
+        bonusSubWeaponDamage = 0f;
 
+        foreach (var instance in ownedSkills)
+        {
+            if (instance.skill.skillName == "집중 훈련")
+            {
+                int level = Mathf.Clamp(instance.level, 1, instance.skill.levelDataList.Count);
+                bonusSubWeaponDamage += instance.skill.levelDataList[level - 1].damage; 
+                Debug.Log($"[SkillManager] 집중 훈련 Lv.{level} → 보조무기 데미지 보너스: +{bonusSubWeaponDamage}");
+            }
+        }
+    }
 
     public void TryShootFireball()
     {
