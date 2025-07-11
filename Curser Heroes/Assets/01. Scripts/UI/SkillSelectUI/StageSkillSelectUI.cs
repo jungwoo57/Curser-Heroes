@@ -27,6 +27,7 @@ public class StageSkillSelectUI : MonoBehaviour
     {
         skillInfoPanelUI.gameObject.SetActive(false);
         skillInfcoCloseButton.gameObject.SetActive(false);
+        UpdateUI();
     }
 
     public void UpdateUI()
