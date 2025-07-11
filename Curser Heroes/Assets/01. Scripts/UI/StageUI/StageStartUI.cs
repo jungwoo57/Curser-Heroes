@@ -42,11 +42,11 @@ public class StageStartUI : MonoBehaviour
    {
       yield return StartCoroutine(StageStartAnimation("STAGE 1")); // 해당 부분 현재 스테이지 이름이로 추후 이름변경
       
-      yield return StartCoroutine(StageStartAnimation("1"));
+      yield return StartCoroutine(StageStartAnimation("3"));
       
       yield return StartCoroutine(StageStartAnimation("2"));
       
-      yield return StartCoroutine(StageStartAnimation("3"));
+      yield return StartCoroutine(StageStartAnimation("1"));
 
       yield return StartCoroutine(StartTextAnimation());
       
