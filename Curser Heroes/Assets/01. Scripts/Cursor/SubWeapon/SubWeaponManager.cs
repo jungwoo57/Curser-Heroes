@@ -5,36 +5,141 @@ using UnityEngine;
 public class SubWeaponManager : MonoBehaviour
 {
     public SubWeaponData equippedSubWeapon;    //현재 장착중인 보조무기 데이터
-    private float currentCooldown = 0f;      //현재 쿨타임 남은시간
+  
     public LayerMask monsterLayer;
+
+
+    private float currentCooldown = 0f;        // 쿨타임
+    private int currentAmmo;
+    private float currentMana = 100f;
+    private float currentChargeTime = 0f;
+    private bool isCharging = false;
+
+    private bool isReloading = false;
+    private float reloadTimer = 0f;
+
+    public float manaRegenPerSecond = 5f;
+
+
+
+
+    void Start()       //장탄형 무기 탄약 초기화 >> 무기 장착시 탄약을 최대치로 초기화
+    {
+        if (equippedSubWeapon.weaponType == SubWeaponType.AmmoBased)
+            currentAmmo = equippedSubWeapon.maxAmmo;
+    }
+
+
+
     void Update()
     {
-        if (currentCooldown > 0f)
-            currentCooldown -= Time.deltaTime;     //쿨타임이 남아있다면 프레임마다 감소
+        //쿨타임 감소
+        if (currentCooldown > 0f)  
+            currentCooldown -= Time.deltaTime;
 
-        if (Input.GetMouseButtonDown(0) && CanUseSubWeapon())
+        // 충전형 무기
+        if (equippedSubWeapon.weaponType == SubWeaponType.ChargeBased)
         {
-            UseSubWeapon();
-        }              //마우스 좌클릭시 보조무기를 사용할 수 있는지 체크하고 사용
+            if (Input.GetMouseButton(0))
+            {
+                isCharging = true;
+                currentChargeTime += Time.deltaTime;
+            }
+            else
+            {
+                if (isCharging && CanUseSubWeapon())
+                    UseSubWeapon();
+
+                isCharging = false;
+                currentChargeTime = 0f;
+            }
+        }
+        else
+        {
+            // 클릭형 무기
+            if (Input.GetMouseButtonDown(0) && CanUseSubWeapon())
+            {
+                UseSubWeapon();
+            }
+        }
+
+        // 마나 자동 회복
+        if (equippedSubWeapon.weaponType == SubWeaponType.ManaBased)
+        {
+            currentMana += manaRegenPerSecond * Time.deltaTime;
+            currentMana = Mathf.Min(currentMana, 100f);
+        }
+
+        // 탄약 무기 리로드
+        if (equippedSubWeapon.weaponType == SubWeaponType.AmmoBased)
+        {
+            if (Input.GetKeyDown(KeyCode.R))
+                StartReloading();
+
+            if (currentAmmo <= 0 && !isReloading)
+                StartReloading();
+
+            if (isReloading)
+            {
+                reloadTimer -= Time.deltaTime;
+                if (reloadTimer <= 0f)
+                {
+                    currentAmmo = equippedSubWeapon.maxAmmo;
+                    isReloading = false;
+                    Debug.Log(" 리로드 완료!");
+                }
+            }
+        }
+
     }
+
+
 
     public bool CanUseSubWeapon()
     {
-        return equippedSubWeapon != null && currentCooldown <= 0f;     //보조무기 사용할 수 있는지 확인(장착 확인 절차)
+        if (equippedSubWeapon == null || currentCooldown > 0f)
+            return false;
+
+        switch (equippedSubWeapon.weaponType)
+        {
+            case SubWeaponType.AmmoBased:
+                return currentAmmo > 0;
+
+            case SubWeaponType.ManaBased:
+                return currentMana >= equippedSubWeapon.manaCost;
+
+            case SubWeaponType.ChargeBased:
+                return currentChargeTime >= equippedSubWeapon.requiredChargeTime;
+
+            default:
+                return true;
+        }
     }
 
     public void UseSubWeapon()
     {
         currentCooldown = equippedSubWeapon.cooldown;
 
-        if ((SubWeaponRangeType)equippedSubWeapon.rangeType == SubWeaponRangeType.Radial)
+        switch (equippedSubWeapon.weaponType)
         {
-            ShootAreaAroundCursor(); // 범위형 타입을 가진 보조무기라면 커서 주변으로 데미지를 주는 데미지존 효과 설정 
+            case SubWeaponType.AmmoBased:
+                currentAmmo--;
+                break;
+            case SubWeaponType.ManaBased:
+                currentMana -= equippedSubWeapon.manaCost;
+                break;
         }
+
+        if (equippedSubWeapon.rangeType == SubWeaponRangeType.Radial)
+            ShootAreaAroundCursor();  //포스 이펙트
         else
-        {
-            ShootToNearestEnemy(); // 위에 경우를 제외한 나머지는 자동조준
-        }
+            ShootToNearestEnemy();   //자동 조준
+
+        Debug.Log($"발사됨: {equippedSubWeapon.weaponName}");
+        Debug.Log($"현재 탄약: {currentAmmo}");
+        Debug.Log($"현재 마나: {currentMana}");
+        Debug.Log($"차징 시간: {currentChargeTime}");
+
     }
 
     void ShootToNearestEnemy()   //자동조준 발사
@@ -112,7 +217,12 @@ public class SubWeaponManager : MonoBehaviour
 
         return nearest;
     }
+    void StartReloading()
+    {
+        isReloading = true;
+        reloadTimer = equippedSubWeapon.reloadTime;
+        Debug.Log("🔃 리로드 중...");
+    }
 
-   
 
 }
