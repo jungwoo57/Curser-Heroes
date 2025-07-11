@@ -10,6 +10,7 @@ public class CursorWeapon : MonoBehaviour
     public WeaponLife weaponLife;       // 분리된 목숨 관리 
     public WeaponUpgrade weaponUpgrade;      // 무기 레벨 관리
     public SpriteRenderer weaponSprite;
+    private int sweepAttackCounter = 0;
     private Dictionary<BaseMonster, float> lastHitTimesBase = new Dictionary<BaseMonster, float>();
     private Dictionary<BossStats, float> lastHitTimesBoss = new Dictionary<BossStats, float>();
     public static event Action<CursorWeapon> OnAnyMonsterDamaged;
@@ -51,11 +52,12 @@ public class CursorWeapon : MonoBehaviour
             int bonusDamage = strengthSkill.skill.levelDataList[strengthSkill.level - 1].damage;
             damage += bonusDamage;
 
-            Debug.Log($"[CursorWeapon] 근력 훈련 보너스 포함 최종 공격력: {damage} (기본: {currentWeapon.GetDamage(weaponUpgrade.weaponLevel)}, 보너스: {bonusDamage})");
-        }
-        else
-        {
-            Debug.Log($"[CursorWeapon] 근력 훈련 미보유 - 현재 공격력: {damage}");
+        //    Debug.Log($"[CursorWeapon] 근력 훈련 보너스 포함 최종 공격력: {damage} (기본: {currentWeapon.GetDamage(weaponUpgrade.weaponLevel)}, 보너스: {bonusDamage})");
+        //}
+        //else
+        //{
+        //    Debug.Log($"[CursorWeapon] 근력 훈련 미보유 - 현재 공격력: {damage}");
+        //}
         }
 
         Collider2D[] hits = Physics2D.OverlapCircleAll(cursorPos, range, targetLayer);   // 커서 위치를 중심으로 원으로 범위 탐지
@@ -71,7 +73,25 @@ public class CursorWeapon : MonoBehaviour
 
                 if (Time.time - lastHitTime >= cooldown)
                 {
-                    monster.TakeDamage(Mathf.RoundToInt(damage));
+                    sweepAttackCounter++; // ⬅️ 카운트 증가
+
+                    int finalDamage = Mathf.RoundToInt(damage);
+
+                    int triggerCount = SkillManager.Instance.criticalSweepEveryNth;
+
+                    if (triggerCount > 0)
+                    {
+                        Debug.Log($"[약점 포착] {triggerCount}회 중 {sweepAttackCounter}회 공격 진행 중");
+
+                        if (sweepAttackCounter >= triggerCount)
+                        {
+                            finalDamage *= 2;
+                            Debug.Log($"[약점 포착] {triggerCount}회 달성 → 2배 피해!");
+                            sweepAttackCounter = 0;
+                        }
+                    }
+
+                    monster.TakeDamage(finalDamage);
                     AudioManager.Instance.PlayHitSound(HitType.Cursor);
                     lastHitTimesBase[monster] = Time.time;
 
@@ -92,7 +112,25 @@ public class CursorWeapon : MonoBehaviour
 
                 if (Time.time - lastHitTime >= cooldown)
                 {
-                    boss.TakeDamage(Mathf.RoundToInt(damage));
+                    sweepAttackCounter++; // ⬅️ 카운트 증가
+
+                    int finalDamage = Mathf.RoundToInt(damage);
+
+                    int triggerCount = SkillManager.Instance.criticalSweepEveryNth;
+
+                    if (triggerCount > 0)
+                    {
+                        Debug.Log($"[약점 포착] {triggerCount}회 중 {sweepAttackCounter}회 공격 진행 중");
+
+                        if (sweepAttackCounter >= triggerCount)
+                        {
+                            finalDamage *= 2;
+                            Debug.Log($"[약점 포착] {triggerCount}회 달성 → 2배 피해!");
+                            sweepAttackCounter = 0;
+                        }
+                    }
+
+                    boss.TakeDamage(finalDamage);
                     AudioManager.Instance.PlayHitSound(HitType.Cursor);
                     lastHitTimesBoss[boss] = Time.time;
 
@@ -130,7 +168,8 @@ public class CursorWeapon : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, currentWeapon.attackRange);
     }
-
-
-
+    public void ResetSweepCounter()
+    {
+        sweepAttackCounter = 0;
+    }
 }

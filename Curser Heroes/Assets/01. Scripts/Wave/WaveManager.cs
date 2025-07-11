@@ -34,6 +34,9 @@ public class WaveManager : MonoBehaviour
     public void StartWave()
     {
         waveCleared = false;
+
+        cursorWeapon.ResetSweepCounter();
+
         int waveNum = currentWaveIndex + 1;
         WaveEntry matched = waveGroupData.waveEntries.Find(w => w.wave == waveNum);
 

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.XR;
 
@@ -30,6 +31,7 @@ public class SkillManager : MonoBehaviour
 
     private float bonusSubWeaponDamage = 0f;
     public float BonusSubWeaponDamage => bonusSubWeaponDamage;
+    public int criticalSweepEveryNth = 0;
 
     [System.Serializable]
     public class SkillInstance
@@ -264,13 +266,31 @@ public class SkillManager : MonoBehaviour
     {
         bonusSubWeaponDamage = 0f;
 
+        WeaponManager.Instance.invincibilityTime = 3.0f;
+
         foreach (var instance in ownedSkills)
         {
+            var skill = instance.skill;
+            int level = Mathf.Clamp(instance.level, 1, skill.levelDataList.Count);
+
             if (instance.skill.skillName == "집중 훈련")
             {
-                int level = Mathf.Clamp(instance.level, 1, instance.skill.levelDataList.Count);
                 bonusSubWeaponDamage += instance.skill.levelDataList[level - 1].damage; 
                 Debug.Log($"[SkillManager] 집중 훈련 Lv.{level} → 보조무기 데미지 보너스: +{bonusSubWeaponDamage}");
+            }
+
+            if (skill.skillName == "느긋한 행동")
+            {
+                float extraTime = skill.levelDataList[level - 1].duration;
+                WeaponManager.Instance.invincibilityTime += extraTime;
+                Debug.Log($"[SkillManager] 느긋한 행동 Lv.{level} → 무적 시간 증가: +{extraTime}초 → 총 {WeaponManager.Instance.invincibilityTime}초");
+            }
+            if (skill.skillName == "약점 포착")
+            {
+                int triggerCount = skill.levelDataList[level - 1].count;
+                SkillManager.Instance.criticalSweepEveryNth = triggerCount;
+
+                Debug.Log($"[SkillManager] 약점 포착 Lv.{level} → {triggerCount}번째 스윕마다 2배 피해");
             }
         }
     }
