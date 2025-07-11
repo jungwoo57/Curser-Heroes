@@ -15,6 +15,7 @@ public class CursorWeapon : MonoBehaviour
     private Dictionary<BossStats, float> lastHitTimesBoss = new Dictionary<BossStats, float>();
     public static event Action<CursorWeapon> OnAnyMonsterDamaged;
 
+    private Collider2D collider;
     //공격 쿨타임을 위해 몬스터 별로 마지막 공격한 시간을 저장, 몬스터 마다 각각 쿨타임을 적용할 수 있다.
 
     private Camera cam;      // 마우스 좌표를 월드 좌표로 바꾸기 위해 메인 카메라를 참조.
@@ -22,12 +23,13 @@ public class CursorWeapon : MonoBehaviour
     void Start()
     {
         cam = Camera.main;
+        collider = GetComponent<Collider2D>();
     }
 
     void Update()
     {
         if (WeaponManager.Instance.isDie) return;
-        AutoAttackCursor();      //커서 근처에 있는 몬스터를 감지하고 쿨타임에 따라 자동으로 공격, 프레임마다 호출
+        //AutoAttackCursor();      //커서 근처에 있는 몬스터를 감지하고 쿨타임에 따라 자동으로 공격, 프레임마다 호출
     } 
 
     private void AutoAttackCursor()      //커서의 좌표설정 
@@ -171,5 +173,14 @@ public class CursorWeapon : MonoBehaviour
     public void ResetSweepCounter()
     {
         sweepAttackCounter = 0;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Monster"))
+        {
+            Debug.Log("닿긴함");
+            AutoAttackCursor();
+        }
     }
 }
