@@ -27,8 +27,7 @@ public class FireballSkill : MonoBehaviour
     {
         if (other.TryGetComponent(out BaseMonster monster) && !damagedTargets.Contains(monster))
         {
-            monster.TakeDamage(damage, null, "Fireball");
-            Debug.Log($"[FireballSkill] 일반 몬스터 {monster.name}에게 {damage} 데미지");
+            monster.TakeDamage(damage);
             damagedTargets.Add(monster);
         }
         else if (other.TryGetComponent(out BossStats boss) && !damagedTargets.Contains(boss))
