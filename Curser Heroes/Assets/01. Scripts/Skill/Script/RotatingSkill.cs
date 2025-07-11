@@ -26,7 +26,7 @@ public class RotatingSkill : MonoBehaviour
             obj.transform.localScale *= levelData.sizeMultiplier;
 
             if (obj.TryGetComponent(out SkillProjectile proj))
-                proj.Init(levelData.damage, Vector2.zero, 0, 0, false);
+                proj.Init(levelData.damage, Vector2.zero, 0);
         }
     }
 

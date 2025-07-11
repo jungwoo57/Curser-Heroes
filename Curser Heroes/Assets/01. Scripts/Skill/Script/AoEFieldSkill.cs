@@ -8,7 +8,7 @@ public class AoEFieldSkill : MonoBehaviour
     private Transform player;                         // 추적 대상 (플레이어)
     private float tickTimer;
     private SkillLevelData info;
-    private float offsetRadius = 0.6f;
+    private float offsetRadius = 0.75f;
 
     // 초기화: 스킬 레벨 정보 + 플레이어 위치 받기
     public void Init(SkillManager.SkillInstance skillInstance, Transform playerTransform)
@@ -59,10 +59,10 @@ public class AoEFieldSkill : MonoBehaviour
             }
 
             // 보스 몬스터 처리
-            //if (col.TryGetComponent(out BossBaseMonster boss))
-            //{
-            //    boss.TakeDamage(info.damage);
-            //}
+            if (col.TryGetComponent(out BossStats boss))
+            {
+                boss.TakeDamage(info.damage);
+            }
         }
     }
 

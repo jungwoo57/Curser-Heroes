@@ -5,19 +5,12 @@ public class SkillProjectile : MonoBehaviour
     private int damage;
     private float speed = 5f;
     private Vector2 direction;
-    private float lifetime = 3f;
-    private bool destroyOnHit = true;
 
-    public void Init(int dmg, Vector2 dir = default, float spd = 5f, float life = 3f, bool destroy = true)
+    public void Init(int dmg, Vector2 dir = default, float spd = 5f)
     {
         damage = dmg;
         direction = dir.normalized;
         speed = spd;
-        lifetime = life;
-        destroyOnHit = destroy;
-
-        if (lifetime > 0 && destroyOnHit)
-            Destroy(gameObject, lifetime); // 일정 시간 후 제거
     }
 
     void Update()
@@ -33,20 +26,16 @@ public class SkillProjectile : MonoBehaviour
             monster.TakeDamage(damage);
             Debug.Log("매직소드가 적 타격함!");
 
-            if (destroyOnHit)
-                Destroy(gameObject);
-
             return; // 충돌 처리 종료
         }
 
         // 보스 몬스터 감지
-        //BossBaseMonster boss = other.GetComponent<BossBaseMonster>();
-        //if (boss != null)
-        //{
-        //    boss.TakeDamage(damage);
+        BossStats boss = other.GetComponent<BossStats>();
+        if (boss != null)
+        {
+            boss.TakeDamage(damage);
 
-        //    if (destroyOnHit)
-        //        Destroy(gameObject);
-        //}
+            return;
+        }
     }
 }
