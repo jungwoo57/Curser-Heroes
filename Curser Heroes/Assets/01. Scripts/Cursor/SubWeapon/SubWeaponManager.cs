@@ -5,7 +5,11 @@ using UnityEngine;
 public class SubWeaponManager : MonoBehaviour
 {
     public SubWeaponData equippedSubWeapon;    //현재 장착중인 보조무기 데이터
+<<<<<<< HEAD
   
+=======
+    [SerializeField]private float currentCooldown = 0f;      //현재 쿨타임 남은시간
+>>>>>>> Develop
     public LayerMask monsterLayer;
 
 
@@ -40,6 +44,7 @@ public class SubWeaponManager : MonoBehaviour
         // 충전형 무기
         if (equippedSubWeapon.weaponType == SubWeaponType.ChargeBased)
         {
+<<<<<<< HEAD
             if (Input.GetMouseButton(0))
             {
                 isCharging = true;
@@ -91,6 +96,12 @@ public class SubWeaponManager : MonoBehaviour
             }
         }
 
+=======
+            UseSubWeapon();
+
+            SkillManager.Instance.TryShootFireball(); // 클릭 공격 시 화염구 스킬 발동을 위해 추가
+        }              //마우스 좌클릭시 보조무기를 사용할 수 있는지 체크하고 사용
+>>>>>>> Develop
     }
 
 

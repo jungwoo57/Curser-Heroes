@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 11281151899081592}
   - component: {fileID: 697448398410540468}
   - component: {fileID: 5116964551133433825}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Animation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 8581895031358723161}
   - component: {fileID: 5456084906350852696}
   - component: {fileID: 3416072246589757268}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: PoisonField
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -189,4 +189,4 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.08
+  m_Radius: 0.15

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -9,9 +10,12 @@ public class CursorWeapon : MonoBehaviour
     public WeaponLife weaponLife;       // 분리된 목숨 관리 
     public WeaponUpgrade weaponUpgrade;      // 무기 레벨 관리
     public SpriteRenderer weaponSprite;
+    private int sweepAttackCounter = 0;
     private Dictionary<BaseMonster, float> lastHitTimesBase = new Dictionary<BaseMonster, float>();
-   
+    private Dictionary<BossStats, float> lastHitTimesBoss = new Dictionary<BossStats, float>();
+    public static event Action<CursorWeapon> OnAnyMonsterDamaged;
 
+    private Collider2D collider;
     //공격 쿨타임을 위해 몬스터 별로 마지막 공격한 시간을 저장, 몬스터 마다 각각 쿨타임을 적용할 수 있다.
 
     private Camera cam;      // 마우스 좌표를 월드 좌표로 바꾸기 위해 메인 카메라를 참조.
@@ -19,11 +23,13 @@ public class CursorWeapon : MonoBehaviour
     void Start()
     {
         cam = Camera.main;
+        collider = GetComponent<Collider2D>();
     }
 
     void Update()
-    {      
-        AutoAttackCursor();      //커서 근처에 있는 몬스터를 감지하고 쿨타임에 따라 자동으로 공격, 프레임마다 호출
+    {
+        if (WeaponManager.Instance.isDie) return;
+        //AutoAttackCursor();      //커서 근처에 있는 몬스터를 감지하고 쿨타임에 따라 자동으로 공격, 프레임마다 호출
     } 
 
     private void AutoAttackCursor()      //커서의 좌표설정 
@@ -34,10 +40,27 @@ public class CursorWeapon : MonoBehaviour
         Vector2 cursorPos = new Vector2(worldPos.x, worldPos.y);
 
         if (currentWeapon == null || weaponUpgrade == null) return;
-
+       
+       
         float range = currentWeapon.attackRange;         //커서의 범위 값
         float cooldown = currentWeapon.attackCooldown;   //쿨타임 값
         float damage = currentWeapon.GetDamage(weaponUpgrade.weaponLevel); // 강화레벨을 포함 시킨 무기 공격력 값
+
+        var strengthSkill = SkillManager.Instance.ownedSkills
+            .Find(s => s.skill.skillName == "근력 훈련");
+
+        if (strengthSkill != null)
+        {
+            int bonusDamage = strengthSkill.skill.levelDataList[strengthSkill.level - 1].damage;
+            damage += bonusDamage;
+
+        //    Debug.Log($"[CursorWeapon] 근력 훈련 보너스 포함 최종 공격력: {damage} (기본: {currentWeapon.GetDamage(weaponUpgrade.weaponLevel)}, 보너스: {bonusDamage})");
+        //}
+        //else
+        //{
+        //    Debug.Log($"[CursorWeapon] 근력 훈련 미보유 - 현재 공격력: {damage}");
+        //}
+        }
 
         Collider2D[] hits = Physics2D.OverlapCircleAll(cursorPos, range, targetLayer);   // 커서 위치를 중심으로 원으로 범위 탐지
 
@@ -52,44 +75,86 @@ public class CursorWeapon : MonoBehaviour
 
                 if (Time.time - lastHitTime >= cooldown)
                 {
-                    monster.TakeDamage(Mathf.RoundToInt(damage));
+                    sweepAttackCounter++; // ⬅️ 카운트 증가
+
+                    int finalDamage = Mathf.RoundToInt(damage);
+
+                    int triggerCount = SkillManager.Instance.criticalSweepEveryNth;
+
+                    if (triggerCount > 0)
+                    {
+                        Debug.Log($"[약점 포착] {triggerCount}회 중 {sweepAttackCounter}회 공격 진행 중");
+
+                        if (sweepAttackCounter >= triggerCount)
+                        {
+                            finalDamage *= 2;
+                            Debug.Log($"[약점 포착] {triggerCount}회 달성 → 2배 피해!");
+                            sweepAttackCounter = 0;
+                        }
+                    }
+
+                    monster.TakeDamage(finalDamage);
                     AudioManager.Instance.PlayHitSound(HitType.Cursor);
                     lastHitTimesBase[monster] = Time.time;
 
                     TryTriggerMeteorSkill();
+
+                    OnAnyMonsterDamaged?.Invoke(this);
                 }
+
                 continue;
             }
 
-            // 보스 몬스터 감지
-            //BossBaseMonster boss = hit.GetComponent<BossBaseMonster>();
-            //if (boss != null)
-            //{
-            //    if (!lastHitTimesBoss.TryGetValue(boss, out float lastHitTime))
-            //        lastHitTime = 0f;
+            //보스 몬스터 감지
+            BossStats boss = hit.GetComponent<BossStats>();
+            if (boss != null)
+            {
+                if (!lastHitTimesBoss.TryGetValue(boss, out float lastHitTime))
+                    lastHitTime = 0f;
 
-            //    if (Time.time - lastHitTime >= cooldown)
-            //    {
-            //        boss.TakeDamage(Mathf.RoundToInt(damage));
-            //        AudioManager.Instance.PlayHitSound(HitType.Cursor);
-            //        lastHitTimesBoss[boss] = Time.time;
+                if (Time.time - lastHitTime >= cooldown)
+                {
+                    sweepAttackCounter++; // ⬅️ 카운트 증가
 
-            //        TryTriggerMeteorSkill();
-            //    }
-            //}
+                    int finalDamage = Mathf.RoundToInt(damage);
+
+                    int triggerCount = SkillManager.Instance.criticalSweepEveryNth;
+
+                    if (triggerCount > 0)
+                    {
+                        Debug.Log($"[약점 포착] {triggerCount}회 중 {sweepAttackCounter}회 공격 진행 중");
+
+                        if (sweepAttackCounter >= triggerCount)
+                        {
+                            finalDamage *= 2;
+                            Debug.Log($"[약점 포착] {triggerCount}회 달성 → 2배 피해!");
+                            sweepAttackCounter = 0;
+                        }
+                    }
+
+                    boss.TakeDamage(finalDamage);
+                    AudioManager.Instance.PlayHitSound(HitType.Cursor);
+                    lastHitTimesBoss[boss] = Time.time;
+
+                    TryTriggerMeteorSkill();
+
+                    OnAnyMonsterDamaged?.Invoke(this);
+                }
+
+            }
+           
         }
 
 
     }
     private void TryTriggerMeteorSkill()
     {
-        var skillManager = FindObjectOfType<SkillManager>();
-        if (skillManager == null) return;
+        if (SkillManager.Instance == null) return;
 
-        var meteorSkill = skillManager.ownedSkills.FirstOrDefault(s => s.skill.skillName == "별동별");
+        var meteorSkill = SkillManager.Instance.ownedSkills.FirstOrDefault(s => s.skill.skillName == "별동별");
         if (meteorSkill != null)
         {
-            skillManager.TrySpawnMeteorSkill(meteorSkill);
+            SkillManager.Instance.TrySpawnMeteorSkill(meteorSkill);
         }
     }
     public void SetWeapon(WeaponData weaponData)     //외부에서 무기를 장착할 수 있게 해주는 초기화 함수
@@ -105,7 +170,17 @@ public class CursorWeapon : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, currentWeapon.attackRange);
     }
+    public void ResetSweepCounter()
+    {
+        sweepAttackCounter = 0;
+    }
 
-
-
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Monster"))
+        {
+            Debug.Log("닿긴함");
+            AutoAttackCursor();
+        }
+    }
 }

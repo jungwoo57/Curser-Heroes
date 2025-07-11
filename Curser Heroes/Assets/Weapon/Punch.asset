@@ -14,9 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Punch
   weaponImage: {fileID: 21300000, guid: 4f19e2ea9958727459aff57fdbff5259, type: 3}
-  weaponDesc: 
-  level: 0
-  upgradeCost: 10
+  weaponDesc: "\uC7A5\uB09C\uCE58\uAE30 \uC88B\uC544\uD558\uB294 \uBAAC\uC2A4\uD130\uB4E4\uC774
+    \uD654\uC7A5\uC2E4\uC5D0\uC11C \uBCFC\uC77C\uC744 \uBCF4\uB358 \uBB34\uB3C4\uAC00\uB97C
+    \uBCC0\uAE30\uC5D0 \uBE60\uB728\uB838\uB2E4. \uD654\uAC00 \uB09C \uBB34\uB3C4\uAC00\uB294
+    \uC8FC\uBA39\uC744 \uD718\uB450\uB978\uB2E4."
+  upgradeCost: 4a010000b6010000460200000603000005040000580500001b07000073090000910c0000b6100000
+  unlockCost: 1000
   baseDamage: 2
   damagePerLevel: 3.5
   attackCooldown: 0.5

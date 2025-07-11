@@ -15,13 +15,47 @@ MonoBehaviour:
   globalMonsterPool:
   - {fileID: 11400000, guid: 7d77bee705647fc40a977fcd2ec84a8e, type: 2}
   - {fileID: 11400000, guid: 54638af21faef144fa40978387dc484f, type: 2}
-  - {fileID: 11400000, guid: 4963c06c696edac40971bc2ab9568b12, type: 2}
+  - {fileID: 11400000, guid: e06972eac5f4f5f4ba95a1104c48f2ee, type: 2}
+  - {fileID: 11400000, guid: 57034278293388746a5ea16639c2180b, type: 2}
+  - {fileID: 11400000, guid: 3306a184d3d3af64e90d47ede0254a45, type: 2}
   waveEntries:
+  - wave: 5
+    overrideBosses:
+    - {fileID: 11400000, guid: b632e75ab71c5bd459ce0387d2fffa89, type: 2}
+    isBossWave: 1
+  - wave: 10
+    overrideBosses:
+    - {fileID: 11400000, guid: b632e75ab71c5bd459ce0387d2fffa89, type: 2}
+    isBossWave: 1
+  - wave: 15
+    overrideBosses:
+    - {fileID: 11400000, guid: b632e75ab71c5bd459ce0387d2fffa89, type: 2}
+    isBossWave: 1
   - wave: 20
-    overrideEnemies:
-    - {fileID: 11400000, guid: 4963c06c696edac40971bc2ab9568b12, type: 2}
-    forceExactOverride: 1
+    overrideBosses:
+    - {fileID: 11400000, guid: b632e75ab71c5bd459ce0387d2fffa89, type: 2}
+    isBossWave: 1
+  - wave: 25
+    overrideBosses:
+    - {fileID: 11400000, guid: b632e75ab71c5bd459ce0387d2fffa89, type: 2}
+    isBossWave: 1
+  - wave: 30
+    overrideBosses:
+    - {fileID: 11400000, guid: b632e75ab71c5bd459ce0387d2fffa89, type: 2}
+    isBossWave: 1
+  - wave: 35
+    overrideBosses:
+    - {fileID: 11400000, guid: b632e75ab71c5bd459ce0387d2fffa89, type: 2}
+    isBossWave: 1
   - wave: 40
-    overrideEnemies:
-    - {fileID: 11400000, guid: 4963c06c696edac40971bc2ab9568b12, type: 2}
-    forceExactOverride: 1
+    overrideBosses:
+    - {fileID: 11400000, guid: b632e75ab71c5bd459ce0387d2fffa89, type: 2}
+    isBossWave: 1
+  - wave: 45
+    overrideBosses:
+    - {fileID: 11400000, guid: b632e75ab71c5bd459ce0387d2fffa89, type: 2}
+    isBossWave: 1
+  - wave: 50
+    overrideBosses:
+    - {fileID: 11400000, guid: b632e75ab71c5bd459ce0387d2fffa89, type: 2}
+    isBossWave: 1

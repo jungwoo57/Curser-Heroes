@@ -9,7 +9,9 @@ public class SubWeaponData : ScriptableObject
     public string weaponName;
     public Sprite weaponImage;
     public string weaponDesc;
-
+    public int[] upgradeCost;
+    public int unlockCost;
+    
     [Header("기본 스탯")]
     public float baseDamage = 1f;
     public float damagePerLevel = 1f;
@@ -43,8 +45,11 @@ public class SubWeaponData : ScriptableObject
 
     public float GetDamage(int level = 0)
     {
-        return baseDamage + damagePerLevel * level;
+        float bonusFromSkill = SkillManager.Instance != null ? SkillManager.Instance.BonusSubWeaponDamage : 0f;
+        float totalDamage = baseDamage + damagePerLevel * level + bonusFromSkill;
+        Debug.Log($"[SubWeaponData] 계산된 데미지: {baseDamage} + {damagePerLevel}*{level} + {bonusFromSkill} = {totalDamage}");
+        return totalDamage;
     }
-   
-    
+
+
 }
