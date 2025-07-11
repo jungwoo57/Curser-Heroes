@@ -69,10 +69,18 @@ public class WeaponManager : MonoBehaviour
         weaponLife.TakeLifeDamage();
 
         // ⚠️ 체력 0이 된 뒤 구원 시도
-        if (weaponLife.currentLives <= 0 && salvationSkillInstance != null && salvationSkillInstance.TryActivate())
+        if (weaponLife.currentLives <= 0)
         {
-            Debug.Log("[WeaponManager] 구원 스킬로 사망 방지!");
-            return; // 구원 발동으로 인해 죽음 회피됨
+            if (salvationSkillInstance != null && salvationSkillInstance.TryActivate())
+            {
+                Debug.Log("[WeaponManager] 구원 스킬로 사망 방지!");
+                return;
+            }
+
+            // 진짜 죽는 경우
+            isDie = true;
+            StartCoroutine(DieAnimation());
+            return;
         }
 
         // 죽지 않았으면 무적 처리
