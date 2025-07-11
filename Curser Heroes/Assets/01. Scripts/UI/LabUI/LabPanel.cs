@@ -13,10 +13,14 @@ public class LabPanel : MonoBehaviour
     public TextMeshProUGUI useJewelText;
     private void OnEnable()
     {
-        UpdateSkillScroll(SkillType.Attack);
-        unlockButton.interactable = false;
+        selectSkill = null;
+        skillName.text = "스킬 이름";
+        skillDescription.text = "스킬 설명";
+        skillEffect.text = "스킬 효과";
         hasJewelText.text = GameManager.Instance.GetJewel().ToString();
         useJewelText.text = "";
+        UpdateSkillScroll(SkillType.Attack);
+        unlockButton.interactable = false;
     }
 
     public void ClickTypeButton(int num)
@@ -63,12 +67,16 @@ public class LabPanel : MonoBehaviour
         }
     }
 
+    public void UpdateSkillImage()
+    {
+      
+    }
     public void ClickSkillButton(int skillIndex)
     {
         selectSkill = GameManager.Instance.allSkills[skillIndex];
         UpdateSkillInfo();
         if(GameManager.Instance.hasSkills.Find(n => n.skillName == selectSkill.skillName)
-           && GameManager.Instance.GetJewel() >= selectSkill.unlockCost)
+           || GameManager.Instance.GetJewel() <= selectSkill.unlockCost)
         {
             unlockButton.interactable = false;
         }
@@ -88,6 +96,18 @@ public class LabPanel : MonoBehaviour
         {
             GameManager.Instance.UnlockSkill(selectSkill);
             unlockButton.interactable = false;
+            for (int i = 0; i < GameManager.Instance.allSkills.Count; i++)
+            {
+                if (GameManager.Instance.hasSkills.Find(n =>
+                        n.skillName == GameManager.Instance.allSkills[i].skillName))
+                {
+                    skillButton[i].image.color = new Color(1f, 1f, 1f, 1.0f);
+                }
+                else
+                {
+                    skillButton[i].image.color = new Color(1f, 1f, 1f, 0.2f);
+                }
+            }
         }
     }
 
