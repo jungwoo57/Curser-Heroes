@@ -21,12 +21,12 @@ public class SettingPanelUI : MonoBehaviour
 
     void SetBGMVolume(float value)
     {
-        //오디오 매니저 제작 후 작성
+        AudioManager.Instance.bgmSource.volume = value;
     }
 
     void SetSFXVolume(float value)
     {
-        //오디오 매니저 제작 후 작성
+        AudioManager.Instance.src.volume = value;
     }
 
     public void OnClickExitButton()
