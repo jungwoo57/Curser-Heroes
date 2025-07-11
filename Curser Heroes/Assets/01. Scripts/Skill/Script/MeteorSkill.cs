@@ -33,8 +33,8 @@ public class MeteorSkill : MonoBehaviour
         {
             if (col.TryGetComponent(out BaseMonster baseMonster))
                 baseMonster.TakeDamage(damage);
-            //else if (col.TryGetComponent(out BossBaseMonster boss))
-            //    boss.TakeDamage(damage);
+            else if (col.TryGetComponent(out BossStats boss))
+                boss.TakeDamage(damage);
         }
 
         Destroy(gameObject);
