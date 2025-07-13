@@ -1,20 +1,15 @@
 ﻿using System;
 using UnityEngine;
 
-
 public class SubWeaponManager : MonoBehaviour
 {
     public SubWeaponData equippedSubWeapon;    //현재 장착중인 보조무기 데이터
-<<<<<<< HEAD
-  
-=======
-    [SerializeField]private float currentCooldown = 0f;      //현재 쿨타임 남은시간
->>>>>>> Develop
+
+    [SerializeField] private float currentCooldown = 0f;      //현재 쿨타임 남은시간
     public LayerMask monsterLayer;
 
+    public int currentAmmo;
 
-    private float currentCooldown = 0f;        // 쿨타임
-    private int currentAmmo;
     private float currentMana = 100f;
     private float currentChargeTime = 0f;
     private bool isCharging = false;
@@ -24,27 +19,24 @@ public class SubWeaponManager : MonoBehaviour
 
     public float manaRegenPerSecond = 5f;
 
-
-
-
-    void Start()       //장탄형 무기 탄약 초기화 >> 무기 장착시 탄약을 최대치로 초기화
+    void Start() //장탄형 무기 탄약 초기화 >> 무기 장착시 탄약을 최대치로 초기화
     {
-        if (equippedSubWeapon.weaponType == SubWeaponType.AmmoBased)
+        if (equippedSubWeapon != null && equippedSubWeapon.weaponType == SubWeaponType.AmmoBased)
             currentAmmo = equippedSubWeapon.maxAmmo;
     }
 
-
-
     void Update()
     {
+        if (equippedSubWeapon == null)
+            return; // 무기 미장착 시 로직 중단
+
         //쿨타임 감소
-        if (currentCooldown > 0f)  
+        if (currentCooldown > 0f)
             currentCooldown -= Time.deltaTime;
 
         // 충전형 무기
         if (equippedSubWeapon.weaponType == SubWeaponType.ChargeBased)
         {
-<<<<<<< HEAD
             if (Input.GetMouseButton(0))
             {
                 isCharging = true;
@@ -91,41 +83,47 @@ public class SubWeaponManager : MonoBehaviour
                 {
                     currentAmmo = equippedSubWeapon.maxAmmo;
                     isReloading = false;
-                    Debug.Log(" 리로드 완료!");
+                    Debug.Log("리로드 완료!");
                 }
             }
         }
-
-=======
-            UseSubWeapon();
-
-            SkillManager.Instance.TryShootFireball(); // 클릭 공격 시 화염구 스킬 발동을 위해 추가
-        }              //마우스 좌클릭시 보조무기를 사용할 수 있는지 체크하고 사용
->>>>>>> Develop
     }
-
-
 
     public bool CanUseSubWeapon()
     {
         if (equippedSubWeapon == null || currentCooldown > 0f)
+        {
+            Debug.Log("❌ 무기를 사용할 수 없음: 쿨타임이 남았거나 무기가 없음");
             return false;
+        }
 
         switch (equippedSubWeapon.weaponType)
         {
             case SubWeaponType.AmmoBased:
-                return currentAmmo > 0;
+                if (currentAmmo > 0)
+                {
+                    Debug.Log($" 장탄형 무기 사용 가능 - 남은 탄약: {currentAmmo}");
+                    return true;
+                }
+                else
+                {
+                    Debug.Log(" 탄약 없음. 장전 필요!");
+                    return false;
+                }
 
             case SubWeaponType.ManaBased:
+                Debug.Log($" 마나 보유량: {currentMana}");
                 return currentMana >= equippedSubWeapon.manaCost;
 
             case SubWeaponType.ChargeBased:
+                Debug.Log($" 현재 차징 시간: {currentChargeTime}");
                 return currentChargeTime >= equippedSubWeapon.requiredChargeTime;
 
             default:
                 return true;
         }
     }
+
 
     public void UseSubWeapon()
     {
@@ -150,7 +148,6 @@ public class SubWeaponManager : MonoBehaviour
         Debug.Log($"현재 탄약: {currentAmmo}");
         Debug.Log($"현재 마나: {currentMana}");
         Debug.Log($"차징 시간: {currentChargeTime}");
-
     }
 
     void ShootToNearestEnemy()   //자동조준 발사
@@ -165,20 +162,17 @@ public class SubWeaponManager : MonoBehaviour
             return;
         }
 
-       
-
         GameObject proj = Instantiate(equippedSubWeapon.projectilePrefab, cursorPos, Quaternion.identity);   //투사체 프리팹을 커서 위치에 생성
         SubProjectile sub = proj.GetComponent<SubProjectile>();    //생성된 투사체 프리팹 가져오기
         if (sub != null)
         {
-            sub.Init(equippedSubWeapon, target);   //타켓 좌표와 장착된 보조무기 정보를 넘기고 초기화
+            sub.Init(equippedSubWeapon, target);   //타겟 좌표와 장착된 보조무기 정보를 넘기고 초기화
         }
         else
         {
             Debug.LogError("SubProjectile 컴포넌트가 프리팹에 없습니다!");
         }
     }
-
 
     void ShootAreaAroundCursor()
     {
@@ -188,13 +182,10 @@ public class SubWeaponManager : MonoBehaviour
         int damage = Mathf.RoundToInt(equippedSubWeapon.GetDamage());
         float radius = equippedSubWeapon.projectileMaxDistance;
 
-        // Layer 설정: "Monster" 레이어에만 영향
         LayerMask monsterLayer = LayerMask.GetMask("Monster");
 
-        // ForceEffect 인스턴스 생성 (이름 없이 순서대로)
         IEffect forceEffect = new ForceEffect(cursorPos, damage, radius, monsterLayer);
 
-        // EffectManager를 담은 임시 오브젝트 생성
         GameObject effectObj = new GameObject("ForceEffectHost");
         effectObj.transform.position = cursorPos;
 
@@ -202,38 +193,35 @@ public class SubWeaponManager : MonoBehaviour
         effectManager.Init(null); // 포스 이펙트는 특정 몬스터와 연결 없음
         effectManager.AddEffect(forceEffect);
 
-        // 이펙트 종료 후 오브젝트 삭제
         Destroy(effectObj, 0.5f);
     }
 
-
-
     BaseMonster FindNearestAliveMonster(Vector3 from)     //가장 가까운 몬스터 탐색
     {
-        BaseMonster[] monsters = FindObjectsOfType<BaseMonster>();    
-        BaseMonster nearest = null;      
-        float minDist = Mathf.Infinity;         //가장 가까운 거리(처음엔 무한대)
+        BaseMonster[] monsters = FindObjectsOfType<BaseMonster>();
+        BaseMonster nearest = null;
+        float minDist = Mathf.Infinity;
 
         foreach (var m in monsters)
         {
-            if (m.IsDead) continue;   //이미 죽은 상태면 패스
+            if (m.IsDead) continue;
 
-            float dist = Vector2.Distance(from, m.transform.position);  //커서의 위치와 몬스터의 현재 거리를 계산
+            float dist = Vector2.Distance(from, m.transform.position);
             if (dist < minDist)
             {
-                minDist = dist;  //최소 거리 갱신
-                nearest = m;     //가장 가까운 몬스터 저장
+                minDist = dist;
+                nearest = m;
             }
         }
 
         return nearest;
     }
+
     void StartReloading()
     {
+        Debug.Log("StartReloading 호출됨");
         isReloading = true;
         reloadTimer = equippedSubWeapon.reloadTime;
-        Debug.Log("🔃 리로드 중...");
+        Debug.Log(" 리로드 중..");
     }
-
-
 }
