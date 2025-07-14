@@ -31,6 +31,7 @@ public class AudioManager : MonoBehaviour
 
     public void PlayBgm(bool isBattle)
     {
+        bgmSource.Stop();
         if (isBattle)
         {
             bgmSource.clip = battleBgm;
