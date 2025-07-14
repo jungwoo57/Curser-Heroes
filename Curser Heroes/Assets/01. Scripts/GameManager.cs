@@ -60,6 +60,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        mainEquipWeapon = ownedWeapons[0];
+        subEquipWeapon = ownedSubWeapons[0];
+    }
 
     public void AddGold(int amount)
     {
