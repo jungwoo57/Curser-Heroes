@@ -19,10 +19,15 @@ public class SubWeaponManager : MonoBehaviour
 
     public float manaRegenPerSecond = 5f;
 
+    public GameObject subWeaponVisualPrefab;  // 보조무기 외형 프리팹
+    private GameObject currentVisual;
+
     void Start() //장탄형 무기 탄약 초기화 >> 무기 장착시 탄약을 최대치로 초기화
     {
-        if (equippedSubWeapon != null && equippedSubWeapon.weaponType == SubWeaponType.AmmoBased)
-            currentAmmo = equippedSubWeapon.maxAmmo;
+        if (equippedSubWeapon != null)
+        {
+            EquipSubWeapon(equippedSubWeapon);  //  장착 함수로 초기화 처리
+        }
     }
 
     void Update()
@@ -93,7 +98,7 @@ public class SubWeaponManager : MonoBehaviour
     {
         if (equippedSubWeapon == null || currentCooldown > 0f)
         {
-            Debug.Log("❌ 무기를 사용할 수 없음: 쿨타임이 남았거나 무기가 없음");
+            Debug.Log(" 무기를 사용할 수 없음: 쿨타임이 남았거나 무기가 없음");
             return false;
         }
 
@@ -123,7 +128,6 @@ public class SubWeaponManager : MonoBehaviour
                 return true;
         }
     }
-
 
     public void UseSubWeapon()
     {
@@ -171,6 +175,13 @@ public class SubWeaponManager : MonoBehaviour
         else
         {
             Debug.LogError("SubProjectile 컴포넌트가 프리팹에 없습니다!");
+        }
+
+        SubWeaponFollower follower = proj.GetComponent<SubWeaponFollower>();
+        if (follower != null)
+        {
+            // 메인 무기를 기준으로 하지 않음
+            follower.SetTarget(target.transform);
         }
     }
 
@@ -223,5 +234,29 @@ public class SubWeaponManager : MonoBehaviour
         isReloading = true;
         reloadTimer = equippedSubWeapon.reloadTime;
         Debug.Log(" 리로드 중..");
+    }
+
+    public void EquipSubWeapon(SubWeaponData newWeaponData)
+    {
+        equippedSubWeapon = newWeaponData;
+
+        if (equippedSubWeapon.weaponType == SubWeaponType.AmmoBased)
+            currentAmmo = equippedSubWeapon.maxAmmo;
+
+        if (currentVisual != null)
+            Destroy(currentVisual);
+
+        if (subWeaponVisualPrefab != null)
+        {
+            currentVisual = Instantiate(subWeaponVisualPrefab, transform.position, Quaternion.identity);
+            SubWeaponFollower followerVisual = currentVisual.GetComponent<SubWeaponFollower>();
+            if (followerVisual != null)
+            {
+                // 메인 무기 기준 이동 제거됨
+                followerVisual.Init(equippedSubWeapon);
+            }
+        }
+
+        Debug.Log($" 보조무기 장착 완료: {equippedSubWeapon.weaponName}");
     }
 }

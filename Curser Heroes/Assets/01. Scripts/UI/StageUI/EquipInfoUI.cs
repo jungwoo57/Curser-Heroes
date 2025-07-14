@@ -1,4 +1,4 @@
-using UnityEngine.UI;
+﻿using UnityEngine.UI;
 using UnityEngine;
 using System;
 
@@ -17,7 +17,7 @@ public class EquipInfoUI : MonoBehaviour
         }
         if (GameManager.Instance.subEquipWeapon.data)
         {
-            subWeaponImage.sprite = GameManager.Instance.subEquipWeapon.data.weaponImage;
+            subWeaponImage.sprite = GameManager.Instance.subEquipWeapon.data.weaponSprite;
         }
     }
     
@@ -35,7 +35,7 @@ public class EquipInfoUI : MonoBehaviour
 
         if (GameManager.Instance.subEquipWeapon.data != null)
         {
-            subWeaponImage.sprite = GameManager.Instance.subEquipWeapon.data.weaponImage;
+            subWeaponImage.sprite = GameManager.Instance.subEquipWeapon.data.weaponSprite;
         }
         //파트너 이미지 추후 추가
     }
