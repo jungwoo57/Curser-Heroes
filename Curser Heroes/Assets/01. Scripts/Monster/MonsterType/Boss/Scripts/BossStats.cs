@@ -66,9 +66,15 @@ public class BossStats : MonoBehaviour
     // 죽었을 때 호출
     public void Die()
     {
+        animator.SetTrigger("BossRun"); // 여기서는 보스 사망 애니메이션으로 사용
+        StartCoroutine(DelayedDeath());
+    }
+
+    private IEnumerator DelayedDeath()
+    {
+        yield return new WaitForSeconds(4f); // 연출 대기 시간
+
         WaveManager.Instance?.OnMonsterKilled(this.gameObject);
-        Destroy(gameObject, 4f);  
-        animator.SetTrigger("BossRun");  // 여기서는 보스 사망 애니메이션으로 사용
-              // 5초 뒤 오브젝트 제거
+        Destroy(gameObject); // 이제 오브젝트 제거
     }
 }
