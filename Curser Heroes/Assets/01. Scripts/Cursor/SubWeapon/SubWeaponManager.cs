@@ -4,16 +4,13 @@ using UnityEngine;
 
 public class SubWeaponManager : MonoBehaviour
 {
-    public SubWeaponData equippedSubWeapon;    //현재 장착중인 보조무기 데이터
-<<<<<<< HEAD
-  
-=======
-    [SerializeField]private float currentCooldown = 0f;      //현재 쿨타임 남은시간
->>>>>>> Develop
+    public SubWeaponData equippedSubWeapon; //현재 장착중인 보조무기 데이터
+
+    //[SerializeField]private float currentCooldown = 0f;      //현재 쿨타임 남은시간
     public LayerMask monsterLayer;
 
 
-    private float currentCooldown = 0f;        // 쿨타임
+    private float currentCooldown = 0f; // 쿨타임
     private int currentAmmo;
     private float currentMana = 100f;
     private float currentChargeTime = 0f;
@@ -27,7 +24,7 @@ public class SubWeaponManager : MonoBehaviour
 
 
 
-    void Start()       //장탄형 무기 탄약 초기화 >> 무기 장착시 탄약을 최대치로 초기화
+    void Start() //장탄형 무기 탄약 초기화 >> 무기 장착시 탄약을 최대치로 초기화
     {
         if (equippedSubWeapon.weaponType == SubWeaponType.AmmoBased)
             currentAmmo = equippedSubWeapon.maxAmmo;
@@ -38,13 +35,12 @@ public class SubWeaponManager : MonoBehaviour
     void Update()
     {
         //쿨타임 감소
-        if (currentCooldown > 0f)  
+        if (currentCooldown > 0f)
             currentCooldown -= Time.deltaTime;
 
         // 충전형 무기
         if (equippedSubWeapon.weaponType == SubWeaponType.ChargeBased)
         {
-<<<<<<< HEAD
             if (Input.GetMouseButton(0))
             {
                 isCharging = true;
@@ -96,13 +92,12 @@ public class SubWeaponManager : MonoBehaviour
             }
         }
 
-=======
-            UseSubWeapon();
+        UseSubWeapon();
 
-            SkillManager.Instance.TryShootFireball(); // 클릭 공격 시 화염구 스킬 발동을 위해 추가
-        }              //마우스 좌클릭시 보조무기를 사용할 수 있는지 체크하고 사용
->>>>>>> Develop
-    }
+        SkillManager.Instance.TryShootFireball(); // 클릭 공격 시 화염구 스킬 발동을 위해 추가
+    } //마우스 좌클릭시 보조무기를 사용할 수 있는지 체크하고 사용
+
+    
 
 
 
