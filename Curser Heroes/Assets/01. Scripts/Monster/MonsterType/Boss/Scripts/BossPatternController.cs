@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 //
 public class BossPatternController : MonoBehaviour
 {
+
     
     public BossData data;
 
@@ -13,6 +14,8 @@ public class BossPatternController : MonoBehaviour
     private Animator animator;
     public BossPatternDamage[] patternDamage;  // 히트박스 스크립트 배열
     private float[] nextAvailableTime;         // 패턴별 다음 실행 가능 시간
+    public bool IsDead { get; set; } = false;
+
     public bool IsInPattern { get; private set; }
     public bool IsInSpawn { get; private set; } // 보스가 스폰 중인지 여부
     public float[] hitboxStartDelays;
@@ -45,7 +48,7 @@ public class BossPatternController : MonoBehaviour
         // 초기 지연: 보스 등장 후 첫 패턴 전 대기
         yield return new WaitForSeconds(data.initialDelay);
         IsInSpawn = false;
-        while (true)  // 보스가 살아있는 동안 패턴 반복
+        while (!IsDead)  // 보스가 살아있는 동안 패턴 반복
         {            
             IsInPattern = true;
 
