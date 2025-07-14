@@ -18,7 +18,16 @@ public class StageSelectedSkillUI : MonoBehaviour
       for (int i = 0; i < previousSkills.Length; i++)
       {
          previousSkills[i] = skills[i];
-         skillImages[i].UpdateUI(previousSkills[i] );
+         skillImages[i].UpdateUI(previousSkills[i]);
+      }
+
+      if (GameManager.Instance.selectSkills.Count == skills.Length) //스킬들의 길이와 선택 스킬이 같으면
+      {
+         for (int i = 0; i < GameManager.Instance.selectSkills.Count; i++)
+         {
+            skills[i] = GameManager.Instance.selectSkills[i];
+            skillImages[i].UpdateUI(skills[i]);
+         }
       }
       InteractApplyButton();
    }
