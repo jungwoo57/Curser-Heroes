@@ -100,7 +100,7 @@ public class WaveManager : MonoBehaviour
         if (!waveCleared && spawnedMonsters.Count == 0)
         {
             waveCleared = true;
-            StartCoroutine(DelayedWaveClear(2f));
+            StartCoroutine(DelayedWaveClear(1.5f));
         }
     }
 

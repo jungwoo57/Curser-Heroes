@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.XR;
 
 public class SkillManager : MonoBehaviour
 {
@@ -199,7 +197,6 @@ public class SkillManager : MonoBehaviour
         {
             if (indomitableSkillInstance == null)
             {
-                // WeaponManager.Instance.cursorWeapon.transform 으로 변경
                 GameObject obj = Instantiate(indomitableSkillPrefab, WeaponManager.Instance.cursorWeapon.transform.position, Quaternion.identity);
                 indomitableSkillInstance = obj.GetComponent<IndomitableSkill>();
                 indomitableSkillInstance.Init(skillInstance, WeaponManager.Instance.cursorWeapon.transform);
