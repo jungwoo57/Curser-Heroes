@@ -72,7 +72,7 @@ public class BossStats : MonoBehaviour
 
     private IEnumerator DelayedDeath()
     {
-        yield return new WaitForSeconds(4f); // 연출 대기 시간
+        yield return new WaitForSeconds(3.5f); // 연출 대기 시간
 
         WaveManager.Instance?.OnMonsterKilled(this.gameObject);
         Destroy(gameObject); // 이제 오브젝트 제거
