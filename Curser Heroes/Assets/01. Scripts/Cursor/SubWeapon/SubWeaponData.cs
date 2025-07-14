@@ -32,6 +32,17 @@ public class SubWeaponData : ScriptableObject
 
     public SubWeaponRangeType rangeType;
 
+    [Header("장탄형 무기 설정")]
+    public int maxAmmo;
+    public float reloadTime;
+
+    [Header("마나형 무기 설정")]
+    public float manaCost;
+
+    [Header("충전형 무기 설정")]
+    public float requiredChargeTime;
+
+
     public float GetDamage(int level = 0)
     {
         float bonusFromSkill = SkillManager.Instance != null ? SkillManager.Instance.BonusSubWeaponDamage : 0f;
