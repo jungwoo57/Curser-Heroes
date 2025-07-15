@@ -18,6 +18,7 @@ public class WaveManager : MonoBehaviour
     private int currentWaveIndex = 0;
     private List<GameObject> spawnedMonsters = new List<GameObject>();
     private bool waveCleared = false;
+    private bool spawningComplete = false;
 
     private void Awake()
     {
@@ -34,6 +35,7 @@ public class WaveManager : MonoBehaviour
     public void StartWave()
     {
         waveCleared = false;
+        spawningComplete = false;
 
         cursorWeapon.ResetSweepCounter();
 
@@ -55,7 +57,7 @@ public class WaveManager : MonoBehaviour
             var spawnQueue = WaveBuilder.BuildWaveEntry(currentWaveData, waveGroupData.globalMonsterPool);
             SpawnMonsters(spawnQueue);
         }
-
+        spawningComplete = true;
         TriggerPassiveSkills();
     }
 
@@ -97,6 +99,9 @@ public class WaveManager : MonoBehaviour
     public void OnMonsterKilled(GameObject monster)
     {
         spawnedMonsters.Remove(monster);
+
+        if (!spawningComplete) return;
+
         if (!waveCleared && spawnedMonsters.Count == 0)
         {
             waveCleared = true;
