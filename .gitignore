@@ -11,6 +11,13 @@
 **/[Uu]ser[Ss]ettings/
 *.log
 
+# Unity user-specific editor settings
+UserSettings/
+**/UserSettings/
+**/EditorUserSettings.asset
+**/Layouts/
+*.dwlt
+
 # ========== #
 # Visual Studio #
 # ========== #
@@ -54,7 +61,11 @@ sysinfo.txt
 # ================ #
 Assets/AddressableAssetsData/*/AssetSettings.asset
 Assets/StreamingAssets/aa/
-Curser Heroes/UserSettings/Layouts/default-2022.dwlt
-*.dwlt
-Curser Heroes/UserSettings/Layouts/default-2022.dwlt
-Curser Heroes/UserSettings/Layouts/default-2022.dwlt
+
+# Optional - Uncomment if using JetBrains Rider or Asset Store tools
+# /Assets/Plugins/Editor/JetBrains*
+# /Assets/AssetStoreTools*
+
+# Memory captures and recordings
+/[Mm]emoryCaptures/
+/[Rr]ecordings/
