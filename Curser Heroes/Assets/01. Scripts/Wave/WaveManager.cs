@@ -98,12 +98,25 @@ public class WaveManager : MonoBehaviour
 
     public void OnMonsterKilled(GameObject monster)
     {
-        spawnedMonsters.Remove(monster);
+        Debug.Log($"[OnMonsterKilled] 몬스터 제거 요청: {monster.name}");
 
-        if (!spawningComplete) return;
+        if (!spawnedMonsters.Contains(monster))
+        {
+            Debug.LogWarning($"[OnMonsterKilled] 제거 대상이 리스트에 없습니다: {monster.name}");
+        }
+
+        spawnedMonsters.Remove(monster);
+        Debug.Log($"[OnMonsterKilled] 남은 몬스터 수: {spawnedMonsters.Count}");
+
+        if (!spawningComplete)
+        {
+            Debug.Log($"[OnMonsterKilled] 스폰 완료 전이라 무시");
+            return;
+        }
 
         if (!waveCleared && spawnedMonsters.Count == 0)
         {
+            Debug.Log("[OnMonsterKilled] 모든 몬스터 제거됨 → 웨이브 클리어 처리 시작");
             waveCleared = true;
             StartCoroutine(DelayedWaveClear(1.5f));
         }

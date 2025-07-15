@@ -380,7 +380,7 @@ public class SkillManager : MonoBehaviour
     {
         switch (index)
         {
-            //case 0: BattleUI.Heal(); break;
+            case 0:WeaponManager.Instance.weaponLife.RecoverLife(); break;
             case 1: GameManager.Instance.AddGold(100); break;
             case 2: GameManager.Instance.AddJewel(10); break;
         }
