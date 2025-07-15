@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
 public class WeaponImage : MonoBehaviour
@@ -45,9 +45,9 @@ public class WeaponImage : MonoBehaviour
         num = 1;
         Debug.Log("업데이트" + subData);
         this.gameObject.SetActive(true);
-        if (recieveData.data.weaponImage != null)
+        if (recieveData.data.weaponSprite != null)
         {
-            weaponSprite.sprite = subData.data.weaponImage;
+            weaponSprite.sprite = subData.data.weaponSprite;
         }
         else
         {

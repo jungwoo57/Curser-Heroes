@@ -44,6 +44,12 @@ public class BossFollowWeapon : MonoBehaviour
             
         }
         FindWeaponByLayer();
+        if (patternController.IsDead)
+        {
+            rb.velocity = Vector2.zero;
+            animator.SetBool("BossMove", false);
+            return;
+        }
         animator.SetBool("BossMove", true);
         if (targetWeapon != null)
         {
