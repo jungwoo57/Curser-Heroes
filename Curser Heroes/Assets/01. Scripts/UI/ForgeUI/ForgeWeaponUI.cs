@@ -1,4 +1,4 @@
-
+﻿
 using UnityEngine;
 using UnityEngine.UI;
 public class ForgeWeaponUI : MonoBehaviour
@@ -70,7 +70,7 @@ public class ForgeWeaponUI : MonoBehaviour
         CheckSubLock();
         if (mainData != null)
         {
-            image.sprite = subData.weaponImage;
+            image.sprite = subData.weaponSprite;
         }
         else
         {

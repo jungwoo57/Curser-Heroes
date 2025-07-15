@@ -7,7 +7,7 @@ public class SubWeaponData : ScriptableObject
 {
     [Header("기본 정보")]
     public string weaponName;
-    public Sprite weaponImage;
+    public Sprite weaponSprite;
     public string weaponDesc;
     public int[] upgradeCost;
     public int unlockCost;
@@ -42,7 +42,8 @@ public class SubWeaponData : ScriptableObject
     [Header("충전형 무기 설정")]
     public float requiredChargeTime;
 
-
+  
+   
     public float GetDamage(int level = 0)
     {
         float bonusFromSkill = SkillManager.Instance != null ? SkillManager.Instance.BonusSubWeaponDamage : 0f;

@@ -2,41 +2,62 @@
 
 public class SubWeaponFollower : MonoBehaviour
 {
-    [Header("참조")]
-    public Transform cursorTransform;       // 커서(주무기)
-    public Transform directionIndicator;    // 시각적 방향 표시
-    public SubWeaponManager subWeaponManager;  //서브웨펀 매니저 정보가져오기
-    public SubWeaponType weaponType;
-    
-    [Header("설정")]
-    public float radius = 1.5f;             // 커서를 중심으로 한 거리
+    private Transform target;
+    private SpriteRenderer spriteRenderer;
 
-    [Header("보조무기 UI")] 
-    public GameObject ammoTypeUI;
-    public GameObject manaTypeUI;
-    public GameObject ChargeTypeUI;
-    
-    void Start()
+    public float followDistance = 1.5f;
+    public float rotationSpeed = 180f;
+
+    void Awake()
     {
-       // weaponType = subWeaponManager.equippedSubWeapon.weaponType;
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
+
+    public void SetTarget(Transform newTarget)
+    {
+        target = newTarget;
+    }
+
+    public void SetSprite(Sprite sprite)
+    {
+        if (spriteRenderer != null && sprite != null)
+            spriteRenderer.sprite = sprite;
+    }
+
+    private SubWeaponData weaponData;
+
+    public void Init(SubWeaponData data)
+    {
+        weaponData = data;
+
+        // 스프라이트 자동 설정
+        if (spriteRenderer == null)
+            spriteRenderer = GetComponent<SpriteRenderer>();
+
+        if (weaponData != null && weaponData.weaponSprite != null)
+        {
+            spriteRenderer.sprite = weaponData.weaponSprite;
+        }
+    }
+
+
+
     void Update()
     {
-        if (cursorTransform == null) return;
+        //  커서 위치 기준으로 회전 궤도 계산
+        Vector3 cursorWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        cursorWorldPos.z = 0f;
 
-        // 1. 마우스 위치 계산
-        Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mouseWorldPos.z = 0f;
+        float angle = Time.time * rotationSpeed;
+        Vector3 offset = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0f) * followDistance;
 
-        // 2. 커서 → 마우스 방향 계산
-        Vector2 direction = (mouseWorldPos - cursorTransform.position).normalized;
+        transform.position = cursorWorldPos + offset;
 
- 
-      
-    }
-
-    public void UpdateUI()
-    {
-        
+        if (target != null)
+        {
+            Vector3 dir = target.position - transform.position;
+            float zRot = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(0f, 0f, zRot);
+        }
     }
 }

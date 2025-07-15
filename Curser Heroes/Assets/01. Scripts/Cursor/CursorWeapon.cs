@@ -15,7 +15,7 @@ public class CursorWeapon : MonoBehaviour
     private Dictionary<BossStats, float> lastHitTimesBoss = new Dictionary<BossStats, float>();
     public static event Action<CursorWeapon> OnAnyMonsterDamaged;
 
-    private Collider2D collider;
+    private Collider2D   collider;
     //공격 쿨타임을 위해 몬스터 별로 마지막 공격한 시간을 저장, 몬스터 마다 각각 쿨타임을 적용할 수 있다.
 
     private Camera cam;      // 마우스 좌표를 월드 좌표로 바꾸기 위해 메인 카메라를 참조.
