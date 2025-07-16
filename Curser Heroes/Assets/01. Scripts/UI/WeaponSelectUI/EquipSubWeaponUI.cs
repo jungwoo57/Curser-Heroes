@@ -13,7 +13,7 @@ public class EquipSubWeaponUI : MonoBehaviour
     public void UpdateUI(OwnedSubWeapon data)
     {
         if (data == null) return;
-        weaponImage.sprite = data.data.weaponImage; //이미지 필요
+        weaponImage.sprite = data.data.weaponSprite; //이미지 필요
         nameText.text = data.data.weaponName ; // equipdata 강화레벨 필요
         descriptionText.text = data.data.weaponDesc;
         //attackTypeText.text = data.effectType.ToString();             //공격타입 관련 데이터 필요

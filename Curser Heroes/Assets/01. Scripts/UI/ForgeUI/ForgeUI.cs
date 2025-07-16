@@ -1,4 +1,4 @@
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 public class ForgeUI : MonoBehaviour
@@ -174,7 +174,7 @@ public class ForgeUI : MonoBehaviour
             weaponDesc.text = selectSubData.weaponDesc;
             hasGoldText.text = GameManager.Instance.GetGold().ToString();
             useGoldText.text = selectSubData.upgradeCost.ToString();
-            weaponImage.sprite = selectSubData.weaponImage;
+            weaponImage.sprite = selectSubData.weaponSprite;
             hasJewelText.text = GameManager.Instance.GetJewel().ToString();
             useJewelText.text = selectSubData.unlockCost.ToString();
             if (selectSubWeapon != null)

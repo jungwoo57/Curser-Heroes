@@ -45,10 +45,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58d48be4fcdabb04fbc4624483889bff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  equippedSubWeapon: {fileID: 11400000, guid: 4a82d059c813e774998f2c9b4cb949eb, type: 2}
+  equippedSubWeapon: {fileID: 11400000, guid: 6ed21f69b099a3f4980541c743ef66f3, type: 2}
+  currentCooldown: 0
   monsterLayer:
     serializedVersion: 2
     m_Bits: 0
+  currentAmmo: 0
+  manaRegenPerSecond: 5
+  subWeaponVisualPrefab: {fileID: 5931814983403596167, guid: f6006f01d557e0942a6e161a10bd81bb, type: 3}
 --- !u!114 &-5775179606432198142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,5 +65,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a721e591cd8d76448b4f1bc43d16e351, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentSubWeapon: {fileID: 0}
+  currentSubWeapon: {fileID: 11400000, guid: 6ed21f69b099a3f4980541c743ef66f3, type: 2}
   weaponLevel: 0
