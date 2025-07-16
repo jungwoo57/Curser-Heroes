@@ -126,14 +126,15 @@ public class BattleUI : MonoBehaviour
     {
         for (int i = 0; i < skills.Length; i++)
         {
+            skills[i].gameObject.SetActive(true); // 항상 켬
+
             if (i < SkillManager.Instance.ownedSkills.Count)
             {
                 skills[i].SetSkill(SkillManager.Instance.ownedSkills[i]);
-                skills[i].gameObject.SetActive(true);
             }
             else
             {
-                skills[i].gameObject.SetActive(false);
+                skills[i].SetEmpty(); // 빈 슬롯 세팅
             }
         }
     }
