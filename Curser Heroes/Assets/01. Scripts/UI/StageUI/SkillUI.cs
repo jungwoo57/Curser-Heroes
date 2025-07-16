@@ -21,4 +21,9 @@ public class SkillUI : MonoBehaviour
     {
         icon.sprite = newIcon;
     }
+    public void SetEmpty()
+    {
+        icon.sprite = null;
+        skillNameText.text = "";
+    }
 }
