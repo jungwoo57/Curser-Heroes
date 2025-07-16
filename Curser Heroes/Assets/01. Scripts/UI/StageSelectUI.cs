@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -35,8 +36,13 @@ public class StageSelectUI : MonoBehaviour
         
         public void Init()
         {
-                stageIndex = 1;
-                maxStageIndex = 5; // 해당 부분 스테이지 구현 후 변경
+                stageIndex = 1; // 해당 부분 스테이지 구현 후 변경
+                UpdateStageInfoUI();
+        }
+
+        private void OnEnable()
+        {
+                maxStageIndex = GameManager.Instance.bestScore;
                 UpdateStageInfoUI();
         }
 

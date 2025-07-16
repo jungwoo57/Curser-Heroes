@@ -150,5 +150,9 @@ public class WaveManager : MonoBehaviour
     public void IncrementWaveIndex()
     {
         currentWaveIndex++;
+        if (gameManager.bestScore < currentWaveIndex)
+        {
+            gameManager.bestScore = currentWaveIndex;
+        }
     }
 }
