@@ -28,14 +28,15 @@ public class SkillUIPanel : MonoBehaviour
     {
         for (int i = 0; i < skillSlots.Length; i++)
         {
+            skillSlots[i].gameObject.SetActive(true);
+
             if (i < ownedSkills.Count)
             {
-                skillSlots[i].gameObject.SetActive(true);
-                skillSlots[i].SetSkill(ownedSkills[i]); // SkillUI의 SetSkill 함수 호출
+                skillSlots[i].SetSkill(ownedSkills[i]);
             }
             else
             {
-                skillSlots[i].gameObject.SetActive(false); // 데이터 없으면 슬롯 숨김
+                skillSlots[i].SetEmpty();
             }
         }
     }
