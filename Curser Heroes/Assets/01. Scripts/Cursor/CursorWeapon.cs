@@ -19,6 +19,7 @@ public class CursorWeapon : MonoBehaviour
     //공격 쿨타임을 위해 몬스터 별로 마지막 공격한 시간을 저장, 몬스터 마다 각각 쿨타임을 적용할 수 있다.
 
     private Camera cam;      // 마우스 좌표를 월드 좌표로 바꾸기 위해 메인 카메라를 참조.
+    public float damageMultiplier = 1f;
 
     void Start()
     {
@@ -53,14 +54,8 @@ public class CursorWeapon : MonoBehaviour
         {
             int bonusDamage = strengthSkill.skill.levelDataList[strengthSkill.level - 1].damage;
             damage += bonusDamage;
-
-        //    Debug.Log($"[CursorWeapon] 근력 훈련 보너스 포함 최종 공격력: {damage} (기본: {currentWeapon.GetDamage(weaponUpgrade.weaponLevel)}, 보너스: {bonusDamage})");
-        //}
-        //else
-        //{
-        //    Debug.Log($"[CursorWeapon] 근력 훈련 미보유 - 현재 공격력: {damage}");
-        //}
         }
+        damage *= damageMultiplier;
 
         Collider2D[] hits = Physics2D.OverlapCircleAll(cursorPos, range, targetLayer);   // 커서 위치를 중심으로 원으로 범위 탐지
 
@@ -96,6 +91,8 @@ public class CursorWeapon : MonoBehaviour
                     monster.TakeDamage(finalDamage);
                     AudioManager.Instance.PlayHitSound(HitType.Cursor);
                     lastHitTimesBase[monster] = Time.time;
+
+                    Debug.Log($"[커서공격] 일반몬스터에게 {finalDamage} 데미지 입힘 (기본: {damage}, 배수: {damageMultiplier})");
 
                     TryTriggerMeteorSkill();
 
