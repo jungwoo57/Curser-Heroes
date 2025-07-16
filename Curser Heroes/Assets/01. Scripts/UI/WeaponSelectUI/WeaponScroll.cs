@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,6 +13,11 @@ public class WeaponScroll : MonoBehaviour
     public ScrollRect scrollRect;
     public int scrollCount;     // 일정 갯 수 이하 스크롤 x
     public GameObject weaponImagePrefabs; // 더미 데이터
+
+    private void OnEnable()
+    {
+        scrollRect.verticalNormalizedPosition = 1.0f;
+    }
 
     public void UpdateScroll(string weaponType)
     {

@@ -27,15 +27,23 @@ public class WeaponSelectUI : MonoBehaviour
             case "main" :
                 Debug.Log("메인무기 열람");
                 weaponScroll.UpdateScroll("main");
-                // 주무기 업데이트
+                mainWeaponSelectButton.interactable = false;
+                subWeaponSelectButton.interactable = true;
+                partnerSelectButton.interactable = true;
                 break;
             case "sub" : 
                 Debug.Log("보주무기 열람");
                 weaponScroll.UpdateScroll("sub");
+                mainWeaponSelectButton.interactable = true;
+                subWeaponSelectButton.interactable = false;
+                partnerSelectButton.interactable = true;
                 // 보조무기 업데이트
                 break;
             case "partner" :
                 Debug.Log("동료 열람");
+                mainWeaponSelectButton.interactable = true;
+                subWeaponSelectButton.interactable = true;
+                partnerSelectButton.interactable = false;
                 // 동료무기 업데이트
                 break;
             
