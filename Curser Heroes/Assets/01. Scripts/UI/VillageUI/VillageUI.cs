@@ -23,7 +23,7 @@ public class VillageUI : MonoBehaviour
         Init();
         if (AudioManager.Instance != null)
         {
-            AudioManager.Instance.PlayBgm(false);
+            AudioManager.Instance.PlayBgm(bgmType.main);
         }
     }
     

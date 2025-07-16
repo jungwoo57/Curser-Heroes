@@ -5579,6 +5579,7 @@ MonoBehaviour:
   selectSubData: {fileID: 0}
   GoldImage: {fileID: 659016471}
   JewelImage: {fileID: 568034676}
+  weaponScroll: {fileID: 400949610}
 --- !u!1 &434834634
 GameObject:
   m_ObjectHideFlags: 0
@@ -5798,9 +5799,9 @@ MonoBehaviour:
   m_fontSize: 40
   m_fontSizeBase: 40
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 30
+  m_fontSizeMax: 40
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
@@ -6501,8 +6502,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 477247828}
   m_HandleRect: {fileID: 0}
   m_Direction: 2
-  m_Value: 0.99999917
-  m_Size: 0.61627346
+  m_Value: 0.99999946
+  m_Size: 0.6162736
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -9260,6 +9261,7 @@ MonoBehaviour:
   unlockButton: {fileID: 460973670}
   hasJewelText: {fileID: 1316374075}
   useJewelText: {fileID: 597079811}
+  scrollRect: {fileID: 298911158}
 --- !u!1 &688670944
 GameObject:
   m_ObjectHideFlags: 0
@@ -17538,7 +17540,6 @@ MonoBehaviour:
   menuImage: {fileID: 832840150}
   stageEntryPanel: {fileID: 1057799095}
   laboratoryEntryPanel: {fileID: 679825504}
-  barEntryPanel: {fileID: 0}
   forgeEntryPanel: {fileID: 434593586}
   menuPanel: {fileID: 832840148}
 --- !u!1 &1484311721
@@ -20277,7 +20278,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 218.5, y: -50}
-  m_SizeDelta: {x: 400, y: 100}
+  m_SizeDelta: {x: 400, y: 99}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1662565395
 MonoBehaviour:
@@ -20329,9 +20330,9 @@ MonoBehaviour:
   m_fontSize: 40
   m_fontSizeBase: 40
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 30
+  m_fontSizeMax: 40
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
@@ -20411,6 +20412,7 @@ MonoBehaviour:
   cursorHitClip: {fileID: 8300000, guid: d2e5abdff1ee98c44946db5a61e3d000, type: 3}
   mainBgm: {fileID: 8300000, guid: fecae2a77cef6694caa4dd7624c09ef9, type: 3}
   battleBgm: {fileID: 8300000, guid: 10ea0c6ecdfbe594d85161c221bce875, type: 3}
+  titleBgm: {fileID: 0}
   bgmSource: {fileID: 0}
   src: {fileID: 0}
 --- !u!4 &1664392854
