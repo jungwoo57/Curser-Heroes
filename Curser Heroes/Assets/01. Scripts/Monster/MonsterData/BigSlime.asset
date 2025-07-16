@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a679e971d4790164f8d9e3ff6463d243, type: 3}
-  m_Name: GreenSlime
+  m_Name: BigSlime
   m_EditorClassIdentifier: 
-  monsterPrefab: {fileID: 381212190073389378, guid: 67e6984c5477c5a44928c87b9fe8e8df, type: 3}
-  maxHP: 25
+  monsterPrefab: {fileID: 7884023807977274704, guid: 3485fa9b283fd7e488adfe1ed21a149e, type: 3}
+  maxHP: 35
   valueCost: 1
   attackCooldown: 5
   damage: 0
