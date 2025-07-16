@@ -103,7 +103,7 @@ public abstract class BaseMonster : MonoBehaviour
             }
 
 
-
+            animator.SetTrigger("Effect");
             attackTimer = UnityEngine.Random.Range(minAttackCooldown, maxAttackCooldown);
         }
     }
@@ -237,5 +237,6 @@ public abstract class BaseMonster : MonoBehaviour
     }
 
    
+
     protected abstract void Attack();
 }
