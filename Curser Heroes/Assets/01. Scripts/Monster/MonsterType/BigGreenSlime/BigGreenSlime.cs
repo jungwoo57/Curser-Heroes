@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class GreenSlime : BaseMonster
+public class BigGreenSlime : BaseMonster
 {
     public float attackRange = 0.5f;
 
@@ -21,11 +21,12 @@ public class GreenSlime : BaseMonster
                 Debug.LogWarning("WeaponManager 인스턴스를 찾을 수 없습니다!");
             }
         }
-        StartCoroutine(SelfDestructAfterDelay(0.7f));
+
+        StartCoroutine(SelfDestructAfterDelay(0.1f));
         Die();
     }
 
-
+    
 
     private void OnDrawGizmosSelected()
     {

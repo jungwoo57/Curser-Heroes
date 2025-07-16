@@ -151,4 +151,14 @@ public class WaveManager : MonoBehaviour
     {
         currentWaveIndex++;
     }
+    // 맨 마지막에 추가
+
+    public void RegisterMonster(GameObject monster)
+    {
+        if (spawnedMonsters.Contains(monster)) return;
+
+        spawnedMonsters.Add(monster);
+        Debug.Log($"[RegisterMonster] 몬스터 등록됨: {monster.name} | 총 {spawnedMonsters.Count}마리 추적 중");
+    }
+
 }

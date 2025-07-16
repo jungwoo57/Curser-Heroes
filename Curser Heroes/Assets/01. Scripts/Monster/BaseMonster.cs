@@ -238,5 +238,6 @@ public abstract class BaseMonster : MonoBehaviour
     }
 
    
+
     protected abstract void Attack();
 }
