@@ -19,6 +19,7 @@ public class MushroomKing : BaseMonster
                 Debug.LogWarning("WeaponManager 인스턴스를 찾을 수 없습니다!");
             }
         }
+      
     }
 
     private void OnDrawGizmosSelected()
