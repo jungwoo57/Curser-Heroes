@@ -39,6 +39,13 @@ public class ForgeUI : MonoBehaviour
         Init();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            ClickExitButton();
+        }
+    }
     public void Init()
     {
         if (GameManager.Instance.mainEquipWeapon.data == null)     //장착 무기 없으면 1번 착용

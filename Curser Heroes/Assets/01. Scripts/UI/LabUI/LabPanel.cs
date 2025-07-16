@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,6 +22,14 @@ public class LabPanel : MonoBehaviour
         useJewelText.text = "";
         UpdateSkillScroll(SkillType.Attack);
         unlockButton.interactable = false;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            ClickExitButton();
+        }
     }
 
     public void ClickTypeButton(int num)

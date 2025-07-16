@@ -14,7 +14,7 @@ public class VillageUI : MonoBehaviour
     [Header("실행창 모음")] 
     [SerializeField] private GameObject stageEntryPanel;
     [SerializeField] private GameObject laboratoryEntryPanel;
-    [SerializeField] private GameObject barEntryPanel;
+    //[SerializeField] private GameObject barEntryPanel;
     [SerializeField] private GameObject forgeEntryPanel;
     [SerializeField] private GameObject menuPanel;
 
@@ -30,6 +30,24 @@ public class VillageUI : MonoBehaviour
     private void OnEnable()
     {
         Init();
+    }
+
+    private void Update()
+    {
+        if (!CheckEnablePanel())
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                if (!menuPanel.activeSelf)
+                {
+                    menuPanel.SetActive(true);
+                }
+                else
+                {
+                    menuPanel.SetActive(false);
+                }
+            }
+        }
     }
 
     private void Init()
@@ -64,5 +82,18 @@ public class VillageUI : MonoBehaviour
     public void OpenMenuPanel()
     {
         menuPanel.SetActive(true);
+    }
+
+    private bool CheckEnablePanel()
+    {
+        if (stageEntryPanel.activeSelf)
+            return true;
+        if (laboratoryEntryPanel.activeSelf)
+            return true;
+        //if (barEntryPanel.activeSelf)
+            //return true;
+        if (forgeEntryPanel.activeSelf)
+            return true;
+        return false;
     }
 }

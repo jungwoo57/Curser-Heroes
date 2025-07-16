@@ -40,6 +40,13 @@ public class StageSelectUI : MonoBehaviour
                 UpdateStageInfoUI();
         }
 
+        void Update()
+        {
+                if (Input.GetKeyDown(KeyCode.Escape))
+                {
+                        ClickHomeButton();
+                }
+        }
         public void ClickNextStageButton(int value)
         {
                 stageIndex += value;
