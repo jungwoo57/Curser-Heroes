@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Tree
   m_EditorClassIdentifier: 
   monsterPrefab: {fileID: 2547284164133435243, guid: 48943318d62d8724588858ad67058f17, type: 3}
-  maxHP: 1
-  valueCost: 1
+  maxHP: 30
+  valueCost: 3
   attackCooldown: 5
   damage: 1
   index: 0

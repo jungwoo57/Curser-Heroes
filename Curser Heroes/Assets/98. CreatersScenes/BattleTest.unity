@@ -2737,7 +2737,7 @@ PrefabInstance:
     - target: {fileID: -5775179606432198142, guid: 5263ae6509a44d54cb65ed7e0a07701d, type: 3}
       propertyPath: currentSubWeapon
       value: 
-      objectReference: {fileID: 11400000, guid: 6ed21f69b099a3f4980541c743ef66f3, type: 2}
+      objectReference: {fileID: 11400000, guid: 73586edf04a11e34ba24dc127036cb73, type: 2}
     - target: {fileID: 1363672529361250790, guid: 5263ae6509a44d54cb65ed7e0a07701d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1
@@ -2785,7 +2785,11 @@ PrefabInstance:
     - target: {fileID: 7386682379840476848, guid: 5263ae6509a44d54cb65ed7e0a07701d, type: 3}
       propertyPath: equippedSubWeapon
       value: 
-      objectReference: {fileID: 11400000, guid: 6ed21f69b099a3f4980541c743ef66f3, type: 2}
+      objectReference: {fileID: 11400000, guid: 73586edf04a11e34ba24dc127036cb73, type: 2}
+    - target: {fileID: 7386682379840476848, guid: 5263ae6509a44d54cb65ed7e0a07701d, type: 3}
+      propertyPath: monsterLayer.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
     - target: {fileID: 7386682379840476848, guid: 5263ae6509a44d54cb65ed7e0a07701d, type: 3}
       propertyPath: subWeaponVisualPrefab
       value: 

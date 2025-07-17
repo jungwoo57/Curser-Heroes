@@ -21,17 +21,18 @@ MonoBehaviour:
   unlockCost: 2000
   baseDamage: 8
   damagePerLevel: 1.7
-  cooldown: 0.5
+  cooldown: 1
   effect: 2
   weaponType: 2
   rangeShape: 2
   speed: 1
   rotateWithDirection: 0
-  projectilePrefab: {fileID: 0}
-  projectileSpeed: 10
-  projectileMaxDistance: 8
-  rangeType: 0
+  projectilePrefab: {fileID: 8863693051383856762, guid: 68920efc1f7613643b2572d23ea42727, type: 3}
+  projectileSpeed: 1
+  projectileMaxDistance: 3
+  rangeType: 2
   maxAmmo: 0
   reloadTime: 0
   manaCost: 5
-  requiredChargeTime: 0
+  requiredChargeTime: 2
+  ForceVisualPrefab: {fileID: 3385550672829998115, guid: 52ed76dbcb822e94989792a17c604749, type: 3}
