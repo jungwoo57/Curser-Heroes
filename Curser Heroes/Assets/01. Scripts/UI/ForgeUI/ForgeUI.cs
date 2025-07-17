@@ -32,13 +32,24 @@ public class ForgeUI : MonoBehaviour
 	public SubWeaponData selectSubData;
 	public Image GoldImage;
 	public Image JewelImage;
-    
+
+    [SerializeField] private ScrollRect weaponScroll;
     private void OnEnable()
     {
         isMain = true;
+        mainWeaponButton.interactable = false;
+        subWeaponButton.interactable = true;
+        weaponScroll.verticalNormalizedPosition = 1.0f;
         Init();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            ClickExitButton();
+        }
+    }
     public void Init()
     {
         if (GameManager.Instance.mainEquipWeapon.data == null)     //장착 무기 없으면 1번 착용

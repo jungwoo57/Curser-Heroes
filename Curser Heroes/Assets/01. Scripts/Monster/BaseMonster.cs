@@ -103,7 +103,7 @@ public abstract class BaseMonster : MonoBehaviour
             }
 
 
-
+            animator.SetTrigger("Effect");
             attackTimer = UnityEngine.Random.Range(minAttackCooldown, maxAttackCooldown);
         }
     }
@@ -219,8 +219,7 @@ public abstract class BaseMonster : MonoBehaviour
             int explosionDamage = data.damage;
             float explosionRadius = 1f;
 
-            Vector2 offset = UnityEngine.Random.insideUnitCircle * 1f;
-            Vector3 explosionPos = transform.position + new Vector3(offset.x, offset.y, 0f);
+            Vector3 explosionPos = transform.position;
 
             var explodeSkillComponent = FindObjectOfType<ExplodeOnKillSkill>();
             if (explodeSkillComponent != null)
@@ -238,5 +237,6 @@ public abstract class BaseMonster : MonoBehaviour
     }
 
    
+
     protected abstract void Attack();
 }

@@ -22,16 +22,15 @@ public class GameManager : MonoBehaviour
     [Header("모든 무기 및 스킬")]
     public List<WeaponData> allMainWeapons; // 모든 무기 원본
     public List<SubWeaponData> allSubWeapons; // 모든 보조 무기 원본
+    public List<PartnerData> allPartners;
     public List<SkillData> allSkills;// 모든 스킬
-    public IReadOnlyList<WeaponData> hasPartner => _hasPartner; // 다른 파일에서 보유 동료 가져오기(수정 불가)
-
-    [SerializeField] private List<WeaponData> _hasPartner; // 보유 동료
+    
     [SerializeField] private List<SkillData> _hasSkills = new List<SkillData>();
     
-    [Header("보유 중인 무기 및 스킬")]
+    [Header("보유 중인 무기 및 동료")]
     [SerializeField] public List<OwnedWeapon> ownedWeapons; // 소유 메인 무기
     [SerializeField] public List<OwnedSubWeapon> ownedSubWeapons; // 소유 보조 무기
-    
+    [SerializeField] public List<OwnedPartner> ownedPartners;
     public List<SkillData> hasSkills => _hasSkills;
     public List<SkillData> skillPool = new List<SkillData>();
     
@@ -39,7 +38,8 @@ public class GameManager : MonoBehaviour
     public OwnedWeapon mainEquipWeapon;
     public OwnedSubWeapon subEquipWeapon;
     public List<SkillData> selectSkills = new List<SkillData>(); // 플레이어가 선택한 스킬 12개 //선택한 스킬(스테이지에 등장할 스킬), 스킬 갯수가 정해져있어서 배열로 변경도 고려
-
+    public OwnedPartner equipPartner;
+    
     [Header("기타 데이터")]
     [SerializeField] private int gold = 9999;
     [SerializeField]private int jewel = 0;
@@ -70,6 +70,11 @@ public class GameManager : MonoBehaviour
         if (ownedSubWeapons != null)
         {
             subEquipWeapon = ownedSubWeapons[0];
+        }
+
+        if (ownedPartners != null)
+        {
+            equipPartner = ownedPartners[0];
         }
     }
 
@@ -138,6 +143,15 @@ public class GameManager : MonoBehaviour
         subEquipWeapon = equipData; // 메인 무기 장착만 작성 추후 보조 동료 추가
     }
 
+    public void EquipPartner(OwnedPartner equipData)
+    {
+        if (equipData == null)
+        {
+            return;
+        }
+        equipPartner = equipData;
+    }
+
     public void EquipSkill(SkillData[] skilldatas)
     {
         selectSkills.Clear();
@@ -178,6 +192,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+   
     public void UnlockSkill(SkillData skilldata)
     {
         if (skilldata.unlockCost <= jewel)
@@ -187,6 +202,25 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void UpgradePartner(PartnerData data)
+    {
+        int index = ownedPartners.FindIndex(w => w.data.partnerName == data.partnerName);
+        if (index >= 0)
+        {
+            gold -= data.upgradeCost[ownedPartners[index].level];
+            ownedPartners[index].level++;
+        }
+    }
+    public void UnlockPartner(PartnerData partnerData)
+    {
+        if (partnerData.unlockCost <= jewel)
+        {
+            jewel -= partnerData.unlockCost;
+            ownedPartners.Add(new OwnedPartner(partnerData));
+        }
+            
+    }
+        
     [ContextMenu("TestSave")]
     public void Save()
     {

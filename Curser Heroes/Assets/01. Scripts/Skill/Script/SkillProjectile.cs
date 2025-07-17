@@ -24,7 +24,6 @@ public class SkillProjectile : MonoBehaviour
         if (monster != null)
         {
             monster.TakeDamage(damage);
-            Debug.Log("매직소드가 적 타격함!");
 
             return; // 충돌 처리 종료
         }
