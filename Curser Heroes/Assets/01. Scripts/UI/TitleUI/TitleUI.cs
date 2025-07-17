@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 public class TitleUI : MonoBehaviour
 {
     public void OnClickGameStart()
     {
-        SceneManager.LoadScene("JW_StageSelectUI");
+        TitleMainLoadManager.Instance.LoadMain();
     }
 
     public void OnClickExitGame()
@@ -17,4 +15,6 @@ public class TitleUI : MonoBehaviour
         Application.Quit();
     #endif
     }
+    
+    
 }
