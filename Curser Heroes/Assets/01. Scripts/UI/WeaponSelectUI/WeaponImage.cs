@@ -15,12 +15,14 @@ public class WeaponImage : MonoBehaviour
     {
         EquipMainWeaponUI.OnBookMark += ChangeBookMark;
         EquipSubWeaponUI.OnBookMark += ChangeBookMark;
+        EquipPartnerUI.OnBookMark += ChangeBookMark;
     }
 
     private void OnDisable()
     {
         EquipMainWeaponUI.OnBookMark -= ChangeBookMark;
         EquipSubWeaponUI.OnBookMark -= ChangeBookMark;
+        EquipPartnerUI.OnBookMark -= ChangeBookMark;
     }
 
     public void WeaponUpdate(OwnedWeapon recieveData) // 매게변수 받아야 할 확률 높음
@@ -117,6 +119,15 @@ public class WeaponImage : MonoBehaviour
         if (subData == weapon)
         {
             bookmarkImage.gameObject.SetActive(subData.bookMark);
+        }
+    }
+    
+    public void ChangeBookMark(OwnedPartner weapon)
+    {
+        if (partnerData == null) return;
+        if (partnerData == weapon)
+        {
+            bookmarkImage.gameObject.SetActive(partnerData.bookMark);
         }
     }
     
