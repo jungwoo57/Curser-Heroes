@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Stone
   m_EditorClassIdentifier: 
   monsterPrefab: {fileID: 9160837163091615608, guid: 549fc2ff2eb92e24ab5f8d3df6da4db9, type: 3}
-  maxHP: 10
-  valueCost: 1
+  maxHP: 35
+  valueCost: 4
   attackCooldown: 5
   damage: 1
   index: 0
