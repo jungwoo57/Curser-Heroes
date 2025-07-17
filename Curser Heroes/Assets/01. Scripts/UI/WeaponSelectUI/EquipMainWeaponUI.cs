@@ -1,7 +1,7 @@
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 public class EquipMainWeaponUI : MonoBehaviour
 {
    [Header("구성요소")]
@@ -12,12 +12,13 @@ public class EquipMainWeaponUI : MonoBehaviour
    public TextMeshProUGUI statusText;
    public Image bookMarkImage;
    public OwnedWeapon selectWeapon;
-   
+
+   public static event Action<OwnedWeapon> OnBookMark;
    public void UpdateUI(OwnedWeapon ownedWeapon)
    {
       selectWeapon = ownedWeapon;
       weaponImage.sprite = ownedWeapon.data.weaponImage;
-      nameText.text = ownedWeapon.data.name ; // equipdata 강화레벨 필요
+      nameText.text = ownedWeapon.data.weaponName ; // equipdata 강화레벨 필요
       descriptionText.text = ownedWeapon.data.weaponDesc;
       //attackTypeText.text = data.             공격타입 관련 데이터 필요
       statusText.text = "공격력 : " + ownedWeapon.levelDamage; // weapondata 데미지 업데이트 필요
@@ -34,6 +35,7 @@ public class EquipMainWeaponUI : MonoBehaviour
    public void ClickBookMarkButton()
    {
       selectWeapon.EnrollBookMark();
+      OnBookMark?.Invoke(selectWeapon);
       UpdateUI(selectWeapon);
    }
 }

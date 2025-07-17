@@ -7,9 +7,8 @@ public class AudioManager : MonoBehaviour
     public static AudioManager Instance { get; private set; }
     [Header("오디오 클립")]
     public AudioClip monsterHitClip, cursorHitClip;
-
     public AudioClip mainBgm, battleBgm, titleBgm;
-    
+    public AudioClip buttonClip;
     [Header("오디오 소스")]
     public AudioSource bgmSource;  // 추가된 bgm 소스
     public AudioSource src;    // 기존 효과음 ()
@@ -32,15 +31,7 @@ public class AudioManager : MonoBehaviour
     public void PlayBgm(bgmType type)
     {
         bgmSource.Stop();
-        /*if (isBattle)
-        {
-            bgmSource.clip = battleBgm;
-        }
-        else
-        {
-            bgmSource.clip = mainBgm;
-        }*/
-
+        
         switch (type)
         {
             case bgmType.main: 
@@ -70,6 +61,13 @@ public class AudioManager : MonoBehaviour
             clip = cursorHitClip;
         }
 
+        src.PlayOneShot(clip);
+    }
+
+    public void PlayButtonSound()
+    {
+        AudioClip clip;
+        clip = buttonClip;
         src.PlayOneShot(clip);
     }
 }

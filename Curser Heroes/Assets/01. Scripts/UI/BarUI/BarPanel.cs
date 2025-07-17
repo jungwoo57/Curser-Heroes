@@ -44,6 +44,10 @@ public class BarPanel : MonoBehaviour
     {
         selectPartner = GameManager.Instance.ownedPartners.Find(p
             => p.data.partnerName == selectData.partnerName);
+        for (int i = 0; i < partnerButtons.Length; i++)
+        {
+            partnerButtons[i].GetComponent<Button>().interactable = true;
+        }//인터렉티블 켜기
         jewelImage.gameObject.SetActive(false);
         goldImage.gameObject.SetActive(false);
         useGoldImage.gameObject.SetActive(false);
@@ -64,13 +68,14 @@ public class BarPanel : MonoBehaviour
             descText.text = selectPartner.data.desc;
             goldImage.gameObject.SetActive(true);
             useGoldImage.gameObject.SetActive(true);
-            if (selectPartner.level < 10)
+            if (selectPartner.level < selectPartner.data.upgradeCost.Length)
             {
                 costText.text = selectData.upgradeCost[selectPartner.level].ToString();
             }
             else
             {
                 costText.text = "최대 레벨";
+                reinforceButton.gameObject.SetActive(false);
             }
         }
         else
@@ -102,18 +107,19 @@ public class BarPanel : MonoBehaviour
         }
     }
 
-    private void ClickPartnerButton(int index)
-    {
-        selectData = partnerButtons[index].partnerData;
-    }
 
     public void Reinforce()
     {
-        GameManager.Instance.UnlockPartner(selectData);
+        GameManager.Instance.UpgradePartner(selectData);
+        UIUpdate();
     }
 
     public void Unlock()
     {
         GameManager.Instance.UnlockPartner(selectData);
+        selectPartner = GameManager.Instance.ownedPartners.Find(p
+            => p.data.partnerName == selectData.partnerName);
+        UIUpdate();
     }
+    
 }

@@ -143,6 +143,15 @@ public class GameManager : MonoBehaviour
         subEquipWeapon = equipData; // 메인 무기 장착만 작성 추후 보조 동료 추가
     }
 
+    public void EquipPartner(OwnedPartner equipData)
+    {
+        if (equipData == null)
+        {
+            return;
+        }
+        equipPartner = equipData;
+    }
+
     public void EquipSkill(SkillData[] skilldatas)
     {
         selectSkills.Clear();
@@ -183,6 +192,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+   
     public void UnlockSkill(SkillData skilldata)
     {
         if (skilldata.unlockCost <= jewel)
@@ -192,6 +202,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void UpgradePartner(PartnerData data)
+    {
+        int index = ownedPartners.FindIndex(w => w.data.partnerName == data.partnerName);
+        if (index >= 0)
+        {
+            gold -= data.upgradeCost[ownedPartners[index].level];
+            ownedPartners[index].level++;
+        }
+    }
     public void UnlockPartner(PartnerData partnerData)
     {
         if (partnerData.unlockCost <= jewel)

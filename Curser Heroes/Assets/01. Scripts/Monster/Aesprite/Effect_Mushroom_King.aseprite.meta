@@ -13,7 +13,6 @@ ScriptedImporter:
   assetBundleName: 
   assetBundleVariant: 
   script: {fileID: 11500000, guid: 62a9f0aa5b59740cfbadc7e5f9823bb0, type: 3}
-  importerVersion: 2
   textureImporterSettings:
     alphaSource: 1
     mipMapMode: 0
@@ -127,7 +126,7 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: Frame_0
+  - name: Effect_Mushroom_King_Frame_0
     originalName: 
     pivot: {x: 0.5, y: 1.4761904}
     alignment: 9
@@ -138,7 +137,7 @@ ScriptedImporter:
       y: 135
       width: 68
       height: 21
-    spriteID: 5ce15ada668a92044b7425f6021db711
+    spriteID: cc12c4b5e54e23944993c429e38aa555
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -147,7 +146,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 135}
-  - name: Frame_1
+  - name: Effect_Mushroom_King_Frame_1
     originalName: 
     pivot: {x: 0.50684935, y: 1.2800001}
     alignment: 9
@@ -158,7 +157,7 @@ ScriptedImporter:
       y: 102
       width: 73
       height: 25
-    spriteID: d8e33cb67c8da254e8207b3b56216979
+    spriteID: 597c7069832f3714a861613a7551b7ff
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -167,7 +166,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 102}
-  - name: Frame_2
+  - name: Effect_Mushroom_King_Frame_2
     originalName: 
     pivot: {x: 0.5064935, y: 1.2307693}
     alignment: 9
@@ -178,7 +177,7 @@ ScriptedImporter:
       y: 4
       width: 77
       height: 26
-    spriteID: c1e6971c746574d41ac24cd9f2929ad1
+    spriteID: 6bd1adf7e9be63a4b9c4c88c57d3af3b
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -187,7 +186,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
-  - name: Frame_3
+  - name: Effect_Mushroom_King_Frame_3
     originalName: 
     pivot: {x: 0.51282054, y: 1.2}
     alignment: 9
@@ -198,7 +197,7 @@ ScriptedImporter:
       y: 38
       width: 78
       height: 25
-    spriteID: a812e26f809dade4bbdab778c1c036b2
+    spriteID: 6fb9dc44e6c9fdb428f88c5cc5cbdbf1
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -207,7 +206,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 38}
-  - name: Frame_4
+  - name: Effect_Mushroom_King_Frame_4
     originalName: 
     pivot: {x: 0.5125, y: 1.2173914}
     alignment: 9
@@ -218,7 +217,7 @@ ScriptedImporter:
       y: 71
       width: 80
       height: 23
-    spriteID: bfec9fd6d0779d04e9231dbf115cad79
+    spriteID: 25cf63a8da9788241bce0e20eb85f6a9
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -230,62 +229,52 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    uuid:
-      value0: 2085223072
-      value1: 0
-      value2: 0
-      value3: 0
-    guid: 0
+    guid: -1095128544
     name: Effect_Mushroom_King
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: Frame_0
+    - name: Effect_Mushroom_King_Frame_0
       frameIndex: 0
-      additiveSortOrder: 0
       cellRect:
         x: 16
         y: 2
         width: 68
         height: 21
-      spriteId: 5ce15ada668a92044b7425f6021db711
-    - name: Frame_1
+      spriteId: cc12c4b5e54e23944993c429e38aa555
+    - name: Effect_Mushroom_King_Frame_1
       frameIndex: 1
-      additiveSortOrder: 0
       cellRect:
         x: 13
         y: 1
         width: 73
         height: 25
-      spriteId: d8e33cb67c8da254e8207b3b56216979
-    - name: Frame_2
+      spriteId: 597c7069832f3714a861613a7551b7ff
+    - name: Effect_Mushroom_King_Frame_2
       frameIndex: 2
-      additiveSortOrder: 0
       cellRect:
         x: 11
         y: 1
         width: 77
         height: 26
-      spriteId: c1e6971c746574d41ac24cd9f2929ad1
-    - name: Frame_3
+      spriteId: 6bd1adf7e9be63a4b9c4c88c57d3af3b
+    - name: Effect_Mushroom_King_Frame_3
       frameIndex: 3
-      additiveSortOrder: 0
       cellRect:
         x: 10
         y: 3
         width: 78
         height: 25
-      spriteId: a812e26f809dade4bbdab778c1c036b2
-    - name: Frame_4
+      spriteId: 6fb9dc44e6c9fdb428f88c5cc5cbdbf1
+    - name: Effect_Mushroom_King_Frame_4
       frameIndex: 4
-      additiveSortOrder: 0
       cellRect:
         x: 9
         y: 5
         width: 80
         height: 23
-      spriteId: bfec9fd6d0779d04e9231dbf115cad79
+      spriteId: 25cf63a8da9788241bce0e20eb85f6a9
     linkedCells: []
     parentIndex: -1
   platformSettings:
@@ -353,4 +342,3 @@ ScriptedImporter:
   secondarySpriteTextures: []
   spritePackingTag: 
   canvasSize: {x: 100, y: 33}
-  previousTextureSize: {x: 128, y: 256}

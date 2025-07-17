@@ -7,7 +7,7 @@ public class UIManager : MonoBehaviour
 {
 
     private static UIManager instance;
-
+    public bool isStart;
     void Awake()
     {
         if (instance == null)
@@ -33,13 +33,14 @@ public class UIManager : MonoBehaviour
             return instance;
         }
     }
-
-   
+    
     public Image gameOverPanel;
     
     public BattleUI battleUI;
     
     public StageStartUI stageStartUI;
+    
+    public StageExitPanel stageExitPanel;
     private void Init()
     {
         battleUI.gameObject.SetActive(false);
@@ -48,10 +49,22 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
+        isStart = false;
         StageStart();
         AudioManager.Instance.PlayBgm(bgmType.battle);
     }
-    
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape)) 
+        {
+            if (!stageExitPanel.gameObject.activeSelf && isStart)
+            {
+                stageExitPanel.gameObject.SetActive(true);
+            }
+        }
+    }
+
     [ContextMenu("스테이지시작")]
     public void StageStart()
     {
