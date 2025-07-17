@@ -10,12 +10,16 @@ public class WeaponImage : MonoBehaviour
     public OwnedSubWeapon subData;
     public OwnedPartner partnerData;
     public int num;
+    public Outline outline;
+    
     public static event Action OnWeaponPanelUpdate;
+    public static event Action<WeaponImage> checkSelect;
     private void OnEnable()
     {
         EquipMainWeaponUI.OnBookMark += ChangeBookMark;
         EquipSubWeaponUI.OnBookMark += ChangeBookMark;
         EquipPartnerUI.OnBookMark += ChangeBookMark;
+        checkSelect += CheckSelected;
     }
 
     private void OnDisable()
@@ -23,11 +27,20 @@ public class WeaponImage : MonoBehaviour
         EquipMainWeaponUI.OnBookMark -= ChangeBookMark;
         EquipSubWeaponUI.OnBookMark -= ChangeBookMark;
         EquipPartnerUI.OnBookMark -= ChangeBookMark;
+        checkSelect -= CheckSelected;
     }
 
     public void WeaponUpdate(OwnedWeapon recieveData) // 매게변수 받아야 할 확률 높음
     {
         data = recieveData;
+        if (recieveData == GameManager.Instance.mainEquipWeapon)
+        {
+            outline.enabled = true;
+        }
+        else
+        {
+            outline.enabled = false;
+        }
         if (data.bookMark)
         {
             bookmarkImage.gameObject.SetActive(true);
@@ -54,6 +67,15 @@ public class WeaponImage : MonoBehaviour
     
     public void WeaponUpdate(OwnedSubWeapon recieveData) // 매게변수 받아야 할 확률 높음
     {
+        subData = recieveData;
+        if (recieveData == GameManager.Instance.subEquipWeapon)
+        {
+            outline.enabled = true;
+        }
+        else
+        {
+            outline.enabled = false;
+        }
         subData = recieveData;
         data = null;
         partnerData = null;
@@ -82,6 +104,15 @@ public class WeaponImage : MonoBehaviour
     public void WeaponUpdate(OwnedPartner recieveData) // 매게변수 받아야 할 확률 높음
     {
         partnerData = recieveData;
+        if (partnerData == GameManager.Instance.equipPartner)
+        {
+            outline.enabled = true;
+        }
+        else
+        {
+            outline.enabled = false;
+        }
+        
         if (partnerData.bookMark)
         {
             bookmarkImage.gameObject.SetActive(true);
@@ -138,17 +169,31 @@ public class WeaponImage : MonoBehaviour
             case 0 : 
                 GameManager.Instance.EquipWeapon(data);
                 OnWeaponPanelUpdate?.Invoke();        //우선 메인 무기만 변경 추후 변경
+                checkSelect?.Invoke(this);
                 break;  // 메인무기
             case 1 : 
                 GameManager.Instance.EquipWeapon(subData);  // 보조 무기 변경
                 OnWeaponPanelUpdate?.Invoke();      
+                checkSelect?.Invoke(this);
                 break;  // 서브 무기
             case 2 : 
                 GameManager.Instance.EquipPartner(partnerData);  // 동료 변경
                 OnWeaponPanelUpdate?.Invoke();      
-                
+                checkSelect?.Invoke(this);
                 break;  // 동료
             default: return; break;
+        }
+    }
+
+    public void CheckSelected(WeaponImage select)
+    {
+        if (select == this)
+        {
+            outline.enabled = true;
+        }
+        else
+        {
+            outline.enabled = false;
         }
     }
 }
