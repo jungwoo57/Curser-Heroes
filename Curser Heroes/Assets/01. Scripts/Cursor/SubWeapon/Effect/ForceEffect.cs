@@ -2,13 +2,13 @@
 
 public class ForceEffect : IEffect
 {
-    private float radius;
+    private Vector3 center;
     private int damage;
-    private float timer;
-    private float duration = 0.1f;
+    private float radius;
     private LayerMask targetLayer;
 
-    private Vector3 center;
+    private float timer = 0f;
+    private float duration = 0.1f;
 
     public ForceEffect(Vector3 center, int damage, float radius, LayerMask targetLayer)
     {
@@ -18,10 +18,9 @@ public class ForceEffect : IEffect
         this.targetLayer = targetLayer;
     }
 
-    public void Apply(BaseMonster dummy)  // 
+    public void Apply(BaseMonster dummy)
     {
         Collider2D[] hits = Physics2D.OverlapCircleAll(center, radius, targetLayer);
-
         foreach (var hit in hits)
         {
             if (hit.TryGetComponent<BaseMonster>(out var monster) && !monster.IsDead)
