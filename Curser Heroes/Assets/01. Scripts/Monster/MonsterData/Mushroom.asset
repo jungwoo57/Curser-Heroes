@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Mushroom
   m_EditorClassIdentifier: 
   monsterPrefab: {fileID: 8119414463541232126, guid: 3c42b3197fecf3d4780a3a23022bd23f, type: 3}
-  maxHP: 11
-  valueCost: 1
+  maxHP: 40
+  valueCost: 2
   attackCooldown: 5
   damage: 1
   index: 0
