@@ -42,7 +42,7 @@ public class ForgeWeaponUI : MonoBehaviour
     public void UpdateUI(WeaponData weaponData)
     {
         mainData = weaponData;
-
+        image.gameObject.SetActive(true);
         CheckMainLock();
         if (mainData != null)
         {
@@ -67,6 +67,7 @@ public class ForgeWeaponUI : MonoBehaviour
     public void UpdateUI(SubWeaponData weaponData)
     {
         subData = weaponData;
+        image.gameObject.SetActive(true);
         CheckSubLock();
         if (mainData != null)
         {
@@ -90,7 +91,7 @@ public class ForgeWeaponUI : MonoBehaviour
 
     public void UpdateUI()
     {
-        image.sprite = null;
+        image.gameObject.SetActive(false);
         hasData = null;
         hasSubData = null;
         mainData = null;

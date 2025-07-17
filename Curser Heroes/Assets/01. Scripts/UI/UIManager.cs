@@ -49,7 +49,7 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         StageStart();
-        AudioManager.Instance.PlayBgm(true);
+        AudioManager.Instance.PlayBgm(bgmType.battle);
     }
     
     [ContextMenu("스테이지시작")]

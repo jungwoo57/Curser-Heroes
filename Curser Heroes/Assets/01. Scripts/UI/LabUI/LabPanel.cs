@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,8 +12,11 @@ public class LabPanel : MonoBehaviour
     public Button unlockButton;
     public TextMeshProUGUI hasJewelText;
     public TextMeshProUGUI useJewelText;
+    [SerializeField]private ScrollRect scrollRect;
+    
     private void OnEnable()
     {
+        scrollRect.verticalNormalizedPosition = 1.0f;
         selectSkill = null;
         skillName.text = "스킬 이름";
         skillDescription.text = "스킬 설명";
@@ -21,6 +25,14 @@ public class LabPanel : MonoBehaviour
         useJewelText.text = "";
         UpdateSkillScroll(SkillType.Attack);
         unlockButton.interactable = false;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            ClickExitButton();
+        }
     }
 
     public void ClickTypeButton(int num)
