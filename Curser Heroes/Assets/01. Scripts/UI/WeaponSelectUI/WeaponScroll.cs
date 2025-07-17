@@ -7,6 +7,7 @@ public class WeaponScroll : MonoBehaviour
 {
     public List<OwnedWeapon> hasWeapons; // 매니저에 있는 무기 리스트 불러오기
     public List<OwnedSubWeapon> hasSubWeapons;
+    public List<OwnedPartner> hasPartners;
     public List<WeaponImage> showWeapons = new List<WeaponImage>(); // 스크롤에서 보여줄 무기들
     public int hasWeaponCounts;
     public Transform content;   // content아래 생성 하기위해서 부모 설정

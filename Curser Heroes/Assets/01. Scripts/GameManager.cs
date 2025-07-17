@@ -183,6 +183,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+   
     public void UnlockSkill(SkillData skilldata)
     {
         if (skilldata.unlockCost <= jewel)
@@ -192,6 +193,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void UpgradePartner(PartnerData data)
+    {
+        int index = ownedPartners.FindIndex(w => w.data.partnerName == data.partnerName);
+        if (index >= 0)
+        {
+            gold -= data.upgradeCost[ownedPartners[index].level];
+            ownedPartners[index].level++;
+        }
+    }
     public void UnlockPartner(PartnerData partnerData)
     {
         if (partnerData.unlockCost <= jewel)

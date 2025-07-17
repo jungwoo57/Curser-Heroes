@@ -1,13 +1,24 @@
+using System;
 using TMPro;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class BarPartnerButton : MonoBehaviour
 {
     [SerializeField]private BarPanel barPanel;
     [SerializeField]private TextMeshProUGUI name;
     [SerializeField]public PartnerData partnerData;
     [SerializeField]public OwnedPartner ownedPartnerData;
+    public Button button;
     private bool isLocked;
+
+    private void OnEnable()
+    {
+        if (barPanel.selectData == partnerData)
+        {
+            button.interactable = false;
+        }
+    }
+
     public void UIUpdate()
     {
         CheckLock();
@@ -42,7 +53,9 @@ public class BarPartnerButton : MonoBehaviour
             barPanel.selectData = partnerData;
             barPanel.selectPartner = ownedPartnerData;
             barPanel.UIUpdate();
+            button.interactable = false;
         }
+        
     }
     
     private void CheckLock()
