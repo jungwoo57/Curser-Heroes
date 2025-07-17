@@ -143,6 +143,15 @@ public class GameManager : MonoBehaviour
         subEquipWeapon = equipData; // 메인 무기 장착만 작성 추후 보조 동료 추가
     }
 
+    public void EquipPartner(OwnedPartner equipData)
+    {
+        if (equipData == null)
+        {
+            return;
+        }
+        equipPartner = equipData;
+    }
+
     public void EquipSkill(SkillData[] skilldatas)
     {
         selectSkills.Clear();

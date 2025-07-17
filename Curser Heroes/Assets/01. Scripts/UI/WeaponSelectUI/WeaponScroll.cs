@@ -108,6 +108,34 @@ public class WeaponScroll : MonoBehaviour
                 break;
 
             case "partner":
+                hasPartners= GameManager.Instance.ownedPartners; //매니저에 있는 동료리스트 가져오기
+                hasWeaponCounts = GameManager.Instance.ownedPartners.Count;
+                if (hasPartners.Count > scrollCount) // 아이템이 일정 갯수 이하이면 스크롤 안되게 하기
+                {
+                    scrollRect.vertical = true;
+                }
+                else
+                {
+                    scrollRect.vertical = false;
+                }
+
+                while (showWeapons.Count < hasPartners.Count) //갯수 부족 할 시 동적생성
+                {
+                    GameObject obj = Instantiate(weaponImagePrefabs, content);
+                    WeaponImage weaponImage = obj.GetComponent<WeaponImage>();
+                    showWeapons.Add(weaponImage);
+                }
+
+                for (int i = 0; i < hasWeaponCounts; i++)
+                {
+                    showWeapons[i].WeaponUpdate(hasPartners[i]); // WeaponImage 업데이트
+                }
+
+                for (int i = hasWeapons.Count; i < showWeapons.Count; i++)
+                {
+                    showWeapons[i].gameObject.SetActive(false); // 남은 부분 끄기
+                }
+
                 break;
         }
     }
