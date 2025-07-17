@@ -1,8 +1,8 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Messengerbird: MonoBehaviour
+public class MessengerbirdEffect : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
