@@ -11,7 +11,18 @@ public class WeaponImage : MonoBehaviour
     public OwnedPartner partnerData;
     public int num;
     public static event Action OnWeaponPanelUpdate;
-    
+    private void OnEnable()
+    {
+        EquipMainWeaponUI.OnBookMark += ChangeBookMark;
+        EquipSubWeaponUI.OnBookMark += ChangeBookMark;
+    }
+
+    private void OnDisable()
+    {
+        EquipMainWeaponUI.OnBookMark -= ChangeBookMark;
+        EquipSubWeaponUI.OnBookMark -= ChangeBookMark;
+    }
+
     public void WeaponUpdate(OwnedWeapon recieveData) // 매게변수 받아야 할 확률 높음
     {
         data = recieveData;
@@ -44,6 +55,14 @@ public class WeaponImage : MonoBehaviour
         subData = recieveData;
         data = null;
         partnerData = null;
+        if (subData.bookMark)
+        {
+            bookmarkImage.gameObject.SetActive(true);
+        }
+        else
+        {
+            bookmarkImage.gameObject.SetActive(false);
+        }
         num = 1;
         this.gameObject.SetActive(true);
         if (recieveData.data.weaponSprite != null)
@@ -81,8 +100,24 @@ public class WeaponImage : MonoBehaviour
         {
             Debug.Log("이미지 없음");
         }
-        //if(isBookMark) { 북마크 색상 변경(빨간색)}
-        //else{ 북마크 색상 변경 (흰색)}
+    }
+
+    public void ChangeBookMark(OwnedWeapon weapon)
+    {
+        if (data == null) return;
+        if (data == weapon)
+        {
+            bookmarkImage.gameObject.SetActive(data.bookMark);
+        }
+    }
+    
+    public void ChangeBookMark(OwnedSubWeapon weapon)
+    {
+        if (subData == null) return;
+        if (subData == weapon)
+        {
+            bookmarkImage.gameObject.SetActive(subData.bookMark);
+        }
     }
     
     public void OnClickWeaponButton()

@@ -4,6 +4,7 @@ public class TitleUI : MonoBehaviour
 {
     public void OnClickGameStart()
     {
+        AudioManager.Instance.PlayButtonSound();
         TitleMainLoadManager.Instance.LoadMain();
     }
 
