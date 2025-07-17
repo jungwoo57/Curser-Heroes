@@ -33,6 +33,7 @@ ScriptedImporter:
   assetBundleName: 
   assetBundleVariant: 
   script: {fileID: 11500000, guid: 62a9f0aa5b59740cfbadc7e5f9823bb0, type: 3}
+  importerVersion: 2
   textureImporterSettings:
     alphaSource: 1
     mipMapMode: 0
@@ -949,326 +950,371 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: 1234451082
+    uuid:
+      value0: 1171513650
+      value1: 0
+      value2: 0
+      value3: 0
+    guid: 1171513650
     name: Mushroom_King
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: Mushroom_King_Frame_0
+    - name: Frame_0
       frameIndex: 0
+      additiveSortOrder: 0
       cellRect:
         x: 1
         y: 3
         width: 61
         height: 53
       spriteId: 4f354ddc31b5fdf4cac67d33019aebaf
-    - name: Mushroom_King_Frame_1
+    - name: Frame_1
       frameIndex: 1
+      additiveSortOrder: 0
       cellRect:
         x: 1
         y: 3
         width: 61
         height: 54
       spriteId: 2461b8e51efd5cc41ae26624d112fc73
-    - name: Mushroom_King_Frame_2
+    - name: Frame_2
       frameIndex: 2
+      additiveSortOrder: 0
       cellRect:
         x: 1
         y: 3
         width: 61
         height: 55
       spriteId: 77d22af6f3552234a947e2ed1a1c1a3c
-    - name: Mushroom_King_Frame_4
+    - name: Frame_4
       frameIndex: 4
+      additiveSortOrder: 0
       cellRect:
         x: 1
         y: 3
         width: 61
         height: 52
       spriteId: 4a46ee9731b19924892ee9970752dc49
-    - name: Mushroom_King_Frame_5
+    - name: Frame_5
       frameIndex: 5
+      additiveSortOrder: 0
       cellRect:
         x: 1
         y: 3
         width: 61
         height: 51
       spriteId: 6fee5b770d97f9648afdb4232f44d638
-    - name: Mushroom_King_Frame_6
+    - name: Frame_6
       frameIndex: 6
+      additiveSortOrder: 0
       cellRect:
         x: 1
         y: 3
         width: 61
         height: 51
       spriteId: 655346a8380d378448bff3ae1c575272
-    - name: Mushroom_King_Frame_7
+    - name: Frame_7
       frameIndex: 7
+      additiveSortOrder: 0
       cellRect:
         x: 1
         y: 3
         width: 61
         height: 51
       spriteId: 4ca7d90dd7da19a43a10edeec7c2ddc3
-    - name: Mushroom_King_Frame_8
+    - name: Frame_8
       frameIndex: 8
+      additiveSortOrder: 0
       cellRect:
         x: 1
         y: 4
         width: 61
         height: 57
       spriteId: 1fe59acd24c1f354dbdf42e7782b1799
-    - name: Mushroom_King_Frame_9
+    - name: Frame_9
       frameIndex: 9
+      additiveSortOrder: 0
       cellRect:
         x: 2
         y: 16
         width: 59
         height: 55
       spriteId: 5088f70c7335e5f419c8afc998e403b2
-    - name: Mushroom_King_Frame_10
+    - name: Frame_10
       frameIndex: 10
+      additiveSortOrder: 0
       cellRect:
         x: 1
         y: 21
         width: 61
         height: 51
       spriteId: ad71ccfbe465c334995b7b1a8aab5b9f
-    - name: Mushroom_King_Frame_11
+    - name: Frame_11
       frameIndex: 11
+      additiveSortOrder: 0
       cellRect:
         x: 1
         y: 22
         width: 61
         height: 51
       spriteId: 43d8cb391fcd9fb499bbef58ca6db29d
-    - name: Mushroom_King_Frame_12
+    - name: Frame_12
       frameIndex: 12
+      additiveSortOrder: 0
       cellRect:
         x: 1
         y: 21
         width: 61
         height: 51
       spriteId: 29f1ae379326bab43ada5d44327afe81
-    - name: Mushroom_King_Frame_13
+    - name: Frame_13
       frameIndex: 13
+      additiveSortOrder: 0
       cellRect:
         x: 1
         y: 21
         width: 61
         height: 50
       spriteId: 8236c2b639b5e67468af364690071121
-    - name: Mushroom_King_Frame_14
+    - name: Frame_14
       frameIndex: 14
+      additiveSortOrder: 0
       cellRect:
         x: 1
         y: 10
         width: 61
         height: 57
       spriteId: 575ccd50584d4b143ada1d876afb8116
-    - name: Mushroom_King_Frame_15
+    - name: Frame_15
       frameIndex: 15
+      additiveSortOrder: 0
       cellRect:
         x: 1
         y: 3
         width: 61
         height: 48
       spriteId: 8d60a6bdb8690a5469d5eb103a89eea9
-    - name: Mushroom_King_Frame_16
+    - name: Frame_16
       frameIndex: 16
+      additiveSortOrder: 0
       cellRect:
         x: 1
         y: 3
         width: 61
         height: 47
       spriteId: 6da47c749e97a634db75eec47c663a42
-    - name: Mushroom_King_Frame_17
+    - name: Frame_17
       frameIndex: 17
+      additiveSortOrder: 0
       cellRect:
         x: 2
         y: 3
         width: 59
         height: 55
       spriteId: ea281bc7fc2b44a4bad5cf17afef685e
-    - name: Mushroom_King_Frame_18
+    - name: Frame_18
       frameIndex: 18
+      additiveSortOrder: 0
       cellRect:
         x: 3
         y: 3
         width: 57
         height: 56
       spriteId: 0ac0ee91d48360a44a55b7c87b623ee5
-    - name: Mushroom_King_Frame_19
+    - name: Frame_19
       frameIndex: 19
+      additiveSortOrder: 0
       cellRect:
         x: 1
         y: 2
         width: 61
         height: 55
       spriteId: bc5965f37b40a754494305097ce61906
-    - name: Mushroom_King_Frame_20
+    - name: Frame_20
       frameIndex: 20
+      additiveSortOrder: 0
       cellRect:
         x: 1
         y: 3
         width: 61
         height: 54
       spriteId: 3de7cb52acca2d54787108a77daf632a
-    - name: Mushroom_King_Frame_21
+    - name: Frame_21
       frameIndex: 21
+      additiveSortOrder: 0
       cellRect:
         x: 2
         y: 3
         width: 59
         height: 54
       spriteId: 064ac740d3d2e7745944fe1bb86cf3b3
-    - name: Mushroom_King_Frame_22
+    - name: Frame_22
       frameIndex: 22
+      additiveSortOrder: 0
       cellRect:
         x: 2
         y: 3
         width: 59
         height: 55
       spriteId: 2aa15bb998914a64981f65525b23bc6d
-    - name: Mushroom_King_Frame_23
+    - name: Frame_23
       frameIndex: 23
+      additiveSortOrder: 0
       cellRect:
         x: 2
         y: 3
         width: 59
         height: 54
       spriteId: f92bc5160e6c3934f8c90bbb9f73d721
-    - name: Mushroom_King_Frame_24
+    - name: Frame_24
       frameIndex: 24
+      additiveSortOrder: 0
       cellRect:
         x: 1
         y: 3
         width: 61
         height: 54
       spriteId: e2c57e33716c3c74a8b0886d138af4d6
-    - name: Mushroom_King_Frame_25
+    - name: Frame_25
       frameIndex: 25
+      additiveSortOrder: 0
       cellRect:
         x: 1
         y: 3
         width: 61
         height: 48
       spriteId: f20281c492a518b49b556f919fe3dea8
-    - name: Mushroom_King_Frame_26
+    - name: Frame_26
       frameIndex: 26
+      additiveSortOrder: 0
       cellRect:
         x: 1
         y: 3
         width: 61
         height: 39
       spriteId: 464f8f7cfdccfa947a08971fc7e1525e
-    - name: Mushroom_King_Frame_27
+    - name: Frame_27
       frameIndex: 27
+      additiveSortOrder: 0
       cellRect:
         x: 1
         y: 3
         width: 61
         height: 29
       spriteId: 93be267f0b7b8264a9e1b40219cf89f3
-    - name: Mushroom_King_Frame_28
+    - name: Frame_28
       frameIndex: 28
+      additiveSortOrder: 0
       cellRect:
         x: 9
         y: 3
         width: 45
         height: 22
       spriteId: dc5455a99cea85e4d9165e6517f49404
-    - name: Mushroom_King_Frame_29
+    - name: Frame_29
       frameIndex: 29
+      additiveSortOrder: 0
       cellRect:
         x: 16
         y: 3
         width: 31
         height: 14
       spriteId: 54fe1c589158e5349a26167e0b712282
-    - name: Mushroom_King_Frame_30
+    - name: Frame_30
       frameIndex: 30
+      additiveSortOrder: 0
       cellRect:
         x: 25
         y: 3
         width: 13
         height: 7
       spriteId: a726c43f1682a9c43a3c8913f77b8cda
-    - name: Mushroom_King_Frame_31
+    - name: Frame_31
       frameIndex: 31
+      additiveSortOrder: 0
       cellRect:
         x: 29
         y: 3
         width: 5
         height: 3
       spriteId: 8777d2d62cb0ccd439c16807b1e2978b
-    - name: Mushroom_King_Frame_32
+    - name: Frame_32
       frameIndex: 32
+      additiveSortOrder: 0
       cellRect:
         x: 29
         y: 3
         width: 5
         height: 3
       spriteId: 5d5aed39f8217d84087065d97273c43c
-    - name: Mushroom_King_Frame_33
+    - name: Frame_33
       frameIndex: 33
+      additiveSortOrder: 0
       cellRect:
         x: 25
         y: 3
         width: 13
         height: 8
       spriteId: 914c9b2c909098845956703ac2b40f96
-    - name: Mushroom_King_Frame_34
+    - name: Frame_34
       frameIndex: 34
+      additiveSortOrder: 0
       cellRect:
         x: 25
         y: 3
         width: 13
         height: 7
       spriteId: 52300eec3203f2442b27489e78595758
-    - name: Mushroom_King_Frame_35
+    - name: Frame_35
       frameIndex: 35
+      additiveSortOrder: 0
       cellRect:
         x: 16
         y: 3
         width: 31
         height: 14
       spriteId: 29913ed2424dc48418d65fa26696d8e0
-    - name: Mushroom_King_Frame_36
+    - name: Frame_36
       frameIndex: 36
+      additiveSortOrder: 0
       cellRect:
         x: 9
         y: 3
         width: 45
         height: 22
       spriteId: 074c84cd033640441bf5bace8348392d
-    - name: Mushroom_King_Frame_37
+    - name: Frame_37
       frameIndex: 37
+      additiveSortOrder: 0
       cellRect:
         x: 1
         y: 3
         width: 61
         height: 39
       spriteId: c8f52d7c1af6470428785a4b4a6dfe07
-    - name: Mushroom_King_Frame_38
+    - name: Frame_38
       frameIndex: 38
+      additiveSortOrder: 0
       cellRect:
         x: 2
         y: 3
         width: 59
         height: 54
       spriteId: 0f451043db40ffb4aad32fd7eaea5865
-    - name: Mushroom_King_Frame_39
+    - name: Frame_39
       frameIndex: 39
+      additiveSortOrder: 0
       cellRect:
         x: 2
         y: 3
         width: 59
         height: 55
       spriteId: ed9f201f4f3fb124d9ce0a5a8fda36dc
-    - name: Mushroom_King_Frame_3
+    - name: Frame_3
       frameIndex: 3
+      additiveSortOrder: 0
       cellRect:
         x: 1
         y: 3
@@ -1342,3 +1388,4 @@ ScriptedImporter:
   secondarySpriteTextures: []
   spritePackingTag: 
   canvasSize: {x: 63, y: 74}
+  previousTextureSize: {x: 512, y: 512}

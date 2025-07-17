@@ -13,6 +13,7 @@ ScriptedImporter:
   assetBundleName: 
   assetBundleVariant: 
   script: {fileID: 11500000, guid: 62a9f0aa5b59740cfbadc7e5f9823bb0, type: 3}
+  importerVersion: 2
   textureImporterSettings:
     alphaSource: 1
     mipMapMode: 0
@@ -229,46 +230,56 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: -1095128544
+    uuid:
+      value0: 2085223072
+      value1: 0
+      value2: 0
+      value3: 0
+    guid: 2085223072
     name: Effect_Mushroom_King
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: Effect_Mushroom_King_Frame_0
+    - name: Frame_0
       frameIndex: 0
+      additiveSortOrder: 0
       cellRect:
         x: 16
         y: 2
         width: 68
         height: 21
       spriteId: cc12c4b5e54e23944993c429e38aa555
-    - name: Effect_Mushroom_King_Frame_1
+    - name: Frame_1
       frameIndex: 1
+      additiveSortOrder: 0
       cellRect:
         x: 13
         y: 1
         width: 73
         height: 25
       spriteId: 597c7069832f3714a861613a7551b7ff
-    - name: Effect_Mushroom_King_Frame_2
+    - name: Frame_2
       frameIndex: 2
+      additiveSortOrder: 0
       cellRect:
         x: 11
         y: 1
         width: 77
         height: 26
       spriteId: 6bd1adf7e9be63a4b9c4c88c57d3af3b
-    - name: Effect_Mushroom_King_Frame_3
+    - name: Frame_3
       frameIndex: 3
+      additiveSortOrder: 0
       cellRect:
         x: 10
         y: 3
         width: 78
         height: 25
       spriteId: 6fb9dc44e6c9fdb428f88c5cc5cbdbf1
-    - name: Effect_Mushroom_King_Frame_4
+    - name: Frame_4
       frameIndex: 4
+      additiveSortOrder: 0
       cellRect:
         x: 9
         y: 5
@@ -342,3 +353,4 @@ ScriptedImporter:
   secondarySpriteTextures: []
   spritePackingTag: 
   canvasSize: {x: 100, y: 33}
+  previousTextureSize: {x: 128, y: 256}

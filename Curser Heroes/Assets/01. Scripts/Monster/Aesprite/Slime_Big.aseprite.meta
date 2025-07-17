@@ -33,6 +33,7 @@ ScriptedImporter:
   assetBundleName: 
   assetBundleVariant: 
   script: {fileID: 11500000, guid: 62a9f0aa5b59740cfbadc7e5f9823bb0, type: 3}
+  importerVersion: 2
   textureImporterSettings:
     alphaSource: 1
     mipMapMode: 0
@@ -969,334 +970,380 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: -556113723
+    uuid:
+      value0: 2216403481
+      value1: 0
+      value2: 0
+      value3: 0
+    guid: -2078563815
     name: Slime_Big
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: Slime_Big_Frame_0
+    - name: Frame_0
       frameIndex: 0
+      additiveSortOrder: 0
       cellRect:
         x: 6
         y: 6
         width: 51
         height: 50
       spriteId: cc9c6666e7fb6294b82952563ce4b2f5
-    - name: Slime_Big_Frame_1
+    - name: Frame_1
       frameIndex: 1
+      additiveSortOrder: 0
       cellRect:
         x: 6
         y: 6
         width: 51
         height: 50
       spriteId: c9735a26fa34a2044a6a71f110594293
-    - name: Slime_Big_Frame_2
+    - name: Frame_2
       frameIndex: 2
+      additiveSortOrder: 0
       cellRect:
         x: 6
         y: 6
         width: 51
         height: 50
       spriteId: 8cb0a8b58db27034fa55d2538aa4de0b
-    - name: Slime_Big_Frame_3
+    - name: Frame_3
       frameIndex: 3
+      additiveSortOrder: 0
       cellRect:
         x: 6
         y: 6
         width: 51
         height: 49
       spriteId: 86211868cd9cbd6458b139c997ee904f
-    - name: Slime_Big_Frame_4
+    - name: Frame_4
       frameIndex: 4
+      additiveSortOrder: 0
       cellRect:
         x: 6
         y: 6
         width: 51
         height: 50
       spriteId: c7465278a49c8464aa0d5f2da8e3a85f
-    - name: Slime_Big_Frame_5
+    - name: Frame_5
       frameIndex: 5
+      additiveSortOrder: 0
       cellRect:
         x: 6
         y: 6
         width: 51
         height: 50
       spriteId: 6b42087f51b736c45b3327be8f83c36a
-    - name: Slime_Big_Frame_6
+    - name: Frame_6
       frameIndex: 6
+      additiveSortOrder: 0
       cellRect:
         x: 6
         y: 6
         width: 51
         height: 50
       spriteId: c961bfc55ed86014eb8d383d1f1b6c8d
-    - name: Slime_Big_Frame_7
+    - name: Frame_7
       frameIndex: 7
+      additiveSortOrder: 0
       cellRect:
         x: 6
         y: 6
         width: 51
         height: 49
       spriteId: 09fbfcdb4ed0a8e44a1c99250076335e
-    - name: Slime_Big_Frame_8
+    - name: Frame_8
       frameIndex: 8
+      additiveSortOrder: 0
       cellRect:
         x: 7
         y: 6
         width: 49
         height: 46
       spriteId: c62dc3f876d8c144aa3549e13561121b
-    - name: Slime_Big_Frame_9
+    - name: Frame_9
       frameIndex: 9
+      additiveSortOrder: 0
       cellRect:
         x: 8
         y: 6
         width: 47
         height: 42
       spriteId: b7bc0b457014d1f45aa54c1cb1ae0cd6
-    - name: Slime_Big_Frame_10
+    - name: Frame_10
       frameIndex: 10
+      additiveSortOrder: 0
       cellRect:
         x: 7
         y: 6
         width: 49
         height: 39
       spriteId: b3a881428d0ebbf448fe6b5411be1f84
-    - name: Slime_Big_Frame_11
+    - name: Frame_11
       frameIndex: 11
+      additiveSortOrder: 0
       cellRect:
         x: 7
         y: 6
         width: 49
         height: 38
       spriteId: f447b4d9470fb75468a837620c096a1f
-    - name: Slime_Big_Frame_12
+    - name: Frame_12
       frameIndex: 12
+      additiveSortOrder: 0
       cellRect:
         x: 7
         y: 6
         width: 49
         height: 39
       spriteId: 9106067d0e94b5f41ba9a18062651abf
-    - name: Slime_Big_Frame_13
+    - name: Frame_13
       frameIndex: 13
+      additiveSortOrder: 0
       cellRect:
         x: 6
         y: 6
         width: 51
         height: 47
       spriteId: 36c6403feba8c614dba578d5ce516e79
-    - name: Slime_Big_Frame_14
+    - name: Frame_14
       frameIndex: 14
+      additiveSortOrder: 0
       cellRect:
         x: 6
         y: 6
         width: 51
         height: 51
       spriteId: c41ce365a476b734696273dd18c21028
-    - name: Slime_Big_Frame_15
+    - name: Frame_15
       frameIndex: 15
+      additiveSortOrder: 0
       cellRect:
         x: 6
         y: 6
         width: 51
         height: 51
       spriteId: 3c8ac048ccb605e49bebc6b8290154f5
-    - name: Slime_Big_Frame_16
+    - name: Frame_16
       frameIndex: 16
+      additiveSortOrder: 0
       cellRect:
         x: 6
         y: 6
         width: 51
         height: 50
       spriteId: 786baf1bcad66404b9cefeacdb7fe063
-    - name: Slime_Big_Frame_17
+    - name: Frame_17
       frameIndex: 17
+      additiveSortOrder: 0
       cellRect:
         x: 6
         y: 6
         width: 51
         height: 51
       spriteId: d2e5cbb1cfd0bbf488d0507520a75bee
-    - name: Slime_Big_Frame_18
+    - name: Frame_18
       frameIndex: 18
+      additiveSortOrder: 0
       cellRect:
         x: 6
         y: 6
         width: 51
         height: 50
       spriteId: f5be747ba945ffb4988dbdea22a52fa1
-    - name: Slime_Big_Frame_19
+    - name: Frame_19
       frameIndex: 19
+      additiveSortOrder: 0
       cellRect:
         x: 6
         y: 6
         width: 51
         height: 49
       spriteId: 1285bba762fb5f74ca8949298e19f2e9
-    - name: Slime_Big_Frame_20
+    - name: Frame_20
       frameIndex: 20
+      additiveSortOrder: 0
       cellRect:
         x: 5
         y: 6
         width: 53
         height: 43
       spriteId: 76ff6b88b84b1f64e9d98700473c20cd
-    - name: Slime_Big_Frame_21
+    - name: Frame_21
       frameIndex: 21
+      additiveSortOrder: 0
       cellRect:
         x: 5
         y: 6
         width: 53
         height: 45
       spriteId: 2ff38bf9e7ef2a2479c0acd83046c099
-    - name: Slime_Big_Frame_22
+    - name: Frame_22
       frameIndex: 22
+      additiveSortOrder: 0
       cellRect:
         x: 3
         y: 6
         width: 60
         height: 50
       spriteId: 8d9f15af8f9a90b4d931e400f7c45b4f
-    - name: Slime_Big_Frame_23
+    - name: Frame_23
       frameIndex: 23
+      additiveSortOrder: 0
       cellRect:
         x: 29
         y: 49
         width: 5
         height: 11
       spriteId: f21915a00072c1e4c980003c6d5ada2e
-    - name: Slime_Big_Frame_24
+    - name: Frame_24
       frameIndex: 24
+      additiveSortOrder: 0
       cellRect:
         x: 29
         y: 24
         width: 5
         height: 11
       spriteId: b688287631a2e3144b8c7112a2243e19
-    - name: Slime_Big_Frame_25
+    - name: Frame_25
       frameIndex: 25
+      additiveSortOrder: 0
       cellRect:
         x: 29
         y: 6
         width: 5
         height: 11
       spriteId: 15757f6d94349e34eb5bb9dccb4e0b9f
-    - name: Slime_Big_Frame_26
+    - name: Frame_26
       frameIndex: 26
+      additiveSortOrder: 0
       cellRect:
         x: 27
         y: 6
         width: 9
         height: 7
       spriteId: 051e5272653eacc4eac332ca69e1cd2a
-    - name: Slime_Big_Frame_27
+    - name: Frame_27
       frameIndex: 27
+      additiveSortOrder: 0
       cellRect:
         x: 25
         y: 6
         width: 13
         height: 4
       spriteId: 74d9a41770cc65a4f8763b30ca700508
-    - name: Slime_Big_Frame_28
+    - name: Frame_28
       frameIndex: 28
+      additiveSortOrder: 0
       cellRect:
         x: 23
         y: 6
         width: 17
         height: 7
       spriteId: 86153b7062cb8f040ac9064f47fdc63d
-    - name: Slime_Big_Frame_29
+    - name: Frame_29
       frameIndex: 29
+      additiveSortOrder: 0
       cellRect:
         x: 21
         y: 6
         width: 21
         height: 13
       spriteId: 6f406abe42e6e104f81d21fb0d30b349
-    - name: Slime_Big_Frame_30
+    - name: Frame_30
       frameIndex: 30
+      additiveSortOrder: 0
       cellRect:
         x: 20
         y: 6
         width: 23
         height: 14
       spriteId: 92c142386aad8794cb7e49382cd00a4a
-    - name: Slime_Big_Frame_31
+    - name: Frame_31
       frameIndex: 31
+      additiveSortOrder: 0
       cellRect:
         x: 21
         y: 6
         width: 21
         height: 14
       spriteId: 8dc3b8cceb670be4da5c301c68c1cba5
-    - name: Slime_Big_Frame_32
+    - name: Frame_32
       frameIndex: 32
+      additiveSortOrder: 0
       cellRect:
         x: 24
         y: 6
         width: 15
         height: 14
       spriteId: 591afe7b756a0b94e984865b58872532
-    - name: Slime_Big_Frame_33
+    - name: Frame_33
       frameIndex: 33
+      additiveSortOrder: 0
       cellRect:
         x: 27
         y: 6
         width: 9
         height: 14
       spriteId: 89dab8295a109d144b4ee31b622c765c
-    - name: Slime_Big_Frame_34
+    - name: Frame_34
       frameIndex: 34
+      additiveSortOrder: 0
       cellRect:
         x: 30
         y: 6
         width: 3
         height: 18
       spriteId: f3536554e8ddc684884525ee6d09348e
-    - name: Slime_Big_Frame_35
+    - name: Frame_35
       frameIndex: 35
+      additiveSortOrder: 0
       cellRect:
         x: 28
         y: 6
         width: 7
         height: 45
       spriteId: ff93d12318639f14197a5650d6af9ba1
-    - name: Slime_Big_Frame_36
+    - name: Frame_36
       frameIndex: 36
+      additiveSortOrder: 0
       cellRect:
         x: 19
         y: 6
         width: 25
         height: 50
       spriteId: c09e40d7050812b408ef7ecabcb82b12
-    - name: Slime_Big_Frame_37
+    - name: Frame_37
       frameIndex: 37
+      additiveSortOrder: 0
       cellRect:
         x: 6
         y: 6
         width: 51
         height: 51
       spriteId: 95b210946fb8e8b499c716b7be7f5098
-    - name: Slime_Big_Frame_38
+    - name: Frame_38
       frameIndex: 38
+      additiveSortOrder: 0
       cellRect:
         x: 6
         y: 6
         width: 51
         height: 52
       spriteId: 4f993843a1f242441a1259265b53876a
-    - name: Slime_Big_Frame_39
+    - name: Frame_39
       frameIndex: 39
+      additiveSortOrder: 0
       cellRect:
         x: 6
         y: 6
         width: 51
         height: 51
       spriteId: face25fbccda9014298760eace6d1e79
-    - name: Slime_Big_Frame_40
+    - name: Frame_40
       frameIndex: 40
+      additiveSortOrder: 0
       cellRect:
         x: 6
         y: 6
@@ -1370,3 +1417,4 @@ ScriptedImporter:
   secondarySpriteTextures: []
   spritePackingTag: 
   canvasSize: {x: 63, y: 64}
+  previousTextureSize: {x: 256, y: 512}

@@ -8,6 +8,7 @@ ScriptedImporter:
   assetBundleName: 
   assetBundleVariant: 
   script: {fileID: 11500000, guid: 62a9f0aa5b59740cfbadc7e5f9823bb0, type: 3}
+  importerVersion: 2
   textureImporterSettings:
     alphaSource: 1
     mipMapMode: 0
@@ -204,38 +205,47 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: 1086108044
+    uuid:
+      value0: 4232791740
+      value1: 0
+      value2: 0
+      value3: 0
+    guid: -62175556
     name: Effect_Tree
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: Effect_Tree_Frame_0
+    - name: Frame_0
       frameIndex: 0
+      additiveSortOrder: 0
       cellRect:
         x: 30
         y: 0
         width: 15
         height: 15
       spriteId: a65ce3054e33b1347a664d9ac083e131
-    - name: Effect_Tree_Frame_1
+    - name: Frame_1
       frameIndex: 1
+      additiveSortOrder: 0
       cellRect:
         x: 25
         y: 0
         width: 25
         height: 25
       spriteId: df11f8e580e1cc64f87c6beec707172e
-    - name: Effect_Tree_Frame_2
+    - name: Frame_2
       frameIndex: 2
+      additiveSortOrder: 0
       cellRect:
         x: 20
         y: 0
         width: 35
         height: 55
       spriteId: c141852289f380e41bc49573f8150254
-    - name: Effect_Tree_Frame_3
+    - name: Frame_3
       frameIndex: 3
+      additiveSortOrder: 0
       cellRect:
         x: 20
         y: 0
@@ -309,3 +319,4 @@ ScriptedImporter:
   secondarySpriteTextures: []
   spritePackingTag: 
   canvasSize: {x: 75, y: 75}
+  previousTextureSize: {x: 128, y: 128}

@@ -33,6 +33,7 @@ ScriptedImporter:
   assetBundleName: 
   assetBundleVariant: 
   script: {fileID: 11500000, guid: 62a9f0aa5b59740cfbadc7e5f9823bb0, type: 3}
+  importerVersion: 2
   textureImporterSettings:
     alphaSource: 1
     mipMapMode: 0
@@ -709,230 +710,263 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: 780980726
+    uuid:
+      value0: 3323264334
+      value1: 0
+      value2: 0
+      value3: 0
+    guid: -971702962
     name: Tree
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: Tree_Frame_0
+    - name: Frame_0
       frameIndex: 0
+      additiveSortOrder: 0
       cellRect:
         x: 3
         y: 2
         width: 26
         height: 27
       spriteId: 42a1e50f7cd30c84cb39c066c9abfb7d
-    - name: Tree_Frame_1
+    - name: Frame_1
       frameIndex: 1
+      additiveSortOrder: 0
       cellRect:
         x: 3
         y: 2
         width: 26
         height: 27
       spriteId: 1c90f8e895e09f249b9565702ea6afd5
-    - name: Tree_Frame_2
+    - name: Frame_2
       frameIndex: 2
+      additiveSortOrder: 0
       cellRect:
         x: 2
         y: 2
         width: 28
         height: 28
       spriteId: 7b4ba3f76c821d2489a616dab17970ee
-    - name: Tree_Frame_3
+    - name: Frame_3
       frameIndex: 3
+      additiveSortOrder: 0
       cellRect:
         x: 3
         y: 2
         width: 26
         height: 28
       spriteId: 43c628cefd11c2a4487a02ba3712fe57
-    - name: Tree_Frame_4
+    - name: Frame_4
       frameIndex: 4
+      additiveSortOrder: 0
       cellRect:
         x: 3
         y: 2
         width: 26
         height: 28
       spriteId: f67b2b7cf1e0aeb4e9b395605d46ef36
-    - name: Tree_Frame_5
+    - name: Frame_5
       frameIndex: 5
+      additiveSortOrder: 0
       cellRect:
         x: 3
         y: 2
         width: 26
         height: 28
       spriteId: 4a27a1669546fed43953f34e713f7de5
-    - name: Tree_Frame_6
+    - name: Frame_6
       frameIndex: 6
+      additiveSortOrder: 0
       cellRect:
         x: 2
         y: 7
         width: 28
         height: 24
       spriteId: edcaa93e3bd97564690ce3da6fcaa194
-    - name: Tree_Frame_7
+    - name: Frame_7
       frameIndex: 7
+      additiveSortOrder: 0
       cellRect:
         x: 2
         y: 7
         width: 28
         height: 24
       spriteId: c6eee9e1f0e2fc44f8aff45ff5e40c72
-    - name: Tree_Frame_8
+    - name: Frame_8
       frameIndex: 8
+      additiveSortOrder: 0
       cellRect:
         x: 5
         y: 2
         width: 22
         height: 25
       spriteId: 0e589988e250ec24aa16e1d3f4f0fd85
-    - name: Tree_Frame_9
+    - name: Frame_9
       frameIndex: 9
+      additiveSortOrder: 0
       cellRect:
         x: 5
         y: 2
         width: 22
         height: 25
       spriteId: 0d7f5fbb9db6caf4aaa891a0c4926c3a
-    - name: Tree_Frame_10
+    - name: Frame_10
       frameIndex: 10
+      additiveSortOrder: 0
       cellRect:
         x: 5
         y: 2
         width: 22
         height: 24
       spriteId: f924db325d64fdf409934e2b1ec065c2
-    - name: Tree_Frame_11
+    - name: Frame_11
       frameIndex: 11
+      additiveSortOrder: 0
       cellRect:
         x: 5
         y: 2
         width: 24
         height: 30
       spriteId: 2e735cac33fd73249b8a11c10c05f151
-    - name: Tree_Frame_12
+    - name: Frame_12
       frameIndex: 12
+      additiveSortOrder: 0
       cellRect:
         x: 5
         y: 2
         width: 25
         height: 29
       spriteId: a1ed2436c7d6d0145aa5723243e81c74
-    - name: Tree_Frame_13
+    - name: Frame_13
       frameIndex: 13
+      additiveSortOrder: 0
       cellRect:
         x: 5
         y: 2
         width: 23
         height: 23
       spriteId: 84d01fb9b389f024fbdb484e1fef2f6a
-    - name: Tree_Frame_14
+    - name: Frame_14
       frameIndex: 14
+      additiveSortOrder: 0
       cellRect:
         x: 5
         y: 2
         width: 23
         height: 20
       spriteId: 8a2e138a47efdb441af318dfa57f9269
-    - name: Tree_Frame_15
+    - name: Frame_15
       frameIndex: 15
+      additiveSortOrder: 0
       cellRect:
         x: 5
         y: 2
         width: 22
         height: 15
       spriteId: a83d8e35f160f224da26d1a346f32250
-    - name: Tree_Frame_16
+    - name: Frame_16
       frameIndex: 16
+      additiveSortOrder: 0
       cellRect:
         x: 5
         y: 2
         width: 22
         height: 8
       spriteId: a7e26ed1e7d03ce4a9b9dcde74c5f5a4
-    - name: Tree_Frame_17
+    - name: Frame_17
       frameIndex: 17
+      additiveSortOrder: 0
       cellRect:
         x: 4
         y: 2
         width: 25
         height: 28
       spriteId: 633a20188795a9845b195da8327a8a68
-    - name: Tree_Frame_18
+    - name: Frame_18
       frameIndex: 18
+      additiveSortOrder: 0
       cellRect:
         x: 15
         y: 2
         width: 2
         height: 1
       spriteId: c3cfec23196a6aa4d8ff3e097d4d55b2
-    - name: Tree_Frame_19
+    - name: Frame_19
       frameIndex: 19
+      additiveSortOrder: 0
       cellRect:
         x: 14
         y: 2
         width: 4
         height: 3
       spriteId: 5a71751860c3b6641b7ead4a90713a12
-    - name: Tree_Frame_20
+    - name: Frame_20
       frameIndex: 20
+      additiveSortOrder: 0
       cellRect:
         x: 13
         y: 2
         width: 6
         height: 6
       spriteId: 25639c837340e594babb04ba474d35f1
-    - name: Tree_Frame_21
+    - name: Frame_21
       frameIndex: 21
+      additiveSortOrder: 0
       cellRect:
         x: 12
         y: 2
         width: 8
         height: 5
       spriteId: f435032d2e47ef34fb49ff6e24b6d8b9
-    - name: Tree_Frame_22
+    - name: Frame_22
       frameIndex: 22
+      additiveSortOrder: 0
       cellRect:
         x: 13
         y: 2
         width: 6
         height: 5
       spriteId: fced83b7f2ad1f442894e8ced94f9efb
-    - name: Tree_Frame_23
+    - name: Frame_23
       frameIndex: 23
+      additiveSortOrder: 0
       cellRect:
         x: 13
         y: 2
         width: 6
         height: 5
       spriteId: 8964fb3d336ec05419305904eb24d58e
-    - name: Tree_Frame_24
+    - name: Frame_24
       frameIndex: 24
+      additiveSortOrder: 0
       cellRect:
         x: 10
         y: 2
         width: 12
         height: 7
       spriteId: d364519f58c2f604a80adde9d8292c00
-    - name: Tree_Frame_25
+    - name: Frame_25
       frameIndex: 25
+      additiveSortOrder: 0
       cellRect:
         x: 8
         y: 2
         width: 16
         height: 15
       spriteId: bbbfdd8372c108a4e8711341d99fee0d
-    - name: Tree_Frame_26
+    - name: Frame_26
       frameIndex: 26
+      additiveSortOrder: 0
       cellRect:
         x: 6
         y: 2
         width: 20
         height: 19
       spriteId: 6e287a72480d75a45ab282e96e935674
-    - name: Tree_Frame_27
+    - name: Frame_27
       frameIndex: 27
+      additiveSortOrder: 0
       cellRect:
         x: 2
         y: 2
@@ -1006,3 +1040,4 @@ ScriptedImporter:
   secondarySpriteTextures: []
   spritePackingTag: 
   canvasSize: {x: 32, y: 32}
+  previousTextureSize: {x: 128, y: 256}

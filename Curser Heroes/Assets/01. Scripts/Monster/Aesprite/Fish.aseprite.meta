@@ -33,6 +33,7 @@ ScriptedImporter:
   assetBundleName: 
   assetBundleVariant: 
   script: {fileID: 11500000, guid: 62a9f0aa5b59740cfbadc7e5f9823bb0, type: 3}
+  importerVersion: 2
   textureImporterSettings:
     alphaSource: 1
     mipMapMode: 0
@@ -669,214 +670,245 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: -874510828
+    uuid:
+      value0: 4217034596
+      value1: 0
+      value2: 0
+      value3: 0
+    guid: -77932700
     name: Fish
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: Fish_Frame_0
+    - name: Frame_0
       frameIndex: 0
+      additiveSortOrder: 0
       cellRect:
         x: 4
         y: 0
         width: 24
         height: 30
       spriteId: 15886e8939dcaf94e8d10fdbf31d7dbc
-    - name: Fish_Frame_1
+    - name: Frame_1
       frameIndex: 1
+      additiveSortOrder: 0
       cellRect:
         x: 4
         y: 0
         width: 24
         height: 30
       spriteId: e4e8ac952e6947248b15d7bac9518113
-    - name: Fish_Frame_2
+    - name: Frame_2
       frameIndex: 2
+      additiveSortOrder: 0
       cellRect:
         x: 4
         y: 0
         width: 24
         height: 30
       spriteId: 4eca0bc515543f64cb30c9932ece5de3
-    - name: Fish_Frame_3
+    - name: Frame_3
       frameIndex: 3
+      additiveSortOrder: 0
       cellRect:
         x: 4
         y: 0
         width: 24
         height: 30
       spriteId: a47a16a081a14e54389bc6bb234c3914
-    - name: Fish_Frame_4
+    - name: Frame_4
       frameIndex: 4
+      additiveSortOrder: 0
       cellRect:
         x: 2
         y: 0
         width: 28
         height: 29
       spriteId: 5c71315da51568545866374d1d9ed11c
-    - name: Fish_Frame_5
+    - name: Frame_5
       frameIndex: 5
+      additiveSortOrder: 0
       cellRect:
         x: 1
         y: 0
         width: 30
         height: 29
       spriteId: 3cef978facfc92a4f99e844fc096b90c
-    - name: Fish_Frame_6
+    - name: Frame_6
       frameIndex: 6
+      additiveSortOrder: 0
       cellRect:
         x: 1
         y: 0
         width: 30
         height: 29
       spriteId: 79ea60a24b0fc3244992b2fb3570aeb5
-    - name: Fish_Frame_7
+    - name: Frame_7
       frameIndex: 7
+      additiveSortOrder: 0
       cellRect:
         x: 1
         y: 0
         width: 30
         height: 28
       spriteId: d976a4d247a80794694b76680cdce185
-    - name: Fish_Frame_8
+    - name: Frame_8
       frameIndex: 8
+      additiveSortOrder: 0
       cellRect:
         x: 2
         y: 0
         width: 28
         height: 27
       spriteId: e271db437dfec3f46963289e012299aa
-    - name: Fish_Frame_9
+    - name: Frame_9
       frameIndex: 9
+      additiveSortOrder: 0
       cellRect:
         x: 1
         y: 0
         width: 30
         height: 28
       spriteId: a777ac6d8cf262a4abd53164683ba13d
-    - name: Fish_Frame_10
+    - name: Frame_10
       frameIndex: 10
+      additiveSortOrder: 0
       cellRect:
         x: 1
         y: 0
         width: 30
         height: 24
       spriteId: 0901a6c7c9e799742ac491dcd93f22c7
-    - name: Fish_Frame_11
+    - name: Frame_11
       frameIndex: 11
+      additiveSortOrder: 0
       cellRect:
         x: 1
         y: 0
         width: 30
         height: 21
       spriteId: 487f8220ab73452499b56a718070e80c
-    - name: Fish_Frame_12
+    - name: Frame_12
       frameIndex: 12
+      additiveSortOrder: 0
       cellRect:
         x: 1
         y: 0
         width: 30
         height: 16
       spriteId: 663bc9dc60a02914b8842428b7c41757
-    - name: Fish_Frame_13
+    - name: Frame_13
       frameIndex: 13
+      additiveSortOrder: 0
       cellRect:
         x: 1
         y: 0
         width: 30
         height: 11
       spriteId: e4b1c5923cc01434aa3b67b2d6c233fb
-    - name: Fish_Frame_14
+    - name: Frame_14
       frameIndex: 14
+      additiveSortOrder: 0
       cellRect:
         x: 1
         y: 0
         width: 30
         height: 8
       spriteId: a72a7468ba6087b4ca02483c3312a5ca
-    - name: Fish_Frame_15
+    - name: Frame_15
       frameIndex: 15
+      additiveSortOrder: 0
       cellRect:
         x: 4
         y: 0
         width: 24
         height: 3
       spriteId: aea19a51c2bcaac489428db8749569f4
-    - name: Fish_Frame_16
+    - name: Frame_16
       frameIndex: 16
+      additiveSortOrder: 0
       cellRect:
         x: 1
         y: 0
         width: 30
         height: 30
       spriteId: 8f7c66f7ca7d48c47b8bed2560d31b75
-    - name: Fish_Frame_17
+    - name: Frame_17
       frameIndex: 17
+      additiveSortOrder: 0
       cellRect:
         x: 6
         y: 0
         width: 20
         height: 9
       spriteId: 7711b4b41c4eae14d8acf0f02844ef69
-    - name: Fish_Frame_18
+    - name: Frame_18
       frameIndex: 18
+      additiveSortOrder: 0
       cellRect:
         x: 6
         y: 0
         width: 20
         height: 12
       spriteId: 9e2089e06b8b5ff43bc89a49d6a7928d
-    - name: Fish_Frame_19
+    - name: Frame_19
       frameIndex: 19
+      additiveSortOrder: 0
       cellRect:
         x: 6
         y: 0
         width: 20
         height: 13
       spriteId: 7607a51e321584b40a57508da0f0d569
-    - name: Fish_Frame_20
+    - name: Frame_20
       frameIndex: 20
+      additiveSortOrder: 0
       cellRect:
         x: 5
         y: 0
         width: 22
         height: 12
       spriteId: 2670cfa6cf793db45a9289e6ad20617c
-    - name: Fish_Frame_21
+    - name: Frame_21
       frameIndex: 21
+      additiveSortOrder: 0
       cellRect:
         x: 4
         y: 0
         width: 24
         height: 10
       spriteId: acacde74b65a5534eb77c7b5315e0831
-    - name: Fish_Frame_22
+    - name: Frame_22
       frameIndex: 22
+      additiveSortOrder: 0
       cellRect:
         x: 2
         y: 0
         width: 28
         height: 32
       spriteId: 6fc3b6f4d3cc7b24f8d1cd6e2a681c2c
-    - name: Fish_Frame_23
+    - name: Frame_23
       frameIndex: 23
+      additiveSortOrder: 0
       cellRect:
         x: 0
         y: 0
         width: 32
         height: 27
       spriteId: 8453879c440b0c946b74348057508f72
-    - name: Fish_Frame_24
+    - name: Frame_24
       frameIndex: 24
+      additiveSortOrder: 0
       cellRect:
         x: 0
         y: 0
         width: 32
         height: 29
       spriteId: 9be243c08c499c340ac82ba864858198
-    - name: Fish_Frame_25
+    - name: Frame_25
       frameIndex: 25
+      additiveSortOrder: 0
       cellRect:
         x: 1
         y: 0
@@ -950,3 +982,4 @@ ScriptedImporter:
   secondarySpriteTextures: []
   spritePackingTag: 
   canvasSize: {x: 32, y: 32}
+  previousTextureSize: {x: 256, y: 256}

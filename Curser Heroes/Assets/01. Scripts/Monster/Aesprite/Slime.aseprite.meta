@@ -33,6 +33,7 @@ ScriptedImporter:
   assetBundleName: 
   assetBundleVariant: 
   script: {fileID: 11500000, guid: 62a9f0aa5b59740cfbadc7e5f9823bb0, type: 3}
+  importerVersion: 2
   textureImporterSettings:
     alphaSource: 1
     mipMapMode: 0
@@ -629,198 +630,227 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: -1324298474
+    uuid:
+      value0: 2939311854
+      value1: 0
+      value2: 0
+      value3: 0
+    guid: -1355655442
     name: Slime
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: Slime_Frame_0
+    - name: Frame_0
       frameIndex: 0
+      additiveSortOrder: 0
       cellRect:
         x: 1
         y: 0
         width: 30
         height: 31
       spriteId: f2b71edd0ece76b42a71589b7eef0f5d
-    - name: Slime_Frame_1
+    - name: Frame_1
       frameIndex: 1
+      additiveSortOrder: 0
       cellRect:
         x: 2
         y: 0
         width: 28
         height: 32
       spriteId: 01cbdd226a717a2479104fb8ca063dd8
-    - name: Slime_Frame_2
+    - name: Frame_2
       frameIndex: 2
+      additiveSortOrder: 0
       cellRect:
         x: 2
         y: 0
         width: 28
         height: 32
       spriteId: aa043f2ce343e804b8929434c905e3ea
-    - name: Slime_Frame_3
+    - name: Frame_3
       frameIndex: 3
+      additiveSortOrder: 0
       cellRect:
         x: 0
         y: 0
         width: 32
         height: 28
       spriteId: 0ed09fd49a40ee040aeec3200b577e2a
-    - name: Slime_Frame_4
+    - name: Frame_4
       frameIndex: 4
+      additiveSortOrder: 0
       cellRect:
         x: 0
         y: 0
         width: 32
         height: 27
       spriteId: bd7b9e71004339440b0e7229126ae85f
-    - name: Slime_Frame_5
+    - name: Frame_5
       frameIndex: 5
+      additiveSortOrder: 0
       cellRect:
         x: 2
         y: 0
         width: 28
         height: 29
       spriteId: eed816d333bdcba45a49652af3fd6dc3
-    - name: Slime_Frame_6
+    - name: Frame_6
       frameIndex: 6
+      additiveSortOrder: 0
       cellRect:
         x: 3
         y: 0
         width: 26
         height: 27
       spriteId: 5a84195ba95301c46a8026646d6fe361
-    - name: Slime_Frame_7
+    - name: Frame_7
       frameIndex: 7
+      additiveSortOrder: 0
       cellRect:
         x: 3
         y: 0
         width: 26
         height: 26
       spriteId: 1bbbc701860ad844690f3405ed2797e6
-    - name: Slime_Frame_8
+    - name: Frame_8
       frameIndex: 8
+      additiveSortOrder: 0
       cellRect:
         x: 0
         y: 0
         width: 32
         height: 32
       spriteId: 4664409f84e3a5d41b9cf71d712365e0
-    - name: Slime_Frame_9
+    - name: Frame_9
       frameIndex: 9
+      additiveSortOrder: 0
       cellRect:
         x: 2
         y: 0
         width: 28
         height: 30
       spriteId: 0212e01144c1b86408e8a34025effbfd
-    - name: Slime_Frame_10
+    - name: Frame_10
       frameIndex: 10
+      additiveSortOrder: 0
       cellRect:
         x: 1
         y: 0
         width: 30
         height: 31
       spriteId: ec15db44c102ac443b1eda26fc1cc59b
-    - name: Slime_Frame_11
+    - name: Frame_11
       frameIndex: 11
+      additiveSortOrder: 0
       cellRect:
         x: 1
         y: 0
         width: 30
         height: 31
       spriteId: 7df0ac162e191704da534a8569813228
-    - name: Slime_Frame_12
+    - name: Frame_12
       frameIndex: 12
+      additiveSortOrder: 0
       cellRect:
         x: 0
         y: 0
         width: 32
         height: 31
       spriteId: ac753f9c7debe2948afab46a56f92b7b
-    - name: Slime_Frame_13
+    - name: Frame_13
       frameIndex: 13
+      additiveSortOrder: 0
       cellRect:
         x: 0
         y: 1
         width: 31
         height: 26
       spriteId: 58ad70b8a6f73da44af8c40dfe61bd52
-    - name: Slime_Frame_14
+    - name: Frame_14
       frameIndex: 14
+      additiveSortOrder: 0
       cellRect:
         x: 0
         y: 1
         width: 32
         height: 26
       spriteId: 1f8d16e73e0498e4a9341b7b7648d4e3
-    - name: Slime_Frame_15
+    - name: Frame_15
       frameIndex: 15
+      additiveSortOrder: 0
       cellRect:
         x: 1
         y: 0
         width: 31
         height: 32
       spriteId: 9912d125a8e7b8b40b0f0217700238c5
-    - name: Slime_Frame_16
+    - name: Frame_16
       frameIndex: 16
+      additiveSortOrder: 0
       cellRect:
         x: 14
         y: 23
         width: 4
         height: 7
       spriteId: b558ae41aa09b3b468d38f6c972d35fd
-    - name: Slime_Frame_17
+    - name: Frame_17
       frameIndex: 17
+      additiveSortOrder: 0
       cellRect:
         x: 14
         y: 7
         width: 4
         height: 7
       spriteId: 862dffa2b2deaf24e9aa3cdfd5b97b18
-    - name: Slime_Frame_18
+    - name: Frame_18
       frameIndex: 18
+      additiveSortOrder: 0
       cellRect:
         x: 10
         y: 1
         width: 12
         height: 8
       spriteId: c32ff0c5e2deeca44834249ed589eb68
-    - name: Slime_Frame_19
+    - name: Frame_19
       frameIndex: 19
+      additiveSortOrder: 0
       cellRect:
         x: 9
         y: 1
         width: 14
         height: 13
       spriteId: 8bd102f312045b24a9c05f512b704ec1
-    - name: Slime_Frame_20
+    - name: Frame_20
       frameIndex: 20
+      additiveSortOrder: 0
       cellRect:
         x: 7
         y: 1
         width: 18
         height: 23
       spriteId: 38077b5be2f4e0047879c30b9ca4c113
-    - name: Slime_Frame_21
+    - name: Frame_21
       frameIndex: 21
+      additiveSortOrder: 0
       cellRect:
         x: 5
         y: 1
         width: 22
         height: 25
       spriteId: 5652da34086173f49b7f62975530c6c8
-    - name: Slime_Frame_22
+    - name: Frame_22
       frameIndex: 22
+      additiveSortOrder: 0
       cellRect:
         x: 4
         y: 1
         width: 24
         height: 28
       spriteId: abc81dc9649a4934ba089aba4ea0bdbf
-    - name: Slime_Frame_23
+    - name: Frame_23
       frameIndex: 23
+      additiveSortOrder: 0
       cellRect:
         x: 2
         y: 1
@@ -894,3 +924,4 @@ ScriptedImporter:
   secondarySpriteTextures: []
   spritePackingTag: 
   canvasSize: {x: 32, y: 32}
+  previousTextureSize: {x: 256, y: 128}

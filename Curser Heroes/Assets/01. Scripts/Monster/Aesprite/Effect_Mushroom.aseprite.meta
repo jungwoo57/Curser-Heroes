@@ -13,6 +13,7 @@ ScriptedImporter:
   assetBundleName: 
   assetBundleVariant: 
   script: {fileID: 11500000, guid: 62a9f0aa5b59740cfbadc7e5f9823bb0, type: 3}
+  importerVersion: 2
   textureImporterSettings:
     alphaSource: 1
     mipMapMode: 0
@@ -289,70 +290,83 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: 1569712018
+    uuid:
+      value0: 761252954
+      value1: 0
+      value2: 0
+      value3: 0
+    guid: 761252954
     name: Effect_Mushroom
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: Effect_Mushroom_Frame_0
+    - name: Frame_0
       frameIndex: 0
+      additiveSortOrder: 0
       cellRect:
         x: 15
         y: 15
         width: 2
         height: 2
       spriteId: d91326dd0f65ac744b637a77ecd4e4fe
-    - name: Effect_Mushroom_Frame_1
+    - name: Frame_1
       frameIndex: 1
+      additiveSortOrder: 0
       cellRect:
         x: 13
         y: 13
         width: 6
         height: 5
       spriteId: 4e1c7c64c31effb4eb1f9b7be4e6a513
-    - name: Effect_Mushroom_Frame_2
+    - name: Frame_2
       frameIndex: 2
+      additiveSortOrder: 0
       cellRect:
         x: 10
         y: 10
         width: 14
         height: 12
       spriteId: c6be0fe54805ab84abc092ff30b698ea
-    - name: Effect_Mushroom_Frame_3
+    - name: Frame_3
       frameIndex: 3
+      additiveSortOrder: 0
       cellRect:
         x: 3
         y: 2
         width: 28
         height: 28
       spriteId: 5dca56c0ef55edf4d80e2b3e249c6a68
-    - name: Effect_Mushroom_Frame_4
+    - name: Frame_4
       frameIndex: 4
+      additiveSortOrder: 0
       cellRect:
         x: 1
         y: 1
         width: 30
         height: 30
       spriteId: cd751a5dcd4cb814aa38a7027e60b76b
-    - name: Effect_Mushroom_Frame_5
+    - name: Frame_5
       frameIndex: 5
+      additiveSortOrder: 0
       cellRect:
         x: 0
         y: 0
         width: 32
         height: 32
       spriteId: e47701972ece56340a38bf200a0419c7
-    - name: Effect_Mushroom_Frame_6
+    - name: Frame_6
       frameIndex: 6
+      additiveSortOrder: 0
       cellRect:
         x: 0
         y: 0
         width: 31
         height: 32
       spriteId: c02d483ca00704a4bb8de3d6bf911360
-    - name: Effect_Mushroom_Frame_7
+    - name: Frame_7
       frameIndex: 7
+      additiveSortOrder: 0
       cellRect:
         x: 6
         y: 3
@@ -426,3 +440,4 @@ ScriptedImporter:
   secondarySpriteTextures: []
   spritePackingTag: 
   canvasSize: {x: 32, y: 32}
+  previousTextureSize: {x: 128, y: 128}
