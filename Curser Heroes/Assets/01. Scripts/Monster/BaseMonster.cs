@@ -211,6 +211,15 @@ public abstract class BaseMonster : MonoBehaviour
         if (animator != null)
             animator.SetBool(HashDie, true);
 
+        var partners = FindObjectsOfType<BasePartner>();
+        foreach (var partner in partners)
+        {
+            if (partner is Messengerbird mb)
+            {
+                mb.HandleMonsterDeath(gameObject, damage);
+            }
+        }
+
         SkillManager.SkillInstance explodeSkill = SkillManager.Instance.ownedSkills.Find(s => s.skill.skillName == "장렬한 퇴장");
 
         if (explodeSkill != null)

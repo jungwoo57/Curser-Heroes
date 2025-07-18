@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 public class EquipMainWeaponUI : MonoBehaviour
 {
    [Header("구성요소")]
@@ -11,7 +12,8 @@ public class EquipMainWeaponUI : MonoBehaviour
    public TextMeshProUGUI statusText;
    public Image bookMarkImage;
    public OwnedWeapon selectWeapon;
-   
+
+   public static event Action<OwnedWeapon> OnBookMark;
    public void UpdateUI(OwnedWeapon ownedWeapon)
    {
       selectWeapon = ownedWeapon;
@@ -33,6 +35,7 @@ public class EquipMainWeaponUI : MonoBehaviour
    public void ClickBookMarkButton()
    {
       selectWeapon.EnrollBookMark();
+      OnBookMark?.Invoke(selectWeapon);
       UpdateUI(selectWeapon);
    }
 }

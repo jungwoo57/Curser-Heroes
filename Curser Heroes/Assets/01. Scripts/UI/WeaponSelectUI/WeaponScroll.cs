@@ -79,6 +79,7 @@ public class WeaponScroll : MonoBehaviour
             case "sub":
                 hasSubWeapons = GameManager.Instance.ownedSubWeapons; //매니저에 있는 서브리스트 가져오기
                 hasWeaponCounts = GameManager.Instance.ownedSubWeapons.Count;
+                int subbookMarkCount = 0;
                 if (hasSubWeapons.Count > scrollCount) // 아이템이 일정 갯수 이하이면 스크롤 안되게 하기
                 {
                     scrollRect.vertical = true;
@@ -95,9 +96,22 @@ public class WeaponScroll : MonoBehaviour
                     showWeapons.Add(weaponImage);
                 }
 
-                for (int i = 0; i < hasWeaponCounts; i++)
+                for (int i = 0; i < hasSubWeapons.Count; i++) //북마크 부터 표시
                 {
-                    showWeapons[i].WeaponUpdate(hasSubWeapons[i]); // WeaponImage 업데이트
+                    if (hasSubWeapons[i].bookMark)
+                    {
+                        showWeapons[subbookMarkCount].WeaponUpdate(hasSubWeapons[i]);
+                        subbookMarkCount++;
+                    }
+                }
+                
+                for (int i = 0; i < hasWeaponCounts; i++) // 남은 UI업데이트
+                {
+                    if (!hasSubWeapons[i].bookMark)
+                    {
+                        showWeapons[subbookMarkCount].WeaponUpdate(hasSubWeapons[i]);
+                        subbookMarkCount++;
+                    } // WeaponImage 업데이트
                 }
 
                 for (int i = hasWeapons.Count; i < showWeapons.Count; i++)
@@ -110,6 +124,7 @@ public class WeaponScroll : MonoBehaviour
             case "partner":
                 hasPartners= GameManager.Instance.ownedPartners; //매니저에 있는 동료리스트 가져오기
                 hasWeaponCounts = GameManager.Instance.ownedPartners.Count;
+                int partnerbookMarkCount = 0;
                 if (hasPartners.Count > scrollCount) // 아이템이 일정 갯수 이하이면 스크롤 안되게 하기
                 {
                     scrollRect.vertical = true;
@@ -126,11 +141,24 @@ public class WeaponScroll : MonoBehaviour
                     showWeapons.Add(weaponImage);
                 }
 
-                for (int i = 0; i < hasWeaponCounts; i++)
+                for (int i = 0; i < hasSubWeapons.Count; i++) //북마크 부터 표시
                 {
-                    showWeapons[i].WeaponUpdate(hasPartners[i]); // WeaponImage 업데이트
+                    if (hasPartners[i].bookMark)
+                    {
+                        showWeapons[partnerbookMarkCount].WeaponUpdate(hasPartners[i]);
+                        partnerbookMarkCount++;
+                    }
                 }
-
+                
+                for (int i = 0; i < hasWeaponCounts; i++) // 남은 UI업데이트
+                {
+                    if (!hasPartners[i].bookMark)
+                    {
+                        showWeapons[partnerbookMarkCount].WeaponUpdate(hasPartners[i]);
+                        partnerbookMarkCount++;
+                    } // WeaponImage 업데이트
+                }
+                
                 for (int i = hasWeapons.Count; i < showWeapons.Count; i++)
                 {
                     showWeapons[i].gameObject.SetActive(false); // 남은 부분 끄기

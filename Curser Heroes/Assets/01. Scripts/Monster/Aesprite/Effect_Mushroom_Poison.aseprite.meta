@@ -127,7 +127,7 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: Effect_Mushroom_Poison_Frame_0
+  - name: Frame_0
     originalName: 
     pivot: {x: 0.42857146, y: -0.8333334}
     alignment: 9
@@ -138,7 +138,7 @@ ScriptedImporter:
       y: 44
       width: 14
       height: 12
-    spriteID: 375e119e4326422488f9df090746fbca
+    spriteID: ee32c6b9aeba1e44592e8f73e0295ee5
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -147,7 +147,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 40, y: 44}
-  - name: Effect_Mushroom_Poison_Frame_1
+  - name: Frame_1
     originalName: 
     pivot: {x: 0.46428573, y: -0.071428575}
     alignment: 9
@@ -158,7 +158,7 @@ ScriptedImporter:
       y: 44
       width: 28
       height: 28
-    spriteID: d9b61a89c25724440af5aa0e110fd425
+    spriteID: 9a26ec24a5ff9c2449e3da4ddc17ad74
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -167,7 +167,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 44}
-  - name: Effect_Mushroom_Poison_Frame_2
+  - name: Frame_2
     originalName: 
     pivot: {x: 0.5, y: -0.033333335}
     alignment: 9
@@ -178,7 +178,7 @@ ScriptedImporter:
       y: 4
       width: 30
       height: 30
-    spriteID: 3684d88e10249ea43aeea870a550a4b5
+    spriteID: dee3187f262907447aef3c785cb0034d
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -187,7 +187,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 83, y: 4}
-  - name: Effect_Mushroom_Poison_Frame_3
+  - name: Frame_3
     originalName: 
     pivot: {x: 0.5, y: 0}
     alignment: 9
@@ -198,7 +198,7 @@ ScriptedImporter:
       y: 4
       width: 32
       height: 32
-    spriteID: b3ee657e96596594cb1adf278c529824
+    spriteID: 1731836b30644a34ab643c76ccb7ee77
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -207,7 +207,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
-  - name: Effect_Mushroom_Poison_Frame_4
+  - name: Frame_4
     originalName: 
     pivot: {x: 0.516129, y: 0}
     alignment: 9
@@ -218,7 +218,7 @@ ScriptedImporter:
       y: 4
       width: 31
       height: 32
-    spriteID: c8b4cd640cd699a45a425190a855b676
+    spriteID: 90c9be9321a268d41a7e504257beaeaf
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -227,7 +227,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 44, y: 4}
-  - name: Effect_Mushroom_Poison_Frame_5
+  - name: Frame_5
     originalName: 
     pivot: {x: 0.47619048, y: -0.10344827}
     alignment: 9
@@ -238,7 +238,7 @@ ScriptedImporter:
       y: 80
       width: 21
       height: 29
-    spriteID: 3df897b279e166c4ebf96560c91eec74
+    spriteID: 2b918abba8eedf3419c9cf3062942f2d
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -255,7 +255,11 @@ ScriptedImporter:
       value1: 0
       value2: 0
       value3: 0
+<<<<<<< HEAD
     guid: -754596577
+=======
+    guid: 0
+>>>>>>> Develop
     name: Effect_Mushroom_Poison
     layerFlags: 0
     layerType: 0
@@ -269,7 +273,11 @@ ScriptedImporter:
         y: 10
         width: 14
         height: 12
+<<<<<<< HEAD
       spriteId: 375e119e4326422488f9df090746fbca
+=======
+      spriteId: ee32c6b9aeba1e44592e8f73e0295ee5
+>>>>>>> Develop
     - name: Frame_1
       frameIndex: 1
       additiveSortOrder: 0
@@ -278,7 +286,11 @@ ScriptedImporter:
         y: 2
         width: 28
         height: 28
+<<<<<<< HEAD
       spriteId: d9b61a89c25724440af5aa0e110fd425
+=======
+      spriteId: 9a26ec24a5ff9c2449e3da4ddc17ad74
+>>>>>>> Develop
     - name: Frame_2
       frameIndex: 2
       additiveSortOrder: 0
@@ -287,7 +299,11 @@ ScriptedImporter:
         y: 1
         width: 30
         height: 30
+<<<<<<< HEAD
       spriteId: 3684d88e10249ea43aeea870a550a4b5
+=======
+      spriteId: dee3187f262907447aef3c785cb0034d
+>>>>>>> Develop
     - name: Frame_3
       frameIndex: 3
       additiveSortOrder: 0
@@ -296,7 +312,11 @@ ScriptedImporter:
         y: 0
         width: 32
         height: 32
+<<<<<<< HEAD
       spriteId: b3ee657e96596594cb1adf278c529824
+=======
+      spriteId: 1731836b30644a34ab643c76ccb7ee77
+>>>>>>> Develop
     - name: Frame_4
       frameIndex: 4
       additiveSortOrder: 0
@@ -305,7 +325,11 @@ ScriptedImporter:
         y: 0
         width: 31
         height: 32
+<<<<<<< HEAD
       spriteId: c8b4cd640cd699a45a425190a855b676
+=======
+      spriteId: 90c9be9321a268d41a7e504257beaeaf
+>>>>>>> Develop
     - name: Frame_5
       frameIndex: 5
       additiveSortOrder: 0
@@ -314,7 +338,7 @@ ScriptedImporter:
         y: 3
         width: 21
         height: 29
-      spriteId: 3df897b279e166c4ebf96560c91eec74
+      spriteId: 2b918abba8eedf3419c9cf3062942f2d
     linkedCells: []
     parentIndex: -1
   platformSettings:
