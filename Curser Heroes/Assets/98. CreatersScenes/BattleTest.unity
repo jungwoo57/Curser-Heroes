@@ -1590,6 +1590,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 85b4d2dc5b8be5e40b4b37e5ac467aa0, type: 2}
+  level: 0
   gaugePerMonsterHit: 2
   currentGauge: 0
   carrotEffectPrefab: {fileID: 4430094316513405922, guid: ccbc1860a7ee52742b7081cf921299f2, type: 3}
@@ -2851,6 +2852,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: f6593e5be176caa4bbd3f5d4efc5dba1, type: 2}
+  level: 0
   gaugePerMonsterHit: 2
   currentGauge: 0
   skillRange: 20
@@ -3845,6 +3847,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 6b6a154afcb20cb4ab98a32ca0cbad4d, type: 2}
+  level: 0
   gaugePerMonsterHit: 2
   currentGauge: 0
   bombPrefab: {fileID: 2947634692177661917, guid: f8beab86eb498ce4893d3456a4fc2ed8, type: 3}
@@ -3918,6 +3921,7 @@ MonoBehaviour:
   explosionPrefab: {fileID: 8286058134636732423, guid: e7b1031d9bfd92844b762023fd3ce9c5, type: 3}
   explodeOnKillSkillPrefab: {fileID: 7016513973741314053, guid: e2810a143be39594e9c8da3b00d7cbe3, type: 3}
   indomitableSkillPrefab: {fileID: 2558407994215219693, guid: c97e698a1a5b4c4438bcf6d0a8e65049, type: 3}
+  lightningEffectPrefab: {fileID: 0}
   skillPool: []
   ownedSkills: []
   maxSkillCount: 6
@@ -7194,6 +7198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: a50d4200bdbfed547b9fcf5c0a9b77eb, type: 2}
+  level: 0
   gaugePerMonsterHit: 2
   currentGauge: 0
   skillRange: 20

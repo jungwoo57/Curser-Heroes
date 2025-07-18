@@ -44,12 +44,12 @@ public class LightningSkill : MonoBehaviour
         // 2D 물리용 OverlapCircleAll 사용
         Collider2D[] colliders = Physics2D.OverlapCircleAll(center, range, monsterLayerMask);
         List<Monster> monsters = new List<Monster>();
-        foreach (var col in colliders)
-        {
-            Monster m = col.GetComponent<Monster>();
-            if (m != null && m.IsAlive())
-                monsters.Add(m);
-        }
+        //foreach (var col in colliders)
+        //{
+        //    Monster m = col.GetComponent<Monster>();
+        //    if (m != null && m.IsAlive())
+        //        monsters.Add(m);
+        //}
         return monsters;
     }
 
