@@ -109,6 +109,8 @@ public class GameManager : MonoBehaviour
             jewel -= weaponData.unlockCost;
             ownedWeapons.Add(new OwnedWeapon(weaponData));
         }
+
+        Save();
     }
 
     public void UnlockWeapon(SubWeaponData weaponData) //무기 해금 시 사용
@@ -119,6 +121,7 @@ public class GameManager : MonoBehaviour
             jewel -= weaponData.unlockCost;
             ownedSubWeapons.Add(new OwnedSubWeapon(weaponData));
         }
+        Save();
     }
     
     public void EquipWeapon(OwnedWeapon equipData)
@@ -130,6 +133,7 @@ public class GameManager : MonoBehaviour
         }
 
         mainEquipWeapon = equipData; // 메인 무기 장착만 작성 추후 보조 동료 추가
+        Save();
     }
 
     public void EquipWeapon(OwnedSubWeapon equipData)
@@ -141,6 +145,7 @@ public class GameManager : MonoBehaviour
         }
 
         subEquipWeapon = equipData; // 메인 무기 장착만 작성 추후 보조 동료 추가
+        Save();
     }
 
     public void EquipPartner(OwnedPartner equipData)
@@ -150,6 +155,7 @@ public class GameManager : MonoBehaviour
             return;
         }
         equipPartner = equipData;
+        Save();
     }
 
     public void EquipSkill(SkillData[] skilldatas)
@@ -160,6 +166,7 @@ public class GameManager : MonoBehaviour
             selectSkills.Add(skilldatas[i]);
         }
         skillPool = new List<SkillData>(selectSkills);
+        Save();
     }
 
     public void UpgradeWeapon(WeaponData data)
@@ -175,6 +182,7 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("해당 데이터 없거나 레벨이 만랩");
         }
+        Save();
     }
     
     public void UpgradeWeapon(SubWeaponData data)
@@ -190,6 +198,7 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("해당 데이터 없음");
         }
+        Save();
     }
 
    
@@ -200,6 +209,7 @@ public class GameManager : MonoBehaviour
             jewel -= skilldata.unlockCost;
             _hasSkills.Add(skilldata);
         }
+        Save();
     }
 
     public void UpgradePartner(PartnerData data)
@@ -210,6 +220,7 @@ public class GameManager : MonoBehaviour
             gold -= data.upgradeCost[ownedPartners[index].level];
             ownedPartners[index].level++;
         }
+        Save();
     }
     public void UnlockPartner(PartnerData partnerData)
     {
@@ -218,6 +229,7 @@ public class GameManager : MonoBehaviour
             jewel -= partnerData.unlockCost;
             ownedPartners.Add(new OwnedPartner(partnerData));
         }
+        Save();
             
     }
         

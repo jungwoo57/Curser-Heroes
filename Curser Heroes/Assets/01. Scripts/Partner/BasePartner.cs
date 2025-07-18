@@ -49,13 +49,13 @@ public abstract class BasePartner : MonoBehaviour
    
     private void HandleMonsterDamaged(CursorWeapon monster)
     {
-        if (currentGauge >= data.gaugeMax)
+        if (currentGauge >= data.gaugeMax[level])
             return; // 중복 발동 방지
 
-        currentGauge = Mathf.Min(currentGauge + gaugePerMonsterHit, data.gaugeMax);
-        ui.UpdateGauge(currentGauge / data.gaugeMax);
+        currentGauge = Mathf.Min(currentGauge + gaugePerMonsterHit, data.gaugeMax[level]);
+        ui.UpdateGauge(currentGauge / data.gaugeMax[level]);
 
-        if (currentGauge >= data.gaugeMax)
+        if (currentGauge >= data.gaugeMax[level])
         {
             ActivateSkill();
             ResetGauge();

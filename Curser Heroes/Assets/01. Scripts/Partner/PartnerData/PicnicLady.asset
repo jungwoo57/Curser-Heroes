@@ -10,12 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c48dfcd55b69fbb45817899f36593764, type: 3}
-  m_Name: RabbitGirl
+  m_Name: PicnicLady
   m_EditorClassIdentifier: 
-  partnerName: RabbitGirl
+  partnerName: PicnicLady
   portraitSprite: {fileID: 0}
-  gaugeMax: 100
+  gaugeMax:
+  - 50
+  - 47
+  - 44
+  - 41
+  - 38
+  - 35
+  - 32
+  - 29
+  - 26
+  - 23
+  - 20
   desc: 
   unlockCost: 0
   upgradeCost: 
-  prefab: {fileID: 5842470853820247829, guid: 70424ff00a3092348914949e55c61706, type: 3}
+  prefab: {fileID: 3283130697468224392, guid: 98eed649b0f37cb4a8c625f31f645815, type: 3}
