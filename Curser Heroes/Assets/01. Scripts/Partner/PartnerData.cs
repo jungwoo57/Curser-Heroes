@@ -13,5 +13,7 @@ public class PartnerData : ScriptableObject
     public string desc;
     public int unlockCost;
     public int[] upgradeCost;
+
+    public BasePartner prefab;
 }
 
