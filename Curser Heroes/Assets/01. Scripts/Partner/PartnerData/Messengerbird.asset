@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Messengerbird
   m_EditorClassIdentifier: 
   partnerName: Messengerbird
-  portraitSprite: {fileID: 0}
+  portraitSprite: {fileID: 21300000, guid: 44c9250151ccbc844bb0065e702d270f, type: 3}
   gaugeMax: 100
   desc: 
   unlockCost: 0
   upgradeCost: 
+  prefab: {fileID: 9076078449556165330, guid: 77acc4b37c1ee5b4aa1839a0a20fe0ab, type: 3}
