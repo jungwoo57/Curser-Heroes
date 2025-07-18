@@ -127,7 +127,7 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: Frame_0
+  - name: Effect_Mushroom_Frame_0
     originalName: 
     pivot: {x: 0.5, y: -7.5}
     alignment: 9
@@ -138,7 +138,7 @@ ScriptedImporter:
       y: 4
       width: 2
       height: 2
-    spriteID: b186d65e2fd15bb4cbe334648d7277f1
+    spriteID: d91326dd0f65ac744b637a77ecd4e4fe
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -147,7 +147,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 121, y: 4}
-  - name: Frame_1
+  - name: Effect_Mushroom_Frame_1
     originalName: 
     pivot: {x: 0.5, y: -2.6000001}
     alignment: 9
@@ -158,7 +158,7 @@ ScriptedImporter:
       y: 44
       width: 6
       height: 5
-    spriteID: 471bd929e1f238f458d34d73b23a38a2
+    spriteID: 4e1c7c64c31effb4eb1f9b7be4e6a513
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -167,7 +167,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 62, y: 44}
-  - name: Frame_2
+  - name: Effect_Mushroom_Frame_2
     originalName: 
     pivot: {x: 0.42857146, y: -0.8333334}
     alignment: 9
@@ -178,7 +178,7 @@ ScriptedImporter:
       y: 44
       width: 14
       height: 12
-    spriteID: 96b9fa727d8d2bb4e9568dc25c58195f
+    spriteID: c6be0fe54805ab84abc092ff30b698ea
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -187,7 +187,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 40, y: 44}
-  - name: Frame_3
+  - name: Effect_Mushroom_Frame_3
     originalName: 
     pivot: {x: 0.46428573, y: -0.071428575}
     alignment: 9
@@ -198,7 +198,7 @@ ScriptedImporter:
       y: 44
       width: 28
       height: 28
-    spriteID: 63cb4bdb3600e1741b8ce021521b2c4f
+    spriteID: 5dca56c0ef55edf4d80e2b3e249c6a68
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -207,7 +207,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 44}
-  - name: Frame_4
+  - name: Effect_Mushroom_Frame_4
     originalName: 
     pivot: {x: 0.5, y: -0.033333335}
     alignment: 9
@@ -218,7 +218,7 @@ ScriptedImporter:
       y: 4
       width: 30
       height: 30
-    spriteID: d16773e9a42454746b00c783bd0a23d8
+    spriteID: cd751a5dcd4cb814aa38a7027e60b76b
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -227,7 +227,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 83, y: 4}
-  - name: Frame_5
+  - name: Effect_Mushroom_Frame_5
     originalName: 
     pivot: {x: 0.5, y: 0}
     alignment: 9
@@ -238,7 +238,7 @@ ScriptedImporter:
       y: 4
       width: 32
       height: 32
-    spriteID: 218c788bbe4d70e4d909b8ba44fcf554
+    spriteID: e47701972ece56340a38bf200a0419c7
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -247,7 +247,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
-  - name: Frame_6
+  - name: Effect_Mushroom_Frame_6
     originalName: 
     pivot: {x: 0.516129, y: 0}
     alignment: 9
@@ -258,7 +258,7 @@ ScriptedImporter:
       y: 4
       width: 31
       height: 32
-    spriteID: dd8e373299720d349b05a16354f15beb
+    spriteID: c02d483ca00704a4bb8de3d6bf911360
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -267,7 +267,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 44, y: 4}
-  - name: Frame_7
+  - name: Effect_Mushroom_Frame_7
     originalName: 
     pivot: {x: 0.47619048, y: -0.10344827}
     alignment: 9
@@ -278,7 +278,7 @@ ScriptedImporter:
       y: 80
       width: 21
       height: 29
-    spriteID: 718c64fdf60a88e4d9697c64a969b9ca
+    spriteID: 5614adcc48a7eb244bcdd6a75eee2f59
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -295,11 +295,7 @@ ScriptedImporter:
       value1: 0
       value2: 0
       value3: 0
-<<<<<<< HEAD
     guid: 761252954
-=======
-    guid: 0
->>>>>>> Develop
     name: Effect_Mushroom
     layerFlags: 0
     layerType: 0
@@ -313,11 +309,7 @@ ScriptedImporter:
         y: 15
         width: 2
         height: 2
-<<<<<<< HEAD
       spriteId: d91326dd0f65ac744b637a77ecd4e4fe
-=======
-      spriteId: b186d65e2fd15bb4cbe334648d7277f1
->>>>>>> Develop
     - name: Frame_1
       frameIndex: 1
       additiveSortOrder: 0
@@ -326,11 +318,7 @@ ScriptedImporter:
         y: 13
         width: 6
         height: 5
-<<<<<<< HEAD
       spriteId: 4e1c7c64c31effb4eb1f9b7be4e6a513
-=======
-      spriteId: 471bd929e1f238f458d34d73b23a38a2
->>>>>>> Develop
     - name: Frame_2
       frameIndex: 2
       additiveSortOrder: 0
@@ -339,11 +327,7 @@ ScriptedImporter:
         y: 10
         width: 14
         height: 12
-<<<<<<< HEAD
       spriteId: c6be0fe54805ab84abc092ff30b698ea
-=======
-      spriteId: 96b9fa727d8d2bb4e9568dc25c58195f
->>>>>>> Develop
     - name: Frame_3
       frameIndex: 3
       additiveSortOrder: 0
@@ -352,11 +336,7 @@ ScriptedImporter:
         y: 2
         width: 28
         height: 28
-<<<<<<< HEAD
       spriteId: 5dca56c0ef55edf4d80e2b3e249c6a68
-=======
-      spriteId: 63cb4bdb3600e1741b8ce021521b2c4f
->>>>>>> Develop
     - name: Frame_4
       frameIndex: 4
       additiveSortOrder: 0
@@ -365,11 +345,7 @@ ScriptedImporter:
         y: 1
         width: 30
         height: 30
-<<<<<<< HEAD
       spriteId: cd751a5dcd4cb814aa38a7027e60b76b
-=======
-      spriteId: d16773e9a42454746b00c783bd0a23d8
->>>>>>> Develop
     - name: Frame_5
       frameIndex: 5
       additiveSortOrder: 0
@@ -378,11 +354,7 @@ ScriptedImporter:
         y: 0
         width: 32
         height: 32
-<<<<<<< HEAD
       spriteId: e47701972ece56340a38bf200a0419c7
-=======
-      spriteId: 218c788bbe4d70e4d909b8ba44fcf554
->>>>>>> Develop
     - name: Frame_6
       frameIndex: 6
       additiveSortOrder: 0
@@ -391,11 +363,7 @@ ScriptedImporter:
         y: 0
         width: 31
         height: 32
-<<<<<<< HEAD
       spriteId: c02d483ca00704a4bb8de3d6bf911360
-=======
-      spriteId: dd8e373299720d349b05a16354f15beb
->>>>>>> Develop
     - name: Frame_7
       frameIndex: 7
       additiveSortOrder: 0
@@ -404,7 +372,7 @@ ScriptedImporter:
         y: 3
         width: 21
         height: 29
-      spriteId: 718c64fdf60a88e4d9697c64a969b9ca
+      spriteId: 5614adcc48a7eb244bcdd6a75eee2f59
     linkedCells: []
     parentIndex: -1
   platformSettings:

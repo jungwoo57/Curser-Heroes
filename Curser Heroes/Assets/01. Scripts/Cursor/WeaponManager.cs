@@ -79,8 +79,6 @@ public class WeaponManager : MonoBehaviour
 
             // 진짜 죽는 경우
             isDie = true;
-            UIManager.Instance.isStart = false;
-            UIManager.Instance.stageExitPanel.gameObject.SetActive(false);
             StartCoroutine(DieAnimation());
             return;
         }

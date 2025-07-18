@@ -1,11 +1,12 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 public class TitleUI : MonoBehaviour
 {
     public void OnClickGameStart()
     {
-        AudioManager.Instance.PlayButtonSound();
-        TitleMainLoadManager.Instance.LoadMain();
+        SceneManager.LoadScene("JW_StageSelectUI");
     }
 
     public void OnClickExitGame()
@@ -16,6 +17,4 @@ public class TitleUI : MonoBehaviour
         Application.Quit();
     #endif
     }
-    
-    
 }
