@@ -33,6 +33,7 @@ ScriptedImporter:
   assetBundleName: 
   assetBundleVariant: 
   script: {fileID: 11500000, guid: 62a9f0aa5b59740cfbadc7e5f9823bb0, type: 3}
+  importerVersion: 2
   textureImporterSettings:
     alphaSource: 1
     mipMapMode: 0
@@ -146,7 +147,7 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: Stone_Dirt_Frame_0
+  - name: Frame_0
     originalName: 
     pivot: {x: 0.5, y: 0.65000004}
     alignment: 9
@@ -157,7 +158,7 @@ ScriptedImporter:
       y: 66
       width: 22
       height: 20
-    spriteID: e44b8fc7c290bb04cb8f8e4053836f2b
+    spriteID: 583ff1dbf70b9694ca3c2d21df3ee348
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -166,7 +167,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 44, y: 66}
-  - name: Stone_Dirt_Frame_1
+  - name: Frame_1
     originalName: 
     pivot: {x: 0.3846154, y: 0.72727275}
     alignment: 9
@@ -177,7 +178,7 @@ ScriptedImporter:
       y: 170
       width: 26
       height: 22
-    spriteID: 58528dad9d7f3674b80d0a451e5dba87
+    spriteID: 217e102a85fbe9c46a0bf21bf5611479
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -186,7 +187,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 170}
-  - name: Stone_Dirt_Frame_2
+  - name: Frame_2
     originalName: 
     pivot: {x: 0.3846154, y: 0.72727275}
     alignment: 9
@@ -197,7 +198,7 @@ ScriptedImporter:
       y: 200
       width: 26
       height: 22
-    spriteID: 9b5cf8951023f6240b8a4f4eaadb037d
+    spriteID: 862a03da0d371ea458998777ef475792
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -206,7 +207,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 200}
-  - name: Stone_Dirt_Frame_3
+  - name: Frame_3
     originalName: 
     pivot: {x: 0.43478262, y: 0.6956522}
     alignment: 9
@@ -217,7 +218,7 @@ ScriptedImporter:
       y: 4
       width: 23
       height: 23
-    spriteID: 19571cb81c2f0c24094431e8b0d66ee3
+    spriteID: 8a90b5c348bfcfd4380f9a9f45e0b276
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -226,7 +227,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 44, y: 4}
-  - name: Stone_Dirt_Frame_4
+  - name: Frame_4
     originalName: 
     pivot: {x: 0.43478262, y: 0.6956522}
     alignment: 9
@@ -237,7 +238,7 @@ ScriptedImporter:
       y: 35
       width: 23
       height: 23
-    spriteID: ffa7f295b46024a488506752376db73e
+    spriteID: fd5c53f931b59824c8aa49619542e5a8
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -246,7 +247,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 44, y: 35}
-  - name: Stone_Dirt_Frame_5
+  - name: Frame_5
     originalName: 
     pivot: {x: 0.43478262, y: 0.44827586}
     alignment: 9
@@ -257,7 +258,7 @@ ScriptedImporter:
       y: 67
       width: 23
       height: 29
-    spriteID: 7a38b36fb1645f545a658b34bd3f8a50
+    spriteID: 5c10af4323124574e9cec5d9288cdb20
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -266,7 +267,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 67}
-  - name: Stone_Dirt_Frame_6
+  - name: Frame_6
     originalName: 
     pivot: {x: 0.43478262, y: 0.44827586}
     alignment: 9
@@ -277,7 +278,7 @@ ScriptedImporter:
       y: 104
       width: 23
       height: 29
-    spriteID: 69ce0d0962e0e3143a6e405ffc894446
+    spriteID: d282dfa59af0fa348a03439d07c7026d
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -286,7 +287,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 104}
-  - name: Stone_Dirt_Frame_7
+  - name: Frame_7
     originalName: 
     pivot: {x: 0.42857146, y: 0.56}
     alignment: 9
@@ -297,7 +298,7 @@ ScriptedImporter:
       y: 34
       width: 28
       height: 25
-    spriteID: 9cda6490328bc6b44ba6081285fbef53
+    spriteID: f41038dbb8f3e8d4cb6dbe7b40328591
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -306,7 +307,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 34}
-  - name: Stone_Dirt_Frame_8
+  - name: Frame_8
     originalName: 
     pivot: {x: 0.3846154, y: 0.6666667}
     alignment: 9
@@ -317,7 +318,7 @@ ScriptedImporter:
       y: 230
       width: 26
       height: 21
-    spriteID: 852d5ba8a0727b7428672a548d0b69e3
+    spriteID: 6442e979aa9642a4582d0146d9c9bdfa
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -326,7 +327,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 230}
-  - name: Stone_Dirt_Frame_9
+  - name: Frame_9
     originalName: 
     pivot: {x: 0.39999998, y: 0.65000004}
     alignment: 9
@@ -337,7 +338,7 @@ ScriptedImporter:
       y: 4
       width: 25
       height: 20
-    spriteID: ea1f0474dfb4aaf40b0a88f896c7e4c7
+    spriteID: 960b72b2e73ad494cbaa3a287eedf881
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -346,7 +347,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 75, y: 4}
-  - name: Stone_Dirt_Frame_10
+  - name: Frame_10
     originalName: 
     pivot: {x: 0.5, y: 0.65000004}
     alignment: 9
@@ -357,7 +358,7 @@ ScriptedImporter:
       y: 94
       width: 22
       height: 20
-    spriteID: 6844d1cb6965f774494988d361739124
+    spriteID: cff26c55a1930654988c8d0f60bfa82d
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -366,7 +367,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 44, y: 94}
-  - name: Stone_Dirt_Frame_11
+  - name: Frame_11
     originalName: 
     pivot: {x: 0.5, y: 0.68421054}
     alignment: 9
@@ -377,7 +378,7 @@ ScriptedImporter:
       y: 122
       width: 22
       height: 19
-    spriteID: 9d236e9ef2d07d24395b70cd8646d380
+    spriteID: 8912308c786df2e49823b932c9c04431
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -386,7 +387,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 44, y: 122}
-  - name: Stone_Dirt_Frame_12
+  - name: Frame_12
     originalName: 
     pivot: {x: 0.5217391, y: 0.8125}
     alignment: 9
@@ -397,7 +398,7 @@ ScriptedImporter:
       y: 203
       width: 23
       height: 16
-    spriteID: 63dc9e4ff4e0dff42983f362c17568cf
+    spriteID: d8186f10465a1464eb64b9804290af3a
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -406,7 +407,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 44, y: 203}
-  - name: Stone_Dirt_Frame_13
+  - name: Frame_13
     originalName: 
     pivot: {x: 0.52380955, y: 0.92857146}
     alignment: 9
@@ -417,7 +418,7 @@ ScriptedImporter:
       y: 227
       width: 21
       height: 14
-    spriteID: 72b26eed110293d4595fa4b778824c1d
+    spriteID: 9ca71168626950349967a4a62823e721
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -426,7 +427,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 44, y: 227}
-  - name: Stone_Dirt_Frame_14
+  - name: Frame_14
     originalName: 
     pivot: {x: 0.55, y: 1.0833334}
     alignment: 9
@@ -437,7 +438,7 @@ ScriptedImporter:
       y: 103
       width: 20
       height: 12
-    spriteID: be092bdc2448ef541b6b4d03c4d0e88e
+    spriteID: 194c9eae733210b449a8411733643540
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -446,7 +447,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 75, y: 103}
-  - name: Stone_Dirt_Frame_15
+  - name: Frame_15
     originalName: 
     pivot: {x: 0.5, y: 4.3333335}
     alignment: 9
@@ -457,7 +458,7 @@ ScriptedImporter:
       y: 249
       width: 18
       height: 3
-    spriteID: d54d073692a7da34c9640840bf645adc
+    spriteID: ed6adfbc574192a4e8b2186c06a9507f
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -466,7 +467,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 44, y: 249}
-  - name: Stone_Dirt_Frame_16
+  - name: Frame_16
     originalName: 
     pivot: {x: 0.5, y: 0.5909091}
     alignment: 9
@@ -477,7 +478,7 @@ ScriptedImporter:
       y: 4
       width: 32
       height: 22
-    spriteID: 19791ec6a19be5f4b969011c7cda626c
+    spriteID: dbe249045c141a94784e7f93882f3251
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -486,7 +487,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
-  - name: Stone_Dirt_Frame_17
+  - name: Frame_17
     originalName: 
     pivot: {x: 0.5, y: 2.6000001}
     alignment: 9
@@ -497,7 +498,7 @@ ScriptedImporter:
       y: 141
       width: 14
       height: 5
-    spriteID: 6776706c4886c8742ba450c0d0dfa2f1
+    spriteID: 839087a5c4b4c7e4999162b456e40f6c
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -506,7 +507,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 75, y: 141}
-  - name: Stone_Dirt_Frame_18
+  - name: Frame_18
     originalName: 
     pivot: {x: 0.5, y: 1.3000001}
     alignment: 9
@@ -517,7 +518,7 @@ ScriptedImporter:
       y: 123
       width: 14
       height: 10
-    spriteID: c64ebe14188b50c4aa5da4d5f3a4678f
+    spriteID: 38d501c100b9d1b4095acf5bf6d3ca3c
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -526,7 +527,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 75, y: 123}
-  - name: Stone_Dirt_Frame_19
+  - name: Frame_19
     originalName: 
     pivot: {x: 0.5, y: 1.1818182}
     alignment: 9
@@ -537,7 +538,7 @@ ScriptedImporter:
       y: 32
       width: 14
       height: 11
-    spriteID: c142b3791d181834faff6683b9c8c615
+    spriteID: 3d23b033cb728594d8ed423c23058059
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -546,7 +547,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 107, y: 32}
-  - name: Stone_Dirt_Frame_20
+  - name: Frame_20
     originalName: 
     pivot: {x: 0.5, y: 1.1818182}
     alignment: 9
@@ -557,7 +558,7 @@ ScriptedImporter:
       y: 4
       width: 14
       height: 11
-    spriteID: 4ae98fdd8b999044eb5e3a1d85d6b342
+    spriteID: 92d86107908ebf445b3683e1057efaaf
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -566,7 +567,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 108, y: 4}
-  - name: Stone_Dirt_Frame_21
+  - name: Frame_21
     originalName: 
     pivot: {x: 0.5, y: 0.65000004}
     alignment: 9
@@ -577,7 +578,7 @@ ScriptedImporter:
       y: 149
       width: 20
       height: 20
-    spriteID: f0034205c3fbda14991b0ad49c55fec3
+    spriteID: 972cc00155f59624e9b1ad2742f8ad3f
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -586,7 +587,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 44, y: 149}
-  - name: Stone_Dirt_Frame_22
+  - name: Frame_22
     originalName: 
     pivot: {x: 0.5, y: 0.92857146}
     alignment: 9
@@ -597,7 +598,7 @@ ScriptedImporter:
       y: 59
       width: 30
       height: 14
-    spriteID: f193dadd02463b940b3cb909c9a850f1
+    spriteID: ac471dbdb9a35e043bc2f098d644a759
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -606,7 +607,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 75, y: 59}
-  - name: Stone_Dirt_Frame_23
+  - name: Frame_23
     originalName: 
     pivot: {x: 0.5, y: 1}
     alignment: 9
@@ -617,7 +618,7 @@ ScriptedImporter:
       y: 81
       width: 30
       height: 14
-    spriteID: 6d2403bb638287d44b786fcfb40c8148
+    spriteID: b2a036441f7158b4587cb9b284fa844f
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -626,7 +627,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 75, y: 81}
-  - name: Stone_Dirt_Frame_24
+  - name: Frame_24
     originalName: 
     pivot: {x: 0.5, y: 0.6666667}
     alignment: 9
@@ -637,7 +638,7 @@ ScriptedImporter:
       y: 141
       width: 28
       height: 21
-    spriteID: 06f64b8bc23ea4d4295daad84643c8a3
+    spriteID: 3847ee4bfb2f2d9428e9c532e7caf53d
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -646,7 +647,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 141}
-  - name: Stone_Dirt_Frame_25
+  - name: Frame_25
     originalName: 
     pivot: {x: 0.5, y: 0.68421054}
     alignment: 9
@@ -657,7 +658,7 @@ ScriptedImporter:
       y: 32
       width: 24
       height: 19
-    spriteID: f14048a88622eb347aa712019fd9d10d
+    spriteID: eecd5e9f9e82ea64ba19ed83a5233075
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -666,7 +667,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 75, y: 32}
-  - name: Stone_Dirt_Frame_26
+  - name: Frame_26
     originalName: 
     pivot: {x: 0.5, y: 0.6666667}
     alignment: 9
@@ -677,7 +678,7 @@ ScriptedImporter:
       y: 177
       width: 22
       height: 18
-    spriteID: c3eca62e0e04cd34883a0dfe8adcb61c
+    spriteID: ac0833da0d67d91498f1b41570bf3462
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -689,228 +690,260 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: 107771999
+    uuid:
+      value0: 4089686171
+      value1: 0
+      value2: 0
+      value3: 0
+    guid: 0
     name: Stone_Dirt
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: Stone_Dirt_Frame_0
+    - name: Frame_0
       frameIndex: 0
+      additiveSortOrder: 0
       cellRect:
         x: 5
         y: 3
         width: 22
         height: 20
-      spriteId: e44b8fc7c290bb04cb8f8e4053836f2b
-    - name: Stone_Dirt_Frame_1
+      spriteId: 583ff1dbf70b9694ca3c2d21df3ee348
+    - name: Frame_1
       frameIndex: 1
+      additiveSortOrder: 0
       cellRect:
         x: 6
         y: 0
         width: 26
         height: 22
-      spriteId: 58528dad9d7f3674b80d0a451e5dba87
-    - name: Stone_Dirt_Frame_2
+      spriteId: 217e102a85fbe9c46a0bf21bf5611479
+    - name: Frame_2
       frameIndex: 2
+      additiveSortOrder: 0
       cellRect:
         x: 6
         y: 0
         width: 26
         height: 22
-      spriteId: 9b5cf8951023f6240b8a4f4eaadb037d
-    - name: Stone_Dirt_Frame_3
+      spriteId: 862a03da0d371ea458998777ef475792
+    - name: Frame_3
       frameIndex: 3
+      additiveSortOrder: 0
       cellRect:
         x: 6
         y: 0
         width: 23
         height: 23
-      spriteId: 19571cb81c2f0c24094431e8b0d66ee3
-    - name: Stone_Dirt_Frame_4
+      spriteId: 8a90b5c348bfcfd4380f9a9f45e0b276
+    - name: Frame_4
       frameIndex: 4
+      additiveSortOrder: 0
       cellRect:
         x: 6
         y: 0
         width: 23
         height: 23
-      spriteId: ffa7f295b46024a488506752376db73e
-    - name: Stone_Dirt_Frame_5
+      spriteId: fd5c53f931b59824c8aa49619542e5a8
+    - name: Frame_5
       frameIndex: 5
+      additiveSortOrder: 0
       cellRect:
         x: 6
         y: 3
         width: 23
         height: 29
-      spriteId: 7a38b36fb1645f545a658b34bd3f8a50
-    - name: Stone_Dirt_Frame_6
+      spriteId: 5c10af4323124574e9cec5d9288cdb20
+    - name: Frame_6
       frameIndex: 6
+      additiveSortOrder: 0
       cellRect:
         x: 6
         y: 3
         width: 23
         height: 29
-      spriteId: 69ce0d0962e0e3143a6e405ffc894446
-    - name: Stone_Dirt_Frame_7
+      spriteId: d282dfa59af0fa348a03439d07c7026d
+    - name: Frame_7
       frameIndex: 7
+      additiveSortOrder: 0
       cellRect:
         x: 4
         y: 2
         width: 28
         height: 25
-      spriteId: 9cda6490328bc6b44ba6081285fbef53
-    - name: Stone_Dirt_Frame_8
+      spriteId: f41038dbb8f3e8d4cb6dbe7b40328591
+    - name: Frame_8
       frameIndex: 8
+      additiveSortOrder: 0
       cellRect:
         x: 6
         y: 2
         width: 26
         height: 21
-      spriteId: 852d5ba8a0727b7428672a548d0b69e3
-    - name: Stone_Dirt_Frame_9
+      spriteId: 6442e979aa9642a4582d0146d9c9bdfa
+    - name: Frame_9
       frameIndex: 9
+      additiveSortOrder: 0
       cellRect:
         x: 6
         y: 3
         width: 25
         height: 20
-      spriteId: ea1f0474dfb4aaf40b0a88f896c7e4c7
-    - name: Stone_Dirt_Frame_10
+      spriteId: 960b72b2e73ad494cbaa3a287eedf881
+    - name: Frame_10
       frameIndex: 10
+      additiveSortOrder: 0
       cellRect:
         x: 5
         y: 3
         width: 22
         height: 20
-      spriteId: 6844d1cb6965f774494988d361739124
-    - name: Stone_Dirt_Frame_11
+      spriteId: cff26c55a1930654988c8d0f60bfa82d
+    - name: Frame_11
       frameIndex: 11
+      additiveSortOrder: 0
       cellRect:
         x: 5
         y: 3
         width: 22
         height: 19
-      spriteId: 9d236e9ef2d07d24395b70cd8646d380
-    - name: Stone_Dirt_Frame_12
+      spriteId: 8912308c786df2e49823b932c9c04431
+    - name: Frame_12
       frameIndex: 12
+      additiveSortOrder: 0
       cellRect:
         x: 4
         y: 3
         width: 23
         height: 16
-      spriteId: 63dc9e4ff4e0dff42983f362c17568cf
-    - name: Stone_Dirt_Frame_13
+      spriteId: d8186f10465a1464eb64b9804290af3a
+    - name: Frame_13
       frameIndex: 13
+      additiveSortOrder: 0
       cellRect:
         x: 5
         y: 3
         width: 21
         height: 14
-      spriteId: 72b26eed110293d4595fa4b778824c1d
-    - name: Stone_Dirt_Frame_14
+      spriteId: 9ca71168626950349967a4a62823e721
+    - name: Frame_14
       frameIndex: 14
+      additiveSortOrder: 0
       cellRect:
         x: 5
         y: 3
         width: 20
         height: 12
-      spriteId: be092bdc2448ef541b6b4d03c4d0e88e
-    - name: Stone_Dirt_Frame_15
+      spriteId: 194c9eae733210b449a8411733643540
+    - name: Frame_15
       frameIndex: 15
+      additiveSortOrder: 0
       cellRect:
         x: 7
         y: 3
         width: 18
         height: 3
-      spriteId: d54d073692a7da34c9640840bf645adc
-    - name: Stone_Dirt_Frame_16
+      spriteId: ed6adfbc574192a4e8b2186c06a9507f
+    - name: Frame_16
       frameIndex: 16
+      additiveSortOrder: 0
       cellRect:
         x: 0
         y: 3
         width: 32
         height: 22
-      spriteId: 19791ec6a19be5f4b969011c7cda626c
-    - name: Stone_Dirt_Frame_17
+      spriteId: dbe249045c141a94784e7f93882f3251
+    - name: Frame_17
       frameIndex: 17
+      additiveSortOrder: 0
       cellRect:
         x: 9
         y: 3
         width: 14
         height: 5
-      spriteId: 6776706c4886c8742ba450c0d0dfa2f1
-    - name: Stone_Dirt_Frame_18
+      spriteId: 839087a5c4b4c7e4999162b456e40f6c
+    - name: Frame_18
       frameIndex: 18
+      additiveSortOrder: 0
       cellRect:
         x: 9
         y: 3
         width: 14
         height: 10
-      spriteId: c64ebe14188b50c4aa5da4d5f3a4678f
-    - name: Stone_Dirt_Frame_19
+      spriteId: 38d501c100b9d1b4095acf5bf6d3ca3c
+    - name: Frame_19
       frameIndex: 19
+      additiveSortOrder: 0
       cellRect:
         x: 9
         y: 3
         width: 14
         height: 11
-      spriteId: c142b3791d181834faff6683b9c8c615
-    - name: Stone_Dirt_Frame_20
+      spriteId: 3d23b033cb728594d8ed423c23058059
+    - name: Frame_20
       frameIndex: 20
+      additiveSortOrder: 0
       cellRect:
         x: 9
         y: 3
         width: 14
         height: 11
-      spriteId: 4ae98fdd8b999044eb5e3a1d85d6b342
-    - name: Stone_Dirt_Frame_21
+      spriteId: 92d86107908ebf445b3683e1057efaaf
+    - name: Frame_21
       frameIndex: 21
+      additiveSortOrder: 0
       cellRect:
         x: 6
         y: 3
         width: 20
         height: 20
-      spriteId: f0034205c3fbda14991b0ad49c55fec3
-    - name: Stone_Dirt_Frame_22
+      spriteId: 972cc00155f59624e9b1ad2742f8ad3f
+    - name: Frame_22
       frameIndex: 22
+      additiveSortOrder: 0
       cellRect:
         x: 1
         y: 3
         width: 30
         height: 14
-      spriteId: f193dadd02463b940b3cb909c9a850f1
-    - name: Stone_Dirt_Frame_23
+      spriteId: ac471dbdb9a35e043bc2f098d644a759
+    - name: Frame_23
       frameIndex: 23
+      additiveSortOrder: 0
       cellRect:
         x: 1
         y: 2
         width: 30
         height: 14
-      spriteId: 6d2403bb638287d44b786fcfb40c8148
-    - name: Stone_Dirt_Frame_24
+      spriteId: b2a036441f7158b4587cb9b284fa844f
+    - name: Frame_24
       frameIndex: 24
+      additiveSortOrder: 0
       cellRect:
         x: 2
         y: 2
         width: 28
         height: 21
-      spriteId: 06f64b8bc23ea4d4295daad84643c8a3
-    - name: Stone_Dirt_Frame_25
+      spriteId: 3847ee4bfb2f2d9428e9c532e7caf53d
+    - name: Frame_25
       frameIndex: 25
+      additiveSortOrder: 0
       cellRect:
         x: 4
         y: 3
         width: 24
         height: 19
-      spriteId: f14048a88622eb347aa712019fd9d10d
-    - name: Stone_Dirt_Frame_26
+      spriteId: eecd5e9f9e82ea64ba19ed83a5233075
+    - name: Frame_26
       frameIndex: 26
+      additiveSortOrder: 0
       cellRect:
         x: 5
         y: 4
         width: 22
         height: 18
-      spriteId: c3eca62e0e04cd34883a0dfe8adcb61c
+      spriteId: ac0833da0d67d91498f1b41570bf3462
     linkedCells: []
     parentIndex: -1
   platformSettings:
@@ -978,3 +1011,4 @@ ScriptedImporter:
   secondarySpriteTextures: []
   spritePackingTag: 
   canvasSize: {x: 32, y: 32}
+  previousTextureSize: {x: 128, y: 256}
