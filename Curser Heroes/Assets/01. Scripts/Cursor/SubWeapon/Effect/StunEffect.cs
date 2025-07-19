@@ -10,7 +10,7 @@
         this.target = target;
         if (target != null && !target.IsDead)
         {
-            target.Stun();   
+            //target.Stun();   
             hasStunned = true;
         }
     }

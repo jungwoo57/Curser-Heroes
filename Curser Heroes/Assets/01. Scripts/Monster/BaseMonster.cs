@@ -193,9 +193,10 @@ public abstract class BaseMonster : MonoBehaviour
     }
   
 
-    public virtual void Stun()     //이펙트 추가
+    public virtual void Stun(float timer)     //이펙트 추가
     {
         isStun = true;
+        OnStun(timer);
         Debug.Log($"{gameObject.name} 몬스터 기절!");
     }
 
@@ -206,6 +207,19 @@ public abstract class BaseMonster : MonoBehaviour
         Debug.Log($"{gameObject.name} 기절 해제됨");
     }
 
+    private IEnumerator OnStun(float time)
+    {
+        SetAttackBool(false);
+        if (spriteRenderer != null)
+        {
+            if (attackColorCoroutine != null)
+                StopCoroutine(attackColorCoroutine);
+
+            spriteRenderer.color = Color.white;
+        }
+        yield return new WaitForSeconds(time);
+        UnStun();
+    }
     protected virtual void Die()
     {
         if (isDead) return;  // 이미 죽었으면 실행 안 함
