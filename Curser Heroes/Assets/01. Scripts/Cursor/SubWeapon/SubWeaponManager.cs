@@ -134,8 +134,8 @@ public class SubWeaponManager : MonoBehaviour
 
     public void UseSubWeapon()
     {
+        // 1) 쿨다운, 자원 소모
         currentCooldown = equippedSubWeapon.cooldown;
-
         switch (equippedSubWeapon.weaponType)
         {
             case SubWeaponType.AmmoBased:
@@ -145,20 +145,25 @@ public class SubWeaponManager : MonoBehaviour
                 currentMana -= equippedSubWeapon.manaCost;
                 break;
         }
-      
-     
+
+        // 2) 공격 방식 분기
         if (equippedSubWeapon.rangeType == SubWeaponRangeType.Radial)
         {
             Debug.Log("▶ Radial 발사 (Force)");
             UseForceEffectAtCursor();
+        }
+        else if (equippedSubWeapon.rangeShape == SubWeaponRangeShape.ShortLine)
+        {
+            Debug.Log("▶ 라인 발사 (직사각형 범위)");
+            UseLineEffectAtCursor();
         }
         else
         {
             Debug.Log("▶ 자동조준 발사");
             ShootToNearestEnemy();
         }
-        
 
+        // 3) 상태 로그
         Debug.Log($"발사됨: {equippedSubWeapon.weaponName}");
         Debug.Log($"남은 탄약: {currentAmmo}, 남은 마나: {currentMana}");
     }
@@ -274,6 +279,31 @@ public class SubWeaponManager : MonoBehaviour
     }
 
 
+    void UseLineEffectAtCursor()
+    {
+        Vector3 cursorPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        cursorPos.z = 0f;
+
+        //  발사 방향 구하기 (플레이어 → 커서)
+        Vector3 dir = (cursorPos - transform.position).normalized;
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+
+        //LineProjectile 프리팹 생성
+        GameObject proj = Instantiate(equippedSubWeapon.projectilePrefab,
+                                      transform.position,
+                                      Quaternion.Euler(0, 0, angle));
+        var lp = proj.GetComponent<LineProjectile>();
+        if (lp != null)
+        {
+            lp.damage = Mathf.RoundToInt(equippedSubWeapon.GetDamage());
+            lp.length = equippedSubWeapon.projectileMaxDistance;
+            lp.width = equippedSubWeapon.effectWidth;           
+            lp.monsterLayer = monsterLayer;
+            lp.lineVFXPrefab = equippedSubWeapon.LineVisualPrefab;      
+            lp.duration = equippedSubWeapon.effectDuration;        
+        }
+        else Debug.LogError("LineProjectile 컴포넌트가 없습니다!");
+    }
 
 
 

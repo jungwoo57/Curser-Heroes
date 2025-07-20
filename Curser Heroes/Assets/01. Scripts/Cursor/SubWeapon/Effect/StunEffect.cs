@@ -1,31 +1,22 @@
 ﻿public class StunEffect : IEffect
 {
-    private float duration = 2f;
-    private float timer = 0f;
-    private BaseMonster target;
-    private bool hasStunned = false;
+    private readonly float duration;
+    private float timer;
 
-    public void Apply(BaseMonster target)
+    public StunEffect(float duration)
     {
-        this.target = target;
-        if (target != null && !target.IsDead)
-        {
-            //target.Stun();   
-            hasStunned = true;
-        }
+        this.duration = duration;
+    }
+
+    // Apply 시점에 몬스터.Stun(duration) 호출
+    public void Apply(BaseMonster monster)
+    {
+        monster.Stun(duration);
     }
 
     public void Update(float deltaTime)
     {
-        if (target == null || target.IsDead) return;
-
         timer += deltaTime;
-
-        if (IsFinished && hasStunned)
-        {
-            target.UnStun();   
-            hasStunned = false;
-        }
     }
 
     public bool IsFinished => timer >= duration;

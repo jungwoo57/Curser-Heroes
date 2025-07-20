@@ -45,6 +45,15 @@ public class SubWeaponData : ScriptableObject
     [Header("애니메이션 이펙트")]
     public GameObject ForceVisualPrefab;
 
+    [Header("라인 이펙트 설정")]
+    public GameObject LineVisualPrefab;   // 길쭉한 VFX 프리팹
+    public float effectWidth = 1.5f;     // 기본 폭
+    public float effectDuration = 0.2f;   // 지속 시간
+
+    [Header("상태이상 효과")]
+    public bool appliesStun = false;
+    public float stunDuration = 1f;  
+
 
 
     public float GetDamage(int level = 0)

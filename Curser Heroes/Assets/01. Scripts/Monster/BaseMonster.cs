@@ -34,7 +34,7 @@ public abstract class BaseMonster : MonoBehaviour
     protected EffectManager effectManager;  
     public bool IsDead => currentHP <= 0;
 
-    protected virtual void Start()
+    protected virtual void Start()   //메서드 변경 필요 - 정재훈, 스턴이펙트 추가
     {
         animator = GetComponent<Animator>();
         if (animator == null)
@@ -43,11 +43,14 @@ public abstract class BaseMonster : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         if (spriteRenderer == null)
             Debug.LogWarning($"{gameObject.name}에 SpriteRenderer 컴포넌트가 없습니다!");
-        
-      
+
+        //effectManager = GetComponent<EffectManager>();
+        //if (effectManager != null)
+        //    effectManager.Init(this);
+
 
         PlaySpawnAnimation();
-        effectManager = GetComponent<EffectManager>();
+        
     }
 
     protected virtual void PlaySpawnAnimation()
