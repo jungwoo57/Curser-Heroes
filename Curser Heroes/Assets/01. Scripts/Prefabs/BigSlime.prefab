@@ -159,6 +159,5 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   attackRange: 0.5
-  SlimePrefab: {fileID: 4807894803058071919, guid: f1082992e899c9c4aad50ccb530fa504, type: 3}
-  spawnCount: 5
-  spawnRadius: 1.5
+  splitPrefab: {fileID: 4807894803058071919, guid: f1082992e899c9c4aad50ccb530fa504, type: 3}
+  splitCount: 5

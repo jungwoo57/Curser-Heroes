@@ -24,7 +24,7 @@ public abstract class BaseMonster : MonoBehaviour
     private static readonly int HashDamage = Animator.StringToHash("Damage");
     private static readonly int HashSpawn = Animator.StringToHash("Spw");
     private float minAttackCooldown = 2f,maxAttackCooldown = 4f;
-    private bool isDead = false;
+    public bool isDead = false;
     private bool isStun = false;
     public event Action<GameObject> onDeath;
 
