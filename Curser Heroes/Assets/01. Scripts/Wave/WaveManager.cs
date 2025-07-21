@@ -10,6 +10,7 @@ public class WaveManager : MonoBehaviour
     public GameManager gameManager;
     public Spawner spawner;
     public static WaveManager Instance { get; private set; }
+    public bool IsWavePlaying => !waveCleared && spawningComplete;
 
     public int clearGold;
     public int clearJewel;
