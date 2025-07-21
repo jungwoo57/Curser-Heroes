@@ -121,6 +121,11 @@ public abstract class BaseMonster : MonoBehaviour
     public virtual void TakeDamage(int amount, SubWeaponData weaponData = null)
     {
         currentHP -= amount;
+        if (DamageTextManager.instance != null)
+        {
+            DamageTextManager.instance.ShowDamage(amount, this.transform.position);
+        }
+
         // 이펙트 적용
         if (weaponData != null && effectManager != null)
         {
@@ -249,6 +254,24 @@ public abstract class BaseMonster : MonoBehaviour
             else
             {
                 Debug.LogWarning("씬에 ExplodeOnKillSkill 컴포넌트가 없습니다!");
+            }
+        }
+        SkillManager.SkillInstance sporeSkill = SkillManager.Instance.ownedSkills.Find(s => s.skill.skillName == "포자폭발");
+        if (sporeSkill != null)
+        {
+            SkillLevelData data = sporeSkill.skill.levelDataList[sporeSkill.level - 1];
+            int sporeDamage = data.damage;
+
+            Vector3 sporePos = transform.position;
+
+            var sporeSkillComponent = FindObjectOfType<SporeExplosionSkill>();
+            if (sporeSkillComponent != null)
+            {
+                sporeSkillComponent.TryTrigger(sporePos);
+            }
+            else
+            {
+                Debug.LogWarning("씬에 SporeExplosionSkill 컴포넌트가 없습니다!");
             }
         }
 
