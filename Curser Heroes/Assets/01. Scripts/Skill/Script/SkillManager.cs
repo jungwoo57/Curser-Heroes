@@ -27,11 +27,11 @@ public class SkillManager : MonoBehaviour
     private ExplodeOnKillSkill explodeSkillComponent;
     private const string FIREBALL_SKILL_NAME = "화염구";
     private IndomitableSkill indomitableSkillInstance;
-    private LightningSkill lightningSkill;
 
     private float bonusSubWeaponDamage = 0f;
     public float BonusSubWeaponDamage => bonusSubWeaponDamage;
     public int criticalSweepEveryNth = 0;
+    public LightningSkill lightningSkill;
 
     [System.Serializable]
     public class SkillInstance
@@ -39,6 +39,12 @@ public class SkillManager : MonoBehaviour
         public SkillData skill;
         public int level;
         public bool IsMaxed => level >= skill.maxLevel;
+
+        public SkillLevelData GetCurrentLevelData()
+        {
+            int index = Mathf.Clamp(level - 1, 0, skill.levelDataList.Count - 1);
+            return skill.levelDataList[index];
+        }
     }
 
     private void Awake()
@@ -161,7 +167,7 @@ public class SkillManager : MonoBehaviour
         }
         // 레벨업 또는 신규 습득 후 자동 배치
         if (selected.skillName == "매직소드" || selected.skillName == "포이즌필드" || selected.skillName == "수호의 방패" 
-            || selected.skillName == "불굴" || selected.skillName == "구원" || selected.skillName == "아이스 에이지")
+            || selected.skillName == "불굴" || selected.skillName == "구원" || selected.skillName == "아이스 에이지" || selected.skillName == "라이트닝" || selected.skillName == "포자폭발")
         {
             DeployPersistentSkill(owned);
         }
@@ -269,7 +275,39 @@ public class SkillManager : MonoBehaviour
             }
             return;
         }
+        else if (skillData.skillName == "라이트닝")
+        {
+            GameObject obj = Instantiate(skillData.skillPrefab, cursorWeapon.transform.position, Quaternion.identity);
+            persistentSkillObjects[skillData] = obj;
 
+            LightningSkill lightning = obj.GetComponent<LightningSkill>();
+            if (lightning != null)
+            {
+                lightning.Init(skillInstance);
+                lightningSkill = lightning; // 참조 보관
+            }
+            else
+            {
+                Debug.LogWarning("LightningSkill 컴포넌트를 찾을 수 없습니다.");
+            }
+            return;
+        }
+        else if (skillData.skillName == "포자폭발")
+        {
+            GameObject obj = Instantiate(skillData.skillPrefab, cursorWeapon.transform.position, Quaternion.identity);
+            persistentSkillObjects[skillData] = obj;
+
+            SporeExplosionSkill sporeSkill = obj.GetComponent<SporeExplosionSkill>();
+            if (sporeSkill != null)
+            {
+                sporeSkill.Init(skillInstance);
+            }
+            else
+            {
+                Debug.LogWarning("SporeExplosionSkill 컴포넌트를 찾을 수 없습니다.");
+            }
+            return;
+        }
         Vector3 spawnPos = cursorWeapon.transform.position;
         GameObject newObj = Instantiate(skillData.skillPrefab, spawnPos, Quaternion.identity);
         persistentSkillObjects[skillData] = newObj;

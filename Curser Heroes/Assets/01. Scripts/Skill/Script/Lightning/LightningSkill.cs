@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class LightningSkill : MonoBehaviour
@@ -11,63 +12,34 @@ public class LightningSkill : MonoBehaviour
     {
         skillInstance = instance;
     }
-
-    public void TryTriggerLightning(Monster hitMonster)
+    public void TryTriggerLightning(BaseMonster hitMonster)
     {
         if (skillInstance == null) return;
 
-        float procChance = 0.1f; // 10%
-
-        if (Random.value > procChance)
-            return;
-
-        SkillLevelData levelData = skillInstance.skill.levelDataList[skillInstance.level - 1];
-        int damage = levelData.damage;
-        float skillRange = levelData.sizeMultiplier; // 범위 용도로 사용
-
-        List<Monster> targets = GetMonstersInRange(hitMonster.transform.position, skillRange);
-
-        hitMonster.TakeDamage(damage);
-
-        foreach (var target in targets)
+        float procChance = 0.1f;
+        if (UnityEngine.Random.value < procChance)
         {
-            if (target == hitMonster) continue;
+            Debug.Log("라이트닝 스킬 발동!");
 
-            target.TakeDamage(damage);
+            Collider2D[] hits = Physics2D.OverlapCircleAll(hitMonster.transform.position, 1f, monsterLayerMask);
+            Debug.Log($"근처 몬스터 탐지 수: {hits.Length}");
 
-            SpawnLightningEffect(hitMonster.transform.position, target.transform.position);
+            foreach (var col in hits)
+            {
+                BaseMonster m = col.GetComponent<BaseMonster>();
+                if (m != null && m != hitMonster)
+                {
+                    Debug.Log($"라이트닝 대상: {m.gameObject.name} 위치: {m.transform.position}");
+
+                    GameObject effect = Instantiate(lightningEffectPrefab, m.transform.position, Quaternion.identity);
+                    Destroy(effect, 1f);
+
+                    int damage = skillInstance.skill.levelDataList[skillInstance.level - 1].damage;
+                    m.TakeDamage(damage);
+
+                    Debug.Log($"라이트닝 데미지 {damage} 입힘 to {m.gameObject.name}");
+                }
+            }
         }
-    }
-
-    List<Monster> GetMonstersInRange(Vector3 center, float range)
-    {
-        // 2D 물리용 OverlapCircleAll 사용
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(center, range, monsterLayerMask);
-        List<Monster> monsters = new List<Monster>();
-        //foreach (var col in colliders)
-        //{
-        //    Monster m = col.GetComponent<Monster>();
-        //    if (m != null && m.IsAlive())
-        //        monsters.Add(m);
-        //}
-        return monsters;
-    }
-
-    void SpawnLightningEffect(Vector3 from, Vector3 to)
-    {
-        if (lightningEffectPrefab == null) return;
-
-        Vector3 dir = to - from;
-        float distance = dir.magnitude;
-
-        GameObject lightning = Instantiate(lightningEffectPrefab, from, Quaternion.identity);
-
-        // 2D에서는 Z축 회전으로 방향 맞춤
-        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        lightning.transform.rotation = Quaternion.Euler(0, 0, angle - 90f); // -90도 보정 필요할 수 있음
-
-        Vector3 scale = lightning.transform.localScale;
-        scale.y = distance;
-        lightning.transform.localScale = scale;
     }
 }
