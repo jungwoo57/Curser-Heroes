@@ -23,6 +23,7 @@ public class RabbitGirl : BasePartner
     private IEnumerator SkillRoutine()
     {
         // 기존 스킬 로직
+        yield return new WaitForSeconds(0.5f); // 애니메이션 연출대기
         StartCoroutine(WeaponManager.Instance.OnTemporaryInvincible(7f));
         StartCoroutine(ApplyDoubleDamageForSeconds(7f));
         PlayCarrotThrowEffect();
