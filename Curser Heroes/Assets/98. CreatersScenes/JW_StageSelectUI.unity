@@ -7647,12 +7647,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 09172d192ac30d344926996232c9a952, type: 2}
   - {fileID: 11400000, guid: 88b16acc185bc80438b61be32ab457ff, type: 2}
   allPartners:
-  - {fileID: 11400000, guid: 3550b8c27cb984e40912bcacf52f8011, type: 2}
-  - {fileID: 11400000, guid: 3e9a041c762ba104db00c4a3a17f5359, type: 2}
-  - {fileID: 11400000, guid: 3979444103a55c54d9789a2e6c5d251d, type: 2}
-  - {fileID: 11400000, guid: 9dfcbddc8adc6434dbba7d0cbdb40c33, type: 2}
-  - {fileID: 11400000, guid: ff5d2b02de640af45b159a358c880445, type: 2}
   - {fileID: 11400000, guid: a50d4200bdbfed547b9fcf5c0a9b77eb, type: 2}
+  - {fileID: 11400000, guid: 6b6a154afcb20cb4ab98a32ca0cbad4d, type: 2}
+  - {fileID: 11400000, guid: 869386afebcc3a84d82f50a9d84efe05, type: 2}
+  - {fileID: 11400000, guid: 85b4d2dc5b8be5e40b4b37e5ac467aa0, type: 2}
+  - {fileID: 11400000, guid: f6593e5be176caa4bbd3f5d4efc5dba1, type: 2}
+  - {fileID: 11400000, guid: d07543672e1bd3f408d25e744fa39cf9, type: 2}
   allSkills:
   - {fileID: 11400000, guid: f04c834df1cebbd4e8ab409149d7e159, type: 2}
   - {fileID: 11400000, guid: 703781ae4a9d084438325b0dee1e77e3, type: 2}
@@ -7685,10 +7685,10 @@ MonoBehaviour:
     level: 0
     bookMark: 0
   ownedPartners:
-  - data: {fileID: 11400000, guid: 3550b8c27cb984e40912bcacf52f8011, type: 2}
+  - data: {fileID: 11400000, guid: 6b6a154afcb20cb4ab98a32ca0cbad4d, type: 2}
     level: 0
     bookMark: 0
-  - data: {fileID: 11400000, guid: 3979444103a55c54d9789a2e6c5d251d, type: 2}
+  - data: {fileID: 11400000, guid: 869386afebcc3a84d82f50a9d84efe05, type: 2}
     level: 0
     bookMark: 0
   skillPool: []
