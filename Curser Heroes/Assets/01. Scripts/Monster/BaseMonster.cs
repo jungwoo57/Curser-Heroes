@@ -201,7 +201,7 @@ public abstract class BaseMonster : MonoBehaviour
     public virtual void Stun(float timer)     //이펙트 추가
     {
         isStun = true;
-        OnStun(timer);
+        StartCoroutine(OnStun(timer));
         Debug.Log($"{gameObject.name} 몬스터 기절!");
     }
 
