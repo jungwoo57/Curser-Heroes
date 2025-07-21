@@ -6,7 +6,8 @@ public abstract class BasePartner : MonoBehaviour
 {
     [Header("기본 데이터")]
     public PartnerData data;                     // ScriptableObject 데이터 (에디터에서 할당)
-
+    public int level;
+    
     [Header("게이지 설정")]
     public float gaugePerMonsterHit = 2f;        // 몬스터 한 마리 맞을 때마다 오를 게이지 값
     [HideInInspector] public float currentGauge; // 현재 게이지 값
@@ -48,13 +49,13 @@ public abstract class BasePartner : MonoBehaviour
    
     private void HandleMonsterDamaged(CursorWeapon monster)
     {
-        if (currentGauge >= data.gaugeMax)
+        if (currentGauge >= data.gaugeMax[level])
             return; // 중복 발동 방지
 
-        currentGauge = Mathf.Min(currentGauge + gaugePerMonsterHit, data.gaugeMax);
-        ui.UpdateGauge(currentGauge / data.gaugeMax);
+        currentGauge = Mathf.Min(currentGauge + gaugePerMonsterHit, data.gaugeMax[level]);
+        ui.UpdateGauge(currentGauge / data.gaugeMax[level]);
 
-        if (currentGauge >= data.gaugeMax)
+        if (currentGauge >= data.gaugeMax[level])
         {
             ActivateSkill();
             ResetGauge();

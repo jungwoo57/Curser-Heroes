@@ -2,7 +2,7 @@
 
 public abstract class SubProjectile : MonoBehaviour
 {
-    protected SubWeaponData subweaponData;
+    public SubWeaponData subweaponData;
     protected BaseMonster target;
 
     public virtual void Init(SubWeaponData data, BaseMonster targetMonster)  // 

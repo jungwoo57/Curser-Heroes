@@ -1,15 +1,14 @@
 ﻿using UnityEngine;
 
 public enum HitType { Monster, Cursor } // 열거형 
-
+public enum bgmType{main, battle, title}
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance { get; private set; }
-
     [Header("오디오 클립")]
     public AudioClip monsterHitClip, cursorHitClip;
-    public AudioClip mainBgm, battleBgm;
-    
+    public AudioClip mainBgm, battleBgm, titleBgm;
+    public AudioClip buttonClip;
     [Header("오디오 소스")]
     public AudioSource bgmSource;  // 추가된 bgm 소스
     public AudioSource src;    // 기존 효과음 ()
@@ -26,19 +25,24 @@ public class AudioManager : MonoBehaviour
         AudioSource[] audioSources = gameObject.GetComponents<AudioSource>();
         src = audioSources[0];
         bgmSource = audioSources[1];
-        PlayBgm(true);
+        PlayBgm(bgmType.title);
     }
 
-    public void PlayBgm(bool isBattle)
+    public void PlayBgm(bgmType type)
     {
         bgmSource.Stop();
-        if (isBattle)
+        
+        switch (type)
         {
-            bgmSource.clip = battleBgm;
-        }
-        else
-        {
-            bgmSource.clip = mainBgm;
+            case bgmType.main: 
+                bgmSource.clip = mainBgm;
+                break;
+            case bgmType.title:
+                bgmSource.clip = titleBgm;
+                break;
+            case bgmType.battle: 
+                bgmSource.clip = battleBgm;
+                break;
         }
         bgmSource.loop = true;
         bgmSource.Play();
@@ -57,6 +61,13 @@ public class AudioManager : MonoBehaviour
             clip = cursorHitClip;
         }
 
+        src.PlayOneShot(clip);
+    }
+
+    public void PlayButtonSound()
+    {
+        AudioClip clip;
+        clip = buttonClip;
         src.PlayOneShot(clip);
     }
 }

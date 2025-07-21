@@ -15,5 +15,9 @@ public class OwnedSubWeapon
     }
     public float levelDamage => data.baseDamage + data.damagePerLevel * level;
     
+    public void EnrollBookMark()
+    {
+        bookMark = !bookMark;
+    }
     
 }

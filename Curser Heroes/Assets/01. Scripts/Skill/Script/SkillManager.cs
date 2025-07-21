@@ -10,7 +10,8 @@ public class SkillManager : MonoBehaviour
     [SerializeField] private CursorWeapon cursorWeapon;
     [SerializeField] private GameObject explosionPrefab;
     [SerializeField] private GameObject explodeOnKillSkillPrefab;
-    [SerializeField] private GameObject indomitableSkillPrefab; 
+    [SerializeField] private GameObject indomitableSkillPrefab;
+    [SerializeField] private GameObject lightningEffectPrefab;
 
     public static SkillManager Instance { get; private set; }
     public List<SkillData> skillPool = new List<SkillData>();
@@ -26,6 +27,7 @@ public class SkillManager : MonoBehaviour
     private ExplodeOnKillSkill explodeSkillComponent;
     private const string FIREBALL_SKILL_NAME = "화염구";
     private IndomitableSkill indomitableSkillInstance;
+    private LightningSkill lightningSkill;
 
     private float bonusSubWeaponDamage = 0f;
     public float BonusSubWeaponDamage => bonusSubWeaponDamage;
@@ -56,6 +58,18 @@ public class SkillManager : MonoBehaviour
         {
             Instantiate(explodeOnKillSkillPrefab);
         }
+        var lightningInstance = ownedSkills.FirstOrDefault(s => s.skill.skillName == "라이트닝");
+        if (lightningInstance != null && lightningSkill == null)
+        {
+            GameObject obj = new GameObject("LightningSkill");
+            lightningSkill = obj.AddComponent<LightningSkill>();
+            lightningSkill.Init(lightningInstance);
+
+            // 번개 이펙트 프리팹과 몬스터 레이어 설정은 직접 연결 필요
+            lightningSkill.lightningEffectPrefab = lightningEffectPrefab;
+            lightningSkill.monsterLayerMask = LayerMask.GetMask("Monster");
+        }
+
     }
 
     void Start()
@@ -146,7 +160,8 @@ public class SkillManager : MonoBehaviour
             strengthSkill.Init(owned);
         }
         // 레벨업 또는 신규 습득 후 자동 배치
-        if (selected.skillName == "매직소드" || selected.skillName == "포이즌필드" || selected.skillName == "수호의 방패" || selected.skillName == "불굴" || selected.skillName == "구원")
+        if (selected.skillName == "매직소드" || selected.skillName == "포이즌필드" || selected.skillName == "수호의 방패" 
+            || selected.skillName == "불굴" || selected.skillName == "구원" || selected.skillName == "아이스 에이지")
         {
             DeployPersistentSkill(owned);
         }
@@ -234,6 +249,23 @@ public class SkillManager : MonoBehaviour
             else if (existingObj.TryGetComponent(out RotatingShieldSkill shield))
             {
                 shield.UpdateShields(skillInstance);
+            }
+            return;
+        }
+        else if (skillData.skillName == "아이스 에이지")
+        {
+            GameObject obj = Instantiate(skillData.skillPrefab, cursorWeapon.transform.position, Quaternion.identity);
+            persistentSkillObjects[skillData] = obj;
+
+            IceAgeSkill iceSkill = obj.GetComponent<IceAgeSkill>();
+            if (iceSkill != null)
+            {
+                
+                iceSkill.Init(skillInstance);
+            }
+            else
+            {
+                Debug.LogWarning("IceAgeSkill 컴포넌트를 찾을 수 없습니다.");
             }
             return;
         }

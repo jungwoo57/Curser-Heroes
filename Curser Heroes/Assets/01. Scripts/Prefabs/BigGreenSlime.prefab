@@ -72,9 +72,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   attackRange: 1.2
-  greenSlimePrefab: {fileID: 381212190073389378, guid: 67e6984c5477c5a44928c87b9fe8e8df, type: 3}
-  spawnCount: 5
-  spawnRadius: 1.5
+  splitPrefab: {fileID: 381212190073389378, guid: 67e6984c5477c5a44928c87b9fe8e8df, type: 3}
+  splitCount: 5
 --- !u!58 &5967116543440169032
 CircleCollider2D:
   m_ObjectHideFlags: 0

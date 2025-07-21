@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class SubWeaponManager : MonoBehaviour
 {
@@ -32,6 +33,7 @@ public class SubWeaponManager : MonoBehaviour
 
     void Update()
     {
+       
         if (equippedSubWeapon == null)
             return; // 무기 미장착 시 로직 중단
 
@@ -44,6 +46,7 @@ public class SubWeaponManager : MonoBehaviour
         {
             if (Input.GetMouseButton(0))
             {
+               
                 isCharging = true;
                 currentChargeTime += Time.deltaTime;
             }
@@ -142,20 +145,29 @@ public class SubWeaponManager : MonoBehaviour
                 currentMana -= equippedSubWeapon.manaCost;
                 break;
         }
-
+      
+     
         if (equippedSubWeapon.rangeType == SubWeaponRangeType.Radial)
-            ShootAreaAroundCursor();  //포스 이펙트
+        {
+            Debug.Log("▶ Radial 발사 (Force)");
+            UseForceEffectAtCursor();
+        }
         else
-            ShootToNearestEnemy();   //자동 조준
+        {
+            Debug.Log("▶ 자동조준 발사");
+            ShootToNearestEnemy();
+        }
+        
 
         Debug.Log($"발사됨: {equippedSubWeapon.weaponName}");
-        Debug.Log($"현재 탄약: {currentAmmo}");
-        Debug.Log($"현재 마나: {currentMana}");
-        Debug.Log($"차징 시간: {currentChargeTime}");
+        Debug.Log($"남은 탄약: {currentAmmo}, 남은 마나: {currentMana}");
     }
+
+
 
     void ShootToNearestEnemy()   //자동조준 발사
     {
+        Debug.Log("▶ ShootToNearestEnemy 호출");
         Vector3 cursorPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);   //메인카메라에서 커서의 좌표
         cursorPos.z = 0f;
 
@@ -185,27 +197,7 @@ public class SubWeaponManager : MonoBehaviour
         }
     }
 
-    void ShootAreaAroundCursor()
-    {
-        Vector3 cursorPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        cursorPos.z = 0f;
-
-        int damage = Mathf.RoundToInt(equippedSubWeapon.GetDamage());
-        float radius = equippedSubWeapon.projectileMaxDistance;
-
-        LayerMask monsterLayer = LayerMask.GetMask("Monster");
-
-        IEffect forceEffect = new ForceEffect(cursorPos, damage, radius, monsterLayer);
-
-        GameObject effectObj = new GameObject("ForceEffectHost");
-        effectObj.transform.position = cursorPos;
-
-        EffectManager effectManager = effectObj.AddComponent<EffectManager>();
-        effectManager.Init(null); // 포스 이펙트는 특정 몬스터와 연결 없음
-        effectManager.AddEffect(forceEffect);
-
-        Destroy(effectObj, 0.5f);
-    }
+   
 
     BaseMonster FindNearestAliveMonster(Vector3 from)     //가장 가까운 몬스터 탐색
     {
@@ -259,4 +251,32 @@ public class SubWeaponManager : MonoBehaviour
 
         Debug.Log($" 보조무기 장착 완료: {equippedSubWeapon.weaponName}");
     }
+
+    void UseForceEffectAtCursor()
+    {
+        Debug.Log("▶ UseForceEffectAtCursor 호출");
+        Vector3 cursorPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        cursorPos.z = 0f;
+
+        // ① RadialProjectile 전용 껍데기 프리팹
+        GameObject proj = Instantiate(equippedSubWeapon.projectilePrefab, cursorPos, Quaternion.identity);
+        Debug.Log($"▶ RadialProjectile 인스턴스: {proj.name}");
+
+        RadialProjectile rp = proj.GetComponent<RadialProjectile>();
+        Debug.Log($"▶ RadialProjectile 컴포넌트 유무: {rp != null}");
+        if (rp != null)
+        {
+            int damage = Mathf.RoundToInt(equippedSubWeapon.GetDamage());
+            LayerMask mask = monsterLayer;
+            GameObject vfx = equippedSubWeapon.ForceVisualPrefab;
+            rp.Init(damage, mask, vfx);
+        }
+    }
+
+
+
+
+
+
+
 }

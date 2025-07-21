@@ -24,8 +24,8 @@ public abstract class BaseMonster : MonoBehaviour
     private static readonly int HashDamage = Animator.StringToHash("Damage");
     private static readonly int HashSpawn = Animator.StringToHash("Spw");
     private float minAttackCooldown = 2f,maxAttackCooldown = 4f;
-    private bool isDead = false;
-
+    public bool isDead = false;
+    private bool isStun = false;
     public event Action<GameObject> onDeath;
 
     private SpriteRenderer spriteRenderer;
@@ -70,6 +70,7 @@ public abstract class BaseMonster : MonoBehaviour
 
     protected virtual void Update()
     {
+        if (isStun) return;
         if (attackTimer > 0f)
             attackTimer -= Time.deltaTime;
 
@@ -194,12 +195,14 @@ public abstract class BaseMonster : MonoBehaviour
 
     public virtual void Stun()     //이펙트 추가
     {
-     
+        isStun = true;
         Debug.Log($"{gameObject.name} 몬스터 기절!");
     }
 
     public virtual void UnStun()
     {
+        isStun = false;
+        attackTimer = UnityEngine.Random.Range(minAttackCooldown, maxAttackCooldown);
         Debug.Log($"{gameObject.name} 기절 해제됨");
     }
 
@@ -210,6 +213,15 @@ public abstract class BaseMonster : MonoBehaviour
 
         if (animator != null)
             animator.SetBool(HashDie, true);
+
+        var partners = FindObjectsOfType<BasePartner>();
+        foreach (var partner in partners)
+        {
+            if (partner is Messengerbird mb)
+            {
+                mb.HandleMonsterDeath(gameObject, damage);
+            }
+        }
 
         SkillManager.SkillInstance explodeSkill = SkillManager.Instance.ownedSkills.Find(s => s.skill.skillName == "장렬한 퇴장");
 

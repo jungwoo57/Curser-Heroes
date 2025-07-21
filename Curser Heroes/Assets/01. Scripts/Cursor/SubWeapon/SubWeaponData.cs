@@ -42,8 +42,11 @@ public class SubWeaponData : ScriptableObject
     [Header("충전형 무기 설정")]
     public float requiredChargeTime;
 
-  
-   
+    [Header("애니메이션 이펙트")]
+    public GameObject ForceVisualPrefab;
+
+
+
     public float GetDamage(int level = 0)
     {
         float bonusFromSkill = SkillManager.Instance != null ? SkillManager.Instance.BonusSubWeaponDamage : 0f;
