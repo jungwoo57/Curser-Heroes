@@ -190,6 +190,7 @@ MonoBehaviour:
   MonsterLayer:
     serializedVersion: 2
     m_Bits: 128
+  isDead: 0
   projectilePrefab: {fileID: 906127360026480083, guid: ce30bb88a2e77844e9f077cdceaf8977, type: 3}
   firePoint: {fileID: 3574388149305653678}
   attackRange: 15

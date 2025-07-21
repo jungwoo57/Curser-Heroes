@@ -124,6 +124,7 @@ MonoBehaviour:
   MonsterLayer:
     serializedVersion: 2
     m_Bits: 128
+  isDead: 0
   attackDelay: 1
   detectionRadius: 10
   effectPrefab: {fileID: 7544652967407294189, guid: 20fda57c09c70924a9ae1cd60c5190ce, type: 3}
