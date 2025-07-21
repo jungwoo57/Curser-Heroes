@@ -6,7 +6,7 @@ using UnityEngine;
 public class LadyEffect : MonoBehaviour
 {
     [SerializeField]private float stunTime = 7.0f;
-
+    [SerializeField] private float animationTime;
     private void OnEnable()
     {
         StartCoroutine(Disable());
@@ -24,7 +24,7 @@ public class LadyEffect : MonoBehaviour
 
     private IEnumerator Disable()
     {
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(animationTime);
         gameObject.SetActive(false);
     }
 }
