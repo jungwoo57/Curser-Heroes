@@ -14,7 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   partnerName: Hunter
   portraitSprite: {fileID: 21300000, guid: 8b6dbabc091e9924fb2fd2efb53b08c2, type: 3}
-  gaugeMax: 100
+  gaugeMax:
+  - 999
+  - 999
+  - 99
+  - 9
+  - 9
+  - 999
+  - 0
+  - 0
+  - 0
+  - 0
   desc: 99
   unlockCost: 6
   upgradeCost: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
