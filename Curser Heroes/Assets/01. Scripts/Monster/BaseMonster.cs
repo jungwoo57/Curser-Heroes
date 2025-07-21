@@ -118,6 +118,11 @@ public abstract class BaseMonster : MonoBehaviour
     public virtual void TakeDamage(int amount, SubWeaponData weaponData = null)
     {
         currentHP -= amount;
+        if (DamageTextManager.instance != null)
+        {
+            DamageTextManager.instance.ShowDamage(amount, this.transform.position);
+        }
+
         // 이펙트 적용
         if (weaponData != null && effectManager != null)
         {
