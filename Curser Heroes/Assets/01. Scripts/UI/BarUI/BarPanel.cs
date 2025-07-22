@@ -8,6 +8,8 @@ public class BarPanel : MonoBehaviour
     [SerializeField]private TextMeshProUGUI nameText;
     [SerializeField]private TextMeshProUGUI descText;
     [SerializeField]private TextMeshProUGUI costText;
+    [SerializeField]private TextMeshProUGUI hasgoldText;
+    [SerializeField] private TextMeshProUGUI costgoldText;
     
     [Header("버튼 모음")]
     [SerializeField]private Button reinforceButton;
@@ -70,7 +72,9 @@ public class BarPanel : MonoBehaviour
             useGoldImage.gameObject.SetActive(true);
             if (selectPartner.level < selectPartner.data.upgradeCost.Length)
             {
-                costText.text = selectData.upgradeCost[selectPartner.level].ToString();
+                costText.text = selectData.gaugeMax[selectPartner.level].ToString();
+                hasgoldText.text = GameManager.Instance.GetGold().ToString();
+                costgoldText.text = selectData.upgradeCost[selectPartner.level].ToString();    
             }
             else
             {
@@ -87,8 +91,9 @@ public class BarPanel : MonoBehaviour
             reinforceButton.gameObject.SetActive(false);
             jewelImage.gameObject.SetActive(true);
             useJewelImage.gameObject.SetActive(true);
-            costText.text = selectData.unlockCost.ToString();
-
+            costText.text = selectData.gaugeMax[0].ToString();
+            costgoldText.text = selectData.unlockCost.ToString();  
+            hasgoldText.text = GameManager.Instance.GetJewel().ToString();
         }
     }
     
@@ -121,5 +126,5 @@ public class BarPanel : MonoBehaviour
             => p.data.partnerName == selectData.partnerName);
         UIUpdate();
     }
-    
+
 }

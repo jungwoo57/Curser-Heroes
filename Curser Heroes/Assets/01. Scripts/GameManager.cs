@@ -43,6 +43,12 @@ public class GameManager : MonoBehaviour
     [Header("기타 데이터")]
     [SerializeField] private int gold = 9999;
     [SerializeField]private int jewel = 0;
+    
+    [Header("튜토리얼 체크용")]
+    public bool fistStage;
+    public bool firstForge;
+    
+    
     public int bestScore;
     private void Awake()
     {

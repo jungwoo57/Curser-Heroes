@@ -2706,7 +2706,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2484558642562927880, guid: 97c9846762c1a53489595834c04e78a2, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -1050
+      value: -1450
       objectReference: {fileID: 0}
     - target: {fileID: 2484558642562927880, guid: 97c9846762c1a53489595834c04e78a2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -7073,7 +7073,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2484558642562927880, guid: 97c9846762c1a53489595834c04e78a2, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -1050
+      value: -1250
       objectReference: {fileID: 0}
     - target: {fileID: 2484558642562927880, guid: 97c9846762c1a53489595834c04e78a2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -7719,6 +7719,8 @@ MonoBehaviour:
     bookMark: 0
   gold: 99999
   jewel: 9999
+  fistStage: 0
+  firstForge: 0
   bestScore: 7
 --- !u!4 &516545486
 Transform:
@@ -10560,7 +10562,7 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 45618308}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.27272725}
+  m_AnchorMin: {x: 0, y: 0.46666664}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
@@ -13420,6 +13422,8 @@ MonoBehaviour:
   nameText: {fileID: 1486985620}
   descText: {fileID: 1444983749}
   costText: {fileID: 1888767014}
+  hasgoldText: {fileID: 1304219442}
+  costgoldText: {fileID: 1470740688}
   reinforceButton: {fileID: 1031832952}
   unLockButton: {fileID: 1879753480}
   exitButton: {fileID: 1315558395}
@@ -15631,7 +15635,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 695069923}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.72727275
+  m_Size: 0.53333336
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -16579,7 +16583,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 1100}
+  m_SizeDelta: {x: 0, y: 1500}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1114959907
 MonoBehaviour:
@@ -18316,13 +18320,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 1512178701}
+        m_TargetAssemblyTypeName: BarUI, Assembly-CSharp
+        m_MethodName: Exit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -28030,7 +28034,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2484558642562927880, guid: 97c9846762c1a53489595834c04e78a2, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -1050
+      value: -1150
       objectReference: {fileID: 0}
     - target: {fileID: 2484558642562927880, guid: 97c9846762c1a53489595834c04e78a2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -28844,7 +28848,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2484558642562927880, guid: 97c9846762c1a53489595834c04e78a2, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -1050
+      value: -1350
       objectReference: {fileID: 0}
     - target: {fileID: 2484558642562927880, guid: 97c9846762c1a53489595834c04e78a2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
