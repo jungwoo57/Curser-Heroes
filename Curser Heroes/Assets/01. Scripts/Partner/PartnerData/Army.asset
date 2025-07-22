@@ -14,7 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   partnerName: 
   portraitSprite: {fileID: -8377159500768162011, guid: 75e8ae116cc01a84694f3f7667314f34, type: 3}
-  gaugeMax: 100
+  gaugeMax:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
   desc: 
   unlockCost: 0
-  upgradeCost: 
+  upgradeCost: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  prefab: {fileID: 0}

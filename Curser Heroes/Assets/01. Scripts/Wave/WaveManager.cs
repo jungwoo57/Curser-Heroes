@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class WaveManager : MonoBehaviour
@@ -10,6 +11,7 @@ public class WaveManager : MonoBehaviour
     public GameManager gameManager;
     public Spawner spawner;
     public static WaveManager Instance { get; private set; }
+    public bool IsWavePlaying => !waveCleared && spawningComplete;
 
     public int clearGold;
     public int clearJewel;
@@ -59,6 +61,17 @@ public class WaveManager : MonoBehaviour
         }
         spawningComplete = true;
         TriggerPassiveSkills();
+
+        if (SkillManager.Instance.arcaneTrailSkillInstance != null)
+        {
+            var trailInstance = SkillManager.Instance.ownedSkills
+                .FirstOrDefault(s => s.skill.skillName == "마법 잔상");
+
+            if (trailInstance != null)
+            {
+                SkillManager.Instance.arcaneTrailSkillInstance.Init(trailInstance);
+            }
+        }
     }
 
     // 소환된 몬스터 리스트 초기화 및 추가,보스 데이터가 있으면 소환 

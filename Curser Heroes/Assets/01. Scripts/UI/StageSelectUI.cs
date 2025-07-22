@@ -121,8 +121,8 @@ public class StageSelectUI : MonoBehaviour
         
         IEnumerator LoadSceneAndStartUI()
         {
-                AsyncOperation async = SceneManager.LoadSceneAsync("BattleTest");
-                
+                //AsyncOperation async = SceneManager.LoadSceneAsync("BattleTest");
+                AsyncOperation async = SceneManager.LoadSceneAsync("JW_EquipPartner");
                 while (!async.isDone) yield return null;
                 
                 yield return new WaitUntil(() => UIManager.Instance != null);

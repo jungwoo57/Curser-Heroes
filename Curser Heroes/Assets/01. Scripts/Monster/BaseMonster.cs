@@ -33,7 +33,7 @@ public abstract class BaseMonster : MonoBehaviour
     private Coroutine attackColorCoroutine;
     protected EffectManager effectManager;  
     public bool IsDead => currentHP <= 0;
-
+    public float deathTime = 1.0f;
     protected virtual void Start()
     {
         animator = GetComponent<Animator>();
@@ -205,7 +205,7 @@ public abstract class BaseMonster : MonoBehaviour
     public virtual void Stun(float timer)     //이펙트 추가
     {
         isStun = true;
-        OnStun(timer);
+        StartCoroutine(OnStun(timer));
         Debug.Log($"{gameObject.name} 몬스터 기절!");
     }
 
@@ -286,7 +286,7 @@ public abstract class BaseMonster : MonoBehaviour
         }
 
         onDeath?.Invoke(gameObject);
-        Destroy(gameObject, 1f);
+        Destroy(gameObject, deathTime);
     }
 
    

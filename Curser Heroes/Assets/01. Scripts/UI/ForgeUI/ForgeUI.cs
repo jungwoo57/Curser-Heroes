@@ -32,10 +32,16 @@ public class ForgeUI : MonoBehaviour
 	public SubWeaponData selectSubData;
 	public Image GoldImage;
 	public Image JewelImage;
-
+    
+    public TutorialUI tutorialUI;
     [SerializeField] private ScrollRect weaponScroll;
     private void OnEnable()
     {
+        tutorialUI.gameObject.SetActive(false);
+        if (!GameManager.Instance.useForge)
+        {
+            tutorialUI.gameObject.SetActive(true);
+        }
         isMain = true;
         mainWeaponButton.interactable = false;
         subWeaponButton.interactable = true;

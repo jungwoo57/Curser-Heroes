@@ -1594,6 +1594,8 @@ MonoBehaviour:
   gaugePerMonsterHit: 2
   currentGauge: 0
   carrotEffectPrefab: {fileID: 4430094316513405922, guid: ccbc1860a7ee52742b7081cf921299f2, type: 3}
+  rabbitEffect: {fileID: 0}
+  imageEnableTime: 0
   skillRange: 20
 --- !u!61 &483445773
 BoxCollider2D:
@@ -2068,7 +2070,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 667223506}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 10ea0c6ecdfbe594d85161c221bce875, type: 3}
@@ -3927,6 +3929,7 @@ MonoBehaviour:
   maxSkillCount: 6
   criticalSweepEveryNth: 0
   lightningSkill: {fileID: 0}
+  arcaneTrailSkillInstance: {fileID: 0}
 --- !u!4 &1128930534
 Transform:
   m_ObjectHideFlags: 0
@@ -5312,6 +5315,8 @@ MonoBehaviour:
     bookMark: 0
   gold: 99999
   jewel: 0
+  fistStage: 0
+  firstForge: 0
   bestScore: 5
 --- !u!4 &1586505580
 Transform:
@@ -6714,6 +6719,8 @@ MonoBehaviour:
     bookMark: 0
   gold: 9999
   jewel: 0
+  fistStage: 0
+  firstForge: 0
   bestScore: 0
 --- !u!4 &2139855846
 Transform:
@@ -6900,8 +6907,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   birdImage: {fileID: 2158946992279722976}
-  startPos: {fileID: 4008655073529519630}
-  visiblePos: {fileID: 5452866872230261817}
+  startPos: {x: 15, y: 2}
+  visiblePos: {x: 3, y: 0}
   moveDuration: 1
   visibleDuration: 6
   chirpAudio: {fileID: 8617594481465733929}
