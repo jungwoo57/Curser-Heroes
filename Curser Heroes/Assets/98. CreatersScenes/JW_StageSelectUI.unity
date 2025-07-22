@@ -7858,6 +7858,9 @@ MonoBehaviour:
   - data: {fileID: 11400000, guid: 869386afebcc3a84d82f50a9d84efe05, type: 2}
     level: 0
     bookMark: 0
+  - data: {fileID: 11400000, guid: a50d4200bdbfed547b9fcf5c0a9b77eb, type: 2}
+    level: 0
+    bookMark: 0
   skillPool: []
   mainEquipWeapon:
     data: {fileID: 0}
@@ -15244,7 +15247,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &980621367
 RectTransform:
   m_ObjectHideFlags: 0
@@ -25958,7 +25961,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1733489500
 RectTransform:
   m_ObjectHideFlags: 0
