@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 313662ea31e2a54469b9f802318e0975, type: 3}
+  m_Name: SporeExplosion
+  m_EditorClassIdentifier: 
+  skillName: "\uD3EC\uC790\uD3ED\uBC1C"
+  icon: {fileID: 21300000, guid: c83940ef918e73747bda3bc6020d16c4, type: 3}
+  type: 0
+  maxLevel: 8
+  description: "\uC801 \uCC98\uCE58 \uC2DC, \uD655\uB960\uC801\uC73C\uB85C \uBAAC\uC2A4\uD130\uB97C
+    \uAD00\uD1B5\uD558\uB294 \uB124 \uAC08\uB798\uC758 \uD3EC\uC790 \uC0DD\uC131."
+  skillPrefab: {fileID: 569545676792154187, guid: 46da00f9e8510944b95ea6f0f06dc09e, type: 3}
+  levelDataList:
+  - level: 1
+    damage: 2
+    sizeMultiplier: 0
+    count: 0
+    duration: 0
+    cooldown: 0
+  - level: 2
+    damage: 4
+    sizeMultiplier: 0
+    count: 0
+    duration: 0
+    cooldown: 0
+  - level: 3
+    damage: 6
+    sizeMultiplier: 0
+    count: 0
+    duration: 0
+    cooldown: 0
+  - level: 4
+    damage: 8
+    sizeMultiplier: 0
+    count: 0
+    duration: 0
+    cooldown: 0
+  - level: 5
+    damage: 10
+    sizeMultiplier: 0
+    count: 0
+    duration: 0
+    cooldown: 0
+  - level: 6
+    damage: 12
+    sizeMultiplier: 0
+    count: 0
+    duration: 0
+    cooldown: 0
+  - level: 7
+    damage: 14
+    sizeMultiplier: 0
+    count: 0
+    duration: 0
+    cooldown: 0
+  - level: 8
+    damage: 16
+    sizeMultiplier: 0
+    count: 0
+    duration: 0
+    cooldown: 0
+  unlockCost: 0

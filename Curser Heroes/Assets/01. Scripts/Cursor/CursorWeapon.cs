@@ -13,6 +13,8 @@ public class CursorWeapon : MonoBehaviour
     private int sweepAttackCounter = 0;
     private Dictionary<BaseMonster, float> lastHitTimesBase = new Dictionary<BaseMonster, float>();
     private Dictionary<BossStats, float> lastHitTimesBoss = new Dictionary<BossStats, float>();
+    private BaseMonster lastHitMonster;
+
     public static event Action<CursorWeapon> OnAnyMonsterDamaged;
 
     private Collider2D   collider;
@@ -91,10 +93,12 @@ public class CursorWeapon : MonoBehaviour
                     monster.TakeDamage(finalDamage);
                     AudioManager.Instance.PlayHitSound(HitType.Cursor);
                     lastHitTimesBase[monster] = Time.time;
+                    lastHitMonster = monster;
 
                     Debug.Log($"[커서공격] 일반몬스터에게 {finalDamage} 데미지 입힘 (기본: {damage}, 배수: {damageMultiplier})");
 
                     TryTriggerMeteorSkill();
+                    TryTriggerLightningSkill();
 
                     OnAnyMonsterDamaged?.Invoke(this);
                 }
@@ -132,8 +136,10 @@ public class CursorWeapon : MonoBehaviour
                     boss.TakeDamage(finalDamage);
                     AudioManager.Instance.PlayHitSound(HitType.Cursor);
                     lastHitTimesBoss[boss] = Time.time;
+                    lastHitMonster = monster;
 
                     TryTriggerMeteorSkill();
+                    TryTriggerLightningSkill();
 
                     OnAnyMonsterDamaged?.Invoke(this);
                 }
@@ -153,6 +159,13 @@ public class CursorWeapon : MonoBehaviour
         {
             SkillManager.Instance.TrySpawnMeteorSkill(meteorSkill);
         }
+    }
+    private void TryTriggerLightningSkill()
+    {
+        if (SkillManager.Instance.lightningSkill == null || lastHitMonster == null)
+            return;
+
+        SkillManager.Instance.lightningSkill.TryTriggerLightning(lastHitMonster);
     }
     public void SetWeapon(WeaponData weaponData)     //외부에서 무기를 장착할 수 있게 해주는 초기화 함수
     {
