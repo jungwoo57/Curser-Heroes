@@ -1,32 +1,27 @@
-﻿using System.Collections;
-using Unity.Collections;
+using System.Collections;
 using UnityEngine;
 
-public class BigSlime : BaseMonster
+public class MeerkatFamily : BaseMonster
 {
     [SerializeField] private float attackRange = 0.5f;
     [SerializeField] private GameObject splitPrefab;
     [SerializeField] private int splitCount = 5;
+    [SerializeField] private float delaytime = 0.7f;
 
     protected override void Attack()
     {
-        Collider2D weaponCollider = Physics2D.OverlapCircle(transform.position, attackRange, LayerMask.GetMask("Weapon"));
-        if (weaponCollider != null)
-        {
-            WeaponManager.Instance?.TakeWeaponLifeDamage();
-            Debug.Log("BigSlime이 무기 내구a도 감소시킴");
-        }
-
-        attackTimer = attackCooldown;
+        StartCoroutine(AttackReadyTime());
     }
-
+    
+    [ContextMenu("분열패턴")]
     protected override void Die()
     {
         if (isDead) return;
-        StartCoroutine(SpawnAfterDelay(0.2f)); // 1초 후 분열 시작
-        base.Die();  // isDead = true 처리
+        StartCoroutine(SpawnAfterDelay(delaytime));
+        base.Die(); // 먼저 isDead 처리 (중복 방지)
+        
     }
-
+    
     private IEnumerator SpawnAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
@@ -39,7 +34,7 @@ public class BigSlime : BaseMonster
             Vector2 spawnPos = Vector2.zero;
             bool found = false;
 
-            // 겹치지 않는 위치 시도
+            // 겹치지 않는 위치 찾기
             for (int attempt = 0; attempt < maxAttempts; attempt++)
             {
                 Vector2 candidate = (Vector2)transform.position + Random.insideUnitCircle * radius;
@@ -55,28 +50,41 @@ public class BigSlime : BaseMonster
             if (!found)
                 spawnPos = (Vector2)transform.position + Random.insideUnitCircle * radius;
 
-            GameObject slime = Instantiate(splitPrefab, spawnPos, Quaternion.identity);
+            GameObject monster = Instantiate(splitPrefab, spawnPos, Quaternion.identity);
 
-            if (slime.TryGetComponent<BaseMonster>(out var m))
+            if (monster.TryGetComponent<BaseMonster>(out var m))
             {
                 m.Setup(new MonsterData
                 {
-                    maxHP = 10,
+                    maxHP = 35,
                     damage = 1,
                     attackCooldown = 2f,
                     valueCost = 1,
                     monsterPrefab = splitPrefab
                 });
 
-                WaveManager.Instance.RegisterMonster(slime);
-                m.onDeath += WaveManager.Instance.OnMonsterKilled;
+                //WaveManager.Instance.RegisterMonster(monster);
+               // m.onDeath += WaveManager.Instance.OnMonsterKilled;
             }
         }
     }
 
-    private void OnDrawGizmosSelected()
+    IEnumerator AttackReadyTime() // 1.0초후에 공격
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, attackRange);
+        yield return new WaitForSeconds(1.0f);
+        StartCoroutine(AttackReadyTime());
+        Collider2D weaponCollider = Physics2D.OverlapCircle(transform.position, attackRange, LayerMask.GetMask("Weapon"));
+        if (weaponCollider != null)
+        {
+            if (WeaponManager.Instance != null)
+            {
+                WeaponManager.Instance.TakeWeaponLifeDamage();
+                Debug.Log("근접 공격");
+            }
+            else
+            {
+                Debug.LogWarning("WeaponManager 인스턴스를 찾을 수 없습니다!");
+            }
+        }
     }
 }
