@@ -45,9 +45,10 @@ public class GameManager : MonoBehaviour
     [SerializeField]private int jewel = 0;
     
     [Header("튜토리얼 체크용")]
-    public bool fistStage;
-    public bool firstForge;
-    
+    public bool useStage;
+    public bool useForge;
+    public bool useLab;
+    public bool useBar;
     
     public int bestScore;
     private void Awake()

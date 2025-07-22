@@ -13,9 +13,14 @@ public class LabPanel : MonoBehaviour
     public TextMeshProUGUI hasJewelText;
     public TextMeshProUGUI useJewelText;
     [SerializeField]private ScrollRect scrollRect;
-    
+    [SerializeField]private TutorialUI tutorialUI;
     private void OnEnable()
     {
+        tutorialUI.gameObject.SetActive(false);
+        if (!GameManager.Instance.useLab)
+        {
+            tutorialUI.gameObject.SetActive(true);
+        }
         scrollRect.verticalNormalizedPosition = 1.0f;
         selectSkill = null;
         skillName.text = "스킬 이름";
