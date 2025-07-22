@@ -4,26 +4,28 @@ public class ArcaneTrail : MonoBehaviour
 {
     public Animator animator;
     public float delayBeforeExplosion = 3f;
-    public float radius = 1.5f;
+    public float radius = 1f;
     public LayerMask monsterLayer;
     public GameObject explosionEffect;
 
     private float timer = 0f;
     private int damage;
+    private bool hasPlayedPending = false;
 
     public void Init(int damage)
     {
         this.damage = damage;
-        animator.Play("Margin"); // 처음 상태
+        animator.Play("Margin"); // 소환 직후 애니메이션
     }
 
     void Update()
     {
         timer += Time.deltaTime;
 
-        if (timer >= 2f && timer < 2.1f)
+        if (!hasPlayedPending && timer >= 2f)
         {
-            animator.Play("Pending"); // 2초 후 전조 애니메이션
+            animator.Play("Pending"); // 폭발 직전 애니메이션
+            hasPlayedPending = true;
         }
 
         if (timer >= delayBeforeExplosion)
@@ -34,11 +36,11 @@ public class ArcaneTrail : MonoBehaviour
 
     void Explode()
     {
-        // 연출
+        // 폭발 이펙트
         if (explosionEffect != null)
             Instantiate(explosionEffect, transform.position, Quaternion.identity);
 
-        // 피해 판정
+        // 피해 처리
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, radius, monsterLayer);
         foreach (var hit in hits)
         {
