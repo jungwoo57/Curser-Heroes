@@ -332,10 +332,12 @@ public class SkillManager : MonoBehaviour
         {
             if (thornDomeSkillInstance == null)
             {
+                Debug.Log("[SkillManager] 가시 돔 스킬 새로 설치 중");
                 GameObject obj = Instantiate(skillData.skillPrefab, cursorWeapon.transform.position, Quaternion.identity);
                 thornDomeSkillInstance = obj.GetComponent<ThornDomeSkill>();
                 if (thornDomeSkillInstance != null)
                 {
+                    Debug.Log("[SkillManager] ThornDomeSkill 컴포넌트 찾음, Init 호출");
                     thornDomeSkillInstance.Init(skillInstance, cursorWeapon.transform);
                     persistentSkillObjects[skillData] = obj;
                 }
@@ -346,6 +348,7 @@ public class SkillManager : MonoBehaviour
             }
             else
             {
+                Debug.Log("[SkillManager] 가시 돔 스킬 레벨업, UpdateLevel 호출");
                 thornDomeSkillInstance.UpdateLevel(skillInstance);
             }
             return;
@@ -528,5 +531,10 @@ public class SkillManager : MonoBehaviour
         var meteor = meteorObj.GetComponent<MeteorSkill>();
         var levelData = skillInstance.skill.levelDataList[skillInstance.level - 1];
         meteor.Init(levelData.damage, target.position);
+    }
+    public void TryTriggerThornDomeOnClick()
+    {
+        if (thornDomeSkillInstance != null)
+            thornDomeSkillInstance.TryTriggerOnClick();
     }
 }

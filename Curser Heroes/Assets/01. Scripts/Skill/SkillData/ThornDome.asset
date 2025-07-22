@@ -15,8 +15,57 @@ MonoBehaviour:
   skillName: "\uAC00\uC2DC \uB3D4"
   icon: {fileID: 21300000, guid: 8de2f6c1f26d3534485b497c445d4e97, type: 3}
   type: 0
-  maxLevel: 0
-  description: 
-  skillPrefab: {fileID: 0}
-  levelDataList: []
+  maxLevel: 8
+  description: "\uC7A5\uC804 \uC2DC, \uAC00\uC7A5 \uAC00\uAE4C\uC6B4 \uC801 \uBC29\uD5A5\uC73C\uB85C
+    \uD53C\uD574\uB97C \uC8FC\uB294 \uAC00\uC2DC \uB3D4 \uC0DD\uC131"
+  skillPrefab: {fileID: 5439983873651579576, guid: 500daa855c7299c40a4d95aa28e5796d, type: 3}
+  levelDataList:
+  - level: 1
+    damage: 5
+    sizeMultiplier: 0
+    count: 0
+    duration: 0
+    cooldown: 0
+  - level: 2
+    damage: 8
+    sizeMultiplier: 0
+    count: 0
+    duration: 0
+    cooldown: 0
+  - level: 3
+    damage: 11
+    sizeMultiplier: 0
+    count: 0
+    duration: 0
+    cooldown: 0
+  - level: 4
+    damage: 14
+    sizeMultiplier: 0
+    count: 0
+    duration: 0
+    cooldown: 0
+  - level: 5
+    damage: 17
+    sizeMultiplier: 0
+    count: 0
+    duration: 0
+    cooldown: 0
+  - level: 6
+    damage: 20
+    sizeMultiplier: 0
+    count: 0
+    duration: 0
+    cooldown: 0
+  - level: 7
+    damage: 23
+    sizeMultiplier: 0
+    count: 0
+    duration: 0
+    cooldown: 0
+  - level: 8
+    damage: 26
+    sizeMultiplier: 0
+    count: 0
+    duration: 0
+    cooldown: 0
   unlockCost: 0

@@ -1,12 +1,11 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ThornDomeSkill : MonoBehaviour
 {
     private SkillManager.SkillInstance skillInstance;
     [SerializeField] private GameObject thornDomePrefab;
 
-    private float cooldown = 3f;
+    private float cooldown = 7f;
     private float timer = 0f;
     private GameObject activeThornDome;
 
@@ -15,6 +14,7 @@ public class ThornDomeSkill : MonoBehaviour
 
     public void Init(SkillManager.SkillInstance instance, Transform cursor)
     {
+        Debug.Log("ThornDomeSkill Init 호출됨");
         skillInstance = instance;
         cursorTransform = cursor;
         mainCamera = Camera.main;
@@ -22,15 +22,18 @@ public class ThornDomeSkill : MonoBehaviour
     }
     public void UpdateLevel(SkillManager.SkillInstance instance)
     {
+        Debug.Log("ThornDomeSkill UpdateLevel 호출됨");
         skillInstance = instance;
     }
-    void Update()
+    private void Update()
     {
-        if (activeThornDome != null) return;
-        timer += Time.deltaTime;
+        if (activeThornDome == null)
+        {
+            timer += Time.deltaTime;
+        }
     }
 
-    public void OnReloadStarted()
+    public void TryTriggerOnClick()
     {
         if (skillInstance == null || activeThornDome != null) return;
 
