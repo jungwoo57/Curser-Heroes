@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ae0907b2ab94a874fbdebaf937d5e2b3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b84026471d263c842ad099af69e5a9f0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -161,4 +161,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff4063fde8d130e4d91d33512197d47b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effectManagerPrefab: {fileID: 0}
+  applyStun: 0
+  stunDuration: 1
+  extraSpeedMultiplier: 1.5
+  explosionPrefab: {fileID: 0}
+  explosionLifetime: 1

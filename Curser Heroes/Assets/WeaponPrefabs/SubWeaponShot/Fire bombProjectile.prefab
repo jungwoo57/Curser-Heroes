@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 683058674878402878}
   - component: {fileID: 4509089290555510684}
+  - component: {fileID: -8809925809704158494}
   - component: {fileID: 6966839693772513791}
   - component: {fileID: 22931873840475987}
-  - component: {fileID: -8809925809704158494}
   m_Layer: 0
   m_Name: Fire bombProjectile
   m_TagString: Untagged
@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 9.260273, y: 13.666723, z: 0.071782865}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -87,6 +87,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-8809925809704158494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8863693051383856762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff4063fde8d130e4d91d33512197d47b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  applyStun: 0
+  stunDuration: 1
+  extraSpeedMultiplier: 1.5
+  explosionPrefab: {fileID: 1838886960009343414, guid: d28cf9aaaa9d0154691b51c98db33940, type: 3}
+  explosionLifetime: 1
 --- !u!61 &6966839693772513791
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -159,16 +176,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &-8809925809704158494
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8863693051383856762}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff4063fde8d130e4d91d33512197d47b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  effectManagerPrefab: {fileID: 0}

@@ -43,8 +43,12 @@ public abstract class BaseMonster : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         if (spriteRenderer == null)
             Debug.LogWarning($"{gameObject.name}에 SpriteRenderer 컴포넌트가 없습니다!");
-        
-      
+        if (currentHP <= 0)
+        {
+            currentHP = maxHP;
+            Debug.Log($"[BaseMonster] {gameObject.name} 기본 체력 세팅: {currentHP}");
+        }
+
 
         PlaySpawnAnimation();
         effectManager = GetComponent<EffectManager>();
@@ -288,4 +292,5 @@ public abstract class BaseMonster : MonoBehaviour
    
 
     protected abstract void Attack();
+  
 }
