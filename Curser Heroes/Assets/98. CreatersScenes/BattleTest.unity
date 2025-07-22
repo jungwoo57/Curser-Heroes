@@ -3921,11 +3921,12 @@ MonoBehaviour:
   explosionPrefab: {fileID: 8286058134636732423, guid: e7b1031d9bfd92844b762023fd3ce9c5, type: 3}
   explodeOnKillSkillPrefab: {fileID: 7016513973741314053, guid: e2810a143be39594e9c8da3b00d7cbe3, type: 3}
   indomitableSkillPrefab: {fileID: 2558407994215219693, guid: c97e698a1a5b4c4438bcf6d0a8e65049, type: 3}
-  lightningEffectPrefab: {fileID: 0}
+  lightningEffectPrefab: {fileID: 416582211618283470, guid: 91c2c919f2dcc2f4daa20f88eaa34eb4, type: 3}
   skillPool: []
   ownedSkills: []
   maxSkillCount: 6
   criticalSweepEveryNth: 0
+  lightningSkill: {fileID: 0}
 --- !u!4 &1128930534
 Transform:
   m_ObjectHideFlags: 0
@@ -3935,7 +3936,7 @@ Transform:
   m_GameObject: {fileID: 1128930532}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.629631, y: 7.320988, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
