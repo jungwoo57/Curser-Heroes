@@ -1,12 +1,21 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class Hunter : BasePartner
 {
     [Header("스킬 범위")]
     public float skillRange = 20f;
-
+    [SerializeField] GameObject hunterAnim;
+    [SerializeField] GameObject[] arrowAnim;
+    [SerializeField] private int arrowMax;
+    [SerializeField] private int arrowMin;
+    [SerializeField] private float xArea;
+    [SerializeField] private float yArea;
     protected override void ActivateSkill()
-    {Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position,skillRange,LayerMask.GetMask("Monster"));
+    {
+        hunterAnim.SetActive(true);
+        StartCoroutine(ArrowAnimation());
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position,skillRange,LayerMask.GetMask("Monster"));
 
         //몬스터마다 1씩 피해 주기
         foreach (var hit in hits)
@@ -24,5 +33,25 @@ public class Hunter : BasePartner
         ui.UpdateGauge(0f);
     }
 
+    IEnumerator ArrowAnimation()
+    {
+        int count = 0;
+        int arrowCount = Random.Range(arrowMin,arrowMax);
+        while (count < arrowCount)
+        {
+            float x = Random.Range(-xArea,xArea);
+            float y = Random.Range(-yArea,yArea);
+            arrowAnim[arrowCount].transform.position = new Vector3(x,y,0f);
+            arrowAnim[arrowCount].SetActive(true);
+            yield return 0.1f;
+        }
+
+        for (int i = 0; i < arrowMax; i++)
+        {
+            arrowAnim[i].SetActive(false);
+        }
+        hunterAnim.SetActive(false);
+    }
+    
 }
 
