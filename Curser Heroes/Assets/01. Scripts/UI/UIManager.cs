@@ -41,6 +41,8 @@ public class UIManager : MonoBehaviour
     public StageStartUI stageStartUI;
     
     public StageExitPanel stageExitPanel;
+    
+    public TutorialUI tutorialUI;
     private void Init()
     {
         battleUI.gameObject.SetActive(false);
@@ -50,7 +52,20 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         isStart = false;
-        StageStart();
+        tutorialUI.gameObject.SetActive(false);
+        if (!GameManager.Instance.useStage)
+        {
+            tutorialUI.gameObject.SetActive(true);
+            tutorialUI.tutorialEnd = () =>
+            {
+                StageStart();
+            };
+        }
+        else
+        {
+            StageStart();
+        }
+
         AudioManager.Instance.PlayBgm(bgmType.battle);
     }
 
