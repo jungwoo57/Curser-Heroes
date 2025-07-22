@@ -32,6 +32,7 @@ public class SkillManager : MonoBehaviour
     public float BonusSubWeaponDamage => bonusSubWeaponDamage;
     public int criticalSweepEveryNth = 0;
     public LightningSkill lightningSkill;
+    public ArcaneTrailSkill arcaneTrailSkillInstance;
 
     [System.Serializable]
     public class SkillInstance
@@ -167,7 +168,8 @@ public class SkillManager : MonoBehaviour
         }
         // 레벨업 또는 신규 습득 후 자동 배치
         if (selected.skillName == "매직소드" || selected.skillName == "포이즌필드" || selected.skillName == "수호의 방패" 
-            || selected.skillName == "불굴" || selected.skillName == "구원" || selected.skillName == "아이스 에이지" || selected.skillName == "라이트닝" || selected.skillName == "포자폭발")
+            || selected.skillName == "불굴" || selected.skillName == "구원" || selected.skillName == "아이스 에이지" || selected.skillName == "라이트닝" 
+            || selected.skillName == "포자폭발" || selected.skillName == "마법 잔상")
         {
             DeployPersistentSkill(owned);
         }
@@ -266,7 +268,7 @@ public class SkillManager : MonoBehaviour
             IceAgeSkill iceSkill = obj.GetComponent<IceAgeSkill>();
             if (iceSkill != null)
             {
-                
+
                 iceSkill.Init(skillInstance);
             }
             else
@@ -305,6 +307,23 @@ public class SkillManager : MonoBehaviour
             else
             {
                 Debug.LogWarning("SporeExplosionSkill 컴포넌트를 찾을 수 없습니다.");
+            }
+            return;
+        }
+        else if (skillData.skillName == "마법 잔상")
+        {
+            GameObject obj = Instantiate(skillData.skillPrefab, cursorWeapon.transform.position, Quaternion.identity);
+            persistentSkillObjects[skillData] = obj;
+
+            ArcaneTrailSkill trail = obj.GetComponent<ArcaneTrailSkill>();
+            if (trail != null)
+            {
+                trail.Init(skillInstance);
+                arcaneTrailSkillInstance = trail;
+            }
+            else
+            {
+                Debug.LogWarning("ArcaneTrailSkill 컴포넌트를 찾을 수 없습니다.");
             }
             return;
         }
