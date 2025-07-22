@@ -5,7 +5,7 @@ public class Hunter : BasePartner
 {
     [Header("스킬 범위")]
     public float skillRange = 20f;
-    [SerializeField] GameObject hunterAnim;
+    [SerializeField] GameObject[] hunterAnim;
     [SerializeField] GameObject[] arrowAnim;
     [SerializeField] private int arrowMax;
     [SerializeField] private int arrowMin;
@@ -13,7 +13,12 @@ public class Hunter : BasePartner
     [SerializeField] private float yArea;
     protected override void ActivateSkill()
     {
-        hunterAnim.SetActive(true);
+        arrowMax = arrowAnim.Length;
+        for (int i = 0; i < hunterAnim.Length; i++)
+        {
+            hunterAnim[i].SetActive(true);
+        }
+
         StartCoroutine(ArrowAnimation());
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position,skillRange,LayerMask.GetMask("Monster"));
 
@@ -41,16 +46,21 @@ public class Hunter : BasePartner
         {
             float x = Random.Range(-xArea,xArea);
             float y = Random.Range(-yArea,yArea);
-            arrowAnim[arrowCount].transform.position = new Vector3(x,y,0f);
-            arrowAnim[arrowCount].SetActive(true);
-            yield return 0.1f;
+            arrowAnim[count].transform.position = new Vector3(x,y,0f);
+            arrowAnim[count].SetActive(true);
+            yield return new WaitForSeconds(0.2f);
+            count++;
         }
 
         for (int i = 0; i < arrowMax; i++)
         {
             arrowAnim[i].SetActive(false);
         }
-        hunterAnim.SetActive(false);
+
+        for (int i = 0; i < hunterAnim.Length; i++)
+        {
+            hunterAnim[i].SetActive(false);
+        }
     }
     
 }
