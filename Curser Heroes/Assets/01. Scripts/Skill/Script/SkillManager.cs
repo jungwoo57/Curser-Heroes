@@ -27,6 +27,7 @@ public class SkillManager : MonoBehaviour
     private ExplodeOnKillSkill explodeSkillComponent;
     private const string FIREBALL_SKILL_NAME = "화염구";
     private IndomitableSkill indomitableSkillInstance;
+    private ThornDomeSkill thornDomeSkillInstance;
 
     private float bonusSubWeaponDamage = 0f;
     public float BonusSubWeaponDamage => bonusSubWeaponDamage;
@@ -169,7 +170,7 @@ public class SkillManager : MonoBehaviour
         // 레벨업 또는 신규 습득 후 자동 배치
         if (selected.skillName == "매직소드" || selected.skillName == "포이즌필드" || selected.skillName == "수호의 방패" 
             || selected.skillName == "불굴" || selected.skillName == "구원" || selected.skillName == "아이스 에이지" || selected.skillName == "라이트닝" 
-            || selected.skillName == "포자폭발" || selected.skillName == "마법 잔상")
+            || selected.skillName == "포자폭발" || selected.skillName == "마법 잔상" || selected.skillName == "가시 돔")
         {
             DeployPersistentSkill(owned);
         }
@@ -324,6 +325,28 @@ public class SkillManager : MonoBehaviour
             else
             {
                 Debug.LogWarning("ArcaneTrailSkill 컴포넌트를 찾을 수 없습니다.");
+            }
+            return;
+        }
+        if (skillData.skillName == "가시 돔")
+        {
+            if (thornDomeSkillInstance == null)
+            {
+                GameObject obj = Instantiate(skillData.skillPrefab, cursorWeapon.transform.position, Quaternion.identity);
+                thornDomeSkillInstance = obj.GetComponent<ThornDomeSkill>();
+                if (thornDomeSkillInstance != null)
+                {
+                    thornDomeSkillInstance.Init(skillInstance, cursorWeapon.transform);
+                    persistentSkillObjects[skillData] = obj;
+                }
+                else
+                {
+                    Debug.LogWarning("ThornDomeSkill 컴포넌트를 찾을 수 없습니다.");
+                }
+            }
+            else
+            {
+                thornDomeSkillInstance.UpdateLevel(skillInstance);
             }
             return;
         }

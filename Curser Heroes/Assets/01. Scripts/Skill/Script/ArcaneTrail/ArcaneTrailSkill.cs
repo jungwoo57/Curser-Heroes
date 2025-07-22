@@ -28,6 +28,7 @@ public class ArcaneTrailSkill : MonoBehaviour
             // 커서 위치 가져오기
             Vector3 spawnPos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
             spawnPos.z = 0f;
+            spawnPos += Vector3.down * 0.8f;
 
             int damage = skillInstance.GetCurrentLevelData().damage;
 
