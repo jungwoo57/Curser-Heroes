@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class SubWeaponManager : MonoBehaviour
 {
@@ -7,37 +9,56 @@ public class SubWeaponManager : MonoBehaviour
     public LayerMask monsterLayer;
 
     [Header("따라다닐 대상")]
-    [Tooltip("보조무기가 회전하며 따라다닐 오브젝트(플레이어/주무기 등)의 Transform")]
     public Transform followTarget;
 
     [Header("강화 연동")]
     public SubWeaponUpgrade upgradeComponent;
 
-    private int currentAmmo;
-    private float currentMana = 100f;
-    private float currentChargeTime;
-    private float currentCooldown;
-    private bool isCharging;
-    private bool isReloading;
-    private float reloadTimer;
+    [Header("UI 세팅")]
+    public Canvas uiCanvas;
+    public RectTransform uiPanel;
 
+    // 장탄형 UI
+    public Image ammoIconPrefab;
+    public Sprite usedAmmoSprite;
+    private List<Image> ammoIcons = new List<Image>();
+
+    // 마나형 UI
+    public Image manaBar;
+    private float maxMana = 100f;
+    private float currentMana;
+
+    // 차징형 UI
+    public Image chargeBar;
+    public Image chargeCompleteIcon;
+    private float currentChargeTime;
+    private bool isCharging;
     private bool charged;
+
+    // 공통 상태
+    private int maxAmmo;
+    private int currentAmmo;
+    private float currentCooldown;
 
 
     private SubWeaponFollower follower;
 
+
     void Awake()
     {
         if (upgradeComponent == null)
-            upgradeComponent = GetComponent<SubWeaponUpgrade>()
+            upgradeComponent = GetComponent<SubWeaponUpgrade>()                
                                ?? gameObject.AddComponent<SubWeaponUpgrade>();
-
         follower = GetComponent<SubWeaponFollower>()
-                   ?? gameObject.AddComponent<SubWeaponFollower>();
+             ?? gameObject.AddComponent<SubWeaponFollower>();
     }
+
 
     void Start()
     {
+        uiPanel.gameObject.SetActive(false);
+        HideAllUI();
+
         if (equippedSubWeapon != null)
             EquipSubWeapon(equippedSubWeapon);
     }
@@ -45,24 +66,52 @@ public class SubWeaponManager : MonoBehaviour
     void Update()
     {
         if (equippedSubWeapon == null) return;
+        HideAllUI();
 
-        // 쿨다운 감소
         if (currentCooldown > 0f)
             currentCooldown -= Time.deltaTime;
+
+        Vector3 screenPos = Camera.main.WorldToScreenPoint(followTarget.position);
+        uiPanel.position = screenPos + new Vector3(0, -30, 0);
+        switch (equippedSubWeapon.weaponType)
+        {
+            case SubWeaponType.AmmoBased:
+                foreach (var ico in ammoIcons)
+                    ico.gameObject.SetActive(true);
+                UpdateAmmoUI();
+                break;
+            case SubWeaponType.ManaBased:
+                manaBar.gameObject.SetActive(true);
+                UpdateManaUI();
+                break;
+            case SubWeaponType.ChargeBased:
+                chargeBar.gameObject.SetActive(true);
+                UpdateChargeUI();
+                break;
+        }
 
         // 입력 처리 (클릭형 / 충전형)
         if (equippedSubWeapon.weaponType == SubWeaponType.ChargeBased)
         {
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButtonDown(0))
             {
                 isCharging = true;
-                currentChargeTime += Time.deltaTime;
-            }
-            else if (isCharging && CanUseSubWeapon())
-            {
-                UseSubWeapon();
-                isCharging = false;
                 currentChargeTime = 0f;
+                charged = false;
+            }
+            if (isCharging && Input.GetMouseButton(0))
+            {
+                currentChargeTime += Time.deltaTime;
+                if (!charged && currentChargeTime >= equippedSubWeapon.requiredChargeTime)
+                    charged = true;
+            }
+            if (isCharging && Input.GetMouseButtonUp(0))
+            {
+                isCharging = false;
+                if (charged && CanUseSubWeapon())
+                    UseSubWeapon();
+                currentChargeTime = 0f;
+                charged = false;
             }
         }
         else if (Input.GetMouseButtonDown(0) && CanUseSubWeapon())
@@ -75,93 +124,8 @@ public class SubWeaponManager : MonoBehaviour
             currentMana = Mathf.Min(100f, currentMana + equippedSubWeapon.manaCost * Time.deltaTime);
 
         // 탄약 리로드
-        if (equippedSubWeapon.weaponType == SubWeaponType.AmmoBased)
-        {
-            if (Input.GetKeyDown(KeyCode.R) || (currentAmmo <= 0 && !isReloading))
-                StartReloading();
-
-            if (isReloading)
-            {
-                reloadTimer -= Time.deltaTime;
-                if (reloadTimer <= 0f)
-                {
-                    currentAmmo = equippedSubWeapon.maxAmmo;
-                    isReloading = false;
-                    Debug.Log("리로드 완료!");
-                }
-            }
-        }
-        if (equippedSubWeapon.weaponType == SubWeaponType.ChargeBased)
-        {
-            // 1) 마우스 누른 순간 깜빡 시작
-            if (Input.GetMouseButtonDown(0))
-            {
-                isCharging = true;
-                currentChargeTime = 0f;
-                charged = false;
-                follower.StartCharging();
-            }
-
-            // 2) 누르고 있는 동안 시간 누적
-            if (isCharging && Input.GetMouseButton(0))
-            {
-                currentChargeTime += Time.deltaTime;
-                if (!charged && currentChargeTime >= equippedSubWeapon.requiredChargeTime)
-                {
-                    charged = true;
-                    follower.SetCharged();
-                }
-            }
-
-            // 3) 마우스에서 손 뗄 때
-            if (isCharging && Input.GetMouseButtonUp(0))
-            {
-                isCharging = false;
-                follower.StopCharging();
-
-                if (charged && CanUseSubWeapon())
-                {
-                    UseSubWeapon();
-                }
-                // 리셋
-                currentChargeTime = 0f;
-                charged = false;
-            }
-        }
-        else if (Input.GetMouseButtonDown(0) && CanUseSubWeapon())
-        {
-            UseSubWeapon();
-        }
-    }
-
-    public bool CanUseSubWeapon()
-    {
-        if (currentCooldown > 0f) return false;
-        switch (equippedSubWeapon.weaponType)
-        {
-            case SubWeaponType.AmmoBased: return currentAmmo > 0;
-            case SubWeaponType.ManaBased: return currentMana >= equippedSubWeapon.manaCost;
-            case SubWeaponType.ChargeBased: return currentChargeTime >= equippedSubWeapon.requiredChargeTime;
-            default: return true;
-        }
-    }
-
-    public void UseSubWeapon()
-    {
-        currentCooldown = equippedSubWeapon.cooldown;
-        if (equippedSubWeapon.weaponType == SubWeaponType.AmmoBased)
-            currentAmmo--;
-        if (equippedSubWeapon.weaponType == SubWeaponType.ManaBased)
-            currentMana -= equippedSubWeapon.manaCost;
-
-        if (equippedSubWeapon.rangeShape == SubWeaponRangeShape.ShortLine)
-            UseLineEffectAtCursor();
-        else if (equippedSubWeapon.rangeType == SubWeaponRangeType.Radial)
-            UseForceEffectAtCursor();
-        else
-            ShootToNearestEnemy();
-
-        Debug.Log($"발사됨: {equippedSubWeapon.weaponName}, 남은 탄약: {currentAmmo}, 남은 마나: {currentMana}");
+        if (equippedSubWeapon.weaponType == SubWeaponType.AmmoBased && Input.GetKeyDown(KeyCode.R))
+            StartReloading();
     }
 
     public void EquipSubWeapon(SubWeaponData data)
@@ -169,14 +133,165 @@ public class SubWeaponManager : MonoBehaviour
         equippedSubWeapon = data;
         upgradeComponent.Init(data);
 
-        if (data.weaponType == SubWeaponType.AmmoBased)
-            currentAmmo = data.maxAmmo;
-
-        
         follower.Init(data, 0f);
         follower.SetMainWeapon(followTarget, 0f);
 
-        Debug.Log($"보조무기 장착 완료: {data.weaponName}");
+        uiPanel.gameObject.SetActive(true);
+
+        HideAllUI();
+
+
+        if (data.weaponType == SubWeaponType.AmmoBased)
+        {
+
+            maxAmmo = data.maxAmmo;
+            currentAmmo = maxAmmo;
+
+      
+        foreach (var ico in ammoIcons) Destroy(ico.gameObject);
+        ammoIcons.Clear();
+        for (int i = 0; i < maxAmmo; i++)
+        {
+            var img = Instantiate(ammoIconPrefab, uiPanel);
+            ammoIcons.Add(img);
+        }
+    }
+    
+
+        else if (data.weaponType == SubWeaponType.ManaBased)
+        {
+            currentMana = maxMana;
+            manaBar.gameObject.SetActive(true);
+            manaBar.fillAmount = 1f;
+        }
+        else if (data.weaponType == SubWeaponType.ChargeBased)
+        {
+            isCharging = false;
+            charged = false;
+            currentChargeTime = 0f;
+
+            chargeBar.gameObject.SetActive(true);
+            chargeBar.fillAmount = 0f;
+            chargeCompleteIcon.gameObject.SetActive(false);
+        }
+    }
+
+    bool CanUseSubWeapon()
+    {
+        if (currentCooldown > 0f) return false;
+        switch (equippedSubWeapon.weaponType)
+        {
+            case SubWeaponType.AmmoBased:
+                return currentAmmo > 0;
+            case SubWeaponType.ManaBased:
+                return currentMana >= equippedSubWeapon.manaCost;
+            case SubWeaponType.ChargeBased:
+                return charged;
+            default:
+                return true;
+        }
+    }
+
+    void UseSubWeapon()
+    {
+        currentCooldown = equippedSubWeapon.cooldown;
+
+        if (equippedSubWeapon.weaponType == SubWeaponType.AmmoBased)
+            currentAmmo--;
+        else if (equippedSubWeapon.weaponType == SubWeaponType.ManaBased)
+            currentMana = Mathf.Max(0f, currentMana - equippedSubWeapon.manaCost);
+
+        // 발사 효과
+        if (equippedSubWeapon.rangeShape == SubWeaponRangeShape.ShortLine)
+            UseLineEffectAtCursor();
+        else if (equippedSubWeapon.rangeType == SubWeaponRangeType.Radial)
+            UseForceEffectAtCursor();
+        else
+            ShootToNearestEnemy();
+
+       
+        if (equippedSubWeapon.weaponType == SubWeaponType.AmmoBased)
+            UpdateAmmoUI();
+        else if (equippedSubWeapon.weaponType == SubWeaponType.ManaBased)
+            UpdateManaUI();
+    }
+
+    void HideAllUI()
+    {
+        // Ammo
+        foreach (var ico in ammoIcons) ico.gameObject.SetActive(false);
+        // Mana
+        manaBar.gameObject.SetActive(false);
+        // Charge
+        chargeBar.gameObject.SetActive(false);
+        chargeCompleteIcon.gameObject.SetActive(false);
+    }
+
+
+    private void UpdateAmmoUI()
+    {
+        for (int i = 0; i < ammoIcons.Count; i++)
+            ammoIcons[i].sprite = (i < currentAmmo)
+                ? ammoIconPrefab.sprite
+                : usedAmmoSprite;
+    }
+
+    void HandleAmmoInput()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            currentAmmo = maxAmmo;
+            Debug.Log("리로드 완료");
+        }
+    }
+    void UpdateManaUI()
+    {
+        manaBar.fillAmount = currentMana / maxMana;
+    }
+
+    void HandleManaInput()
+    {
+       
+    }
+    
+    private void UpdateChargeUI()
+    {
+        if (isCharging)
+        {
+            chargeBar.fillAmount = Mathf.Clamp01(
+                currentChargeTime / equippedSubWeapon.requiredChargeTime
+            );
+            chargeCompleteIcon.gameObject.SetActive(false);
+        }
+        else if (charged)
+        {
+            chargeBar.fillAmount = 1f;
+            chargeCompleteIcon.gameObject.SetActive(true);
+        }
+    }
+
+    void HandleChargeInput()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            isCharging = true;
+            currentChargeTime = 0f;
+            charged = false;
+        }
+        if (isCharging && Input.GetMouseButton(0))
+        {
+            currentChargeTime += Time.deltaTime;
+            if (!charged && currentChargeTime >= equippedSubWeapon.requiredChargeTime)
+                charged = true;
+        }
+        if (isCharging && Input.GetMouseButtonUp(0))
+        {
+            isCharging = false;
+            if (charged && CanUseSubWeapon())
+                UseSubWeapon();
+            currentChargeTime = 0f;
+            charged = false;
+        }
     }
 
     void ShootToNearestEnemy()
@@ -209,32 +324,25 @@ public class SubWeaponManager : MonoBehaviour
 
     void StartReloading()
     {
-        isReloading = true;
-        reloadTimer = equippedSubWeapon.reloadTime;
+        currentAmmo = maxAmmo;
         Debug.Log("리로드 시작");
     }
 
-    BaseMonster FindNearestAliveMonster(Vector3 from)
+    private BaseMonster FindNearestAliveMonster(Vector3 from)
     {
         var monsters = FindObjectsOfType<BaseMonster>();
-        Debug.Log($"[AutoAim] Monsters total: {monsters.Length}");
         BaseMonster nearest = null;
-        float minDist = Mathf.Infinity;
-
+        float minDist = float.MaxValue;
         foreach (var m in monsters)
-           
         {
-            Debug.Log($"[AutoAim]  → {m.name}, IsDead={m.IsDead}, CurrentHP={m.CurrentHP}");
             if (m.IsDead) continue;
-            float dist = Vector2.Distance(from, m.transform.position);
-            if (dist < minDist)
+            float d = Vector2.Distance(from, m.transform.position);
+            if (d < minDist)
             {
-                minDist = dist;
+                minDist = d;
                 nearest = m;
             }
         }
-
-        Debug.Log($"[AutoAim] Found {monsters.Length} monsters, nearest={(nearest != null ? nearest.name : "null")}");
         return nearest;
     }
 
@@ -253,7 +361,7 @@ public class SubWeaponManager : MonoBehaviour
             return;
         }
 
-        // 3) 데미지만 매니저에서 덮어쓰기
+        
         rp.damage = Mathf.RoundToInt(upgradeComponent.GetCurrentDamage());
         rp.monsterLayer = monsterLayer;
 
