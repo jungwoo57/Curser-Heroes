@@ -7,7 +7,7 @@ public class Stoneworm : BaseMonster
     public float detectionRadius = 10f;
 
     public GameObject effectPrefab;               // 뿌리 이펙트 프리팹
-    public WarningIndicator warningIndicatorPrefab; // 프리팹으로 여러 개 인스턴스화 가능하게
+    public WarningIndicator[] warningIndicator; // 프리팹으로 여러 개 인스턴스화 가능하게
 
     protected override void Attack()
     {
@@ -26,12 +26,18 @@ public class Stoneworm : BaseMonster
             GameObject fakeTarget = new GameObject($"WarningTarget_{i}");
             fakeTarget.transform.position = spawnPos;
 
+            /*
             // 경고 인디케이터 인스턴스 생성 및 설정
             WarningIndicator indicator = Instantiate(warningIndicatorPrefab);
             indicator.target = fakeTarget.transform;
             indicator.duration = attackDelay;
             indicator.gameObject.SetActive(true);
-
+            */
+            
+            warningIndicator[i].target = fakeTarget.transform;
+            warningIndicator[i].duration = attackDelay;
+            warningIndicator[i].gameObject.SetActive(true);
+            
             // 지연 후 이펙트 생성 및 경고 제거
             StartCoroutine(SpawnRootAfterDelay(spawnPos, fakeTarget));
         }
@@ -60,8 +66,10 @@ public class Stoneworm : BaseMonster
     {
         yield return new WaitForSeconds(attackDelay);
 
-        Instantiate(effectPrefab, pos, Quaternion.identity);
-
-        Destroy(fakeTarget);
-    }
+        GameObject acidPrefab = Instantiate(effectPrefab, pos, Quaternion.identity, transform);
+        MonsterProjectile acidEffect = acidPrefab.GetComponent<MonsterProjectile>();
+        acidEffect.Initialize(Vector3.zero, damage);
+        Destroy(acidEffect, 0.5f);
+        Destroy(fakeTarget); // 타겟 오브젝트 삭제
+    } // 
 }

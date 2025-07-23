@@ -5,7 +5,7 @@ using UnityEngine;
 public class Meerpokkat : BaseMonster
 {
     public float attackRange = 0.5f;
-    public float explodeRange = 1.0f;
+    public float explodeRange = 0.8f;
     protected override void Attack()
     {
         StartCoroutine(AttackReadyTime());
