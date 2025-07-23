@@ -99,6 +99,7 @@ public class CursorWeapon : MonoBehaviour
 
                     TryTriggerMeteorSkill();
                     TryTriggerLightningSkill();
+                    SkillManager.Instance.TryTriggerDimensionSlash(cursorPos);
 
                     OnAnyMonsterDamaged?.Invoke(this);
                 }
@@ -140,6 +141,7 @@ public class CursorWeapon : MonoBehaviour
 
                     TryTriggerMeteorSkill();
                     TryTriggerLightningSkill();
+                    SkillManager.Instance.TryTriggerDimensionSlash(cursorPos);
 
                     OnAnyMonsterDamaged?.Invoke(this);
                 }

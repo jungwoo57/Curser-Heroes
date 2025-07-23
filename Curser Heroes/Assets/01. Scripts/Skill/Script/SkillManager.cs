@@ -35,6 +35,7 @@ public class SkillManager : MonoBehaviour
     public int criticalSweepEveryNth = 0;
     public LightningSkill lightningSkill;
     public ArcaneTrailSkill arcaneTrailSkillInstance;
+    public RadiantPulseSkill radiantPulseSkillInstance;
 
     [System.Serializable]
     public class SkillInstance
@@ -354,6 +355,31 @@ public class SkillManager : MonoBehaviour
             }
             return;
         }
+        if (skillData.skillName == "빛의 파동")
+        {
+            if (radiantPulseSkillInstance != null)
+            {
+                Debug.Log("[SkillManager] 빛의 파동 이미 설치됨");
+                return;
+            }
+
+            GameObject obj = Instantiate(skillData.skillPrefab, cursorWeapon.transform.position, Quaternion.identity);
+            obj.transform.SetParent(cursorWeapon.transform);
+
+            RadiantPulseSkill pulse = obj.GetComponent<RadiantPulseSkill>();
+            if (pulse != null)
+            {
+                pulse.Init(skillInstance);
+                radiantPulseSkillInstance = pulse;
+                persistentSkillObjects[skillData] = obj;
+            }
+            else
+            {
+                Debug.LogWarning("RadiantPulseSkill 컴포넌트를 찾을 수 없습니다.");
+            }
+
+            return;
+        }
         Vector3 spawnPos = cursorWeapon.transform.position;
         GameObject newObj = Instantiate(skillData.skillPrefab, spawnPos, Quaternion.identity);
         persistentSkillObjects[skillData] = newObj;
@@ -559,12 +585,23 @@ public class SkillManager : MonoBehaviour
         if (beamSkill != null)
         {
             beamSkill.Init(deathBeamSkillData);
-            beamSkill.TryActivate();
         }
         else
         {
             Debug.LogWarning("DeathBeamSkill 컴포넌트를 찾을 수 없습니다.");
             Destroy(obj);
         }
+    }
+    public void TryTriggerDimensionSlash(Vector2 cursorPosition)
+    {
+        var dimensionSlashSkillData = ownedSkills.FirstOrDefault(s => s.skill.skillName == "차원 가르기");
+        if (dimensionSlashSkillData == null) return;
+
+        float chance = 0.05f; // 5%
+        if (Random.value > chance) return;
+
+        GameObject obj = Instantiate(dimensionSlashSkillData.skill.skillPrefab, cursorPosition, Quaternion.identity);
+        DimensionSlash slash = obj.GetComponent<DimensionSlash>();
+        slash.Init(dimensionSlashSkillData);
     }
 }
