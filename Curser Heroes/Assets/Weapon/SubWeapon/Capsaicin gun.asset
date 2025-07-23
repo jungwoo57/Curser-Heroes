@@ -27,11 +27,19 @@ MonoBehaviour:
   rangeShape: 1
   speed: 1
   rotateWithDirection: 0
-  projectilePrefab: {fileID: 8863693051383856762, guid: baa01d2f56b25754fa95a48ba4d486db, type: 3}
+  projectilePrefab: {fileID: 6007872726890634382, guid: baa01d2f56b25754fa95a48ba4d486db, type: 3}
   projectileSpeed: 10
   projectileMaxDistance: 8
-  rangeType: 0
+  rangeType: 1
   maxAmmo: 3
   reloadTime: 3
   manaCost: 5
   requiredChargeTime: 2.5
+  ForceVisualPrefab: {fileID: 0}
+  LineVisualPrefab: {fileID: 7219144208769793663, guid: f1aa15705f9a30049b12281e073d7593, type: 3}
+  effectWidth: 5
+  effectDuration: 3
+  effectRadius: 3
+  stunOnRadial: 0
+  stunOnLine: 0
+  stunDuration: 1

@@ -13,14 +13,14 @@ public class SubWeaponUpgrade : MonoBehaviour
     }
 
     // 강화 함수
-    public void Upgrade()      
+    public void Upgrade()
     {
         weaponLevel++;
         float newDamage = currentSubWeapon.GetDamage(weaponLevel);
         Debug.Log($"[보조무기 강화] {currentSubWeapon.weaponName} 레벨: {weaponLevel}, 데미지: {newDamage}");
     }
 
-    public float GetCurrentDamage()      
+    public float GetCurrentDamage()
     {
         return currentSubWeapon.GetDamage(weaponLevel);
     }

@@ -1,63 +1,48 @@
 ﻿using UnityEngine;
 
-public abstract class SubProjectile : MonoBehaviour
+public class SubProjectile : MonoBehaviour
 {
-    public SubWeaponData subweaponData;
+    protected SubWeaponData subWeaponData;
     protected BaseMonster target;
+    protected float speed;
+    protected int calculatedDamage;  // Manager가 넘겨준 데미지 저장용
 
-    public virtual void Init(SubWeaponData data, BaseMonster targetMonster)  // 
+    // 기존 2-arg Init (하위 호환)
+    public void Init(SubWeaponData data, BaseMonster tgt)
     {
-        subweaponData = data;
-        target = targetMonster;
+        subWeaponData = data;
+        target = tgt;
+        speed = data.projectileSpeed;
+        calculatedDamage = 0;
     }
+
+    // 새 3-arg Init 오버로드: Manager에서 level·강화 반영된 데미지를 넘겨줌
+    public void Init(SubWeaponData data, BaseMonster tgt, int damage)
+    {
+        Init(data, tgt);
+        calculatedDamage = damage;
+    }
+
     protected virtual void Update()
     {
-        if (target == null || target.IsDead)     //몬스터가 null이거나 죽었으면 투사체 삭제
+        if (target == null || target.IsDead)
         {
             Destroy(gameObject);
             return;
         }
 
-        
-        Vector3 direction = (target.transform.position - transform.position).normalized;
-        transform.position += direction * subweaponData.projectileSpeed * Time.deltaTime;  //projectileSpeed를 사용하여 타겟 직선 이동
+        // 타겟으로 이동
+        Vector3 dir = (target.transform.position - transform.position).normalized;
+        transform.position += dir * speed * Time.deltaTime;
 
-        // 거리 체크 후 충돌 처리
-        if (Vector3.Distance(transform.position, target.transform.position) < 0.3f)   //거리가 0.3 이하면 충돌로 간주
+        // 충돌 판정
+        if (Vector3.Distance(transform.position, target.transform.position) < 0.1f)
         {
-            ApplyDamage(target);
-            ApplyEffect(target);
-            Destroy(gameObject);                 //데미지, 이펙트 적용 후 투사체 파괴
+            int dmg = (calculatedDamage > 0)
+                      ? calculatedDamage
+                      : Mathf.RoundToInt(subWeaponData.GetDamage());
+            target.TakeDamage(dmg, subWeaponData);
+            Destroy(gameObject);
         }
     }
-
-
-
-    protected void ApplyDamage(BaseMonster monster)
-    {
-        int dmg = Mathf.RoundToInt(subweaponData.GetDamage());
-        Debug.Log($"[SubProjectile] {monster.gameObject.name} 에게 {dmg} 데미지!");
-        target.TakeDamage(dmg, subweaponData);     //서브웨폰 데이터에 들어있는 공격력을 베이스 몬스터의
-                                                //TakeDamage로 전달
-    }
-
-    [SerializeField] private GameObject effectManagerPrefab;   //이펙트 매니저 프리팹 연결
-
-    protected void ApplyEffect(BaseMonster monster)
-    {
-        if (monster.TryGetComponent(out EffectManager effectManager))     //몬스터가 이펙트매니저를 갖고 있으면 효과 적용
-        {
-            IEffect effect = EffectFactory.CreateEffect(subweaponData.effect);
-            if (effect != null)
-                effectManager.AddEffect(effect);
-        }
-    }
-
-    protected virtual void OnHit()
-    {
-        ApplyDamage(target);
-        ApplyEffect(target);
-        Destroy(gameObject);       //데미지 적용,이펙트 적용, 삭제
-    }
-
 }

@@ -36,3 +36,10 @@ MonoBehaviour:
   manaCost: 5
   requiredChargeTime: 2
   ForceVisualPrefab: {fileID: 3385550672829998115, guid: 52ed76dbcb822e94989792a17c604749, type: 3}
+  LineVisualPrefab: {fileID: 0}
+  effectWidth: 1.5
+  effectDuration: 0.2
+  effectRadius: 1
+  stunOnRadial: 0
+  stunOnLine: 0
+  stunDuration: 1

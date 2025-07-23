@@ -1,7 +1,5 @@
 ﻿using UnityEngine;
 
-public enum SubWeaponRangeShape { LongProjectile, ShortLine, ShortCircle }
-
 [CreateAssetMenu(fileName = "SubWeaponData", menuName = "Weapon/Create Sub Weapon")]
 public class SubWeaponData : ScriptableObject
 {
@@ -11,12 +9,11 @@ public class SubWeaponData : ScriptableObject
     public string weaponDesc;
     public int[] upgradeCost;
     public int unlockCost;
-    
+
     [Header("기본 스탯")]
     public float baseDamage = 1f;
     public float damagePerLevel = 1f;
     public float cooldown = 0.5f;
-
 
     [Header("보조무기 특성")]
     public SubWeaponEffect effect;
@@ -29,7 +26,6 @@ public class SubWeaponData : ScriptableObject
     public GameObject projectilePrefab;
     public float projectileSpeed = 10f;
     public float projectileMaxDistance = 8f;
-
     public SubWeaponRangeType rangeType;
 
     [Header("장탄형 무기 설정")]
@@ -45,15 +41,26 @@ public class SubWeaponData : ScriptableObject
     [Header("애니메이션 이펙트")]
     public GameObject ForceVisualPrefab;
 
+    [Header("라인 이펙트 설정")]
+    public GameObject LineVisualPrefab;
+    public float effectWidth = 1.5f;
+    public float effectDuration = 0.2f;
 
+    [Header("범위형(Radial) 이펙트 반경")]
+    public float effectRadius = 3f;
+
+    [Header("스턴 설정")]
+    public bool stunOnRadial = false;
+    public bool stunOnLine = false;
+    public float stunDuration = 1f;
 
     public float GetDamage(int level = 0)
     {
-        float bonusFromSkill = SkillManager.Instance != null ? SkillManager.Instance.BonusSubWeaponDamage : 0f;
+        float bonusFromSkill = SkillManager.Instance != null
+            ? SkillManager.Instance.BonusSubWeaponDamage
+            : 0f;
         float totalDamage = baseDamage + damagePerLevel * level + bonusFromSkill;
-        Debug.Log($"[SubWeaponData] 계산된 데미지: {baseDamage} + {damagePerLevel}*{level} + {bonusFromSkill} = {totalDamage}");
+        Debug.Log($"[SubWeaponData] 계산된 데미지: {totalDamage}");
         return totalDamage;
     }
-
-
 }

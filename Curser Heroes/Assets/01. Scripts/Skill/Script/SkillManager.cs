@@ -28,6 +28,7 @@ public class SkillManager : MonoBehaviour
     private const string FIREBALL_SKILL_NAME = "화염구";
     private IndomitableSkill indomitableSkillInstance;
     private ThornDomeSkill thornDomeSkillInstance;
+    private DeathBeamSkill deathBeamSkillInstance;
 
     private float bonusSubWeaponDamage = 0f;
     public float BonusSubWeaponDamage => bonusSubWeaponDamage;
@@ -536,5 +537,34 @@ public class SkillManager : MonoBehaviour
     {
         if (thornDomeSkillInstance != null)
             thornDomeSkillInstance.TryTriggerOnClick();
+    }
+    public void TryTriggerDeathBeam()
+    {
+        var deathBeamSkillData = ownedSkills.FirstOrDefault(s => s.skill.skillName == "죽음의 광선");
+        if (deathBeamSkillData == null)
+            return;
+
+        // 발동 확률 체크
+        float procChance = 1f; // 필요하면 skillInstance에서 가져오기
+        if (Random.value > procChance)
+            return;
+
+        if (cursorWeapon == null)
+            return;
+
+        // 프리팹 위치와 회전 지정 (커서 무기 위치 사용)
+        GameObject obj = Instantiate(deathBeamSkillData.skill.skillPrefab, cursorWeapon.transform.position, Quaternion.identity);
+        var beamSkill = obj.GetComponent<DeathBeamSkill>();
+
+        if (beamSkill != null)
+        {
+            beamSkill.Init(deathBeamSkillData);
+            beamSkill.TryActivate();
+        }
+        else
+        {
+            Debug.LogWarning("DeathBeamSkill 컴포넌트를 찾을 수 없습니다.");
+            Destroy(obj);
+        }
     }
 }

@@ -7,9 +7,9 @@ public static class EffectFactory
         switch (effect)
         {
             case SubWeaponEffect.Stun:
-                return new StunEffect();
+            // return new StunEffect();
             case SubWeaponEffect.Burn:
-                return new BurnEffect();        
+                return new BurnEffect();
             default:
                 return null;
         }
