@@ -6,9 +6,9 @@ public class DeathBeamSkill : MonoBehaviour
     private SkillManager.SkillInstance skillInstance;
 
     [Header("Death Beam Settings")]
-    [SerializeField] private float procChance = 0.9f;       // 발동 확률
-    [SerializeField] private int hitCount = 5;                // 틱 수
-    [SerializeField] private float tickInterval = 0.05f;      // 틱 간격
+    [SerializeField] private float procChance = 1f;
+    [SerializeField] private int hitCount = 5;
+    [SerializeField] private float tickInterval = 0.05f;
     [SerializeField] private float targetSearchRadius = 20f;
 
     [Header("Effects")]
@@ -22,36 +22,34 @@ public class DeathBeamSkill : MonoBehaviour
 
     public void TryActivate()
     {
+        Debug.Log("[DeathBeamSkill] TryActivate 호출됨");
+
         if (Random.value > procChance)
         {
-            Destroy(gameObject); // 발동 실패
+            Debug.Log("[DeathBeamSkill] 확률 실패로 종료");
+            Destroy(gameObject);
             return;
         }
 
         Transform target = FindNearestMonster();
         if (target == null)
         {
-            Destroy(gameObject); // 대상 없음
+            Debug.Log("[DeathBeamSkill] 타겟 없음 → 종료");
+            Destroy(gameObject);
             return;
         }
 
-        // 방향 조정
+        // 타겟 방향 회전
         Vector3 dir = (target.position - transform.position).normalized;
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, angle);
 
+        Debug.Log($"[DeathBeamSkill] 타겟 방향 회전 완료, angle: {angle}");
         StartCoroutine(FireBeam(target));
     }
 
     private IEnumerator FireBeam(Transform target)
     {
-        // 애니메이션 트리거 실행
-        if (beamAnimator != null)
-        {
-            beamAnimator.SetTrigger("Fire");
-        }
-
-        // 애니메이션 길이만큼 대기 (실제 길이에 맞게 조정)
         yield return new WaitForSeconds(1f);
 
         int damage = skillInstance.GetCurrentLevelData().damage;

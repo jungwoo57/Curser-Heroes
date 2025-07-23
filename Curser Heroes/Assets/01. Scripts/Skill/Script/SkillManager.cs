@@ -171,7 +171,7 @@ public class SkillManager : MonoBehaviour
         // 레벨업 또는 신규 습득 후 자동 배치
         if (selected.skillName == "매직소드" || selected.skillName == "포이즌필드" || selected.skillName == "수호의 방패" 
             || selected.skillName == "불굴" || selected.skillName == "구원" || selected.skillName == "아이스 에이지" || selected.skillName == "라이트닝" 
-            || selected.skillName == "포자폭발" || selected.skillName == "마법 잔상" || selected.skillName == "가시 돔" || selected.skillName == "가시 돔")
+            || selected.skillName == "포자폭발" || selected.skillName == "마법 잔상" || selected.skillName == "가시 돔")
         {
             DeployPersistentSkill(owned);
         }
@@ -353,20 +353,6 @@ public class SkillManager : MonoBehaviour
                 thornDomeSkillInstance.UpdateLevel(skillInstance);
             }
             return;
-        }
-        else if(skillData.skillName == "죽음의 광선")
-        {
-            GameObject obj = Instantiate(skillData.skillPrefab);
-            DeathBeamSkill beamSkill = obj.GetComponent<DeathBeamSkill>();
-            if (beamSkill != null)
-            {
-                beamSkill.Init(skillInstance);
-                deathBeamSkillInstance = beamSkill;
-            }
-            else
-            {
-                Debug.LogWarning("DeathBeamSkill 컴포넌트를 찾을 수 없습니다.");
-            }
         }
         Vector3 spawnPos = cursorWeapon.transform.position;
         GameObject newObj = Instantiate(skillData.skillPrefab, spawnPos, Quaternion.identity);
@@ -554,9 +540,31 @@ public class SkillManager : MonoBehaviour
     }
     public void TryTriggerDeathBeam()
     {
-        if (deathBeamSkillInstance != null)
+        var deathBeamSkillData = ownedSkills.FirstOrDefault(s => s.skill.skillName == "죽음의 광선");
+        if (deathBeamSkillData == null)
+            return;
+
+        // 발동 확률 체크
+        float procChance = 1f; // 필요하면 skillInstance에서 가져오기
+        if (Random.value > procChance)
+            return;
+
+        if (cursorWeapon == null)
+            return;
+
+        // 프리팹 위치와 회전 지정 (커서 무기 위치 사용)
+        GameObject obj = Instantiate(deathBeamSkillData.skill.skillPrefab, cursorWeapon.transform.position, Quaternion.identity);
+        var beamSkill = obj.GetComponent<DeathBeamSkill>();
+
+        if (beamSkill != null)
         {
-            deathBeamSkillInstance.TryActivate();
+            beamSkill.Init(deathBeamSkillData);
+            beamSkill.TryActivate();
+        }
+        else
+        {
+            Debug.LogWarning("DeathBeamSkill 컴포넌트를 찾을 수 없습니다.");
+            Destroy(obj);
         }
     }
 }

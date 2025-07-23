@@ -162,6 +162,7 @@ public class SubWeaponManager : MonoBehaviour
             ShootToNearestEnemy();
 
         Debug.Log($"발사됨: {equippedSubWeapon.weaponName}, 남은 탄약: {currentAmmo}, 남은 마나: {currentMana}");
+        SkillManager.Instance.TryTriggerDeathBeam();
     }
 
     public void EquipSubWeapon(SubWeaponData data)
