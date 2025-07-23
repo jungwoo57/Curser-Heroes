@@ -12,11 +12,59 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 313662ea31e2a54469b9f802318e0975, type: 3}
   m_Name: DeathBeam
   m_EditorClassIdentifier: 
-  skillName: 
-  icon: {fileID: 0}
+  skillName: "\uC8FD\uC74C\uC758 \uAD11\uC120"
+  icon: {fileID: 21300000, guid: 9038a3ad66a7c034eae18c47e7ef0546, type: 3}
   type: 0
-  maxLevel: 0
+  maxLevel: 8
   description: 
-  skillPrefab: {fileID: 0}
-  levelDataList: []
+  skillPrefab: {fileID: 5019107984508011208, guid: b768f992215b99c4f8e49c9d342b19f7, type: 3}
+  levelDataList:
+  - level: 1
+    damage: 2
+    sizeMultiplier: 0
+    count: 0
+    duration: 0
+    cooldown: 0
+  - level: 2
+    damage: 3
+    sizeMultiplier: 0
+    count: 0
+    duration: 0
+    cooldown: 0
+  - level: 3
+    damage: 4
+    sizeMultiplier: 0
+    count: 0
+    duration: 0
+    cooldown: 0
+  - level: 4
+    damage: 5
+    sizeMultiplier: 0
+    count: 0
+    duration: 0
+    cooldown: 0
+  - level: 5
+    damage: 6
+    sizeMultiplier: 0
+    count: 0
+    duration: 0
+    cooldown: 0
+  - level: 6
+    damage: 7
+    sizeMultiplier: 0
+    count: 0
+    duration: 0
+    cooldown: 0
+  - level: 7
+    damage: 8
+    sizeMultiplier: 0
+    count: 0
+    duration: 0
+    cooldown: 0
+  - level: 8
+    damage: 9
+    sizeMultiplier: 0
+    count: 0
+    duration: 0
+    cooldown: 0
   unlockCost: 0
