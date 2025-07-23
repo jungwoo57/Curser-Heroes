@@ -6,86 +6,109 @@ public class DeathBeamSkill : MonoBehaviour
     private SkillManager.SkillInstance skillInstance;
 
     [Header("Death Beam Settings")]
-    [SerializeField] private float procChance = 0.9f;       // 발동 확률
-    [SerializeField] private int hitCount = 5;                // 틱 수
-    [SerializeField] private float tickInterval = 0.05f;      // 틱 간격
+    [SerializeField] private float procChance = 0.05f;  // 발동 확률 (5%)
+    [SerializeField] private int hitCount = 5;          // 총 타격 횟수
+    [SerializeField] private float tickInterval = 0.05f;
     [SerializeField] private float targetSearchRadius = 20f;
 
-    [Header("Effects")]
-    [SerializeField] private LayerMask monsterLayer;
-    [SerializeField] private Animator beamAnimator;
+    [Header("Beam Prefab Parts")]
+    [SerializeField] private Transform beamPivot;         // 회전 적용 대상 (기준 오브젝트)
+    [SerializeField] private GameObject beamSprite;       // 회전에 영향을 받지 않는 애니메이션 파트
+    [SerializeField] private GameObject beamColliderObj;  // 실제 충돌 처리 파트 (자식에 BoxCollider2D 포함)
+
+    private Coroutine beamRoutine;
+    public GameObject deathBeamPrefab;
+    public CursorWeapon cursorWeapon;
 
     public void Init(SkillManager.SkillInstance instance)
     {
-        this.skillInstance = instance;
+        skillInstance = instance;
+        StartCoroutine(ActivateBeam());
     }
 
-    public void TryActivate()
+    private IEnumerator ActivateBeam()
     {
-        if (Random.value > procChance)
+        // 가장 가까운 대상 찾기
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, targetSearchRadius, LayerMask.GetMask("Monster"));
+        if (hits.Length == 0)
         {
-            Destroy(gameObject); // 발동 실패
-            return;
+            Destroy(gameObject);
+            yield break;
         }
 
-        Transform target = FindNearestMonster();
+        Transform target = GetClosestTarget(hits);
         if (target == null)
         {
-            Destroy(gameObject); // 대상 없음
-            return;
+            Destroy(gameObject);
+            yield break;
         }
 
-        // 방향 조정
-        Vector3 dir = (target.position - transform.position).normalized;
-        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, 0, angle);
+        // 방향 계산 및 회전 적용
+        Vector2 direction = (target.position - cursorWeapon.transform.position).normalized;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-        StartCoroutine(FireBeam(target));
-    }
+        // 프리팹 생성 위치
+        GameObject obj = Instantiate(deathBeamPrefab, cursorWeapon.transform.position, Quaternion.identity);
 
-    private IEnumerator FireBeam(Transform target)
-    {
-        // 애니메이션 트리거 실행
-        if (beamAnimator != null)
-        {
-            beamAnimator.SetTrigger("Fire");
-        }
+        // 회전 적용
+        obj.transform.rotation = Quaternion.Euler(0, 0, angle);
 
-        // 애니메이션 길이만큼 대기 (실제 길이에 맞게 조정)
-        yield return new WaitForSeconds(1f);
+        // Damage Coroutine 실행
+        beamRoutine = StartCoroutine(DamageRoutine());
 
-        int damage = skillInstance.GetCurrentLevelData().damage;
-
-        for (int i = 0; i < hitCount; i++)
-        {
-            if (target == null) break;
-
-            var monster = target.GetComponent<BaseMonster>();
-            if (monster != null)
-                monster.TakeDamage(damage);
-
-            yield return new WaitForSeconds(tickInterval);
-        }
-
+        // 일정 시간 후 삭제
+        yield return new WaitForSeconds(hitCount * tickInterval + 0.1f);
         Destroy(gameObject);
     }
 
-    private Transform FindNearestMonster()
+    private IEnumerator DamageRoutine()
     {
-        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, targetSearchRadius, monsterLayer);
-        Transform nearest = null;
+        int currentHits = 0;
+
+        while (currentHits < hitCount)
+        {
+            Collider2D[] targets = Physics2D.OverlapBoxAll(
+                beamColliderObj.transform.position,
+                beamColliderObj.GetComponent<BoxCollider2D>().size,
+                beamPivot.eulerAngles.z,
+                LayerMask.GetMask("Monster")
+            );
+
+            foreach (var target in targets)
+            {
+                var health = target.GetComponent<BaseMonster>();
+                if (health != null)
+                {
+                    health.TakeDamage(skillInstance.GetCurrentLevelData().damage);
+                }
+            }
+
+            currentHits++;
+            yield return new WaitForSeconds(tickInterval);
+        }
+    }
+
+    private Transform GetClosestTarget(Collider2D[] hits)
+    {
         float minDist = float.MaxValue;
+        Transform closest = null;
 
         foreach (var hit in hits)
         {
-            float dist = Vector2.Distance(hit.transform.position, transform.position);
+            float dist = Vector2.Distance(transform.position, hit.transform.position);
             if (dist < minDist)
             {
                 minDist = dist;
-                nearest = hit.transform;
+                closest = hit.transform;
             }
         }
 
-        return nearest;
+        return closest;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, targetSearchRadius);
     }
 }

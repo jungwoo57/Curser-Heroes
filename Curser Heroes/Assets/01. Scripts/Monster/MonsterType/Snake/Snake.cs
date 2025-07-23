@@ -2,11 +2,11 @@
 
 public class Snake : BaseMonster
 {
-    public float attackRange = 0.5f;
+    public float attackRange = 0.3f;
 
     protected override void Attack()
     {
-        Collider2D weaponCollider = Physics2D.OverlapCircle(transform.position, attackRange, LayerMask.GetMask("Weapon"));
+        Collider2D weaponCollider = Physics2D.OverlapCircle(transform.position + Vector3.up*0.33f, attackRange, LayerMask.GetMask("Weapon"));
         if (weaponCollider != null)
         {
             if (WeaponManager.Instance != null)
@@ -24,6 +24,6 @@ public class Snake : BaseMonster
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, attackRange);
+        Gizmos.DrawWireSphere(transform.position + Vector3.up*0.33f, attackRange);
     }
 }

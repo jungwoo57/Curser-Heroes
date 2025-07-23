@@ -72,6 +72,16 @@ public class WaveManager : MonoBehaviour
                 SkillManager.Instance.arcaneTrailSkillInstance.Init(trailInstance);
             }
         }
+        if (SkillManager.Instance.radiantPulseSkillInstance != null)
+        {
+            var pulseInstance = SkillManager.Instance.ownedSkills
+                .FirstOrDefault(s => s.skill.skillName == "빛의 파동");
+
+            if (pulseInstance != null)
+            {
+                SkillManager.Instance.radiantPulseSkillInstance.Init(pulseInstance);
+            }
+        }
     }
 
     // 소환된 몬스터 리스트 초기화 및 추가,보스 데이터가 있으면 소환 

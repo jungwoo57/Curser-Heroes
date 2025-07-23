@@ -457,6 +457,7 @@ MonoBehaviour:
   battleUI: {fileID: 1499278492}
   stageStartUI: {fileID: 800217685}
   stageExitPanel: {fileID: 0}
+  tutorialUI: {fileID: 0}
 --- !u!4 &41921648
 Transform:
   m_ObjectHideFlags: 0
@@ -3930,6 +3931,7 @@ MonoBehaviour:
   criticalSweepEveryNth: 0
   lightningSkill: {fileID: 0}
   arcaneTrailSkillInstance: {fileID: 0}
+  radiantPulseSkillInstance: {fileID: 0}
 --- !u!4 &1128930534
 Transform:
   m_ObjectHideFlags: 0
@@ -5315,8 +5317,10 @@ MonoBehaviour:
     bookMark: 0
   gold: 99999
   jewel: 0
-  fistStage: 0
-  firstForge: 0
+  useStage: 0
+  useForge: 0
+  useLab: 0
+  useBar: 0
   bestScore: 5
 --- !u!4 &1586505580
 Transform:
@@ -6719,8 +6723,10 @@ MonoBehaviour:
     bookMark: 0
   gold: 9999
   jewel: 0
-  fistStage: 0
-  firstForge: 0
+  useStage: 0
+  useForge: 0
+  useLab: 0
+  useBar: 0
   bestScore: 0
 --- !u!4 &2139855846
 Transform:
@@ -7210,6 +7216,12 @@ MonoBehaviour:
   gaugePerMonsterHit: 2
   currentGauge: 0
   skillRange: 20
+  hunterAnim: []
+  arrowAnim: []
+  arrowMax: 0
+  arrowMin: 0
+  xArea: 0
+  yArea: 0
 --- !u!223 &6485140274089088555
 Canvas:
   m_ObjectHideFlags: 0

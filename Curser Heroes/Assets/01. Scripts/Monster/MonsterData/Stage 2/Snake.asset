@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a679e971d4790164f8d9e3ff6463d243, type: 3}
   m_Name: Snake
   m_EditorClassIdentifier: 
-  monsterPrefab: {fileID: 0}
-  maxHP: 0
-  valueCost: 0
-  attackCooldown: 0
-  damage: 0
+  monsterPrefab: {fileID: 5619297063353876026, guid: a5f83a94eb7bbf24ea583afa14a7aeb8, type: 3}
+  maxHP: 50
+  valueCost: 2
+  attackCooldown: 2
+  damage: 1
   index: 0
