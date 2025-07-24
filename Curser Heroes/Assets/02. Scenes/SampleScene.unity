@@ -3675,6 +3675,7 @@ MonoBehaviour:
   lightningSkill: {fileID: 0}
   arcaneTrailSkillInstance: {fileID: 0}
   radiantPulseSkillInstance: {fileID: 0}
+  shadowFriendSkillInstance: {fileID: 0}
 --- !u!4 &1539420337
 Transform:
   m_ObjectHideFlags: 0
@@ -6014,11 +6015,14 @@ MonoBehaviour:
   upgradeComponent: {fileID: 0}
   uiCanvas: {fileID: 0}
   uiPanel: {fileID: 0}
+  AmmoUIGroup: {fileID: 0}
+  ManaUIGroup: {fileID: 0}
+  ChargeUIGroup: {fileID: 0}
   ammoIconPrefab: {fileID: 0}
   usedAmmoSprite: {fileID: 0}
   manaBar: {fileID: 0}
-  chargeBar: {fileID: 0}
-  chargeCompleteIcon: {fileID: 0}
+  chargeEmptyBar: {fileID: 0}
+  chargeCompleteBar: {fileID: 0}
 --- !u!114 &3847692191974945374
 MonoBehaviour:
   m_ObjectHideFlags: 0
