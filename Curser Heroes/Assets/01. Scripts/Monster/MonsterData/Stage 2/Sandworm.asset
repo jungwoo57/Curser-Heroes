@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a679e971d4790164f8d9e3ff6463d243, type: 3}
   m_Name: Sandworm
   m_EditorClassIdentifier: 
-  monsterPrefab: {fileID: 0}
-  maxHP: 0
-  valueCost: 0
-  attackCooldown: 0
-  damage: 0
+  monsterPrefab: {fileID: 9123407018690660253, guid: 64d591fd0ec22d042add91c066bf5e99, type: 3}
+  maxHP: 55
+  valueCost: 2
+  attackCooldown: 2
+  damage: 1
   index: 0

@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a679e971d4790164f8d9e3ff6463d243, type: 3}
-  m_Name: Stoneworm
+  m_Name: Scolpion
   m_EditorClassIdentifier: 
-  monsterPrefab: {fileID: 3871478028698495228, guid: d22b58a7e9fe664479f21dbde518668d, type: 3}
-  maxHP: 54
-  valueCost: 3
+  monsterPrefab: {fileID: 8037782549445663505, guid: ce955cf8f1c38054d8f11fa30b29b24e, type: 3}
+  maxHP: 47
+  valueCost: 4
   attackCooldown: 3
   damage: 1
   index: 0
