@@ -12,12 +12,14 @@ public class RadiantPulseSkill : MonoBehaviour
     {
         skillInstance = instance;
         lastPulseTime = Time.time - cooldown; // 웨이브 시작 시 즉시 발동되도록
+        Debug.Log("[빛의 파동] Init 호출됨");
     }
 
     void Update()
     {
         if (Time.time - lastPulseTime >= cooldown)
         {
+            Debug.Log("[빛의 파동] 쿨타임 충족 - Pulse 발동 시도");
             TriggerPulse();
         }
     }
@@ -25,15 +27,9 @@ public class RadiantPulseSkill : MonoBehaviour
     private void TriggerPulse()
     {
         lastPulseTime = Time.time;
-
         float duration = skillInstance.GetCurrentLevelData().duration;
 
-        Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mouseWorldPos.z = 0f; // 2D 기준
-
-        GameObject pulseObj = Instantiate(pulseEffectPrefab, mouseWorldPos, Quaternion.identity);
-
-        // 마우스를 따라가므로 Init() 필요 없음
+        GameObject pulseObj = Instantiate(pulseEffectPrefab, Vector3.zero, Quaternion.identity);
         Destroy(pulseObj, duration);
     }
 }
