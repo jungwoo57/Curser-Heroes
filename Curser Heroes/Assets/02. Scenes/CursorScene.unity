@@ -278,7 +278,7 @@ PrefabInstance:
     - target: {fileID: 7386682379840476848, guid: 5263ae6509a44d54cb65ed7e0a07701d, type: 3}
       propertyPath: equippedSubWeapon
       value: 
-      objectReference: {fileID: 11400000, guid: 6ed21f69b099a3f4980541c743ef66f3, type: 2}
+      objectReference: {fileID: 11400000, guid: 58d3f8a445bf9c5479bf00118682c7e0, type: 2}
     - target: {fileID: 7386682379840476848, guid: 5263ae6509a44d54cb65ed7e0a07701d, type: 3}
       propertyPath: chargeCompleteIcon
       value: 
@@ -391,6 +391,22 @@ PrefabInstance:
     - target: {fileID: 3412583423064343053, guid: 7e17ee9ca96d47b4792f60664b467c41, type: 3}
       propertyPath: m_Name
       value: TestCursorWeapon_CanMove
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358929382388800747, guid: 7e17ee9ca96d47b4792f60664b467c41, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4f19e2ea9958727459aff57fdbff5259, type: 3}
+    - target: {fileID: 7861142701776654893, guid: 7e17ee9ca96d47b4792f60664b467c41, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7861142701776654893, guid: 7e17ee9ca96d47b4792f60664b467c41, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7861142701776654893, guid: 7e17ee9ca96d47b4792f60664b467c41, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7861142701776654893, guid: 7e17ee9ca96d47b4792f60664b467c41, type: 3}
       propertyPath: m_LocalPosition.x
@@ -729,7 +745,7 @@ PrefabInstance:
     - target: {fileID: 7456348291754140429, guid: f46d8baf9b2636e4eaec3175a27b0875, type: 3}
       propertyPath: selectedWeapon
       value: 
-      objectReference: {fileID: 11400000, guid: 133254ae2272caf40a2dcfe7c7cc5bdb, type: 2}
+      objectReference: {fileID: 11400000, guid: 3c5de675841d1894f906beb96949b960, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
