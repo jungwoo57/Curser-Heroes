@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,6 +19,11 @@ public class SubWeaponManager : MonoBehaviour
     public Canvas uiCanvas;
     public RectTransform uiPanel;
 
+    [Header("UI 그룹")]
+    public GameObject AmmoUIGroup;
+    public GameObject ManaUIGroup;
+    public GameObject ChargeUIGroup;
+
     // 장탄형 UI
     public Image ammoIconPrefab;
     public Sprite usedAmmoSprite;
@@ -29,8 +35,8 @@ public class SubWeaponManager : MonoBehaviour
     private float currentMana;
 
     // 차징형 UI
-    public Image chargeBar;
-    public Image chargeCompleteIcon;
+    public Image chargeEmptyBar;
+    public Image chargeCompleteBar;
     private float currentChargeTime;
     private bool isCharging;
     private bool charged;
@@ -66,6 +72,7 @@ public class SubWeaponManager : MonoBehaviour
     void Update()
     {
         if (equippedSubWeapon == null) return;
+        
         HideAllUI();
 
         if (currentCooldown > 0f)
@@ -85,8 +92,15 @@ public class SubWeaponManager : MonoBehaviour
                 UpdateManaUI();
                 break;
             case SubWeaponType.ChargeBased:
-                chargeBar.gameObject.SetActive(true);
-                UpdateChargeUI();
+                if (isCharging)
+                {
+                    chargeEmptyBar.gameObject.SetActive(true);
+                    UpdateChargeUI();
+                }
+                else if (charged)
+                {
+                    chargeCompleteBar.gameObject.SetActive(true);
+                }
                 break;
         }
 
@@ -98,20 +112,32 @@ public class SubWeaponManager : MonoBehaviour
                 isCharging = true;
                 currentChargeTime = 0f;
                 charged = false;
+                Debug.Log("[Charge] ▶ 시작");
+
             }
             if (isCharging && Input.GetMouseButton(0))
             {
                 currentChargeTime += Time.deltaTime;
+
                 if (!charged && currentChargeTime >= equippedSubWeapon.requiredChargeTime)
+                {
                     charged = true;
+                    Debug.Log("[Charge] ✔ 충전 완료, UI 고정");
+                }
+               
             }
             if (isCharging && Input.GetMouseButtonUp(0))
             {
                 isCharging = false;
+                Debug.Log($"[Charge] 해제, charged={charged}");
+
                 if (charged && CanUseSubWeapon())
+                {
+                    Debug.Log("[Charge] 발사!");
                     UseSubWeapon();
-                currentChargeTime = 0f;
-                charged = false;
+                }
+               
+               
             }
         }
         else if (Input.GetMouseButtonDown(0) && CanUseSubWeapon())
@@ -132,6 +158,10 @@ public class SubWeaponManager : MonoBehaviour
     {
         equippedSubWeapon = data;
         upgradeComponent.Init(data);
+
+        AmmoUIGroup.SetActive(data.weaponType == SubWeaponType.AmmoBased);
+        ManaUIGroup.SetActive(data.weaponType == SubWeaponType.ManaBased);
+        ChargeUIGroup.SetActive(data.weaponType == SubWeaponType.ChargeBased);
 
         follower.Init(data, 0f);
         follower.SetMainWeapon(followTarget, 0f);
@@ -170,9 +200,9 @@ public class SubWeaponManager : MonoBehaviour
             charged = false;
             currentChargeTime = 0f;
 
-            chargeBar.gameObject.SetActive(true);
-            chargeBar.fillAmount = 0f;
-            chargeCompleteIcon.gameObject.SetActive(false);
+            chargeEmptyBar.gameObject.SetActive(true);
+            chargeEmptyBar.fillAmount = 0f;
+            chargeCompleteBar.gameObject.SetActive(false);
         }
     }
 
@@ -201,7 +231,9 @@ public class SubWeaponManager : MonoBehaviour
         else if (equippedSubWeapon.weaponType == SubWeaponType.ManaBased)
             currentMana = Mathf.Max(0f, currentMana - equippedSubWeapon.manaCost);
 
-        // 발사 효과
+       
+
+        
         if (equippedSubWeapon.rangeShape == SubWeaponRangeShape.ShortLine)
             UseLineEffectAtCursor();
         else if (equippedSubWeapon.rangeType == SubWeaponRangeType.Radial)
@@ -214,17 +246,36 @@ public class SubWeaponManager : MonoBehaviour
             UpdateAmmoUI();
         else if (equippedSubWeapon.weaponType == SubWeaponType.ManaBased)
             UpdateManaUI();
-    }
+        else if (equippedSubWeapon.weaponType == SubWeaponType.ChargeBased)
+            UpdateChargeUI();
 
+
+        if (equippedSubWeapon.weaponType == SubWeaponType.ChargeBased)
+        {
+            
+            StartCoroutine(ResetChargedAfterDelay(0.2f));
+        }
+    }
+    private IEnumerator ResetChargedAfterDelay(float delay)
+    {
+        
+        yield return new WaitForSeconds(delay);
+        charged = false;
+    }
     void HideAllUI()
     {
         // Ammo
         foreach (var ico in ammoIcons) ico.gameObject.SetActive(false);
+        
         // Mana
-        manaBar.gameObject.SetActive(false);
+        if (manaBar != null)
+            manaBar.gameObject.SetActive(false);
+
         // Charge
-        chargeBar.gameObject.SetActive(false);
-        chargeCompleteIcon.gameObject.SetActive(false);
+        if (chargeEmptyBar != null)
+            chargeEmptyBar.gameObject.SetActive(false);
+        if (chargeCompleteBar != null)
+            chargeCompleteBar.gameObject.SetActive(false);
     }
 
 
@@ -247,6 +298,7 @@ public class SubWeaponManager : MonoBehaviour
     void UpdateManaUI()
     {
         manaBar.fillAmount = currentMana / maxMana;
+        manaBar.gameObject.SetActive(true);
     }
 
     void HandleManaInput()
@@ -254,19 +306,26 @@ public class SubWeaponManager : MonoBehaviour
        
     }
     
-    private void UpdateChargeUI()
+     void UpdateChargeUI()
     {
-        if (isCharging)
+        if (isCharging && !charged)
         {
-            chargeBar.fillAmount = Mathf.Clamp01(
-                currentChargeTime / equippedSubWeapon.requiredChargeTime
-            );
-            chargeCompleteIcon.gameObject.SetActive(false);
+            
+            chargeEmptyBar.gameObject.SetActive(true);
+            chargeEmptyBar.fillAmount = currentChargeTime / equippedSubWeapon.requiredChargeTime;
+            chargeCompleteBar.gameObject.SetActive(false);
         }
         else if (charged)
         {
-            chargeBar.fillAmount = 1f;
-            chargeCompleteIcon.gameObject.SetActive(true);
+            
+            chargeEmptyBar.gameObject.SetActive(false);
+            chargeCompleteBar.gameObject.SetActive(true);
+        }
+        else
+        {
+            
+            chargeEmptyBar.gameObject.SetActive(false);
+            chargeCompleteBar.gameObject.SetActive(false);
         }
     }
 
