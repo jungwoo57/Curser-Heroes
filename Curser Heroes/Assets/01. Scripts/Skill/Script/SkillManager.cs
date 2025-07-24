@@ -35,6 +35,7 @@ public class SkillManager : MonoBehaviour
     public int criticalSweepEveryNth = 0;
     public LightningSkill lightningSkill;
     public ArcaneTrailSkill arcaneTrailSkillInstance;
+    public RadiantPulseSkill radiantPulseSkillInstance;
 
     [System.Serializable]
     public class SkillInstance
@@ -171,7 +172,7 @@ public class SkillManager : MonoBehaviour
         // 레벨업 또는 신규 습득 후 자동 배치
         if (selected.skillName == "매직소드" || selected.skillName == "포이즌필드" || selected.skillName == "수호의 방패" 
             || selected.skillName == "불굴" || selected.skillName == "구원" || selected.skillName == "아이스 에이지" || selected.skillName == "라이트닝" 
-            || selected.skillName == "포자폭발" || selected.skillName == "마법 잔상" || selected.skillName == "가시 돔")
+            || selected.skillName == "포자폭발" || selected.skillName == "마법 잔상" || selected.skillName == "가시 돔" || selected.skillName == "빛의 파동")
         {
             DeployPersistentSkill(owned);
         }
@@ -329,7 +330,7 @@ public class SkillManager : MonoBehaviour
             }
             return;
         }
-        if (skillData.skillName == "가시 돔")
+        else if (skillData.skillName == "가시 돔")
         {
             if (thornDomeSkillInstance == null)
             {
@@ -352,6 +353,31 @@ public class SkillManager : MonoBehaviour
                 Debug.Log("[SkillManager] 가시 돔 스킬 레벨업, UpdateLevel 호출");
                 thornDomeSkillInstance.UpdateLevel(skillInstance);
             }
+            return;
+        }
+        else if (skillData.skillName == "빛의 파동")
+        {
+            if (radiantPulseSkillInstance != null)
+            {
+                Debug.Log("[SkillManager] 빛의 파동 이미 설치됨");
+                return;
+            }
+
+            GameObject obj = Instantiate(skillData.skillPrefab, cursorWeapon.transform.position, Quaternion.identity);
+            obj.transform.SetParent(cursorWeapon.transform);
+
+            RadiantPulseSkill pulse = obj.GetComponent<RadiantPulseSkill>();
+            if (pulse != null)
+            {
+                pulse.Init(skillInstance);
+                radiantPulseSkillInstance = pulse;
+                persistentSkillObjects[skillData] = obj;
+            }
+            else
+            {
+                Debug.LogWarning("RadiantPulseSkill 컴포넌트를 찾을 수 없습니다.");
+            }
+
             return;
         }
         Vector3 spawnPos = cursorWeapon.transform.position;
@@ -559,12 +585,23 @@ public class SkillManager : MonoBehaviour
         if (beamSkill != null)
         {
             beamSkill.Init(deathBeamSkillData);
-            beamSkill.TryActivate();
         }
         else
         {
             Debug.LogWarning("DeathBeamSkill 컴포넌트를 찾을 수 없습니다.");
             Destroy(obj);
         }
+    }
+    public void TryTriggerDimensionSlash(Vector2 cursorPosition)
+    {
+        var dimensionSlashSkillData = ownedSkills.FirstOrDefault(s => s.skill.skillName == "차원 가르기");
+        if (dimensionSlashSkillData == null) return;
+
+        float chance = 0.05f; // 5%
+        if (Random.value > chance) return;
+
+        GameObject obj = Instantiate(dimensionSlashSkillData.skill.skillPrefab, cursorPosition, Quaternion.identity);
+        DimensionSlash slash = obj.GetComponent<DimensionSlash>();
+        slash.Init(dimensionSlashSkillData);
     }
 }
