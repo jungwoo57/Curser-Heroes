@@ -7122,8 +7122,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 477247828}
   m_HandleRect: {fileID: 0}
   m_Direction: 2
-  m_Value: 0.99999946
-  m_Size: 0.6162735
+  m_Value: 0.99999917
+  m_Size: 0.61627346
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -7818,8 +7818,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6b6a154afcb20cb4ab98a32ca0cbad4d, type: 2}
   - {fileID: 11400000, guid: 869386afebcc3a84d82f50a9d84efe05, type: 2}
   - {fileID: 11400000, guid: 85b4d2dc5b8be5e40b4b37e5ac467aa0, type: 2}
-  - {fileID: 11400000, guid: f6593e5be176caa4bbd3f5d4efc5dba1, type: 2}
-  - {fileID: 11400000, guid: d07543672e1bd3f408d25e744fa39cf9, type: 2}
   allSkills:
   - {fileID: 11400000, guid: f04c834df1cebbd4e8ab409149d7e159, type: 2}
   - {fileID: 11400000, guid: 703781ae4a9d084438325b0dee1e77e3, type: 2}
@@ -7889,10 +7887,10 @@ MonoBehaviour:
     bookMark: 0
   gold: 99999
   jewel: 9999
-  useStage: 1
-  useForge: 1
-  useLab: 1
-  useBar: 1
+  useStage: 0
+  useForge: 0
+  useLab: 0
+  useBar: 0
   bestScore: 7
 --- !u!4 &516545486
 Transform:
@@ -29101,7 +29099,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2001570936}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: c30f039a908c67b41b5f38a253e27e99, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: 9da91fbb8ae769b4892f789582a99b1f, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
@@ -29115,14 +29113,12 @@ VideoPlayer:
   m_TimeUpdateMode: 2
   m_PlaybackSpeed: 1
   m_AudioOutputMode: 2
-  m_TargetAudioSources:
-  - {fileID: 0}
-  m_DirectAudioVolumes:
-  - 0
+  m_TargetAudioSources: []
+  m_DirectAudioVolumes: []
   m_Url: 
-  m_EnabledAudioTracks: 01
-  m_DirectAudioMutes: 00
-  m_ControlledAudioTrackCount: 1
+  m_EnabledAudioTracks: 
+  m_DirectAudioMutes: 
+  m_ControlledAudioTrackCount: 0
   m_PlayOnAwake: 1
   m_SkipOnDrop: 1
   m_Looping: 0

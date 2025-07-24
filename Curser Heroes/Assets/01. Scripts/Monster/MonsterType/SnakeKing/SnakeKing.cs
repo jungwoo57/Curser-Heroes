@@ -5,9 +5,17 @@ using UnityEngine;
 public class SnakeKing : BaseMonster
 {
     public float attackRange = 0.5f;
-
+    [SerializeField] private float attackDelay;
+    [SerializeField] private float offset;
     protected override void Attack()
     {
+        StartCoroutine(DelayAttack());
+    }
+
+    IEnumerator DelayAttack()
+    {
+        yield return new WaitForSeconds(attackDelay);
+        Debug.Log("공격");
         Collider2D weaponCollider = Physics2D.OverlapCircle(transform.position, attackRange, LayerMask.GetMask("Weapon"));
         if (weaponCollider != null)
         {
@@ -22,10 +30,9 @@ public class SnakeKing : BaseMonster
             }
         }
     }
-
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, attackRange);
+        Gizmos.DrawWireSphere(transform.position + Vector3.up * offset, attackRange);
     }
 }
