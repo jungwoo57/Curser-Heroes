@@ -29,6 +29,8 @@ public class SkillManager : MonoBehaviour
     private IndomitableSkill indomitableSkillInstance;
     private ThornDomeSkill thornDomeSkillInstance;
     private DeathBeamSkill deathBeamSkillInstance;
+    private MirrorCursorSkill mirrorCursorSkillInstance;
+    private PredatorSkill predatorSkillInstance;
 
     private float bonusSubWeaponDamage = 0f;
     public float BonusSubWeaponDamage => bonusSubWeaponDamage;
@@ -174,7 +176,7 @@ public class SkillManager : MonoBehaviour
         if (selected.skillName == "매직소드" || selected.skillName == "포이즌필드" || selected.skillName == "수호의 방패" 
             || selected.skillName == "불굴" || selected.skillName == "구원" || selected.skillName == "아이스 에이지" || selected.skillName == "라이트닝" 
             || selected.skillName == "포자폭발" || selected.skillName == "마법 잔상" || selected.skillName == "가시 돔" || selected.skillName == "빛의 파동"
-            || selected.skillName == "그림자 친구")
+            || selected.skillName == "그림자 친구" || selected.skillName == "분신술" || selected.skillName == "포식자")
         {
             DeployPersistentSkill(owned);
         }
@@ -405,6 +407,53 @@ public class SkillManager : MonoBehaviour
                 Debug.LogWarning("ShadowFriendSkill 컴포넌트를 찾을 수 없습니다.");
             }
 
+            return;
+        }
+        else if (skillData.skillName == "분신술")
+        {
+            if (mirrorCursorSkillInstance != null)
+            {
+                Debug.Log("[SkillManager] 분신술 스킬 이미 설치됨");
+                return;
+            }
+
+            GameObject obj = Instantiate(skillData.skillPrefab, cursorWeapon.transform.position, Quaternion.identity);
+            MirrorCursorSkill mirrorSkill = obj.GetComponent<MirrorCursorSkill>();
+            if (mirrorSkill != null)
+            {
+                mirrorSkill.Init(skillInstance, cursorWeapon.transform);
+                mirrorCursorSkillInstance = mirrorSkill;
+                persistentSkillObjects[skillData] = obj;
+            }
+            else
+            {
+                Debug.LogWarning("MirrorCursorSkill 컴포넌트를 찾을 수 없습니다.");
+            }
+
+            return;
+        }
+        else if (skillData.skillName == "포식자")
+        {
+            if (predatorSkillInstance != null)
+            {
+                Debug.Log("[SkillManager] 포식자 스킬 이미 설치됨");
+                return;
+            }
+
+            GameObject obj = Instantiate(skillData.skillPrefab, cursorWeapon.transform.position, Quaternion.identity);
+            obj.transform.SetParent(cursorWeapon.transform);
+
+            PredatorSkill predator = obj.GetComponent<PredatorSkill>();
+            if (predator != null)
+            {
+                predator.Init(skillInstance, cursorWeapon.transform);
+                predatorSkillInstance = predator;
+                persistentSkillObjects[skillData] = obj;
+            }
+            else
+            {
+                Debug.LogWarning("PredatorSkill 컴포넌트를 찾을 수 없습니다.");
+            }
             return;
         }
         Vector3 spawnPos = cursorWeapon.transform.position;
