@@ -21,7 +21,7 @@ MonoBehaviour:
   unlockCost: 2000
   baseDamage: 8
   damagePerLevel: 1.7
-  cooldown: 1
+  cooldown: 0.1
   effect: 2
   weaponType: 2
   rangeShape: 2
@@ -39,7 +39,7 @@ MonoBehaviour:
   LineVisualPrefab: {fileID: 0}
   effectWidth: 1.5
   effectDuration: 0.2
-  effectRadius: 1
+  effectRadius: 2
   stunOnRadial: 0
   stunOnLine: 0
   stunDuration: 1
