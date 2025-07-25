@@ -172,6 +172,16 @@ public class SkillManager : MonoBehaviour
             }
             strengthSkill.Init(owned);
         }
+        else if (selected.skillName == "거인")  // 여기에 추가
+        {
+            var giantSkill = FindObjectOfType<GiantSkill>();
+            if (giantSkill == null)
+            {
+                GameObject obj = new GameObject("GiantSkill");
+                giantSkill = obj.AddComponent<GiantSkill>();
+            }
+            giantSkill.Activate(owned);
+        }
         // 레벨업 또는 신규 습득 후 자동 배치
         if (selected.skillName == "매직소드" || selected.skillName == "포이즌필드" || selected.skillName == "수호의 방패" 
             || selected.skillName == "불굴" || selected.skillName == "구원" || selected.skillName == "아이스 에이지" || selected.skillName == "라이트닝" 

@@ -21,6 +21,7 @@ public class CursorWeapon : MonoBehaviour
 
     private Camera cam; // 마우스 좌표를 월드 좌표로 바꾸기 위해 메인 카메라 참조
     public float damageMultiplier = 1f;
+    public float attackRangeMultiplier = 1f;
 
     void Start()
     {
@@ -43,7 +44,7 @@ public class CursorWeapon : MonoBehaviour
 
         if (currentWeapon == null || weaponUpgrade == null) return;
 
-        float range = currentWeapon.attackRange;
+        float range = currentWeapon.attackRange * attackRangeMultiplier;
         float cooldown = currentWeapon.attackCooldown;
         float damage = GetCurrentDamage(); // ✅ 변경된 부분: 데미지 계산 함수 호출
 
