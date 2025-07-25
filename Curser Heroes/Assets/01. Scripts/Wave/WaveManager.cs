@@ -82,6 +82,16 @@ public class WaveManager : MonoBehaviour
                 SkillManager.Instance.radiantPulseSkillInstance.Init(pulseInstance);
             }
         }
+        if (SkillManager.Instance.shadowFriendSkillInstance != null)
+        {
+            var shadowFriendInstance = SkillManager.Instance.ownedSkills
+                .FirstOrDefault(s => s.skill.skillName == "그림자 친구");
+
+            if (shadowFriendInstance != null)
+            {
+                SkillManager.Instance.shadowFriendSkillInstance.Init(shadowFriendInstance);
+            }
+        }
     }
 
     // 소환된 몬스터 리스트 초기화 및 추가,보스 데이터가 있으면 소환 

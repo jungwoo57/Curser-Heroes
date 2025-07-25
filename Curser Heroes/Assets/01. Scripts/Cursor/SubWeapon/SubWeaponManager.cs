@@ -68,6 +68,11 @@ public class SubWeaponManager : MonoBehaviour
 
     void Start()
     {
+        if (GameManager.Instance)
+        {
+            equippedSubWeapon = GameManager.Instance.subEquipWeapon.data; // 게임매니저가 있으면 넣어주기
+        }
+
         uiPanel.gameObject.SetActive(false);
         HideAllUI();
 
