@@ -9,7 +9,10 @@ public class SubWeaponUpgrade : MonoBehaviour
     public void Init(SubWeaponData subWeaponData)         //무기 설정시 초기화
     {
         currentSubWeapon = subWeaponData;
-        weaponLevel = 0;
+        if (GameManager.Instance)
+        {
+            weaponLevel = GameManager.Instance.subEquipWeapon.level;
+        }
     }
 
     // 강화 함수
