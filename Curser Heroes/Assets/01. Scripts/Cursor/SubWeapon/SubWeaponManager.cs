@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -49,6 +50,11 @@ public class SubWeaponManager : MonoBehaviour
 
     private SubWeaponFollower follower;
 
+    private Coroutine manaFireCoroutine;
+
+    [Header("Mana Regeneration")]
+    public float manaRegenRate = 10f; // 초당 회복량
+
 
     void Awake()
     {
@@ -62,6 +68,11 @@ public class SubWeaponManager : MonoBehaviour
 
     void Start()
     {
+        if (GameManager.Instance)
+        {
+            equippedSubWeapon = GameManager.Instance.subEquipWeapon.data; // 게임매니저가 있으면 넣어주기
+        }
+
         uiPanel.gameObject.SetActive(false);
         HideAllUI();
 
@@ -72,87 +83,86 @@ public class SubWeaponManager : MonoBehaviour
     void Update()
     {
         if (equippedSubWeapon == null) return;
-        
-        HideAllUI();
 
+        //  UI 패널 위치 고정
+        Vector3 screenPos = Camera.main.WorldToScreenPoint(followTarget.position);
+        uiPanel.position = screenPos + Vector3.down * 30f;
+
+        //  쿨다운 감소 
         if (currentCooldown > 0f)
             currentCooldown -= Time.deltaTime;
 
-        Vector3 screenPos = Camera.main.WorldToScreenPoint(followTarget.position);
-        uiPanel.position = screenPos + new Vector3(0, -30, 0);
+        //  UI 그룹 토글 & 갱신
+        AmmoUIGroup.SetActive(equippedSubWeapon.weaponType == SubWeaponType.AmmoBased);
+        ManaUIGroup.SetActive(equippedSubWeapon.weaponType == SubWeaponType.ManaBased);
+        ChargeUIGroup.SetActive(equippedSubWeapon.weaponType == SubWeaponType.ChargeBased);
+
+        // 마나 자동 회복 (언제나)
+        if (equippedSubWeapon.weaponType == SubWeaponType.ManaBased)
+            currentMana = Mathf.Min(maxMana, currentMana + manaRegenRate * Time.deltaTime);
+
         switch (equippedSubWeapon.weaponType)
         {
             case SubWeaponType.AmmoBased:
-                foreach (var ico in ammoIcons)
-                    ico.gameObject.SetActive(true);
                 UpdateAmmoUI();
                 break;
             case SubWeaponType.ManaBased:
-                manaBar.gameObject.SetActive(true);
                 UpdateManaUI();
                 break;
             case SubWeaponType.ChargeBased:
-                if (isCharging)
-                {
-                    chargeEmptyBar.gameObject.SetActive(true);
-                    UpdateChargeUI();
-                }
-                else if (charged)
-                {
-                    chargeCompleteBar.gameObject.SetActive(true);
-                }
+                UpdateChargeUI();
                 break;
         }
 
-        // 입력 처리 (클릭형 / 충전형)
-        if (equippedSubWeapon.weaponType == SubWeaponType.ChargeBased)
+        
+        switch (equippedSubWeapon.weaponType)
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                isCharging = true;
-                currentChargeTime = 0f;
-                charged = false;
-                Debug.Log("[Charge] ▶ 시작");
-
-            }
-            if (isCharging && Input.GetMouseButton(0))
-            {
-                currentChargeTime += Time.deltaTime;
-
-                if (!charged && currentChargeTime >= equippedSubWeapon.requiredChargeTime)
-                {
-                    charged = true;
-                    Debug.Log("[Charge] ✔ 충전 완료, UI 고정");
-                }
-               
-            }
-            if (isCharging && Input.GetMouseButtonUp(0))
-            {
-                isCharging = false;
-                Debug.Log($"[Charge] 해제, charged={charged}");
-
-                if (charged && CanUseSubWeapon())
-                {
-                    Debug.Log("[Charge] 발사!");
+            case SubWeaponType.AmmoBased:
+                if (Input.GetMouseButtonDown(0) && CanUseSubWeapon())
                     UseSubWeapon();
+                break;
+
+            case SubWeaponType.ManaBased:
+                if (Input.GetMouseButtonDown(0))
+                {
+                    
+                    if (manaFireCoroutine == null)
+                        manaFireCoroutine = StartCoroutine(ContinuousManaFire());
                 }
-               
-               
-            }
-        }
-        else if (Input.GetMouseButtonDown(0) && CanUseSubWeapon())
-        {
-            UseSubWeapon();
-        }
+                if (Input.GetMouseButtonUp(0))
+                {
+                   
+                    if (manaFireCoroutine != null)
+                    {
+                        StopCoroutine(manaFireCoroutine);
+                        manaFireCoroutine = null;
+                    }
+                }
+                break;
 
-        // 마나 회복
-        if (equippedSubWeapon.weaponType == SubWeaponType.ManaBased)
-            currentMana = Mathf.Min(100f, currentMana + equippedSubWeapon.manaCost * Time.deltaTime);
-
-        // 탄약 리로드
-        if (equippedSubWeapon.weaponType == SubWeaponType.AmmoBased && Input.GetKeyDown(KeyCode.R))
-            StartReloading();
+            case SubWeaponType.ChargeBased:
+                if (Input.GetMouseButtonDown(0))
+                {
+                    isCharging = true;
+                    charged = false;
+                    currentChargeTime = 0f;
+                }
+                if (isCharging)
+                {
+                    currentChargeTime += Time.deltaTime;
+                    if (!charged && currentChargeTime >= equippedSubWeapon.requiredChargeTime)
+                        charged = true;
+                }
+                if (Input.GetMouseButtonUp(0))
+                {
+                    isCharging = false;
+                    if (charged && CanUseSubWeapon())
+                        UseSubWeapon();
+                }
+                break;
+        }
     }
+
 
     public void EquipSubWeapon(SubWeaponData data)
     {
@@ -222,18 +232,18 @@ public class SubWeaponManager : MonoBehaviour
         }
     }
 
-    void UseSubWeapon()
+    public void UseSubWeapon()
     {
+        //  쿨타임 세팅 (모든 타입)
         currentCooldown = equippedSubWeapon.cooldown;
 
+        // 자원 소모
         if (equippedSubWeapon.weaponType == SubWeaponType.AmmoBased)
             currentAmmo--;
         else if (equippedSubWeapon.weaponType == SubWeaponType.ManaBased)
             currentMana = Mathf.Max(0f, currentMana - equippedSubWeapon.manaCost);
 
-       
-
-        
+        // 발사 이펙트 / 투사체 분기
         if (equippedSubWeapon.rangeShape == SubWeaponRangeShape.ShortLine)
             UseLineEffectAtCursor();
         else if (equippedSubWeapon.rangeType == SubWeaponRangeType.Radial)
@@ -241,7 +251,7 @@ public class SubWeaponManager : MonoBehaviour
         else
             ShootToNearestEnemy();
 
-       
+        // UI 즉시 갱신
         if (equippedSubWeapon.weaponType == SubWeaponType.AmmoBased)
             UpdateAmmoUI();
         else if (equippedSubWeapon.weaponType == SubWeaponType.ManaBased)
@@ -249,18 +259,28 @@ public class SubWeaponManager : MonoBehaviour
         else if (equippedSubWeapon.weaponType == SubWeaponType.ChargeBased)
             UpdateChargeUI();
 
-
+        // ChargeBased 발사 뒤 charged 플래그 초기화
         if (equippedSubWeapon.weaponType == SubWeaponType.ChargeBased)
-        {
-            
-            StartCoroutine(ResetChargedAfterDelay(0.2f));
-        }
+            charged = false;
     }
+
     private IEnumerator ResetChargedAfterDelay(float delay)
     {
         
         yield return new WaitForSeconds(delay);
         charged = false;
+    }
+
+    private IEnumerator ContinuousManaFire()
+    {
+        // 마우스를 누르고 있고, 쿨다운/마나 조건이 되는 한
+        while (Input.GetMouseButton(0) && CanUseSubWeapon())
+        {
+            UseSubWeapon();
+            // 투사체 애니메이션/쿨다운과 동일한 간격으로 대기
+            yield return new WaitForSeconds(equippedSubWeapon.cooldown);
+        }
+        manaFireCoroutine = null;
     }
     void HideAllUI()
     {
@@ -407,24 +427,41 @@ public class SubWeaponManager : MonoBehaviour
 
     void UseForceEffectAtCursor()
     {
+        // 커서 중심 위치
         Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         pos.z = 0f;
 
-        var proj = Instantiate(
-            equippedSubWeapon.projectilePrefab, pos, Quaternion.identity);
-        var rp = proj.GetComponent<RadialProjectile>();
-        if (rp == null)
+        // 1) VFX Zone 생성
+        if (equippedSubWeapon.ForceVisualPrefab != null)
         {
-            Debug.LogError("RadialProjectile 없음");
-            Destroy(proj);
-            return;
+            var zone = Instantiate(
+                equippedSubWeapon.ForceVisualPrefab,
+                pos,
+                Quaternion.identity
+            );
+            float dia = equippedSubWeapon.effectRadius * 2f;
+            zone.transform.localScale = new Vector3(dia, dia, 1f);
+            Destroy(zone, equippedSubWeapon.effectDuration);
         }
 
-        
-        rp.damage = Mathf.RoundToInt(upgradeComponent.GetCurrentDamage());
-        rp.monsterLayer = monsterLayer;
-
+        // 2) OverlapCircleAll로 즉시 데미지 존
+        int dmg = Mathf.RoundToInt(upgradeComponent.GetCurrentDamage());
+        var hits = Physics2D.OverlapCircleAll(
+            pos,
+            equippedSubWeapon.effectRadius,
+            monsterLayer
+        );
+        foreach (var col in hits)
+        {
+            if (col.TryGetComponent<BaseMonster>(out var m) && !m.IsDead)
+            {
+                m.TakeDamage(dmg, equippedSubWeapon);
+                if (equippedSubWeapon.stunOnRadial)
+                    m.Stun(equippedSubWeapon.stunDuration);
+            }
+        }
     }
+
 
 
     void UseLineEffectAtCursor()

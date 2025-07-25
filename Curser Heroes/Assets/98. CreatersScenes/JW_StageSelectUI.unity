@@ -1612,7 +1612,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 85100581}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: c30f039a908c67b41b5f38a253e27e99, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: bacd013f517ea0b4d9839dceb23e9838, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
@@ -1626,14 +1626,12 @@ VideoPlayer:
   m_TimeUpdateMode: 2
   m_PlaybackSpeed: 1
   m_AudioOutputMode: 2
-  m_TargetAudioSources:
-  - {fileID: 0}
-  m_DirectAudioVolumes:
-  - 0
+  m_TargetAudioSources: []
+  m_DirectAudioVolumes: []
   m_Url: 
-  m_EnabledAudioTracks: 01
-  m_DirectAudioMutes: 00
-  m_ControlledAudioTrackCount: 1
+  m_EnabledAudioTracks: 
+  m_DirectAudioMutes: 
+  m_ControlledAudioTrackCount: 0
   m_PlayOnAwake: 1
   m_SkipOnDrop: 1
   m_Looping: 0
@@ -7952,10 +7950,10 @@ MonoBehaviour:
     bookMark: 0
   gold: 99999
   jewel: 9999
-  useStage: 0
-  useForge: 0
-  useLab: 0
-  useBar: 0
+  useStage: 1
+  useForge: 1
+  useLab: 1
+  useBar: 1
   bestScore: 7
 --- !u!4 &516545486
 Transform:

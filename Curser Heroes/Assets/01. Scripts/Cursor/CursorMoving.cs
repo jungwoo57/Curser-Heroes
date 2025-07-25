@@ -1,37 +1,36 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CursorMoving : MonoBehaviour
 {
-    public GameObject cursor;  
-    [Range(0,1f)]
-    public float cursorSpeed;   // 최고속도 1f
+    [Tooltip("0~1")]
+    [Range(0f, 1f)]
+    public float cursorMoving = 0.5f;
+
+    
+
+    private Camera cam;
+
     private void Awake()
     {
-        if (cursor == null)
-        {
-            cursor = this.gameObject; // 커서 할당
-        }
-        cursor.transform.position = Vector3.zero;
+        cam = Camera.main;
+        transform.position = Vector3.zero;
     }
 
     void Update()
     {
-        MouseMoving();
-    }
+        
+        Vector3 mouseScreen = Input.mousePosition;
+        mouseScreen.z = -cam.transform.position.z;
+        Vector3 targetPos = cam.ScreenToWorldPoint(mouseScreen);
+        targetPos.z = 0f;
 
-    void MouseMoving()
-    {
-        Vector2 objectPos = cursor.transform.position;
-        Vector2 mousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y,
-            -Camera.main.transform.position.z));
-        Vector2 moveDir = (mousePos - objectPos).normalized;
-        if (Vector2.Distance(objectPos, mousePos) > 1.0f)
-        {
-           cursor.transform.position = Vector2.Lerp(cursor.transform.position,
-                    mousePos,1f * cursorSpeed);
-        }
-    }
+        
+        transform.position = Vector3.Lerp(
+            transform.position,
+            targetPos,
+            cursorMoving
+        );
 
+       
+    }
 }
