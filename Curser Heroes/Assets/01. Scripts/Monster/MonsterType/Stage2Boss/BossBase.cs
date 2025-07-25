@@ -9,20 +9,20 @@ public class BossBase : MonoBehaviour
     [SerializeField] private float attackRange;
     //public static event Action<BossBase> OnAnyMonsterDamaged; << ???
 
-    [SerializeField] private bool isPattern;
-    [SerializeField] private bool isDie;
+    [SerializeField] protected bool isPattern;
+    [SerializeField] protected bool isDie;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
     private Color originalColor;
     protected Vector3 targetPos;
-    
+    protected List<System.Action> patterns = new List<System.Action>();
     
     protected virtual void Awake()
     {
         // 초기 체력 세팅
         currentHP = data.maxHP;
         // 애니메이터와 스프라이트 렌더러 가져오기
-        animator = GetComponentInChildren<Animator>();
+        //animator = GetComponentInChildren<Animator>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         originalColor = spriteRenderer.color;
     }
@@ -35,7 +35,7 @@ public class BossBase : MonoBehaviour
 
         currentHP -= amount;
         //OnAnyMonsterDamaged?.Invoke(this);
-        animator.SetTrigger("BossDamage");  // 피격 애니메이션
+        //animator.SetTrigger("BossDamage");  // 피격 애니메이션
         StartCoroutine(FlashEffect());
 
         if (currentHP <= 0)
@@ -64,7 +64,7 @@ public class BossBase : MonoBehaviour
     // 죽었을 때 호출
     public void Die()
     {
-        animator.SetTrigger("BossRun"); // 사망 애니메이션
+        //animator.SetTrigger("BossRun"); // 사망 애니메이션
         StartCoroutine(DelayedDeath());
     }
 
