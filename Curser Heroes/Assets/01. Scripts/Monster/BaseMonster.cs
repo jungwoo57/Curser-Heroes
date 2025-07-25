@@ -284,6 +284,19 @@ public abstract class BaseMonster : MonoBehaviour
                 Debug.LogWarning("씬에 SporeExplosionSkill 컴포넌트가 없습니다!");
             }
         }
+        SkillManager.SkillInstance predatorSkill = SkillManager.Instance.ownedSkills.Find(s => s.skill.skillName == "포식자");
+        if (predatorSkill != null)
+        {
+            var predatorSkillComponent = FindObjectOfType<PredatorSkill>();
+            if (predatorSkillComponent != null)
+            {
+                predatorSkillComponent.OnMonsterKilled(transform.position);
+            }
+            else
+            {
+                Debug.LogWarning("씬에 PredatorSkill 컴포넌트가 없습니다!");
+            }
+        }
 
         onDeath?.Invoke(gameObject);
         Destroy(gameObject, deathTime);
