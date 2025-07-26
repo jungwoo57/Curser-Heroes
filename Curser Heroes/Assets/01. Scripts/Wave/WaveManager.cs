@@ -8,7 +8,6 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private CursorWeapon cursorWeapon;
 
     public WaveGroupData waveGroupData;
-    public GameManager gameManager;
     public Spawner spawner;
     public static WaveManager Instance { get; private set; }
     public bool IsWavePlaying => !waveCleared && spawningComplete;
@@ -30,7 +29,6 @@ public class WaveManager : MonoBehaviour
             return;
         }
         Instance = this;
-        gameManager = GameManager.Instance;
     }
 
     [ContextMenu("스폰시키기")]
@@ -164,12 +162,12 @@ public class WaveManager : MonoBehaviour
     void OnWaveCleared()
     {
         clearGold = currentWaveData.CalculateGoldReward();
-        gameManager.AddGold(clearGold);
+        GameManager.Instance.AddGold(clearGold);
 
         int? jewel = currentWaveData.TryGetJewelReward();
         if (jewel.HasValue)
         {
-            gameManager.AddJewel(jewel.Value);
+            GameManager.Instance.AddJewel(jewel.Value);
             clearJewel = jewel.Value;
         }
         else
@@ -183,9 +181,9 @@ public class WaveManager : MonoBehaviour
     public void IncrementWaveIndex()
     {
         currentWaveIndex++;
-        if (gameManager.bestScore < currentWaveIndex)
+        if (GameManager.Instance.bestScore < currentWaveIndex)
         {
-            gameManager.bestScore = currentWaveIndex;
+            GameManager.Instance.bestScore = currentWaveIndex;
         }
     }
     // 맨 마지막에 추가
