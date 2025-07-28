@@ -5,36 +5,42 @@ public class ThornDomeSkill : MonoBehaviour
     private SkillManager.SkillInstance skillInstance;
     [SerializeField] private GameObject thornDomePrefab;
 
-    private const float cooldown = 7f;
+    private float cooldown = 7f;
     private float timer = 0f;
     private GameObject activeThornDome;
 
     private Transform cursorTransform;
+    private Camera mainCamera;
 
     public void Init(SkillManager.SkillInstance instance, Transform cursor)
     {
+        Debug.Log("ThornDomeSkill Init 호출됨");
         skillInstance = instance;
         cursorTransform = cursor;
-        timer = cooldown; // 시작 시 바로 발동 가능
+        mainCamera = Camera.main;
+        timer = cooldown; // 웨이브 시작 시 즉시 발동 가능
     }
-
     public void UpdateLevel(SkillManager.SkillInstance instance)
     {
+        Debug.Log("ThornDomeSkill UpdateLevel 호출됨");
         skillInstance = instance;
     }
-
     private void Update()
     {
         if (activeThornDome == null)
+        {
             timer += Time.deltaTime;
+        }
     }
 
     public void TryTriggerOnClick()
     {
         if (skillInstance == null || activeThornDome != null) return;
+
         if (timer < cooldown) return;
         if (!HasAtLeastOneMonster()) return;
 
+<<<<<<< HEAD
         GameObject closest = FindClosestMonster();
         if (closest == null) return;
 
@@ -52,18 +58,25 @@ public class ThornDomeSkill : MonoBehaviour
         Quaternion rotation = Quaternion.Euler(0f, 0f, angle); 
 >>>>>>> Stashed changes
 
+=======
+        Vector3 spawnPosition = GetSpawnPositionNearClosestMonster();
+>>>>>>> parent of 2752a4f (Test: 스킬 위치값 조정중)
         int damage = skillInstance.GetCurrentLevelData().damage;
 
-        // 회전 적용
-        activeThornDome = Instantiate(thornDomePrefab, spawnPos, rotation);
-        activeThornDome.GetComponent<ThornDome>().Init(damage, cursorTransform, dir);
+        activeThornDome = Instantiate(thornDomePrefab, spawnPosition, Quaternion.identity);
+        activeThornDome.GetComponent<ThornDome>().Init(damage, cursorTransform);
 
         timer = 0f;
     }
 
-    private bool HasAtLeastOneMonster()
+    private Vector3 GetSpawnPositionNearClosestMonster()
     {
-        return GameObject.FindGameObjectsWithTag("Monster").Length > 0;
+        GameObject closest = FindClosestMonster();
+        if (closest == null) return cursorTransform.position;
+
+        Vector2 dir = (closest.transform.position - cursorTransform.position).normalized;
+        float offsetDistance = 0.3f;
+        return cursorTransform.position + (Vector3)(dir * offsetDistance);
     }
 
     private GameObject FindClosestMonster()
@@ -83,5 +96,10 @@ public class ThornDomeSkill : MonoBehaviour
         }
 
         return closest;
+    }
+
+    private bool HasAtLeastOneMonster()
+    {
+        return GameObject.FindGameObjectsWithTag("Monster").Length > 0;
     }
 }
