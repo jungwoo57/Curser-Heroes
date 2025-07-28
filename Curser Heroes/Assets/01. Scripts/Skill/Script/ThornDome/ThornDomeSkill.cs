@@ -46,7 +46,11 @@ public class ThornDomeSkill : MonoBehaviour
 
         // 회전값 계산 (Z축 회전)
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+<<<<<<< Updated upstream
         Quaternion rotation = Quaternion.Euler(0f, 0f, angle); // 기본 이미지가 위를 보고 있으므로 -90도 보정
+=======
+        Quaternion rotation = Quaternion.Euler(0f, 0f, angle); 
+>>>>>>> Stashed changes
 
         int damage = skillInstance.GetCurrentLevelData().damage;
 
