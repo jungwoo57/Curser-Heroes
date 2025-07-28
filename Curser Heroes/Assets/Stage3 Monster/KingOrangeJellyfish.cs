@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class KingOrangeparipari : Orangeparipari
+public class KingOrangeparipari : OrangeJellyfish
 {
     [Header("Spawn Settings")]
     [SerializeField] private GameObject orangePrefab;

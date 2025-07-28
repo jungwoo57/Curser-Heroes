@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Orangeparipari : BaseMonster
+public class OrangeJellyfish : BaseMonster
 {
     [Header("Cursor Attack Settings")]
     [SerializeField] private float attackRange = 1.2f;

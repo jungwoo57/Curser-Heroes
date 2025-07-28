@@ -7,7 +7,7 @@ public class CursorMoving : MonoBehaviour
     [Range(0, 1f)]
     public float cursorSpeed = 1f;
 
-    private float originalSpeed;
+    private float originalSpeed;   
     private bool isStunned;
 
     private void Awake()
@@ -42,7 +42,15 @@ public class CursorMoving : MonoBehaviour
     private IEnumerator StunCoroutine(float duration)
     {
         isStunned = true;
+
+      
+        float prevSpeed = cursorSpeed;
+        cursorSpeed = 0f;
+
         yield return new WaitForSeconds(duration);
+
+       
+        cursorSpeed = prevSpeed;
         isStunned = false;
     }
 }
