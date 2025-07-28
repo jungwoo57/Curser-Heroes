@@ -573,7 +573,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cursorWeapon: {fileID: 625156783}
   waveGroupData: {fileID: 11400000, guid: 9fa0573a5e50445489f8e2a2d6d96d27, type: 2}
-  gameManager: {fileID: 1252401771}
   spawner: {fileID: 956043386}
   clearGold: 0
   clearJewel: 0
@@ -2125,6 +2124,7 @@ MonoBehaviour:
   weaponUpgrade: {fileID: 625156785}
   weaponSprite: {fileID: 625156784}
   damageMultiplier: 1
+  attackRangeMultiplier: 1
 --- !u!212 &625156784
 SpriteRenderer:
   m_ObjectHideFlags: 0

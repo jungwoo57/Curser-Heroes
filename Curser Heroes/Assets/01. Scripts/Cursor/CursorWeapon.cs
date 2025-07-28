@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class CursorWeapon : MonoBehaviour
 {
-    public WeaponData currentWeapon;    //무기 정보
-    public LayerMask targetLayer;       //공격대상 설정
-    public WeaponLife weaponLife;       // 분리된 목숨 관리 
-    public WeaponUpgrade weaponUpgrade;      // 무기 레벨 관리
+    public WeaponData currentWeapon;    // 무기 정보
+    public LayerMask targetLayer;       // 공격 대상 설정
+    public WeaponLife weaponLife;       // 분리된 목숨 관리
+    public WeaponUpgrade weaponUpgrade; // 무기 레벨 관리
     public SpriteRenderer weaponSprite;
     private int sweepAttackCounter = 0;
     private Dictionary<BaseMonster, float> lastHitTimesBase = new Dictionary<BaseMonster, float>();
@@ -17,11 +17,11 @@ public class CursorWeapon : MonoBehaviour
 
     public static event Action<CursorWeapon> OnAnyMonsterDamaged;
 
-    private Collider2D   collider;
-    //공격 쿨타임을 위해 몬스터 별로 마지막 공격한 시간을 저장, 몬스터 마다 각각 쿨타임을 적용할 수 있다.
+    private Collider2D collider;
 
-    private Camera cam;      // 마우스 좌표를 월드 좌표로 바꾸기 위해 메인 카메라를 참조.
+    private Camera cam; // 마우스 좌표를 월드 좌표로 바꾸기 위해 메인 카메라 참조
     public float damageMultiplier = 1f;
+    public float attackRangeMultiplier = 1f;
 
     void Start()
     {
@@ -32,38 +32,26 @@ public class CursorWeapon : MonoBehaviour
     void Update()
     {
         if (WeaponManager.Instance.isDie) return;
-        //AutoAttackCursor();      //커서 근처에 있는 몬스터를 감지하고 쿨타임에 따라 자동으로 공격, 프레임마다 호출
-    } 
+        // AutoAttackCursor(); // 커서 근처 몬스터를 감지하고 쿨타임에 따라 공격
+    }
 
-    private void AutoAttackCursor()      //커서의 좌표설정 
+    private void AutoAttackCursor()
     {
-        Vector3 mousePos = Input.mousePosition;             
+        Vector3 mousePos = Input.mousePosition;
         Vector3 worldPos = cam.ScreenToWorldPoint(mousePos);
-        
+
         Vector2 cursorPos = new Vector2(worldPos.x, worldPos.y);
 
         if (currentWeapon == null || weaponUpgrade == null) return;
-       
-       
-        float range = currentWeapon.attackRange;         //커서의 범위 값
-        float cooldown = currentWeapon.attackCooldown;   //쿨타임 값
-        float damage = currentWeapon.GetDamage(weaponUpgrade.weaponLevel); // 강화레벨을 포함 시킨 무기 공격력 값
 
-        var strengthSkill = SkillManager.Instance.ownedSkills
-            .Find(s => s.skill.skillName == "근력 훈련");
+        float range = currentWeapon.attackRange * attackRangeMultiplier;
+        float cooldown = currentWeapon.attackCooldown;
+        float damage = GetCurrentDamage(); // ✅ 변경된 부분: 데미지 계산 함수 호출
 
-        if (strengthSkill != null)
-        {
-            int bonusDamage = strengthSkill.skill.levelDataList[strengthSkill.level - 1].damage;
-            damage += bonusDamage;
-        }
-        damage *= damageMultiplier;
-
-        Collider2D[] hits = Physics2D.OverlapCircleAll(cursorPos, range, targetLayer);   // 커서 위치를 중심으로 원으로 범위 탐지
+        Collider2D[] hits = Physics2D.OverlapCircleAll(cursorPos, range, targetLayer);
 
         foreach (var hit in hits)
         {
-            // 일반 몬스터 감지
             BaseMonster monster = hit.GetComponent<BaseMonster>();
             if (monster != null)
             {
@@ -72,10 +60,9 @@ public class CursorWeapon : MonoBehaviour
 
                 if (Time.time - lastHitTime >= cooldown)
                 {
-                    sweepAttackCounter++; // ⬅️ 카운트 증가
+                    sweepAttackCounter++;
 
                     int finalDamage = Mathf.RoundToInt(damage);
-
                     int triggerCount = SkillManager.Instance.criticalSweepEveryNth;
 
                     if (triggerCount > 0)
@@ -95,7 +82,7 @@ public class CursorWeapon : MonoBehaviour
                     lastHitTimesBase[monster] = Time.time;
                     lastHitMonster = monster;
 
-                    Debug.Log($"[커서공격] 일반몬스터에게 {finalDamage} 데미지 입힘 (기본: {damage}, 배수: {damageMultiplier})");
+                    Debug.Log($"[커서공격] 일반몬스터에게 {finalDamage} 데미지 입힘");
 
                     TryTriggerMeteorSkill();
                     TryTriggerLightningSkill();
@@ -107,7 +94,6 @@ public class CursorWeapon : MonoBehaviour
                 continue;
             }
 
-            //보스 몬스터 감지
             BossStats boss = hit.GetComponent<BossStats>();
             if (boss != null)
             {
@@ -116,10 +102,9 @@ public class CursorWeapon : MonoBehaviour
 
                 if (Time.time - lastHitTime >= cooldown)
                 {
-                    sweepAttackCounter++; // ⬅️ 카운트 증가
+                    sweepAttackCounter++;
 
                     int finalDamage = Mathf.RoundToInt(damage);
-
                     int triggerCount = SkillManager.Instance.criticalSweepEveryNth;
 
                     if (triggerCount > 0)
@@ -145,13 +130,30 @@ public class CursorWeapon : MonoBehaviour
 
                     OnAnyMonsterDamaged?.Invoke(this);
                 }
-
             }
-           
+        }
+    }
+
+    public int GetCurrentDamage()
+    {
+        if (currentWeapon == null || weaponUpgrade == null) return 0;
+
+        float damage = currentWeapon.GetDamage(weaponUpgrade.weaponLevel);
+
+        var strengthSkill = SkillManager.Instance.ownedSkills
+            .Find(s => s.skill.skillName == "근력 훈련");
+
+        if (strengthSkill != null)
+        {
+            int bonusDamage = strengthSkill.skill.levelDataList[strengthSkill.level - 1].damage;
+            damage += bonusDamage;
         }
 
+        damage *= damageMultiplier;
 
+        return Mathf.RoundToInt(damage);
     }
+
     private void TryTriggerMeteorSkill()
     {
         if (SkillManager.Instance == null) return;
@@ -162,6 +164,7 @@ public class CursorWeapon : MonoBehaviour
             SkillManager.Instance.TrySpawnMeteorSkill(meteorSkill);
         }
     }
+
     private void TryTriggerLightningSkill()
     {
         if (SkillManager.Instance.lightningSkill == null || lastHitMonster == null)
@@ -169,19 +172,21 @@ public class CursorWeapon : MonoBehaviour
 
         SkillManager.Instance.lightningSkill.TryTriggerLightning(lastHitMonster);
     }
-    public void SetWeapon(WeaponData weaponData)     //외부에서 무기를 장착할 수 있게 해주는 초기화 함수
+
+    public void SetWeapon(WeaponData weaponData)
     {
         currentWeapon = weaponData;
         weaponSprite.sprite = currentWeapon.weaponImage;
     }
 
-    private void OnDrawGizmos()       //레인지 범위 시각효과(에디터 전용) 
+    private void OnDrawGizmos()
     {
         if (currentWeapon == null) return;
 
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, currentWeapon.attackRange);
     }
+
     public void ResetSweepCounter()
     {
         sweepAttackCounter = 0;

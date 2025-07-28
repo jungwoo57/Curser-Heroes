@@ -3,7 +3,6 @@
 public class PulseEffect : MonoBehaviour
 {
     private Camera mainCam;
-    private Vector3 offset = new Vector3(0f, -3f, 0f);  // 마우스보다 아래쪽
 
     private void Start()
     {
@@ -14,7 +13,7 @@ public class PulseEffect : MonoBehaviour
     {
         Vector3 mouseWorldPos = mainCam.ScreenToWorldPoint(Input.mousePosition);
         mouseWorldPos.z = 0f;
-        transform.position = mouseWorldPos + offset;  // 항상 offset만큼 아래에 위치
+        transform.position = mouseWorldPos;
     }
 
     private void OnTriggerEnter2D(Collider2D other)

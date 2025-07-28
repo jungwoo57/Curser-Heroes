@@ -251,6 +251,13 @@ public class SubWeaponManager : MonoBehaviour
         else
             ShootToNearestEnemy();
 
+        if (SkillManager.Instance != null)
+        {
+            SkillManager.Instance.TryShootFireball();
+            SkillManager.Instance.TryTriggerThornDomeOnClick();
+            SkillManager.Instance.TryTriggerDeathBeam();
+        }
+
         // UI 즉시 갱신
         if (equippedSubWeapon.weaponType == SubWeaponType.AmmoBased)
             UpdateAmmoUI();

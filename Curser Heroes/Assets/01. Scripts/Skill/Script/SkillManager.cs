@@ -29,6 +29,8 @@ public class SkillManager : MonoBehaviour
     private IndomitableSkill indomitableSkillInstance;
     private ThornDomeSkill thornDomeSkillInstance;
     private DeathBeamSkill deathBeamSkillInstance;
+    private MirrorCursorSkill mirrorCursorSkillInstance;
+    private PredatorSkill predatorSkillInstance;
 
     private float bonusSubWeaponDamage = 0f;
     public float BonusSubWeaponDamage => bonusSubWeaponDamage;
@@ -170,11 +172,21 @@ public class SkillManager : MonoBehaviour
             }
             strengthSkill.Init(owned);
         }
+        else if (selected.skillName == "거인")  // 여기에 추가
+        {
+            var giantSkill = FindObjectOfType<GiantSkill>();
+            if (giantSkill == null)
+            {
+                GameObject obj = new GameObject("GiantSkill");
+                giantSkill = obj.AddComponent<GiantSkill>();
+            }
+            giantSkill.Activate(owned);
+        }
         // 레벨업 또는 신규 습득 후 자동 배치
         if (selected.skillName == "매직소드" || selected.skillName == "포이즌필드" || selected.skillName == "수호의 방패" 
             || selected.skillName == "불굴" || selected.skillName == "구원" || selected.skillName == "아이스 에이지" || selected.skillName == "라이트닝" 
             || selected.skillName == "포자폭발" || selected.skillName == "마법 잔상" || selected.skillName == "가시 돔" || selected.skillName == "빛의 파동"
-            || selected.skillName == "그림자 친구")
+            || selected.skillName == "그림자 친구" || selected.skillName == "분신술" || selected.skillName == "포식자")
         {
             DeployPersistentSkill(owned);
         }
@@ -407,6 +419,53 @@ public class SkillManager : MonoBehaviour
 
             return;
         }
+        else if (skillData.skillName == "분신술")
+        {
+            if (mirrorCursorSkillInstance != null)
+            {
+                Debug.Log("[SkillManager] 분신술 스킬 이미 설치됨");
+                return;
+            }
+
+            GameObject obj = Instantiate(skillData.skillPrefab, cursorWeapon.transform.position, Quaternion.identity);
+            MirrorCursorSkill mirrorSkill = obj.GetComponent<MirrorCursorSkill>();
+            if (mirrorSkill != null)
+            {
+                mirrorSkill.Init(skillInstance, cursorWeapon.transform);
+                mirrorCursorSkillInstance = mirrorSkill;
+                persistentSkillObjects[skillData] = obj;
+            }
+            else
+            {
+                Debug.LogWarning("MirrorCursorSkill 컴포넌트를 찾을 수 없습니다.");
+            }
+
+            return;
+        }
+        else if (skillData.skillName == "포식자")
+        {
+            if (predatorSkillInstance != null)
+            {
+                Debug.Log("[SkillManager] 포식자 스킬 이미 설치됨");
+                return;
+            }
+
+            GameObject obj = Instantiate(skillData.skillPrefab, cursorWeapon.transform.position, Quaternion.identity);
+            obj.transform.SetParent(cursorWeapon.transform);
+
+            PredatorSkill predator = obj.GetComponent<PredatorSkill>();
+            if (predator != null)
+            {
+                predator.Init(skillInstance, cursorWeapon.transform);
+                predatorSkillInstance = predator;
+                persistentSkillObjects[skillData] = obj;
+            }
+            else
+            {
+                Debug.LogWarning("PredatorSkill 컴포넌트를 찾을 수 없습니다.");
+            }
+            return;
+        }
         Vector3 spawnPos = cursorWeapon.transform.position;
         GameObject newObj = Instantiate(skillData.skillPrefab, spawnPos, Quaternion.identity);
         persistentSkillObjects[skillData] = newObj;
@@ -461,6 +520,54 @@ public class SkillManager : MonoBehaviour
         }
     }
 
+    public void OnMonsterKilled(Vector3 deathPosition)
+    {
+        SkillInstance explodeSkill = ownedSkills.Find(s => s.skill.skillName == "장렬한 퇴장");
+        if (explodeSkill == null) return;
+
+        SkillLevelData data = explodeSkill.skill.levelDataList[explodeSkill.level - 1];
+        int damage = data.damage;
+        float radius = 1.5f;
+
+        if (explodeSkillComponent != null)
+        {
+            explodeSkillComponent.TriggerExplosion(deathPosition, damage, radius, LayerMask.GetMask("Monster"));
+        }
+        else
+        {
+            Debug.LogWarning("ExplodeOnKillSkill 컴포넌트가 없습니다!");
+        }
+    }
+
+    void ShowRewardSelection()
+    {
+        GameObject canvas = GameObject.Find("Canvas"); 
+        if (canvas == null)
+        {
+            Debug.LogError("Canvas를 찾을 수 없습니다.");
+            return;
+        }
+
+        GameObject ui = Instantiate(rewardSelectUIPrefab, canvas.transform, false);
+        ui.GetComponent<RewardSelectUI>().Init(OnRewardSelected);
+    }
+
+    void OnRewardSelected(int index)
+    {
+        switch (index)
+        {
+            case 0:WeaponManager.Instance.weaponLife.RecoverLife(); break;
+            case 1: GameManager.Instance.AddGold(100); break;
+            case 2: GameManager.Instance.AddJewel(10); break;
+        }
+        WaveManager.Instance.IncrementWaveIndex();
+        WaveManager.Instance.StartWave();
+    }
+
+    List<SkillData> GetRandomSkills(List<SkillData> source, int count)
+    {
+        return source.OrderBy(x => Random.value).Take(count).ToList();
+    }
     public void TryShootFireball()
     {
         SkillInstance fireballSkill = ownedSkills.FirstOrDefault(s => s.skill.skillName == FIREBALL_SKILL_NAME);
@@ -511,55 +618,6 @@ public class SkillManager : MonoBehaviour
         {
             Debug.LogWarning("FireballSkill 컴포넌트를 찾을 수 없습니다.");
         }
-    }
-
-    public void OnMonsterKilled(Vector3 deathPosition)
-    {
-        SkillInstance explodeSkill = ownedSkills.Find(s => s.skill.skillName == "장렬한 퇴장");
-        if (explodeSkill == null) return;
-
-        SkillLevelData data = explodeSkill.skill.levelDataList[explodeSkill.level - 1];
-        int damage = data.damage;
-        float radius = 1.5f;
-
-        if (explodeSkillComponent != null)
-        {
-            explodeSkillComponent.TriggerExplosion(deathPosition, damage, radius, LayerMask.GetMask("Monster"));
-        }
-        else
-        {
-            Debug.LogWarning("ExplodeOnKillSkill 컴포넌트가 없습니다!");
-        }
-    }
-
-    void ShowRewardSelection()
-    {
-        GameObject canvas = GameObject.Find("Canvas"); 
-        if (canvas == null)
-        {
-            Debug.LogError("Canvas를 찾을 수 없습니다.");
-            return;
-        }
-
-        GameObject ui = Instantiate(rewardSelectUIPrefab, canvas.transform, false);
-        ui.GetComponent<RewardSelectUI>().Init(OnRewardSelected);
-    }
-
-    void OnRewardSelected(int index)
-    {
-        switch (index)
-        {
-            case 0:WeaponManager.Instance.weaponLife.RecoverLife(); break;
-            case 1: GameManager.Instance.AddGold(100); break;
-            case 2: GameManager.Instance.AddJewel(10); break;
-        }
-        WaveManager.Instance.IncrementWaveIndex();
-        WaveManager.Instance.StartWave();
-    }
-
-    List<SkillData> GetRandomSkills(List<SkillData> source, int count)
-    {
-        return source.OrderBy(x => Random.value).Take(count).ToList();
     }
 
     public void TrySpawnMeteorSkill(SkillInstance skillInstance)

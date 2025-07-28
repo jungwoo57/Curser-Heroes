@@ -144,7 +144,7 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: -0.36363637}
+    pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 24, y: 1.1}
     newSize: {x: 24, y: 1.1}
     adaptiveTilingThreshold: 0.5
@@ -153,10 +153,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -12, y: 0.58}
-      - {x: 12, y: 0.58}
-      - {x: 12, y: 1.3199999}
-      - {x: -12, y: 1.3199999}
+    - - {x: -12, y: -0.37}
+      - {x: 12, y: -0.37}
+      - {x: 12, y: 0.37}
+      - {x: -12, y: 0.37}
   m_UseDelaunayMesh: 0
 --- !u!1 &3278545197892436799
 GameObject:
@@ -184,7 +184,7 @@ Transform:
   m_GameObject: {fileID: 3278545197892436799}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 24, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -393,3 +393,5 @@ MonoBehaviour:
   beamPivot: {fileID: 2867326353836248955}
   beamSprite: {fileID: 7284581165807808379}
   beamColliderObj: {fileID: 3278545197892436799}
+  deathBeamPrefab: {fileID: 0}
+  cursorWeapon: {fileID: 0}
