@@ -75,8 +75,7 @@ public abstract class BaseMonster : MonoBehaviour
     protected virtual void Update()
     {
         if (isStun) return;
-        if (attackTimer > 0f)
-            attackTimer -= Time.deltaTime;
+        attackTimer -= Time.deltaTime;
 
         // 공격 준비 시 색상 천천히 연한 빨강(분홍)으로 변화
         if (attackTimer <= 1.2f && attackTimer + Time.deltaTime > 1.2f)
@@ -103,13 +102,14 @@ public abstract class BaseMonster : MonoBehaviour
             {
                 if (attackColorCoroutine != null)
                     StopCoroutine(attackColorCoroutine);
-
-                attackColorCoroutine = StartCoroutine(ChangeColorGradually(Color.white, 0.3f));
+                attackColorCoroutine =
+                    StartCoroutine(ChangeColorGradually(Color.white, 0.3f));
             }
+            if (animator != null)
+                animator.SetTrigger("Effect");
 
-
-            animator.SetTrigger("Effect");
-            attackTimer = UnityEngine.Random.Range(minAttackCooldown, maxAttackCooldown);
+            
+            attackTimer = attackCooldown;
         }
     }
 
