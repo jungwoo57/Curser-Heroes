@@ -4,7 +4,7 @@ public class MeteorSkill : MonoBehaviour
 {
     private int damage;
     private float fallSpeed = 10f;
-    private Vector3 targetPosition;
+    [SerializeField]private Vector3 targetPosition;
 
     public void Init(int dmg, Vector3 targetPos)
     {
