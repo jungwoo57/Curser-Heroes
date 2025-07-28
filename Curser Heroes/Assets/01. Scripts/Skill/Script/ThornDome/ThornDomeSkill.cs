@@ -40,27 +40,10 @@ public class ThornDomeSkill : MonoBehaviour
         if (timer < cooldown) return;
         if (!HasAtLeastOneMonster()) return;
 
-<<<<<<< HEAD
         GameObject closest = FindClosestMonster();
         if (closest == null) return;
 
-        // 방향 계산
-        Vector2 dir = (closest.transform.position - cursorTransform.position).normalized;
-
-        // 커서 기준 0.8f 떨어진 위치
-        Vector3 spawnPos = cursorTransform.position + (Vector3)(dir * 0.3f);
-
-        // 회전값 계산 (Z축 회전)
-        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-<<<<<<< Updated upstream
-        Quaternion rotation = Quaternion.Euler(0f, 0f, angle); // 기본 이미지가 위를 보고 있으므로 -90도 보정
-=======
-        Quaternion rotation = Quaternion.Euler(0f, 0f, angle); 
->>>>>>> Stashed changes
-
-=======
         Vector3 spawnPosition = GetSpawnPositionNearClosestMonster();
->>>>>>> parent of 2752a4f (Test: 스킬 위치값 조정중)
         int damage = skillInstance.GetCurrentLevelData().damage;
 
         activeThornDome = Instantiate(thornDomePrefab, spawnPosition, Quaternion.identity);

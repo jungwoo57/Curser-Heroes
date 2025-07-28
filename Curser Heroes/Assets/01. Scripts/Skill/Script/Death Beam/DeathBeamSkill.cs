@@ -9,7 +9,7 @@ public class DeathBeamSkill : MonoBehaviour
     [SerializeField] private float procChance = 0.05f;  // 발동 확률 (5%)
     [SerializeField] private int hitCount = 5;          // 총 타격 횟수
     [SerializeField] private float tickInterval = 0.05f;
-    [SerializeField] private float targetSearchRadius = 20f;
+    [SerializeField] private float targetSearchRadius = 10f;
 
     [Header("Beam Prefab Parts")]
     [SerializeField] private Transform beamPivot;         // 회전 적용 대상 (기준 오브젝트)

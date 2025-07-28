@@ -21,6 +21,8 @@ public class ThornDome : MonoBehaviour
         this.cursorTransform = cursor;
         Debug.Log($"[ThornDome] Init: 데미지 {damage}");
         RotateTowardClosestMonster();
+
+        transform.position = cursorTransform.position + transform.up * 0.3f;
     }
 
     private void RotateTowardClosestMonster()
@@ -30,14 +32,14 @@ public class ThornDome : MonoBehaviour
 
         Vector2 dir = (closest.transform.position - cursorTransform.position).normalized;
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0f, 0f, angle);
+        transform.rotation = Quaternion.Euler(0f, 0f, angle -90);
     }
 
     void Update()
     {
         if (cursorTransform != null)
         {
-            transform.position = cursorTransform.position + transform.right * 0.3f;
+            transform.position = cursorTransform.position + transform.up * 0.3f;
         }
     }
 

@@ -389,9 +389,9 @@ MonoBehaviour:
   procChance: 0.05
   hitCount: 5
   tickInterval: 0.05
-  targetSearchRadius: 20
-  beamPivot: {fileID: 2867326353836248955}
-  beamSprite: {fileID: 7284581165807808379}
-  beamColliderObj: {fileID: 3278545197892436799}
+  targetSearchRadius: 10
+  beamPivot: {fileID: 0}
+  beamSprite: {fileID: 0}
+  beamColliderObj: {fileID: 0}
   deathBeamPrefab: {fileID: 0}
   cursorWeapon: {fileID: 0}
