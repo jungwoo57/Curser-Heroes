@@ -8,6 +8,7 @@ public class HealthEagleBoss : BossBase
    [Header("덤벨 공격 관련")]
    public GameObject dumbbell;  // 아령발사체 프리펩
    [SerializeField] private float dumbbelSpeed; // 덤벨 날아가는 속도
+   [SerializeField] private float attackWaitTime;
    [SerializeField] private float dumbbelAttackDelay;
    [SerializeField] private Transform firePoint; // 발사 위치
    
@@ -18,6 +19,7 @@ public class HealthEagleBoss : BossBase
    [SerializeField] private float areaMoveTime;  //경고 범위 따라다니는 시간
    [SerializeField] private GameObject warningArea;
    [SerializeField] private float jumpAttackRange;
+   [SerializeField] private GameObject jumpEffect;
    float jumpTime = 0.5f;  // 날아오르는 시간
 
    [Header("바람공격 관련")] 
@@ -25,7 +27,7 @@ public class HealthEagleBoss : BossBase
    [SerializeField] private float windSpeed;  // 바람 속도
    [SerializeField] private float windDuration;  // 바람 지속시간
    [SerializeField] private float windWaitTime; // 전조 시간
-
+   
    [Header("쿨다운")] 
    [SerializeField] private float[] curCoolDown;
 
@@ -44,9 +46,10 @@ public class HealthEagleBoss : BossBase
       patterns.Add(() => StartCoroutine(Pattern2()));
       patterns.Add(() => StartCoroutine(Pattern3()));
    }
-   private void Update()
+   protected override void Update()
    {
       if (isDie) return;
+      base.Update();
       for (int i = 0; i < curCoolDown.Length; i++)
       {
          curCoolDown[i] += Time.deltaTime;
@@ -67,6 +70,7 @@ public class HealthEagleBoss : BossBase
 
       if (canPatterns.Count > 0)
       {
+         canMove = true;
          int i =Random.Range(0, canPatterns.Count);
          int index = canPatterns[i];
          patterns[index]?.Invoke();
@@ -78,11 +82,13 @@ public class HealthEagleBoss : BossBase
    {
       curCoolDown[0] = 0;
       isPattern = true; //패턴 시작
+      animator.SetTrigger("Pattern1");
       yield return new WaitForSeconds(dumbbelAttackDelay);
       DumbbellAttack();
-      yield return new WaitForSeconds(dumbbelAttackDelay);
+      yield return new WaitForSeconds(attackWaitTime);
       DumbbellAttack();
       yield return new WaitForSeconds(patternWaitTime);
+      yield return new WaitForSeconds(2.0f);
       curCoolDown[0] = 0;
       isPattern = false; // 패턴 종료
    }
@@ -96,6 +102,7 @@ public class HealthEagleBoss : BossBase
       yield return StartCoroutine(JumpAttack());
       //StartCoroutine(JumpAttack());
       yield return new WaitForSeconds(patternWaitTime);
+      yield return new WaitForSeconds(2.0f);
       curCoolDown[1] = 0;
       isPattern = false;
    }
@@ -106,6 +113,7 @@ public class HealthEagleBoss : BossBase
       yield return null;
       yield return StartCoroutine(WindAttack());
       yield return new WaitForSeconds(patternWaitTime);
+      yield return new WaitForSeconds(2.0f);
       curCoolDown[2] = 0; // 쿨타임 초기화
       isPattern = false;
    }
@@ -114,7 +122,6 @@ public class HealthEagleBoss : BossBase
    {
       if (dumbbell != null && firePoint != null)
       {
-         Debug.Log("덤벨공격");
          CheckTarget();
          Vector3 direction = (targetPos - firePoint.position).normalized;
          GameObject projectile = Instantiate(dumbbell, firePoint.position, Quaternion.identity);
@@ -126,6 +133,9 @@ public class HealthEagleBoss : BossBase
 
    IEnumerator JumpAttack()
    {
+      animator.SetTrigger("Pattern2_Jump");
+      yield return new WaitForSeconds(jumpTime);
+      Vector3 jumpPos = jumpEffect.transform.position;
       float elapsedTime = 0;
       Vector3 startPos = transform.position;
       Vector3 flyPos = transform.position + Vector3.up * jumpDistance;  // 올라갈 위치
@@ -142,7 +152,6 @@ public class HealthEagleBoss : BossBase
       while (elapsedTime <= areaMoveTime)   // 경고범위가 따라다니는 시간
       {
          CheckTarget();
-         Debug.Log("타겟 위치" + targetPos);
          warningArea.transform.position = targetPos;
          elapsedTime += Time.deltaTime;
          yield return null;
@@ -152,6 +161,9 @@ public class HealthEagleBoss : BossBase
       ///////////////////////
       elapsedTime = 0;
       startPos = transform.position;
+      animator.SetTrigger("Pattern2_Attack");
+      yield return null;
+      animator.speed = 0;
       while (elapsedTime <= fallTime) // 떨어지기
       {
          warningArea.transform.position = fallPos;
@@ -159,14 +171,18 @@ public class HealthEagleBoss : BossBase
          elapsedTime += Time.deltaTime;
          yield return null;
       }
+
+      animator.speed = 1.0f;
       warningCol.enabled = true;  // warningArea에서 공격 처리
       yield return new WaitForSeconds(0.3f); // 판정 시간
+      animator.SetTrigger("Idle");
       warningCol.enabled = false;
       warningArea.SetActive(false);
    }
 
    IEnumerator WindAttack()
    {
+      animator.SetTrigger("Pattern3");
       yield return new WaitForSeconds(windWaitTime);
       bossWind.transform.position = firePoint.position; // 위치 초기화
       bossWind.SetActive(true);
