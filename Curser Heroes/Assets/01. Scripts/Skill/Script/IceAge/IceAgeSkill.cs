@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using static SkillManager;
 
 public class IceAgeSkill : MonoBehaviour
 {
@@ -37,8 +38,7 @@ public class IceAgeSkill : MonoBehaviour
 
         GameObject field = Instantiate(iceFieldPrefab, cursorPos, Quaternion.identity);
 
-        int level = Mathf.Clamp(skillInstance.level, 1, skillInstance.skill.levelDataList.Count);
-        int damage = skillInstance.skill.levelDataList[level - 1].damage;
+        int damage = skillInstance.skill.levelDataList[skillInstance.level- 1].damage;
 
         field.GetComponent<IceAgeField>().Setup(damage);
         spawnedFields.Add(field);

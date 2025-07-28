@@ -1,36 +1,56 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class CursorMoving : MonoBehaviour
 {
-    [Tooltip("0~1")]
-    [Range(0f, 1f)]
-    public float cursorMoving = 0.5f;
+    [Header("Movement Settings")]
+    [Range(0, 1f)]
+    public float cursorSpeed = 1f;
 
-    
-
-    private Camera cam;
+    private float originalSpeed;   
+    private bool isStunned;
 
     private void Awake()
     {
-        cam = Camera.main;
+        originalSpeed = cursorSpeed;
         transform.position = Vector3.zero;
     }
 
-    void Update()
+    private void Update()
     {
-        
-        Vector3 mouseScreen = Input.mousePosition;
-        mouseScreen.z = -cam.transform.position.z;
-        Vector3 targetPos = cam.ScreenToWorldPoint(mouseScreen);
-        targetPos.z = 0f;
+        if (!isStunned)
+            MouseMoving();
+    }
 
-        
-        transform.position = Vector3.Lerp(
-            transform.position,
-            targetPos,
-            cursorMoving
+    void MouseMoving()
+    {
+        Vector2 objectPos = transform.position;
+        Vector2 mousePos = Camera.main.ScreenToWorldPoint(
+            new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z)
         );
+        if (Vector2.Distance(objectPos, mousePos) > 1.0f)
+            transform.position = Vector2.Lerp(objectPos, mousePos, cursorSpeed);
+    }
+
+    
+    public void Stun(float duration)
+    {
+        if (isStunned) return;
+        StartCoroutine(StunCoroutine(duration));
+    }
+
+    private IEnumerator StunCoroutine(float duration)
+    {
+        isStunned = true;
+
+      
+        float prevSpeed = cursorSpeed;
+        cursorSpeed = 0f;
+
+        yield return new WaitForSeconds(duration);
 
        
+        cursorSpeed = prevSpeed;
+        isStunned = false;
     }
 }

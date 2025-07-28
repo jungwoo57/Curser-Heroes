@@ -40,6 +40,9 @@ public class ThornDomeSkill : MonoBehaviour
         if (timer < cooldown) return;
         if (!HasAtLeastOneMonster()) return;
 
+        GameObject closest = FindClosestMonster();
+        if (closest == null) return;
+
         Vector3 spawnPosition = GetSpawnPositionNearClosestMonster();
         int damage = skillInstance.GetCurrentLevelData().damage;
 
