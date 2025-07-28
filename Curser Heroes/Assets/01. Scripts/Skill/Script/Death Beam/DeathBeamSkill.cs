@@ -6,23 +6,32 @@ public class DeathBeamSkill : MonoBehaviour
     private SkillManager.SkillInstance skillInstance;
 
     [Header("Death Beam Settings")]
-    [SerializeField] private float procChance = 0.05f;  // 발동 확률 (5%)
-    [SerializeField] private int hitCount = 5;          // 총 타격 횟수
+    [SerializeField] private float procChance = 0.05f;
+    [SerializeField] private int hitCount = 5;
     [SerializeField] private float tickInterval = 0.05f;
     [SerializeField] private float targetSearchRadius = 10f;
 
     [Header("Beam Prefab Parts")]
-    [SerializeField] private Transform beamPivot;         // 회전 적용 대상 (기준 오브젝트)
-    [SerializeField] private GameObject beamSprite;       // 회전에 영향을 받지 않는 애니메이션 파트
-    [SerializeField] private GameObject beamColliderObj;  // 실제 충돌 처리 파트 (자식에 BoxCollider2D 포함)
+    [SerializeField] private Transform beamPivot;         // 회전 대상
+    [SerializeField] private GameObject beamSprite;       // 애니메이션 전용 (회전 제외)
+    [SerializeField] private GameObject beamColliderObj;  // 충돌 감지 (BoxCollider2D 포함)
 
+    private CursorWeapon cursorWeapon;
     private Coroutine beamRoutine;
-    public GameObject deathBeamPrefab;
-    public CursorWeapon cursorWeapon;
 
     public void Init(SkillManager.SkillInstance instance)
     {
         skillInstance = instance;
+
+        cursorWeapon = WeaponManager.Instance.cursorWeapon;
+
+        if (cursorWeapon == null)
+        {
+            Debug.LogWarning("CursorWeapon이 존재하지 않습니다.");
+            Destroy(gameObject);
+            return;
+        }
+
         StartCoroutine(ActivateBeam());
     }
 
@@ -43,17 +52,18 @@ public class DeathBeamSkill : MonoBehaviour
             yield break;
         }
 
-        // 방향 계산 및 회전 적용
+        // 커서 기준 방향 계산
         Vector2 direction = (target.position - cursorWeapon.transform.position).normalized;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-        // 프리팹 생성 위치
-        GameObject obj = Instantiate(deathBeamPrefab, cursorWeapon.transform.position, Quaternion.identity);
+        // DeathBeamSkill 위치 및 회전 설정
+        transform.position = cursorWeapon.transform.position;
 
         // 회전 적용
-        obj.transform.rotation = Quaternion.Euler(0, 0, angle);
-
-        // Damage Coroutine 실행
+        beamPivot.rotation = Quaternion.Euler(0, 0, angle);
+        beamSprite.transform.rotation = Quaternion.Euler(0, 0, angle);
+        yield return new WaitForSeconds(1f);
+        // 데미지 처리 시작
         beamRoutine = StartCoroutine(DamageRoutine());
 
         // 일정 시간 후 삭제
@@ -69,17 +79,33 @@ public class DeathBeamSkill : MonoBehaviour
         {
             Collider2D[] targets = Physics2D.OverlapBoxAll(
                 beamColliderObj.transform.position,
-                beamColliderObj.GetComponent<BoxCollider2D>().size,
+                Vector2.Scale(beamColliderObj.GetComponent<BoxCollider2D>().size, beamColliderObj.transform.lossyScale),
                 beamPivot.eulerAngles.z,
                 LayerMask.GetMask("Monster")
             );
 
+            Debug.Log($"[{currentHits}] 충돌한 몬스터 수: {targets.Length}");
+
             foreach (var target in targets)
             {
-                var health = target.GetComponent<BaseMonster>();
-                if (health != null)
+                BaseMonster monster = target.GetComponentInParent<BaseMonster>();
+                if (monster != null)
                 {
-                    health.TakeDamage(skillInstance.GetCurrentLevelData().damage);
+                    Debug.Log($"[{currentHits}] {monster.name}에게 {skillInstance.GetCurrentLevelData().damage} 데미지");
+                    monster.TakeDamage(skillInstance.GetCurrentLevelData().damage);
+                    continue;  // 처리했으면 보스 체크 안함
+                }
+
+                // 보스 몬스터 처리
+                BossStats boss = target.GetComponentInParent<BossStats>();
+                if (boss != null)
+                {
+                    Debug.Log($"[{currentHits}] 보스 {boss.name}에게 {skillInstance.GetCurrentLevelData().damage} 데미지");
+                    boss.TakeDamage(skillInstance.GetCurrentLevelData().damage);
+                }
+                else
+                {
+                    Debug.LogWarning("충돌했지만 BaseMonster 또는 BossStats 없음: " + target.name);
                 }
             }
 

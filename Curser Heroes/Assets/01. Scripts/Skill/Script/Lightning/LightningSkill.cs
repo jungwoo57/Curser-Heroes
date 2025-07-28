@@ -16,7 +16,7 @@ public class LightningSkill : MonoBehaviour
     {
         if (skillInstance == null) return;
 
-        float procChance = 0.1f;
+        float procChance = 1f;
         if (UnityEngine.Random.value < procChance)
         {
             Debug.Log("라이트닝 스킬 발동!");
@@ -24,20 +24,66 @@ public class LightningSkill : MonoBehaviour
             Collider2D[] hits = Physics2D.OverlapCircleAll(hitMonster.transform.position, 1f, monsterLayerMask);
             Debug.Log($"근처 몬스터 탐지 수: {hits.Length}");
 
+            int damage = skillInstance.skill.levelDataList[skillInstance.level - 1].damage;
+
             foreach (var col in hits)
             {
-                BaseMonster m = col.GetComponent<BaseMonster>();
-                if (m != null && m != hitMonster)
+                // 보스 및 일반 몬스터 중 hitMonster 제외하고 처리
+                if (col.TryGetComponent<BaseMonster>(out var m) && m != hitMonster)
                 {
                     Debug.Log($"라이트닝 대상: {m.gameObject.name} 위치: {m.transform.position}");
 
-                    GameObject effect = Instantiate(lightningEffectPrefab, m.transform.position, Quaternion.identity);
+                    Vector3 start = hitMonster.transform.position;
+                    Vector3 end = m.transform.position;
+                    Vector3 direction = end - start;
+                    float distance = direction.magnitude;
+
+                    GameObject effect = Instantiate(lightningEffectPrefab, start, Quaternion.identity);
+
+                    Transform visual = effect.transform.Find("Visual");
+                    if (visual != null)
+                    {
+                        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+                        visual.rotation = Quaternion.Euler(0f, 0f, angle);
+
+                        Vector3 scale = visual.localScale;
+                        scale.y = distance;
+                        visual.localScale = scale;
+                    }
+
+                    m.TakeDamage(damage);
                     Destroy(effect, 1f);
 
-                    int damage = skillInstance.skill.levelDataList[skillInstance.level - 1].damage;
-                    m.TakeDamage(damage);
-
                     Debug.Log($"라이트닝 데미지 {damage} 입힘 to {m.gameObject.name}");
+                    continue;
+                }
+
+                if (col.TryGetComponent<BossStats>(out var boss) && col.gameObject != hitMonster.gameObject)
+                {
+                    Debug.Log($"라이트닝 대상(보스): {boss.gameObject.name} 위치: {boss.transform.position}");
+
+                    Vector3 start = hitMonster.transform.position;
+                    Vector3 end = boss.transform.position;
+                    Vector3 direction = end - start;
+                    float distance = direction.magnitude;
+
+                    GameObject effect = Instantiate(lightningEffectPrefab, start, Quaternion.identity);
+
+                    Transform visual = effect.transform.Find("Visual");
+                    if (visual != null)
+                    {
+                        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+                        visual.rotation = Quaternion.Euler(0f, 0f, angle);
+
+                        Vector3 scale = visual.localScale;
+                        scale.y = distance;
+                        visual.localScale = scale;
+                    }
+
+                    boss.TakeDamage(damage);
+                    Destroy(effect, 1f);
+
+                    Debug.Log($"라이트닝 데미지 {damage} 입힘 to 보스 {boss.gameObject.name}");
                 }
             }
         }

@@ -44,9 +44,18 @@ public class ArcaneTrail : MonoBehaviour
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, radius, monsterLayer);
         foreach (var hit in hits)
         {
-            BaseMonster monster = hit.GetComponent<BaseMonster>();
-            if (monster != null)
+            if (hit.TryGetComponent<BaseMonster>(out var monster))
+            {
                 monster.TakeDamage(damage);
+                continue;
+            }
+
+            // 보스 몬스터 처리
+            if (hit.TryGetComponent<BossStats>(out var boss))
+            {
+                boss.TakeDamage(damage);
+            }
+
         }
 
         Destroy(gameObject);
