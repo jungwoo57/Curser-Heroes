@@ -2,8 +2,7 @@
 
 public class RotatingShieldSkill : MonoBehaviour
 {
-    [SerializeField] private GameObject shieldPrefab;
-
+    private GameObject shieldPrefab;
     private Transform player;
     private float rotateSpeed = 100f;
     private float radius = 1.5f;
