@@ -25,7 +25,7 @@ public class WaveEntry
 
     public bool HasBosses => overrideBosses != null && overrideBosses.Count > 0;
 
-    public int WaveValue => 30 + (wave - 1) * 5;
+    public int WaveValue => 30 + (wave - 1) * 2;
 
     public int CalculateGoldReward()
     {
