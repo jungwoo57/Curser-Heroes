@@ -656,7 +656,7 @@ public class SkillManager : MonoBehaviour
             return;
 
         // 발동 확률 체크
-        float procChance = 1f; // 필요하면 skillInstance에서 가져오기
+        float procChance = 0.05f; // 필요하면 skillInstance에서 가져오기
         if (Random.value > procChance)
             return;
 
