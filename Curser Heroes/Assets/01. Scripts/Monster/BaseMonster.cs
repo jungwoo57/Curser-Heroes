@@ -2,7 +2,7 @@
 using System;
 using System.Collections;
 
-public abstract class BaseMonster : MonoBehaviour
+public abstract class BaseMonster : Monster
 {
     protected int maxHP;
     protected int currentHP;

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class SeaurchinLamb : SeaurchinGroup
+public class SeaUrchinLady : SeaUrchin
 {
     public override void Setup(MonsterData data)
     {

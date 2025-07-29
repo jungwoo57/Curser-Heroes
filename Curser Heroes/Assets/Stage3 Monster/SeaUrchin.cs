@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
+using UnityEngine.Timeline;
 
-public class SeaurchinGroup : BaseMonster
+public class SeaUrchin : BaseMonster
 {
     [Header("Attack Settings")]
+    [SerializeField] private Vector2 attackOffset = new Vector2(0, 0.5f);
     [SerializeField] private float attackRange = 1.0f;
     [SerializeField] private LayerMask cursorLayer;
     [SerializeField] private float stunDuration = 1.0f;
@@ -16,13 +18,14 @@ public class SeaurchinGroup : BaseMonster
 
     protected override void Attack()
     {
-        Debug.Log($"[{name}]  Attack() at {Time.time:F2}");
+        Vector2 origin = (Vector2)transform.position + attackOffset;
+        Collider2D hit = Physics2D.OverlapCircle(origin, attackRange, cursorLayer);
+
 
         
-        Collider2D hit = Physics2D.OverlapCircle(transform.position, attackRange, cursorLayer);
         if (hit == null)
         {
-            Debug.Log($"[{name}] └ No cursor Collider in range {attackRange}");
+            
             return;
         }
 
@@ -55,7 +58,8 @@ public class SeaurchinGroup : BaseMonster
 
     private void OnDrawGizmosSelected()
     {
+        Vector2 origin = (Vector2)transform.position + attackOffset;
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, attackRange);
+        Gizmos.DrawWireSphere(origin, attackRange);
     }
 }
