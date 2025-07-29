@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Video;
 
 public enum SkillType { Attack, Defense, Buff }
 
@@ -14,7 +15,9 @@ public class SkillData : ScriptableObject
     public string description;
     
     public GameObject skillPrefab;
-
+    public VideoClip animClip;
+    
+    
     public List<SkillLevelData> levelDataList; // 레벨 별 수치
     public int unlockCost;
 }

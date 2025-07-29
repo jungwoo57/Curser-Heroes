@@ -2,6 +2,8 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Video;
+
 public class LabPanel : MonoBehaviour
 {
     public TextMeshProUGUI skillName;
@@ -14,6 +16,8 @@ public class LabPanel : MonoBehaviour
     public TextMeshProUGUI useJewelText;
     [SerializeField]private ScrollRect scrollRect;
     [SerializeField]private TutorialUI tutorialUI;
+    [SerializeField] private VideoPlayer skillPlayer;
+    [SerializeField] private RawImage skillAnimImage;
     private void OnEnable()
     {
         tutorialUI.gameObject.SetActive(false);
@@ -30,6 +34,7 @@ public class LabPanel : MonoBehaviour
         useJewelText.text = "";
         UpdateSkillScroll(SkillType.Attack);
         unlockButton.interactable = false;
+        skillPlayer.clip = null;
     }
 
     private void Update()
@@ -54,7 +59,15 @@ public class LabPanel : MonoBehaviour
         //skillEffect.text = selectSkill. 효과는 뭐라넣어야하지
         hasJewelText.text = GameManager.Instance.GetJewel().ToString();
         useJewelText.text = selectSkill.unlockCost.ToString();
-        
+        if(selectSkill.animClip != null)
+        {
+            skillAnimImage.gameObject.SetActive(true);
+            skillPlayer.clip = selectSkill.animClip;
+        }
+        else
+        {
+            skillAnimImage.gameObject.SetActive(false);
+        }
     }
 
     public void UpdateSkillScroll(SkillType type)

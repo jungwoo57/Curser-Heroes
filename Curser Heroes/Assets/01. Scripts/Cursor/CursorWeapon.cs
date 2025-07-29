@@ -13,6 +13,7 @@ public class CursorWeapon : MonoBehaviour
     private int sweepAttackCounter = 0;
     private Dictionary<BaseMonster, float> lastHitTimesBase = new Dictionary<BaseMonster, float>();
     private Dictionary<BossStats, float> lastHitTimesBoss = new Dictionary<BossStats, float>();
+    private Dictionary<BossBase, float> lastHitTimesBossB = new Dictionary<BossBase, float>();
     private BaseMonster lastHitMonster;
 
     public static event Action<CursorWeapon> OnAnyMonsterDamaged;
@@ -131,7 +132,48 @@ public class CursorWeapon : MonoBehaviour
                     OnAnyMonsterDamaged?.Invoke(this);
                 }
             }
+            BossBase bossB = hit.GetComponent<BossBase>();
+            if (bossB != null)
+            {
+                if (!lastHitTimesBossB.TryGetValue(bossB, out float lastHitTime))
+                    lastHitTime = 0f;
+
+                if (Time.time - lastHitTime >= cooldown)
+                {
+                    sweepAttackCounter++;
+
+                    int finalDamage = Mathf.RoundToInt(damage);
+                    int triggerCount = SkillManager.Instance.criticalSweepEveryNth;
+
+                    if (triggerCount > 0)
+                    {
+                        Debug.Log($"[약점 포착] {triggerCount}회 중 {sweepAttackCounter}회 공격 진행 중");
+
+                        if (sweepAttackCounter >= triggerCount)
+                        {
+                            finalDamage *= 2;
+                            Debug.Log($"[약점 포착] {triggerCount}회 달성 → 2배 피해!");
+                            sweepAttackCounter = 0;
+                        }
+                    }
+
+                    bossB.TakeDamage(finalDamage);
+                    AudioManager.Instance.PlayHitSound(HitType.Cursor);
+                    lastHitTimesBossB[bossB] = Time.time;
+                    lastHitMonster = monster;
+
+                    TryTriggerMeteorSkill();
+                    TryTriggerLightningSkill();
+                    SkillManager.Instance.TryTriggerDimensionSlash(cursorPos);
+
+                    OnAnyMonsterDamaged?.Invoke(this);
+                }
+            }
+
+            
         }
+        
+        
     }
 
     public int GetCurrentDamage()
