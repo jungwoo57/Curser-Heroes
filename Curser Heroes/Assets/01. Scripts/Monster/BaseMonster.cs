@@ -229,6 +229,7 @@ public abstract class BaseMonster : MonoBehaviour
         yield return new WaitForSeconds(time);
         UnStun();
     }
+    [ContextMenu("죽음")]
     protected virtual void Die()
     {
         if (isDead) return;  // 이미 죽었으면 실행 안 함

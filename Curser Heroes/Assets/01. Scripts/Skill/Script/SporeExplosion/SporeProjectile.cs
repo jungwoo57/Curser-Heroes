@@ -4,9 +4,9 @@ using System.Linq;
 
 public class SporeProjectile : MonoBehaviour
 {
-    private float speed;
+    [SerializeField]private float speed;
     private int damage;
-    private Vector2 direction;
+    [SerializeField]private Vector2 direction;
     private HashSet<BaseMonster> damagedMonsters = new HashSet<BaseMonster>();
     private HashSet<BossStats> damagedBosses = new HashSet<BossStats>();
 
