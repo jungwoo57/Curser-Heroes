@@ -178,6 +178,7 @@ public class Boss_Shark : BossBase
 
     IEnumerator MeleeAttack()
     {
+        animator.SetTrigger("Pattern3");
         rushCol.gameObject.SetActive(true);
         rushCol.enabled = true;
         float elapsedTime = 0;
