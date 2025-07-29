@@ -16,7 +16,7 @@ public class LightningSkill : MonoBehaviour
     {
         if (skillInstance == null) return;
 
-        float procChance = 1f;
+        float procChance = 0.1f;
         if (UnityEngine.Random.value < procChance)
         {
             Debug.Log("라이트닝 스킬 발동!");
