@@ -7,6 +7,7 @@ public class ShadowFriend : MonoBehaviour
 
     public float speed = 1f;
     public float lifetime = 4f;
+    private float pushPower = 3f;
 
     private Vector2 moveDir;
     private SkillManager.SkillInstance skillInstance;
@@ -24,16 +25,12 @@ public class ShadowFriend : MonoBehaviour
         transform.Translate(moveDir * speed * Time.deltaTime);
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerStay2D(Collider2D other)
     {
         if (((1 << other.gameObject.layer) & monsterLayer) != 0)
         {
-            Rigidbody2D rb = other.attachedRigidbody;
-            if (rb != null)
-            {
-                Vector2 pushDir = (other.transform.position - transform.position).normalized;
-                rb.AddForce(pushDir * 5f, ForceMode2D.Impulse);
-            }
+            Vector2 pushDir = (other.transform.position - transform.position).normalized;
+            other.transform.position += (Vector3)(pushDir * pushPower * Time.deltaTime);
         }
         else if (((1 << other.gameObject.layer) & projectileLayer) != 0)
         {
