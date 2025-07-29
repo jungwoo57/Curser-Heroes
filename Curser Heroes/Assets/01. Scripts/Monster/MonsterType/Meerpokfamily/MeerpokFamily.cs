@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -66,8 +66,8 @@ public class MeerpokFamily : BaseMonster
                     monsterPrefab = splitPrefab
                 });
 
-                //WaveManager.Instance.RegisterMonster(monster);  //웨이브 등록 함수
-               // m.onDeath += WaveManager.Instance.OnMonsterKilled;
+                WaveManager.Instance.RegisterMonster(monster);  //웨이브 등록 함수
+                m.onDeath += WaveManager.Instance.OnMonsterKilled;
             }
         }
     }

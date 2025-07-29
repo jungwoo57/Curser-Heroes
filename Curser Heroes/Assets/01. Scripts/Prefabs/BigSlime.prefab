@@ -158,6 +158,8 @@ MonoBehaviour:
   MonsterLayer:
     serializedVersion: 2
     m_Bits: 128
+  isDead: 0
+  deathTime: 1
   attackRange: 0.5
   splitPrefab: {fileID: 4807894803058071919, guid: f1082992e899c9c4aad50ccb530fa504, type: 3}
   splitCount: 5

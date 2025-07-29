@@ -7,11 +7,13 @@ public class BossBase : MonoBehaviour
     public BossData data;           // ScriptableObject 참조
     public int currentHP;          // 현재 체력
     [SerializeField] private float attackRange;
+    [SerializeField] private float moveSpeed;
     //public static event Action<BossBase> OnAnyMonsterDamaged; << ???
 
     [SerializeField] protected bool isPattern;
     [SerializeField] protected bool isDie;
-    private Animator animator;
+    [SerializeField] protected bool canMove = false; // 첫 패턴 후 true;
+    protected Animator animator;
     private SpriteRenderer spriteRenderer;
     private Color originalColor;
     protected Vector3 targetPos;
@@ -22,11 +24,15 @@ public class BossBase : MonoBehaviour
         // 초기 체력 세팅
         currentHP = data.maxHP;
         // 애니메이터와 스프라이트 렌더러 가져오기
-        //animator = GetComponentInChildren<Animator>();
+        animator = GetComponentInChildren<Animator>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         originalColor = spriteRenderer.color;
     }
 
+    protected virtual void Update()
+    {
+        BossMove();
+    }
     // 외부에서 호출하여 데미지를 입힐 때 쓰는 함수
     public void TakeDamage(int amount)
     {
@@ -35,7 +41,7 @@ public class BossBase : MonoBehaviour
 
         currentHP -= amount;
         //OnAnyMonsterDamaged?.Invoke(this);
-        //animator.SetTrigger("BossDamage");  // 피격 애니메이션
+        animator.SetTrigger("BossDamage");  // 피격 애니메이션, 패턴중엔 안나옴
         StartCoroutine(FlashEffect());
 
         if (currentHP <= 0)
@@ -62,9 +68,11 @@ public class BossBase : MonoBehaviour
     }
 
     // 죽었을 때 호출
+    [ContextMenu("사망")]
     public void Die()
     {
-        //animator.SetTrigger("BossRun"); // 사망 애니메이션
+        animator.SetTrigger("BossRun"); // 사망 애니메이션
+        isDie = true;
         StartCoroutine(DelayedDeath());
     }
 
@@ -81,5 +89,22 @@ public class BossBase : MonoBehaviour
         Collider2D weaponCollider = Physics2D.OverlapCircle(transform.position, attackRange, LayerMask.GetMask("Weapon"));
         if (weaponCollider == null) return;
         targetPos = weaponCollider.transform.position;
+    }
+
+    protected void BossMove()
+    {
+        if (isPattern || isDie || !canMove)
+        {
+            animator.SetBool("BossMove",false);
+            return;
+        }
+
+        CheckTarget();
+        if (animator)
+        {
+            animator.SetBool("BossMove",true);
+        }
+        Vector3 moveDir = targetPos - transform.position;
+        transform.position += moveDir.normalized*Time.deltaTime*moveSpeed;
     }
 }

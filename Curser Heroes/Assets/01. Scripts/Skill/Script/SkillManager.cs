@@ -656,9 +656,12 @@ public class SkillManager : MonoBehaviour
             return;
 
         // 발동 확률 체크
-        float procChance = 1f; // 필요하면 skillInstance에서 가져오기
+        float procChance = 0.05f; // 필요하면 skillInstance에서 가져오기
         if (Random.value > procChance)
             return;
+
+        if (cursorWeapon == null)
+            cursorWeapon = WeaponManager.Instance?.cursorWeapon;
 
         if (cursorWeapon == null)
             return;
@@ -682,7 +685,7 @@ public class SkillManager : MonoBehaviour
         var dimensionSlashSkillData = ownedSkills.FirstOrDefault(s => s.skill.skillName == "차원 가르기");
         if (dimensionSlashSkillData == null) return;
 
-        float chance = 0.05f; // 5%
+        float chance = 1f; // 5%
         if (Random.value > chance) return;
 
         GameObject obj = Instantiate(dimensionSlashSkillData.skill.skillPrefab, cursorPosition, Quaternion.identity);

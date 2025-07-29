@@ -35,9 +35,15 @@ public class IceAgeField : MonoBehaviour
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, 1f, LayerMask.GetMask("Monster"));
         foreach (var hit in hits)
         {
-            if (hit.TryGetComponent(out BaseMonster monster))
+            if (hit.TryGetComponent<BaseMonster>(out var monster))
             {
                 monster.TakeDamage(damage);
+                continue;
+            }
+
+            if (hit.TryGetComponent<BossStats>(out var boss))
+            {
+                boss.TakeDamage(damage);
             }
         }
     }

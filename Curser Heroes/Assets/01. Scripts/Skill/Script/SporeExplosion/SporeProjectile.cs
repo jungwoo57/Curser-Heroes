@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 
 public class SporeProjectile : MonoBehaviour
 {
-    private float speed;
+    [SerializeField]private float speed;
     private int damage;
-    private Vector2 direction;
-    private HashSet<BaseMonster> damaged = new();
+    [SerializeField]private Vector2 direction;
+    private HashSet<BaseMonster> damagedMonsters = new HashSet<BaseMonster>();
+    private HashSet<BossStats> damagedBosses = new HashSet<BossStats>();
 
     public void Init(int damage, Vector2 dir, float speed)
     {
@@ -24,16 +26,29 @@ public class SporeProjectile : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.TryGetComponent(out BaseMonster monster))
+        if (col.TryGetComponent<BaseMonster>(out var monster))
         {
-            if (damaged.Contains(monster))
+            if (damagedMonsters.Contains(monster))
             {
                 Debug.Log($"[SporeProjectile] 이미 데미지를 입힌 몬스터: {monster.name}");
                 return;
             }
             monster.TakeDamage(damage);
-            damaged.Add(monster);
+            damagedMonsters.Add(monster);
             Debug.Log($"[SporeProjectile] 몬스터 타격: {monster.name}, 데미지: {damage}");
+            return;  // 몬스터 처리 완료
+        }
+
+        if (col.TryGetComponent<BossStats>(out var boss))
+        {
+            if (damagedBosses.Contains(boss))
+            {
+                Debug.Log($"[SporeProjectile] 이미 데미지를 입힌 보스: {boss.name}");
+                return;
+            }
+            boss.TakeDamage(damage);
+            damagedBosses.Add(boss);
+            Debug.Log($"[SporeProjectile] 보스 타격: {boss.name}, 데미지: {damage}");
         }
     }
 }
