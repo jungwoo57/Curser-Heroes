@@ -136,13 +136,13 @@ public class WaveManager : MonoBehaviour
 
         if (!spawningComplete || waveCleared) return;
 
-        // 0.8초 후에 몬스터 수 다시 체크
+        // 1초 후에 몬스터 수 다시 체크
         StartCoroutine(CheckWaveClearAfterDelay());
     }
 
     private IEnumerator CheckWaveClearAfterDelay()
     {
-        yield return new WaitForSeconds(0.8f); // 분열 몬스터 등록 대기
+        yield return new WaitForSeconds(1.5f); // 분열 몬스터 등록 대기
 
         if (!waveCleared && spawnedMonsters.Count == 0)
         {

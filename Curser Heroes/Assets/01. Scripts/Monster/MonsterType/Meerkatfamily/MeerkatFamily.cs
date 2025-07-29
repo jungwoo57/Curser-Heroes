@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 public class MeerkatFamily : BaseMonster
@@ -63,8 +63,8 @@ public class MeerkatFamily : BaseMonster
                     monsterPrefab = splitPrefab
                 });
 
-                //WaveManager.Instance.RegisterMonster(monster);
-               // m.onDeath += WaveManager.Instance.OnMonsterKilled;
+                WaveManager.Instance.RegisterMonster(monster);
+                m.onDeath += WaveManager.Instance.OnMonsterKilled;
             }
         }
     }
