@@ -3989,14 +3989,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursorWeapon: {fileID: 1388093526}
-  waveGroupData: {fileID: 11400000, guid: 9fa0573a5e50445489f8e2a2d6d96d27, type: 2}
+  currentStage: {fileID: 11400000, guid: 29ea2a76e3245684e98552ce88893f3b, type: 2}
   spawner: {fileID: 311152294}
   clearGold: 0
   clearJewel: 0
-  currentWaveData:
-    wave: 0
-    overrideBosses: []
-    isBossWave: 0
 --- !u!4 &1327750762
 Transform:
   m_ObjectHideFlags: 0

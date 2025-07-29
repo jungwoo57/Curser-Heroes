@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98c80afdaf47a4e4387b208c40110510, type: 3}
+  m_Name: Stage 1
+  m_EditorClassIdentifier: 
+  stageNumber: 1
+  monsterPool:
+  - {fileID: 11400000, guid: 156b3f5140363b44d9ebc74e7eccfee0, type: 2}
+  - {fileID: 11400000, guid: e6f014e8d4ac82a4ea78b40e099a9aea, type: 2}
+  - {fileID: 11400000, guid: 54638af21faef144fa40978387dc484f, type: 2}
+  - {fileID: 11400000, guid: c2110156f45579e4d8e040a4815e6236, type: 2}
+  - {fileID: 11400000, guid: 275e53df355179543b6f4b3965b56c88, type: 2}
+  - {fileID: 11400000, guid: e06972eac5f4f5f4ba95a1104c48f2ee, type: 2}
+  - {fileID: 11400000, guid: 650a1f2a94807534a9f9100867c8e885, type: 2}
+  - {fileID: 11400000, guid: 16c3d3e3fe07bc843a7e7391e12416a7, type: 2}
+  - {fileID: 11400000, guid: 7d77bee705647fc40a977fcd2ec84a8e, type: 2}
+  - {fileID: 11400000, guid: 57034278293388746a5ea16639c2180b, type: 2}
+  - {fileID: 11400000, guid: 620c0e7ecaa8f284596bc50e2eb1b5f7, type: 2}
+  - {fileID: 11400000, guid: b5827335af538b14fa1649e813caa758, type: 2}
+  - {fileID: 11400000, guid: 3306a184d3d3af64e90d47ede0254a45, type: 2}
+  boss: {fileID: 11400000, guid: b632e75ab71c5bd459ce0387d2fffa89, type: 2}
