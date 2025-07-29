@@ -278,7 +278,7 @@ PrefabInstance:
     - target: {fileID: 7386682379840476848, guid: 5263ae6509a44d54cb65ed7e0a07701d, type: 3}
       propertyPath: equippedSubWeapon
       value: 
-      objectReference: {fileID: 11400000, guid: 88561bc56f42f0e46b8b20e3390ff37b, type: 2}
+      objectReference: {fileID: 11400000, guid: 88b16acc185bc80438b61be32ab457ff, type: 2}
     - target: {fileID: 7386682379840476848, guid: 5263ae6509a44d54cb65ed7e0a07701d, type: 3}
       propertyPath: chargeCompleteIcon
       value: 
@@ -1236,6 +1236,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -6413036324077634254, guid: f81ab9aaea67b544bb40ba7dc5835a59, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2069594727963631631, guid: f81ab9aaea67b544bb40ba7dc5835a59, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.91
@@ -1294,7 +1298,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4553895591374849486, guid: f81ab9aaea67b544bb40ba7dc5835a59, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

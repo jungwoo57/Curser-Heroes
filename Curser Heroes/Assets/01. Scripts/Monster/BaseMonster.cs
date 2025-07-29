@@ -2,12 +2,12 @@
 using System;
 using System.Collections;
 
-public abstract class BaseMonster : Monster
+public abstract class BaseMonster : MonoBehaviour
 {
     protected int maxHP;
-    [SerializeField]protected int currentHP;
+    protected int currentHP;
     protected int damage;
-    [SerializeField]protected float attackCooldown;
+    protected float attackCooldown;
     protected float attackTimer;
 
     public int CurrentHP => currentHP;
@@ -229,7 +229,6 @@ public abstract class BaseMonster : Monster
         yield return new WaitForSeconds(time);
         UnStun();
     }
-    [ContextMenu("죽음")]
     protected virtual void Die()
     {
         if (isDead) return;  // 이미 죽었으면 실행 안 함
