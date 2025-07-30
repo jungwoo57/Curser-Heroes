@@ -174,7 +174,13 @@ MonoBehaviour:
   - 0
   - 0
   - 0
-  patternWaitTime: 2
+  patternWaitTime: 0.3
+  animStartPos: {x: 0, y: 10, z: 0}
+  animEndPos: {x: 0, y: -5, z: 0}
+  animSpawnPos: {x: 0, y: 0, z: 0}
+  animFallTime: 2
+  animUpTime: 1
+  isAnim: 0
 --- !u!61 &5203948065632788213
 BoxCollider2D:
   m_ObjectHideFlags: 0

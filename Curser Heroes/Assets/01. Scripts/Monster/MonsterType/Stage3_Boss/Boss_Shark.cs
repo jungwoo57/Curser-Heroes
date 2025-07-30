@@ -26,7 +26,13 @@ public class Boss_Shark : BossBase
     [SerializeField] private float[] curCoolDown;
     [SerializeField] private float patternWaitTime;
 
-    
+    [Header("등장 애니메이션 관련")] 
+    [SerializeField] private Vector3 animStartPos;
+    [SerializeField] private Vector3 animEndPos;
+    [SerializeField] private Vector3 animSpawnPos;
+    [SerializeField] private float animFallTime;
+    [SerializeField] private float animUpTime;
+    [SerializeField] private bool isAnim;
     override protected void Awake()
     {
         base.Awake();
@@ -39,11 +45,13 @@ public class Boss_Shark : BossBase
         patterns.Add(() => StartCoroutine(Pattern1()));
         patterns.Add(() => StartCoroutine(Pattern2()));
         patterns.Add(() => StartCoroutine(Pattern3()));
+        StartCoroutine(StartAnimation());
     }
     
     protected override void Update()
     {
         if (isDie) return;
+        if (isAnim) return;
         base.Update();
         for (int i = 0; i < curCoolDown.Length; i++)
         {
@@ -66,7 +74,6 @@ public class Boss_Shark : BossBase
 
         if (canPatterns.Count > 0)
         {
-            canMove = true;
             int i =Random.Range(0, canPatterns.Count);
             int index = canPatterns[i];
             patterns[index]?.Invoke();
@@ -74,36 +81,39 @@ public class Boss_Shark : BossBase
       
     }
     
-    IEnumerator Pattern1() // 덤벨공격
+    IEnumerator Pattern1()
     {
+        canMove = true;
         curCoolDown[0] = 0;
         isPattern = true; //패턴 시작
         animator.SetTrigger("Pattern1");
-        StartCoroutine(RushAttack());
+        yield return new WaitForSeconds(0.1f);
+        yield return StartCoroutine(RushAttack());
         yield return new WaitForSeconds(patternWaitTime);
         curCoolDown[0] = 0;
+        animator.SetTrigger("Idle");
         isPattern = false; // 패턴 종료
     }
 
     IEnumerator Pattern2()
     {
+        canMove = true;
         isPattern = true;
         yield return StartCoroutine(JumpAttack());
         yield return new WaitForSeconds(jumpTime);
         yield return StartCoroutine(JumpAttack());
         yield return new WaitForSeconds(patternWaitTime);
-        yield return new WaitForSeconds(1.0f);
         curCoolDown[1] = 0;
         isPattern = false;
     }
    
     IEnumerator Pattern3()
     {
+        canMove = true;
         isPattern = true;
         yield return null;
         yield return StartCoroutine(MeleeAttack());
         yield return new WaitForSeconds(patternWaitTime);
-        yield return new WaitForSeconds(2.0f);
         curCoolDown[2] = 0; // 쿨타임 초기화
         isPattern = false;
     }
@@ -132,7 +142,6 @@ public class Boss_Shark : BossBase
         animator.SetTrigger("Pattern2_Jump");
         yield return new WaitForSeconds(jumpAttackDelay);
         animator.speed = 0.0f;
-        //Vector3 jumpPos = jumpEffect.transform.position;
         float elapsedTime = 0;
         Vector3 startPos = transform.position;
         Vector3 flyPos = transform.position + Vector3.up * jumpDistance;  // 올라갈 위치
@@ -142,6 +151,7 @@ public class Boss_Shark : BossBase
             elapsedTime += Time.deltaTime;
             yield return null;
         }
+        transform.rotation = Quaternion.Euler(180, 0, 0);
         animator.speed = 1.0f;
         //////////////////// 경고 범위 관련
         elapsedTime = 0;
@@ -169,7 +179,7 @@ public class Boss_Shark : BossBase
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-
+        transform.rotation = Quaternion.Euler(0, 0, 0);
         animator.speed = 1.0f;
         warningCol.enabled = true;  // warningArea에서 공격 처리
         yield return new WaitForSeconds(0.3f); // 판정 시간
@@ -192,5 +202,32 @@ public class Boss_Shark : BossBase
         rushCol.enabled = false;
         rushCol.gameObject.SetActive(false);
         
+    }
+
+    IEnumerator StartAnimation()
+    {
+        isAnim = true;
+        transform.position = animStartPos;
+        float elapsedTime = 0;
+        animator.SetBool("BossMove", true);
+        while (elapsedTime <= animFallTime)
+        {
+            transform.position = Vector3.Lerp(animStartPos, animEndPos, (elapsedTime / animFallTime));
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        animator.SetBool("BossMove", false);
+        elapsedTime = 0;
+        float animTime = animator.GetCurrentAnimatorStateInfo(0).length;
+        animator.SetTrigger("BossDamage");
+        while (elapsedTime <= animTime)
+        {
+            transform.position = Vector3.Lerp(animEndPos, animSpawnPos, (elapsedTime / animTime));
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        animator.speed = 1.0f;
+        animator.SetTrigger("Idle");
+        isAnim = false;
     }
 }

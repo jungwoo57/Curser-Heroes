@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -30,6 +31,14 @@ public class WaveManager : MonoBehaviour
             return;
         }
         Instance = this;
+    }
+
+    private void Start()
+    {
+        if (StageManager.Instance != null)
+        {
+            SetStage(StageManager.Instance.selectStage);
+        }
     }
 
     public void SetStage(StageData stage)
