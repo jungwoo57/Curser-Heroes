@@ -89,7 +89,7 @@ public class StageSelectUI : MonoBehaviour
               //bestWaveText.text = GameManager.Instance.bestScore.ToString() + " WAVE"; // 가장 높은 웨이브 설정
               bestWaveText.text = StageManager.Instance.bestWave[stageIndex].ToString();
               stageNameText.text = StageManager.Instance.selectStage.stageName;
-              backGroundImage.sprite = StageManager.Instance.selectStage.StageImage;
+              backGroundImage.sprite = StageManager.Instance.selectStage.stageImage;
         }
 
         public void UpdatePartnerInfoUI()
