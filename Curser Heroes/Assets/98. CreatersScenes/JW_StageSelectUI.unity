@@ -16333,6 +16333,7 @@ MonoBehaviour:
   homeButton: {fileID: 880053200}
   stageChangeButtonleft: {fileID: 1837289779}
   stageChangeButtonright: {fileID: 309102758}
+  backGroundImage: {fileID: 1037972765}
   bestScoreText: {fileID: 1574618404}
   bestWaveText: {fileID: 1275833026}
   stageNameText: {fileID: 792702195}
@@ -16340,6 +16341,8 @@ MonoBehaviour:
   subWeaponImage: {fileID: 1500992532}
   partnerImage: {fileID: 579277356}
   skillListButton: {fileID: 1415092655}
+  stageIndex: 0
+  maxStageIndex: 0
   weaponSelectUI: {fileID: 81744887}
   skillListPanel: {fileID: 448122871}
 --- !u!1 &1069948359
@@ -17829,6 +17832,56 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1216455050}
   m_CullTransparentMesh: 1
+--- !u!1 &1234680396
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1234680397}
+  - component: {fileID: 1234680398}
+  m_Layer: 0
+  m_Name: StageManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1234680397
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1234680396}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1234680398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1234680396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3136e8f1bc8e704c9b783aff5400f91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stages:
+  - {fileID: 11400000, guid: 3a6ab5f2c15c86c498c6dc2fee887d34, type: 2}
+  - {fileID: 11400000, guid: 7a74d2585cea2d44ba050b2b82b53271, type: 2}
+  - {fileID: 11400000, guid: efdd8eef5a752034d90d4d5718cc8f4e, type: 2}
+  selectStage: {fileID: 0}
+  bestWave: 
 --- !u!1 &1241526911
 GameObject:
   m_ObjectHideFlags: 0
@@ -32558,3 +32611,4 @@ SceneRoots:
   - {fileID: 516545486}
   - {fileID: 1072206503}
   - {fileID: 1664392854}
+  - {fileID: 1234680397}
