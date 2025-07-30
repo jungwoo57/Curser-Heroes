@@ -106,7 +106,7 @@ public abstract class BaseMonster : MonoBehaviour
                     StartCoroutine(ChangeColorGradually(Color.white, 0.3f));
             }
             if (animator != null)
-                animator.SetTrigger("Effect");
+                //animator.SetTrigger("Effect");
 
             
             attackTimer = attackCooldown;
