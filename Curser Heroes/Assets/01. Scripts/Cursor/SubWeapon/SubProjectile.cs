@@ -1,13 +1,23 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(Collider2D), typeof(Rigidbody2D))]
 public class SubProjectile : MonoBehaviour
 {
-    protected SubWeaponData subWeaponData;
+    
+    [SerializeField] protected SubWeaponData subWeaponData;
+    [SerializeField] protected int calculatedDamage;
     protected BaseMonster target;
     protected float speed;
-    protected int calculatedDamage;  // Manager가 넘겨준 데미지 저장용
 
-    // 기존 2-arg Init (하위 호환)
+  
+    public SubWeaponData WeaponData => subWeaponData;
+
+    
+    public int DamageAmount =>
+        (calculatedDamage > 0)
+            ? calculatedDamage
+            : Mathf.RoundToInt(subWeaponData.GetDamage());
+
     public void Init(SubWeaponData data, BaseMonster tgt)
     {
         subWeaponData = data;
@@ -16,11 +26,24 @@ public class SubProjectile : MonoBehaviour
         calculatedDamage = 0;
     }
 
-    // 새 3-arg Init 오버로드: Manager에서 level·강화 반영된 데미지를 넘겨줌
     public void Init(SubWeaponData data, BaseMonster tgt, int damage)
     {
-        Init(data, tgt);
+        subWeaponData = data;
+        target = tgt;
+        speed = data.projectileSpeed;
         calculatedDamage = damage;
+    }
+
+    private void Awake()
+    {
+        // Collider를 Trigger로 전환
+        var col = GetComponent<Collider2D>();
+        col.isTrigger = true;
+
+        // Rigidbody를 Kinematic으로 설정
+        var rb = GetComponent<Rigidbody2D>();
+        rb.isKinematic = true;
+        rb.gravityScale = 0f;
     }
 
     protected virtual void Update()
@@ -30,18 +53,17 @@ public class SubProjectile : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
-        // 타겟으로 이동
         Vector3 dir = (target.transform.position - transform.position).normalized;
         transform.position += dir * speed * Time.deltaTime;
+    }
 
-        // 충돌 판정
-        if (Vector3.Distance(transform.position, target.transform.position) < 0.1f)
+   
+    protected virtual void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.TryGetComponent<BaseMonster>(out var monster) && !monster.IsDead)
         {
-            int dmg = (calculatedDamage > 0)
-                      ? calculatedDamage
-                      : Mathf.RoundToInt(subWeaponData.GetDamage());
-            target.TakeDamage(dmg, subWeaponData);
+            Debug.Log($"[SubProjectile] Hit {monster.name}, dmg = {DamageAmount}");
+            monster.TakeDamage(DamageAmount, WeaponData);
             Destroy(gameObject);
         }
     }

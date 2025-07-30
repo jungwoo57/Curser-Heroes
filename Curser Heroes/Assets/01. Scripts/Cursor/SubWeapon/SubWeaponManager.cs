@@ -29,6 +29,8 @@ public class SubWeaponManager : MonoBehaviour
     public Image ammoIconPrefab;
     public Sprite usedAmmoSprite;
     private List<Image> ammoIcons = new List<Image>();
+    private bool isReloading;
+    private float reloadTimer;
 
     // 마나형 UI
     public Image manaBar;
@@ -88,18 +90,38 @@ public class SubWeaponManager : MonoBehaviour
         Vector3 screenPos = Camera.main.WorldToScreenPoint(followTarget.position);
         uiPanel.position = screenPos + Vector3.down * 30f;
 
-        //  쿨다운 감소 
+        //  쿨다운 감소 (모든 타입)
         if (currentCooldown > 0f)
             currentCooldown -= Time.deltaTime;
 
-        //  UI 그룹 토글 & 갱신
+        //  자동 리로드 (AmmoBased 전용)
+        if (equippedSubWeapon.weaponType == SubWeaponType.AmmoBased)
+        {
+            // 탄약이 바닥나고, 아직 리로드 중이 아니면 자동 시작
+            if (currentAmmo <= 0 && !isReloading)
+            {
+                Debug.Log("[Ammo] 자동 리로드 시작");
+                StartReloading();
+            }
+
+            // 리로드 타이머 감소 & 완료 처리
+            if (isReloading)
+            {
+                reloadTimer -= Time.deltaTime;
+                if (reloadTimer <= 0f)
+                {
+                    currentAmmo = equippedSubWeapon.maxAmmo;
+                    isReloading = false;
+                    Debug.Log("[Ammo] 자동 리로드 완료");
+                    UpdateAmmoUI();
+                }
+            }
+        }
+
+        
         AmmoUIGroup.SetActive(equippedSubWeapon.weaponType == SubWeaponType.AmmoBased);
         ManaUIGroup.SetActive(equippedSubWeapon.weaponType == SubWeaponType.ManaBased);
         ChargeUIGroup.SetActive(equippedSubWeapon.weaponType == SubWeaponType.ChargeBased);
-
-        // 마나 자동 회복 (언제나)
-        if (equippedSubWeapon.weaponType == SubWeaponType.ManaBased)
-            currentMana = Mathf.Min(maxMana, currentMana + manaRegenRate * Time.deltaTime);
 
         switch (equippedSubWeapon.weaponType)
         {
@@ -114,24 +136,23 @@ public class SubWeaponManager : MonoBehaviour
                 break;
         }
 
-        
+       
         switch (equippedSubWeapon.weaponType)
         {
             case SubWeaponType.AmmoBased:
-                if (Input.GetMouseButtonDown(0) && CanUseSubWeapon())
+               
+                if (!isReloading && Input.GetMouseButtonDown(0) && CanUseSubWeapon())
                     UseSubWeapon();
                 break;
 
             case SubWeaponType.ManaBased:
                 if (Input.GetMouseButtonDown(0))
                 {
-                    
                     if (manaFireCoroutine == null)
                         manaFireCoroutine = StartCoroutine(ContinuousManaFire());
                 }
                 if (Input.GetMouseButtonUp(0))
                 {
-                   
                     if (manaFireCoroutine != null)
                     {
                         StopCoroutine(manaFireCoroutine);
@@ -161,7 +182,12 @@ public class SubWeaponManager : MonoBehaviour
                 }
                 break;
         }
+
+        // 마나 자동 회복
+        if (equippedSubWeapon.weaponType == SubWeaponType.ManaBased)
+            currentMana = Mathf.Min(maxMana, currentMana + manaRegenRate * Time.deltaTime);
     }
+
 
 
     public void EquipSubWeapon(SubWeaponData data)
@@ -314,13 +340,12 @@ public class SubWeaponManager : MonoBehaviour
                 : usedAmmoSprite;
     }
 
-    void HandleAmmoInput()
+    private void StartReloading()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            currentAmmo = maxAmmo;
-            Debug.Log("리로드 완료");
-        }
+        isReloading = true;
+        
+        reloadTimer = equippedSubWeapon.reloadTime;
+        Debug.Log($"[Ammo] 자동 리로드 시작 ({reloadTimer:F2}초)");
     }
     void UpdateManaUI()
     {
@@ -408,11 +433,7 @@ public class SubWeaponManager : MonoBehaviour
             );
     }
 
-    void StartReloading()
-    {
-        currentAmmo = maxAmmo;
-        Debug.Log("리로드 시작");
-    }
+    
 
     private BaseMonster FindNearestAliveMonster(Vector3 from)
     {

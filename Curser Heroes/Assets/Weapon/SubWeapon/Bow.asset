@@ -35,3 +35,11 @@ MonoBehaviour:
   reloadTime: 3
   manaCost: 5
   requiredChargeTime: 2.5
+  ForceVisualPrefab: {fileID: 0}
+  LineVisualPrefab: {fileID: 0}
+  effectWidth: 1.5
+  effectDuration: 0.2
+  effectRadius: 3
+  stunOnRadial: 0
+  stunOnLine: 0
+  stunDuration: 1
