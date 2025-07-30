@@ -11,14 +11,19 @@ public class SkillSlot : MonoBehaviour
 
     private Action onClick;
 
-    public void Set(SkillData skillData, Action onClickCallback)
+    public void Set(SkillData skillData, int ownedLevel, Action onClickCallback)
     {
         icon.sprite = skillData.icon;
-        skillNameText.text = $"{skillData.skillName} Lv.1";
-        descriptionText.text = skillData.description;
+
+        // 다음 레벨 = 미보유 시 Lv.1, 보유 중이면 Lv.n+1
+        int nextLevel = Mathf.Clamp(ownedLevel + 1, 1, skillData.maxLevel);
+        skillNameText.text = $"{skillData.skillName} Lv.{nextLevel}";
+
+        // 해당 레벨에 맞는 설명 가져오기
+        var levelInfo = skillData.levelDataList[Mathf.Clamp(nextLevel - 1, 0, skillData.levelDataList.Count - 1)];
+        descriptionText.text = levelInfo.description;
 
         onClick = onClickCallback;
-
         var btn = GetComponent<Button>();
         btn.onClick.RemoveAllListeners();
         btn.onClick.AddListener(() => onClick?.Invoke());

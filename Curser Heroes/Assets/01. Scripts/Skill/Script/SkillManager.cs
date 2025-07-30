@@ -117,6 +117,11 @@ public class SkillManager : MonoBehaviour
     {
         return ownedSkills.Any(s => s.skill.skillName == skillName);
     }
+    public int GetSkillLevel(SkillData skillData)
+    {
+        var instance = ownedSkills.Find(s => s.skill == skillData);
+        return instance != null ? instance.level : 0;
+    }
 
     void ShowSkillSelection()
     {
