@@ -4936,13 +4936,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 309102756}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1057799096}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 750, y: -35}
@@ -6333,6 +6333,8 @@ MonoBehaviour:
   selectSubData: {fileID: 0}
   GoldImage: {fileID: 659016471}
   JewelImage: {fileID: 568034676}
+  useJewelImage: {fileID: 68948539}
+  useGoldImage: {fileID: 1897671995}
   tutorialUI: {fileID: 2001570938}
   weaponScroll: {fileID: 400949610}
 --- !u!1 &434834634
@@ -7258,7 +7260,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 2
   m_Value: 0.99999917
-  m_Size: 0.61627346
+  m_Size: 0.6162735
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -16333,6 +16335,7 @@ MonoBehaviour:
   homeButton: {fileID: 880053200}
   stageChangeButtonleft: {fileID: 1837289779}
   stageChangeButtonright: {fileID: 309102758}
+  backGroundImage: {fileID: 1037972765}
   bestScoreText: {fileID: 1574618404}
   bestWaveText: {fileID: 1275833026}
   stageNameText: {fileID: 792702195}
@@ -16340,6 +16343,8 @@ MonoBehaviour:
   subWeaponImage: {fileID: 1500992532}
   partnerImage: {fileID: 579277356}
   skillListButton: {fileID: 1415092655}
+  stageIndex: 0
+  maxStageIndex: 0
   weaponSelectUI: {fileID: 81744887}
   skillListPanel: {fileID: 448122871}
 --- !u!1 &1069948359
@@ -17829,6 +17834,55 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1216455050}
   m_CullTransparentMesh: 1
+--- !u!1 &1234680396
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1234680397}
+  - component: {fileID: 1234680398}
+  m_Layer: 0
+  m_Name: StageManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1234680397
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1234680396}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1234680398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1234680396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3136e8f1bc8e704c9b783aff5400f91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stages:
+  - {fileID: 11400000, guid: 29ea2a76e3245684e98552ce88893f3b, type: 2}
+  - {fileID: 11400000, guid: 2c03d2e1855367b4880adc2b1beb44a7, type: 2}
+  selectStage: {fileID: 0}
+  bestWave: 
 --- !u!1 &1241526911
 GameObject:
   m_ObjectHideFlags: 0
@@ -32558,3 +32612,4 @@ SceneRoots:
   - {fileID: 516545486}
   - {fileID: 1072206503}
   - {fileID: 1664392854}
+  - {fileID: 1234680397}
