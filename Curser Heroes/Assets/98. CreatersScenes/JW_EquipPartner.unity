@@ -572,14 +572,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursorWeapon: {fileID: 625156783}
-  waveGroupData: {fileID: 11400000, guid: 9fa0573a5e50445489f8e2a2d6d96d27, type: 2}
+  currentStage: {fileID: 0}
   spawner: {fileID: 956043386}
   clearGold: 0
   clearJewel: 0
-  currentWaveData:
-    wave: 0
-    overrideBosses: []
-    isBossWave: 0
 --- !u!4 &44191905
 Transform:
   m_ObjectHideFlags: 0
@@ -6624,6 +6620,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isStart: 0
+  stageBackGround: {fileID: 1849315065}
   gameOverPanel: {fileID: 274465}
   battleUI: {fileID: 193387550}
   stageStartUI: {fileID: 632612447}

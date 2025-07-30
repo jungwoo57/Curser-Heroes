@@ -130,7 +130,8 @@ public class Boss_Shark : BossBase
     IEnumerator JumpAttack()
     {
         animator.SetTrigger("Pattern2_Jump");
-        yield return new WaitForSeconds(jumpTime);
+        yield return new WaitForSeconds(jumpAttackDelay);
+        animator.speed = 0.0f;
         //Vector3 jumpPos = jumpEffect.transform.position;
         float elapsedTime = 0;
         Vector3 startPos = transform.position;
@@ -141,6 +142,7 @@ public class Boss_Shark : BossBase
             elapsedTime += Time.deltaTime;
             yield return null;
         }
+        animator.speed = 1.0f;
         //////////////////// 경고 범위 관련
         elapsedTime = 0;
         warningArea.SetActive(true);

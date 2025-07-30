@@ -234,7 +234,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.018292584, y: 0.28170675}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -245,7 +245,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.46585494, y: 0.4365865}
   m_EdgeRadius: 0
 --- !u!114 &184127614
 MonoBehaviour:
@@ -355,7 +355,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1030041477}
@@ -959,7 +959,7 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 4f540249e182a464eafc676c4914dac9, type: 2}
   currentHP: 0
   attackRange: 1000
-  moveSpeed: 1.4
+  moveSpeed: 2.5
   isPattern: 0
   isDie: 0
   canMove: 0
@@ -967,7 +967,7 @@ MonoBehaviour:
   rushCol: {fileID: 184127613}
   jumpDistance: 15
   fallTime: 2
-  jumpAttackDelay: 2
+  jumpAttackDelay: 2.2
   areaMoveTime: 1
   warningArea: {fileID: 236407148}
   jumpAttackRange: 2
@@ -987,7 +987,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1807042233}
@@ -1027,7 +1027,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.0036584958, y: 0.28658524}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1038,7 +1038,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.49512297, y: 0.54634243}
   m_EdgeRadius: 0
 --- !u!1 &1038873845
 GameObject:
@@ -1470,8 +1470,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b17cd42e33d6fbe4aa825f6edf2fff73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHP: 0
-  attackCooldown: 0
   MonsterLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -1665,7 +1663,7 @@ Transform:
   m_GameObject: {fileID: 1807042232}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.5291189}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1712,7 +1710,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 2685496610450378408, guid: ce429179c84161645b85de1c433b6ec3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1733,7 +1731,7 @@ Animator:
   m_GameObject: {fileID: 1807042232}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bb3c864cc9de8874ea86fc96f2ec2fcb, type: 2}
+  m_Controller: {fileID: 9100000, guid: 62b3c7b4ce7d21f42bf7d16e19c074bc, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

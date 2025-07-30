@@ -33,6 +33,8 @@ public class UIManager : MonoBehaviour
             return instance;
         }
     }
+
+    public SpriteRenderer stageBackGround;
     
     public Image gameOverPanel;
     
@@ -51,6 +53,10 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
+        if (StageManager.Instance != null)
+        {
+            stageBackGround.sprite = StageManager.Instance.selectStage.battleStageBackGround;
+        }
         isStart = false;
         tutorialUI.gameObject.SetActive(false);
         if (!GameManager.Instance.useStage)

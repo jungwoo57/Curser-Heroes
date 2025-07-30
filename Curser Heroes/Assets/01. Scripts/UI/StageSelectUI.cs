@@ -116,7 +116,7 @@ public class StageSelectUI : MonoBehaviour
 
         public void ClickEnterButton()
         {
-                Debug.Log("게임 시작");                     // 테스트용 코드
+         
                 if (GameManager.Instance.selectSkills.Count != 12)
                 {
                         Debug.Log("모든 스킬이 선택되지 않았습니다.");
