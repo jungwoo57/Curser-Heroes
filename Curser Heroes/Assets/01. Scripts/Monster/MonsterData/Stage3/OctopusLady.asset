@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a679e971d4790164f8d9e3ff6463d243, type: 3}
-  m_Name: SeaUrchin_King
+  m_Name: OctopusLady
   m_EditorClassIdentifier: 
-  monsterPrefab: {fileID: 9079356541153537258, guid: 5d394489a5b3bb143a448f0d97abec87, type: 3}
-  maxHP: 0
-  valueCost: 0
-  attackCooldown: 0
-  damage: 0
+  monsterPrefab: {fileID: 6480728079284604344, guid: 014f0ebff555fc64ab4095a9233a0673, type: 3}
+  maxHP: 65
+  valueCost: 2
+  attackCooldown: 3
+  damage: 1
   index: 0
