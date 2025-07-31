@@ -64,7 +64,7 @@ public class SkillSlot : MonoBehaviour
     {
         switch (skillName)
         {
-            case "매직 소드":
+            case "매직소드":
                 return "검 추가";
             case "수호의 방패":
                 return "방패 추가";

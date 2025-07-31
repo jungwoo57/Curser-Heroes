@@ -153,6 +153,9 @@ public class SkillManager : MonoBehaviour
 
         List<SkillData> selection = GetRandomSkills(availableSkills, 3);
         skillUI.Show(selection, OnSkillSelected);
+
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     void OnSkillSelected(SkillData selected)
@@ -555,6 +558,9 @@ public class SkillManager : MonoBehaviour
 
         GameObject ui = Instantiate(rewardSelectUIPrefab, canvas.transform, false);
         ui.GetComponent<RewardSelectUI>().Init(OnRewardSelected);
+
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     void OnRewardSelected(int index)
@@ -565,6 +571,9 @@ public class SkillManager : MonoBehaviour
             case 1: GameManager.Instance.AddGold(100); break;
             case 2: GameManager.Instance.AddJewel(10); break;
         }
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Confined;
+
         WaveManager.Instance.IncrementWaveIndex();
         WaveManager.Instance.StartWave();
     }
