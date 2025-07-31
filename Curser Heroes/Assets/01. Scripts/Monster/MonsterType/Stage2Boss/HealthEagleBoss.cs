@@ -80,6 +80,7 @@ public class HealthEagleBoss : BossBase
    
    IEnumerator Pattern1() // 덤벨공격
    {
+      canMove = true;
       curCoolDown[0] = 0;
       isPattern = true; //패턴 시작
       animator.SetTrigger("Pattern1");
@@ -95,6 +96,7 @@ public class HealthEagleBoss : BossBase
 
    IEnumerator Pattern2()
    {
+      canMove = true;
       isPattern = true;
       //애니메이터 bool혹은 트리거 값 추가
       yield return StartCoroutine(JumpAttack());
@@ -109,6 +111,7 @@ public class HealthEagleBoss : BossBase
    
    IEnumerator Pattern3()
    {
+      canMove = true;
       isPattern = true;
       yield return null;
       yield return StartCoroutine(WindAttack());

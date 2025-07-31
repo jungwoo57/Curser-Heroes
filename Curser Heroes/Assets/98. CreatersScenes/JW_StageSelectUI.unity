@@ -4936,13 +4936,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 309102756}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1057799096}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 750, y: -35}
@@ -6333,6 +6333,8 @@ MonoBehaviour:
   selectSubData: {fileID: 0}
   GoldImage: {fileID: 659016471}
   JewelImage: {fileID: 568034676}
+  useJewelImage: {fileID: 68948539}
+  useGoldImage: {fileID: 1897671995}
   tutorialUI: {fileID: 2001570938}
   weaponScroll: {fileID: 400949610}
 --- !u!1 &434834634
@@ -7258,7 +7260,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 2
   m_Value: 0.99999917
-  m_Size: 0.61627346
+  m_Size: 0.6162735
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -17877,9 +17879,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stages:
-  - {fileID: 11400000, guid: 3a6ab5f2c15c86c498c6dc2fee887d34, type: 2}
-  - {fileID: 11400000, guid: 7a74d2585cea2d44ba050b2b82b53271, type: 2}
-  - {fileID: 11400000, guid: efdd8eef5a752034d90d4d5718cc8f4e, type: 2}
+  - {fileID: 11400000, guid: 29ea2a76e3245684e98552ce88893f3b, type: 2}
+  - {fileID: 11400000, guid: 2c03d2e1855367b4880adc2b1beb44a7, type: 2}
   selectStage: {fileID: 0}
   bestWave: 
 --- !u!1 &1241526911

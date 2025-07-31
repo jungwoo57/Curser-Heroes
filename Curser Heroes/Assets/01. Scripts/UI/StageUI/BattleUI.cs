@@ -116,8 +116,8 @@ public class BattleUI : MonoBehaviour
 
     public void TextUpdate()
     {
-        stageText.text = "Stage : " + WaveManager.Instance.currentStage.stageNumber;
-        waveText.text = "Wave : " + WaveManager.Instance.CurrentWaveNumber;
+        //stageText.text = "Stage : " + WaveManager.Instance.currentStage.stageNumber;
+        //waveText.text = "Wave : " + WaveManager.Instance.CurrentWaveNumber;
         goldText.text = "Gold : " + GameManager.Instance.GetGold() + "(" + WaveManager.Instance.clearGold + ")";  //매니저에게 스테이지 정보 가져와서 적용
         jewelText.text = "Jewel : " + GameManager.Instance.GetJewel() + "(" + WaveManager.Instance.clearJewel + ")"; //매니저에게 스테이지 정보 가져와서 적용
     }
