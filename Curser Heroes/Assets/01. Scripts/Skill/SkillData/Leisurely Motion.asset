@@ -18,6 +18,7 @@ MonoBehaviour:
   maxLevel: 5
   description: "\uCEE4\uC11C\uC758 \uBB34\uC801 \uC2DC\uAC04 \uC99D\uAC00."
   skillPrefab: {fileID: 0}
+  animClip: {fileID: 0}
   levelDataList:
   - level: 1
     damage: 0
@@ -25,28 +26,33 @@ MonoBehaviour:
     count: 0
     duration: 0.5
     cooldown: 0
+    description: "\uCEE4\uC11C\uC758 \uBB34\uC801 \uC2DC\uAC04 \uC99D\uAC00."
   - level: 2
     damage: 0
     sizeMultiplier: 0
     count: 0
     duration: 1
     cooldown: 0
+    description: "\uC9C0\uC18D\uC2DC\uAC04: 0.5 \u2192 1"
   - level: 3
     damage: 0
     sizeMultiplier: 0
     count: 0
     duration: 1.5
     cooldown: 0
+    description: "\uC9C0\uC18D\uC2DC\uAC04: 1 \u2192 1.5"
   - level: 4
     damage: 0
     sizeMultiplier: 0
     count: 0
     duration: 2
     cooldown: 0
+    description: "\uC9C0\uC18D\uC2DC\uAC04: 1.5 \u2192 2"
   - level: 5
     damage: 0
     sizeMultiplier: 0
     count: 0
     duration: 2.5
     cooldown: 0
+    description: "\uC9C0\uC18D\uC2DC\uAC04: 2 \u2192 2.5"
   unlockCost: 0

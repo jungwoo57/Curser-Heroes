@@ -9,6 +9,7 @@ public class CursorMoving : MonoBehaviour
 
     private float originalSpeed;   
     private bool isStunned;
+    
 
     private void Awake()
     {
@@ -53,4 +54,6 @@ public class CursorMoving : MonoBehaviour
         cursorSpeed = prevSpeed;
         isStunned = false;
     }
+
+ 
 }

@@ -27,23 +27,29 @@ MonoBehaviour:
     sizeMultiplier: 0
     count: 0
     duration: 0
-    cooldown: 7
+    cooldown: 20
+    description: "\uC77C\uC815 \uC2DC\uAC04\uB9C8\uB2E4, \uC801\uC744 \uBC00\uC5B4\uB0B4\uACE0
+      \uD22C\uC0AC\uCCB4\uB97C \uB9C9\uC544\uB0B4\uB294 \uADF8\uB9BC\uC790 \uCE5C\uAD6C\uB97C
+      \uC18C\uD658"
   - level: 2
     damage: 0
     sizeMultiplier: 0
     count: 0
     duration: 0
-    cooldown: 6
+    cooldown: 18
+    description: "\uCFE8\uD0C0\uC784: 20 \u2192 18"
   - level: 3
     damage: 0
     sizeMultiplier: 0
     count: 0
     duration: 0
-    cooldown: 6
+    cooldown: 16
+    description: "\uCFE8\uD0C0\uC784: 18 \u2192 16"
   - level: 4
     damage: 0
     sizeMultiplier: 0
     count: 0
     duration: 0
-    cooldown: 5
+    cooldown: 14
+    description: "\uCFE8\uD0C0\uC784: 16 \u2192 14"
   unlockCost: 0

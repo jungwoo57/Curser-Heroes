@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a679e971d4790164f8d9e3ff6463d243, type: 3}
   m_Name: SeaUrchin_King
   m_EditorClassIdentifier: 
-  monsterPrefab: {fileID: 9079356541153537258, guid: 5d394489a5b3bb143a448f0d97abec87, type: 3}
-  maxHP: 0
-  valueCost: 0
-  attackCooldown: 0
-  damage: 0
+  monsterPrefab: {fileID: 0}
+  maxHP: 65
+  valueCost: 2
+  attackCooldown: 2
+  damage: 1
   index: 0
