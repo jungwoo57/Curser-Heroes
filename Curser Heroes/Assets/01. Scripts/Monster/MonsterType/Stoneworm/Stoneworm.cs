@@ -16,7 +16,7 @@ public class Stoneworm : BaseMonster
 
         Vector3 basePos = target.position;
 
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < warningIndicator.Length; i++)
         {
             // 각 위치에 약간의 오프셋을 줘서 분산
             Vector3 offset = Random.insideUnitCircle * 1.5f;

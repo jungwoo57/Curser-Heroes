@@ -7,7 +7,7 @@ public abstract class BaseMonster : MonoBehaviour
     protected int maxHP;
     protected int currentHP;
     protected int damage;
-    protected float attackCooldown;
+    [SerializeField]protected float attackCooldown;
     protected float attackTimer;
 
     public int CurrentHP => currentHP;

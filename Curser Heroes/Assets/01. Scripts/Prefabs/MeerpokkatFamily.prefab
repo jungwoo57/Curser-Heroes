@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa05d9f8a03069d4a92a02a8a1fbbbd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackCooldown: 0
   MonsterLayer:
     serializedVersion: 2
     m_Bits: 0

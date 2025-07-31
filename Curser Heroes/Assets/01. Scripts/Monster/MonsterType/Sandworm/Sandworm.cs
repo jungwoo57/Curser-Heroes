@@ -56,7 +56,7 @@ public class Sandworm : BaseMonster
         yield return new WaitForSeconds(attackDelay);
         
         GameObject acidPrefab = Instantiate(effectPrefab, pos, Quaternion.identity ,transform);
-        MonsterProjectile acidEffect = acidPrefab.GetComponent<MonsterProjectile>();
+        Octopus_Ink acidEffect = acidPrefab.GetComponent<Octopus_Ink>();
         acidEffect.Initialize(Vector3.zero, damage);
         Destroy(acidEffect, 0.5f);
         Destroy(fakeTarget); // 타겟 오브젝트 삭제
