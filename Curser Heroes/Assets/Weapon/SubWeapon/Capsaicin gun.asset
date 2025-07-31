@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a595bcdfd8ab3e341af4dac3e68e0bbc, type: 3}
   m_Name: Capsaicin gun
   m_EditorClassIdentifier: 
-  weaponName: CapsaicinGun
+  weaponName: "\uCEA1\uC0AC\uC774\uC2E0 \uBB3C\uCD1D"
   weaponSprite: {fileID: 21300000, guid: de26be81c08de9f418302e72b69efce1, type: 3}
   weaponDesc: "\uBAAC\uC2A4\uD130\uC758 \uC9C4\uD589 \uC911\uC778 \uACF5\uACA9 \uD328\uD134\uC744
     \uC911\uB2E8\uD558\uACE0, 5\uCD08 \uB3D9\uC548 \uACF5\uACA9 \uBD88\uAC00 \uC0C1\uD0DC\uB85C
     \uB9CC\uB4DC\uB294 \uD6A8\uACFC."
   upgradeCost: 26020000ba02000076030000650400009405000015070000fe0800006b0b0000800e00006a120000
   unlockCost: 1000
-  baseDamage: 4
+  baseDamage: 2
   damagePerLevel: 1.4
   cooldown: 0.1
   effect: 1

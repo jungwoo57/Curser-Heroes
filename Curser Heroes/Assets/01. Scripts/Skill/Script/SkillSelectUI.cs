@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class SkillSelectUI : MonoBehaviour
@@ -13,7 +13,8 @@ public class SkillSelectUI : MonoBehaviour
             if (i < skills.Count)
             {
                 var skill = skills[i];
-                slots[i].Set(skill, () => onSelect?.Invoke(skill));
+                int ownedLevel = SkillManager.Instance.GetSkillLevel(skill); // 현재 보유 레벨
+                slots[i].Set(skill, ownedLevel, () => onSelect?.Invoke(skill));
                 slots[i].gameObject.SetActive(true);
             }
             else

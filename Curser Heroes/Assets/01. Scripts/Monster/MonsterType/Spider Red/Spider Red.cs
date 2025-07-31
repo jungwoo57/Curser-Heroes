@@ -2,7 +2,7 @@
 
 public class SpiderRed : BaseMonster
 {
-   public SpiderProjectile[] projectilePrefab; // 투사체 프리팹
+    public SpiderProjectile[] projectilePrefab; // 투사체 프리팹
     public Transform firePoint;         // 발사 위치
     public float attackRange = 5f;      // 공격 사거리
     public GameObject[] warningArea;
