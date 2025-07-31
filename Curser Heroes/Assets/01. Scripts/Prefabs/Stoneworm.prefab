@@ -324,6 +324,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: deae72b7d9ae06643a6b37d490e3b96e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackCooldown: 0
   MonsterLayer:
     serializedVersion: 2
     m_Bits: 128

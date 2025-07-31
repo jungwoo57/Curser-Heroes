@@ -36,7 +36,6 @@ public class BossBase : MonoBehaviour
     // 외부에서 호출하여 데미지를 입힐 때 쓰는 함수
     public void TakeDamage(int amount)
     {
-        
         if (currentHP <= 0) return;  // 이미 죽었으면 무시
 
         currentHP -= amount;
@@ -46,7 +45,6 @@ public class BossBase : MonoBehaviour
 
         if (currentHP <= 0)
             Die();
-        
     }
     // 투명도를 깜빡이며 피격 효과
     private IEnumerator FlashEffect()

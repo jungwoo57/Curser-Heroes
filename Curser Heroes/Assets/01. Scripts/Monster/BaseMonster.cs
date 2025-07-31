@@ -7,7 +7,7 @@ public abstract class BaseMonster : MonoBehaviour
     protected int maxHP;
     protected int currentHP;
     protected int damage;
-    protected float attackCooldown;
+    [SerializeField]protected float attackCooldown;
     protected float attackTimer;
 
     public int CurrentHP => currentHP;
@@ -106,7 +106,7 @@ public abstract class BaseMonster : MonoBehaviour
                     StartCoroutine(ChangeColorGradually(Color.white, 0.3f));
             }
             if (animator != null)
-                animator.SetTrigger("Effect");
+                //animator.SetTrigger("Effect");
 
             
             attackTimer = attackCooldown;
