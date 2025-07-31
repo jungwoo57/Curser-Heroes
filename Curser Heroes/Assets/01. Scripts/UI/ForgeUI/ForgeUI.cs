@@ -157,7 +157,7 @@ public class ForgeUI : MonoBehaviour
                 GoldImage.gameObject.SetActive(true);
                 weaponAtk.text = ("공격력 : ") + selectWeapon.levelDamage.ToString();
                 if(selectWeapon.level <= 0) weaponName.text = selectData.weaponName;
-                else weaponName.text = selectData.weaponName + " (" + "+" + (selectWeapon.level)+ ")";
+                else weaponName.text = selectData.weaponName + "+" + (selectWeapon.level);
                 hasGoldText.gameObject.SetActive(true);
                 useGoldText.gameObject.SetActive(true);
                 GoldImage.gameObject.SetActive(true);
@@ -168,7 +168,7 @@ public class ForgeUI : MonoBehaviour
                 }
                 else
                 {
-                    useGoldText.text = "최대레벨";
+                    useGoldText.text = "최대 레벨";
                 }
 
                 if (GameManager.Instance.GetGold() < selectData.upgradeCost[selectWeapon.level >= 10 ? 9 : selectWeapon.level] || selectWeapon.level >=10)
@@ -204,7 +204,7 @@ public class ForgeUI : MonoBehaviour
             if (selectSubWeapon != null)
             {
                 if(selectSubWeapon.level <= 0) weaponName.text = selectSubData.weaponName;
-                else weaponName.text = selectSubData.weaponName + "   (" + (selectSubWeapon.level) + ")";
+                else weaponName.text = selectSubData.weaponName + "+" + (selectSubWeapon.level);
                 
                 weaponAtk.text = ("공격력 : ") + selectSubWeapon.levelDamage.ToString();
                 hasGoldText.gameObject.SetActive(true);
@@ -217,7 +217,7 @@ public class ForgeUI : MonoBehaviour
                 }
                 else
                 {
-                    useGoldText.text = "최대레벨";
+                    useGoldText.text = "최대 레벨";
                 }
 
                 if (GameManager.Instance.GetGold() < selectSubData.upgradeCost[selectSubWeapon.level >= 10 ? 9 : selectSubWeapon.level] || selectSubWeapon.level >=10)
