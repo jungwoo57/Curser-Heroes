@@ -12,7 +12,7 @@ public class StageSkillSelectUI : MonoBehaviour
     
     private void Start()
     {
-        hasSkills = GameManager.Instance.hasSkills;
+        hasSkills = GameManager.Instance.HasSkills;
         if (hasSkills != null)
         {
             UpdateUI();
@@ -27,6 +27,7 @@ public class StageSkillSelectUI : MonoBehaviour
     {
         skillInfoPanelUI.gameObject.SetActive(false);
         skillInfcoCloseButton.gameObject.SetActive(false);
+        hasSkills = GameManager.Instance.HasSkills;
         UpdateUI();
     }
 

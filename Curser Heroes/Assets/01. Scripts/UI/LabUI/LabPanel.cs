@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -84,7 +84,7 @@ public class LabPanel : MonoBehaviour
             {
                 skillButton[i].image.gameObject.SetActive(true);
                 skillButton[i].image.sprite = GameManager.Instance.allSkills[i].icon;
-                if (GameManager.Instance.hasSkills.Find(n => n.skillName == GameManager.Instance.allSkills[i].skillName))
+                if (GameManager.Instance.HasSkills.Find(n => n.skillName == GameManager.Instance.allSkills[i].skillName))
                 {
                     skillButton[i].image.color = new Color(1f, 1f, 1f, 1.0f);
                 }
@@ -105,7 +105,7 @@ public class LabPanel : MonoBehaviour
     {
         selectSkill = GameManager.Instance.allSkills[skillIndex];
         UpdateSkillInfo();
-        if(GameManager.Instance.hasSkills.Find(n => n.skillName == selectSkill.skillName)
+        if(GameManager.Instance.HasSkills.Find(n => n.skillName == selectSkill.skillName)
            || GameManager.Instance.GetJewel() <= selectSkill.unlockCost)
         {
             unlockButton.interactable = false;
@@ -118,7 +118,7 @@ public class LabPanel : MonoBehaviour
 
     public void UnlockSkill()
     {
-        if (GameManager.Instance.hasSkills.Find(n => n.skillName == selectSkill.skillName))
+        if (GameManager.Instance.HasSkills.Find(n => n.skillName == selectSkill.skillName))
         {
             Debug.Log("해당스킬이 있습니다");
         }
@@ -128,7 +128,7 @@ public class LabPanel : MonoBehaviour
             unlockButton.interactable = false;
             for (int i = 0; i < GameManager.Instance.allSkills.Count; i++)
             {
-                if (GameManager.Instance.hasSkills.Find(n =>
+                if (GameManager.Instance.HasSkills.Find(n =>
                         n.skillName == GameManager.Instance.allSkills[i].skillName))
                 {
                     skillButton[i].image.color = new Color(1f, 1f, 1f, 1.0f);

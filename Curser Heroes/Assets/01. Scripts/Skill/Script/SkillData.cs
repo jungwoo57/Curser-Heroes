@@ -20,4 +20,5 @@ public class SkillData : ScriptableObject
     
     public List<SkillLevelData> levelDataList; // 레벨 별 수치
     public int unlockCost;
+    public bool isDefaultSkill; // 기본 제공 스킬
 }

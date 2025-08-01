@@ -25,13 +25,13 @@ public class GameManager : MonoBehaviour
     public List<PartnerData> allPartners;
     public List<SkillData> allSkills;// 모든 스킬
     
-    [SerializeField] private List<SkillData> _hasSkills = new List<SkillData>();
-    
+    [SerializeField] private List<SkillData> defaultSkills = new List<SkillData>();  // 처음부터 제공되는 스킬
+    [SerializeField] private List<SkillData> unlockedSkills = new List<SkillData>(); // 해금한 스킬
+
     [Header("보유 중인 무기 및 동료")]
     [SerializeField] public List<OwnedWeapon> ownedWeapons; // 소유 메인 무기
     [SerializeField] public List<OwnedSubWeapon> ownedSubWeapons; // 소유 보조 무기
     [SerializeField] public List<OwnedPartner> ownedPartners;
-    public List<SkillData> hasSkills => _hasSkills;
     public List<SkillData> skillPool = new List<SkillData>();
     
     [Header("장착 및 선택한 스킬")]
@@ -58,8 +58,9 @@ public class GameManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
 
-            _hasSkills = new List<SkillData>(allSkills);
-            skillPool = new List<SkillData>(allSkills); //테스트 편의를 위해 잠시 모든 스킬의 데이터를 가져와 사용 
+            defaultSkills = allSkills.FindAll(skill => skill.isDefaultSkill);
+            unlockedSkills = new List<SkillData>(); // 저장된 스킬은 Load에서 복원
+            skillPool = new List<SkillData>(HasSkills); // 선택 풀은 제공 + 해금 스킬에서만
         }
         else
         {
@@ -208,15 +209,20 @@ public class GameManager : MonoBehaviour
         Save();
     }
 
-   
-    public void UnlockSkill(SkillData skilldata)
+
+    public void UnlockSkill(SkillData skillData)
     {
-        if (skilldata.unlockCost <= jewel)
+        if (!unlockedSkills.Contains(skillData))
         {
-            jewel -= skilldata.unlockCost;
-            _hasSkills.Add(skilldata);
+            unlockedSkills.Add(skillData);
+
+            if (!HasSkills.Contains(skillData))
+            {
+                HasSkills.Add(skillData);
+            }
+
+            Save();
         }
-        Save();
     }
 
     public void UpgradePartner(PartnerData data)
@@ -239,13 +245,23 @@ public class GameManager : MonoBehaviour
         Save();
             
     }
-        
+    public List<SkillData> HasSkills
+    {
+        get
+        {
+            var all = new List<SkillData>(defaultSkills);
+            all.AddRange(unlockedSkills);
+            return all;
+        }
+    }
+
     [ContextMenu("TestSave")]
     public void Save()
     {
         if (!SaveLoadManager.instance) return;
         SaveData data = new SaveData();
-        data.hasSkills = _hasSkills;
+        data.unlockedSkills = unlockedSkills;
+        data.selectedSkills = selectSkills;
         data.ownedWeapons = ownedWeapons;
         data.ownedSubWeapons = ownedSubWeapons;
         data.mainEquipWeapon = mainEquipWeapon;
@@ -253,8 +269,9 @@ public class GameManager : MonoBehaviour
         data.selectedSkills = selectSkills;
         data.gold = gold; 
         data.jewel = jewel;
-        data.bestScore = bestScore;
-
+        data.stage1bestWave = StageManager.Instance.bestWave[0];
+        data.stage1bestWave = StageManager.Instance.bestWave[1];
+        data.stage1bestWave = StageManager.Instance.bestWave[2];
         SaveLoadManager.instance.Save(data);
     }
 
@@ -264,7 +281,9 @@ public class GameManager : MonoBehaviour
         SaveData loadData = new SaveData();
         loadData = SaveLoadManager.instance.Load();
         if (loadData == null) return;
-        _hasSkills = loadData.hasSkills;
+        unlockedSkills = loadData.unlockedSkills ?? new List<SkillData>();
+        selectSkills = loadData.selectedSkills ?? new List<SkillData>();
+        skillPool = new List<SkillData>(HasSkills);
         ownedWeapons = loadData.ownedWeapons;
         ownedSubWeapons = loadData.ownedSubWeapons;
         mainEquipWeapon = loadData.mainEquipWeapon;
@@ -272,8 +291,13 @@ public class GameManager : MonoBehaviour
         selectSkills =  loadData.selectedSkills;
         gold = loadData.gold;
         jewel = loadData.jewel;
-        bestScore = loadData.bestScore;
+        StageManager.Instance.bestWave[0] = loadData.stage1bestWave;
+        StageManager.Instance.bestWave[1] = loadData.stage2bestWave;
+        StageManager.Instance.bestWave[2] = loadData.stage3bestWave;
+        
+        //bestScore = loadData.bestScore;
     }
+
 
     public void OnApplicationQuit()      //마을에서 게임 껏을 시 자동 저장
     {
