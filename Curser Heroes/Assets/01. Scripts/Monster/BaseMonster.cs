@@ -17,13 +17,13 @@ public abstract class BaseMonster : MonoBehaviour
 
     protected int valueCost;
     protected Animator animator;
-    
+
 
     private static readonly int HashAtk = Animator.StringToHash("Atk");
     private static readonly int HashDie = Animator.StringToHash("Die");
     private static readonly int HashDamage = Animator.StringToHash("Damage");
     private static readonly int HashSpawn = Animator.StringToHash("Spw");
-    private float minAttackCooldown = 2f,maxAttackCooldown = 4f;
+    private float minAttackCooldown = 2f, maxAttackCooldown = 4f;
     public bool isDead = false;
     private bool isStun = false;
     public event Action<GameObject> onDeath;
@@ -31,7 +31,7 @@ public abstract class BaseMonster : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Coroutine flashCoroutine;
     private Coroutine attackColorCoroutine;
-    protected EffectManager effectManager;  
+    protected EffectManager effectManager;
     public bool IsDead => currentHP <= 0;
     public float deathTime = 1.0f;
     protected virtual void Start()
@@ -57,8 +57,8 @@ public abstract class BaseMonster : MonoBehaviour
 
 
 
-        
-        
+
+
     }
 
     protected virtual void PlaySpawnAnimation()
@@ -115,8 +115,8 @@ public abstract class BaseMonster : MonoBehaviour
             if (animator != null)
                 //animator.SetTrigger("Effect");
 
-            
-            attackTimer = attackCooldown;
+
+                attackTimer = attackCooldown;
         }
     }
 
@@ -137,12 +137,22 @@ public abstract class BaseMonster : MonoBehaviour
         // 이펙트 적용
         if (weaponData != null && effectManager != null)
         {
-            IEffect effect = EffectFactory.CreateEffect(weaponData.effect);
+            // 생성자 시그니처:
+            // CreateEffect(effect, target, burnDPS, burnDuration, stunDuration)
+            IEffect effect = EffectFactory.CreateEffect(
+                weaponData.effect,
+                this,                                  // BaseMonster target
+                weaponData.burnDamagePerSecond,        // int burn DPS
+                weaponData.burnDuration,               // float burn duration
+                weaponData.stunDuration                // float stun duration
+            );
+
             if (effect != null)
-            {
                 effectManager.AddEffect(effect);
-            }
         }
+    
+
+
 
 
         if (animator != null)

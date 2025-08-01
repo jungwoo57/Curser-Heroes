@@ -4,13 +4,12 @@
 public class LineProjectile : MonoBehaviour
 {
     [Header("Line Settings")]
-    public float length = 5f;               // 앞쪽으로 뻗어나가는 길이
-    public float width = 1f;                // 옆으로 퍼지는 폭
-    public GameObject lineVFXPrefab;        // 길쭉한 VFX 프리팹
-    public float duration = 0.2f;           // 지속 시간
+    public float length = 5f;
+    public float width = 1f;
+    public GameObject lineVFXPrefab;
+    public float duration = 0.2f;
     public LayerMask monsterLayer;
 
-   
     private SubWeaponData weaponData;
     private int damageAmount;
 
@@ -23,42 +22,42 @@ public class LineProjectile : MonoBehaviour
 
     void Start()
     {
-        //  시각 이펙트
+        // 1) VFX
         if (lineVFXPrefab != null)
         {
-            var vfx = Instantiate(
-                lineVFXPrefab,
-                transform.position,
-                transform.rotation
-            );
+            var vfx = Instantiate(lineVFXPrefab, transform.position, transform.rotation);
             vfx.transform.localScale = new Vector3(width, length, 1f);
             Destroy(vfx, duration);
         }
 
-        //  충돌 처리 및 데미지/상태이상 적용
+        // 2) 데미지·상태이상 처리
         Vector3 boxCenter = transform.position + transform.up * (length / 2f);
         Vector2 boxSize = new Vector2(width, length);
         float angle = transform.eulerAngles.z;
 
         var hits = Physics2D.OverlapBoxAll(boxCenter, boxSize, angle, monsterLayer);
+        Debug.Log($"▶ LineProjectile hits: {hits.Length}");
         foreach (var col in hits)
         {
             if (col.TryGetComponent<BaseMonster>(out var m) && !m.IsDead)
             {
-                // 기본 데미지
                 m.TakeDamage(damageAmount, weaponData);
 
-                // 상태이상 효과: Burn OR Stun
                 switch (weaponData.effect)
                 {
                     case SubWeaponEffect.Burn:
-                        var burn = new BurnEffect();
-                        burn.Apply(m);
+                        var burn = new BurnEffect(
+                            m,
+                            weaponData.burnDamagePerSecond,
+                            weaponData.burnDuration,
+                            1f
+                        );
                         m.GetComponent<EffectManager>()?.AddEffect(burn);
                         break;
 
                     case SubWeaponEffect.Stun:
-                        m.Stun(weaponData.stunDuration);
+                        var stun = new StunEffect(weaponData.stunDuration);
+                        m.GetComponent<EffectManager>()?.AddEffect(stun);
                         break;
                 }
             }

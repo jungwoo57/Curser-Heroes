@@ -455,11 +455,11 @@ public class SubWeaponManager : MonoBehaviour
 
     void UseForceEffectAtCursor()
     {
-        // 커서 중심 위치
+        // 1) 커서 위치
         Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         pos.z = 0f;
 
-        //  VFX Zone 생성
+        // 2) VFX Zone
         if (equippedSubWeapon.ForceVisualPrefab != null)
         {
             var zone = Instantiate(
@@ -472,7 +472,7 @@ public class SubWeaponManager : MonoBehaviour
             Destroy(zone, equippedSubWeapon.effectDuration);
         }
 
-        //  범위 내 몬스터 타격
+        // 3) 데미지 존
         int dmg = Mathf.RoundToInt(upgradeComponent.GetCurrentDamage());
         var hits = Physics2D.OverlapCircleAll(
             pos,
@@ -484,20 +484,24 @@ public class SubWeaponManager : MonoBehaviour
         {
             if (col.TryGetComponent<BaseMonster>(out var m) && !m.IsDead)
             {
-                // 기본 데미지
                 m.TakeDamage(dmg, equippedSubWeapon);
 
-                // 상태이상 효과 처리 (Burn OR Stun)
+                // 상태이상 효과
                 switch (equippedSubWeapon.effect)
                 {
                     case SubWeaponEffect.Burn:
-                        var burn = new BurnEffect();
-                        burn.Apply(m);
+                        var burn = new BurnEffect(
+                            m,
+                            equippedSubWeapon.burnDamagePerSecond,
+                            equippedSubWeapon.burnDuration,
+                            1f
+                        );
                         m.GetComponent<EffectManager>()?.AddEffect(burn);
                         break;
 
                     case SubWeaponEffect.Stun:
-                        m.Stun(equippedSubWeapon.stunDuration);
+                        var stun = new StunEffect(equippedSubWeapon.stunDuration);
+                        m.GetComponent<EffectManager>()?.AddEffect(stun);
                         break;
                 }
             }
@@ -507,13 +511,15 @@ public class SubWeaponManager : MonoBehaviour
 
 
 
+
+
     void UseLineEffectAtCursor()
     {
-        //  커서 월드 위치 계산
+        // 1) 커서 월드 위치
         Vector3 cursorPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         cursorPos.z = 0f;
 
-        //  자동 조준
+        // 2) 자동 조준
         BaseMonster target = FindNearestAliveMonster(cursorPos);
         Vector3 aimPos = cursorPos;
         if (target != null)
@@ -522,13 +528,13 @@ public class SubWeaponManager : MonoBehaviour
             aimPos = (sr != null) ? sr.bounds.center : target.transform.position;
         }
 
-        
+        // 3) 발사 위치·각도 계산
         Vector3 dir = (aimPos - cursorPos).normalized;
         float angleDeg = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        float cursorRad = 0.5f;                                // 커서 반지름
+        float cursorRad = 0.5f;
         Vector3 origin = cursorPos + dir * cursorRad;
 
-        
+        // 4) Projectile 생성 + Init
         GameObject proj = Instantiate(
             equippedSubWeapon.projectilePrefab,
             origin,
@@ -542,17 +548,17 @@ public class SubWeaponManager : MonoBehaviour
             return;
         }
 
-        
         int dmg = Mathf.RoundToInt(upgradeComponent.GetCurrentDamage());
         lp.Init(equippedSubWeapon, dmg);
 
-        
+        // 5) 크기/레이어 설정
         float maxLen = equippedSubWeapon.projectileMaxDistance;
-        float dist = Vector2.Distance(cursorPos, aimPos);
-        lp.length = Mathf.Min(maxLen, dist);
+        float distToAim = Vector2.Distance(cursorPos, aimPos);
+        lp.length = Mathf.Min(maxLen, distToAim);
         lp.width = equippedSubWeapon.effectWidth;
         lp.monsterLayer = monsterLayer;
     }
+
 
 
 

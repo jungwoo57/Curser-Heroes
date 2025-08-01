@@ -53,7 +53,7 @@ public class SubWeaponData : ScriptableObject
     public SubWeaponEffect subeffect;
 
     [Tooltip("화상 효과일 때, 초당 데미지")]
-    public float burnDamagePerSecond;
+    public int burnDamagePerSecond;
 
     [Tooltip("화상 효과 지속 시간")]
     public float burnDuration;
