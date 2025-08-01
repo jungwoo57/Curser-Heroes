@@ -37,13 +37,16 @@ public class ForgeUI : MonoBehaviour
     //[SerializeField] private Image useGoldImage;
     
     public TutorialUI tutorialUI;
+    [SerializeField] private RawImage tutorialPanel;
     [SerializeField] private ScrollRect weaponScroll;
     private void OnEnable()
     {
         tutorialUI.gameObject.SetActive(false);
+        tutorialPanel.gameObject.SetActive(false);
         if (!GameManager.Instance.useForge)
         {
             tutorialUI.gameObject.SetActive(true);
+            tutorialPanel.gameObject.SetActive(true);
         }
         isMain = true;
         mainWeaponButton.interactable = false;

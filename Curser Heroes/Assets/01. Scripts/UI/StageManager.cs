@@ -21,7 +21,7 @@ public class StageManager : MonoBehaviour
     [Header(("스테이지 정보"))] 
     [SerializeField] public List<StageData> stages;
     [SerializeField] public StageData selectStage;
-    [SerializeField] public List<int> bestWave; // 스테이지 선택 번호
+    [SerializeField] public int[] bestWave; // 스테이지 선택 번호
     
     private void Awake()
     {
@@ -36,7 +36,7 @@ public class StageManager : MonoBehaviour
         }
 
         selectStage = stages[0];
-        bestWave = new List<int>(new int[stages.Count]);
+        //bestWave = new List<int>(new int[stages.Count]);
     }
 
     public void UpdateStage(int index)

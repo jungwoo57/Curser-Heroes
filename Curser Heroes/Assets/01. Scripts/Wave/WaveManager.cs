@@ -184,6 +184,14 @@ public class WaveManager : MonoBehaviour
             clearJewel = 0;
         }
 
+        if (StageManager.Instance != null)
+        {
+            if (StageManager.Instance.bestWave[currentStage.stageNumber - 1] < waveNum)
+            {
+                StageManager.Instance.bestWave[currentStage.stageNumber - 1] = waveNum;
+            }
+        }
+
         SkillManager.Instance.OnWaveEnd();
     }
 

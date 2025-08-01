@@ -11,8 +11,12 @@ public class SaveData
     public OwnedWeapon mainEquipWeapon;
     public OwnedSubWeapon subEquipWeapon;
     public List<SkillData> selectedSkills;
+
+    public int stage1bestWave;
+    public int stage2bestWave;
+    public int stage3bestWave;
     
     public int gold;
     public int jewel;
-    public int bestScore;
+    //public int bestScore;
 }

@@ -12,17 +12,21 @@ public class StageSelectUI : MonoBehaviour
         [SerializeField] private Button stageChangeButtonleft;
         [SerializeField] private Button stageChangeButtonright;
         [SerializeField] private Image backGroundImage;
+        [SerializeField] private Button stageStartButton;
         
         [Header("스테이지 정보")] 
         [SerializeField] private TextMeshProUGUI bestScoreText;
         [SerializeField] private TextMeshProUGUI bestWaveText;
         [SerializeField] private TextMeshProUGUI stageNameText;
+        [SerializeField] private TextMeshProUGUI stageWarningText;
         [SerializeField] private Image mainWeaponImage;
         [SerializeField] private Image subWeaponImage;
         [SerializeField] private Image partnerImage;
         [SerializeField] private Button skillListButton;
         [SerializeField] private int stageIndex;        
         [SerializeField] private int maxStageIndex;
+        [SerializeField] private int unlockStageWave;
+        
         [Header("창 모음")] 
         [SerializeField] private GameObject weaponSelectUI;
         [SerializeField] private GameObject skillListPanel;
@@ -75,7 +79,6 @@ public class StageSelectUI : MonoBehaviour
                 Debug.Log(stageIndex);
                 if (StageManager.Instance != null)
                 {
-                        Debug.Log("여긴됨 ㅇㅇ");
                         StageManager.Instance.UpdateStage(stageIndex);
                 }
                 UpdateStageInfoUI();
@@ -83,13 +86,19 @@ public class StageSelectUI : MonoBehaviour
         }
 
         public void UpdateStageInfoUI() // 해당 인덱스의 스테이지 정보 UPDATE
-        {
-              Debug.Log("UI업데이트 임시 출력");   // TEST용 코드
+        { 
+                stageWarningText.gameObject.SetActive(false); 
+                stageStartButton.interactable = true;
               //bestScoreText.text = StageManager.Instance.selectStage.stageName;     
               //bestWaveText.text = GameManager.Instance.bestScore.ToString() + " WAVE"; // 가장 높은 웨이브 설정
               bestWaveText.text = StageManager.Instance.bestWave[stageIndex].ToString();
               stageNameText.text = StageManager.Instance.selectStage.stageName;
               backGroundImage.sprite = StageManager.Instance.selectStage.stageImage;
+              if (stageIndex > 0 && StageManager.Instance.bestWave[stageIndex-1] < unlockStageWave)
+              {
+                      stageWarningText.gameObject.SetActive(true);
+                      stageStartButton.interactable = false;
+              }
         }
 
         public void UpdatePartnerInfoUI()
