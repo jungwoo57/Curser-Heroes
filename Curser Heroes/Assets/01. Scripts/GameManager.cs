@@ -269,8 +269,9 @@ public class GameManager : MonoBehaviour
         data.selectedSkills = selectSkills;
         data.gold = gold; 
         data.jewel = jewel;
-        data.bestScore = bestScore;
-
+        data.stage1bestWave = StageManager.Instance.bestWave[0];
+        data.stage1bestWave = StageManager.Instance.bestWave[1];
+        data.stage1bestWave = StageManager.Instance.bestWave[2];
         SaveLoadManager.instance.Save(data);
     }
 
@@ -290,7 +291,11 @@ public class GameManager : MonoBehaviour
         selectSkills =  loadData.selectedSkills;
         gold = loadData.gold;
         jewel = loadData.jewel;
-        bestScore = loadData.bestScore;
+        StageManager.Instance.bestWave[0] = loadData.stage1bestWave;
+        StageManager.Instance.bestWave[1] = loadData.stage2bestWave;
+        StageManager.Instance.bestWave[2] = loadData.stage3bestWave;
+        
+        //bestScore = loadData.bestScore;
     }
 
 
