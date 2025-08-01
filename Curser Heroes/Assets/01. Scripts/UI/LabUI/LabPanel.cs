@@ -32,7 +32,7 @@ public class LabPanel : MonoBehaviour
         skillEffect.text = "스킬 효과";
         hasJewelText.text = GameManager.Instance.GetJewel().ToString();
         useJewelText.text = "";
-        UpdateSkillScroll(SkillType.Attack);
+        UpdateSkillScroll(SkillType.All);
         unlockButton.interactable = false;
         skillPlayer.clip = null;
     }
@@ -56,7 +56,6 @@ public class LabPanel : MonoBehaviour
         if (!selectSkill) return;
         skillName.text = selectSkill.skillName;
         skillDescription.text = selectSkill.description;
-        //skillEffect.text = selectSkill. 효과는 뭐라넣어야하지
         hasJewelText.text = GameManager.Instance.GetJewel().ToString();
         useJewelText.text = selectSkill.unlockCost.ToString();
         if(selectSkill.animClip != null)
@@ -80,7 +79,7 @@ public class LabPanel : MonoBehaviour
         
         for (int i = 0; i < GameManager.Instance.allSkills.Count; i++)  // 타입별로 정렬
         {
-            if (GameManager.Instance.allSkills[i]&&GameManager.Instance.allSkills[i].type==type)
+            if (GameManager.Instance.allSkills[i]&&GameManager.Instance.allSkills[i].type==type || type==SkillType.All)
             {
                 skillButton[i].image.gameObject.SetActive(true);
                 skillButton[i].image.sprite = GameManager.Instance.allSkills[i].icon;
@@ -96,6 +95,8 @@ public class LabPanel : MonoBehaviour
             }
         }
     }
+    
+    
 
     public void UpdateSkillImage()
     {

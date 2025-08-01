@@ -49,8 +49,9 @@ public class GameManager : MonoBehaviour
     public bool useForge;
     public bool useLab;
     public bool useBar;
-    
-    public int bestScore;
+
+    public event Action OnGoldChanged;
+    public event Action OnJewelChanged;
     private void Awake()
     {
         if (instance == null)
@@ -89,14 +90,24 @@ public class GameManager : MonoBehaviour
     public void AddGold(int amount)
     {
         gold += amount;
-        UIManager.Instance.battleUI.TextUpdate();
+        if (UIManager.Instance != null)
+        {
+            UIManager.Instance.battleUI.TextUpdate();
+        }
+
+        OnGoldChanged?.Invoke();
         Debug.Log($"골드 획득: {amount} / 총 골드: {gold}");
     }
 
     public void AddJewel(int amount)
     {
         jewel += amount;
-        UIManager.Instance.battleUI.TextUpdate();
+        if (UIManager.Instance != null)
+        {
+            UIManager.Instance.battleUI.TextUpdate();
+        }
+
+        OnJewelChanged?.Invoke();
         Debug.Log($"쥬얼 획득: {amount} / 총 쥬얼: {jewel}");
     }
 
@@ -114,7 +125,7 @@ public class GameManager : MonoBehaviour
     {
         if (weaponData.unlockCost <= jewel)
         {
-            jewel -= weaponData.unlockCost;
+            AddJewel(- weaponData.unlockCost);
             ownedWeapons.Add(new OwnedWeapon(weaponData));
         }
 
@@ -126,7 +137,7 @@ public class GameManager : MonoBehaviour
 
         if (weaponData.unlockCost <= jewel)
         {
-            jewel -= weaponData.unlockCost;
+            AddJewel(- weaponData.unlockCost);
             ownedSubWeapons.Add(new OwnedSubWeapon(weaponData));
         }
         Save();
@@ -182,7 +193,8 @@ public class GameManager : MonoBehaviour
         int index = ownedWeapons.FindIndex(w => w.data.weaponName == data.weaponName);
         if (index >= 0 && ownedWeapons[index].level<10)
         {
-            gold -= data.upgradeCost[ownedWeapons[index].level];
+            //gold -= data.upgradeCost[ownedWeapons[index].level];
+            AddGold(-data.upgradeCost[ownedWeapons[index].level]);
             ownedWeapons[index].level++;
             Debug.Log(ownedWeapons[index].data.name + "업그레이드 완료" + ownedWeapons[index].level);
         }
@@ -198,7 +210,7 @@ public class GameManager : MonoBehaviour
         int index = ownedSubWeapons.FindIndex(w => w.data.weaponName == data.weaponName);
         if (index >= 0)
         {
-            gold -= data.upgradeCost[ownedSubWeapons[index].level];
+            AddGold(-data.upgradeCost[ownedSubWeapons[index].level]);
             ownedSubWeapons[index].level++;
             Debug.Log(ownedSubWeapons[index].data.name + "업그레이드 완료" + ownedSubWeapons[index].level);
         }
@@ -214,12 +226,19 @@ public class GameManager : MonoBehaviour
     {
         if (!unlockedSkills.Contains(skillData))
         {
+            AddJewel(-skillData.unlockCost);
             unlockedSkills.Add(skillData);
 
+           
             if (!HasSkills.Contains(skillData))
             {
-                HasSkills.Add(skillData);
+                if(jewel >= skillData.unlockCost)
+                {
+                    AddJewel(-skillData.unlockCost);
+                    HasSkills.Add(skillData);
+                }
             }
+            
 
             Save();
         }

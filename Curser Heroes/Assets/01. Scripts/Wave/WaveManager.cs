@@ -198,10 +198,10 @@ public class WaveManager : MonoBehaviour
     public void IncrementWaveIndex()
     {
         currentWaveIndex++;
-        if (GameManager.Instance.bestScore < currentWaveIndex)
+        /*if (GameManager.Instance.bestScore < currentWaveIndex)
         {
             GameManager.Instance.bestScore = currentWaveIndex;
-        }
+        }*/
     }
 
     public void RegisterMonster(GameObject monster)
