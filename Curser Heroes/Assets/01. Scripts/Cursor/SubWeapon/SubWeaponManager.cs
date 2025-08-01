@@ -417,7 +417,7 @@ public class SubWeaponManager : MonoBehaviour
             return;
         }
 
-        Debug.Log($"[Bow] 자동조준 발사: target={target.name}");
+        Debug.Log($" 자동조준 발사: target={target.name}");
         
         GameObject proj = Instantiate(
             equippedSubWeapon.projectilePrefab,
@@ -455,11 +455,11 @@ public class SubWeaponManager : MonoBehaviour
 
     void UseForceEffectAtCursor()
     {
-        // 커서 중심 위치
+        // 1) 커서 위치
         Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         pos.z = 0f;
 
-        // 1) VFX Zone 생성
+        // 2) VFX Zone
         if (equippedSubWeapon.ForceVisualPrefab != null)
         {
             var zone = Instantiate(
@@ -472,35 +472,55 @@ public class SubWeaponManager : MonoBehaviour
             Destroy(zone, equippedSubWeapon.effectDuration);
         }
 
-        // 2) OverlapCircleAll로 즉시 데미지 존
+        // 3) 데미지 존
         int dmg = Mathf.RoundToInt(upgradeComponent.GetCurrentDamage());
         var hits = Physics2D.OverlapCircleAll(
             pos,
             equippedSubWeapon.effectRadius,
             monsterLayer
         );
+
         foreach (var col in hits)
         {
             if (col.TryGetComponent<BaseMonster>(out var m) && !m.IsDead)
             {
                 m.TakeDamage(dmg, equippedSubWeapon);
-                if (equippedSubWeapon.stunOnRadial)
-                    m.Stun(equippedSubWeapon.stunDuration);
+
+                // 상태이상 효과
+                switch (equippedSubWeapon.effect)
+                {
+                    case SubWeaponEffect.Burn:
+                        var burn = new BurnEffect(
+                            m,
+                            equippedSubWeapon.burnDamagePerSecond,
+                            equippedSubWeapon.burnDuration,
+                            1f
+                        );
+                        m.GetComponent<EffectManager>()?.AddEffect(burn);
+                        break;
+
+                    case SubWeaponEffect.Stun:
+                        var stun = new StunEffect(equippedSubWeapon.stunDuration);
+                        m.GetComponent<EffectManager>()?.AddEffect(stun);
+                        break;
+                }
             }
         }
     }
 
 
 
+
+
+
     void UseLineEffectAtCursor()
     {
+        // 1) 커서 월드 위치
         Vector3 cursorPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         cursorPos.z = 0f;
 
-      
+        // 2) 자동 조준
         BaseMonster target = FindNearestAliveMonster(cursorPos);
-
-       
         Vector3 aimPos = cursorPos;
         if (target != null)
         {
@@ -508,22 +528,18 @@ public class SubWeaponManager : MonoBehaviour
             aimPos = (sr != null) ? sr.bounds.center : target.transform.position;
         }
 
-      
+        // 3) 발사 위치·각도 계산
         Vector3 dir = (aimPos - cursorPos).normalized;
         float angleDeg = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        float cursorRad = 0.5f;
+        Vector3 origin = cursorPos + dir * cursorRad;
 
-
-        float cursorRadius = 0.5f;
-        Vector3 origin = cursorPos + dir * cursorRadius;
-
-
+        // 4) Projectile 생성 + Init
         GameObject proj = Instantiate(
             equippedSubWeapon.projectilePrefab,
             origin,
             Quaternion.Euler(0, 0, angleDeg)
         );
-
-
         var lp = proj.GetComponent<LineProjectile>();
         if (lp == null)
         {
@@ -531,16 +547,19 @@ public class SubWeaponManager : MonoBehaviour
             Destroy(proj);
             return;
         }
-       
+
+        int dmg = Mathf.RoundToInt(upgradeComponent.GetCurrentDamage());
+        lp.Init(equippedSubWeapon, dmg);
+
+        // 5) 크기/레이어 설정
         float maxLen = equippedSubWeapon.projectileMaxDistance;
         float distToAim = Vector2.Distance(cursorPos, aimPos);
         lp.length = Mathf.Min(maxLen, distToAim);
         lp.width = equippedSubWeapon.effectWidth;
-        lp.damage = Mathf.RoundToInt(upgradeComponent.GetCurrentDamage());
         lp.monsterLayer = monsterLayer;
-        lp.applyStun = equippedSubWeapon.stunOnLine;
-        lp.stunDuration = equippedSubWeapon.stunDuration;
     }
+
+
 
 
 

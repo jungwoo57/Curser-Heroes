@@ -49,10 +49,17 @@ public class SubWeaponData : ScriptableObject
     [Header("범위형(Radial) 이펙트 반경")]
     public float effectRadius = 3f;
 
-    [Header("스턴 설정")]
-    public bool stunOnRadial = false;
-    public bool stunOnLine = false;
-    public float stunDuration = 1f;
+    [Header("상태이상 효과")]
+    public SubWeaponEffect subeffect;
+
+    [Tooltip("화상 효과일 때, 초당 데미지")]
+    public int burnDamagePerSecond;
+
+    [Tooltip("화상 효과 지속 시간")]
+    public float burnDuration;
+
+    [Tooltip("스턴 효과일 때, 스턴 지속 시간")]
+    public float stunDuration;
 
     public float GetDamage(int level = 0)
     {

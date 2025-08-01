@@ -170,11 +170,16 @@ MonoBehaviour:
     data: {fileID: 0}
     level: 0
     bookMark: 0
+  hasSubData:
+    data: {fileID: 0}
+    level: 0
+    bookMark: 0
   subData: {fileID: 0}
   forgeUI: {fileID: 0}
   image: {fileID: 2643211788273847285}
   levelText: {fileID: 0}
   locked: 0
+  button: {fileID: 1220877931812183026}
 --- !u!114 &1220877931812183026
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -28,7 +28,7 @@ public class RadialProjectile : MonoBehaviour
         if (subWeaponData != null)
         {
             radius = subWeaponData.effectRadius;
-            applyStun = subWeaponData.stunOnRadial;
+            
             stunDuration = subWeaponData.stunDuration;
             if (damage == 0)
                 damage = Mathf.RoundToInt(subWeaponData.GetDamage());
