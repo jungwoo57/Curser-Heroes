@@ -57,14 +57,39 @@ public class SubProjectile : MonoBehaviour
         transform.position += dir * speed * Time.deltaTime;
     }
 
-   
+
     protected virtual void OnTriggerEnter2D(Collider2D other)
     {
         if (other.TryGetComponent<BaseMonster>(out var monster) && !monster.IsDead)
         {
-            Debug.Log($"[SubProjectile] Hit {monster.name}, dmg = {DamageAmount}");
-            monster.TakeDamage(DamageAmount, WeaponData);
+
+            monster.TakeDamage(DamageAmount, subWeaponData);
+            if (subWeaponData.effect == SubWeaponEffect.Burn)
+            {
+                var burn = new BurnEffect();
+                burn.Apply(monster);                       
+                monster.GetComponent<EffectManager>()?
+                       .AddEffect(burn);                  
+            }
+
+
+            switch (subWeaponData.effect)
+            {
+                case SubWeaponEffect.Burn:
+                    {
+                        var burn = new BurnEffect();
+                        burn.Apply(monster);
+                        
+                        monster.GetComponent<EffectManager>()?.AddEffect(burn);
+                        break;
+                    }
+                case SubWeaponEffect.Stun:
+                    monster.Stun(subWeaponData.stunDuration);
+                    break;
+            }
+
             Destroy(gameObject);
         }
     }
+
 }

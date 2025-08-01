@@ -49,9 +49,16 @@ public abstract class BaseMonster : MonoBehaviour
             Debug.Log($"[BaseMonster] {gameObject.name} 기본 체력 세팅: {currentHP}");
         }
 
+        effectManager = GetComponent<EffectManager>()
+                   ?? gameObject.AddComponent<EffectManager>();
+        effectManager.Init(this);
 
         PlaySpawnAnimation();
-        effectManager = GetComponent<EffectManager>();
+
+
+
+        
+        
     }
 
     protected virtual void PlaySpawnAnimation()
@@ -152,8 +159,8 @@ public abstract class BaseMonster : MonoBehaviour
 
         if (currentHP <= 0)
             Die();
-        //else
-        //    PlayHitEffect();     
+       // else
+            //PlayHitEffect();     
     }
 
     private IEnumerator ChangeColorGradually(Color targetColor, float duration)

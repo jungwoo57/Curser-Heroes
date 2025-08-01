@@ -39,6 +39,7 @@ MonoBehaviour:
   effectWidth: 1.5
   effectDuration: 0.2
   effectRadius: 3
-  stunOnRadial: 0
-  stunOnLine: 0
+  subeffect: 3
+  burnDamagePerSecond: 0.5
+  burnDuration: 1
   stunDuration: 1
