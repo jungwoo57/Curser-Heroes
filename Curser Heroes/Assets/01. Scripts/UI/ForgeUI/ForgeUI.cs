@@ -15,7 +15,9 @@ public class ForgeUI : MonoBehaviour
     public TextMeshProUGUI weaponDesc;
     public TextMeshProUGUI weaponHp;
     public TextMeshProUGUI weaponAtk;
-
+    public TextMeshProUGUI upgradeWeaponAtk;
+    public TextMeshProUGUI currentWeaponAtk;
+    
     [Header("무기 선택 이미지")] 
     public ForgeWeaponUI[] weaponUIs;
     
@@ -98,7 +100,6 @@ public class ForgeUI : MonoBehaviour
                 GameManager.Instance.UpgradeWeapon(selectWeapon.data);
                 UIUpdate();
             }
-            Debug.Log("무기강화");       
         }
         else
         {
@@ -107,7 +108,6 @@ public class ForgeUI : MonoBehaviour
                 GameManager.Instance.UpgradeWeapon(selectSubWeapon.data);
                 UIUpdate();
             }
-            Debug.Log("보조무기강화");    
         } //weapondata에 레벨이 존재해야 할 것 같음
     }
 
@@ -159,6 +159,7 @@ public class ForgeUI : MonoBehaviour
             {
                 //GoldImage.gameObject.SetActive(true);
                 weaponAtk.text = ("공격력 : ") + selectWeapon.levelDamage.ToString();
+                currentWeaponAtk.text = selectWeapon.levelDamage.ToString();
                 if(selectWeapon.level <= 0) weaponName.text = selectData.weaponName;
                 else weaponName.text = selectData.weaponName + "+" + (selectWeapon.level);
                 //hasGoldText.gameObject.SetActive(true);
@@ -168,10 +169,12 @@ public class ForgeUI : MonoBehaviour
                 if (selectWeapon.level < 10)
                 {
                     useGoldText.text = selectData.upgradeCost[selectWeapon.level].ToString();
+                    upgradeWeaponAtk.text = (selectWeapon.levelDamage + selectData.damagePerLevel).ToString();
                 }
                 else
                 {
                     useGoldText.text = "최대 레벨";
+                    upgradeWeaponAtk.text = "최대 레벨";
                 }
 
                 if (GameManager.Instance.GetGold() < selectData.upgradeCost[selectWeapon.level >= 10 ? 9 : selectWeapon.level] || selectWeapon.level >=10)
@@ -183,7 +186,8 @@ public class ForgeUI : MonoBehaviour
             {
                 reinforceButton.gameObject.SetActive(false);
                 //JewelImage.gameObject.SetActive(true);
-                weaponAtk.text = ("공격력 : ") + selectData.baseDamage.ToString();
+                currentWeaponAtk.text = "미해금";
+                upgradeWeaponAtk.text = selectData.baseDamage.ToString();
                 weaponName.text = selectData.weaponName;
                 //hasJewelText.gameObject.SetActive(true);
                 useJewelText.gameObject.SetActive(true);
@@ -210,6 +214,7 @@ public class ForgeUI : MonoBehaviour
                 else weaponName.text = selectSubData.weaponName + "+" + (selectSubWeapon.level);
                 
                 weaponAtk.text = ("공격력 : ") + selectSubWeapon.levelDamage.ToString();
+                currentWeaponAtk.text = selectSubWeapon.levelDamage.ToString();
                 //hasGoldText.gameObject.SetActive(true);
                 useGoldText.gameObject.SetActive(true);
                 //GoldImage.gameObject.SetActive(true);
@@ -217,10 +222,12 @@ public class ForgeUI : MonoBehaviour
                 if (selectSubWeapon.level < 10)
                 {
                     useGoldText.text = selectSubData.upgradeCost[selectSubWeapon.level].ToString();
+                    upgradeWeaponAtk.text = (selectSubWeapon.levelDamage + selectSubData.damagePerLevel).ToString();
                 }
                 else
                 {
                     useGoldText.text = "최대 레벨";
+                    upgradeWeaponAtk.text = "최대 레벨";
                 }
 
                 if (GameManager.Instance.GetGold() < selectSubData.upgradeCost[selectSubWeapon.level >= 10 ? 9 : selectSubWeapon.level] || selectSubWeapon.level >=10)
@@ -231,6 +238,9 @@ public class ForgeUI : MonoBehaviour
             else
             {
                 weaponAtk.text = ("공격력 : ") + selectSubData.baseDamage.ToString();
+                //if(selectSubData.weaponName != selectSubWeapon)
+                currentWeaponAtk.text = "미해금";
+                upgradeWeaponAtk.text = selectSubData.baseDamage.ToString();
                 weaponName.text = selectSubData.weaponName;
                 //hasJewelText.gameObject.SetActive(true);
                 useJewelText.gameObject.SetActive(true);

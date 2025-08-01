@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Video;
 
-public enum SkillType { Attack, Defense, Buff }
+public enum SkillType { Attack, Defense, Buff, All }
 
 [System.Serializable]
 [CreateAssetMenu(fileName = "SkillData", menuName = "Skill/SkillData")]
