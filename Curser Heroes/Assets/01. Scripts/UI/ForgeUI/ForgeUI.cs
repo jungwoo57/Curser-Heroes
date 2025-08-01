@@ -138,6 +138,11 @@ public class ForgeUI : MonoBehaviour
     }
     public void UIUpdate()
     {
+        for (int i = 0; i < weaponUIs.Length; i++)
+        {
+            Button uiButton = weaponUIs[i].GetComponent<Button>();
+            uiButton.interactable = true;
+        }
         reinforceButton.interactable = true;
         //GoldImage.gameObject.SetActive(false);
         //JewelImage.gameObject.SetActive(false);
