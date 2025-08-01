@@ -57,14 +57,37 @@ public class SubProjectile : MonoBehaviour
         transform.position += dir * speed * Time.deltaTime;
     }
 
-   
+
     protected virtual void OnTriggerEnter2D(Collider2D other)
     {
         if (other.TryGetComponent<BaseMonster>(out var monster) && !monster.IsDead)
         {
             Debug.Log($"[SubProjectile] Hit {monster.name}, dmg = {DamageAmount}");
-            monster.TakeDamage(DamageAmount, WeaponData);
+            monster.TakeDamage(DamageAmount, subWeaponData);
+
+            // 상태이상 효과: Burn 또는 Stun 중 하나
+            switch (subWeaponData.effect)
+            {
+                case SubWeaponEffect.Burn:
+                    var burn = new BurnEffect(
+                        monster,
+                        subWeaponData.burnDamagePerSecond,
+                        subWeaponData.burnDuration,
+                        1f  // 1초마다 Tick
+                    );
+                    monster.GetComponent<EffectManager>()?.AddEffect(burn);
+                    break;
+
+                case SubWeaponEffect.Stun:
+                    // StunEffect 생성자에 지속시간만 전달
+                    var stun = new StunEffect(subWeaponData.stunDuration);
+                    monster.GetComponent<EffectManager>()?.AddEffect(stun);
+                    break;
+            }
+
             Destroy(gameObject);
         }
     }
+
+
 }
