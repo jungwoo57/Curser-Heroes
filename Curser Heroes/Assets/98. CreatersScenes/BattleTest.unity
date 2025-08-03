@@ -333,8 +333,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80af96e6299edc140a1dc325b944529b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startPos: {x: 1280, y: 0}
-  endPos: {x: -1280, y: 0}
+  startPos: {x: 1920, y: 0}
+  endPos: {x: -1920, y: 0}
   moveDurationTime: 0.35
   slowDurationTime: 0.3
   imageDurationTime: 1.2
@@ -803,11 +803,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2759616108512299097, guid: 6ecabeb6474f3a048a817b49bc49e889, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 500
+      value: 1920
       objectReference: {fileID: 0}
     - target: {fileID: 2759616108512299097, guid: 6ecabeb6474f3a048a817b49bc49e889, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 500
+      value: 1080
       objectReference: {fileID: 0}
     - target: {fileID: 2759616108512299097, guid: 6ecabeb6474f3a048a817b49bc49e889, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6016,11 +6016,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7848367225710614069, guid: 812213da68f502f42a6fee79468996e7, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 500
+      value: 1920
       objectReference: {fileID: 0}
     - target: {fileID: 7848367225710614069, guid: 812213da68f502f42a6fee79468996e7, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 500
+      value: 1080
       objectReference: {fileID: 0}
     - target: {fileID: 7848367225710614069, guid: 812213da68f502f42a6fee79468996e7, type: 3}
       propertyPath: m_LocalPosition.x
