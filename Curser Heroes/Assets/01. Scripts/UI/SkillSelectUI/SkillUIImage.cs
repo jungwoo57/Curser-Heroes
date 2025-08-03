@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class SkillUIImage : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     public Image skillImage;
+    public Image imageShadow;
     public SkillData data;
     private StageSkillSelectUI stageSkillSelectUI;
 
@@ -25,14 +26,29 @@ public class SkillUIImage : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
                 Debug.Log("데이터 없음");
                 return;
             }
-            skillImage.sprite = data.icon;
+            
+        skillImage.sprite = data.icon;
+        Color imgColor = skillImage.color;
+        imgColor.a = 1f;
+        skillImage.color = imgColor;
+
+        imageShadow.sprite = data.icon;
+        Color shadowColor = imageShadow.color;
+        shadowColor.a = 1f;
+        imageShadow.color = shadowColor;
     }
 
     public void CancleSelect()
     {
         data = null;
-        skillImage.sprite = null;
-        return;
+
+        Color imgColor = skillImage.color;
+        imgColor.a = 0f;
+        skillImage.color = imgColor;
+
+        Color shadowColor = imageShadow.color;
+        shadowColor.a = 0f;
+        imageShadow.color = shadowColor;
     }
 
     public void OnClickSkillButton()
