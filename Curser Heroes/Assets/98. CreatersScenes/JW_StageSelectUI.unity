@@ -8170,6 +8170,7 @@ GameObject:
   - component: {fileID: 448122872}
   - component: {fileID: 448122874}
   - component: {fileID: 448122873}
+  - component: {fileID: 448122875}
   m_Layer: 5
   m_Name: SkillList
   m_TagString: Untagged
@@ -8243,6 +8244,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 448122871}
   m_CullTransparentMesh: 1
+--- !u!114 &448122875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 448122871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7b77d99f6d512c4bb9136792c2e9699, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  exitButton: {fileID: 1318461478}
+  skillSelectedUI: {fileID: 1642185598}
+  warningPanel: {fileID: 2076487459}
 --- !u!1 &450038388
 GameObject:
   m_ObjectHideFlags: 0
@@ -23415,7 +23431,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 448122875}
         m_TargetAssemblyTypeName: SkillPanelUI, Assembly-CSharp
         m_MethodName: OnClickExit
         m_Mode: 1
@@ -37013,7 +37029,6 @@ GameObject:
   - component: {fileID: 2034772693}
   - component: {fileID: 2034772695}
   - component: {fileID: 2034772694}
-  - component: {fileID: 2034772696}
   m_Layer: 5
   m_Name: Setter
   m_TagString: Untagged
@@ -37078,21 +37093,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2034772692}
   m_CullTransparentMesh: 1
---- !u!114 &2034772696
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2034772692}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7b77d99f6d512c4bb9136792c2e9699, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  exitButton: {fileID: 1318461478}
-  skillSelectedUI: {fileID: 1642185598}
-  warningPanel: {fileID: 2076487459}
 --- !u!1 &2040712647
 GameObject:
   m_ObjectHideFlags: 0
