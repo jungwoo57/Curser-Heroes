@@ -143,7 +143,8 @@ public class ForgeUI : MonoBehaviour
             Button uiButton = weaponUIs[i].GetComponent<Button>();
             uiButton.interactable = true;
         }
-        reinforceButton.interactable = true;
+        reinforceButton.gameObject.SetActive(false);
+        unlockButton.gameObject.SetActive(false); //추가
         //GoldImage.gameObject.SetActive(false);
         //JewelImage.gameObject.SetActive(false);
         //hasGoldText.gameObject.SetActive(false);
@@ -160,7 +161,7 @@ public class ForgeUI : MonoBehaviour
             hasJewelText.text = GameManager.Instance.GetJewel().ToString();
             useJewelText.text = selectData.unlockCost.ToString();
             weaponImage.sprite = selectData.weaponImage;
-            if (selectWeapon != null)
+            if (selectWeapon != null && selectWeapon.data != null)
             {
                 //GoldImage.gameObject.SetActive(true);
                 weaponAtk.text = ("공격력 : ") + selectWeapon.levelDamage.ToString();
@@ -169,6 +170,7 @@ public class ForgeUI : MonoBehaviour
                 else weaponName.text = selectData.weaponName + "+" + (selectWeapon.level);
                 //hasGoldText.gameObject.SetActive(true);
                 useGoldText.gameObject.SetActive(true);
+                reinforceButton.gameObject.SetActive(true);
                 //GoldImage.gameObject.SetActive(true);
                 //useGoldImage.gameObject.SetActive(true);
                 if (selectWeapon.level < 10)
@@ -184,12 +186,12 @@ public class ForgeUI : MonoBehaviour
 
                 if (GameManager.Instance.GetGold() < selectData.upgradeCost[selectWeapon.level >= 10 ? 9 : selectWeapon.level] || selectWeapon.level >=10)
                 {
-                    reinforceButton.interactable = false;
+                    reinforceButton.gameObject.SetActive(false); 
                 }
             }
             else
             {
-                reinforceButton.gameObject.SetActive(false);
+                unlockButton.gameObject.SetActive(true);
                 //JewelImage.gameObject.SetActive(true);
                 currentWeaponAtk.text = "미해금";
                 upgradeWeaponAtk.text = selectData.baseDamage.ToString();
@@ -213,7 +215,8 @@ public class ForgeUI : MonoBehaviour
             weaponImage.sprite = selectSubData.weaponSprite;
             //hasJewelText.text = GameManager.Instance.GetJewel().ToString();
             useJewelText.text = selectSubData.unlockCost.ToString();
-            if (selectSubWeapon != null)
+            reinforceButton.gameObject.SetActive(true);
+            if (selectSubWeapon != null && selectSubWeapon.data !=null)
             {
                 if(selectSubWeapon.level <= 0) weaponName.text = selectSubData.weaponName;
                 else weaponName.text = selectSubData.weaponName + "+" + (selectSubWeapon.level);
@@ -237,7 +240,7 @@ public class ForgeUI : MonoBehaviour
 
                 if (GameManager.Instance.GetGold() < selectSubData.upgradeCost[selectSubWeapon.level >= 10 ? 9 : selectSubWeapon.level] || selectSubWeapon.level >=10)
                 {
-                    reinforceButton.interactable = false;
+                    reinforceButton.gameObject.SetActive(false);
                 }
             }
             else
@@ -249,9 +252,14 @@ public class ForgeUI : MonoBehaviour
                 weaponName.text = selectSubData.weaponName;
                 //hasJewelText.gameObject.SetActive(true);
                 useJewelText.gameObject.SetActive(true);
+                unlockButton.gameObject.SetActive(true);
                 //JewelImage.gameObject.SetActive(true);
                 //useJewelImage.gameObject.SetActive(true);
                 weaponAtk.text = ("공격력 : ") + selectSubData.baseDamage.ToString();
+                if (GameManager.Instance.GetJewel() < selectSubData.unlockCost)
+                {
+                    unlockButton.gameObject.SetActive(false);
+                }
             }
         }
     }
@@ -286,6 +294,7 @@ public class ForgeUI : MonoBehaviour
                 weaponUIs[i].UpdateUI();
             } 
         }
+        UIUpdate();
     }
     public void ClickWeaponChangeButton()        //무기 변경
     {
