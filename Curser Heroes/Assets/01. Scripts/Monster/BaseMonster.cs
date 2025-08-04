@@ -36,6 +36,7 @@ public abstract class BaseMonster : MonoBehaviour
     public float deathTime = 1.0f;
     protected virtual void Start()
     {
+        Debug.Log("몬스터 위치 " + transform.position);
         animator = GetComponent<Animator>();
         if (animator == null)
             Debug.LogWarning($"{gameObject.name}에 Animator 컴포넌트가 없습니다!");
@@ -48,13 +49,13 @@ public abstract class BaseMonster : MonoBehaviour
             currentHP = maxHP;
             Debug.Log($"[BaseMonster] {gameObject.name} 기본 체력 세팅: {currentHP}");
         }
-
+        Debug.Log("몬스터 위치2 " + transform.position);
         effectManager = GetComponent<EffectManager>()
                    ?? gameObject.AddComponent<EffectManager>();
         effectManager.Init(this);
-
+        Debug.Log("몬스터 위치3 " + transform.position);
         PlaySpawnAnimation();
-
+        Debug.Log("몬스터 위치4 " + transform.position);
 
 
 

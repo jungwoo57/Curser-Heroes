@@ -10,7 +10,7 @@ public class EffectManager : MonoBehaviour
     public void Init(BaseMonster target)
     {
         owner = target;
-        if (target != null)
+        if (target != null && transform != target.transform)
         {
             transform.SetParent(target.transform);
             transform.localPosition = Vector3.zero;
