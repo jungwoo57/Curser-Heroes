@@ -24,7 +24,12 @@ public class SkillPanelUI : MonoBehaviour
       }
    }
 
-   public void Exit()
+    public void CloseWarningPanel()
+    {
+        warningPanel.SetActive(false);
+    }
+
+    public void Exit()
    {
       gameObject.SetActive(false);
    }
