@@ -84,27 +84,33 @@ public class DamageTextManager : MonoBehaviour
         damageText.gameObject.SetActive(false);
     }
 
-    public void ShowStun(Vector3 monsterPosition, float duration)
+    public void ShowStun(Transform monsterPosition, float duration)
     {
         for (int i = 0; i < stunCanvas.childCount; i++)
         {
             Transform child = stunCanvas.GetChild(i);
             if (!child.gameObject.activeInHierarchy)
             {
-                child.position = monsterPosition + Vector3.up * stunOffset;
+                child.position = monsterPosition.position + Vector3.up * stunOffset;
                 child.gameObject.SetActive(true);
+                StunImageFollow follow = child.GetComponent<StunImageFollow>();
+                follow.Init(monsterPosition);
                 Image image = child.GetComponent<Image>();
                 if (image != null)
                 {
                     image.sprite = stunSprite;
                 }
                 StartCoroutine(CloseStun(child.gameObject, duration));
+                return;
                 // 스턴 애니메이션
             }
         }
         
         GameObject newStun = Instantiate(stunImage, stunCanvas);
-        newStun.transform.position = monsterPosition + Vector3.up * stunOffset;
+        newStun.transform.position = monsterPosition.position + Vector3.up * stunOffset;
+        
+        StunImageFollow follows = newStun.GetComponent<StunImageFollow>();
+        follows.Init(monsterPosition);
         
         Image newImage = newStun.GetComponent<Image>();
         if (newImage != null)

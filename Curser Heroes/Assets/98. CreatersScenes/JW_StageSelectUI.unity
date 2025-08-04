@@ -1836,7 +1836,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 0.3018868, g: 0.3018868, b: 0.3018868, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -7622,6 +7622,8 @@ MonoBehaviour:
   weaponAtk: {fileID: 1032018981}
   upgradeWeaponAtk: {fileID: 1828876322}
   currentWeaponAtk: {fileID: 2017977438}
+  reinforceText: {fileID: 469081830}
+  unlockText: {fileID: 221930951}
   weaponUIs:
   - {fileID: 3252381011573359598}
   - {fileID: 659305653}
@@ -7639,6 +7641,8 @@ MonoBehaviour:
   mainWeaponButton: {fileID: 813982044}
   subWeaponButton: {fileID: 549322939}
   unlockButton: {fileID: 70967811}
+  enabledColor: {r: 1, g: 1, b: 1, a: 1}
+  disableColor: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 1}
   isMain: 1
   selectWeapon:
     data: {fileID: 0}
@@ -8814,8 +8818,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 477247828}
   m_HandleRect: {fileID: 0}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.70000005
+  m_Value: 0.9999998
+  m_Size: 0.7
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -9650,7 +9654,7 @@ MonoBehaviour:
     data: {fileID: 0}
     level: 0
     bookMark: 0
-  gold: 99999
+  gold: 5000
   jewel: 9999
   useStage: 1
   useForge: 1

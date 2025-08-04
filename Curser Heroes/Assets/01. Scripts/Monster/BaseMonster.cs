@@ -49,16 +49,11 @@ public abstract class BaseMonster : MonoBehaviour
             currentHP = maxHP;
             Debug.Log($"[BaseMonster] {gameObject.name} 기본 체력 세팅: {currentHP}");
         }
-        Debug.Log("몬스터 위치2 " + transform.position);
         effectManager = GetComponent<EffectManager>()
                    ?? gameObject.AddComponent<EffectManager>();
         effectManager.Init(this);
-        Debug.Log("몬스터 위치3 " + transform.position);
         PlaySpawnAnimation();
-        Debug.Log("몬스터 위치4 " + transform.position);
-
-
-
+        
 
     }
 
@@ -108,10 +103,7 @@ public abstract class BaseMonster : MonoBehaviour
 
             if (spriteRenderer != null)
             {
-                if (attackColorCoroutine != null)
-                    StopCoroutine(attackColorCoroutine);
-                attackColorCoroutine =
-                    StartCoroutine(ChangeColorGradually(Color.white, 0.3f));
+                spriteRenderer.color = new Color(1f, 1,1.0f, 1.0f);
             }
             if (animator != null)
                 //animator.SetTrigger("Effect");
@@ -223,10 +215,17 @@ public abstract class BaseMonster : MonoBehaviour
     public virtual void Stun(float timer)     //이펙트 추가
     {
         isStun = true;
-        animator.SetBool("Atk", false);
+        SetAttackBool(false);
+        if (spriteRenderer != null)
+        {
+            if (attackColorCoroutine != null)
+                StopCoroutine(attackColorCoroutine);
+            attackColorCoroutine =
+                StartCoroutine(ChangeColorGradually(Color.white, 0.2f));
+        }
         if (DamageTextManager.instance != null)
         {
-            DamageTextManager.instance.ShowStun(this.transform.position, timer);
+            DamageTextManager.instance.ShowStun(this.transform, timer);
         }
         StartCoroutine(OnStun(timer));
         Debug.Log($"{gameObject.name} 몬스터 기절!");

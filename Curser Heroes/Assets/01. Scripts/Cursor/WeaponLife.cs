@@ -22,6 +22,16 @@ public class WeaponLife : MonoBehaviour
         UIManager.Instance.battleUI.TakeDamage();
         Debug.Log($"{currentWeapon.weaponName} 목숨 -1 → 현재: {currentLives}");
     }
+
+    public void TakeLifeBossDamage()
+    {
+        if (currentLives <= 0) return;
+        currentLives--;
+        UIManager.Instance.battleUI.TakeDamage();
+        if (currentLives <= 0) return;
+        currentLives--;
+        UIManager.Instance.battleUI.TakeDamage();
+    }
     public void RecoverLife()
     {
         if (currentLives < maxLives)

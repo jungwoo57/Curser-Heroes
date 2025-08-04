@@ -23,7 +23,6 @@ public class Spawner : MonoBehaviour
             GameObject go = Instantiate(data.monsterPrefab, spawnPos, Quaternion.identity);  // 몬스터 생성
             go.transform.parent = gameObject.transform;
             go.transform.position = spawnPos;
-            Debug.Log(go.transform.position);
             MonoBehaviour comp = go.GetComponent<MonoBehaviour>();
 
            

@@ -8,7 +8,7 @@ public class Stage2BossAttack : MonoBehaviour
         {
             if (WeaponManager.Instance != null && !WeaponManager.Instance.isInvincible)
             {
-                WeaponManager.Instance.TakeWeaponLifeDamage();
+                WeaponManager.Instance.TakeWeaponLifeBossDamage();
             }
         }
     }

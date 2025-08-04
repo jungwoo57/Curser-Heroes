@@ -92,6 +92,47 @@ public class WeaponManager : MonoBehaviour
         }
     }
 
+    public void TakeWeaponLifeBossDamage()
+    {
+        if (isDie) return;
+        if (isInvincible) return;
+
+        // 불굴은 선제적으로 막음 (맞기 전에)
+        if (indomitableSkillInstance != null && indomitableSkillInstance.TryBlockDamage())
+        {
+            Debug.Log("[WeaponManager] 불굴로 피해 무효화!");
+            return;
+        }
+
+        AudioManager.Instance.PlayHitSound(HitType.Monster);
+
+        // 🔥 실제로 체력 깎기
+        weaponLife.TakeLifeBossDamage();
+
+        // ⚠️ 체력 0이 된 뒤 구원 시도
+        if (weaponLife.currentLives <= 0)
+        {
+            if (salvationSkillInstance != null && salvationSkillInstance.TryActivate())
+            {
+                Debug.Log("[WeaponManager] 구원 스킬로 사망 방지!");
+                return;
+            }
+
+            // 진짜 죽는 경우
+            isDie = true;
+            UIManager.Instance.isStart = false;
+            UIManager.Instance.stageExitPanel.gameObject.SetActive(false);
+            StartCoroutine(DieAnimation());
+            return;
+        }
+
+        // 죽지 않았으면 무적 처리
+        if (!isDie)
+        {
+            StartCoroutine(OnInvincible());
+        }
+    }
+    
     private IEnumerator OnInvincible()
     {
         isInvincible = true;
