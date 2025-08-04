@@ -14,7 +14,6 @@ public class Spawner : MonoBehaviour
 
         // 몬스터 수만큼 겹치지 않는 유니크한 위치를 생성
         List<Vector3> spawnPositions = UniquePositions(monsters.Count, spawnRadius);
-
         for (int i = 0; i < monsters.Count; i++)
         {
             MonsterData data = monsters[i];
@@ -22,7 +21,9 @@ public class Spawner : MonoBehaviour
 
             Vector3 spawnPos = spawnPositions[i];  // 미리 생성한 위치 가져오기
             GameObject go = Instantiate(data.monsterPrefab, spawnPos, Quaternion.identity);  // 몬스터 생성
-
+            go.transform.parent = gameObject.transform;
+            go.transform.position = spawnPos;
+            Debug.Log(go.transform.position);
             MonoBehaviour comp = go.GetComponent<MonoBehaviour>();
 
            

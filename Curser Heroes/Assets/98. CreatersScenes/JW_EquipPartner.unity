@@ -3209,7 +3209,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43e6ea272206a194b8f32c5380680709, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnRadius: 2.5
+  spawnRadius: 4
 --- !u!4 &956043387
 Transform:
   m_ObjectHideFlags: 0
@@ -3219,7 +3219,7 @@ Transform:
   m_GameObject: {fileID: 956043385}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.037817836, y: 2.3683271, z: -0.0742211}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4226,7 +4226,8 @@ MonoBehaviour:
   allSubWeapons: []
   allPartners: []
   allSkills: []
-  _hasSkills: []
+  defaultSkills: []
+  unlockedSkills: []
   ownedWeapons: []
   ownedSubWeapons: []
   ownedPartners: []
@@ -4250,7 +4251,6 @@ MonoBehaviour:
   useForge: 0
   useLab: 0
   useBar: 0
-  bestScore: 0
 --- !u!4 &1252401772
 Transform:
   m_ObjectHideFlags: 0
@@ -6318,7 +6318,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cafc72613b41a6c4cb74bb8eda7e73d8, type: 2}
   - {fileID: 11400000, guid: 62a3a2eee2d2a4e468393fadffa4afaa, type: 2}
   - {fileID: 11400000, guid: 0104d9de62535264dacb7c6ecde70cdc, type: 2}
-  _hasSkills: []
+  defaultSkills: []
+  unlockedSkills: []
   ownedWeapons:
   - data: {fileID: 11400000, guid: 71c3c201cfc09ce47b8feee890c11af0, type: 2}
     level: 0
@@ -6366,7 +6367,6 @@ MonoBehaviour:
   useForge: 0
   useLab: 0
   useBar: 0
-  bestScore: 5
 --- !u!4 &1988138259
 Transform:
   m_ObjectHideFlags: 0
