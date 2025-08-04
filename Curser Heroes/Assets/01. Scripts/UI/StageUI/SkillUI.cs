@@ -14,7 +14,8 @@ public class SkillUI : MonoBehaviour
     {
         skillInstance = instance; // 저장
         icon.sprite = skillInstance.skill.icon;
-        skillNameText.text = $"{skillInstance.skill.skillName} Lv.{skillInstance.level}";
+        //skillNameText.text = $"{skillInstance.skill.skillName} Lv.{skillInstance.level}";
+        skillNameText.text = $"Lv. {skillInstance.level}";
     }
 
     public void UpdateIcon(Sprite newIcon)
