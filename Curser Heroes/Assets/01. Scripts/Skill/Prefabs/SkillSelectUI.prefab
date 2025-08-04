@@ -27,7 +27,7 @@ RectTransform:
   m_GameObject: {fileID: 2116206273608610595}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2898597277353372685}
@@ -88,7 +88,7 @@ RectTransform:
   m_GameObject: {fileID: 3111001122526436010}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.9, y: 0.9, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3941078950151330916}
@@ -119,7 +119,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 4
-  m_Spacing: 30
+  m_Spacing: 20
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
@@ -161,11 +161,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 771781596719720976, guid: 15246d8e67e7f9c45af87af9ab5c017b, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 350
+      value: 700
       objectReference: {fileID: 0}
     - target: {fileID: 771781596719720976, guid: 15246d8e67e7f9c45af87af9ab5c017b, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 600
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 771781596719720976, guid: 15246d8e67e7f9c45af87af9ab5c017b, type: 3}
       propertyPath: m_LocalScale.x
@@ -240,6 +240,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4923175406609828517, guid: 15246d8e67e7f9c45af87af9ab5c017b, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 4923175406609828517, guid: 15246d8e67e7f9c45af87af9ab5c017b, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 4923175406609828517, guid: 15246d8e67e7f9c45af87af9ab5c017b, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -278,6 +286,18 @@ PrefabInstance:
     - target: {fileID: 7416855481631743631, guid: 15246d8e67e7f9c45af87af9ab5c017b, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7429894035054682291, guid: 15246d8e67e7f9c45af87af9ab5c017b, type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7429894035054682291, guid: 15246d8e67e7f9c45af87af9ab5c017b, type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7429894035054682291, guid: 15246d8e67e7f9c45af87af9ab5c017b, type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.r
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -334,19 +354,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 771781596719720976, guid: 15246d8e67e7f9c45af87af9ab5c017b, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 350
+      value: 700
       objectReference: {fileID: 0}
     - target: {fileID: 771781596719720976, guid: 15246d8e67e7f9c45af87af9ab5c017b, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 600
-      objectReference: {fileID: 0}
-    - target: {fileID: 771781596719720976, guid: 15246d8e67e7f9c45af87af9ab5c017b, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 771781596719720976, guid: 15246d8e67e7f9c45af87af9ab5c017b, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 771781596719720976, guid: 15246d8e67e7f9c45af87af9ab5c017b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -400,10 +412,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: SkillSlot
       objectReference: {fileID: 0}
-    - target: {fileID: 3895877417982195099, guid: 15246d8e67e7f9c45af87af9ab5c017b, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 3ea2a2d72c6be864cb2525c57fbcd244, type: 3}
     - target: {fileID: 4923175406609828517, guid: 15246d8e67e7f9c45af87af9ab5c017b, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -507,19 +515,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 771781596719720976, guid: 15246d8e67e7f9c45af87af9ab5c017b, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 350
+      value: 700
       objectReference: {fileID: 0}
     - target: {fileID: 771781596719720976, guid: 15246d8e67e7f9c45af87af9ab5c017b, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 600
-      objectReference: {fileID: 0}
-    - target: {fileID: 771781596719720976, guid: 15246d8e67e7f9c45af87af9ab5c017b, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 771781596719720976, guid: 15246d8e67e7f9c45af87af9ab5c017b, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 771781596719720976, guid: 15246d8e67e7f9c45af87af9ab5c017b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -573,10 +573,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: SkillSlot (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 3895877417982195099, guid: 15246d8e67e7f9c45af87af9ab5c017b, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 3e350b2cc52a02a4caa67a27ab52ce44, type: 3}
     - target: {fileID: 4923175406609828517, guid: 15246d8e67e7f9c45af87af9ab5c017b, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
