@@ -30,7 +30,7 @@ public class CursorMoving : MonoBehaviour
             new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z)
         );
         if (Vector2.Distance(objectPos, mousePos) > 1.0f)
-            transform.position = Vector2.Lerp(objectPos, mousePos, cursorSpeed);
+            transform.position = Vector2.Lerp(objectPos, mousePos, cursorSpeed*Time.deltaTime);
     }
 
     

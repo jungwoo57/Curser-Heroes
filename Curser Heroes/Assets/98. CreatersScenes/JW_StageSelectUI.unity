@@ -5477,7 +5477,7 @@ RectTransform:
   m_Father: {fileID: 1679753018}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -9656,6 +9656,7 @@ MonoBehaviour:
     bookMark: 0
   gold: 5000
   jewel: 9999
+  mouseSensitivity: 0.5
   useStage: 1
   useForge: 1
   useLab: 1
@@ -24760,6 +24761,7 @@ MonoBehaviour:
   mainSlider: {fileID: 1852613293}
   bgmSlider: {fileID: 1417288713}
   sfxSlider: {fileID: 1070164431}
+  mouseSensitivitySlider: {fileID: 1790215613}
   isFullScreen: 0
 --- !u!1 &1413000842
 GameObject:
@@ -29459,8 +29461,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 957048614}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -32056,7 +32058,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 0.5
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
