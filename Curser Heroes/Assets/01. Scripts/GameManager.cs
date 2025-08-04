@@ -249,7 +249,7 @@ public class GameManager : MonoBehaviour
         int index = ownedPartners.FindIndex(w => w.data.partnerName == data.partnerName);
         if (index >= 0)
         {
-            gold -= data.upgradeCost[ownedPartners[index].level];
+            AddGold(-data.upgradeCost[ownedPartners[index].level]);
             ownedPartners[index].level++;
         }
         Save();

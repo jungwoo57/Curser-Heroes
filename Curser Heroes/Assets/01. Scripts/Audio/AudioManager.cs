@@ -8,7 +8,8 @@ public class AudioManager : MonoBehaviour
     [Header("오디오 클립")]
     public AudioClip monsterHitClip, cursorHitClip;
     public AudioClip mainBgm, battleBgm, titleBgm;
-    public AudioClip buttonClip;
+    public AudioClip titlebuttonClip;
+    public AudioClip uibuttonClip;
     [Header("오디오 소스")]
     public AudioSource bgmSource;  // 추가된 bgm 소스
     public AudioSource src;    // 기존 효과음 ()
@@ -67,7 +68,7 @@ public class AudioManager : MonoBehaviour
     public void PlayButtonSound()
     {
         AudioClip clip;
-        clip = buttonClip;
+        clip = titlebuttonClip;
         src.PlayOneShot(clip);
     }
 }
