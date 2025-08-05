@@ -114,7 +114,7 @@ public class WeaponScroll : MonoBehaviour
                     } // WeaponImage 업데이트
                 }
 
-                for (int i = hasWeapons.Count; i < showWeapons.Count; i++)
+                for (int i = hasSubWeapons.Count; i < showWeapons.Count; i++)
                 {
                     showWeapons[i].gameObject.SetActive(false); // 남은 부분 끄기
                 }
