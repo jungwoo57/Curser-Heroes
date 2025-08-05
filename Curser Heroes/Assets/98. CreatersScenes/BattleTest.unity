@@ -3305,7 +3305,7 @@ GameObject:
   - component: {fileID: 1168926506}
   - component: {fileID: 1168926505}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Canvas1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5602,7 +5602,8 @@ MonoBehaviour:
   mainBgm: {fileID: 0}
   battleBgm: {fileID: 0}
   titleBgm: {fileID: 0}
-  buttonClip: {fileID: 0}
+  titlebuttonClip: {fileID: 0}
+  uibuttonClip: {fileID: 0}
   bgmSource: {fileID: 0}
   src: {fileID: 0}
 --- !u!4 &1678120703
