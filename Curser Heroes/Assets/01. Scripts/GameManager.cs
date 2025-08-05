@@ -258,7 +258,7 @@ public class GameManager : MonoBehaviour
     {
         if (partnerData.unlockCost <= jewel)
         {
-            AddJewel(-partnerData.unlockCost);
+            jewel -= partnerData.unlockCost;
             ownedPartners.Add(new OwnedPartner(partnerData));
         }
         Save();

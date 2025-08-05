@@ -17,6 +17,7 @@ public abstract class BaseMonster : MonoBehaviour
 
     protected int valueCost;
     protected Animator animator;
+    private float originalAnimSpeed = 1f;
 
 
     private static readonly int HashAtk = Animator.StringToHash("Atk");

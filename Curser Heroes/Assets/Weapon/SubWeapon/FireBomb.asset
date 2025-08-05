@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a595bcdfd8ab3e341af4dac3e68e0bbc, type: 3}
   m_Name: FireBomb
   m_EditorClassIdentifier: 
+  useSound: {fileID: 8300000, guid: 083b5f2998569c343a17223161d088d5, type: 3}
   weaponName: "\uD654\uC5FC\uBCD1"
   weaponSprite: {fileID: 21300000, guid: 35781731b5eb98a41b56fa6263a8c190, type: 3}
   weaponDesc: "5\uCD08 \uB3D9\uC548, \uCD08 \uB2F9 5\uC758 \uACE0\uC815 \uD53C\uD574\uB97C
@@ -40,6 +41,6 @@ MonoBehaviour:
   effectDuration: 0.2
   effectRadius: 3
   subeffect: 3
-  burnDamagePerSecond: 0.5
-  burnDuration: 1
+  burnDamagePerSecond: 1
+  burnDuration: 3
   stunDuration: 1

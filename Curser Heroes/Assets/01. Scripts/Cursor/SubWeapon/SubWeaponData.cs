@@ -3,6 +3,9 @@
 [CreateAssetMenu(fileName = "SubWeaponData", menuName = "Weapon/Create Sub Weapon")]
 public class SubWeaponData : ScriptableObject
 {
+    [Header("사운드")]
+    public AudioClip useSound; 
+
     [Header("기본 정보")]
     public string weaponName;
     public Sprite weaponSprite;
