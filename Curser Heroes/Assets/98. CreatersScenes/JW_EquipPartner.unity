@@ -7314,6 +7314,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameExitPanel
       objectReference: {fileID: 0}
+    - target: {fileID: 773818199338979239, guid: ef14c7c5d5df2934183c19fb0cd552ef, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4768410467957405777, guid: ef14c7c5d5df2934183c19fb0cd552ef, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -7392,6 +7396,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4768410467957405777, guid: ef14c7c5d5df2934183c19fb0cd552ef, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8921876522536143630, guid: ef14c7c5d5df2934183c19fb0cd552ef, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -6390403767302270384, guid: 5f562ed7f1f4a4c488f5c6f3b11798d1, type: 2}
+    - target: {fileID: 8921876522536143630, guid: ef14c7c5d5df2934183c19fb0cd552ef, type: 3}
+      propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

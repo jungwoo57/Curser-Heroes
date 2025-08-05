@@ -183,7 +183,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: ecd9851fdf7ed9246a535c09001c80e1, type: 3}
   m_Type: 3
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 0
   m_FillAmount: 1
@@ -504,6 +504,10 @@ PrefabInstance:
     - target: {fileID: 3519378834441640791, guid: 5132faf00541097488d7b58e8558a65e, type: 3}
       propertyPath: m_Name
       value: Bird
+      objectReference: {fileID: 0}
+    - target: {fileID: 3519378834441640791, guid: 5132faf00541097488d7b58e8558a65e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7646408413872156089, guid: 5132faf00541097488d7b58e8558a65e, type: 3}
       propertyPath: visiblePos.x
