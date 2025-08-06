@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class BarUI : MonoBehaviour
 {
-    [SerializeField]TutorialUI tutorialUI;
-
+    [SerializeField] private TutorialUI tutorialUI;
+    [SerializeField] private GameObject tutorialPanel;
     private void OnEnable()
     {
         tutorialUI.gameObject.SetActive(false);
+        tutorialPanel.SetActive(false);
         if (!GameManager.Instance.useBar)
         {
+            tutorialPanel.SetActive(false);
             tutorialUI.gameObject.SetActive(true);
         }
     }
