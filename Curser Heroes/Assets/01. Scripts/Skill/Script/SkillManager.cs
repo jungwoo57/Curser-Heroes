@@ -215,6 +215,9 @@ public class SkillManager : MonoBehaviour
             UIManager.Instance.battleUI.SkillUpdate();
         }
 
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
         Destroy(skillSelectUIInstance);
         skillSelectUIInstance = null;
 
