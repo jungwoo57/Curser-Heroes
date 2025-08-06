@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 public class ForgeUI : MonoBehaviour
@@ -37,7 +38,12 @@ public class ForgeUI : MonoBehaviour
     [Header("텍스트 컬러")] 
     [SerializeField] private Color enabledColor;
     [SerializeField] private Color disableColor;
-    
+
+
+    [Header("강화 표시 및 해금 이펙트")] 
+    [SerializeField] private GameObject[] upgradeDirection;
+    [SerializeField] private GameObject unlockDirection;
+    [SerializeField] private float effectDurationTime;
     
     public bool isMain = true;
     public OwnedWeapon selectWeapon;
@@ -121,6 +127,7 @@ public class ForgeUI : MonoBehaviour
                 UIUpdate();
             }
         } //weapondata에 레벨이 존재해야 할 것 같음
+        ReinforceEffect();
     }
 
     public void OnClickUnlockWeapon()
@@ -143,6 +150,7 @@ public class ForgeUI : MonoBehaviour
                 selectSubData = selectSubWeapon.data;   //버그 픽스용 추가코드
             }
         }
+        UnlockEffect();
         unlockButton.gameObject.SetActive(false);
         reinforceButton.gameObject.SetActive(true);
         UpdateSelectUI();
@@ -185,7 +193,7 @@ public class ForgeUI : MonoBehaviour
             weaponHp.text = ("체력 : ") + selectData.maxLives.ToString();
             hasGoldText.text = GameManager.Instance.GetGold().ToString();
             hasJewelText.text = GameManager.Instance.GetJewel().ToString();
-            useJewelText.text = "-" + selectData.unlockCost.ToString();
+            useJewelText.text = selectData.unlockCost.ToString();
             weaponImage.sprite = selectData.weaponImage;
             reinforceText.color = enabledColor;
             if (selectWeapon != null && selectWeapon.data != null)
@@ -202,7 +210,7 @@ public class ForgeUI : MonoBehaviour
                 //useGoldImage.gameObject.SetActive(true);
                 if (selectWeapon.level < 10)
                 {
-                    useGoldText.text = "-" + selectData.upgradeCost[selectWeapon.level].ToString();
+                    useGoldText.text =  selectData.upgradeCost[selectWeapon.level].ToString();
                     upgradeWeaponAtk.text = (selectWeapon.levelDamage + selectData.damagePerLevel).ToString();
                 }
                 else
@@ -256,7 +264,7 @@ public class ForgeUI : MonoBehaviour
             }
             weaponDesc.text = selectSubData.weaponDesc;
             //hasGoldText.text = GameManager.Instance.GetGold().ToString();
-            useGoldText.text = "-" + selectSubData.upgradeCost.ToString();
+            useGoldText.text = selectSubData.upgradeCost.ToString();
             weaponImage.sprite = selectSubData.weaponSprite;
             //hasJewelText.text = GameManager.Instance.GetJewel().ToString();
             useJewelText.text = selectSubData.unlockCost.ToString();
@@ -274,7 +282,7 @@ public class ForgeUI : MonoBehaviour
                 //useGoldImage.gameObject.SetActive(true);
                 if (selectSubWeapon.level < 10)
                 {
-                    useGoldText.text = "-" + selectSubData.upgradeCost[selectSubWeapon.level].ToString();
+                    useGoldText.text = selectSubData.upgradeCost[selectSubWeapon.level].ToString();
                     upgradeWeaponAtk.text = (selectSubWeapon.levelDamage + selectSubData.damagePerLevel).ToString();
                     reinforceText.color = enabledColor;
                 }
@@ -365,5 +373,29 @@ public class ForgeUI : MonoBehaviour
         UIUpdate();
         UpdateSelectUI();
     }
+
+    public void ReinforceEffect()
+    {
+        for (int i = 0; i < upgradeDirection.Length; i++)
+        {
+            if (!upgradeDirection[i].activeInHierarchy)
+            {
+                upgradeDirection[i].gameObject.SetActive(true);
+                StartCoroutine(EffectTime(effectDurationTime, upgradeDirection[i]));
+                return;
+            }
+        }
+    }
     
+    private void UnlockEffect()
+    {
+        unlockDirection.gameObject.SetActive(true);
+        StartCoroutine(EffectTime(effectDurationTime, unlockDirection));
+    }
+
+    IEnumerator EffectTime(float durationTime, GameObject effect)
+    {
+        yield return new WaitForSeconds(durationTime);
+        effect.SetActive(false);
+    }
 }
