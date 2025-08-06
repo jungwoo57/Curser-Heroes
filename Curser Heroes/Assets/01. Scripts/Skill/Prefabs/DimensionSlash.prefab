@@ -152,6 +152,9 @@ MonoBehaviour:
   monsterLayer:
     serializedVersion: 2
     m_Bits: 128
+  WeaponLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!61 &1046783441944008696
 BoxCollider2D:
   m_ObjectHideFlags: 0
