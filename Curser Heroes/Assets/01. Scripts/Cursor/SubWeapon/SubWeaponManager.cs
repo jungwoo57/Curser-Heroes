@@ -75,6 +75,7 @@ public class SubWeaponManager : MonoBehaviour
 
     void Start()
     {
+       
         if (GameManager.Instance)
         {
             equippedSubWeapon = GameManager.Instance.subEquipWeapon.data; // 게임매니저가 있으면 넣어주기
@@ -265,16 +266,28 @@ public class SubWeaponManager : MonoBehaviour
 
     public void UseSubWeapon()
     {
-        //  쿨타임 세팅 (모든 타입)
+        //  쿨타임 세팅
         currentCooldown = equippedSubWeapon.cooldown;
 
-        // 자원 소모
+        //  자원 소모
         if (equippedSubWeapon.weaponType == SubWeaponType.AmmoBased)
             currentAmmo--;
         else if (equippedSubWeapon.weaponType == SubWeaponType.ManaBased)
             currentMana = Mathf.Max(0f, currentMana - equippedSubWeapon.manaCost);
 
-        // 발사 이펙트 / 투사체 분기
+        //  사운드 재생 (볼륨만 적용)
+        if (equippedSubWeapon.useSound != null && audioSource != null)
+        {
+            Debug.Log($"[SFX] PlayOneShot: {equippedSubWeapon.useSound?.name}  vol={equippedSubWeapon.useSoundVolume}");
+            audioSource.PlayOneShot(equippedSubWeapon.useSound, equippedSubWeapon.useSoundVolume);
+
+            audioSource.PlayOneShot(
+                equippedSubWeapon.useSound,
+                equippedSubWeapon.useSoundVolume
+            );
+        }
+
+        //  발사 이펙트 / 투사체 분기
         if (equippedSubWeapon.rangeShape == SubWeaponRangeShape.ShortLine)
             UseLineEffectAtCursor();
         else if (equippedSubWeapon.rangeType == SubWeaponRangeType.Radial)
@@ -282,6 +295,7 @@ public class SubWeaponManager : MonoBehaviour
         else
             ShootToNearestEnemy();
 
+        
         if (SkillManager.Instance != null)
         {
             SkillManager.Instance.TryShootFireball();
@@ -289,7 +303,7 @@ public class SubWeaponManager : MonoBehaviour
             SkillManager.Instance.TryTriggerDeathBeam();
         }
 
-        // UI 즉시 갱신
+        //  UI 즉시 갱신
         if (equippedSubWeapon.weaponType == SubWeaponType.AmmoBased)
             UpdateAmmoUI();
         else if (equippedSubWeapon.weaponType == SubWeaponType.ManaBased)
@@ -297,14 +311,11 @@ public class SubWeaponManager : MonoBehaviour
         else if (equippedSubWeapon.weaponType == SubWeaponType.ChargeBased)
             UpdateChargeUI();
 
-        // ChargeBased 발사 뒤 charged 플래그 초기화
+        //  ChargeBased 초기화
         if (equippedSubWeapon.weaponType == SubWeaponType.ChargeBased)
             charged = false;
-
-        if (equippedSubWeapon.useSound != null && audioSource != null)
-            audioSource.PlayOneShot(equippedSubWeapon.useSound);
-
     }
+
 
     private IEnumerator ResetChargedAfterDelay(float delay)
     {

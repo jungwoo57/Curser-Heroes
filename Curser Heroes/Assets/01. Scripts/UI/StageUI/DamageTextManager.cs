@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,6 +15,9 @@ public class DamageTextManager : MonoBehaviour
     [SerializeField] private GameObject stunImage;
     [SerializeField] private Sprite stunSprite;
     [SerializeField] private float stunOffset;
+    [SerializeField] private Transform burnCanvas;     
+    [SerializeField] private GameObject burnImage;     
+    [SerializeField] private float burnOffset = 1f;    
     private void Awake()
     {
         instance = this;
@@ -125,4 +128,31 @@ public class DamageTextManager : MonoBehaviour
         yield return new WaitForSeconds(durationTime);
         stunobj.SetActive(false);
     }
+    public void ShowBurn(Transform monsterPosition, float duration)
+    {
+        
+        for (int i = 0; i < burnCanvas.childCount; i++)
+        {
+            Transform child = burnCanvas.GetChild(i);
+            if (!child.gameObject.activeInHierarchy)
+            {
+                child.position = monsterPosition.position + Vector3.up * burnOffset;
+                child.gameObject.SetActive(true);
+                StartCoroutine(CloseBurn(child.gameObject, duration));
+                return;
+            }
+        }
+
+        
+        GameObject newBurn = Instantiate(burnImage, burnCanvas);
+        newBurn.transform.position = monsterPosition.position + Vector3.up * burnOffset;
+        StartCoroutine(CloseBurn(newBurn, duration));
+    }
+
+    private IEnumerator CloseBurn(GameObject obj, float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        obj.SetActive(false);
+    }
+
 }
