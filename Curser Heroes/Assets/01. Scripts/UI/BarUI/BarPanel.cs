@@ -12,7 +12,12 @@ public class BarPanel : MonoBehaviour
     [SerializeField]private TextMeshProUGUI hasJewelText;
     [SerializeField]private TextMeshProUGUI costgoldText;
     [SerializeField]private TextMeshProUGUI costjewelText;
-
+    [SerializeField]private TextMeshProUGUI curgageText;
+    [SerializeField] private TextMeshProUGUI aftergageText;
+    [SerializeField]private TextMeshProUGUI reinforcementText;
+    [SerializeField] private TextMeshProUGUI unlockText;
+    
+    
     [Header("버튼 모음")]
     [SerializeField]private Button reinforceButton;
     [SerializeField]private Button unLockButton;
@@ -24,10 +29,11 @@ public class BarPanel : MonoBehaviour
     [SerializeField] private Image iconImage;
     //[SerializeField]private Image goldImage;
     //[SerializeField]private Image jewelImage;
-    //[SerializeField]private Image useGoldImage;
-    //[SerializeField]private Image useJewelImage;
 
-    //[SerializeField]private BarPartnerButton[] partnerButtons;
+    [Header("잠김 텍스트 컬러")] 
+    [SerializeField] private Color cantTextColor;
+    [SerializeField] private Color canTextColor;
+    
     [SerializeField]private BarPartnerImageButton[] partnerButtons;
     public OwnedPartner selectPartner;
     public PartnerData selectData;
@@ -52,12 +58,8 @@ public class BarPanel : MonoBehaviour
             => p.data.partnerName == selectData.partnerName);
         for (int i = 0; i < partnerButtons.Length; i++)
         {
-            partnerButtons[i].GetComponent<Button>().interactable = true;
+            partnerButtons[i].UIUpdate();
         }//인터렉티블 켜기
-        //jewelImage.gameObject.SetActive(false);
-        //goldImage.gameObject.SetActive(false);
-        //useGoldImage.gameObject.SetActive(false);
-        //useJewelImage.gameObject.SetActive(false);
         if (selectPartner != null)
         {
             if (selectPartner.level == 0) // 레벨 1일떈 표시 x
@@ -69,7 +71,10 @@ public class BarPanel : MonoBehaviour
                 nameText.text = selectPartner.data.partnerName + selectPartner.level.ToString();
             }
             reinforceButton.gameObject.SetActive(true);
+            reinforceButton.interactable = true;
+            reinforcementText.color = canTextColor;
             unLockButton.gameObject.SetActive(false);
+            unLockButton.interactable = true;
             doneButton.gameObject.SetActive(false);
             //mainImage.sprite = selectPartner.data.portraitSprite;
             iconImage.sprite = selectPartner.data.portraitSprite;
@@ -78,7 +83,7 @@ public class BarPanel : MonoBehaviour
             //useGoldImage.gameObject.SetActive(true);
             costgoldText.gameObject.SetActive(true);
             costjewelText.gameObject.SetActive(false);
-
+            
             if (selectPartner.level < selectPartner.data.upgradeCost.Length)
             {
                 costText.text = selectData.gaugeMax[selectPartner.level].ToString();
@@ -86,10 +91,19 @@ public class BarPanel : MonoBehaviour
                 hasJewelText.text = GameManager.Instance.GetJewel().ToString();
                 costgoldText.text = selectData.upgradeCost[selectPartner.level].ToString();
                 costjewelText.text = selectData.upgradeCost[selectPartner.level].ToString();
+                curgageText.text = selectData.gaugeMax[selectPartner.level].ToString();
+                aftergageText.text = selectData.gaugeMax[selectPartner.level+1].ToString();
+                if (selectPartner.data.upgradeCost[selectPartner.level] > GameManager.Instance.GetGold())
+                {
+                    reinforceButton.interactable = false;
+                    reinforcementText.color = cantTextColor;
+                }
             }
             else
             {
                 costgoldText.text = "최대 레벨";
+                aftergageText.text = "최대레벨";
+                curgageText.text = selectData.gaugeMax[selectPartner.level].ToString();
                 reinforceButton.gameObject.SetActive(false);
                 doneButton.gameObject.SetActive(true);
             }
@@ -100,6 +114,7 @@ public class BarPanel : MonoBehaviour
             //mainImage.sprite = selectData.portraitSprite;
             iconImage.sprite = selectData.portraitSprite;
             descText.text = selectData.desc;
+            unlockText.color = canTextColor;
             unLockButton.gameObject.SetActive(true);
             reinforceButton.gameObject.SetActive(false);
             doneButton.gameObject.SetActive(false);
@@ -111,6 +126,13 @@ public class BarPanel : MonoBehaviour
             costjewelText.text = selectData.unlockCost.ToString();
             hasgoldText.text = GameManager.Instance.GetGold().ToString();
             hasJewelText.text = GameManager.Instance.GetJewel().ToString();
+            curgageText.text = "미해금";
+            aftergageText.text = selectData.gaugeMax[0].ToString();
+            if (selectData.unlockCost > GameManager.Instance.GetJewel())
+            {
+                unLockButton.interactable = false;
+                unlockText.color = cantTextColor;
+            }
         }
     }
     
@@ -132,8 +154,12 @@ public class BarPanel : MonoBehaviour
 
     public void Reinforce()
     {
-        GameManager.Instance.UpgradePartner(selectData);
-        UIUpdate();
+        float hasgold = GameManager.Instance.GetGold();
+        if (hasgold >= selectData.upgradeCost[selectPartner.level])
+        {
+            GameManager.Instance.UpgradePartner(selectData);
+            UIUpdate();
+        }
     }
 
     public void Unlock()

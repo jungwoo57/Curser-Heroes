@@ -12,18 +12,30 @@ public class BarPartnerImageButton : MonoBehaviour
     public Button button;
     private bool isLocked;
 
+    public Outline outline;
     [SerializeField] private Color lockedColor;
     [SerializeField] private Color unlockedColor;
-    private void OnEnable()
+    /*private void OnEnable()
     {
         if (barPanel.selectData == partnerData)
         {
             button.interactable = false;
+            outline.enabled = true;
         }
-    }
+    }*/
 
     public void UIUpdate()
     {
+        if (barPanel.selectData == partnerData)
+        {
+            button.interactable = false;
+            outline.enabled = true;
+        }
+        else
+        {
+            button.interactable = true;
+            outline.enabled = false;
+        }
         CheckLock();
         partnerImage.sprite = partnerData.portraitSprite;
         if(isLocked) partnerImage.color = lockedColor;
@@ -45,6 +57,7 @@ public class BarPartnerImageButton : MonoBehaviour
             barPanel.selectPartner = ownedPartnerData;
             barPanel.UIUpdate();
             button.interactable = false;
+            outline.enabled = true;
         }
         
     }

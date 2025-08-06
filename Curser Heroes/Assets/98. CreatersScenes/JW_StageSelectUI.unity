@@ -5540,7 +5540,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1667901477139743788, guid: 03903c605f5164447ac4b378d23cd111, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 350
+      value: 355
       objectReference: {fileID: 0}
     - target: {fileID: 1667901477139743788, guid: 03903c605f5164447ac4b378d23cd111, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -11859,7 +11859,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1841675846}
   m_HandleRect: {fileID: 1841675845}
   m_Direction: 2
-  m_Value: 0.99999976
+  m_Value: 0.9999999
   m_Size: 0.48582196
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -16596,12 +16596,18 @@ MonoBehaviour:
   hasJewelText: {fileID: 265988936}
   costgoldText: {fileID: 1470740688}
   costjewelText: {fileID: 1723932868}
+  curgageText: {fileID: 903290127}
+  aftergageText: {fileID: 2110121935}
+  reinforcementText: {fileID: 956432988}
+  unlockText: {fileID: 623686458}
   reinforceButton: {fileID: 1031832952}
   unLockButton: {fileID: 1879753480}
   exitButton: {fileID: 1315558395}
   doneButton: {fileID: 1956809890}
   mainImage: {fileID: 0}
   iconImage: {fileID: 1896569831}
+  cantTextColor: {r: 1, g: 1, b: 1, a: 0.39215687}
+  canTextColor: {r: 1, g: 1, b: 1, a: 1}
   partnerButtons:
   - {fileID: 8981201336220154336}
   - {fileID: 271389261}
@@ -19327,7 +19333,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 0.78431374}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -20861,7 +20867,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1667901477139743788, guid: 03903c605f5164447ac4b378d23cd111, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 750
+      value: 765
       objectReference: {fileID: 0}
     - target: {fileID: 1667901477139743788, guid: 03903c605f5164447ac4b378d23cd111, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -21052,7 +21058,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1667901477139743788, guid: 03903c605f5164447ac4b378d23cd111, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 550
+      value: 560
       objectReference: {fileID: 0}
     - target: {fileID: 1667901477139743788, guid: 03903c605f5164447ac4b378d23cd111, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -34760,7 +34766,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
