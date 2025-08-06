@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    public float spawnRadius = 5f;  // 몬스터가 소환될 반경 범위
+    public float spawnRadius = 2.5f;  // 몬스터가 소환될 반경 범위
 
     // 몬스터 데이터 리스트를 받아서 각 몬스터를 겹치지 않는 랜덤 위치에 소환하고,
     // 몬스터가 죽을 때 호출될 콜백 함수도 연결해줌
