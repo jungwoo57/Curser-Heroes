@@ -702,7 +702,7 @@ public class SkillManager : MonoBehaviour
         var dimensionSlashSkillData = ownedSkills.FirstOrDefault(s => s.skill.skillName == "차원 가르기");
         if (dimensionSlashSkillData == null) return;
 
-        float chance = 1f; // 5%
+        float chance = 0.05f; // 5%
         if (Random.value > chance) return;
 
         GameObject obj = Instantiate(dimensionSlashSkillData.skill.skillPrefab, cursorPosition, Quaternion.identity);
