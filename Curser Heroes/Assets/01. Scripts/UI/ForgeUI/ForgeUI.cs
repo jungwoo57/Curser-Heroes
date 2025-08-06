@@ -154,6 +154,8 @@ public class ForgeUI : MonoBehaviour
         {
             Button uiButton = weaponUIs[i].GetComponent<Button>();
             uiButton.interactable = true;
+            Outline uiOutline = uiButton.GetComponent<Outline>();
+            uiOutline.enabled = false;
             uiButton.gameObject.SetActive(false); // ui초기화 코드 추가 0804
         }
         reinforceButton.gameObject.SetActive(false);
@@ -170,9 +172,11 @@ public class ForgeUI : MonoBehaviour
                 Button uiButton = weaponUIs[i].GetComponent<Button>();
                 uiButton.gameObject.SetActive(true);
                 uiButton.interactable = true;
+                Outline uiOutline = uiButton.GetComponent<Outline>();
                 if (weaponUIs[i].mainData == selectData)
                 {
                     uiButton.interactable = false;
+                    uiOutline.enabled = true;
                 }
             }
             weaponDesc.text = selectData.weaponDesc;
@@ -241,9 +245,11 @@ public class ForgeUI : MonoBehaviour
                 Button uiButton = weaponUIs[i].GetComponent<Button>();
                 uiButton.gameObject.SetActive(true);
                 uiButton.interactable = true;
+                Outline uiOutline = uiButton.GetComponent<Outline>();
                 if (weaponUIs[i].subData == selectSubData)
                 {
                     uiButton.interactable = false;
+                    uiOutline.enabled = true;
                 }
             }
             weaponDesc.text = selectSubData.weaponDesc;
