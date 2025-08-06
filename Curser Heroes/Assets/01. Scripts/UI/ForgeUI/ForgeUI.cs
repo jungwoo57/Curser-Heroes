@@ -51,7 +51,7 @@ public class ForgeUI : MonoBehaviour
     //[SerializeField] private Image useGoldImage;
     
     public TutorialUI tutorialUI;
-    [SerializeField] private RawImage tutorialPanel;
+    [SerializeField] private GameObject tutorialPanel;
     [SerializeField] private ScrollRect weaponScroll;
     private void OnEnable()
     {
@@ -159,7 +159,9 @@ public class ForgeUI : MonoBehaviour
             uiButton.gameObject.SetActive(false); // ui초기화 코드 추가 0804
         }
         reinforceButton.gameObject.SetActive(false);
+        reinforceButton.interactable = true;
         unlockButton.gameObject.SetActive(false); //추가
+        unlockButton.interactable = true;
         useGoldText.gameObject.SetActive(false);
         useJewelText.gameObject.SetActive(false);
         goldImage.gameObject.SetActive(false);
@@ -189,7 +191,7 @@ public class ForgeUI : MonoBehaviour
             if (selectWeapon != null && selectWeapon.data != null)
             {
                 goldImage.gameObject.SetActive(true);
-                weaponAtk.text = ("공격력 : ") + selectWeapon.levelDamage.ToString();
+                weaponAtk.text = ("공격력 : ") + (int)(selectWeapon.levelDamage);
                 currentWeaponAtk.text = selectWeapon.levelDamage.ToString();
                 if(selectWeapon.level <= 0) weaponName.text = selectData.weaponName;
                 else weaponName.text = selectData.weaponName + "+" + (selectWeapon.level);
@@ -264,7 +266,7 @@ public class ForgeUI : MonoBehaviour
                 if(selectSubWeapon.level <= 0) weaponName.text = selectSubData.weaponName;
                 else weaponName.text = selectSubData.weaponName + "+" + (selectSubWeapon.level);
                 
-                weaponAtk.text = ("공격력 : ") + selectSubWeapon.levelDamage.ToString();
+                weaponAtk.text = ("공격력 : ") + (int)selectSubWeapon.levelDamage;
                 currentWeaponAtk.text = selectSubWeapon.levelDamage.ToString();
                 //hasGoldText.gameObject.SetActive(true);
                 useGoldText.gameObject.SetActive(true);

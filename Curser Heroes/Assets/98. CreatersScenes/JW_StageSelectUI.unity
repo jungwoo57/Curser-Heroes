@@ -8083,7 +8083,7 @@ MonoBehaviour:
   selectData: {fileID: 0}
   selectSubData: {fileID: 0}
   tutorialUI: {fileID: 2001570938}
-  tutorialPanel: {fileID: 1011064011}
+  tutorialPanel: {fileID: 980621366}
   weaponScroll: {fileID: 400949610}
 --- !u!1 &440641501
 GameObject:
@@ -9935,7 +9935,7 @@ MonoBehaviour:
     data: {fileID: 0}
     level: 0
     bookMark: 0
-  gold: 5000
+  gold: 5037
   jewel: 9999
   mouseSensitivity: 0.5
   useStage: 1
@@ -27639,6 +27639,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tutorialUI: {fileID: 1733489501}
+  tutorialPanel: {fileID: 1069948359}
 --- !u!1 &1524711822
 GameObject:
   m_ObjectHideFlags: 0
