@@ -104,6 +104,8 @@ public abstract class BaseMonster : MonoBehaviour
 
             if (spriteRenderer != null)
             {
+                if (attackColorCoroutine != null)
+                    StopCoroutine(attackColorCoroutine);
                 spriteRenderer.color = new Color(1f, 1,1.0f, 1.0f);
             }
             if (animator != null)
