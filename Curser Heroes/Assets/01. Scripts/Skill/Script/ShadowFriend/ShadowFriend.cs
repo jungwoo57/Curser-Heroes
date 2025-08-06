@@ -29,8 +29,16 @@ public class ShadowFriend : MonoBehaviour
     {
         if (((1 << other.gameObject.layer) & monsterLayer) != 0)
         {
+            // 몬스터를 밀어낼 방향과 힘 계산
             Vector2 pushDir = (other.transform.position - transform.position).normalized;
-            other.transform.position += (Vector3)(pushDir * pushPower * Time.deltaTime);
+            Vector3 newPosition = other.transform.position + (Vector3)(pushDir * pushPower * Time.deltaTime);
+
+            // X축과 Y축 위치를 제한
+            newPosition.x = Mathf.Clamp(newPosition.x, -8f, 8f);
+            newPosition.y = Mathf.Clamp(newPosition.y, -2.5f, 2f);
+
+            // 제한된 위치로 몬스터의 위치 업데이트
+            other.transform.position = newPosition;
         }
         else if (((1 << other.gameObject.layer) & projectileLayer) != 0)
         {

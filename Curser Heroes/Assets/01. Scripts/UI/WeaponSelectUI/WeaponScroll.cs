@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -141,7 +141,7 @@ public class WeaponScroll : MonoBehaviour
                     showWeapons.Add(weaponImage);
                 }
 
-                for (int i = 0; i < hasSubWeapons.Count; i++) //북마크 부터 표시
+                for (int i = 0; i < hasPartners.Count; i++) //북마크 부터 표시
                 {
                     if (hasPartners[i].bookMark)
                     {

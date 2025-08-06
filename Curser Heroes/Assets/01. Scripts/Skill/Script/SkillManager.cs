@@ -132,7 +132,7 @@ public class SkillManager : MonoBehaviour
         }
 
         skillSelectUIInstance = Instantiate(skillSelectUIPrefab);
-        var canvas = GameObject.Find("Canvas");
+        var canvas = GameObject.Find("UICanvas");
         if (canvas != null)
         {
             skillSelectUIInstance.transform.SetParent(canvas.transform, false);
@@ -549,7 +549,7 @@ public class SkillManager : MonoBehaviour
 
     void ShowRewardSelection()
     {
-        GameObject canvas = GameObject.Find("Canvas"); 
+        GameObject canvas = GameObject.Find("UICanvas"); 
         if (canvas == null)
         {
             Debug.LogError("Canvas를 찾을 수 없습니다.");
