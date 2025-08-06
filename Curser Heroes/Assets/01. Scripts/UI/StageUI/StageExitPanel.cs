@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -32,8 +32,27 @@ public class StageExitPanel : MonoBehaviour
             yield return new WaitForSeconds(1.0f);
             timer--;
         }
+
+        CloseAllUIWindows();
+
         gameObject.SetActive(false);
         SceneManager.LoadScene("98. CreatersScenes/JW_StageSelectUI");
         
+    }
+    private void CloseAllUIWindows()
+    {
+        // 스킬 선택 UI를 찾아서 닫습니다.
+        var skillSelectUI = GameObject.FindObjectOfType<SkillSelectUI>();
+        if (skillSelectUI != null)
+        {
+            Destroy(skillSelectUI.gameObject);
+        }
+
+        // 보상 선택 UI를 찾아서 닫습니다.
+        var rewardSelectUI = GameObject.FindObjectOfType<RewardSelectUI>();
+        if (rewardSelectUI != null)
+        {
+            Destroy(rewardSelectUI.gameObject);
+        }
     }
 }
