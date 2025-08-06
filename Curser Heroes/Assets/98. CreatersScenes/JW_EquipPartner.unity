@@ -1881,6 +1881,7 @@ GameObject:
   - component: {fileID: 625156789}
   - component: {fileID: 625156788}
   - component: {fileID: 625156787}
+  - component: {fileID: 625156791}
   m_Layer: 6
   m_Name: TestCursorWeapon
   m_TagString: Untagged
@@ -2057,7 +2058,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 625156782}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 37795c23a1a067d4c9bc21edda5219f8, type: 3}
   m_Name: 
@@ -2077,6 +2078,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &625156791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 625156782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96f11c3f80f2d0448bb475ee042cc4d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cursorSpeed: 0.14
 --- !u!1 &632612446
 GameObject:
   m_ObjectHideFlags: 0

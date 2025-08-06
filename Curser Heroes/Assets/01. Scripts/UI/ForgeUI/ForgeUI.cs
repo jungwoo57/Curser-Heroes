@@ -19,6 +19,11 @@ public class ForgeUI : MonoBehaviour
     public TextMeshProUGUI currentWeaponAtk;
     [SerializeField] private TextMeshProUGUI reinforceText;
     [SerializeField] private TextMeshProUGUI unlockText;
+
+    [Header("이미지 목록")] 
+    [SerializeField] private Image goldImage;
+    [SerializeField] private Image jewelImage;
+    
     
     [Header("무기 선택 이미지")] 
     public ForgeWeaponUI[] weaponUIs;
@@ -149,12 +154,17 @@ public class ForgeUI : MonoBehaviour
         {
             Button uiButton = weaponUIs[i].GetComponent<Button>();
             uiButton.interactable = true;
+            Outline uiOutline = uiButton.GetComponent<Outline>();
+            uiOutline.enabled = false;
             uiButton.gameObject.SetActive(false); // ui초기화 코드 추가 0804
         }
         reinforceButton.gameObject.SetActive(false);
         unlockButton.gameObject.SetActive(false); //추가
         useGoldText.gameObject.SetActive(false);
         useJewelText.gameObject.SetActive(false);
+        goldImage.gameObject.SetActive(false);
+        jewelImage.gameObject.SetActive(false);
+        
         if (isMain)
         {
             for (int i = 0; i < GameManager.Instance.allMainWeapons.Count; i++)
@@ -162,17 +172,23 @@ public class ForgeUI : MonoBehaviour
                 Button uiButton = weaponUIs[i].GetComponent<Button>();
                 uiButton.gameObject.SetActive(true);
                 uiButton.interactable = true;
+                Outline uiOutline = uiButton.GetComponent<Outline>();
+                if (weaponUIs[i].mainData == selectData)
+                {
+                    uiButton.interactable = false;
+                    uiOutline.enabled = true;
+                }
             }
             weaponDesc.text = selectData.weaponDesc;
             weaponHp.text = ("체력 : ") + selectData.maxLives.ToString();
             hasGoldText.text = GameManager.Instance.GetGold().ToString();
             hasJewelText.text = GameManager.Instance.GetJewel().ToString();
-            useJewelText.text = selectData.unlockCost.ToString();
+            useJewelText.text = "-" + selectData.unlockCost.ToString();
             weaponImage.sprite = selectData.weaponImage;
             reinforceText.color = enabledColor;
             if (selectWeapon != null && selectWeapon.data != null)
             {
-                //GoldImage.gameObject.SetActive(true);
+                goldImage.gameObject.SetActive(true);
                 weaponAtk.text = ("공격력 : ") + selectWeapon.levelDamage.ToString();
                 currentWeaponAtk.text = selectWeapon.levelDamage.ToString();
                 if(selectWeapon.level <= 0) weaponName.text = selectData.weaponName;
@@ -180,11 +196,11 @@ public class ForgeUI : MonoBehaviour
                 //hasGoldText.gameObject.SetActive(true);
                 useGoldText.gameObject.SetActive(true);
                 reinforceButton.gameObject.SetActive(true);
-                //GoldImage.gameObject.SetActive(true);
+                goldImage.gameObject.SetActive(true);
                 //useGoldImage.gameObject.SetActive(true);
                 if (selectWeapon.level < 10)
                 {
-                    useGoldText.text = selectData.upgradeCost[selectWeapon.level].ToString();
+                    useGoldText.text = "-" + selectData.upgradeCost[selectWeapon.level].ToString();
                     upgradeWeaponAtk.text = (selectWeapon.levelDamage + selectData.damagePerLevel).ToString();
                 }
                 else
@@ -212,7 +228,7 @@ public class ForgeUI : MonoBehaviour
                 weaponName.text = selectData.weaponName;
                 useJewelText.gameObject.SetActive(true);
                 unlockText.color = enabledColor;
-                
+                jewelImage.gameObject.SetActive(true);
                 
                 if (GameManager.Instance.GetJewel() < selectData.unlockCost)
                 {
@@ -229,10 +245,16 @@ public class ForgeUI : MonoBehaviour
                 Button uiButton = weaponUIs[i].GetComponent<Button>();
                 uiButton.gameObject.SetActive(true);
                 uiButton.interactable = true;
+                Outline uiOutline = uiButton.GetComponent<Outline>();
+                if (weaponUIs[i].subData == selectSubData)
+                {
+                    uiButton.interactable = false;
+                    uiOutline.enabled = true;
+                }
             }
             weaponDesc.text = selectSubData.weaponDesc;
             //hasGoldText.text = GameManager.Instance.GetGold().ToString();
-            useGoldText.text = selectSubData.upgradeCost.ToString();
+            useGoldText.text = "-" + selectSubData.upgradeCost.ToString();
             weaponImage.sprite = selectSubData.weaponSprite;
             //hasJewelText.text = GameManager.Instance.GetJewel().ToString();
             useJewelText.text = selectSubData.unlockCost.ToString();
@@ -246,11 +268,11 @@ public class ForgeUI : MonoBehaviour
                 currentWeaponAtk.text = selectSubWeapon.levelDamage.ToString();
                 //hasGoldText.gameObject.SetActive(true);
                 useGoldText.gameObject.SetActive(true);
-                //GoldImage.gameObject.SetActive(true);
+                goldImage.gameObject.SetActive(true);
                 //useGoldImage.gameObject.SetActive(true);
                 if (selectSubWeapon.level < 10)
                 {
-                    useGoldText.text = selectSubData.upgradeCost[selectSubWeapon.level].ToString();
+                    useGoldText.text = "-" + selectSubData.upgradeCost[selectSubWeapon.level].ToString();
                     upgradeWeaponAtk.text = (selectSubWeapon.levelDamage + selectSubData.damagePerLevel).ToString();
                     reinforceText.color = enabledColor;
                 }
@@ -280,7 +302,7 @@ public class ForgeUI : MonoBehaviour
                 //hasJewelText.gameObject.SetActive(true);
                 useJewelText.gameObject.SetActive(true);
                 unlockButton.gameObject.SetActive(true);
-                //JewelImage.gameObject.SetActive(true);
+                jewelImage.gameObject.SetActive(true);
                 //useJewelImage.gameObject.SetActive(true);
                 weaponAtk.text = ("공격력 : ") + selectSubData.baseDamage.ToString();
                 if (GameManager.Instance.GetJewel() < selectSubData.unlockCost)

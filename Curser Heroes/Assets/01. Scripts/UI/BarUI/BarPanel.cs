@@ -27,8 +27,8 @@ public class BarPanel : MonoBehaviour
     //[SerializeField]private Image useGoldImage;
     //[SerializeField]private Image useJewelImage;
 
-    [SerializeField]private BarPartnerButton[] partnerButtons;
-        
+    //[SerializeField]private BarPartnerButton[] partnerButtons;
+    [SerializeField]private BarPartnerImageButton[] partnerButtons;
     public OwnedPartner selectPartner;
     public PartnerData selectData;
     private void OnEnable()
@@ -71,7 +71,7 @@ public class BarPanel : MonoBehaviour
             reinforceButton.gameObject.SetActive(true);
             unLockButton.gameObject.SetActive(false);
             doneButton.gameObject.SetActive(false);
-            mainImage.sprite = selectPartner.data.portraitSprite;
+            //mainImage.sprite = selectPartner.data.portraitSprite;
             iconImage.sprite = selectPartner.data.portraitSprite;
             descText.text = selectPartner.data.desc;
             //goldImage.gameObject.SetActive(true);
@@ -97,7 +97,7 @@ public class BarPanel : MonoBehaviour
         else
         {
             nameText.text = selectData.partnerName;
-            mainImage.sprite = selectData.portraitSprite;
+            //mainImage.sprite = selectData.portraitSprite;
             iconImage.sprite = selectData.portraitSprite;
             descText.text = selectData.desc;
             unLockButton.gameObject.SetActive(true);
