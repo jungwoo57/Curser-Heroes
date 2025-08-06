@@ -21,7 +21,7 @@ public class RotatingSkill : MonoBehaviour
             float angle = i * angleStep * Mathf.Deg2Rad;
             Vector3 offset = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * radius;
 
-            Quaternion rotation = Quaternion.Euler(0, 0, angle * Mathf.Rad2Deg);
+            Quaternion rotation = Quaternion.Euler(0, 0, angle * Mathf.Rad2Deg - 90);
             GameObject obj = Instantiate(rotatingObjectPrefab, transform.position + offset, rotation, transform);
             obj.transform.localScale *= levelData.sizeMultiplier;
 
