@@ -10,6 +10,13 @@ public class SettingPanelUI : MonoBehaviour
     
     void Start()
     {
+        mainSlider.value = AudioListener.volume;
+        if (AudioManager.Instance != null)
+        {
+            bgmSlider.value = AudioManager.Instance.bgmSource.volume;
+            sfxSlider.value = AudioManager.Instance.src.volume;
+        }
+        
         mainSlider.onValueChanged.AddListener(SetMainVolume);
         bgmSlider.onValueChanged.AddListener(SetBGMVolume);
         sfxSlider.onValueChanged.AddListener(SetSFXVolume);
