@@ -13,6 +13,7 @@ public class DimensionSlash : MonoBehaviour
 
     [SerializeField] private float attackDuration = 1f;
     [SerializeField] private LayerMask monsterLayer;
+    [SerializeField] private LayerMask WeaponLayer;
 
     public void Init(SkillManager.SkillInstance skillInstance)
     {
@@ -84,30 +85,41 @@ public class DimensionSlash : MonoBehaviour
 
         if (!isAttacking) return;
 
+        if (((1 << collision.gameObject.layer) & WeaponLayer.value) != 0)
+        {
+            Debug.Log("[DimensionSlash] 무기 레이어와 충돌 조건 충족!");
+
+            // WeaponManager의 싱글톤 인스턴스를 직접 참조
+            if (WeaponManager.Instance != null)
+            {
+                Debug.Log("[DimensionSlash] WeaponManager 인스턴스 접근 성공! 데미지 적용 시도.");
+                WeaponManager.Instance.TakeWeaponLifeDamage();
+            }
+            else
+            {
+                Debug.LogError("[DimensionSlash] WeaponManager.Instance를 찾을 수 없습니다. 인스턴스가 초기화되었는지 확인하세요.");
+            }
+        }
+
         // 몬스터 레이어 필터링
-        if ((monsterLayer.value & (1 << collision.gameObject.layer)) == 0)
+        if ((monsterLayer.value & (1 << collision.gameObject.layer)) != 0)
         {
-            Debug.Log("[DimensionSlash] 충돌 대상이 monsterLayer에 없음. 무시됨.");
-            return;
-        }
+            // 일반 몬스터 처리
+            BaseMonster monster = collision.GetComponentInParent<BaseMonster>();
+            if (monster != null && !damagedTargets.Contains(monster))
+            {
+                Debug.Log($"DimensionSlash 데미지 적용: {damage} to {monster.name}");
+                monster.TakeDamage(damage);
+                damagedTargets.Add(monster);
+            }
 
-        // 일반 몬스터 처리
-        BaseMonster monster = collision.GetComponentInParent<BaseMonster>();
-        if (monster != null && !damagedTargets.Contains(monster))
-        {
-            Debug.Log($"DimensionSlash 데미지 적용: {damage} to {monster.name}");
-            monster.TakeDamage(damage);
-            damagedTargets.Add(monster);
-            return;
-        }
-
-        // 보스 처리
-        BossStats boss = collision.GetComponentInParent<BossStats>();
-        if (boss != null)
-        {
-            Debug.Log($"DimensionSlash 보스 데미지 적용: {damage} to {boss.name}");
-            boss.TakeDamage(damage);
-            return;
+            // 보스 처리
+            BossStats boss = collision.GetComponentInParent<BossStats>();
+            if (boss != null)
+            {
+                Debug.Log($"DimensionSlash 보스 데미지 적용: {damage} to {boss.name}");
+                boss.TakeDamage(damage);
+            }
         }
     }
 }

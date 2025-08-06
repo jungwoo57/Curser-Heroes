@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,6 +18,11 @@ public class LabPanel : MonoBehaviour
     [SerializeField]private TutorialUI tutorialUI;
     [SerializeField] private VideoPlayer skillPlayer;
     [SerializeField] private RawImage skillAnimImage;
+    [SerializeField] private Image useJewelImage;
+    
+    [Header("이펙트 모음")] 
+    [SerializeField] private GameObject unlockDirection;
+    [SerializeField] private float effectDurationTime;
     private void OnEnable()
     {
         tutorialUI.gameObject.SetActive(false);
@@ -34,6 +39,7 @@ public class LabPanel : MonoBehaviour
         useJewelText.text = "";
         UpdateSkillScroll(SkillType.All);
         unlockButton.interactable = false;
+        useJewelImage.gameObject.SetActive(false);
         skillPlayer.clip = null;
     }
 
@@ -58,6 +64,7 @@ public class LabPanel : MonoBehaviour
         skillDescription.text = selectSkill.description;
         hasJewelText.text = GameManager.Instance.GetJewel().ToString();
         useJewelText.text = selectSkill.unlockCost.ToString();
+        useJewelImage.gameObject.SetActive(true);
         if(selectSkill.animClip != null)
         {
             skillAnimImage.gameObject.SetActive(true);
@@ -126,10 +133,12 @@ public class LabPanel : MonoBehaviour
            || GameManager.Instance.GetJewel() <= selectSkill.unlockCost)
         {
             unlockButton.interactable = false;
+            useJewelImage.gameObject.SetActive(false);
         }
         else
         {
             unlockButton.interactable = true;
+            useJewelImage.gameObject.SetActive(true);
         }
     }
 
@@ -141,8 +150,10 @@ public class LabPanel : MonoBehaviour
         }
         else
         {
+            if (GameManager.Instance.GetJewel() < selectSkill.unlockCost) return;
             GameManager.Instance.UnlockSkill(selectSkill);
             unlockButton.interactable = false;
+            UnlockEffect();
             for (int i = 0; i < GameManager.Instance.allSkills.Count; i++)
             {
                 if (GameManager.Instance.HasSkills.Find(n =>
@@ -165,5 +176,17 @@ public class LabPanel : MonoBehaviour
     public void ClickExitButton()
     {
         gameObject.SetActive(false);
+    }
+    
+    private void UnlockEffect()
+    {
+        unlockDirection.gameObject.SetActive(true);
+        StartCoroutine(EffectTime(effectDurationTime, unlockDirection));
+    }
+
+    IEnumerator EffectTime(float durationTime, GameObject effect)
+    {
+        yield return new WaitForSeconds(durationTime);
+        effect.SetActive(false);
     }
 }

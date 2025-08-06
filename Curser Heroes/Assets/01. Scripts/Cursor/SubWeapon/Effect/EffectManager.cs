@@ -1,12 +1,11 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class EffectManager : MonoBehaviour
 {
     private BaseMonster owner;
     private readonly List<IEffect> activeEffects = new List<IEffect>();
 
-    
     public void Init(BaseMonster target)
     {
         owner = target;
@@ -17,21 +16,20 @@ public class EffectManager : MonoBehaviour
         }
     }
 
-    
     public void AddEffect(IEffect effect)
     {
-        
         activeEffects.Add(effect);
         Debug.Log($"[EffectManager] Added {effect.GetType().Name} to {owner.name}");
+
+        // ← 여기서 바로 Apply 호출!
+        effect.Apply(owner);
     }
 
     void Update()
     {
-       
         for (int i = activeEffects.Count - 1; i >= 0; i--)
         {
             var effect = activeEffects[i];
-            Debug.Log($"[EffectManager] Updating {effect.GetType().Name} on {owner.name}");
             effect.Update(Time.deltaTime);
 
             if (effect.IsFinished)

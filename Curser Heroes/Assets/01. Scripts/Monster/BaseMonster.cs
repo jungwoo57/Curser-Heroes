@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections;
+using System.Xml.Linq;
 
 public abstract class BaseMonster : MonoBehaviour
 {
@@ -327,7 +328,29 @@ public abstract class BaseMonster : MonoBehaviour
         Destroy(gameObject, deathTime);
     }
 
-   
+    #region ▶ Editor용 Effect 테스트 (ContextMenu)
+
+    [ContextMenu("▶ Test Stun (2s)")]
+    private void ContextTestStun()
+    {
+        // EffectManager 가져와서 초기화 후 StunEffect 적용
+        var em = GetComponent<EffectManager>() ?? gameObject.AddComponent<EffectManager>();
+        em.Init(this);
+        em.AddEffect(new StunEffect(2f));
+        Debug.Log($"[ContextTest] Applied StunEffect to {name}");
+    }
+
+    [ContextMenu("▶ Test Burn (5dps × 5s)")]
+    private void ContextTestBurn()
+    {
+        // EffectManager 가져와서 초기화 후 BurnEffect 적용
+        var em = GetComponent<EffectManager>() ?? gameObject.AddComponent<EffectManager>();
+        em.Init(this);
+        em.AddEffect(new BurnEffect(this, damagePerSecond: 5, durationSeconds: 5f));
+        Debug.Log($"[ContextTest] Applied BurnEffect to {name}");
+    }
+
+    #endregion
 
     protected abstract void Attack();
   

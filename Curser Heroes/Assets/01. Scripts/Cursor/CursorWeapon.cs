@@ -47,7 +47,7 @@ public class CursorWeapon : MonoBehaviour
 
         float range = currentWeapon.attackRange * attackRangeMultiplier;
         float cooldown = currentWeapon.attackCooldown;
-        float damage = GetCurrentDamage(); // ✅ 변경된 부분: 데미지 계산 함수 호출
+        float damage = GetCurrentDamage(); //  변경된 부분: 데미지 계산 함수 호출
 
         //Collider2D[] hits = Physics2D.OverlapCircleAll(cursorPos, range, targetLayer);
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, range, targetLayer);

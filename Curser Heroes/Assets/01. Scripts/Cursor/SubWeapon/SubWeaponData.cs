@@ -4,7 +4,12 @@
 public class SubWeaponData : ScriptableObject
 {
     [Header("사운드")]
-    public AudioClip useSound; 
+    [Tooltip("이 보조무기를 사용할 때 재생할 사운드")]
+    public AudioClip useSound;
+
+    [Tooltip("useSound 재생 볼륨 (0~1)")]
+    [Range(0f, 1f)]
+    public float useSoundVolume = 1f;
 
     [Header("기본 정보")]
     public string weaponName;
