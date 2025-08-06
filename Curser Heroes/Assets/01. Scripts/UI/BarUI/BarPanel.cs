@@ -27,8 +27,8 @@ public class BarPanel : MonoBehaviour
     //[SerializeField]private Image useGoldImage;
     //[SerializeField]private Image useJewelImage;
 
-    [SerializeField]private BarPartnerButton[] partnerButtons;
-        
+    //[SerializeField]private BarPartnerButton[] partnerButtons;
+    [SerializeField]private BarPartnerImageButton[] partnerButtons;
     public OwnedPartner selectPartner;
     public PartnerData selectData;
     private void OnEnable()
