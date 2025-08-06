@@ -50,6 +50,13 @@ public class RotatingShieldSkill : MonoBehaviour
             Debug.LogWarning("[RotatingShieldSkill] player가 null입니다.");
         }
     }
+    void LateUpdate()
+    {
+        foreach (Transform child in transform)
+        {
+            child.rotation = Quaternion.identity;
+        }
+    }
 
     public void UpdateShields(SkillManager.SkillInstance skillInstance)
     {

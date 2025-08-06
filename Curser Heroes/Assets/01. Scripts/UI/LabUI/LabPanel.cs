@@ -116,9 +116,12 @@ public class LabPanel : MonoBehaviour
         {
             Button btns = skillButton[i].GetComponent<Button>();
             btns.interactable = true;
+            skillButton[i].outline.enabled = false;
         }
         Button skillbtn = skillButton[skillIndex].GetComponent<Button>();
         skillbtn.interactable = false;//추가코드
+        Outline outline = skillButton[skillIndex].GetComponent<Outline>();
+        outline.enabled = true;
         if(GameManager.Instance.HasSkills.Find(n => n.skillName == selectSkill.skillName)
            || GameManager.Instance.GetJewel() <= selectSkill.unlockCost)
         {

@@ -38,10 +38,10 @@ public class CursorWeapon : MonoBehaviour
 
     private void AutoAttackCursor()
     {
-        Vector3 mousePos = Input.mousePosition;
-        Vector3 worldPos = cam.ScreenToWorldPoint(mousePos);
+        //Vector3 mousePos = Input.mousePosition;
+        //Vector3 worldPos = cam.ScreenToWorldPoint(mousePos);
 
-        Vector2 cursorPos = new Vector2(worldPos.x, worldPos.y);
+        //Vector2 cursorPos = new Vector2(worldPos.x, worldPos.y);
 
         if (currentWeapon == null || weaponUpgrade == null) return;
 
@@ -49,8 +49,8 @@ public class CursorWeapon : MonoBehaviour
         float cooldown = currentWeapon.attackCooldown;
         float damage = GetCurrentDamage(); //  변경된 부분: 데미지 계산 함수 호출
 
-        Collider2D[] hits = Physics2D.OverlapCircleAll(cursorPos, range, targetLayer);
-
+        //Collider2D[] hits = Physics2D.OverlapCircleAll(cursorPos, range, targetLayer);
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, range, targetLayer);
         foreach (var hit in hits)
         {
             BaseMonster monster = hit.GetComponent<BaseMonster>();
@@ -87,8 +87,8 @@ public class CursorWeapon : MonoBehaviour
 
                     TryTriggerMeteorSkill();
                     TryTriggerLightningSkill();
-                    SkillManager.Instance.TryTriggerDimensionSlash(cursorPos);
-
+                    //SkillManager.Instance.TryTriggerDimensionSlash(cursorPos);
+                    SkillManager.Instance.TryTriggerDimensionSlash(transform.position);
                     OnAnyMonsterDamaged?.Invoke(this);
                 }
 
@@ -127,8 +127,8 @@ public class CursorWeapon : MonoBehaviour
 
                     TryTriggerMeteorSkill();
                     TryTriggerLightningSkill();
-                    SkillManager.Instance.TryTriggerDimensionSlash(cursorPos);
-
+                    //SkillManager.Instance.TryTriggerDimensionSlash(cursorPos);
+                    SkillManager.Instance.TryTriggerDimensionSlash(transform.position);
                     OnAnyMonsterDamaged?.Invoke(this);
                 }
             }
@@ -164,8 +164,8 @@ public class CursorWeapon : MonoBehaviour
 
                     TryTriggerMeteorSkill();
                     TryTriggerLightningSkill();
-                    SkillManager.Instance.TryTriggerDimensionSlash(cursorPos);
-
+                    //SkillManager.Instance.TryTriggerDimensionSlash(cursorPos);
+                    SkillManager.Instance.TryTriggerDimensionSlash(transform.position);
                     OnAnyMonsterDamaged?.Invoke(this);
                 }
             }
