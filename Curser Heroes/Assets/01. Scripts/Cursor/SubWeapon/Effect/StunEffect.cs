@@ -8,10 +8,14 @@
         this.duration = duration;
     }
 
-    // Apply 시점에 몬스터.Stun(duration) 호출
     public void Apply(BaseMonster monster)
     {
+        //  몬스터 로직으로 스턴
         monster.Stun(duration);
+
+        //  몬스터 위에 스턴 아이콘 띄우기
+        if (DamageTextManager.instance != null)
+            DamageTextManager.instance.ShowStun(monster.transform, duration);
     }
 
     public void Update(float deltaTime)

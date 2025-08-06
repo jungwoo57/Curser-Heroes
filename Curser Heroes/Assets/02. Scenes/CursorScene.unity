@@ -186,7 +186,7 @@ PrefabInstance:
     - target: {fileID: 7386682379840476848, guid: 5263ae6509a44d54cb65ed7e0a07701d, type: 3}
       propertyPath: equippedSubWeapon
       value: 
-      objectReference: {fileID: 11400000, guid: 73586edf04a11e34ba24dc127036cb73, type: 2}
+      objectReference: {fileID: 11400000, guid: 88561bc56f42f0e46b8b20e3390ff37b, type: 2}
     - target: {fileID: 8995953269268811770, guid: 5263ae6509a44d54cb65ed7e0a07701d, type: 3}
       propertyPath: m_audioClip
       value: 
@@ -383,10 +383,10 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3412583423064343053, guid: 7e17ee9ca96d47b4792f60664b467c41, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1527712710}
+      addedObject: {fileID: 1527712712}
     - targetCorrespondingSourceObject: {fileID: 3412583423064343053, guid: 7e17ee9ca96d47b4792f60664b467c41, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1527712712}
+      addedObject: {fileID: 1527712714}
   m_SourcePrefab: {fileID: 100100000, guid: 7e17ee9ca96d47b4792f60664b467c41, type: 3}
 --- !u!1001 &244713826
 PrefabInstance:
@@ -813,11 +813,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4068150806333290452, guid: 1f5753cd535758640ab852932d9cce08, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.34
+      value: -2.68
       objectReference: {fileID: 0}
     - target: {fileID: 4068150806333290452, guid: 1f5753cd535758640ab852932d9cce08, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.51
+      value: -2.51
       objectReference: {fileID: 0}
     - target: {fileID: 4068150806333290452, guid: 1f5753cd535758640ab852932d9cce08, type: 3}
       propertyPath: m_LocalPosition.z
@@ -899,19 +899,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7861142701776654893, guid: 7e17ee9ca96d47b4792f60664b467c41, type: 3}
   m_PrefabInstance: {fileID: 236995629}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1527712710
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1527712697}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9e47a76ac5ee8540ba1eb327164a80a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cursorSpeed: 0.507
 --- !u!58 &1527712712
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -947,6 +934,20 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.08
+--- !u!114 &1527712714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1527712697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37795c23a1a067d4c9bc21edda5219f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sensitivity: 5
+  smoothing: 0.1
 --- !u!1001 &1685421489
 PrefabInstance:
   m_ObjectHideFlags: 0
