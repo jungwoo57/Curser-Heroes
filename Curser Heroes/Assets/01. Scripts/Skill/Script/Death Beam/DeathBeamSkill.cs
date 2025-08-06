@@ -61,7 +61,7 @@ public class DeathBeamSkill : MonoBehaviour
 
         // 회전 적용
         beamPivot.rotation = Quaternion.Euler(0, 0, angle);
-        beamSprite.transform.rotation = Quaternion.Euler(0, 0, angle);
+
         yield return new WaitForSeconds(1f);
         // 데미지 처리 시작
         beamRoutine = StartCoroutine(DamageRoutine());

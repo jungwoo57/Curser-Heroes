@@ -6,6 +6,10 @@ using UnityEngine.UI;
 
 public class SubWeaponManager : MonoBehaviour
 {
+
+    public AudioClip useSound;
+    private AudioSource audioSource;
+
     [Header("장착/발사 설정")]
     public SubWeaponData equippedSubWeapon;
     public LayerMask monsterLayer;
@@ -65,6 +69,7 @@ public class SubWeaponManager : MonoBehaviour
                                ?? gameObject.AddComponent<SubWeaponUpgrade>();
         follower = GetComponent<SubWeaponFollower>()
              ?? gameObject.AddComponent<SubWeaponFollower>();
+        audioSource = GetComponent<AudioSource>();
     }
 
 
@@ -295,6 +300,10 @@ public class SubWeaponManager : MonoBehaviour
         // ChargeBased 발사 뒤 charged 플래그 초기화
         if (equippedSubWeapon.weaponType == SubWeaponType.ChargeBased)
             charged = false;
+
+        if (equippedSubWeapon.useSound != null && audioSource != null)
+            audioSource.PlayOneShot(equippedSubWeapon.useSound);
+
     }
 
     private IEnumerator ResetChargedAfterDelay(float delay)
