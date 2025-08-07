@@ -21,7 +21,7 @@ public class EffectManager : MonoBehaviour
         activeEffects.Add(effect);
         Debug.Log($"[EffectManager] Added {effect.GetType().Name} to {owner.name}");
 
-        // ← 여기서 바로 Apply 호출!
+       
         effect.Apply(owner);
     }
 
