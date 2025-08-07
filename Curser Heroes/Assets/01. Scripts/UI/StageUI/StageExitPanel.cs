@@ -25,19 +25,26 @@ public class StageExitPanel : MonoBehaviour
 
     private IEnumerator CountDown()
     {
+        // 게임 진행 멈추기
+        Time.timeScale = 0f;
+
         int timer = countDownTime;
         while (timer > 0)
         {
             timeText.text = timer.ToString() + "초 후 전투 나가기";
-            yield return new WaitForSeconds(1.0f);
+
+            // Time.timeScale의 영향을 받지 않는 WaitForSecondsRealtime을 사용
+            yield return new WaitForSecondsRealtime(1.0f);
             timer--;
         }
 
         CloseAllUIWindows();
-
         gameObject.SetActive(false);
+
+        // 게임 오버 처리 전에 게임 시간 재개
+        Time.timeScale = 1f;
+
         UIManager.Instance.StageEnd();
-        
     }
     private void CloseAllUIWindows()
     {
