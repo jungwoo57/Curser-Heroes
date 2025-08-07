@@ -186,18 +186,29 @@ public class WaveManager : MonoBehaviour
 
         if (StageManager.Instance != null)
         {
-            if (StageManager.Instance.bestWave[currentStage.stageNumber - 1] < waveNum)
+            int stageIndex = currentStage.stageNumber - 1;
+            if (StageManager.Instance.bestWave[stageIndex] < waveNum)
             {
-                StageManager.Instance.bestWave[currentStage.stageNumber - 1] = waveNum;
+                StageManager.Instance.bestWave[stageIndex] = waveNum;
+
+                // 최고 웨이브 기록을 GameManager에 업데이트
+                if (GameManager.Instance != null)
+                {
+                    GameManager.Instance.bestWave = waveNum;
+                }
             }
         }
-
         SkillManager.Instance.OnWaveEnd();
     }
 
     public void IncrementWaveIndex()
     {
         currentWaveIndex++;
+
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.currentWave = currentWaveIndex;
+        }
         /*if (GameManager.Instance.bestScore < currentWaveIndex)
         {
             GameManager.Instance.bestScore = currentWaveIndex;

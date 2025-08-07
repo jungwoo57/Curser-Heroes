@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,6 +18,16 @@ public class LabPanel : MonoBehaviour
     [SerializeField]private TutorialUI tutorialUI;
     [SerializeField] private VideoPlayer skillPlayer;
     [SerializeField] private RawImage skillAnimImage;
+    [SerializeField] private Image useJewelImage;
+    
+    [Header("이펙트 모음")] 
+    [SerializeField] private GameObject unlockDirection;
+    [SerializeField] private float effectDurationTime;
+
+	[Header("스킬 텍스트")]
+	[SerializeField] private TextMeshProUGUI skillTypeText;
+    [SerializeField] private TextMeshProUGUI maxLevelText;
+        
     private void OnEnable()
     {
         tutorialUI.gameObject.SetActive(false);
@@ -27,13 +37,17 @@ public class LabPanel : MonoBehaviour
         }
         scrollRect.verticalNormalizedPosition = 1.0f;
         selectSkill = null;
-        skillName.text = "스킬 이름";
-        skillDescription.text = "스킬 설명";
+        skillName.text = "";
+        skillDescription.text = "";
         skillEffect.text = "스킬 효과";
         hasJewelText.text = GameManager.Instance.GetJewel().ToString();
         useJewelText.text = "";
+        skillTypeText.text = "";
+        maxLevelText.text = "";
+        
         UpdateSkillScroll(SkillType.All);
         unlockButton.interactable = false;
+        useJewelImage.gameObject.SetActive(false);
         skillPlayer.clip = null;
     }
 
@@ -56,8 +70,23 @@ public class LabPanel : MonoBehaviour
         if (!selectSkill) return;
         skillName.text = selectSkill.skillName;
         skillDescription.text = selectSkill.description;
+        switch (selectSkill.type)
+        {
+            case SkillType.Attack:
+                skillTypeText.text = "공격형";
+                break;
+            case SkillType.Defense:
+                skillTypeText.text = "수비형";
+                break;
+            case SkillType.Buff:
+                skillTypeText.text = "버프형";
+                break;
+        }
+        
+        maxLevelText.text = "최대 레벨 : " + (selectSkill.levelDataList.Count).ToString();
         hasJewelText.text = GameManager.Instance.GetJewel().ToString();
         useJewelText.text = selectSkill.unlockCost.ToString();
+        useJewelImage.gameObject.SetActive(true);
         if(selectSkill.animClip != null)
         {
             skillAnimImage.gameObject.SetActive(true);
@@ -103,11 +132,6 @@ public class LabPanel : MonoBehaviour
     }
     
     
-
-    public void UpdateSkillImage()
-    {
-      
-    }
     public void ClickSkillButton(int skillIndex)
     {
         selectSkill = GameManager.Instance.allSkills[skillIndex];
@@ -126,10 +150,18 @@ public class LabPanel : MonoBehaviour
            || GameManager.Instance.GetJewel() <= selectSkill.unlockCost)
         {
             unlockButton.interactable = false;
+            useJewelImage.gameObject.SetActive(false);
         }
         else
         {
             unlockButton.interactable = true;
+            useJewelImage.gameObject.SetActive(true);
+        }
+        if(GameManager.Instance.HasSkills.Find(n => n.skillName == selectSkill.skillName))
+        {
+            unlockButton.interactable = false;
+            useJewelImage.gameObject.SetActive(false);
+            useJewelText.text = "이미 보유한 스킬입니다";
         }
     }
 
@@ -141,8 +173,10 @@ public class LabPanel : MonoBehaviour
         }
         else
         {
+            if (GameManager.Instance.GetJewel() < selectSkill.unlockCost) return;
             GameManager.Instance.UnlockSkill(selectSkill);
             unlockButton.interactable = false;
+            UnlockEffect();
             for (int i = 0; i < GameManager.Instance.allSkills.Count; i++)
             {
                 if (GameManager.Instance.HasSkills.Find(n =>
@@ -151,6 +185,8 @@ public class LabPanel : MonoBehaviour
                     //skillButton[i].image.color = new Color(1f, 1f, 1f, 1.0f);
                     skillButton[i].backGroundImage.color = new Color(1f, 1f, 1f, 1.0f);
                     skillButton[i].skillImage.color = new Color(1f, 1f, 1f, 1.0f);
+                    useJewelImage.gameObject.SetActive(false);
+                    useJewelText.text = "이미 보유한 스킬입니다";
                 }
                 else
                 {
@@ -165,5 +201,17 @@ public class LabPanel : MonoBehaviour
     public void ClickExitButton()
     {
         gameObject.SetActive(false);
+    }
+    
+    private void UnlockEffect()
+    {
+        unlockDirection.gameObject.SetActive(true);
+        StartCoroutine(EffectTime(effectDurationTime, unlockDirection));
+    }
+
+    IEnumerator EffectTime(float durationTime, GameObject effect)
+    {
+        yield return new WaitForSeconds(durationTime);
+        effect.SetActive(false);
     }
 }

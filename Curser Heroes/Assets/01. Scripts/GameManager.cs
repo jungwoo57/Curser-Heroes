@@ -53,6 +53,12 @@ public class GameManager : MonoBehaviour
 
     public event Action OnGoldChanged;
     public event Action OnJewelChanged;
+
+    public int startSessionGold;
+    public int startSessionJewel;
+    public int currentWave; 
+    public int bestWave;
+
     private void Awake()
     {
         if (instance == null)
@@ -86,6 +92,7 @@ public class GameManager : MonoBehaviour
         {
             equipPartner = ownedPartners[0];
         }
+        //Load();
     }
 
     public void AddGold(int amount)

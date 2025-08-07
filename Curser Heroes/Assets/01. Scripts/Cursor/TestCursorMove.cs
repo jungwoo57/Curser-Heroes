@@ -28,9 +28,10 @@ public class TestCursorMove : MonoBehaviour
         {
             //if (!isStunned)
                 // MouseMoving();
-            float moveX = Input.GetAxis("Mouse X") * cursorSpeed;
-            float moveY = Input.GetAxis("Mouse Y") * cursorSpeed;
-            
+            //float moveX = Input.GetAxis("Mouse X") * cursorSpeed; 
+            //float moveY = Input.GetAxis("Mouse Y") * cursorSpeed;
+            float moveX = Input.GetAxis("Mouse X");
+            float moveY = Input.GetAxis("Mouse Y");
             transform.position += new Vector3(moveX, moveY, 0f);
         }
 

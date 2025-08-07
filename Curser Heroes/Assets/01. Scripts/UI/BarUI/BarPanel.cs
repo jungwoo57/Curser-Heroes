@@ -1,4 +1,4 @@
-using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -27,8 +27,8 @@ public class BarPanel : MonoBehaviour
     [Header("이미지 모음")] 
     [SerializeField]private Image mainImage;
     [SerializeField] private Image iconImage;
-    //[SerializeField]private Image goldImage;
-    //[SerializeField]private Image jewelImage;
+    [SerializeField]private Image goldImage;
+    [SerializeField]private Image jewelImage;
 
     [Header("잠김 텍스트 컬러")] 
     [SerializeField] private Color cantTextColor;
@@ -37,6 +37,11 @@ public class BarPanel : MonoBehaviour
     [SerializeField]private BarPartnerImageButton[] partnerButtons;
     public OwnedPartner selectPartner;
     public PartnerData selectData;
+
+    [Header("강화 및 잠금 이펙트")] 
+    [SerializeField] private GameObject[] upgradeDirections;
+    [SerializeField] private GameObject unlockDirection;
+    [SerializeField] private float effectDurationTime;
     private void OnEnable()
     {
         if (GameManager.Instance.equipPartner != null)
@@ -68,7 +73,7 @@ public class BarPanel : MonoBehaviour
             }
             else
             {
-                nameText.text = selectPartner.data.partnerName + selectPartner.level.ToString();
+                nameText.text = selectPartner.data.partnerName + " +" + selectPartner.level.ToString();
             }
             reinforceButton.gameObject.SetActive(true);
             reinforceButton.interactable = true;
@@ -79,7 +84,8 @@ public class BarPanel : MonoBehaviour
             //mainImage.sprite = selectPartner.data.portraitSprite;
             iconImage.sprite = selectPartner.data.portraitSprite;
             descText.text = selectPartner.data.desc;
-            //goldImage.gameObject.SetActive(true);
+            goldImage.gameObject.SetActive(true);
+            jewelImage.gameObject.SetActive(false);
             //useGoldImage.gameObject.SetActive(true);
             costgoldText.gameObject.SetActive(true);
             costjewelText.gameObject.SetActive(false);
@@ -102,9 +108,10 @@ public class BarPanel : MonoBehaviour
             else
             {
                 costgoldText.text = "최대 레벨";
-                aftergageText.text = "최대레벨";
+                aftergageText.text = "최대 레벨";
                 curgageText.text = selectData.gaugeMax[selectPartner.level].ToString();
                 reinforceButton.gameObject.SetActive(false);
+                goldImage.gameObject.SetActive(false);
                 doneButton.gameObject.SetActive(true);
             }
         }
@@ -118,7 +125,8 @@ public class BarPanel : MonoBehaviour
             unLockButton.gameObject.SetActive(true);
             reinforceButton.gameObject.SetActive(false);
             doneButton.gameObject.SetActive(false);
-            //jewelImage.gameObject.SetActive(true);
+            jewelImage.gameObject.SetActive(true);
+            goldImage.gameObject.SetActive(false);
             //useJewelImage.gameObject.SetActive(true);
             costgoldText.gameObject.SetActive(false);
             costjewelText.gameObject.SetActive(true);
@@ -158,6 +166,7 @@ public class BarPanel : MonoBehaviour
         if (hasgold >= selectData.upgradeCost[selectPartner.level])
         {
             GameManager.Instance.UpgradePartner(selectData);
+            ReinforceEffect();
             UIUpdate();
         }
     }
@@ -167,7 +176,33 @@ public class BarPanel : MonoBehaviour
         GameManager.Instance.UnlockPartner(selectData);
         selectPartner = GameManager.Instance.ownedPartners.Find(p
             => p.data.partnerName == selectData.partnerName);
+        UnlockEffect();
         UIUpdate();
+    }
+    
+    public void ReinforceEffect()
+    {
+        for (int i = 0; i < upgradeDirections.Length; i++)
+        {
+            if (!upgradeDirections[i].activeInHierarchy)
+            {
+                upgradeDirections[i].gameObject.SetActive(true);
+                StartCoroutine(EffectTime(effectDurationTime, upgradeDirections[i]));
+                return;
+            }
+        }
+    }
+    
+    private void UnlockEffect()
+    {
+        unlockDirection.gameObject.SetActive(true);
+        StartCoroutine(EffectTime(effectDurationTime, unlockDirection));
+    }
+
+    IEnumerator EffectTime(float durationTime, GameObject effect)
+    {
+        yield return new WaitForSeconds(durationTime);
+        effect.SetActive(false);
     }
 
 }
