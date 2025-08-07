@@ -1884,7 +1884,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b3cf239c8d3452a4d8c962d75774c681, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 690c7994465bf464a823033d24311cf5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3959,7 +3959,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b3cf239c8d3452a4d8c962d75774c681, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 690c7994465bf464a823033d24311cf5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4595,6 +4595,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1149468239}
+  - component: {fileID: 1149468241}
+  - component: {fileID: 1149468240}
   m_Layer: 5
   m_Name: GameOver
   m_TagString: Untagged
@@ -4622,6 +4624,44 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1149468240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1149468238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1149468241
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1149468238}
+  m_CullTransparentMesh: 1
 --- !u!1 &1167853668
 GameObject:
   m_ObjectHideFlags: 0
@@ -6675,7 +6715,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 13990ad621c6ad74092c8f77eb800bbd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a4019f774942b4644966725a3ce0656f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8237,7 +8277,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isStart: 0
   stageBackGround: {fileID: 1849315065}
-  gameOverPanel: {fileID: 6385762576393491832}
+  gameOverPanel: {fileID: 274465}
   gameOver: {fileID: 1149468238}
   returnToTownButton: {fileID: 363753156}
   restartButton: {fileID: 980705784}
@@ -9139,17 +9179,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef14c7c5d5df2934183c19fb0cd552ef, type: 3}
---- !u!114 &6385762576393491832 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8519912846090742129, guid: ef14c7c5d5df2934183c19fb0cd552ef, type: 3}
-  m_PrefabInstance: {fileID: 6385762576393491831}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
