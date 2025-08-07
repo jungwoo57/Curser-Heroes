@@ -73,7 +73,7 @@ public class BarPanel : MonoBehaviour
             }
             else
             {
-                nameText.text = selectPartner.data.partnerName + selectPartner.level.ToString();
+                nameText.text = selectPartner.data.partnerName + " +" + selectPartner.level.ToString();
             }
             reinforceButton.gameObject.SetActive(true);
             reinforceButton.interactable = true;
@@ -108,7 +108,7 @@ public class BarPanel : MonoBehaviour
             else
             {
                 costgoldText.text = "최대 레벨";
-                aftergageText.text = "최대레벨";
+                aftergageText.text = "최대 레벨";
                 curgageText.text = selectData.gaugeMax[selectPartner.level].ToString();
                 reinforceButton.gameObject.SetActive(false);
                 goldImage.gameObject.SetActive(false);
