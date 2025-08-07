@@ -8,6 +8,7 @@ public class StageSelectedSkillUI : MonoBehaviour
    public bool isChange = false;
    private SkillPanelUI skillPanelUI;
    public SkillData[] previousSkills;        //추가 코드
+
    
    private void OnEnable()
    {
@@ -53,6 +54,10 @@ public class StageSelectedSkillUI : MonoBehaviour
          if (!skillImages[i].data)
          {
             skillImages[i].UpdateUI(skill);
+            if (skillImages[i].outline != null)
+            {
+               skillImages[i].outline.enabled = true;
+            }
             skills[i] = skillImages[i].data;
             InteractApplyButton();
             return;

@@ -8,7 +8,9 @@ public class SkillUIImage : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     public Image imageShadow;
     public SkillData data;
     public StageSkillSelectUI stageSkillSelectUI;
-
+    public Outline outline;
+    public bool isSelected;
+    
     private float pressTime;     //누르고 있는 시간
     //private bool isHolding = false;
     [SerializeField]private float holdTime = 0.5f;     //눌러야하는 시간
@@ -21,6 +23,11 @@ public class SkillUIImage : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         }
     }
 
+    private void OnEnable()
+    {
+        /*if(outline != null)
+            outline.enabled = false;*/
+    }
     public void UpdateUI(SkillData skillData)
     {
             if (skillData == null) return;
@@ -31,6 +38,7 @@ public class SkillUIImage : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
                 return;
             }
             
+        
         skillImage.sprite = data.icon;
         Color imgColor = skillImage.color;
         imgColor.a = 1f;
@@ -40,6 +48,25 @@ public class SkillUIImage : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         Color shadowColor = imageShadow.color;
         shadowColor.a = 1f;
         imageShadow.color = shadowColor;
+
+        isSelected = false;
+        if (stageSkillSelectUI != null && outline != null)
+        {
+            for (int i = 0; i < stageSkillSelectUI.skills.Count; i++)
+            {
+                if (stageSkillSelectUI.skills[i].skillName == data.skillName)
+                {
+                    isSelected = false;
+                }
+            }
+
+            if (outline.enabled)
+            {
+                Debug.Log("아웃라인나111옴");
+            }
+
+            outline.enabled = isSelected;
+        }
     }
 
     public void CancleSelect()
@@ -53,6 +80,10 @@ public class SkillUIImage : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         Color shadowColor = imageShadow.color;
         shadowColor.a = 0f;
         imageShadow.color = shadowColor;
+        /*if (outline != null)
+        {
+            outline.enabled = false;
+        }*/
     }
 
     public void OnClickSkillButton()

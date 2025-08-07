@@ -6147,10 +6147,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasSkills: []
   showSkills: []
-  skillUIImage: {fileID: 4381853689773395033, guid: 3b0fc1a1aff86d84d8474eae4b2aedb7, type: 3}
+  skillUIImage: {fileID: 2264880153732414496, guid: 867b7003034fa9440ae0cbcd42576561, type: 3}
   stageSelectedSkillUI: {fileID: 1642185598}
   skillInfoPanelUI: {fileID: 1608189168}
   skillInfcoCloseButton: {fileID: 753255965}
+  skills:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &265988934
 GameObject:
   m_ObjectHideFlags: 0
@@ -11328,6 +11341,10 @@ MonoBehaviour:
   useForge: 1
   useLab: 1
   useBar: 1
+  startSessionGold: 0
+  startSessionJewel: 0
+  currentWave: 0
+  bestWave: 0
 --- !u!4 &516545486
 Transform:
   m_ObjectHideFlags: 0
@@ -33122,7 +33139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1608189167
 RectTransform:
   m_ObjectHideFlags: 0
