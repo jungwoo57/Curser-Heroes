@@ -1928,7 +1928,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 1}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -3821,6 +3821,10 @@ MonoBehaviour:
   useForge: 0
   useLab: 0
   useBar: 0
+  startSessionGold: 0
+  startSessionJewel: 0
+  currentWave: 0
+  bestWave: 0
 --- !u!4 &1252401772
 Transform:
   m_ObjectHideFlags: 0
@@ -5789,6 +5793,10 @@ MonoBehaviour:
   useForge: 0
   useLab: 0
   useBar: 0
+  startSessionGold: 0
+  startSessionJewel: 0
+  currentWave: 0
+  bestWave: 0
 --- !u!4 &1988138259
 Transform:
   m_ObjectHideFlags: 0
@@ -5975,10 +5983,19 @@ MonoBehaviour:
   isStart: 0
   stageBackGround: {fileID: 1849315065}
   gameOverPanel: {fileID: 274465}
+  gameOver: {fileID: 0}
+  returnToTownButton: {fileID: 0}
+  restartButton: {fileID: 0}
   battleUI: {fileID: 193387550}
   stageStartUI: {fileID: 632612447}
   stageExitPanel: {fileID: 1759036968}
   tutorialUI: {fileID: 1369146613}
+  currentWaveText: {fileID: 0}
+  bestWaveText: {fileID: 0}
+  startGoldText: {fileID: 0}
+  earnedGoldText: {fileID: 0}
+  startJewelText: {fileID: 0}
+  earnedJewelText: {fileID: 0}
 --- !u!4 &2071171534
 Transform:
   m_ObjectHideFlags: 0
