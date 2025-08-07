@@ -139,6 +139,10 @@ public class UIManager : MonoBehaviour
         // GameOverPanel(배경) 활성화 및 페이드 인 시작
         gameOverPanel.gameObject.SetActive(true);
 
+        // 게임 진행 멈추기
+        Time.timeScale = 0f;
+
+        // 마우스 커서 보이게 하기
         Cursor.visible = true;
 
         // 마우스 잠금 해제 (필요한 경우)
@@ -151,7 +155,7 @@ public class UIManager : MonoBehaviour
         {
             float time = elapsedTime / durationTime;
             gameOverPanel.color = Color.Lerp(startColor, endColor, time);
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.unscaledDeltaTime; // Time.unscaledDeltaTime을 사용하여 독립적으로 동작
             yield return null;
         }
 
@@ -188,11 +192,13 @@ public class UIManager : MonoBehaviour
     // 버튼 클릭 이벤트에 연결될 함수들
     private void ReturnToTown()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene("JW_StageSelectUI");
     }
 
     private void RestartGame()
     {
+        Time.timeScale = 1f;
         // 현재 씬을 다시 로드하여 게임을 처음부터 시작
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
