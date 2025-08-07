@@ -36,7 +36,7 @@ public class StageExitPanel : MonoBehaviour
         CloseAllUIWindows();
 
         gameObject.SetActive(false);
-        SceneManager.LoadScene("98. CreatersScenes/JW_StageSelectUI");
+        UIManager.Instance.StageEnd();
         
     }
     private void CloseAllUIWindows()
