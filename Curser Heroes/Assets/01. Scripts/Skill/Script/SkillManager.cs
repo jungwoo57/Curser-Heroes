@@ -216,7 +216,7 @@ public class SkillManager : MonoBehaviour
         }
 
         Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Confined;
 
         Destroy(skillSelectUIInstance);
         skillSelectUIInstance = null;

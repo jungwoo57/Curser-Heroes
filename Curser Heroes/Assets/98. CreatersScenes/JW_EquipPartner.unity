@@ -9385,20 +9385,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isStart: 0
   stageBackGround: {fileID: 1849315065}
-  gameOverPanel: {fileID: 274465}
-  gameOver: {fileID: 682683736}
-  returnToTownButton: {fileID: 1788759813}
-  restartButton: {fileID: 984124712}
+  gameOverPanel: {fileID: 0}
+  gameOver: {fileID: 0}
+  returnToTownButton: {fileID: 0}
+  restartButton: {fileID: 0}
   battleUI: {fileID: 193387550}
   stageStartUI: {fileID: 632612447}
   stageExitPanel: {fileID: 1759036968}
   tutorialUI: {fileID: 1369146613}
-  currentWaveText: {fileID: 1788640712}
-  bestWaveText: {fileID: 66502534}
-  startGoldText: {fileID: 2048841412}
-  earnedGoldText: {fileID: 1545991175}
-  startJewelText: {fileID: 2122320907}
-  earnedJewelText: {fileID: 199224853}
+  currentWaveText: {fileID: 0}
+  bestWaveText: {fileID: 0}
+  startGoldText: {fileID: 0}
+  earnedGoldText: {fileID: 0}
+  startJewelText: {fileID: 0}
+  earnedJewelText: {fileID: 0}
 --- !u!4 &2071171534
 Transform:
   m_ObjectHideFlags: 0
