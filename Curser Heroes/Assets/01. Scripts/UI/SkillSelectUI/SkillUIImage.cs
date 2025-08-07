@@ -7,14 +7,18 @@ public class SkillUIImage : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     public Image skillImage;
     public Image imageShadow;
     public SkillData data;
-    private StageSkillSelectUI stageSkillSelectUI;
+    public StageSkillSelectUI stageSkillSelectUI;
 
     private float pressTime;     //누르고 있는 시간
     //private bool isHolding = false;
     [SerializeField]private float holdTime = 0.5f;     //눌러야하는 시간
     private void Awake()
     {
-        stageSkillSelectUI = GetComponentInParent<StageSkillSelectUI>();
+        StageSkillSelectUI ui =GetComponentInParent<StageSkillSelectUI>();
+        if (ui != null)
+        {
+            stageSkillSelectUI = ui;
+        }
     }
 
     public void UpdateUI(SkillData skillData)
