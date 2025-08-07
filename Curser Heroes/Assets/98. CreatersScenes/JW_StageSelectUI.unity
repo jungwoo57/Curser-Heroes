@@ -6147,10 +6147,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasSkills: []
   showSkills: []
-  skillUIImage: {fileID: 4381853689773395033, guid: 3b0fc1a1aff86d84d8474eae4b2aedb7, type: 3}
+  skillUIImage: {fileID: 2264880153732414496, guid: 867b7003034fa9440ae0cbcd42576561, type: 3}
   stageSelectedSkillUI: {fileID: 1642185598}
   skillInfoPanelUI: {fileID: 1608189168}
   skillInfcoCloseButton: {fileID: 753255965}
+  skills:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &265988934
 GameObject:
   m_ObjectHideFlags: 0
@@ -11272,26 +11285,11 @@ MonoBehaviour:
   - data: {fileID: 11400000, guid: 71c3c201cfc09ce47b8feee890c11af0, type: 2}
     level: 0
     bookMark: 0
-  - data: {fileID: 11400000, guid: 133254ae2272caf40a2dcfe7c7cc5bdb, type: 2}
-    level: 0
-    bookMark: 1
-  - data: {fileID: 11400000, guid: ad89040aa703a48419f6395330ab660e, type: 2}
-    level: 0
-    bookMark: 0
   ownedSubWeapons:
-  - data: {fileID: 11400000, guid: 88561bc56f42f0e46b8b20e3390ff37b, type: 2}
-    level: 0
-    bookMark: 0
-  - data: {fileID: 11400000, guid: 7c5bc041035cbb541b849b963e7c3ad5, type: 2}
+  - data: {fileID: 11400000, guid: 6ed21f69b099a3f4980541c743ef66f3, type: 2}
     level: 0
     bookMark: 0
   ownedPartners:
-  - data: {fileID: 11400000, guid: 6b6a154afcb20cb4ab98a32ca0cbad4d, type: 2}
-    level: 0
-    bookMark: 0
-  - data: {fileID: 11400000, guid: 869386afebcc3a84d82f50a9d84efe05, type: 2}
-    level: 0
-    bookMark: 0
   - data: {fileID: 11400000, guid: a50d4200bdbfed547b9fcf5c0a9b77eb, type: 2}
     level: 0
     bookMark: 0
@@ -33126,7 +33124,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1608189167
 RectTransform:
   m_ObjectHideFlags: 0
