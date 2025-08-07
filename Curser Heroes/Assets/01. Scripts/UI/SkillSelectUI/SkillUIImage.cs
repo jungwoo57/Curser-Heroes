@@ -22,12 +22,7 @@ public class SkillUIImage : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
             stageSkillSelectUI = ui;
         }
     }
-
-    private void OnEnable()
-    {
-        /*if(outline != null)
-            outline.enabled = false;*/
-    }
+    
     public void UpdateUI(SkillData skillData)
     {
             if (skillData == null) return;
@@ -37,7 +32,9 @@ public class SkillUIImage : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
                 Debug.Log("데이터 없음");
                 return;
             }
-            
+        
+        if(outline != null)
+            outline.enabled = false;
         
         skillImage.sprite = data.icon;
         Color imgColor = skillImage.color;
@@ -56,15 +53,9 @@ public class SkillUIImage : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
             {
                 if (stageSkillSelectUI.skills[i].skillName == data.skillName)
                 {
-                    isSelected = false;
+                    isSelected = true;
                 }
             }
-
-            if (outline.enabled)
-            {
-                Debug.Log("아웃라인나111옴");
-            }
-
             outline.enabled = isSelected;
         }
     }
@@ -80,10 +71,10 @@ public class SkillUIImage : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         Color shadowColor = imageShadow.color;
         shadowColor.a = 0f;
         imageShadow.color = shadowColor;
-        /*if (outline != null)
+        if (outline != null)
         {
             outline.enabled = false;
-        }*/
+        }
     }
 
     public void OnClickSkillButton()
