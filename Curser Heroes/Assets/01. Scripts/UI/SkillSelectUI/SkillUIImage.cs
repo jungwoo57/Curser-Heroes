@@ -51,10 +51,13 @@ public class SkillUIImage : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         {
             for (int i = 0; i < stageSkillSelectUI.skills.Count; i++)
             {
+                if(stageSkillSelectUI.skills[i] ==null) continue;
                 if (stageSkillSelectUI.skills[i].skillName == data.skillName)
                 {
                     isSelected = true;
+                    break;
                 }
+                else isSelected = false;
             }
             outline.enabled = isSelected;
         }
@@ -62,6 +65,11 @@ public class SkillUIImage : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 
     public void CancleSelect()
     {
+        if (outline != null)
+        {
+            outline.enabled = false;
+            stageSkillSelectUI.skills.Remove(data);
+        }
         data = null;
 
         Color imgColor = skillImage.color;
@@ -71,10 +79,6 @@ public class SkillUIImage : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         Color shadowColor = imageShadow.color;
         shadowColor.a = 0f;
         imageShadow.color = shadowColor;
-        if (outline != null)
-        {
-            outline.enabled = false;
-        }
     }
 
     public void OnClickSkillButton()
@@ -82,6 +86,7 @@ public class SkillUIImage : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         if (stageSkillSelectUI != null)
         {
             stageSkillSelectUI.stageSelectedSkillUI.SelectSkill(data);
+            stageSkillSelectUI.UpdateUI();
         }
         else
         {
