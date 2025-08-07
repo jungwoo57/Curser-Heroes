@@ -103,16 +103,33 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) 
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (!stageExitPanel.gameObject.activeSelf && isStart)
+            // Exit Panel이 현재 활성화 상태인지 확인
+            bool isPanelActive = stageExitPanel.gameObject.activeSelf;
+
+            // isStart 상태이고, 패널이 비활성화 상태일 때 (처음 ESC를 누를 때)
+            if (!isPanelActive && isStart)
             {
                 stageExitPanel.gameObject.SetActive(true);
+                // 게임 시간을 멈춤
+                Time.timeScale = 0f;
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+            }
+            // 패널이 활성화 상태일 때 (ESC를 다시 눌러 닫을 때)
+            else if (isPanelActive)
+            {
+                stageExitPanel.gameObject.SetActive(false);
+                // 게임 시간을 재개
+                Time.timeScale = 1f;
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Confined;
             }
         }
     }
 
-    [ContextMenu("스테이지시작")]
+        [ContextMenu("스테이지시작")]
     public void StageStart()
     {
         battleUI.gameObject.SetActive(true);
