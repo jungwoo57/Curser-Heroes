@@ -221,7 +221,8 @@ public class ForgeUI : MonoBehaviour
                     reinforceText.color = disableColor;
                 }
 
-                if (GameManager.Instance.GetGold() < selectData.upgradeCost[selectWeapon.level >= 10 ? 9 : selectWeapon.level] || selectWeapon.level >=10)
+                //if (GameManager.Instance.GetGold() < selectData.upgradeCost[selectWeapon.level >= 10 ? 9 : selectWeapon.level] || selectWeapon.level >=10)
+                if(GameManager.Instance.GetGold() < selectData.upgradeCost[selectWeapon.level >= 10 ? 9 : selectWeapon.level] || selectWeapon.level >= 10)//10까지 강화가안되요
                 {
                     //reinforceButton.gameObject.SetActive(false);
                     reinforceButton.interactable = false;

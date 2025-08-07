@@ -140,6 +140,12 @@ public class LabPanel : MonoBehaviour
             unlockButton.interactable = true;
             useJewelImage.gameObject.SetActive(true);
         }
+        if(GameManager.Instance.HasSkills.Find(n => n.skillName == selectSkill.skillName))
+        {
+            unlockButton.interactable = false;
+            useJewelImage.gameObject.SetActive(false);
+            useJewelText.text = "이미 보유한 스킬입니다";
+        }
     }
 
     public void UnlockSkill()
@@ -162,6 +168,8 @@ public class LabPanel : MonoBehaviour
                     //skillButton[i].image.color = new Color(1f, 1f, 1f, 1.0f);
                     skillButton[i].backGroundImage.color = new Color(1f, 1f, 1f, 1.0f);
                     skillButton[i].skillImage.color = new Color(1f, 1f, 1f, 1.0f);
+                    useJewelImage.gameObject.SetActive(false);
+                    useJewelText.text = "이미 보유한 스킬입니다";
                 }
                 else
                 {
