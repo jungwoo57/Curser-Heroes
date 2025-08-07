@@ -23,6 +23,11 @@ public class LabPanel : MonoBehaviour
     [Header("이펙트 모음")] 
     [SerializeField] private GameObject unlockDirection;
     [SerializeField] private float effectDurationTime;
+
+	[Header("스킬 텍스트")]
+	[SerializeField] private TextMeshProUGUI skillTypeText;
+    [SerializeField] private TextMeshProUGUI maxLevelText;
+        
     private void OnEnable()
     {
         tutorialUI.gameObject.SetActive(false);
@@ -32,11 +37,14 @@ public class LabPanel : MonoBehaviour
         }
         scrollRect.verticalNormalizedPosition = 1.0f;
         selectSkill = null;
-        skillName.text = "스킬 이름";
-        skillDescription.text = "스킬 설명";
+        skillName.text = "";
+        skillDescription.text = "";
         skillEffect.text = "스킬 효과";
         hasJewelText.text = GameManager.Instance.GetJewel().ToString();
         useJewelText.text = "";
+        skillTypeText.text = "";
+        maxLevelText.text = "";
+        
         UpdateSkillScroll(SkillType.All);
         unlockButton.interactable = false;
         useJewelImage.gameObject.SetActive(false);
@@ -62,6 +70,20 @@ public class LabPanel : MonoBehaviour
         if (!selectSkill) return;
         skillName.text = selectSkill.skillName;
         skillDescription.text = selectSkill.description;
+        switch (selectSkill.type)
+        {
+            case SkillType.Attack:
+                skillTypeText.text = "공격형";
+                break;
+            case SkillType.Defense:
+                skillTypeText.text = "수비형";
+                break;
+            case SkillType.Buff:
+                skillTypeText.text = "버프형";
+                break;
+        }
+        
+        maxLevelText.text = "최대 레벨 : " + (selectSkill.levelDataList.Count).ToString();
         hasJewelText.text = GameManager.Instance.GetJewel().ToString();
         useJewelText.text = selectSkill.unlockCost.ToString();
         useJewelImage.gameObject.SetActive(true);
@@ -110,11 +132,6 @@ public class LabPanel : MonoBehaviour
     }
     
     
-
-    public void UpdateSkillImage()
-    {
-      
-    }
     public void ClickSkillButton(int skillIndex)
     {
         selectSkill = GameManager.Instance.allSkills[skillIndex];

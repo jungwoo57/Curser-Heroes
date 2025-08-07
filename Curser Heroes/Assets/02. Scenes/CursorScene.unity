@@ -186,7 +186,7 @@ PrefabInstance:
     - target: {fileID: 7386682379840476848, guid: 5263ae6509a44d54cb65ed7e0a07701d, type: 3}
       propertyPath: equippedSubWeapon
       value: 
-      objectReference: {fileID: 11400000, guid: 88561bc56f42f0e46b8b20e3390ff37b, type: 2}
+      objectReference: {fileID: 11400000, guid: 73586edf04a11e34ba24dc127036cb73, type: 2}
     - target: {fileID: 8995953269268811770, guid: 5263ae6509a44d54cb65ed7e0a07701d, type: 3}
       propertyPath: m_audioClip
       value: 
@@ -946,8 +946,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37795c23a1a067d4c9bc21edda5219f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensitivity: 5
-  smoothing: 0.1
+  sensitivity: 4.29
+  smoothing: 0
 --- !u!1001 &1685421489
 PrefabInstance:
   m_ObjectHideFlags: 0
