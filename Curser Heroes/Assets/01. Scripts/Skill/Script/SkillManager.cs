@@ -154,6 +154,8 @@ public class SkillManager : MonoBehaviour
         List<SkillData> selection = GetRandomSkills(availableSkills, 3);
         skillUI.Show(selection, OnSkillSelected);
 
+        Time.timeScale = 0f;
+
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
@@ -214,6 +216,8 @@ public class SkillManager : MonoBehaviour
             Debug.Log("[SkillManager] SkillUpdate 호출");
             UIManager.Instance.battleUI.SkillUpdate();
         }
+
+        Time.timeScale = 1f;
 
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Confined;
@@ -562,6 +566,8 @@ public class SkillManager : MonoBehaviour
         GameObject ui = Instantiate(rewardSelectUIPrefab, canvas.transform, false);
         ui.GetComponent<RewardSelectUI>().Init(OnRewardSelected);
 
+        Time.timeScale = 0f;
+
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
@@ -574,6 +580,9 @@ public class SkillManager : MonoBehaviour
             case 1: GameManager.Instance.AddGold(100); break;
             case 2: GameManager.Instance.AddJewel(10); break;
         }
+
+        Time.timeScale = 1f;
+
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Confined;
 
