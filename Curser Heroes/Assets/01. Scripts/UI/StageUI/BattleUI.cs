@@ -48,23 +48,7 @@ public class BattleUI : MonoBehaviour
     public void Init()
     {
         battlePanel.SetActive(true);
-
-        playerMaxHelath = WeaponManager.Instance.weaponLife.currentWeapon.maxLives;
-        healthIndex = playerMaxHelath;
-
-        for (int i = 0; i < healthImage.Length; i++)
-        {
-            if (i < playerMaxHelath)
-            {
-                healthImage[i].GetComponent<Image>().sprite = activeHealthImage;
-                healthImage[i].SetActive(true);
-            }
-            else
-            {
-                healthImage[i].SetActive(false);
-            }
-        }
-
+        UpdateHealthUI(); // 게임 시작 시 체력 UI를 초기화합니다.
         TextUpdate();
     }
     // 주석처리 = 수정 전 코드
@@ -72,7 +56,7 @@ public class BattleUI : MonoBehaviour
     //{
     //    battlePanel.SetActive(true);
     //    //healthIndex = playerMaxHelath - 1;// 더미 데이터 추후 변경  동료 데이터 추가 시 동료 데이터도 초기화
-       
+
     //    healthIndex = WeaponManager.Instance.weaponLife.currentWeapon.maxLives; //변경할 코드   
 
     //   /* if (healthIndex > playerMaxHelath)
@@ -86,26 +70,43 @@ public class BattleUI : MonoBehaviour
     //    }
     //    TextUpdate();
     //}
-    
+    public void UpdateHealthUI()
+    {
+        // WeaponManager에서 현재 플레이어의 목숨 정보를 가져옵니다.
+        int currentLives = WeaponManager.Instance.weaponLife.currentLives;
+        int maxLives = WeaponManager.Instance.weaponLife.maxLives;
+
+        // 모든 체력 이미지 슬롯을 순회합니다.
+        for (int i = 0; i < healthImage.Length; i++)
+        {
+            if (i < maxLives)
+            {
+                // 최대 목숨 이내의 이미지는 활성화
+                healthImage[i].SetActive(true);
+                // 현재 목숨에 따라 스프라이트를 변경
+                healthImage[i].GetComponent<Image>().sprite = (i < currentLives) ? activeHealthImage : inactiveHealthImage;
+            }
+            else
+            {
+                // 최대 목숨을 초과하는 이미지는 비활성화
+                healthImage[i].SetActive(false);
+            }
+        }
+    }
+
     [ContextMenu("데미지주기")]
     public void TakeDamage()
     {
-        if (healthIndex > 0 && healthIndex <= healthImage.Length)
-        {
-            healthIndex--;
-            healthImage[healthIndex].GetComponent<Image>().sprite = inactiveHealthImage;
-        }
+        WeaponManager.Instance.weaponLife.TakeLifeDamage();
+        UpdateHealthUI();
     }
 
 
     [ContextMenu("힐하기")]
     public void Heal()
     {
-        if (healthIndex < playerMaxHelath)
-        {
-            healthImage[healthIndex].GetComponent<Image>().sprite = activeHealthImage;
-            healthIndex++;
-        }
+        WeaponManager.Instance.weaponLife.RecoverLife();
+        UpdateHealthUI();
     }
 
     public void PartnerHealthUpdate() // 동료 체력 업데이트 피격 시 실행
