@@ -200,7 +200,7 @@ public class ForgeUI : MonoBehaviour
             {
                 goldImage.gameObject.SetActive(true);
                 weaponAtk.text = ("공격력 : ") + (int)(selectWeapon.levelDamage);
-                currentWeaponAtk.text = selectWeapon.levelDamage.ToString();
+                currentWeaponAtk.text = ((int)selectWeapon.levelDamage).ToString();
                 if(selectWeapon.level <= 0) weaponName.text = selectData.weaponName;
                 else weaponName.text = selectData.weaponName + "+" + (selectWeapon.level);
                 //hasGoldText.gameObject.SetActive(true);
@@ -217,6 +217,7 @@ public class ForgeUI : MonoBehaviour
                 {
                     useGoldText.text = "최대 레벨";
                     upgradeWeaponAtk.text = "최대 레벨";
+                    goldImage.gameObject.SetActive(false);
                     reinforceButton.interactable = false;
                     reinforceText.color = disableColor;
                 }
@@ -276,7 +277,7 @@ public class ForgeUI : MonoBehaviour
                 else weaponName.text = selectSubData.weaponName + "+" + (selectSubWeapon.level);
                 
                 weaponAtk.text = ("공격력 : ") + (int)selectSubWeapon.levelDamage;
-                currentWeaponAtk.text = selectSubWeapon.levelDamage.ToString();
+                currentWeaponAtk.text = ((int)(selectSubWeapon.levelDamage)).ToString();
                 //hasGoldText.gameObject.SetActive(true);
                 useGoldText.gameObject.SetActive(true);
                 goldImage.gameObject.SetActive(true);
@@ -291,6 +292,9 @@ public class ForgeUI : MonoBehaviour
                 {
                     useGoldText.text = "최대 레벨";
                     upgradeWeaponAtk.text = "최대 레벨";
+                    goldImage.gameObject.SetActive(false);
+                    reinforceButton.interactable = false;
+                    reinforceText.color = disableColor;
                 }
 
                 if (GameManager.Instance.GetGold() < selectSubData.upgradeCost[selectSubWeapon.level >= 10 ? 9 : selectSubWeapon.level] || selectSubWeapon.level >=10)
