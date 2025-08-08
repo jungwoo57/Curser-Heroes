@@ -40,6 +40,10 @@ public class SettingPanelUI : MonoBehaviour
 
     void SetMouseSensitivity(float value)
     {
+        if (value <= 0)
+        {
+            value = 0.1f;
+        }
         GameManager.Instance.mouseSensitivity = value;
     }
     public void OnClickExitButton()
