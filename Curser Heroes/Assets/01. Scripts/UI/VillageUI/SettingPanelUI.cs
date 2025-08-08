@@ -16,7 +16,7 @@ public class SettingPanelUI : MonoBehaviour
             bgmSlider.value = AudioManager.Instance.bgmSource.volume;
             sfxSlider.value = AudioManager.Instance.src.volume;
         }
-        
+        mouseSensitivitySlider.value = GameManager.Instance.mouseSensitivity;
         mainSlider.onValueChanged.AddListener(SetMainVolume);
         bgmSlider.onValueChanged.AddListener(SetBGMVolume);
         sfxSlider.onValueChanged.AddListener(SetSFXVolume);

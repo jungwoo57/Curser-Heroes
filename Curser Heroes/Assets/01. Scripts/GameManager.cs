@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
     [Header("기타 데이터")]
     [SerializeField] private int gold = 9999;
     [SerializeField]private int jewel = 0;
-    [SerializeField] public float mouseSensitivity = 0.5f;
+    [SerializeField] public float mouseSensitivity = 1.0f;
     
     [Header("튜토리얼 체크용")]
     public bool useStage;

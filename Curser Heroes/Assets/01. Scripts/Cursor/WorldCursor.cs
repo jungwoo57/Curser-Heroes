@@ -20,8 +20,8 @@ public class WorldCursor : MonoBehaviour
         
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.None;  
-
         
+        smoothing = smoothing * (1.0f - GameManager.Instance.mouseSensitivity);
         transform.position = GetMouseWorldPosition();
     }
 
