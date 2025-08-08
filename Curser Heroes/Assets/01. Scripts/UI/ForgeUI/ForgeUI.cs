@@ -225,6 +225,7 @@ public class ForgeUI : MonoBehaviour
                 unlockButton.gameObject.SetActive(true);
                 unlockText.color = enabledColor;
                 unlockButton.interactable = true;
+                weaponAtk.text = "공격력 : " + selectData.baseDamage.ToString();
                 currentWeaponAtk.text = "미해금";
                 upgradeWeaponAtk.text = selectData.baseDamage.ToString();
                 weaponName.text = selectData.weaponName;
