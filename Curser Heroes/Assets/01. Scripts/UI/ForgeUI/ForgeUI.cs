@@ -201,7 +201,7 @@ public class ForgeUI : MonoBehaviour
                 if (selectWeapon.level < 10)
                 {
                     useGoldText.text =  selectData.upgradeCost[selectWeapon.level].ToString();
-                    upgradeWeaponAtk.text = (selectWeapon.levelDamage + selectData.damagePerLevel).ToString();
+                    upgradeWeaponAtk.text = ((int)(selectWeapon.levelDamage + selectData.damagePerLevel)).ToString();
                 }
                 else
                 {
@@ -275,7 +275,7 @@ public class ForgeUI : MonoBehaviour
                 if (selectSubWeapon.level < 10)
                 {
                     useGoldText.text = selectSubData.upgradeCost[selectSubWeapon.level].ToString();
-                    upgradeWeaponAtk.text = (selectSubWeapon.levelDamage + selectSubData.damagePerLevel).ToString();
+                    upgradeWeaponAtk.text = ((int)(selectSubWeapon.levelDamage + selectSubData.damagePerLevel)).ToString();
                     reinforceText.color = enabledColor;
                 }
                 else
