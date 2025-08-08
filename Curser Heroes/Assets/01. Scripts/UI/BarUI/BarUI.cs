@@ -4,26 +4,20 @@ using UnityEngine;
 
 public class BarUI : MonoBehaviour
 {
-    [SerializeField] private TutorialUI tutorialUI;
-    [SerializeField] private GameObject tutorialPanel;
-    private void OnEnable()
-    {
-        tutorialUI.gameObject.SetActive(false);
-        tutorialPanel.SetActive(false);
-        if (!GameManager.Instance.useBar)
-        {
-            tutorialPanel.SetActive(false);
-            tutorialUI.gameObject.SetActive(true);
-        }
-    }
+    
+   [SerializeField] private TutorialImageUI tutorialImageUI;
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !tutorialImageUI.gameObject.activeInHierarchy)
         {
             Exit();
         }
     }
     
+    public void ClickHintButton()
+    {
+        tutorialImageUI.gameObject.SetActive(true);
+    }
     
     public void Exit()
     {

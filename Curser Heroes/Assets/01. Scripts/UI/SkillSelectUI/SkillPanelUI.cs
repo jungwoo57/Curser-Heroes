@@ -6,7 +6,8 @@ public class SkillPanelUI : MonoBehaviour
    public Button exitButton;
    public StageSelectedSkillUI skillSelectedUI;
    public GameObject warningPanel;
-
+   [SerializeField] private TutorialImageUI tutorialImageUI;
+   
    private void OnEnable()
    {
       warningPanel.SetActive(false);
@@ -32,5 +33,10 @@ public class SkillPanelUI : MonoBehaviour
     public void Exit()
    {
       gameObject.SetActive(false);
+   }
+    
+   public void ClickHintButton()
+   {
+      tutorialImageUI.gameObject.SetActive(true);
    }
 }

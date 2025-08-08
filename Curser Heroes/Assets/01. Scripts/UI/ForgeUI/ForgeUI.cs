@@ -50,24 +50,12 @@ public class ForgeUI : MonoBehaviour
     public OwnedSubWeapon selectSubWeapon;
 	public WeaponData selectData;
 	public SubWeaponData selectSubData;
-	//public Image GoldImage;
-	//public Image JewelImage;
-
-    //[SerializeField] private Image useJewelImage;
-    //[SerializeField] private Image useGoldImage;
+	
     
-    public TutorialUI tutorialUI;
-    [SerializeField] private GameObject tutorialPanel;
+    public TutorialImageUI tutorialImageUI;
     [SerializeField] private ScrollRect weaponScroll;
     private void OnEnable()
     {
-        tutorialUI.gameObject.SetActive(false);
-        tutorialPanel.gameObject.SetActive(false);
-        if (!GameManager.Instance.useForge)
-        {
-            tutorialUI.gameObject.SetActive(true);
-            tutorialPanel.gameObject.SetActive(true);
-        }
         isMain = true;
         mainWeaponButton.interactable = false;
         subWeaponButton.interactable = true;
@@ -77,7 +65,7 @@ public class ForgeUI : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !tutorialImageUI.gameObject.activeInHierarchy)
         {
             ClickExitButton();
         }
@@ -402,5 +390,10 @@ public class ForgeUI : MonoBehaviour
     {
         yield return new WaitForSeconds(durationTime);
         effect.SetActive(false);
+    }
+
+    public void ClickHintButton()
+    {
+        tutorialImageUI.gameObject.SetActive(true);
     }
 }
