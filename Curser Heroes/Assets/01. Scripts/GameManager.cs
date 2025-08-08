@@ -136,7 +136,7 @@ public class GameManager : MonoBehaviour
             AddJewel(- weaponData.unlockCost);
             ownedWeapons.Add(new OwnedWeapon(weaponData));
         }
-
+        AudioManager.Instance.PlayButtonSound(buttonType.village);
         Save();
     }
 
@@ -210,6 +210,7 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("해당 데이터 없거나 레벨이 만랩");
         }
+        UpgradeSound();
         Save();
     }
     
@@ -226,6 +227,7 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("해당 데이터 없음");
         }
+        UpgradeSound();
         Save();
     }
 
@@ -246,7 +248,7 @@ public class GameManager : MonoBehaviour
                     HasSkills.Add(skillData);
                 }
             }
-            
+            UpgradeSound();
 
             Save();
         }
@@ -260,6 +262,7 @@ public class GameManager : MonoBehaviour
             AddGold(-data.upgradeCost[ownedPartners[index].level]);
             ownedPartners[index].level++;
         }
+        UpgradeSound();
         Save();
     }
     public void UnlockPartner(PartnerData partnerData)
@@ -269,6 +272,7 @@ public class GameManager : MonoBehaviour
             jewel -= partnerData.unlockCost;
             ownedPartners.Add(new OwnedPartner(partnerData));
         }
+        UpgradeSound();
         Save();
             
     }
@@ -332,5 +336,11 @@ public class GameManager : MonoBehaviour
         {
             Save();
         }
+    }
+
+    public void UpgradeSound()
+    {
+        if(AudioManager.Instance != null)
+            AudioManager.Instance.PlayButtonSound(buttonType.upgrade);
     }
 }

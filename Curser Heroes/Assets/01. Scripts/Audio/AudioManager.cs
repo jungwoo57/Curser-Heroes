@@ -2,6 +2,9 @@
 
 public enum HitType { Monster, Cursor } // 열거형 
 public enum bgmType{main, battle, title}
+
+public enum buttonType { title, village, upgrade}
+
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance { get; private set; }
@@ -10,6 +13,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip mainBgm, battleBgm, titleBgm;
     public AudioClip titlebuttonClip;
     public AudioClip uibuttonClip;
+    public AudioClip upgradeClip;
     [Header("오디오 소스")]
     public AudioSource bgmSource;  // 추가된 bgm 소스
     public AudioSource src;    // 기존 효과음 ()
@@ -65,10 +69,24 @@ public class AudioManager : MonoBehaviour
         src.PlayOneShot(clip);
     }
 
-    public void PlayButtonSound()
+    public void PlayButtonSound(buttonType type)
     {
         AudioClip clip;
-        clip = titlebuttonClip;
-        src.PlayOneShot(clip);
+
+        switch (type)
+        {
+            case buttonType.title:
+                clip = titlebuttonClip;
+                src.PlayOneShot(clip);
+                break;
+            case buttonType.village:
+                clip = uibuttonClip;
+                src.PlayOneShot(clip);
+                break;
+            case buttonType.upgrade:
+                clip = upgradeClip;
+                src.PlayOneShot(clip);
+                break;
+        }
     }
 }
