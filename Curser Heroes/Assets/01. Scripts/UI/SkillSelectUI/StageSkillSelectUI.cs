@@ -42,7 +42,6 @@ public class StageSkillSelectUI : MonoBehaviour
 
     public void UpdateUI()
     {
-        
         while (showSkills.Count < hasSkills.Count)
         {
             SkillUIImage obj = Instantiate(skillUIImage ,this.transform);
@@ -51,9 +50,11 @@ public class StageSkillSelectUI : MonoBehaviour
         }
         for (int i = 0; i < stageSelectedSkillUI.skills.Length; i++)
         {
-            skills[i] = stageSelectedSkillUI.skills[i];
+            //skills[i] = stageSelectedSkillUI.skills[i];
+            skills[i] = stageSelectedSkillUI.skillImages[i].data;
         }
-
+        
+        
         for (int i = 0; i < showSkills.Count; i++)         //이미지 업데이트
         {
             showSkills[i].gameObject.SetActive(true);

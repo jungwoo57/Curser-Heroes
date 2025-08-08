@@ -124,7 +124,13 @@ public class SubWeaponManager : MonoBehaviour
             }
         }
 
-        
+        if (Input.GetMouseButtonDown(0) && SkillManager.Instance != null)
+        {
+            SkillManager.Instance.TryShootFireball();
+            SkillManager.Instance.TryTriggerThornDomeOnClick();
+            SkillManager.Instance.TryTriggerDeathBeam();
+        }
+
         AmmoUIGroup.SetActive(equippedSubWeapon.weaponType == SubWeaponType.AmmoBased);
         ManaUIGroup.SetActive(equippedSubWeapon.weaponType == SubWeaponType.ManaBased);
         ChargeUIGroup.SetActive(equippedSubWeapon.weaponType == SubWeaponType.ChargeBased);
@@ -294,14 +300,6 @@ public class SubWeaponManager : MonoBehaviour
             UseForceEffectAtCursor();
         else
             ShootToNearestEnemy();
-
-        
-        if (SkillManager.Instance != null)
-        {
-            SkillManager.Instance.TryShootFireball();
-            SkillManager.Instance.TryTriggerThornDomeOnClick();
-            SkillManager.Instance.TryTriggerDeathBeam();
-        }
 
         //  UI 즉시 갱신
         if (equippedSubWeapon.weaponType == SubWeaponType.AmmoBased)

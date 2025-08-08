@@ -22,6 +22,8 @@ public class MirrorCursor : MonoBehaviour
         sr.sprite = originalCursor.GetComponent<SpriteRenderer>().sprite;
         sr.color = new Color(1, 1, 1, 120f / 255f); // 알파값
 
+        transform.localScale = originalCursor.localScale;
+
         // 충돌 안 받도록 설정
         gameObject.layer = LayerMask.NameToLayer("Default");
         Collider2D col = GetComponent<Collider2D>();

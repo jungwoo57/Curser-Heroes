@@ -121,15 +121,23 @@ public class UIManager : MonoBehaviour
             else if (isPanelActive)
             {
                 stageExitPanel.gameObject.SetActive(false);
-                // 게임 시간을 재개
-                Time.timeScale = 1f;
-                Cursor.visible = false;
-                Cursor.lockState = CursorLockMode.Confined;
+
+                // SkillSelectUI와 RewardSelectUI가 모두 활성화되지 않았을 때만 시간을 재개
+                var skillSelectUI = GameObject.FindObjectOfType<SkillSelectUI>();
+                var rewardSelectUI = GameObject.FindObjectOfType<RewardSelectUI>();
+
+                if (skillSelectUI == null && rewardSelectUI == null)
+                {
+                    // 게임 시간을 재개
+                    Time.timeScale = 1f;
+                    Cursor.visible = false;
+                    Cursor.lockState = CursorLockMode.Confined;
+                }
             }
         }
     }
 
-        [ContextMenu("스테이지시작")]
+    [ContextMenu("스테이지시작")]
     public void StageStart()
     {
         battleUI.gameObject.SetActive(true);

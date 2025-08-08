@@ -19,8 +19,13 @@ public class WeaponLife : MonoBehaviour
         if (currentLives <= 0) return;
 
         currentLives--;
-        UIManager.Instance.battleUI.TakeDamage();
         Debug.Log($"{currentWeapon.weaponName} 목숨 -1 → 현재: {currentLives}");
+
+        // 데미지를 입었으므로 UI를 새로고침합니다.
+        if (UIManager.Instance != null && UIManager.Instance.battleUI != null)
+        {
+            UIManager.Instance.battleUI.UpdateHealthUI();
+        }
     }
 
     public void TakeLifeBossDamage()
@@ -37,15 +42,26 @@ public class WeaponLife : MonoBehaviour
         if (currentLives < maxLives)
         {
             currentLives++;
-            UIManager.Instance.battleUI.Heal();
             Debug.Log($"[구원] 목숨 1 회복됨 → 현재: {currentLives}");
+
+            // 체력이 회복되었으므로 UI를 새로고침합니다.
+            if (UIManager.Instance != null && UIManager.Instance.battleUI != null)
+            {
+                UIManager.Instance.battleUI.UpdateHealthUI();
+            }
         }
     }
     public void IncreaseMaxLife(int amount)
     {
         maxLives += amount;
-        currentLives = Mathf.Min(currentLives + amount, maxLives);  // 회복도 1회 같이 처리
+        currentLives = Mathf.Min(currentLives + amount, maxLives);
         Debug.Log($"[거인] 최대 목숨 +{amount} → 현재: {currentLives}/{maxLives}");
+
+        // 최대 체력이 증가했으므로 UI를 새로고침합니다.
+        if (UIManager.Instance != null && UIManager.Instance.battleUI != null)
+        {
+            UIManager.Instance.battleUI.UpdateHealthUI();
+        }
     }
 
     [ContextMenu("사망 애니메이션")]

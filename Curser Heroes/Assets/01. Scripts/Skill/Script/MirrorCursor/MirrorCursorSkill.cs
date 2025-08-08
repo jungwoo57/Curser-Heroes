@@ -48,14 +48,16 @@ public class MirrorCursorSkill : MonoBehaviour
         Vector3 leftOffset = Vector3.left * xOffset;
         Vector3 rightOffset = Vector3.right * xOffset;
 
-        CreateMirror(leftOffset, finalDamage);
-        CreateMirror(rightOffset, finalDamage);
+        CreateMirror(leftOffset, finalDamage, cursorTransform.localScale);
+        CreateMirror(rightOffset, finalDamage, cursorTransform.localScale);
     }
 
-    private void CreateMirror(Vector3 offset, float damage)
+    private void CreateMirror(Vector3 offset, float damage, Vector3 localScale)
     {
         Vector3 spawnPos = cursorTransform.position + offset;
         GameObject mirror = Instantiate(mirrorPrefab, spawnPos, Quaternion.identity);
+        mirror.transform.localScale = localScale;
+
         mirror.GetComponent<MirrorCursor>().Init(cursorTransform, damage, mirrorDuration, offset);
     }
 }
