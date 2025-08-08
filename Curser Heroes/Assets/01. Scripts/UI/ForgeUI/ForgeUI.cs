@@ -160,6 +160,7 @@ public class ForgeUI : MonoBehaviour
         unlockButton.interactable = true;
         useGoldText.gameObject.SetActive(false);
         useJewelText.gameObject.SetActive(false);
+        weaponHp.gameObject.SetActive(false);
         goldImage.gameObject.SetActive(false);
         jewelImage.gameObject.SetActive(false);
         
@@ -178,6 +179,7 @@ public class ForgeUI : MonoBehaviour
                 }
             }
             weaponDesc.text = selectData.weaponDesc;
+            weaponHp.gameObject.SetActive(true);
             weaponHp.text = ("체력 : ") + selectData.maxLives.ToString();
             hasGoldText.text = GameManager.Instance.GetGold().ToString();
             hasJewelText.text = GameManager.Instance.GetJewel().ToString();
