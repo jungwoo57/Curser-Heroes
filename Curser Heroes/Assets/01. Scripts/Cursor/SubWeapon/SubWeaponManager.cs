@@ -94,7 +94,7 @@ public class SubWeaponManager : MonoBehaviour
 
         //  UI 패널 위치 고정
         Vector3 screenPos = Camera.main.WorldToScreenPoint(followTarget.position);
-        uiPanel.position = screenPos + Vector3.down * 30f;
+        uiPanel.position = screenPos + Vector3.down * 45f;
 
         //  쿨다운 감소 (모든 타입)
         if (currentCooldown > 0f)
