@@ -124,6 +124,8 @@ public class SubWeaponManager : MonoBehaviour
             }
         }
 
+        if (Time.timeScale == 0f) return;
+
         if (Input.GetMouseButtonDown(0) && SkillManager.Instance != null)
         {
             SkillManager.Instance.TryShootFireball();
