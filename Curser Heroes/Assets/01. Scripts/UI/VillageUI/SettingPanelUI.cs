@@ -49,13 +49,12 @@ public class SettingPanelUI : MonoBehaviour
 
     public void OnClickFullScreenButton()
     {
-        Screen.fullScreen = true;
-        Debug.Log(Screen.fullScreen);
+        Screen.SetResolution(1980, 1280, true);
+        
     }
 
     public void OnClickWindowScreenButton()
     {
-        Screen.fullScreen = false;
-        Debug.Log(Screen.fullScreen);
+        Screen.SetResolution(1600, 900, false);
     }
 }
