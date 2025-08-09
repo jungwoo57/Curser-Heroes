@@ -42,6 +42,8 @@ public class BearKingGroundAttack : MonoBehaviour
     IEnumerator SelfDeactive()
     {
         yield return new WaitForSeconds(deActiveTime);
+        animator.SetTrigger("End");
+        yield return new WaitForSeconds(0.2f);
         gameObject.SetActive(false);
     }
 }
