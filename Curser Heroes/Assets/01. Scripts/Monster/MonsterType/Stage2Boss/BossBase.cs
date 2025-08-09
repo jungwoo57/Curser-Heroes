@@ -42,7 +42,12 @@ public class BossBase : MonoBehaviour
         //OnAnyMonsterDamaged?.Invoke(this);
         animator.SetTrigger("BossDamage");  // 피격 애니메이션, 패턴중엔 안나옴
         StartCoroutine(FlashEffect());
-
+        
+        if (DamageTextManager.instance != null)
+        {
+            DamageTextManager.instance.ShowDamage(amount, this.transform.position);
+        }
+        
         if (currentHP <= 0)
             Die();
     }
