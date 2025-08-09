@@ -528,8 +528,9 @@ GameObject:
   - component: {fileID: 473009324}
   - component: {fileID: 473009323}
   - component: {fileID: 473009322}
+  - component: {fileID: 473009326}
   m_Layer: 0
-  m_Name: Square
+  m_Name: bossGrouind
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -567,18 +568,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.4}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    pivot: {x: 0.5, y: -0.011904763}
+    oldSize: {x: 0.33, y: 0.84}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.5}
+  m_Size: {x: 0.4, y: 1}
   m_EdgeRadius: 0
 --- !u!95 &473009323
 Animator:
@@ -590,7 +591,7 @@ Animator:
   m_GameObject: {fileID: 473009321}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 71fd5e6a0af639c4588850cde15bb201, type: 2}
+  m_Controller: {fileID: 9100000, guid: 6e12ce2f1fe19f145af60abb54baad0a, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -642,7 +643,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 5964467670378530400, guid: 4bfa33a480671b24a9314622ba6f3ae1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -662,12 +663,27 @@ Transform:
   m_GameObject: {fileID: 473009321}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.05, y: -0.05, z: 0}
-  m_LocalScale: {x: 2.5, y: 2.5, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 787568976918651044}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &473009326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 473009321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8487fdafdc5bcf4888a22a324895999, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 3
+  animator: {fileID: 473009323}
+  deActiveTime: 2
 --- !u!4 &479217101 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4951498327049113220, guid: ba1386c1833b2174e968f3284249b97a, type: 3}
@@ -2247,6 +2263,7 @@ Transform:
   m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 473009325}
   - {fileID: 2423827110739117642}
   - {fileID: 8558481147131383329}
   - {fileID: 5494787150940765940}
@@ -3330,7 +3347,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: b632e75ab71c5bd459ce0387d2fffa89, type: 2}
   patternLogics:
-  - {fileID: 8104827718695386725}
+  - {fileID: 8104827718695386726}
   - {fileID: 2471469157486103273}
   - {fileID: 5431390770931123949}
   patternDamage:
@@ -3817,6 +3834,7 @@ GameObject:
   - component: {fileID: 2596777521417152826}
   - component: {fileID: 3839988440549574822}
   - component: {fileID: 3607710155064137421}
+  - component: {fileID: 8104827718695386726}
   - component: {fileID: 411168605197512203}
   - component: {fileID: 2471469157486103273}
   - component: {fileID: 8104827718695386725}
@@ -4737,7 +4755,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5197665908109593205}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3f711606e571dab4382e68190bb00e01, type: 3}
   m_Name: 
@@ -4752,6 +4770,29 @@ MonoBehaviour:
   targetWeapon: {fileID: 0}
   warningIndicator: {fileID: 7180573779717756709}
   warningTime: 0.6
+--- !u!114 &8104827718695386726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5197665908109593205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48f5eb49c77ba234d84283c05ccf9156, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  patternParent: {fileID: 2423827110739117642}
+  activationInterval: 0.1
+  firePoint: {fileID: 2423827110739117642}
+  weaponLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  detectionRadius: 10
+  targetWeapon: {fileID: 0}
+  warningIndicator: {fileID: 7180573779717756709}
+  warningTime: 0.6
+  ground: {fileID: 473009326}
 --- !u!212 &8352670005834858276
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5343,5 +5384,4 @@ SceneRoots:
   - {fileID: 1384152541}
   - {fileID: 1039266563977982146}
   - {fileID: 1181459687}
-  - {fileID: 473009325}
   - {fileID: 9901151}
