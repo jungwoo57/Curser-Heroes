@@ -21,6 +21,13 @@ public class PredatorSkill : MonoBehaviour
         if (Random.value < chance && WeaponManager.Instance.weaponLife)
         {
             WeaponManager.Instance.weaponLife.RecoverLife();
+
+            AudioSource audioSource = GetComponent<AudioSource>();
+            if (audioSource != null && skillInstance.skill.audioClip != null)
+            {
+                audioSource.PlayOneShot(skillInstance.skill.audioClip);
+            }
+
             PlayEffect();
         }
     }

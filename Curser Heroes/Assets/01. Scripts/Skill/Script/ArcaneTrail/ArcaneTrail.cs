@@ -8,14 +8,17 @@ public class ArcaneTrail : MonoBehaviour
     public LayerMask monsterLayer;
     public GameObject explosionEffect;
 
+    public AudioClip explosionSound;
+
     private float timer = 0f;
     private int damage;
     private bool hasPlayedPending = false;
 
-    public void Init(int damage)
+    public void Init(int damage, AudioClip clip)
     {
         this.damage = damage;
         animator.Play("Margin"); // 소환 직후 애니메이션
+        this.explosionSound = clip;
     }
 
     void Update()
@@ -36,6 +39,11 @@ public class ArcaneTrail : MonoBehaviour
 
     void Explode()
     {
+        if (explosionSound != null)
+        {
+            AudioSource.PlayClipAtPoint(explosionSound, transform.position);
+        }
+
         // 폭발 이펙트
         if (explosionEffect != null)
             Instantiate(explosionEffect, transform.position, Quaternion.identity);

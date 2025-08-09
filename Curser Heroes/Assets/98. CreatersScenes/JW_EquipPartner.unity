@@ -992,7 +992,7 @@ AudioSource:
   m_GameObject: {fileID: 192290470}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: ab7db9c6fce52aa4f89a4a51241df910, type: 2}
   m_audioClip: {fileID: 8300000, guid: 10ea0c6ecdfbe594d85161c221bce875, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.4
@@ -1094,11 +1094,12 @@ MonoBehaviour:
   monsterHitClip: {fileID: 8300000, guid: 290640edf8888f7459f9323e8e006ceb, type: 3}
   cursorHitClip: {fileID: 8300000, guid: d2e5abdff1ee98c44946db5a61e3d000, type: 3}
   mainBgm: {fileID: 0}
-  battleBgm: {fileID: 0}
   titleBgm: {fileID: 0}
+  gameOverBgm: {fileID: 0}
   titlebuttonClip: {fileID: 0}
   uibuttonClip: {fileID: 0}
   upgradeClip: {fileID: 0}
+  stageDatas: []
   bgmSource: {fileID: 0}
   src: {fileID: 0}
 --- !u!4 &192290473
@@ -4590,7 +4591,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1149468239
 RectTransform:
   m_ObjectHideFlags: 0

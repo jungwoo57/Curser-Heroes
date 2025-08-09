@@ -9,6 +9,13 @@ public class GiantSkill : MonoBehaviour
         if (alreadyActivated) return;
         alreadyActivated = true;
 
+        AudioSource audioSource = GetComponent<AudioSource>();
+
+        if (audioSource != null && skillInstance.skill.audioClip != null)
+        {
+            audioSource.PlayOneShot(skillInstance.skill.audioClip);
+        }
+
         // 1) 최대 목숨 +1, 회복도 +1
         WeaponLife weaponLife = WeaponManager.Instance.cursorWeapon.GetComponent<WeaponLife>();
         if (weaponLife != null)

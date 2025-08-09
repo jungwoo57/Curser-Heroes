@@ -29,6 +29,12 @@ public class RadiantPulseSkill : MonoBehaviour
         lastPulseTime = Time.time;
         float duration = skillInstance.GetCurrentLevelData().duration;
 
+        AudioSource audioSource = GetComponent<AudioSource>();
+        if (audioSource != null && skillInstance.skill.audioClip != null)
+        {
+            audioSource.PlayOneShot(skillInstance.skill.audioClip);
+        }
+
         GameObject pulseObj = Instantiate(pulseEffectPrefab, Vector3.zero, Quaternion.identity);
         Destroy(pulseObj, duration);
     }

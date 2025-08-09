@@ -10,9 +10,23 @@ public class AoEFieldSkill : MonoBehaviour
     private SkillLevelData info;
     private float offsetRadius = 0.75f;
 
+    private AudioSource audioSource;
+    private SkillManager.SkillInstance skillInstance;
+
     // 초기화: 스킬 레벨 정보 + 플레이어 위치 받기
     public void Init(SkillManager.SkillInstance skillInstance, Transform playerTransform)
     {
+        this.skillInstance = skillInstance; // 초기화
+        info = skillInstance.skill.levelDataList[skillInstance.level - 1];
+        player = playerTransform;
+
+        // ⭐ AudioSource 컴포넌트 가져오기
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+
         info = skillInstance.skill.levelDataList[skillInstance.level - 1];
         player = playerTransform;
 
@@ -55,6 +69,11 @@ public class AoEFieldSkill : MonoBehaviour
             if (col.TryGetComponent(out BaseMonster baseMonster))
             {
                 baseMonster.TakeDamage(info.damage);
+                
+                if (audioSource != null && skillInstance.skill.audioClip != null)
+                {
+                    audioSource.PlayOneShot(skillInstance.skill.audioClip);
+                }
                 continue;
             }
 
@@ -62,6 +81,11 @@ public class AoEFieldSkill : MonoBehaviour
             if (col.TryGetComponent(out BossStats boss))
             {
                 boss.TakeDamage(info.damage);
+
+                if (audioSource != null && skillInstance.skill.audioClip != null)
+                {
+                    audioSource.PlayOneShot(skillInstance.skill.audioClip);
+                }
             }
         }
     }

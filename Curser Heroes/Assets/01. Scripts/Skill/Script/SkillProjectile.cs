@@ -6,6 +6,14 @@ public class SkillProjectile : MonoBehaviour
     private float speed = 5f;
     private Vector2 direction;
 
+    private AudioSource audioSource;
+    public AudioClip attackSound;
+
+    void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     public void Init(int dmg, Vector2 dir = default, float spd = 5f)
     {
         damage = dmg;
@@ -23,15 +31,24 @@ public class SkillProjectile : MonoBehaviour
         BaseMonster monster = other.GetComponent<BaseMonster>();
         if (monster != null)
         {
+            // 💡 몬스터와 충돌 시 공격음 재생
+            if (audioSource != null && attackSound != null)
+            {
+                audioSource.PlayOneShot(attackSound);
+            }
             monster.TakeDamage(damage);
 
-            return; // 충돌 처리 종료
+            return;
         }
 
-        // 보스 몬스터 감지
         BossStats boss = other.GetComponent<BossStats>();
         if (boss != null)
         {
+            // 💡 보스와 충돌 시 공격음 재생
+            if (audioSource != null && attackSound != null)
+            {
+                audioSource.PlayOneShot(attackSound);
+            }
             boss.TakeDamage(damage);
 
             return;

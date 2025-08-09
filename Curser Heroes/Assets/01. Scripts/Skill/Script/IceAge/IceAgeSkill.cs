@@ -13,9 +13,17 @@ public class IceAgeSkill : MonoBehaviour
 
     private SkillManager.SkillInstance skillInstance;
 
+    private AudioSource audioSource;
+
     public void Init(SkillManager.SkillInstance instance)
     {
         skillInstance = instance;
+
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
     }
 
     void Update()
@@ -36,11 +44,17 @@ public class IceAgeSkill : MonoBehaviour
         Vector3 cursorPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         cursorPos.z = 0f;
 
+        if (audioSource != null && skillInstance.skill.audioClip != null)
+        {
+            audioSource.PlayOneShot(skillInstance.skill.audioClip);
+        }
+
         GameObject field = Instantiate(iceFieldPrefab, cursorPos, Quaternion.identity);
+
 
         int damage = skillInstance.skill.levelDataList[skillInstance.level- 1].damage;
 
-        field.GetComponent<IceAgeField>().Setup(damage);
+        field.GetComponent<IceAgeField>().Setup(damage, skillInstance.skill.audioClip);
         spawnedFields.Add(field);
     }
 }
