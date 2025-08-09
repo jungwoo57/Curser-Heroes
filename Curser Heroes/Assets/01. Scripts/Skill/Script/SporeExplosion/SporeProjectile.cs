@@ -10,11 +10,24 @@ public class SporeProjectile : MonoBehaviour
     private HashSet<BaseMonster> damagedMonsters = new HashSet<BaseMonster>();
     private HashSet<BossStats> damagedBosses = new HashSet<BossStats>();
 
-    public void Init(int damage, Vector2 dir, float speed)
+    private AudioClip hitAudioClip;
+    private AudioSource audioSource;
+
+    public void Init(int damage, Vector2 dir, float speed, AudioClip audioClip)
     {
         this.damage = damage;
         this.direction = dir.normalized;
         this.speed = speed;
+        // ⭐ 오디오 클립 초기화
+        this.hitAudioClip = audioClip;
+
+        // ⭐ AudioSource 컴포넌트 가져오기 또는 추가
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+
         Debug.Log($"[SporeProjectile] Init 호출됨: 데미지={damage}, 방향={direction}, 속도={speed}, 시작위치={transform.position}");
         Destroy(gameObject, 5f); // 수명 제한
     }
@@ -35,6 +48,12 @@ public class SporeProjectile : MonoBehaviour
             }
             monster.TakeDamage(damage);
             damagedMonsters.Add(monster);
+
+            if (audioSource != null && hitAudioClip != null)
+            {
+                audioSource.PlayOneShot(hitAudioClip);
+            }
+
             Debug.Log($"[SporeProjectile] 몬스터 타격: {monster.name}, 데미지: {damage}");
             return;  // 몬스터 처리 완료
         }
@@ -48,6 +67,12 @@ public class SporeProjectile : MonoBehaviour
             }
             boss.TakeDamage(damage);
             damagedBosses.Add(boss);
+
+            if (audioSource != null && hitAudioClip != null)
+            {
+                audioSource.PlayOneShot(hitAudioClip);
+            }
+
             Debug.Log($"[SporeProjectile] 보스 타격: {boss.name}, 데미지: {damage}");
         }
     }

@@ -41,6 +41,13 @@ public class DimensionSlash : MonoBehaviour
         Debug.Log("[DimensionSlash] isAttacking = true, 공격 시작");
         animator.Play("Attack");
 
+        AudioSource audioSource = GetComponent<AudioSource>();
+
+        if (audioSource != null && skillInstance.skill.audioClip != null)
+        {
+            audioSource.PlayOneShot(skillInstance.skill.audioClip);
+        }
+
         DetectInitialTargets();
 
         // 공격 애니메이션 길이만큼 대기

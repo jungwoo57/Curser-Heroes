@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static SkillManager;
 
 public class SkillManager : MonoBehaviour
 {
@@ -638,7 +639,7 @@ public class SkillManager : MonoBehaviour
         {
             // 방향 계산: 타겟 위치 - 커서 위치
             Vector3 direction = (nearest.transform.position - cursorPos).normalized;
-            fireballComp.Init(damage, direction);
+            fireballComp.Init(damage, direction, fireballSkill.skill.audioClip);
         }
         else
         {
@@ -668,7 +669,7 @@ public class SkillManager : MonoBehaviour
 
         var meteor = meteorObj.GetComponent<MeteorSkill>();
         var levelData = skillInstance.skill.levelDataList[skillInstance.level - 1];
-        meteor.Init(levelData.damage, target.position);
+        meteor.Init(levelData.damage, target.position, skillInstance.skill.audioClip);
     }
     public void TryTriggerThornDomeOnClick()
     {

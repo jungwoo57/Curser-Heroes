@@ -8,9 +8,18 @@ public class IceAgeField : MonoBehaviour
     private float lifeTimer = 0f;
     private int damage;
 
-    public void Setup(int damage)
+    private AudioClip tickSound;
+    private AudioSource audioSource;
+
+    public void Setup(int damage, AudioClip tickSound)
     {
         this.damage = damage;
+        this.tickSound = tickSound;
+
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
     }
 
     void Update()
@@ -35,6 +44,11 @@ public class IceAgeField : MonoBehaviour
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, 1f, LayerMask.GetMask("Monster"));
         foreach (var hit in hits)
         {
+            if (audioSource != null && tickSound != null)
+            {
+                audioSource.PlayOneShot(tickSound);
+            }
+
             if (hit.TryGetComponent<BaseMonster>(out var monster))
             {
                 monster.TakeDamage(damage);

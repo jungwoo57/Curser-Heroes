@@ -98,7 +98,16 @@ public class UIManager : MonoBehaviour
             restartButton.onClick.AddListener(RestartGame);
         }
 
-        AudioManager.Instance.PlayBgm(bgmType.battle);
+        if (StageManager.Instance != null && StageManager.Instance.selectStage != null)
+        {
+            int currentStageNumber = StageManager.Instance.selectStage.stageNumber;
+            AudioManager.Instance.PlayBgm(bgmType.battle, currentStageNumber);
+        }
+        else
+        {
+            // 예외 처리: StageManager나 selectStage가 null일 경우
+            Debug.LogWarning("StageManager or selectStage is not available. Cannot play BGM.");
+        }
     }
 
     private void Update()
@@ -155,6 +164,11 @@ public class UIManager : MonoBehaviour
     {
         UpdateGameOverData();
         StartCoroutine(StageEndCoroutine());
+
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlayBgm(bgmType.gameOver);
+        }
     }
     private IEnumerator StageEndCoroutine()
     {

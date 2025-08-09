@@ -49,6 +49,7 @@ public class ShadowProjectile : MonoBehaviour
         yield return new WaitForSeconds(0.5f); // Spawn 애니메이션 길이만큼 대기
         GameObject friend = Instantiate(shadowFriendPrefab, transform.position, Quaternion.identity);
         friend.GetComponent<ShadowFriend>().Init(moveDir, skillInstance);
+
         Destroy(gameObject);
     }
 

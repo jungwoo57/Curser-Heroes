@@ -16,4 +16,5 @@ public class StageData : ScriptableObject
     public string stageName;
     public Sprite stageImage;    // 스테이지 선택창 백그라운드
     public Sprite battleStageBackGround;  // 전투 화면 백그라운드
+    public AudioClip battleBgm;
 }

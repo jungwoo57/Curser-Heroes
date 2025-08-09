@@ -19,11 +19,19 @@ public class DeathBeamSkill : MonoBehaviour
     private CursorWeapon cursorWeapon;
     private Coroutine beamRoutine;
 
+    private AudioSource audioSource;
+
     public void Init(SkillManager.SkillInstance instance)
     {
         skillInstance = instance;
 
         cursorWeapon = WeaponManager.Instance.cursorWeapon;
+
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
 
         if (cursorWeapon == null)
         {
@@ -65,6 +73,11 @@ public class DeathBeamSkill : MonoBehaviour
         yield return new WaitForSeconds(1f);
         // 데미지 처리 시작
         beamRoutine = StartCoroutine(DamageRoutine());
+
+        if (skillInstance.skill.audioClip != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(skillInstance.skill.audioClip);
+        }
 
         // 일정 시간 후 삭제
         yield return new WaitForSeconds(hitCount * tickInterval + 0.1f);

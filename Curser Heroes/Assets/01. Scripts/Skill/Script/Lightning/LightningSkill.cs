@@ -22,6 +22,12 @@ public class LightningSkill : MonoBehaviour
         {
             Debug.Log("라이트닝 스킬 발동!");
 
+            AudioSource audioSource = GetComponent<AudioSource>();
+            if (audioSource != null && skillInstance.skill.audioClip != null)
+            {
+                audioSource.PlayOneShot(skillInstance.skill.audioClip);
+            }
+
             // 1. 피격된 몬스터에게 떨어지는 번개 생성 (회전 없음)
             // 이펙트 시작 위치는 몬스터의 머리 위로 조정할 수 있습니다.
             Vector3 strikePosition = hitMonster.transform.position + Vector3.up * 0.5f; // 예시
