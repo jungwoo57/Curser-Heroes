@@ -880,7 +880,7 @@ MonoBehaviour:
   - {fileID: 1954128084504163748}
   - {fileID: 1463378918413995601}
   firePoint: {fileID: 4111415989338577436}
-  attackRange: 5
+  attackRange: 50
   warningArea:
   - {fileID: 2206001871159744666}
   - {fileID: 7474745549055224367}
@@ -890,7 +890,7 @@ MonoBehaviour:
   minScale: 0.1
   maxScale: 0.4
   maxDistance: 0
-  speed: 5
+  speed: 7
   angle: 20
 --- !u!61 &7700118836909139700
 BoxCollider2D:

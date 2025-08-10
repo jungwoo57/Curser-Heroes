@@ -15,7 +15,7 @@ public class Bivalvia : BaseMonster
     [SerializeField] private float speed =5.0f;
 
 
-    protected override void Start()
+    protected void OnEnable()
     {
         projectilePrefab.gameObject.SetActive(false);
     }
@@ -72,7 +72,7 @@ public class Bivalvia : BaseMonster
         
         warningArea.transform.localScale = new Vector3(scale, scale, scale);
 
-        if (warningArea.transform.localScale.x > 0.35f)
+        if (warningArea.transform.localScale.x >= 0.40f)
         {
             warningArea.gameObject.SetActive(false);
             isAttacking = false;
