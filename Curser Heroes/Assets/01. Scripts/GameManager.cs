@@ -309,9 +309,11 @@ public class GameManager : MonoBehaviour
     [ContextMenu("Load")]
     public void Load()
     {
+        Debug.Log("여긴됨");
         SaveData loadData = new SaveData();
         loadData = SaveLoadManager.instance.Load();
         if (loadData == null) return;
+        Debug.Log("데이터 로드됨");
         unlockedSkills = loadData.unlockedSkills ?? new List<SkillData>();
         selectSkills = loadData.selectedSkills ?? new List<SkillData>();
         skillPool = new List<SkillData>(HasSkills);
@@ -325,7 +327,7 @@ public class GameManager : MonoBehaviour
         StageManager.Instance.bestWave[0] = loadData.stage1bestWave;
         StageManager.Instance.bestWave[1] = loadData.stage2bestWave;
         StageManager.Instance.bestWave[2] = loadData.stage3bestWave;
-        
+        OnGoldChanged?.Invoke();
         //bestScore = loadData.bestScore;
     }
 
