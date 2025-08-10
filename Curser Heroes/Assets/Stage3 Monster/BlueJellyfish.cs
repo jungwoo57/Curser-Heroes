@@ -33,13 +33,15 @@ public class BlueJellyfish : BaseMonster
 
     protected override void Attack()
     {
-        
         Vector2 attackOrigin = (Vector2)transform.position + attackOffset;
         Collider2D hit = Physics2D.OverlapCircle(attackOrigin, attackRange, cursorLayer);
-        if (hit != null)
+
+        if (hit != null && WeaponManager.Instance != null && !WeaponManager.Instance.isInvincible)
         {
-            if (hit.TryGetComponent<WeaponLife>(out var life))
-                life.TakeLifeDamage();
+            if (hit.gameObject.layer == LayerMask.NameToLayer("Weapon"))
+            {
+                WeaponManager.Instance.TakeWeaponLifeDamage();
+            }
         }
     }
 
@@ -51,13 +53,18 @@ public class BlueJellyfish : BaseMonster
 
     private void Explode()
     {
-        
         Vector2 explodeOrigin = (Vector2)transform.position + explosionOffset;
         Collider2D[] hits = Physics2D.OverlapCircleAll(explodeOrigin, explosionRadius, cursorLayer);
-        foreach (var hit in hits)
+
+        if (WeaponManager.Instance != null && !WeaponManager.Instance.isInvincible)
         {
-            if (hit.TryGetComponent<WeaponLife>(out var life))
-                life.TakeLifeDamage();
+            foreach (var hit in hits)
+            {
+                if (hit.gameObject.layer == LayerMask.NameToLayer("Weapon"))
+                {
+                    WeaponManager.Instance.TakeWeaponLifeDamage();
+                }
+            }
         }
     }
 
