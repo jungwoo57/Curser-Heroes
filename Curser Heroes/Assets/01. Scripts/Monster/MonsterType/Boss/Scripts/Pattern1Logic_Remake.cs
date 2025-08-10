@@ -21,7 +21,7 @@ public class Pattern1Logic_Remake : PatternLogicBase
     public float warningTime = 0.6f;
 
     [Header("지면 공격 관련")]
-    [SerializeField] private GameObject ground;
+    [SerializeField] private BearKingGroundAttack ground;
     //[SerializeField] private float ;
 
     void Start()
@@ -30,7 +30,7 @@ public class Pattern1Logic_Remake : PatternLogicBase
     }
     public override IEnumerator Execute(BossPatternController controller)
     {
-        
+        Debug.Log("공격은 했음 ㅇㅇ;");
         if (patternParent == null || firePoint == null || targetWeapon == null)
         {
             Debug.LogWarning("Pattern1Logic: 필수 Transform이 할당되지 않았습니다.");
@@ -46,8 +46,12 @@ public class Pattern1Logic_Remake : PatternLogicBase
             warningIndicator.gameObject.SetActive(true);
         }
         // 발사 로직 작성
+        ground.transform.position = firePoint.position;
+        ground.Init(dir);
+        ground.gameObject.SetActive(true); // 그라운드 활성화
         
-        
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        ground.transform.rotation = Quaternion.Euler(0, 0, angle - 90); // 스프라이트 로테이션 돌리기
     }
     private void FindWeaponByLayer()
     {
