@@ -76,6 +76,7 @@ public class Bivalvia : BaseMonster
         {
             warningArea.gameObject.SetActive(false);
             isAttacking = false;
+            projectilePrefab.gameObject.SetActive(false);
         }
     }
 }
