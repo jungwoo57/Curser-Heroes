@@ -8,6 +8,7 @@ public class KingBlueJellyfish : BlueJellyfish
 
     protected override void Die()
     {
+        if (isDead) return;
         SpawnMinions();
         base.Die();  
     }

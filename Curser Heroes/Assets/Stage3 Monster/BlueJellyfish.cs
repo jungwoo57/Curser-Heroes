@@ -47,6 +47,7 @@ public class BlueJellyfish : BaseMonster
 
     protected override void Die()
     {
+        if (isDead) return;
         Explode();
         base.Die();  
     }
