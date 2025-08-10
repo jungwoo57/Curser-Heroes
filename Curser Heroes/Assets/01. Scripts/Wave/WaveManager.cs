@@ -151,12 +151,12 @@ public class WaveManager : MonoBehaviour
 
     private IEnumerator CheckWaveClearAfterDelay()
     {
-        yield return new WaitForSeconds(1.5f); // 분열 몬스터 등록 대기
+        yield return new WaitForSeconds(2f); // 분열 몬스터 등록 대기
 
         if (!waveCleared && spawnedMonsters.Count == 0)
         {
             waveCleared = true;
-            StartCoroutine(DelayedWaveClear(1.5f));
+            StartCoroutine(DelayedWaveClear(2.5f));
         }
     }
 
