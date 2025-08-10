@@ -3207,11 +3207,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4951498327049113220, guid: ba1386c1833b2174e968f3284249b97a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -1.57
       objectReference: {fileID: 0}
     - target: {fileID: 4951498327049113220, guid: ba1386c1833b2174e968f3284249b97a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.14
       objectReference: {fileID: 0}
     - target: {fileID: 4951498327049113220, guid: ba1386c1833b2174e968f3284249b97a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3250,8 +3250,12 @@ PrefabInstance:
       value: Bivalvia
       objectReference: {fileID: 0}
     - target: {fileID: 8793971243143877439, guid: ba1386c1833b2174e968f3284249b97a, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8793971243143877439, guid: ba1386c1833b2174e968f3284249b97a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
