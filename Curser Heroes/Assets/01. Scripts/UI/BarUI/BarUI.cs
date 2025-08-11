@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,17 @@ public class BarUI : MonoBehaviour
 {
     
    [SerializeField] private TutorialImageUI tutorialImageUI;
-    private void Update()
+
+   private void OnEnable()
+   {
+       if (!GameManager.Instance.useBar)
+       {
+           ClickHintButton();
+           GameManager.Instance.useBar = true;
+       }
+   }
+
+   private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape) && !tutorialImageUI.gameObject.activeInHierarchy)
         {

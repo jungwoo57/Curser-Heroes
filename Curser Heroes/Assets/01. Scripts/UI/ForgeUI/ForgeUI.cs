@@ -61,6 +61,11 @@ public class ForgeUI : MonoBehaviour
         subWeaponButton.interactable = true;
         weaponScroll.verticalNormalizedPosition = 1.0f;
         Init();
+        if (!GameManager.Instance.useForge)
+        {
+            ClickHintButton();
+            GameManager.Instance.useForge = true;
+        }
     }
 
     private void Update()

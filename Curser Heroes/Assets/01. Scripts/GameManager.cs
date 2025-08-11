@@ -50,7 +50,9 @@ public class GameManager : MonoBehaviour
     public bool useForge;
     public bool useLab;
     public bool useBar;
-
+    public bool useSkillList;
+    public bool weaponSelectList;
+    
     public event Action OnGoldChanged;
     public event Action OnJewelChanged;
 
