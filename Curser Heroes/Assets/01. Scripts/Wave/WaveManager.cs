@@ -170,7 +170,7 @@ public class WaveManager : MonoBehaviour
     {
         int waveNum = currentWaveIndex + 1;
 
-        clearGold = WaveUtils.CalculateGoldReward(waveNum);
+        clearGold = WaveUtils.CalculateGoldReward(waveNum, currentStage);
         GameManager.Instance.AddGold(clearGold);
 
         int? jewel = WaveUtils.TryGetJewelReward(waveNum);
