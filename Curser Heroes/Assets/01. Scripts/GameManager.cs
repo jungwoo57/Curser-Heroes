@@ -94,7 +94,7 @@ public class GameManager : MonoBehaviour
         {
             equipPartner = ownedPartners[0];
         }
-        //Load();
+        Load();
     }
 
     public void AddGold(int amount)
