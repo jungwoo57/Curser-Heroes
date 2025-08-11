@@ -5,7 +5,6 @@ public class SettingPanelUI : MonoBehaviour
     public Slider mainSlider;
     public Slider bgmSlider;
     public Slider sfxSlider;
-    public Slider mouseSensitivitySlider;
     public bool isFullScreen;
     
     void Start()
@@ -16,11 +15,9 @@ public class SettingPanelUI : MonoBehaviour
             bgmSlider.value = AudioManager.Instance.bgmSource.volume;
             sfxSlider.value = AudioManager.Instance.src.volume;
         }
-        mouseSensitivitySlider.value = GameManager.Instance.mouseSensitivity;
         mainSlider.onValueChanged.AddListener(SetMainVolume);
         bgmSlider.onValueChanged.AddListener(SetBGMVolume);
         sfxSlider.onValueChanged.AddListener(SetSFXVolume);
-        mouseSensitivitySlider.onValueChanged.AddListener(SetMouseSensitivity);
     }
 
     void SetMainVolume(float value)
@@ -37,15 +34,7 @@ public class SettingPanelUI : MonoBehaviour
     {
         AudioManager.Instance.src.volume = value;
     }
-
-    void SetMouseSensitivity(float value)
-    {
-        if (value <= 0)
-        {
-            value = 0.1f;
-        }
-        GameManager.Instance.mouseSensitivity = value;
-    }
+    
     public void OnClickExitButton()
     {
         gameObject.SetActive(false);
