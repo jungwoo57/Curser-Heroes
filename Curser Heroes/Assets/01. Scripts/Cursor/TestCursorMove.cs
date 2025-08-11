@@ -19,10 +19,7 @@ public class TestCursorMove : MonoBehaviour
 
         private void Start()
         {
-            if (GameManager.Instance != null)
-            {
-                cursorSpeed = GameManager.Instance.mouseSensitivity;
-            }
+            
         }
         private void Update()
         {

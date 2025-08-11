@@ -2,29 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public class OwnedWeaponSave
-{
-    public string weaponName;
-    public int level;
-    public bool bookMark;
-}
-
-[System.Serializable]
-public class OwnedSubeaponSave
-{
-    public string weaponName;
-    public int level;
-    public bool bookMark;
-}
-
-public class OwnedPartnerSave
-{
-    public string weaponName;
-    public int level;
-    public bool bookMark;
-}
-
 public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
@@ -66,7 +43,6 @@ public class GameManager : MonoBehaviour
     [Header("기타 데이터")]
     [SerializeField] private int gold = 9999;
     [SerializeField]private int jewel = 0;
-    [SerializeField] public float mouseSensitivity = 1.0f;
     
     [Header("튜토리얼 체크용")]
     public bool useStage;

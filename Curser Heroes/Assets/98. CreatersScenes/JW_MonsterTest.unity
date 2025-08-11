@@ -1267,6 +1267,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TreeFlower
       objectReference: {fileID: 0}
+    - target: {fileID: 771171714132205675, guid: 92f6bf9fd0bb25d4997b7ca8e850dfc8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9210273703392147809, guid: 92f6bf9fd0bb25d4997b7ca8e850dfc8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2584,7 +2588,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4599194489727827547, guid: daefcbe7240c0ab45a910a91b63ecedd, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6100888464032904874, guid: daefcbe7240c0ab45a910a91b63ecedd, type: 3}
       propertyPath: m_LocalPosition.x
