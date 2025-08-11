@@ -2,6 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class OwnedWeaponSave
+{
+    public string weaponName;
+    public int level;
+    public bool bookMark;
+}
+
+[System.Serializable]
+public class OwnedSubeaponSave
+{
+    public string weaponName;
+    public int level;
+    public bool bookMark;
+}
+
+public class OwnedPartnerSave
+{
+    public string weaponName;
+    public int level;
+    public bool bookMark;
+}
+
 public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
@@ -80,6 +103,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        Load();
         if (ownedWeapons != null)
         {
             mainEquipWeapon = ownedWeapons[0];
@@ -94,7 +118,7 @@ public class GameManager : MonoBehaviour
         {
             equipPartner = ownedPartners[0];
         }
-        Load();
+        //Load();
     }
 
     public void AddGold(int amount)
@@ -297,9 +321,25 @@ public class GameManager : MonoBehaviour
         data.selectedSkills = selectSkills;
         data.ownedWeapons = ownedWeapons;
         data.ownedSubWeapons = ownedSubWeapons;
+        data.ownedPartners = ownedPartners;
         data.mainEquipWeapon = mainEquipWeapon;
         data.subEquipWeapon = subEquipWeapon;
         data.selectedSkills = selectSkills;
+        data.mainWeaponName.Clear();
+        data.subWeaponName.Clear();
+        data.partnerName.Clear();
+        for (int i = 0; i < ownedWeapons.Count; i++)
+        {
+            data.mainWeaponName.Add(ownedWeapons[i].data.weaponName);   
+        }
+        for (int i = 0; i < ownedSubWeapons.Count; i++)
+        {
+            data.subWeaponName.Add(ownedSubWeapons[i].data.weaponName);   
+        }
+        for (int i = 0; i < ownedPartners.Count; i++)
+        {
+            data.partnerName.Add(ownedPartners[i].data.partnerName);   
+        }
         data.gold = gold; 
         data.jewel = jewel;
         data.stage1bestWave = StageManager.Instance.bestWave[0];
@@ -330,6 +370,21 @@ public class GameManager : MonoBehaviour
         ownedSubWeapons = loadData.ownedSubWeapons;
         mainEquipWeapon = loadData.mainEquipWeapon;
         subEquipWeapon = loadData.subEquipWeapon;
+
+        for (int i = 0; i < ownedWeapons.Count; i++)
+        {
+           ownedWeapons[i].data = allMainWeapons.Find(w => w.weaponName == loadData.mainWeaponName[i]);
+        }
+        
+        for (int i = 0; i < ownedSubWeapons.Count; i++)
+        {
+            ownedSubWeapons[i].data = allSubWeapons.Find(w => w.weaponName == loadData.subWeaponName[i]);
+        }
+        
+        for (int i = 0; i < ownedPartners.Count; i++)
+        {
+            ownedPartners[i].data = allPartners.Find(w => w.partnerName == loadData.partnerName[i]);
+        }
         selectSkills =  loadData.selectedSkills;
         gold = loadData.gold;
         jewel = loadData.jewel;
