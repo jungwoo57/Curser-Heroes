@@ -121,10 +121,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55f392efda73e064294cd06e1c5a742f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackCooldown: 5
   MonsterLayer:
     serializedVersion: 2
     m_Bits: 128
   isDead: 0
+  deathTime: 1
   attackDelay: 1
   detectionRadius: 10
   effectPrefab: {fileID: 7544652967407294189, guid: 20fda57c09c70924a9ae1cd60c5190ce, type: 3}
