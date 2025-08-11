@@ -65,6 +65,7 @@ public class ForgeUI : MonoBehaviour
         {
             ClickHintButton();
             GameManager.Instance.useForge = true;
+            GameManager.Instance.Save();
         }
     }
 

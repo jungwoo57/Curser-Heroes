@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
@@ -44,8 +45,17 @@ public class LabPanel : MonoBehaviour
         unlockButton.interactable = false;
         useJewelImage.gameObject.SetActive(false);
         skillPlayer.clip = null;
+
+        if (!GameManager.Instance.useLab)
+        {
+            ClickHintButton();
+            GameManager.Instance.useLab = true;
+            GameManager.Instance.Save();
+        }
     }
 
+    
+    
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape) && !tutorialImageUI.gameObject.activeInHierarchy)

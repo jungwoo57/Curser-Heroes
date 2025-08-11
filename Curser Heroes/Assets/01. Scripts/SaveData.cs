@@ -18,5 +18,11 @@ public class SaveData
     
     public int gold;
     public int jewel;
-    //public int bestScore;
+
+    public bool useStage;
+    public bool useForge;
+    public bool useLab;
+    public bool useBar;
+    public bool useSkillList;
+    public bool useWeaponSelectList;
 }

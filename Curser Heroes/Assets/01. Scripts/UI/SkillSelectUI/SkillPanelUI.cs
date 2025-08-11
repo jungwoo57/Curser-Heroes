@@ -11,6 +11,12 @@ public class SkillPanelUI : MonoBehaviour
    private void OnEnable()
    {
       warningPanel.SetActive(false);
+      if (!GameManager.Instance.useSkillList)
+      {
+         ClickHintButton();
+         GameManager.Instance.useSkillList = true;
+         GameManager.Instance.Save();
+      }
    }
 
    public void OnClickExit()

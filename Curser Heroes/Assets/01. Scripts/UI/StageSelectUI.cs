@@ -50,8 +50,13 @@ public class StageSelectUI : MonoBehaviour
 
         private void OnEnable()
         {
-                //maxStageIndex = GameManager.Instance.bestScore;
                 UpdateStageInfoUI();
+                if (!GameManager.Instance.useStage)
+                {
+                        ClickHintButton();
+                        GameManager.Instance.useStage = true;
+                        GameManager.Instance.Save();
+                }
         }
 
         void Update()

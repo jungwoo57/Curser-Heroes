@@ -19,10 +19,10 @@ public class SaveLoadManager : MonoBehaviour
     {
         path = Application.persistentDataPath + "/save.data";
         saveData = new SaveData();
-        if (GameManager.Instance != null)
-        {
-            GameManager.Instance.Load();
-        }
+        //if (GameManager.Instance != null)
+        //{
+        //   GameManager.Instance.Load();
+        //}
     }
     
 

@@ -14,6 +14,7 @@ public class BarUI : MonoBehaviour
        {
            ClickHintButton();
            GameManager.Instance.useBar = true;
+           GameManager.Instance.Save();
        }
    }
 

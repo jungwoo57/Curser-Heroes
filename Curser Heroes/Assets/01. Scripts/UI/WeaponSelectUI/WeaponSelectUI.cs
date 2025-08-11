@@ -18,6 +18,12 @@ public class WeaponSelectUI : MonoBehaviour
     private void OnEnable()
     {
         ChangeWeaponPanel("main");
+        if (!GameManager.Instance.useWeaponSelectList)
+        {
+            ClickHintButton();
+            GameManager.Instance.useWeaponSelectList = true;
+            GameManager.Instance.Save();
+        }
     }
 
     public void ChangeWeaponPanel(string buttonName)  // 무기 선택 화면 바꾸기

@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
     public bool useLab;
     public bool useBar;
     public bool useSkillList;
-    public bool weaponSelectList;
+    public bool useWeaponSelectList;
     
     public event Action OnGoldChanged;
     public event Action OnJewelChanged;
@@ -305,6 +305,13 @@ public class GameManager : MonoBehaviour
         data.stage1bestWave = StageManager.Instance.bestWave[0];
         data.stage1bestWave = StageManager.Instance.bestWave[1];
         data.stage1bestWave = StageManager.Instance.bestWave[2];
+        data.useStage = useStage;
+        data.useForge = useForge;
+        data.useBar = useBar;
+        data.useLab = useLab;
+        data.useSkillList = useSkillList;
+        data.useWeaponSelectList = useWeaponSelectList;
+        
         SaveLoadManager.instance.Save(data);
     }
 
@@ -329,6 +336,12 @@ public class GameManager : MonoBehaviour
         StageManager.Instance.bestWave[0] = loadData.stage1bestWave;
         StageManager.Instance.bestWave[1] = loadData.stage2bestWave;
         StageManager.Instance.bestWave[2] = loadData.stage3bestWave;
+        useStage = loadData.useStage;
+        useForge = loadData.useForge;
+        useBar = loadData.useBar;
+        useLab = loadData.useLab;
+        useSkillList = loadData.useSkillList;
+        useWeaponSelectList = loadData.useWeaponSelectList;
         OnGoldChanged?.Invoke();
         //bestScore = loadData.bestScore;
     }

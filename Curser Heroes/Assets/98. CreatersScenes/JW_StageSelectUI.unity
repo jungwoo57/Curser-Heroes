@@ -11726,10 +11726,12 @@ MonoBehaviour:
   gold: 9999999
   jewel: 999999
   mouseSensitivity: 1
-  useStage: 1
-  useForge: 1
-  useLab: 1
-  useBar: 1
+  useStage: 0
+  useForge: 0
+  useLab: 0
+  useBar: 0
+  useSkillList: 0
+  useWeaponSelectList: 0
   startSessionGold: 0
   startSessionJewel: 0
   currentWave: 0
