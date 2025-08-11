@@ -21,8 +21,8 @@ MonoBehaviour:
     \uB9CC\uB4DC\uB294 \uD6A8\uACFC."
   upgradeCost: 26020000ba02000076030000650400009405000015070000fe0800006b0b0000800e00006a120000
   unlockCost: 1000
-  baseDamage: 2
-  damagePerLevel: 1.4
+  baseDamage: 7
+  damagePerLevel: 1.5
   cooldown: 0.5
   effect: 0
   weaponType: 1
@@ -36,7 +36,7 @@ MonoBehaviour:
   maxAmmo: 3
   reloadTime: 3
   manaCost: 5
-  requiredChargeTime: 2.5
+  requiredChargeTime: 1
   ForceVisualPrefab: {fileID: 0}
   LineVisualPrefab: {fileID: 0}
   effectWidth: 1.5
