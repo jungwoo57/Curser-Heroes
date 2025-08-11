@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 using UnityEngine;
 
@@ -21,7 +21,7 @@ public class SaveLoadManager : MonoBehaviour
         saveData = new SaveData();
         //if (GameManager.Instance != null)
         //{
-        //   GameManager.Instance.Load();
+        //    GameManager.Instance.Load();
         //}
     }
     

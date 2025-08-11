@@ -13,8 +13,12 @@ MonoBehaviour:
   m_Name: TestWeapon
   m_EditorClassIdentifier: 
   weaponName: Spoon
+  weaponImage: {fileID: 0}
+  weaponDesc: 
+  upgradeCost: 
+  unlockCost: 0
   baseDamage: 10
-  damagePerLevel: 1.5
+  damagePerLevel: 5.5
   attackCooldown: 0.5
   attackRange: 0.5
   maxLives: 3
