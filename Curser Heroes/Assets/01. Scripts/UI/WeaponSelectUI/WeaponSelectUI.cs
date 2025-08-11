@@ -12,7 +12,7 @@ public class WeaponSelectUI : MonoBehaviour
     [SerializeField] private GameObject selectScroll;             // 무기 선택 창
     [SerializeField] private GameObject weaponInfoScroll;        // 무기 정보 보여주는 판넬
     [SerializeField] private GameObject ExitButton;
-
+    [SerializeField] private TutorialImageUI tutorialImageUI;
     public static event Action OnEquipUIUpdate;
 
     private void OnEnable()
@@ -52,5 +52,10 @@ public class WeaponSelectUI : MonoBehaviour
     {
         weaponSelectUI.SetActive(false);
         OnEquipUIUpdate?.Invoke();
+    }
+    
+    public void ClickHintButton()
+    {
+        tutorialImageUI.gameObject.SetActive(true);
     }
 }

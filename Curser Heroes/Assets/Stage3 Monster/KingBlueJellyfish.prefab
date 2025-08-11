@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6399340596730785121}
   - component: {fileID: 3439928779430709343}
   - component: {fileID: 6826303127476980083}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: KingBlueJellyfish
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 347.3666, y: -0.11564091, z: -0.24071947}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64cba1e50bbdd224db96c163892f0bac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackCooldown: 0
   MonsterLayer:
     serializedVersion: 2
     m_Bits: 128

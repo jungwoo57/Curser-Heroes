@@ -13,7 +13,7 @@ public class TitleUI : MonoBehaviour
 
     public void OnClickGameStart()
     {
-        AudioManager.Instance.PlayButtonSound();
+        AudioManager.Instance.PlayButtonSound(buttonType.title);
         TitleMainLoadManager.Instance.LoadMain();
     }
 

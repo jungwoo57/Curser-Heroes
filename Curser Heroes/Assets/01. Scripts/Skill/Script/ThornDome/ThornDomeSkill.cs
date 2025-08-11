@@ -46,8 +46,14 @@ public class ThornDomeSkill : MonoBehaviour
         Vector3 spawnPosition = GetSpawnPositionNearClosestMonster();
         int damage = skillInstance.GetCurrentLevelData().damage;
 
+        AudioSource audioSource = GetComponent<AudioSource>();
+        if (audioSource != null && skillInstance.skill.audioClip != null)
+        {
+            audioSource.PlayOneShot(skillInstance.skill.audioClip);
+        }
+
         activeThornDome = Instantiate(thornDomePrefab, spawnPosition, Quaternion.identity);
-        activeThornDome.GetComponent<ThornDome>().Init(damage, cursorTransform);
+        activeThornDome.GetComponent<ThornDome>().Init(damage, cursorTransform, skillInstance.skill.audioClip);
 
         timer = 0f;
     }

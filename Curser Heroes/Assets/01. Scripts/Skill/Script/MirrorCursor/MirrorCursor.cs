@@ -10,8 +10,15 @@ public class MirrorCursor : MonoBehaviour
     private float timer;
     private Vector3 offset;
 
-    public void Init(Transform originalCursor, float damage, float duration, Vector3 offset)
+    private AudioSource audioSource;
+    private AudioClip attackSound;
+
+    public void Init(Transform originalCursor, float damage, float duration, Vector3 offset, AudioClip clip)
     {
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null) audioSource = gameObject.AddComponent<AudioSource>();
+        this.attackSound = clip;
+
         this.targetCursor = originalCursor;
         this.damage = damage;
         this.duration = duration;
@@ -49,8 +56,12 @@ public class MirrorCursor : MonoBehaviour
     {
         Debug.Log($"[MirrorCursor] 충돌 감지: {other.name}");
 
-        if (((1 << other.gameObject.layer) & monsterLayer) == 0)
-            return;
+        if (((1 << other.gameObject.layer) & monsterLayer) == 0) return;
+
+        if (audioSource != null && attackSound != null)
+        {
+            audioSource.PlayOneShot(attackSound);
+        }
 
         // BaseMonster 처리
         if (other.TryGetComponent<BaseMonster>(out var baseMonster))

@@ -45,8 +45,13 @@ public class SeaUrchin : BaseMonster
         Collider2D hit = Physics2D.OverlapCircle(origin, attackRange, cursorLayer);
         if (hit == null) return;
 
-        if (hit.TryGetComponent<WeaponLife>(out var life))
-            life.TakeLifeDamage();
+        if (hit != null && WeaponManager.Instance != null && !WeaponManager.Instance.isInvincible)
+        {
+            if (hit.gameObject.layer == LayerMask.NameToLayer("Weapon"))
+            {
+                WeaponManager.Instance.TakeWeaponLifeDamage();
+            }
+        }
 
         var mover = hit.GetComponent<CursorMoving>()
                     ?? hit.GetComponentInParent<CursorMoving>();

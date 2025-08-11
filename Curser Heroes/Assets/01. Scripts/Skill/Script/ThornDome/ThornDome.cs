@@ -12,13 +12,20 @@ public class ThornDome : MonoBehaviour
     private HashSet<BaseMonster> damagedMonsters = new HashSet<BaseMonster>();
     private HashSet<BossStats> damagedBosses = new HashSet<BossStats>();
 
+    private AudioSource audioSource;
+    private AudioClip attackSound;
+
     private void Start()
     {
         Destroy(gameObject, duration);
     }
 
-    public void Init(int damage, Transform cursor)
+    public void Init(int damage, Transform cursor, AudioClip clip)
     {
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null) audioSource = gameObject.AddComponent<AudioSource>();
+        this.attackSound = clip;
+
         this.damage = damage;
         this.cursorTransform = cursor;
         Debug.Log($"[ThornDome] Init: 데미지 {damage}");
@@ -48,6 +55,11 @@ public class ThornDome : MonoBehaviour
     void OnTriggerEnter2D(Collider2D col)
     {
         Debug.Log($"[ThornDome] 충돌 감지: {col.name}");
+        
+        if (audioSource != null && attackSound != null)
+        {
+            audioSource.PlayOneShot(attackSound);
+        }
 
         if (col.TryGetComponent<BaseMonster>(out var monster))
         {

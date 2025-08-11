@@ -54,10 +54,17 @@ public class MirrorCursorSkill : MonoBehaviour
 
     private void CreateMirror(Vector3 offset, float damage, Vector3 localScale)
     {
+        AudioSource audioSource = GetComponent<AudioSource>();
+
         Vector3 spawnPos = cursorTransform.position + offset;
         GameObject mirror = Instantiate(mirrorPrefab, spawnPos, Quaternion.identity);
         mirror.transform.localScale = localScale;
 
-        mirror.GetComponent<MirrorCursor>().Init(cursorTransform, damage, mirrorDuration, offset);
+        if (audioSource != null && skillInstance.skill.audioClip != null)
+        {
+            audioSource.PlayOneShot(skillInstance.skill.audioClip);
+        }
+
+        mirror.GetComponent<MirrorCursor>().Init(cursorTransform, damage, mirrorDuration, offset, skillInstance.skill.audioClip);
     }
 }

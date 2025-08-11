@@ -62,21 +62,29 @@ public class VillageUI : MonoBehaviour
     public void OpenStageEntryPanel()
     {
         stageEntryPanel.SetActive(true);
+        if(AudioManager.Instance != null)
+            AudioManager.Instance.PlayButtonSound(buttonType.village);
     }
 
     public void OpenLaboratoryEntryPanel()
     {
         laboratoryEntryPanel.SetActive(true);
+        if(AudioManager.Instance != null)
+            AudioManager.Instance.PlayButtonSound(buttonType.village);
     }
 
     public void OpenBarEntryPanel()
     {
         barEntryPanel.SetActive(true);
+        if(AudioManager.Instance != null)
+            AudioManager.Instance.PlayButtonSound(buttonType.village);
     }
 
     public void OpenForgeEntryPanel()
     {
         forgeEntryPanel.SetActive(true);
+        if(AudioManager.Instance != null)
+            AudioManager.Instance.PlayButtonSound(buttonType.village);
     }
 
     public void OpenMenuPanel()

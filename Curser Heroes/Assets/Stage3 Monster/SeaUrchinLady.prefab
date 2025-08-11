@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8859515533239754020}
   - component: {fileID: -925712610005276961}
   - component: {fileID: 7842608248014606238}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SeaUrchinLady
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e17d30faa1b430b4b96054db93304a2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackCooldown: 0
   MonsterLayer:
     serializedVersion: 2
     m_Bits: 128

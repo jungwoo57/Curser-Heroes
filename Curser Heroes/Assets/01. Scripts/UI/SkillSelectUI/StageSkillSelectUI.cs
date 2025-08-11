@@ -68,4 +68,6 @@ public class StageSkillSelectUI : MonoBehaviour
         skillInfoPanelUI.gameObject.SetActive(false);
         skillInfcoCloseButton.gameObject.SetActive(false);
     }
+    
+    
 }

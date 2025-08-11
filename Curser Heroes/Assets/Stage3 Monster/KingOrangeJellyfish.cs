@@ -8,6 +8,7 @@ public class KingOrangeparipari : OrangeJellyfish
 
     protected override void Die()
     {
+        if (isDead) return;
         SpawnMinions();
         base.Die();  
     }

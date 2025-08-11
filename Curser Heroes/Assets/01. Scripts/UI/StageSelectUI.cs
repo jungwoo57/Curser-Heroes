@@ -30,7 +30,7 @@ public class StageSelectUI : MonoBehaviour
         [Header("창 모음")] 
         [SerializeField] private GameObject weaponSelectUI;
         [SerializeField] private GameObject skillListPanel;
-        
+        [SerializeField] private TutorialImageUI tutorialImageUI;
        
 
         void Awake()
@@ -56,7 +56,9 @@ public class StageSelectUI : MonoBehaviour
 
         void Update()
         {
-                if (Input.GetKeyDown(KeyCode.Escape))
+                if (Input.GetKeyDown(KeyCode.Escape) && !tutorialImageUI.gameObject.activeInHierarchy
+                    && !weaponSelectUI.gameObject.activeInHierarchy &&!skillListPanel.gameObject.activeInHierarchy
+                    )
                 {
                         ClickHomeButton();
                 }
@@ -149,6 +151,9 @@ public class StageSelectUI : MonoBehaviour
                 yield return new WaitUntil(() => UIManager.Instance != null);
         }
         
-        
+        public void ClickHintButton()
+        {
+                tutorialImageUI.gameObject.SetActive(true);
+        }
 
 }

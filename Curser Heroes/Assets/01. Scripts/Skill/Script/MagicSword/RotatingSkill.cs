@@ -8,8 +8,21 @@ public class RotatingSkill : MonoBehaviour
     private float rotateSpeed = 90f;
     private float radius = 1f;
 
+    private AudioSource audioSource;
+
     public void Init(SkillManager.SkillInstance skillInstance, Transform playerTransform)
     {
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+
+        if (audioSource != null && skillInstance.skill.audioClip != null)
+        {
+            audioSource.PlayOneShot(skillInstance.skill.audioClip);
+        }
+
         var levelData = skillInstance.skill.levelDataList[skillInstance.level - 1];
         player = playerTransform;
 

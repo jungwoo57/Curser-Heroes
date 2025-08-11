@@ -10,11 +10,19 @@ public class ArcaneTrailSkill : MonoBehaviour
 
     private Camera mainCamera;
 
+    private AudioSource audioSource;
+
     public void Init(SkillManager.SkillInstance instance)
     {
         skillInstance = instance;
         timer = cooldown; // 웨이브 시작 시 즉시 발동
         mainCamera = Camera.main;
+
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
     }
 
     void Update()
@@ -32,8 +40,13 @@ public class ArcaneTrailSkill : MonoBehaviour
 
             int damage = skillInstance.GetCurrentLevelData().damage;
 
+            if (skillInstance.skill.audioClip != null)
+            {
+                audioSource.PlayOneShot(skillInstance.skill.audioClip);
+            }
+
             GameObject obj = Instantiate(arcaneTrailPrefab, spawnPos, Quaternion.identity);
-            obj.GetComponent<ArcaneTrail>().Init(damage);
+            obj.GetComponent<ArcaneTrail>().Init(damage, skillInstance.skill.audioClip);
         }
     }
 }

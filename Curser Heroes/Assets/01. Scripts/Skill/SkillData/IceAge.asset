@@ -19,7 +19,8 @@ MonoBehaviour:
   description: "\uD53C\uD574\uB97C \uC8FC\uB294 \uC5BC\uC74C \uBC1C\uD310\uC744 2\uCD08\uB9C8\uB2E4
     \uCEE4\uC11C \uC704\uCE58\uC5D0 \uC18C\uD658"
   skillPrefab: {fileID: 8147731778620953181, guid: 68dc81e5180dd11498dd1c788b138340, type: 3}
-  animClip: {fileID: 32900000, guid: fc49c0f581c5c2143a5d44fa6b2af2e9, type: 3}
+  animClip: {fileID: 32900000, guid: c9ae3d7f0d827f544b8df662064ac618, type: 3}
+  audioClip: {fileID: 8300000, guid: d2e5abdff1ee98c44946db5a61e3d000, type: 3}
   levelDataList:
   - level: 1
     damage: 1

@@ -50,24 +50,12 @@ public class ForgeUI : MonoBehaviour
     public OwnedSubWeapon selectSubWeapon;
 	public WeaponData selectData;
 	public SubWeaponData selectSubData;
-	//public Image GoldImage;
-	//public Image JewelImage;
-
-    //[SerializeField] private Image useJewelImage;
-    //[SerializeField] private Image useGoldImage;
+	
     
-    public TutorialUI tutorialUI;
-    [SerializeField] private GameObject tutorialPanel;
+    public TutorialImageUI tutorialImageUI;
     [SerializeField] private ScrollRect weaponScroll;
     private void OnEnable()
     {
-        tutorialUI.gameObject.SetActive(false);
-        tutorialPanel.gameObject.SetActive(false);
-        if (!GameManager.Instance.useForge)
-        {
-            tutorialUI.gameObject.SetActive(true);
-            tutorialPanel.gameObject.SetActive(true);
-        }
         isMain = true;
         mainWeaponButton.interactable = false;
         subWeaponButton.interactable = true;
@@ -77,7 +65,7 @@ public class ForgeUI : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !tutorialImageUI.gameObject.activeInHierarchy)
         {
             ClickExitButton();
         }
@@ -172,6 +160,7 @@ public class ForgeUI : MonoBehaviour
         unlockButton.interactable = true;
         useGoldText.gameObject.SetActive(false);
         useJewelText.gameObject.SetActive(false);
+        weaponHp.gameObject.SetActive(false);
         goldImage.gameObject.SetActive(false);
         jewelImage.gameObject.SetActive(false);
         
@@ -190,6 +179,7 @@ public class ForgeUI : MonoBehaviour
                 }
             }
             weaponDesc.text = selectData.weaponDesc;
+            weaponHp.gameObject.SetActive(true);
             weaponHp.text = ("체력 : ") + selectData.maxLives.ToString();
             hasGoldText.text = GameManager.Instance.GetGold().ToString();
             hasJewelText.text = GameManager.Instance.GetJewel().ToString();
@@ -211,7 +201,7 @@ public class ForgeUI : MonoBehaviour
                 if (selectWeapon.level < 10)
                 {
                     useGoldText.text =  selectData.upgradeCost[selectWeapon.level].ToString();
-                    upgradeWeaponAtk.text = (selectWeapon.levelDamage + selectData.damagePerLevel).ToString();
+                    upgradeWeaponAtk.text = ((int)(selectWeapon.levelDamage + selectData.damagePerLevel)).ToString();
                 }
                 else
                 {
@@ -235,6 +225,7 @@ public class ForgeUI : MonoBehaviour
                 unlockButton.gameObject.SetActive(true);
                 unlockText.color = enabledColor;
                 unlockButton.interactable = true;
+                weaponAtk.text = "공격력 : " + selectData.baseDamage.ToString();
                 currentWeaponAtk.text = "미해금";
                 upgradeWeaponAtk.text = selectData.baseDamage.ToString();
                 weaponName.text = selectData.weaponName;
@@ -285,7 +276,7 @@ public class ForgeUI : MonoBehaviour
                 if (selectSubWeapon.level < 10)
                 {
                     useGoldText.text = selectSubData.upgradeCost[selectSubWeapon.level].ToString();
-                    upgradeWeaponAtk.text = (selectSubWeapon.levelDamage + selectSubData.damagePerLevel).ToString();
+                    upgradeWeaponAtk.text = ((int)(selectSubWeapon.levelDamage + selectSubData.damagePerLevel)).ToString();
                     reinforceText.color = enabledColor;
                 }
                 else
@@ -402,5 +393,10 @@ public class ForgeUI : MonoBehaviour
     {
         yield return new WaitForSeconds(durationTime);
         effect.SetActive(false);
+    }
+
+    public void ClickHintButton()
+    {
+        tutorialImageUI.gameObject.SetActive(true);
     }
 }

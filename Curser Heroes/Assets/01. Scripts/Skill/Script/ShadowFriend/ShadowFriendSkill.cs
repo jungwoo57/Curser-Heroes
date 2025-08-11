@@ -64,5 +64,11 @@ public class ShadowFriendSkill : MonoBehaviour
         // 투사체 발사
         GameObject obj = Instantiate(shadowProjectilePrefab, cursorTransform.position, Quaternion.identity);
         obj.GetComponent<ShadowProjectile>().Init(direction, skillInstance);
+
+        AudioSource audioSource = GetComponent<AudioSource>();
+        if (audioSource != null && skillInstance.skill.audioClip != null)
+        {
+            audioSource.PlayOneShot(skillInstance.skill.audioClip);
+        }
     }
 }

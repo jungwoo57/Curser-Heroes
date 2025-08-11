@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
     [Header("기타 데이터")]
     [SerializeField] private int gold = 9999;
     [SerializeField]private int jewel = 0;
-    [SerializeField] public float mouseSensitivity = 0.5f;
+    [SerializeField] public float mouseSensitivity = 1.0f;
     
     [Header("튜토리얼 체크용")]
     public bool useStage;
@@ -136,7 +136,7 @@ public class GameManager : MonoBehaviour
             AddJewel(- weaponData.unlockCost);
             ownedWeapons.Add(new OwnedWeapon(weaponData));
         }
-
+        AudioManager.Instance.PlayButtonSound(buttonType.village);
         Save();
     }
 
@@ -210,6 +210,7 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("해당 데이터 없거나 레벨이 만랩");
         }
+        UpgradeSound();
         Save();
     }
     
@@ -226,6 +227,7 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("해당 데이터 없음");
         }
+        UpgradeSound();
         Save();
     }
 
@@ -246,7 +248,7 @@ public class GameManager : MonoBehaviour
                     HasSkills.Add(skillData);
                 }
             }
-            
+            UpgradeSound();
 
             Save();
         }
@@ -260,6 +262,7 @@ public class GameManager : MonoBehaviour
             AddGold(-data.upgradeCost[ownedPartners[index].level]);
             ownedPartners[index].level++;
         }
+        UpgradeSound();
         Save();
     }
     public void UnlockPartner(PartnerData partnerData)
@@ -269,6 +272,7 @@ public class GameManager : MonoBehaviour
             jewel -= partnerData.unlockCost;
             ownedPartners.Add(new OwnedPartner(partnerData));
         }
+        UpgradeSound();
         Save();
             
     }
@@ -305,9 +309,11 @@ public class GameManager : MonoBehaviour
     [ContextMenu("Load")]
     public void Load()
     {
+        Debug.Log("여긴됨");
         SaveData loadData = new SaveData();
         loadData = SaveLoadManager.instance.Load();
         if (loadData == null) return;
+        Debug.Log("데이터 로드됨");
         unlockedSkills = loadData.unlockedSkills ?? new List<SkillData>();
         selectSkills = loadData.selectedSkills ?? new List<SkillData>();
         skillPool = new List<SkillData>(HasSkills);
@@ -321,7 +327,7 @@ public class GameManager : MonoBehaviour
         StageManager.Instance.bestWave[0] = loadData.stage1bestWave;
         StageManager.Instance.bestWave[1] = loadData.stage2bestWave;
         StageManager.Instance.bestWave[2] = loadData.stage3bestWave;
-        
+        OnGoldChanged?.Invoke();
         //bestScore = loadData.bestScore;
     }
 
@@ -332,5 +338,11 @@ public class GameManager : MonoBehaviour
         {
             Save();
         }
+    }
+
+    public void UpgradeSound()
+    {
+        if(AudioManager.Instance != null)
+            AudioManager.Instance.PlayButtonSound(buttonType.upgrade);
     }
 }

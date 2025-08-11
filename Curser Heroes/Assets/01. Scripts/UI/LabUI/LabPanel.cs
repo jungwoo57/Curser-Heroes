@@ -15,7 +15,6 @@ public class LabPanel : MonoBehaviour
     public TextMeshProUGUI hasJewelText;
     public TextMeshProUGUI useJewelText;
     [SerializeField]private ScrollRect scrollRect;
-    [SerializeField]private TutorialUI tutorialUI;
     [SerializeField] private VideoPlayer skillPlayer;
     [SerializeField] private RawImage skillAnimImage;
     [SerializeField] private Image useJewelImage;
@@ -28,13 +27,9 @@ public class LabPanel : MonoBehaviour
 	[SerializeField] private TextMeshProUGUI skillTypeText;
     [SerializeField] private TextMeshProUGUI maxLevelText;
         
+    [SerializeField] private TutorialImageUI tutorialImageUI;
     private void OnEnable()
     {
-        tutorialUI.gameObject.SetActive(false);
-        if (!GameManager.Instance.useLab)
-        {
-            tutorialUI.gameObject.SetActive(true);
-        }
         scrollRect.verticalNormalizedPosition = 1.0f;
         selectSkill = null;
         skillName.text = "";
@@ -53,7 +48,7 @@ public class LabPanel : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !tutorialImageUI.gameObject.activeInHierarchy)
         {
             ClickExitButton();
         }
@@ -213,5 +208,10 @@ public class LabPanel : MonoBehaviour
     {
         yield return new WaitForSeconds(durationTime);
         effect.SetActive(false);
+    }
+    
+    public void ClickHintButton()
+    {
+        tutorialImageUI.gameObject.SetActive(true);
     }
 }

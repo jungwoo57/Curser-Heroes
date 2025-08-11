@@ -16,6 +16,7 @@ public class SkillData : ScriptableObject
     
     public GameObject skillPrefab;
     public VideoClip animClip;
+    public AudioClip audioClip;
     
     
     public List<SkillLevelData> levelDataList; // 레벨 별 수치

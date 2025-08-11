@@ -11,6 +11,7 @@ public class Hunter : BasePartner
     [SerializeField] private int arrowMin;
     [SerializeField] private float xArea;
     [SerializeField] private float yArea;
+    [SerializeField] private float waitTime;
     protected override void ActivateSkill()
     {
         arrowMax = arrowAnim.Length;
@@ -20,18 +21,7 @@ public class Hunter : BasePartner
         }
 
         StartCoroutine(ArrowAnimation());
-        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position,skillRange,LayerMask.GetMask("Monster"));
-
-        //몬스터마다 1씩 피해 주기
-        foreach (var hit in hits)
-        {
-            BaseMonster monster = hit.GetComponent<BaseMonster>();
-            if (monster != null)
-            {
-                monster.TakeDamage(1, null);
-                Debug.Log($"Hunter 스킬 발동: {monster.name}에게 1의 피해를 입힘");
-            }
-        }
+        StartCoroutine(AttackDelay());
 
         //스킬 사용 후 게이지 초기화
         currentGauge = 0f;
@@ -62,6 +52,23 @@ public class Hunter : BasePartner
             hunterAnim[i].SetActive(false);
         }
     }
-    
+
+    IEnumerator AttackDelay()
+    {
+        yield return new WaitForSeconds(waitTime);
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position,skillRange,LayerMask.GetMask("Monster"));
+
+        //몬스터마다 1씩 피해 주기
+        foreach (var hit in hits)
+        {
+            BaseMonster monster = hit.GetComponent<BaseMonster>();
+            if (monster != null)
+            {
+                monster.TakeDamage(1, null);
+                Debug.Log($"Hunter 스킬 발동: {monster.name}에게 1의 피해를 입힘");
+            }
+        }
+
+    }
 }
 

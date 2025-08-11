@@ -52,6 +52,13 @@ public class IndomitableSkill : MonoBehaviour
         if (isOnCooldown) return false;
 
         Debug.Log("[불굴] 피해 1회 방어!");
+
+        AudioSource audioSource = GetComponent<AudioSource>();
+        if (audioSource != null && skillInstance.skill.audioClip != null)
+        {
+            audioSource.PlayOneShot(skillInstance.skill.audioClip);
+        }
+
         DeployShieldEffect();
 
         if (shieldIdleInstance != null)

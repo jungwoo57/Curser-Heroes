@@ -299,7 +299,7 @@ GameObject:
   - component: {fileID: 3783996289271368873}
   - component: {fileID: 1390987151609251020}
   - component: {fileID: 9026785863417418031}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bivalvia
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -388,7 +388,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcb233c23cd76b54ab2f62c736dfc36b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackCooldown: 3
+  attackCooldown: 5
   MonsterLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -396,14 +396,14 @@ MonoBehaviour:
   deathTime: 1
   projectilePrefab: {fileID: 4701117680639547694}
   firePoint: {fileID: 593780125548016288}
-  attackRange: 5
+  attackRange: 50
   warningArea: {fileID: 5298624056027490392}
   isAttacking: 0
   targetPos: {x: 0, y: 0}
   minScale: 0.1
   maxScale: 0.4
   maxDistance: 0
-  speed: 5
+  speed: 7
 --- !u!95 &1390987151609251020
 Animator:
   serializedVersion: 5
