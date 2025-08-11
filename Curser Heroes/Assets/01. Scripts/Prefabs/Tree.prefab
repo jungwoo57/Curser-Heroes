@@ -98,12 +98,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1809679358, guid: ce98609741aae8b4ea5b6385e77d1d38, type: 3}
+  m_Sprite: {fileID: 3606473586980471517, guid: b6c578bc8ba68c04082f02bbfa3f7207, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.33, y: 0.32}
+  m_Size: {x: 0.26, y: 0.27}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -121,9 +121,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7419111cfc1071143bd8fd85de688080, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackCooldown: 5
   MonsterLayer:
     serializedVersion: 2
     m_Bits: 128
+  isDead: 0
+  deathTime: 1
   attackDelay: 0.5
   detectionRadius: 10
   effectPrefab: {fileID: 7544652967407294189, guid: 20fda57c09c70924a9ae1cd60c5190ce, type: 3}
@@ -163,9 +166,9 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.33, y: 0.32}
-    newSize: {x: 0.33, y: 0.32}
+    pivot: {x: 0.5, y: 0.5185185}
+    oldSize: {x: 0.26, y: 0.27}
+    newSize: {x: 0.26, y: 0.27}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
