@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Hunter : BasePartner
 {
@@ -12,6 +14,15 @@ public class Hunter : BasePartner
     [SerializeField] private float xArea;
     [SerializeField] private float yArea;
     [SerializeField] private float waitTime;
+    [SerializeField] private int damage;
+    [SerializeField] private SubWeaponManager subWeaponManager;
+
+    private void Start()
+    {
+        subWeaponManager = FindObjectOfType<SubWeaponManager>();
+        damage = (int)subWeaponManager.upgradeComponent.GetCurrentDamage();
+    }
+
     protected override void ActivateSkill()
     {
         arrowMax = arrowAnim.Length;
@@ -19,7 +30,8 @@ public class Hunter : BasePartner
         {
             hunterAnim[i].SetActive(true);
         }
-
+        
+        //if(sub)
         StartCoroutine(ArrowAnimation());
         StartCoroutine(AttackDelay());
 
@@ -64,8 +76,15 @@ public class Hunter : BasePartner
             BaseMonster monster = hit.GetComponent<BaseMonster>();
             if (monster != null)
             {
-                monster.TakeDamage(1, null);
-                Debug.Log($"Hunter 스킬 발동: {monster.name}에게 1의 피해를 입힘");
+                monster.TakeDamage(damage, null);
+            }
+            
+            BossStats boss = hit.GetComponent<BossStats>();
+            {
+                if (boss != null)
+                {
+                    boss.TakeDamage(damage);
+                }
             }
         }
 

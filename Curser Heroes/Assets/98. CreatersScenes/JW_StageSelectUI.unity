@@ -11648,8 +11648,8 @@ MonoBehaviour:
     data: {fileID: 0}
     level: 0
     bookMark: 0
-  gold: 9999999
-  jewel: 999999
+  gold: 0
+  jewel: 0
   useStage: 0
   useForge: 0
   useLab: 0
@@ -22928,7 +22928,7 @@ MonoBehaviour:
   skillListButton: {fileID: 1415092655}
   stageIndex: 0
   maxStageIndex: 0
-  unlockStageWave: 0
+  unlockStageWave: 40
   weaponSelectUI: {fileID: 81744887}
   skillListPanel: {fileID: 448122871}
   tutorialImageUI: {fileID: 1563066039}
