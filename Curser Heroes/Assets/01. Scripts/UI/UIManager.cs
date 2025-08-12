@@ -200,6 +200,10 @@ public class UIManager : MonoBehaviour
 
         // 페이드 인 완료 후 GameOverImage 활성화
         gameOver.SetActive(true);
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.Save();
+        }
     }
     private void UpdateGameOverData()
     {
