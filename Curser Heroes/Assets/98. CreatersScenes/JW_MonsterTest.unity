@@ -1489,7 +1489,6 @@ MonoBehaviour:
     bookMark: 0
   gold: 99999
   jewel: 0
-  mouseSensitivity: 0.5
   useStage: 0
   useForge: 0
   useLab: 0
@@ -2637,6 +2636,10 @@ PrefabInstance:
     - target: {fileID: 6417681730815138463, guid: daefcbe7240c0ab45a910a91b63ecedd, type: 3}
       propertyPath: deActiveTime
       value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6662786613458827146, guid: daefcbe7240c0ab45a910a91b63ecedd, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

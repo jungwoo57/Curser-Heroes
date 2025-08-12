@@ -1837,7 +1837,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3
   animator: {fileID: 3921090695311569316}
-  deActiveTime: 2
+  deActiveTime: 3
+  col: {fileID: 105557508868897021}
+  colActiveTime: 0.4
 --- !u!1 &5440618157817693787
 GameObject:
   m_ObjectHideFlags: 0

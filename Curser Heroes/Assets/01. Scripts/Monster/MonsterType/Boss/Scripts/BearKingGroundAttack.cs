@@ -7,11 +7,14 @@ public class BearKingGroundAttack : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private Animator animator;
     [SerializeField] private float deActiveTime;
+    [SerializeField] private Collider2D col;
+    [SerializeField] private float colActiveTime;
     private Vector3 dir;
 
 
     private void OnEnable()
     {
+        col.enabled = false;
         StartCoroutine(SelfDeactive());
         animator.SetTrigger("Idle");
     }
@@ -41,7 +44,9 @@ public class BearKingGroundAttack : MonoBehaviour
 
     IEnumerator SelfDeactive()
     {
-        yield return new WaitForSeconds(deActiveTime);
+        yield return new WaitForSeconds(colActiveTime);
+        col.enabled = true;
+        yield return new WaitForSeconds(deActiveTime - colActiveTime);
         animator.SetTrigger("End");
         yield return new WaitForSeconds(0.2f);
         gameObject.SetActive(false);
