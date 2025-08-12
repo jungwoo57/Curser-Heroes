@@ -97,6 +97,7 @@
 - CursorMoving : 플레이어(커서) 이동 관리
 - WeaponManager : 무기 장착, 체력, 무적 처리, 스킬 발동 관리
 - SubWeaponManager : 보조 무기 발동, 조준, 공격 방식, 쿨타임 관리
+- EffectManager : 보조 무기 상태이상 관리
 - PoolingRefactory : 몬스터 스폰 관리
 - SkillManager : 스킬 선택, 효과, 레벨업, UI 반영 관리
 - UIManager : UI 전환 및 연출 관리
