@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,15 +7,16 @@ public class WaveManager : MonoBehaviour
 {
     [SerializeField] private CursorWeapon cursorWeapon;
 
-    public WaveGroupData waveGroupData;
-    public GameManager gameManager;
+    public StageData currentStage;
     public Spawner spawner;
+
     public static WaveManager Instance { get; private set; }
+    public int CurrentWaveNumber => currentWaveIndex + 1;
+
     public bool IsWavePlaying => !waveCleared && spawningComplete;
 
     public int clearGold;
     public int clearJewel;
-    public WaveEntry currentWaveData;
 
     private int currentWaveIndex = 0;
     private List<GameObject> spawnedMonsters = new List<GameObject>();
@@ -29,55 +31,87 @@ public class WaveManager : MonoBehaviour
             return;
         }
         Instance = this;
-        gameManager = GameManager.Instance;
+    }
+
+    private void Start()
+    {
+        if (StageManager.Instance != null)
+        {
+            SetStage(StageManager.Instance.selectStage);
+        }
+    }
+
+    public void SetStage(StageData stage)
+    {
+        currentStage = stage;
+        Debug.Log($"[WaveManager] 현재 스테이지 변경됨: {stage.stageNumber}");
+        currentWaveIndex = 0;
     }
 
     [ContextMenu("스폰시키기")]
     public void StartWave()
     {
+        if (currentStage == null)
+        {
+            Debug.LogError("[WaveManager] 스테이지가 설정되지 않았습니다.");
+            return;
+        }
+
         waveCleared = false;
         spawningComplete = false;
-
         cursorWeapon.ResetSweepCounter();
 
         int waveNum = currentWaveIndex + 1;
-        WaveEntry matched = waveGroupData.waveEntries.Find(w => w.wave == waveNum);
-
-        currentWaveData = matched != null ? matched : new WaveEntry { wave = waveNum };
-
-        Debug.Log($"웨이브 시작: {currentWaveData.wave}");
+        Debug.Log($"웨이브 시작: {waveNum} (스테이지: {currentStage.stageNumber})");
 
         FindObjectOfType<BattleUI>()?.TextUpdate();
 
-        if (currentWaveData.isBossWave && currentWaveData.HasBosses)
+        if (WaveUtils.IsBossWave(waveNum))
         {
-            SpawnBosses(currentWaveData.overrideBosses);
+            SpawnBoss(currentStage.boss);
         }
         else
         {
-            var spawnQueue = WaveBuilder.BuildWaveEntry(currentWaveData, waveGroupData.globalMonsterPool);
+            var spawnQueue = WaveBuilder.BuildWave(waveNum, currentStage.monsterPool);
             SpawnMonsters(spawnQueue);
         }
+
         spawningComplete = true;
         TriggerPassiveSkills();
     }
 
-    // 소환된 몬스터 리스트 초기화 및 추가,보스 데이터가 있으면 소환 
-    private void SpawnBosses(List<BossData> bosses)
+    private void SpawnBoss(BossData bossData)
     {
         spawnedMonsters.Clear();
-        foreach (var bossData in bosses)
-        {
-            if (bossData == null || bossData.BossPrefab == null) continue;
 
-            GameObject bossObj = Instantiate(bossData.BossPrefab, Vector3.zero, Quaternion.identity);
-            spawnedMonsters.Add(bossObj);
+        if (bossData == null || bossData.BossPrefab == null)
+        {
+            Debug.LogWarning("[WaveManager] 보스 데이터가 없습니다.");
+            return;
+        }
+
+        GameObject bossObj = Instantiate(bossData.BossPrefab, Vector3.zero, Quaternion.identity);
+        spawnedMonsters.Add(bossObj);
+
+        BaseMonster boss = bossObj.GetComponent<BaseMonster>();
+        if (boss != null)
+        {
+            boss.onDeath += OnMonsterKilled;
         }
     }
 
     private void SpawnMonsters(List<MonsterData> monsters)
     {
         spawnedMonsters = spawner.SpawnMonsters(monsters, OnMonsterKilled);
+
+        foreach (var monsterObj in spawnedMonsters)
+        {
+            BaseMonster monster = monsterObj.GetComponent<BaseMonster>();
+            if (monster != null)
+            {
+                monster.onDeath += OnMonsterKilled;
+            }
+        }
     }
 
     private void TriggerPassiveSkills()
@@ -99,27 +133,30 @@ public class WaveManager : MonoBehaviour
 
     public void OnMonsterKilled(GameObject monster)
     {
-        Debug.Log($"[OnMonsterKilled] 몬스터 제거 요청: {monster.name}");
-
         if (!spawnedMonsters.Contains(monster))
         {
-            Debug.LogWarning($"[OnMonsterKilled] 제거 대상이 리스트에 없습니다: {monster.name}");
-        }
-
-        spawnedMonsters.Remove(monster);
-        Debug.Log($"[OnMonsterKilled] 남은 몬스터 수: {spawnedMonsters.Count}");
-
-        if (!spawningComplete)
-        {
-            Debug.Log($"[OnMonsterKilled] 스폰 완료 전이라 무시");
+            Debug.LogWarning($"[OnMonsterKilled] 리스트 외 몬스터: {monster.name}");
             return;
         }
 
+        Debug.Log($"[WaveManager] 몬스터 사망 처리: {monster.name}");
+
+        spawnedMonsters.Remove(monster);
+
+        if (!spawningComplete || waveCleared) return;
+
+        // 1초 후에 몬스터 수 다시 체크
+        StartCoroutine(CheckWaveClearAfterDelay());
+    }
+
+    private IEnumerator CheckWaveClearAfterDelay()
+    {
+        yield return new WaitForSeconds(2f); // 분열 몬스터 등록 대기
+
         if (!waveCleared && spawnedMonsters.Count == 0)
         {
-            Debug.Log("[OnMonsterKilled] 모든 몬스터 제거됨 → 웨이브 클리어 처리 시작");
             waveCleared = true;
-            StartCoroutine(DelayedWaveClear(1.5f));
+            StartCoroutine(DelayedWaveClear(2.5f));
         }
     }
 
@@ -131,39 +168,58 @@ public class WaveManager : MonoBehaviour
 
     void OnWaveCleared()
     {
-        clearGold = currentWaveData.CalculateGoldReward();
-        gameManager.AddGold(clearGold);
+        int waveNum = currentWaveIndex + 1;
 
-        int? jewel = currentWaveData.TryGetJewelReward();
+        clearGold = WaveUtils.CalculateGoldReward(waveNum, currentStage);
+        GameManager.Instance.AddGold(clearGold);
+
+        int? jewel = WaveUtils.TryGetJewelReward(waveNum);
         if (jewel.HasValue)
         {
-            gameManager.AddJewel(jewel.Value);
             clearJewel = jewel.Value;
+            GameManager.Instance.AddJewel(jewel.Value);
         }
         else
         {
             clearJewel = 0;
         }
 
+        if (StageManager.Instance != null)
+        {
+            int stageIndex = currentStage.stageNumber - 1;
+            if (StageManager.Instance.bestWave[stageIndex] < waveNum)
+            {
+                StageManager.Instance.bestWave[stageIndex] = waveNum;
+
+                // 최고 웨이브 기록을 GameManager에 업데이트
+                if (GameManager.Instance != null)
+                {
+                    GameManager.Instance.bestWave = waveNum;
+                }
+            }
+        }
         SkillManager.Instance.OnWaveEnd();
     }
 
     public void IncrementWaveIndex()
     {
         currentWaveIndex++;
-        if (gameManager.bestScore < currentWaveIndex)
+
+        if (GameManager.Instance != null)
         {
-            gameManager.bestScore = currentWaveIndex;
+            GameManager.Instance.currentWave = currentWaveIndex;
         }
+        /*if (GameManager.Instance.bestScore < currentWaveIndex)
+        {
+            GameManager.Instance.bestScore = currentWaveIndex;
+        }*/
     }
-    // 맨 마지막에 추가
 
     public void RegisterMonster(GameObject monster)
     {
-        if (spawnedMonsters.Contains(monster)) return;
-
-        spawnedMonsters.Add(monster);
-        Debug.Log($"[RegisterMonster] 몬스터 등록됨: {monster.name} | 총 {spawnedMonsters.Count}마리 추적 중");
+        if (!spawnedMonsters.Contains(monster))
+        {
+            spawnedMonsters.Add(monster);
+        }
     }
-
 }

@@ -2,15 +2,26 @@
 
 public class RotatingShieldSkill : MonoBehaviour
 {
-    [SerializeField] private GameObject shieldPrefab;
-
+    [SerializeField]private GameObject shieldPrefab;
     private Transform player;
     private float rotateSpeed = 100f;
     private float radius = 1.5f;
 
+    public AudioClip blockSound;
+    private AudioSource audioSource;
+
     public void Init(SkillManager.SkillInstance skillInstance, Transform playerTransform)
     {
-        
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+
+        if (audioSource != null && skillInstance.skill.audioClip != null)
+        {
+            audioSource.PlayOneShot(skillInstance.skill.audioClip);
+        }
+
         player = playerTransform;
 
         if (player == null)
@@ -34,7 +45,10 @@ public class RotatingShieldSkill : MonoBehaviour
             GameObject shield = Instantiate(shieldPrefab, transform.position + offset, rotation, transform);
             shield.transform.localScale *= scaleMultiplier;
 
-            // ⚠️ 프리팹에 DestroyProjectileOnContact + Collider (isTrigger) 필요
+            if (shield.TryGetComponent(out DestroyProjectileOnContact contactScript))
+            {
+                contactScript.Init(blockSound);
+            }
         }
         Debug.Log($"[RotatingShieldSkill] Init 완료 - 방패 {shieldCount}개 배치됨");
     }
@@ -49,6 +63,13 @@ public class RotatingShieldSkill : MonoBehaviour
         else
         {
             Debug.LogWarning("[RotatingShieldSkill] player가 null입니다.");
+        }
+    }
+    void LateUpdate()
+    {
+        foreach (Transform child in transform)
+        {
+            child.rotation = Quaternion.identity;
         }
     }
 

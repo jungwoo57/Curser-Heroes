@@ -2,39 +2,30 @@
 
 public class SkillProjectile : MonoBehaviour
 {
+    private RotatingSkill parentSkill;
     private int damage;
-    private float speed = 5f;
-    private Vector2 direction;
 
-    public void Init(int dmg, Vector2 dir = default, float spd = 5f)
+    public void Init(RotatingSkill parent, int dmg)
     {
+        parentSkill = parent;
         damage = dmg;
-        direction = dir.normalized;
-        speed = spd;
     }
 
-    void Update()
-    {
-        transform.Translate(direction * speed * Time.deltaTime);
-    }
-
+    // 충돌이 시작되는 순간에만 호출됩니다.
     private void OnTriggerEnter2D(Collider2D other)
     {
         BaseMonster monster = other.GetComponent<BaseMonster>();
         if (monster != null)
         {
-            monster.TakeDamage(damage);
-
-            return; // 충돌 처리 종료
+            parentSkill.ApplyDamageAndDisableCollision(other);
         }
-
-        // 보스 몬스터 감지
-        BossStats boss = other.GetComponent<BossStats>();
-        if (boss != null)
+        else
         {
-            boss.TakeDamage(damage);
-
-            return;
+            BossStats boss = other.GetComponent<BossStats>();
+            if (boss != null)
+            {
+                parentSkill.ApplyDamageAndDisableCollision(other);
+            }
         }
     }
 }

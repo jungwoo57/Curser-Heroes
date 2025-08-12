@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 313662ea31e2a54469b9f802318e0975, type: 3}
+  m_Name: ShadowFriend
+  m_EditorClassIdentifier: 
+  skillName: "\uADF8\uB9BC\uC790 \uCE5C\uAD6C"
+  icon: {fileID: 21300000, guid: b1c89d0631699494785e941f34fd4d2f, type: 3}
+  type: 1
+  maxLevel: 4
+  description: "\uC77C\uC815 \uC2DC\uAC04\uB9C8\uB2E4, \uC801\uC744 \uBC00\uC5B4\uB0B4\uACE0
+    \uD22C\uC0AC\uCCB4\uB97C \uB9C9\uC544\uB0B4\uB294 \uADF8\uB9BC\uC790 \uCE5C\uAD6C\uB97C
+    \uC18C\uD658"
+  skillPrefab: {fileID: 5652214049184216454, guid: 43e1496f1de36a34aa9fd3dcb223dcaa, type: 3}
+  animClip: {fileID: 32900000, guid: 3c2f228a977a2734b93a4412aa5225a9, type: 3}
+  audioClip: {fileID: 0}
+  levelDataList:
+  - level: 1
+    damage: 0
+    sizeMultiplier: 0
+    count: 0
+    duration: 0
+    cooldown: 20
+    description: "\uC77C\uC815 \uC2DC\uAC04\uB9C8\uB2E4, \uC801\uC744 \uBC00\uC5B4\uB0B4\uACE0
+      \uD22C\uC0AC\uCCB4\uB97C \uB9C9\uC544\uB0B4\uB294 \uADF8\uB9BC\uC790 \uCE5C\uAD6C\uB97C
+      \uC18C\uD658"
+  - level: 2
+    damage: 0
+    sizeMultiplier: 0
+    count: 0
+    duration: 0
+    cooldown: 18
+    description: "\uCFE8\uD0C0\uC784: 20 \u2192 18"
+  - level: 3
+    damage: 0
+    sizeMultiplier: 0
+    count: 0
+    duration: 0
+    cooldown: 16
+    description: "\uCFE8\uD0C0\uC784: 18 \u2192 16"
+  - level: 4
+    damage: 0
+    sizeMultiplier: 0
+    count: 0
+    duration: 0
+    cooldown: 14
+    description: "\uCFE8\uD0C0\uC784: 16 \u2192 14"
+  unlockCost: 50
+  isDefaultSkill: 0

@@ -24,7 +24,7 @@ public class WarningIndicator : MonoBehaviour
     {
         if (target == null) return;
 
-        transform.position = target.position;
+        transform.position = target.position; // enable로 옮겨보자
 
         timer += Time.deltaTime;
 

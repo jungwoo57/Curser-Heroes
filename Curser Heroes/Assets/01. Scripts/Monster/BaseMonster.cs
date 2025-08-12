@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections;
+using System.Xml.Linq;
 
 public abstract class BaseMonster : MonoBehaviour
 {
     protected int maxHP;
     protected int currentHP;
     protected int damage;
-    protected float attackCooldown;
+    [SerializeField]protected float attackCooldown;
     protected float attackTimer;
 
     public int CurrentHP => currentHP;
@@ -17,13 +18,14 @@ public abstract class BaseMonster : MonoBehaviour
 
     protected int valueCost;
     protected Animator animator;
-    
+    private float originalAnimSpeed = 1f;
+
 
     private static readonly int HashAtk = Animator.StringToHash("Atk");
     private static readonly int HashDie = Animator.StringToHash("Die");
     private static readonly int HashDamage = Animator.StringToHash("Damage");
     private static readonly int HashSpawn = Animator.StringToHash("Spw");
-    private float minAttackCooldown = 2f,maxAttackCooldown = 4f;
+    private float minAttackCooldown = 2f, maxAttackCooldown = 4f;
     public bool isDead = false;
     private bool isStun = false;
     public event Action<GameObject> onDeath;
@@ -31,11 +33,12 @@ public abstract class BaseMonster : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Coroutine flashCoroutine;
     private Coroutine attackColorCoroutine;
-    protected EffectManager effectManager;  
+    protected EffectManager effectManager;
     public bool IsDead => currentHP <= 0;
-
+    public float deathTime = 1.0f;
     protected virtual void Start()
     {
+        Debug.Log("몬스터 위치 " + transform.position);
         animator = GetComponent<Animator>();
         if (animator == null)
             Debug.LogWarning($"{gameObject.name}에 Animator 컴포넌트가 없습니다!");
@@ -43,11 +46,17 @@ public abstract class BaseMonster : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         if (spriteRenderer == null)
             Debug.LogWarning($"{gameObject.name}에 SpriteRenderer 컴포넌트가 없습니다!");
-        
-      
-
+        if (currentHP <= 0)
+        {
+            currentHP = maxHP;
+            Debug.Log($"[BaseMonster] {gameObject.name} 기본 체력 세팅: {currentHP}");
+        }
+        effectManager = GetComponent<EffectManager>()
+                   ?? gameObject.AddComponent<EffectManager>();
+        effectManager.Init(this);
         PlaySpawnAnimation();
-        effectManager = GetComponent<EffectManager>();
+        
+
     }
 
     protected virtual void PlaySpawnAnimation()
@@ -71,8 +80,7 @@ public abstract class BaseMonster : MonoBehaviour
     protected virtual void Update()
     {
         if (isStun) return;
-        if (attackTimer > 0f)
-            attackTimer -= Time.deltaTime;
+        attackTimer -= Time.deltaTime;
 
         // 공격 준비 시 색상 천천히 연한 빨강(분홍)으로 변화
         if (attackTimer <= 1.2f && attackTimer + Time.deltaTime > 1.2f)
@@ -99,13 +107,13 @@ public abstract class BaseMonster : MonoBehaviour
             {
                 if (attackColorCoroutine != null)
                     StopCoroutine(attackColorCoroutine);
-
-                attackColorCoroutine = StartCoroutine(ChangeColorGradually(Color.white, 0.3f));
+                spriteRenderer.color = new Color(1f, 1,1.0f, 1.0f);
             }
+            if (animator != null)
+                //animator.SetTrigger("Effect");
 
 
-            animator.SetTrigger("Effect");
-            attackTimer = UnityEngine.Random.Range(minAttackCooldown, maxAttackCooldown);
+                attackTimer = attackCooldown;
         }
     }
 
@@ -126,12 +134,22 @@ public abstract class BaseMonster : MonoBehaviour
         // 이펙트 적용
         if (weaponData != null && effectManager != null)
         {
-            IEffect effect = EffectFactory.CreateEffect(weaponData.effect);
+            // 생성자 시그니처:
+            // CreateEffect(effect, target, burnDPS, burnDuration, stunDuration)
+            IEffect effect = EffectFactory.CreateEffect(
+                weaponData.effect,
+                this,                                  // BaseMonster target
+                weaponData.burnDamagePerSecond,        // int burn DPS
+                weaponData.burnDuration,               // float burn duration
+                weaponData.stunDuration                // float stun duration
+            );
+
             if (effect != null)
-            {
                 effectManager.AddEffect(effect);
-            }
         }
+    
+
+
 
 
         if (animator != null)
@@ -148,8 +166,8 @@ public abstract class BaseMonster : MonoBehaviour
 
         if (currentHP <= 0)
             Die();
-        //else
-        //    PlayHitEffect();     
+       // else
+            //PlayHitEffect();     
     }
 
     private IEnumerator ChangeColorGradually(Color targetColor, float duration)
@@ -201,7 +219,19 @@ public abstract class BaseMonster : MonoBehaviour
     public virtual void Stun(float timer)     //이펙트 추가
     {
         isStun = true;
-        OnStun(timer);
+        SetAttackBool(false);
+        if (spriteRenderer != null)
+        {
+            if (attackColorCoroutine != null)
+                StopCoroutine(attackColorCoroutine);
+            attackColorCoroutine =
+                StartCoroutine(ChangeColorGradually(Color.white, 0.2f));
+        }
+        if (DamageTextManager.instance != null)
+        {
+            DamageTextManager.instance.ShowStun(this.transform, timer);
+        }
+        StartCoroutine(OnStun(timer));
         Debug.Log($"{gameObject.name} 몬스터 기절!");
     }
 
@@ -280,12 +310,48 @@ public abstract class BaseMonster : MonoBehaviour
                 Debug.LogWarning("씬에 SporeExplosionSkill 컴포넌트가 없습니다!");
             }
         }
+        SkillManager.SkillInstance predatorSkill = SkillManager.Instance.ownedSkills.Find(s => s.skill.skillName == "포식자");
+        if (predatorSkill != null)
+        {
+            var predatorSkillComponent = FindObjectOfType<PredatorSkill>();
+            if (predatorSkillComponent != null)
+            {
+                predatorSkillComponent.OnMonsterKilled(transform.position);
+            }
+            else
+            {
+                Debug.LogWarning("씬에 PredatorSkill 컴포넌트가 없습니다!");
+            }
+        }
 
         onDeath?.Invoke(gameObject);
-        Destroy(gameObject, 1f);
+        Destroy(gameObject, deathTime);
     }
 
-   
+    #region ▶ Editor용 Effect 테스트 (ContextMenu)
+
+    [ContextMenu("▶ Test Stun (2s)")]
+    private void ContextTestStun()
+    {
+        // EffectManager 가져와서 초기화 후 StunEffect 적용
+        var em = GetComponent<EffectManager>() ?? gameObject.AddComponent<EffectManager>();
+        em.Init(this);
+        em.AddEffect(new StunEffect(2f));
+        Debug.Log($"[ContextTest] Applied StunEffect to {name}");
+    }
+
+    [ContextMenu("▶ Test Burn (5dps × 5s)")]
+    private void ContextTestBurn()
+    {
+        // EffectManager 가져와서 초기화 후 BurnEffect 적용
+        var em = GetComponent<EffectManager>() ?? gameObject.AddComponent<EffectManager>();
+        em.Init(this);
+        em.AddEffect(new BurnEffect(this, damagePerSecond: 5, durationSeconds: 5f));
+        Debug.Log($"[ContextTest] Applied BurnEffect to {name}");
+    }
+
+    #endregion
 
     protected abstract void Attack();
+  
 }

@@ -9,6 +9,12 @@ public class SettingPanelUI : MonoBehaviour
     
     void Start()
     {
+        mainSlider.value = AudioListener.volume;
+        if (AudioManager.Instance != null)
+        {
+            bgmSlider.value = AudioManager.Instance.bgmSource.volume;
+            sfxSlider.value = AudioManager.Instance.src.volume;
+        }
         mainSlider.onValueChanged.AddListener(SetMainVolume);
         bgmSlider.onValueChanged.AddListener(SetBGMVolume);
         sfxSlider.onValueChanged.AddListener(SetSFXVolume);
@@ -23,12 +29,12 @@ public class SettingPanelUI : MonoBehaviour
     {
         AudioManager.Instance.bgmSource.volume = value;
     }
-
+    
     void SetSFXVolume(float value)
     {
         AudioManager.Instance.src.volume = value;
     }
-
+    
     public void OnClickExitButton()
     {
         gameObject.SetActive(false);
@@ -36,13 +42,12 @@ public class SettingPanelUI : MonoBehaviour
 
     public void OnClickFullScreenButton()
     {
-        Screen.fullScreen = true;
-        Debug.Log(Screen.fullScreen);
+        Screen.SetResolution(1980, 1280, true);
+        
     }
 
     public void OnClickWindowScreenButton()
     {
-        Screen.fullScreen = false;
-        Debug.Log(Screen.fullScreen);
+        Screen.SetResolution(1600, 900, false);
     }
 }

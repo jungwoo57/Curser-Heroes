@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98c80afdaf47a4e4387b208c40110510, type: 3}
+  m_Name: Stage 2
+  m_EditorClassIdentifier: 
+  stageNumber: 2
+  monsterPool:
+  - {fileID: 11400000, guid: 39a100db6613d8942b31dbb364591364, type: 2}
+  - {fileID: 11400000, guid: 7f6d3539c333ae84fbd0e011624c34dc, type: 2}
+  - {fileID: 11400000, guid: 7f6d3539c333ae84fbd0e011624c34dc, type: 2}
+  - {fileID: 11400000, guid: f3091c8a0ce7ba84595ea2721d4bca2d, type: 2}
+  - {fileID: 11400000, guid: cdc6343dad204ad45afb41229e605206, type: 2}
+  - {fileID: 11400000, guid: 06020938ea4f5cf4aa069408dd58ef27, type: 2}
+  - {fileID: 11400000, guid: 5e07339409344c54ba326776f6405ee0, type: 2}
+  - {fileID: 11400000, guid: f07cb9a034c4c944b8e1f01e54904a7f, type: 2}
+  - {fileID: 11400000, guid: 3791ab31bac71734ba99a42d80673842, type: 2}
+  - {fileID: 11400000, guid: 3c9580da05b441e4ba554d0131331cd6, type: 2}
+  - {fileID: 11400000, guid: ecfa165cfa7092c4883f48b3c54b3bca, type: 2}
+  - {fileID: 11400000, guid: e1185aa061da02e419bffe96ddce5edd, type: 2}
+  - {fileID: 11400000, guid: d275e9bb63e120344965535b9bcadbfc, type: 2}
+  boss: {fileID: 11400000, guid: b53a83bdfaeb6b141a6d40d7ec48c5d5, type: 2}
+  stageName: "\uC2A4\uD14C\uC774\uC9C0 2"
+  stageImage: {fileID: 21300000, guid: 27630dc033bd371438df658d1d7aa87a, type: 3}
+  battleStageBackGround: {fileID: 21300000, guid: c1661e3a3e84dbb4690cc9bd1357b848, type: 3}
+  battleBgm: {fileID: 8300000, guid: 8ef7289abcb6d9b4faa2de536eecd893, type: 3}
+  baseGoldReward: 15

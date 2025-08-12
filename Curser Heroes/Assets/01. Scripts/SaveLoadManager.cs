@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 using UnityEngine;
 
@@ -13,12 +13,16 @@ public class SaveLoadManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        path = Application.persistentDataPath + "/save.data";
+        saveData = new SaveData();
     }
 
     void Start()
     {
-        path = Application.persistentDataPath + "/save.data";
-        saveData = new SaveData();
+        //if (GameManager.Instance != null)
+        //{
+        //    GameManager.Instance.Load();
+        //}
     }
     
 

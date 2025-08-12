@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7861142701776654893}
   - component: {fileID: 7805512865914524789}
-  - component: {fileID: 3474801437560691055}
   - component: {fileID: 4358929382388800747}
   - component: {fileID: 5280744739267004475}
   - component: {fileID: 5876902608647161431}
@@ -54,20 +53,8 @@ MonoBehaviour:
     m_Bits: 0
   weaponLife: {fileID: 5280744739267004475}
   weaponUpgrade: {fileID: 5876902608647161431}
---- !u!114 &3474801437560691055
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3412583423064343053}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9e47a76ac5ee8540ba1eb327164a80a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cursor: {fileID: 0}
-  cursorSpeed: 0.2
+  weaponSprite: {fileID: 0}
+  damageMultiplier: 1
 --- !u!212 &4358929382388800747
 SpriteRenderer:
   m_ObjectHideFlags: 0

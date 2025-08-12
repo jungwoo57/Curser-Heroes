@@ -20,6 +20,12 @@ public class SalvationSkill : MonoBehaviour
 
         hasActivated = true;
 
+        AudioSource audioSource = GetComponent<AudioSource>();
+        if (audioSource != null && skillInstance.skill.audioClip != null)
+        {
+            audioSource.PlayOneShot(skillInstance.skill.audioClip);
+        }
+
         Debug.Log("[구원] 발동! 목숨 1 회복 + 무적 5초");
 
         // 목숨 1 회복

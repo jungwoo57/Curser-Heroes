@@ -102,13 +102,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81b2328b04340b4418ea5fa534d256dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentWeapon: {fileID: 11400000, guid: 039fe819971c8b74cb9cf96f22319f8a, type: 2}
+  currentWeapon: {fileID: 11400000, guid: 71c3c201cfc09ce47b8feee890c11af0, type: 2}
   targetLayer:
     serializedVersion: 2
     m_Bits: 128
   weaponLife: {fileID: 388895274124319222}
   weaponUpgrade: {fileID: 4146143317601679812}
   weaponSprite: {fileID: 8908534444373656798}
+  damageMultiplier: 1
+  attackRangeMultiplier: 1
 --- !u!114 &388895274124319222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,6 +150,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37795c23a1a067d4c9bc21edda5219f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sensitivity: 20
+  smoothing: 0.277
 --- !u!58 &9071703732780315610
 CircleCollider2D:
   m_ObjectHideFlags: 0

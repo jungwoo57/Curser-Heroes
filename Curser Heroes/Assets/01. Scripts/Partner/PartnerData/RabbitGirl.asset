@@ -12,9 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c48dfcd55b69fbb45817899f36593764, type: 3}
   m_Name: RabbitGirl
   m_EditorClassIdentifier: 
-  partnerName: RabbitGirl
-  portraitSprite: {fileID: 21300000, guid: 0a87083033aff8142ad77c8b34b248cf, type: 3}
-  gaugeMax: 100
-  desc: 
-  unlockCost: 0
-  upgradeCost: 
+  partnerName: "\uD1A0\uB07C \uC218\uC778 \uC218\uB140"
+  portraitSprite: {fileID: 21300000, guid: ee59d18d7bbf4d744b9059586866729e, type: 3}
+  gaugeMax:
+  - 100
+  - 97
+  - 94
+  - 91
+  - 88
+  - 85
+  - 82
+  - 79
+  - 76
+  - 73
+  - 70
+  desc: "\uD2B9\uAE30 \uBC1C\uB3D9 \uC2DC, \uC77C\uC815 \uC2DC\uAC04 \uBB34\uC801
+    \uC0C1\uD0DC\uAC00 \uB418\uBA70 \uC2A4\uC715 \uACF5\uACA9\uC774 \uB450 \uBC30\uC758
+    \uD53C\uD574\uB97C \uC785\uD78C\uB2E4."
+  unlockCost: 180
+  upgradeCost: 44020000f2020000d4030000fa0400007806000068080000ed0a0000340e000076120000ff170000
+  prefab: {fileID: 5842470853820247829, guid: 70424ff00a3092348914949e55c61706, type: 3}

@@ -5,17 +5,24 @@ using UnityEngine.UI;
 public class SkillUIImage : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     public Image skillImage;
+    public Image imageShadow;
     public SkillData data;
-    private StageSkillSelectUI stageSkillSelectUI;
-
+    public StageSkillSelectUI stageSkillSelectUI;
+    public Outline outline;
+    public bool isSelected;
+    
     private float pressTime;     //누르고 있는 시간
     //private bool isHolding = false;
     [SerializeField]private float holdTime = 0.5f;     //눌러야하는 시간
     private void Awake()
     {
-        stageSkillSelectUI = GetComponentInParent<StageSkillSelectUI>();
+        StageSkillSelectUI ui =GetComponentInParent<StageSkillSelectUI>();
+        if (ui != null)
+        {
+            stageSkillSelectUI = ui;
+        }
     }
-
+    
     public void UpdateUI(SkillData skillData)
     {
             if (skillData == null) return;
@@ -25,14 +32,53 @@ public class SkillUIImage : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
                 Debug.Log("데이터 없음");
                 return;
             }
-            skillImage.sprite = data.icon;
+        
+        if(outline != null)
+            outline.enabled = false;
+        
+        skillImage.sprite = data.icon;
+        Color imgColor = skillImage.color;
+        imgColor.a = 1f;
+        skillImage.color = imgColor;
+
+        imageShadow.sprite = data.icon;
+        Color shadowColor = imageShadow.color;
+        shadowColor.a = 1f;
+        imageShadow.color = shadowColor;
+
+        isSelected = false;
+        if (stageSkillSelectUI != null && outline != null)
+        {
+            for (int i = 0; i < stageSkillSelectUI.skills.Count; i++)
+            {
+                if(stageSkillSelectUI.skills[i] ==null) continue;
+                if (stageSkillSelectUI.skills[i].skillName == data.skillName)
+                {
+                    isSelected = true;
+                    break;
+                }
+                else isSelected = false;
+            }
+            outline.enabled = isSelected;
+        }
     }
 
     public void CancleSelect()
     {
+        if (outline != null)
+        {
+            outline.enabled = false;
+            stageSkillSelectUI.skills.Remove(data);
+        }
         data = null;
-        skillImage.sprite = null;
-        return;
+
+        Color imgColor = skillImage.color;
+        imgColor.a = 0f;
+        skillImage.color = imgColor;
+
+        Color shadowColor = imageShadow.color;
+        shadowColor.a = 0f;
+        imageShadow.color = shadowColor;
     }
 
     public void OnClickSkillButton()
@@ -40,6 +86,7 @@ public class SkillUIImage : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         if (stageSkillSelectUI != null)
         {
             stageSkillSelectUI.stageSelectedSkillUI.SelectSkill(data);
+            stageSkillSelectUI.UpdateUI();
         }
         else
         {

@@ -12,21 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c48dfcd55b69fbb45817899f36593764, type: 3}
   m_Name: PicnicLady
   m_EditorClassIdentifier: 
-  partnerName: PicnicLady
-  portraitSprite: {fileID: 0}
+  partnerName: "\uD53C\uD06C\uB2C9 \uB808\uC774\uB514"
+  portraitSprite: {fileID: 21300000, guid: 0df3d14bada38874b88b7a450f3cd73f, type: 3}
   gaugeMax:
-  - 50
-  - 47
-  - 44
-  - 41
-  - 38
-  - 35
-  - 32
-  - 29
-  - 26
-  - 23
-  - 20
-  desc: 
-  unlockCost: 0
-  upgradeCost: 
+  - 100
+  - 97
+  - 94
+  - 91
+  - 88
+  - 85
+  - 82
+  - 79
+  - 76
+  - 73
+  - 70
+  desc: "\uD2B9\uAE30 \uBC1C\uB3D9 \uC2DC, \uBAA8\uB4E0 \uC801\uC744 \uC77C\uC815
+    \uC2DC\uAC04 \uACBD\uC9C1\uC2DC\uD0A8\uB2E4."
+  unlockCost: 180
+  upgradeCost: 44020000f2020000d4030000fa0400007806000068080000ed0a0000340e000076120000ff170000
   prefab: {fileID: 3283130697468224392, guid: 98eed649b0f37cb4a8c625f31f645815, type: 3}

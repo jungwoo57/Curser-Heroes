@@ -2,50 +2,69 @@
 
 public class RadialProjectile : MonoBehaviour
 {
-    [Header("포스 범위")]
-    [SerializeField, Range(0.1f, 10f)]
-    private float forceRadius = 3f;    // Inspector 슬라이더로만 제어
+    [Header("데이터 (프리팹 인스펙터에서 할당)")]
+    [Tooltip("이 투사체가 사용할 SubWeaponData")]
+    [SerializeField] private SubWeaponData subWeaponData;
 
-    private int damage;
-    private LayerMask monsterLayer;
-    private GameObject vfxPrefab;
-    private float duration = 0.6f;
+    [Header("데미지 (Manager가 Assign)")]
+    [Tooltip("Manager가 Instantiate 후 설정해 주거나, 인스펙터에서 기본값 지정 가능")]
+    public int damage = 0;
 
- 
-    public void Init(int dmg, LayerMask layer, GameObject vfx)
-    {
-        damage = dmg;
-        monsterLayer = layer;
-        vfxPrefab = vfx;
-        // forceRadius는 Inspector 값 그대로 사용
-    }
+    [Header("레이어 마스크 (프리팹 인스펙터에서 할당)")]
+    public LayerMask monsterLayer;
+
+    [Header("VFX (프리팹 인스펙터에서 할당)")]
+    public GameObject vfxPrefab;
+
+    [Header("범위 & 스턴 (SubWeaponData 대신 Inspector에서 덮어쓰기 가능)")]
+    public float radius = 3f;
+    public bool applyStun = false;
+    public float stunDuration = 1f;
 
     void Start()
     {
-        // 1) VFX
-        if (vfxPrefab != null)
+        Debug.Log($"[RadialProjectile] radius={radius}, vfxPrefab={vfxPrefab?.name}");
+        // 만약 인스펙터에 SubWeaponData를 할당했다면 기본값 채워주기
+        if (subWeaponData != null)
         {
-            var vfx = Instantiate(vfxPrefab, transform.position, Quaternion.identity);
-            vfx.transform.localScale = Vector3.one * forceRadius * 2f;
-            Destroy(vfx, duration);
+            radius = subWeaponData.effectRadius;
+            
+            stunDuration = subWeaponData.stunDuration;
+            if (damage == 0)
+                damage = Mathf.RoundToInt(subWeaponData.GetDamage());
+            if (vfxPrefab == null)
+                vfxPrefab = subWeaponData.ForceVisualPrefab;
         }
 
-        // 2) 데미지
-        var hits = Physics2D.OverlapCircleAll(transform.position, forceRadius, monsterLayer);
-        Debug.Log($"▶ Hits: {hits.Length}");
-        foreach (var col in hits)
-            if (col.TryGetComponent<BaseMonster>(out var m) && !m.IsDead)
-                m.TakeDamage(damage);
-
-        // 3) 정리
-        Destroy(gameObject, duration);
+        Explode();
     }
 
-#if UNITY_EDITOR
+    private void Explode()
+    {
+        // 1) 범위 내 몬스터 검색
+        var hits = Physics2D.OverlapCircleAll(transform.position, radius, monsterLayer);
+        foreach (var hit in hits)
+        {
+            var m = hit.GetComponent<BaseMonster>();
+            if (m == null || m.IsDead) continue;
+            m.TakeDamage(damage, subWeaponData);
+            if (applyStun) m.Stun(stunDuration);
+        }
+
+        // 2) VFX
+        if (vfxPrefab != null)
+        {
+            var fx = Instantiate(vfxPrefab, transform.position, Quaternion.identity);
+            Destroy(fx, 1f);
+        }
+
+        Destroy(gameObject);
+    }
+
+    // (디버그용)
     void OnDrawGizmosSelected()
     {
-        Gizmos.color = new Color(1, 0, 0, 0.3f);
-        Gizmos.DrawSphere(transform.position, forceRadius);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, radius);
     }
-#endif
 }

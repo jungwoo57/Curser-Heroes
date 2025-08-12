@@ -12,20 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c48dfcd55b69fbb45817899f36593764, type: 3}
   m_Name: Hunter
   m_EditorClassIdentifier: 
-  partnerName: Hunter
-  portraitSprite: {fileID: 21300000, guid: 8b6dbabc091e9924fb2fd2efb53b08c2, type: 3}
+  partnerName: "\uC0AC\uB0E5\uAFBC \uCE5C\uAD6C\uB4E4"
+  portraitSprite: {fileID: 21300000, guid: c78391f588658274490de8692308554c, type: 3}
   gaugeMax:
-  - 999
-  - 999
-  - 99
-  - 9
-  - 9
-  - 999
-  - 0
-  - 0
-  - 0
-  - 0
-  desc: 99
-  unlockCost: 6
-  upgradeCost: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
+  - 100
+  - 97
+  - 94
+  - 91
+  - 88
+  - 85
+  - 82
+  - 79
+  - 76
+  - 73
+  - 70
+  desc: "\uD2B9\uAE30 \uBC1C\uB3D9 \uC2DC, \uBAA8\uB4E0 \uC801\uC5D0\uAC8C \uBCF4\uC870
+    \uACF5\uACA9\uB825\uB9CC\uD07C\uC758 \uD53C\uD574\uB97C \uC785\uD78C\uB2E4."
+  unlockCost: 0
+  upgradeCost: 4a010000ad0100002d020000d4020000ad030000c704000035060000110800007c0a0000a10d0000
   prefab: {fileID: 139786698625539810, guid: 8c87eb871047f5e4faee4c035c291c06, type: 3}

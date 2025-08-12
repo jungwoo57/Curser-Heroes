@@ -1,7 +1,7 @@
-using System.Collections;
+﻿using System.Collections;
 using TMPro;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 public class DamageTextManager : MonoBehaviour
 {
@@ -9,9 +9,15 @@ public class DamageTextManager : MonoBehaviour
 
     [SerializeField] private GameObject damageText;
     [SerializeField] private Transform damageCanvas;
+    [SerializeField] private Transform stunCanvas;
     [SerializeField] private float time;
     [SerializeField] private float offset;
-        
+    [SerializeField] private GameObject stunImage;
+    [SerializeField] private Sprite stunSprite;
+    [SerializeField] private float stunOffset;
+    [SerializeField] private Transform burnCanvas;     
+    [SerializeField] private GameObject burnImage;     
+    [SerializeField] private float burnOffset = 1f;    
     private void Awake()
     {
         instance = this;
@@ -19,7 +25,6 @@ public class DamageTextManager : MonoBehaviour
 
     public void ShowDamage(int damage, Vector3 monsterPosition)
     {
-        Debug.Log("텍스트는나옴");
         for (int i = 0; i < damageCanvas.childCount; i++)
         {
             Transform child = damageCanvas.GetChild(i);
@@ -80,6 +85,74 @@ public class DamageTextManager : MonoBehaviour
         }
         
         damageText.gameObject.SetActive(false);
+    }
+
+    public void ShowStun(Transform monsterPosition, float duration)
+    {
+        for (int i = 0; i < stunCanvas.childCount; i++)
+        {
+            Transform child = stunCanvas.GetChild(i);
+            if (!child.gameObject.activeInHierarchy)
+            {
+                child.position = monsterPosition.position + Vector3.up * stunOffset;
+                child.gameObject.SetActive(true);
+                StunImageFollow follow = child.GetComponent<StunImageFollow>();
+                follow.Init(monsterPosition);
+                Image image = child.GetComponent<Image>();
+                if (image != null)
+                {
+                    image.sprite = stunSprite;
+                }
+                StartCoroutine(CloseStun(child.gameObject, duration));
+                return;
+                // 스턴 애니메이션
+            }
+        }
+        
+        GameObject newStun = Instantiate(stunImage, stunCanvas);
+        newStun.transform.position = monsterPosition.position + Vector3.up * stunOffset;
+        
+        StunImageFollow follows = newStun.GetComponent<StunImageFollow>();
+        follows.Init(monsterPosition);
+        
+        Image newImage = newStun.GetComponent<Image>();
+        if (newImage != null)
+        {
+            newImage.sprite = stunSprite;
+        }
+        StartCoroutine(CloseStun(newStun.gameObject, duration));
+    }
+
+    IEnumerator CloseStun(GameObject stunobj, float durationTime)
+    {
+        yield return new WaitForSeconds(durationTime);
+        stunobj.SetActive(false);
+    }
+    public void ShowBurn(Transform monsterPosition, float duration)
+    {
+        
+        for (int i = 0; i < burnCanvas.childCount; i++)
+        {
+            Transform child = burnCanvas.GetChild(i);
+            if (!child.gameObject.activeInHierarchy)
+            {
+                child.position = monsterPosition.position + Vector3.up * burnOffset;
+                child.gameObject.SetActive(true);
+                StartCoroutine(CloseBurn(child.gameObject, duration));
+                return;
+            }
+        }
+
+        
+        GameObject newBurn = Instantiate(burnImage, burnCanvas);
+        newBurn.transform.position = monsterPosition.position + Vector3.up * burnOffset;
+        StartCoroutine(CloseBurn(newBurn, duration));
+    }
+
+    private IEnumerator CloseBurn(GameObject obj, float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        obj.SetActive(false);
     }
 
 }

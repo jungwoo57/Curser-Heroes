@@ -4,7 +4,8 @@ using System.Collections;
 public class RabbitGirl : BasePartner
 {
     public GameObject carrotEffectPrefab;
-
+    public GameObject rabbitEffect;
+    [SerializeField] private float imageEnableTime;
     [Header("스킬 범위")]
     public float skillRange = 20f;
 
@@ -15,11 +16,14 @@ public class RabbitGirl : BasePartner
 
         isSkillActive = true;
         StartCoroutine(SkillRoutine());
+        rabbitEffect.SetActive(true);
+        StartCoroutine(RabbitImageDisAble());
     }
 
     private IEnumerator SkillRoutine()
     {
         // 기존 스킬 로직
+        yield return new WaitForSeconds(0.5f); // 애니메이션 연출대기
         StartCoroutine(WeaponManager.Instance.OnTemporaryInvincible(7f));
         StartCoroutine(ApplyDoubleDamageForSeconds(7f));
         PlayCarrotThrowEffect();
@@ -69,5 +73,11 @@ public class RabbitGirl : BasePartner
         yield return new WaitForSeconds(duration);
         weapon.damageMultiplier = 1f;
         Debug.Log("[RabbitGirl] 공격력 버프 해제");
+    }
+
+    IEnumerator RabbitImageDisAble()
+    {
+        yield return new WaitForSeconds(imageEnableTime);
+        rabbitEffect.SetActive(false);
     }
 }

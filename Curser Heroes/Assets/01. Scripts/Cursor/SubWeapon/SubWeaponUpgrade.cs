@@ -9,18 +9,21 @@ public class SubWeaponUpgrade : MonoBehaviour
     public void Init(SubWeaponData subWeaponData)         //무기 설정시 초기화
     {
         currentSubWeapon = subWeaponData;
-        weaponLevel = 0;
+        if (GameManager.Instance)
+        {
+            weaponLevel = GameManager.Instance.subEquipWeapon.level;
+        }
     }
 
     // 강화 함수
-    public void Upgrade()      
+    public void Upgrade()
     {
         weaponLevel++;
         float newDamage = currentSubWeapon.GetDamage(weaponLevel);
         Debug.Log($"[보조무기 강화] {currentSubWeapon.weaponName} 레벨: {weaponLevel}, 데미지: {newDamage}");
     }
 
-    public float GetCurrentDamage()      
+    public float GetCurrentDamage()
     {
         return currentSubWeapon.GetDamage(weaponLevel);
     }

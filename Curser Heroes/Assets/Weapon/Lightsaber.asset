@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad7c51b5ed48a1447976c84327ca1842, type: 3}
   m_Name: Lightsaber
   m_EditorClassIdentifier: 
-  weaponName: Lightsaber
+  weaponName: "\uAD11\uC120\uAC80"
   weaponImage: {fileID: 21300000, guid: 21ec4d9eb90f70747bc4636d8eae2890, type: 3}
   weaponDesc: "\uC2DC\uAC04\uC744 \uB118\uC5B4 \uBBF8\uB798\uC758 \uC6B0\uC8FC\uC120\uC774
     \uB5A8\uC5B4\uC84C\uB2E4. \uC6B0\uC8FC\uC120\uC5D0 \uD638\uAE30\uC2EC\uC744 \uAC00\uC9C4
@@ -21,10 +21,10 @@ MonoBehaviour:
     \uC6B0\uC8FC\uC120\uC758 \uBB34\uAE30\uB294 \uAD11\uC120\uAC80 \uD558\uB098 \uC6B0\uC8FC
     \uBE44\uD589\uC0AC\uB294 \uC774\uAC83\uC744 \uD718\uB458\uB7EC \uBAAC\uC2A4\uD130\uB4E4\uC744
     \uCAD3\uC544\uB0B8\uB2E4."
-  upgradeCost: 8a020000600300007d040000f8050000f00700008e0a0000090e0000aa120000d218000002210000
-  unlockCost: 2500
+  upgradeCost: f4010000550500008e0e0000bb270000766c00001928010058280300c79e080080881700e23e4000
+  unlockCost: 100
   baseDamage: 10
-  damagePerLevel: 4.7
-  attackCooldown: 0.5
+  damagePerLevel: 5.8
+  attackCooldown: 0.1
   attackRange: 0.5
   maxLives: 5

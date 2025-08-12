@@ -1,37 +1,59 @@
+﻿using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 public class CursorMoving : MonoBehaviour
 {
-    public GameObject cursor;  
-    [Range(0,1f)]
-    public float cursorSpeed;   // 최고속도 1f
+    [Header("Movement Settings")]
+    [Range(0, 1f)]
+    public float cursorSpeed = 1f;
+
+    private float originalSpeed;   
+    private bool isStunned;
+    
+
     private void Awake()
     {
-        if (cursor == null)
-        {
-            cursor = this.gameObject; // 커서 할당
-        }
-        cursor.transform.position = Vector3.zero;
+        originalSpeed = cursorSpeed;
+        transform.position = Vector3.zero;
     }
 
-    void Update()
+    private void Update()
     {
-        MouseMoving();
+        if (!isStunned)
+            MouseMoving();
     }
 
     void MouseMoving()
     {
-        Vector2 objectPos = cursor.transform.position;
-        Vector2 mousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y,
-            -Camera.main.transform.position.z));
-        Vector2 moveDir = (mousePos - objectPos).normalized;
+        Vector2 objectPos = transform.position;
+        Vector2 mousePos = Camera.main.ScreenToWorldPoint(
+            new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z)
+        );
         if (Vector2.Distance(objectPos, mousePos) > 1.0f)
-        {
-           cursor.transform.position = Vector2.Lerp(cursor.transform.position,
-                    mousePos,1f * cursorSpeed);
-        }
+            transform.position = Vector2.Lerp(objectPos, mousePos, cursorSpeed*Time.deltaTime);
     }
 
+    
+    public void Stun(float duration)
+    {
+        if (isStunned) return;
+        StartCoroutine(StunCoroutine(duration));
+    }
+
+    private IEnumerator StunCoroutine(float duration)
+    {
+        isStunned = true;
+
+      
+        float prevSpeed = cursorSpeed;
+        cursorSpeed = 0f;
+
+        yield return new WaitForSeconds(duration);
+
+       
+        cursorSpeed = prevSpeed;
+        isStunned = false;
+    }
+
+ 
 }

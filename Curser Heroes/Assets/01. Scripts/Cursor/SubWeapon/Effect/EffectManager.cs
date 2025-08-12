@@ -1,15 +1,15 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class EffectManager : MonoBehaviour
 {
     private BaseMonster owner;
-    private readonly List<IEffect> activeEffects = new();
+    private readonly List<IEffect> activeEffects = new List<IEffect>();
 
     public void Init(BaseMonster target)
     {
         owner = target;
-        if (target != null)
+        if (target != null && transform != target.transform)
         {
             transform.SetParent(target.transform);
             transform.localPosition = Vector3.zero;
@@ -18,18 +18,25 @@ public class EffectManager : MonoBehaviour
 
     public void AddEffect(IEffect effect)
     {
-        effect.Apply(owner);
         activeEffects.Add(effect);
+        Debug.Log($"[EffectManager] Added {effect.GetType().Name} to {owner.name}");
+
+       
+        effect.Apply(owner);
     }
 
     void Update()
     {
         for (int i = activeEffects.Count - 1; i >= 0; i--)
         {
-            activeEffects[i].Update(Time.deltaTime);
-            if (activeEffects[i].IsFinished)
+            var effect = activeEffects[i];
+            effect.Update(Time.deltaTime);
+
+            if (effect.IsFinished)
+            {
+                Debug.Log($"[EffectManager] {effect.GetType().Name} finished on {owner.name}");
                 activeEffects.RemoveAt(i);
+            }
         }
     }
-
 }

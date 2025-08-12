@@ -48,7 +48,7 @@ public class SporeExplosionSkill : MonoBehaviour
             Debug.Log($"[SporeExplosionSkill] 포자 투사체 생성: 방향={dir.normalized}, 회전={rot.eulerAngles}");
 
             SporeProjectile sp = proj.GetComponent<SporeProjectile>();
-            sp.Init(damage, dir.normalized, projectileSpeed);
+            sp.Init(damage, dir.normalized, projectileSpeed, skillInstance.skill.audioClip);
         }
 
     }

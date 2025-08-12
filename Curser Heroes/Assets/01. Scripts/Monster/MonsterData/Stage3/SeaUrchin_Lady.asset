@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a679e971d4790164f8d9e3ff6463d243, type: 3}
+  m_Name: SeaUrchin_Lady
+  m_EditorClassIdentifier: 
+  monsterPrefab: {fileID: 4172754891538788549, guid: 7bf9a3e06a7285a45b5e9b79d9b5d4a0, type: 3}
+  maxHP: 197
+  valueCost: 2
+  attackCooldown: 2
+  damage: 1
+  index: 0

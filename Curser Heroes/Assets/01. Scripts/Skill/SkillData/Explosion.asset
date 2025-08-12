@@ -18,7 +18,9 @@ MonoBehaviour:
   maxLevel: 8
   description: "\uBAAC\uC2A4\uD130 \uCC98\uCE58 \uC2DC, \uCC98\uCE58\uB41C \uBAAC\uC2A4\uD130
     \uC8FC\uC704\uC5D0 \uD53C\uD574\uB97C \uC8FC\uB294 \uD3ED\uBC1C \uC0DD\uC131"
-  skillPrefab: {fileID: 7116249138344472241, guid: e7b1031d9bfd92844b762023fd3ce9c5, type: 3}
+  skillPrefab: {fileID: 8286058134636732423, guid: e7b1031d9bfd92844b762023fd3ce9c5, type: 3}
+  animClip: {fileID: 32900000, guid: 13246c473143cb341982795160670569, type: 3}
+  audioClip: {fileID: 8300000, guid: 4a377d43b93fee4478691d11e41c46c7, type: 3}
   levelDataList:
   - level: 1
     damage: 3
@@ -26,46 +28,56 @@ MonoBehaviour:
     count: 0
     duration: 0
     cooldown: 0
+    description: "\uBAAC\uC2A4\uD130 \uCC98\uCE58 \uC2DC, \uCC98\uCE58\uB41C \uBAAC\uC2A4\uD130
+      \uC8FC\uC704\uC5D0 \uD53C\uD574\uB97C \uC8FC\uB294 \uD3ED\uBC1C \uC0DD\uC131"
   - level: 2
     damage: 7
     sizeMultiplier: 0
     count: 0
     duration: 0
     cooldown: 0
+    description: "\uD53C\uD574\uB7C9: 3 \u2192  7"
   - level: 3
     damage: 11
     sizeMultiplier: 0
     count: 0
     duration: 0
     cooldown: 0
+    description: "\uD53C\uD574\uB7C9: 7 \u2192  11"
   - level: 4
     damage: 15
     sizeMultiplier: 0
     count: 0
     duration: 0
     cooldown: 0
+    description: "\uD53C\uD574\uB7C9: 11 \u2192  15"
   - level: 5
     damage: 19
     sizeMultiplier: 0
     count: 0
     duration: 0
     cooldown: 0
+    description: "\uD53C\uD574\uB7C9: 15 \u2192  19"
   - level: 6
     damage: 23
     sizeMultiplier: 0
     count: 0
     duration: 0
     cooldown: 0
+    description: "\uD53C\uD574\uB7C9: 19 \u2192  23"
   - level: 7
     damage: 27
     sizeMultiplier: 0
     count: 0
     duration: 0
     cooldown: 0
+    description: "\uD53C\uD574\uB7C9: 23 \u2192  27"
   - level: 8
     damage: 31
     sizeMultiplier: 0
     count: 0
     duration: 0
     cooldown: 0
+    description: "\uD53C\uD574\uB7C9: 27 \u2192  31"
   unlockCost: 0
+  isDefaultSkill: 1

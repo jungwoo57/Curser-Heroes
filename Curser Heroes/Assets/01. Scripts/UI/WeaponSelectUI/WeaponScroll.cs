@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -114,7 +114,7 @@ public class WeaponScroll : MonoBehaviour
                     } // WeaponImage 업데이트
                 }
 
-                for (int i = hasWeapons.Count; i < showWeapons.Count; i++)
+                for (int i = hasSubWeapons.Count; i < showWeapons.Count; i++)
                 {
                     showWeapons[i].gameObject.SetActive(false); // 남은 부분 끄기
                 }
@@ -141,7 +141,7 @@ public class WeaponScroll : MonoBehaviour
                     showWeapons.Add(weaponImage);
                 }
 
-                for (int i = 0; i < hasSubWeapons.Count; i++) //북마크 부터 표시
+                for (int i = 0; i < hasPartners.Count; i++) //북마크 부터 표시
                 {
                     if (hasPartners[i].bookMark)
                     {
@@ -159,7 +159,7 @@ public class WeaponScroll : MonoBehaviour
                     } // WeaponImage 업데이트
                 }
                 
-                for (int i = hasWeapons.Count; i < showWeapons.Count; i++)
+                for (int i = hasWeaponCounts; i < showWeapons.Count; i++)
                 {
                     showWeapons[i].gameObject.SetActive(false); // 남은 부분 끄기
                 }

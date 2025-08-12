@@ -11,23 +11,27 @@ public class StageSelectUI : MonoBehaviour
         [SerializeField] private Button homeButton;
         [SerializeField] private Button stageChangeButtonleft;
         [SerializeField] private Button stageChangeButtonright;
-        
+        [SerializeField] private Image backGroundImage;
+        [SerializeField] private Button stageStartButton;
         
         [Header("스테이지 정보")] 
         [SerializeField] private TextMeshProUGUI bestScoreText;
         [SerializeField] private TextMeshProUGUI bestWaveText;
         [SerializeField] private TextMeshProUGUI stageNameText;
+        [SerializeField] private TextMeshProUGUI stageWarningText;
         [SerializeField] private Image mainWeaponImage;
         [SerializeField] private Image subWeaponImage;
         [SerializeField] private Image partnerImage;
         [SerializeField] private Button skillListButton;
-
+        [SerializeField] private int stageIndex;        
+        [SerializeField] private int maxStageIndex;
+        [SerializeField] private int unlockStageWave;
+        
         [Header("창 모음")] 
         [SerializeField] private GameObject weaponSelectUI;
         [SerializeField] private GameObject skillListPanel;
-        
-        private int stageIndex;
-        private int maxStageIndex;
+        [SerializeField] private TutorialImageUI tutorialImageUI;
+       
 
         void Awake()
         {
@@ -36,19 +40,30 @@ public class StageSelectUI : MonoBehaviour
         
         public void Init()
         {
-                stageIndex = 1; // 해당 부분 스테이지 구현 후 변경
+                stageIndex = 0; // 해당 부분 스테이지 구현 후 변경
+                if (StageManager.Instance != null)
+                {
+                        maxStageIndex = StageManager.Instance.stages.Count - 1;
+                }
                 UpdateStageInfoUI();
         }
 
         private void OnEnable()
         {
-                maxStageIndex = GameManager.Instance.bestScore;
                 UpdateStageInfoUI();
+                if (!GameManager.Instance.useStage)
+                {
+                        ClickHintButton();
+                        GameManager.Instance.useStage = true;
+                        GameManager.Instance.Save();
+                }
         }
 
         void Update()
         {
-                if (Input.GetKeyDown(KeyCode.Escape))
+                if (Input.GetKeyDown(KeyCode.Escape) && !tutorialImageUI.gameObject.activeInHierarchy
+                    && !weaponSelectUI.gameObject.activeInHierarchy &&!skillListPanel.gameObject.activeInHierarchy
+                    )
                 {
                         ClickHomeButton();
                 }
@@ -56,28 +71,41 @@ public class StageSelectUI : MonoBehaviour
         public void ClickNextStageButton(int value)
         {
                 stageIndex += value;
-                if (stageIndex < 1)
+                if (stageIndex < 0)
                 {
-                        stageIndex = 1;
-                        return;
+                        stageIndex = maxStageIndex;
+                        //return;
                 }
 
                 if (stageIndex > maxStageIndex)
                 {
-                        stageIndex = maxStageIndex;
-                        return;
+                        stageIndex = 0; // 첫 스테이지 로 변경
+                        //return;
                 }    // 해당 함수 부분 기획 의견 듣고 결정 (마지막 스테이지에서 처음 스테이지로 이동할지 아니면 넘어가 지지 않을지)
                 
                 Debug.Log(stageIndex);
+                if (StageManager.Instance != null)
+                {
+                        StageManager.Instance.UpdateStage(stageIndex);
+                }
                 UpdateStageInfoUI();
+                
         }
 
         public void UpdateStageInfoUI() // 해당 인덱스의 스테이지 정보 UPDATE
-        {
-              Debug.Log("UI업데이트 임시 출력");   // TEST용 코드
-              //  bestScoreText.text = stage[index].maxScore.ToString()     예시 코드 스테이지 제작 후 결정
-              bestWaveText.text = GameManager.Instance.bestScore.ToString() + " WAVE"; // 가장 높은 웨이브 설정
-              //stageNameText.text = stage[index].name;                     예시 코드 스테이지 제작 후 결정
+        { 
+                stageWarningText.gameObject.SetActive(false); 
+                stageStartButton.interactable = true;
+              //bestScoreText.text = StageManager.Instance.selectStage.stageName;     
+              //bestWaveText.text = GameManager.Instance.bestScore.ToString() + " WAVE"; // 가장 높은 웨이브 설정
+              bestWaveText.text = StageManager.Instance.bestWave[stageIndex].ToString();
+              stageNameText.text = StageManager.Instance.selectStage.stageName;
+              backGroundImage.sprite = StageManager.Instance.selectStage.stageImage;
+              if (stageIndex > 0 && StageManager.Instance.bestWave[stageIndex-1] < unlockStageWave)
+              {
+                      stageWarningText.gameObject.SetActive(true);
+                      stageStartButton.interactable = false;
+              }
         }
 
         public void UpdatePartnerInfoUI()
@@ -104,7 +132,7 @@ public class StageSelectUI : MonoBehaviour
 
         public void ClickEnterButton()
         {
-                Debug.Log("게임 시작");                     // 테스트용 코드
+         
                 if (GameManager.Instance.selectSkills.Count != 12)
                 {
                         Debug.Log("모든 스킬이 선택되지 않았습니다.");
@@ -121,13 +149,16 @@ public class StageSelectUI : MonoBehaviour
         
         IEnumerator LoadSceneAndStartUI()
         {
-                AsyncOperation async = SceneManager.LoadSceneAsync("BattleTest");
-                
+                //AsyncOperation async = SceneManager.LoadSceneAsync("BattleTest");
+                AsyncOperation async = SceneManager.LoadSceneAsync("JW_EquipPartner");
                 while (!async.isDone) yield return null;
                 
                 yield return new WaitUntil(() => UIManager.Instance != null);
         }
         
-        
+        public void ClickHintButton()
+        {
+                tutorialImageUI.gameObject.SetActive(true);
+        }
 
 }

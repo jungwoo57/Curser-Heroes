@@ -18,6 +18,7 @@ MonoBehaviour:
   maxLevel: 8
   description: "\uCEE4\uC11C\uC758 (\uC2A4\uC715) \uACF5\uACA9\uB825 \uC99D\uAC00"
   skillPrefab: {fileID: 0}
+  animClip: {fileID: 0}
   levelDataList:
   - level: 1
     damage: 2
@@ -25,46 +26,55 @@ MonoBehaviour:
     count: 0
     duration: 0
     cooldown: 0
+    description: "\uCEE4\uC11C\uC758 (\uC2A4\uC715) \uACF5\uACA9\uB825 \uC99D\uAC00"
   - level: 2
     damage: 4
     sizeMultiplier: 0
     count: 0
     duration: 0
     cooldown: 0
+    description: "\uD53C\uD574\uB7C9: 2 \u2192 4"
   - level: 3
     damage: 6
     sizeMultiplier: 0
     count: 0
     duration: 0
     cooldown: 0
+    description: "\uD53C\uD574\uB7C9: 4 \u2192 6"
   - level: 4
     damage: 8
     sizeMultiplier: 0
     count: 0
     duration: 0
     cooldown: 0
+    description: "\uD53C\uD574\uB7C9: 6 \u2192 8"
   - level: 5
     damage: 10
     sizeMultiplier: 0
     count: 0
     duration: 0
     cooldown: 0
+    description: "\uD53C\uD574\uB7C9: 8 \u2192 10"
   - level: 6
     damage: 12
     sizeMultiplier: 0
     count: 0
     duration: 0
     cooldown: 0
+    description: "\uD53C\uD574\uB7C9: 10 \u2192 12"
   - level: 7
     damage: 14
     sizeMultiplier: 0
     count: 0
     duration: 0
     cooldown: 0
+    description: "\uD53C\uD574\uB7C9: 12 \u2192 14"
   - level: 8
     damage: 16
     sizeMultiplier: 0
     count: 0
     duration: 0
     cooldown: 0
+    description: "\uD53C\uD574\uB7C9: 14 \u2192 16"
   unlockCost: 0
+  isDefaultSkill: 1

@@ -54,9 +54,23 @@ public class Sandworm : BaseMonster
     IEnumerator SpawnRootAfterDelay(Vector3 pos, GameObject fakeTarget)
     {
         yield return new WaitForSeconds(attackDelay);
+        
+        GameObject acidPrefab = Instantiate(effectPrefab, pos, Quaternion.identity ,transform);
+        Octopus_Ink acidEffect = acidPrefab.GetComponent<Octopus_Ink>();
+        if (acidEffect != null)
+        {
+            acidEffect.Initialize(Vector3.zero, damage);
+        }
+        else
+        {
+            MonsterProjectile projectile = acidPrefab.GetComponent<MonsterProjectile>();
+            if (projectile != null)
+            {
+                projectile.Initialize(Vector3.zero, damage);
+            }
+        }
 
-        Instantiate(effectPrefab, pos, Quaternion.identity);
-
+        Destroy(acidEffect, 0.5f);
         Destroy(fakeTarget); // 타겟 오브젝트 삭제
     }
 

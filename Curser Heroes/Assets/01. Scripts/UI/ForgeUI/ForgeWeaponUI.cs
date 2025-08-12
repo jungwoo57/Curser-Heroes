@@ -11,7 +11,7 @@ public class ForgeWeaponUI : MonoBehaviour
     public Image image;
     public Text levelText;
     public bool locked;
-    
+    public Button button;
 
     public void CheckMainLock()   //메인 무기 소유하고 있으면 잠그기 아니면 해금
     {
@@ -110,6 +110,7 @@ public class ForgeWeaponUI : MonoBehaviour
                 forgeUI.reinforceButton.gameObject.SetActive(true);
                 forgeUI.unlockButton.gameObject.SetActive(false);
                 forgeUI.UIUpdate();
+                button.interactable = false;
             }
             else
             {
@@ -119,7 +120,9 @@ public class ForgeWeaponUI : MonoBehaviour
                 forgeUI.reinforceButton.gameObject.SetActive(false);
                 forgeUI.unlockButton.gameObject.SetActive(true);
                 forgeUI.UIUpdate();
+                button.interactable = false;
             }
+            button.interactable = false;
         }
         else
         {
@@ -141,6 +144,7 @@ public class ForgeWeaponUI : MonoBehaviour
                 forgeUI.unlockButton.gameObject.SetActive(true);
                 forgeUI.UIUpdate();
             }
+            button.interactable = false;
         }
         //가지고 있으면 무기 변경 아니면 무기 해금 일단 무기 변경만
     }

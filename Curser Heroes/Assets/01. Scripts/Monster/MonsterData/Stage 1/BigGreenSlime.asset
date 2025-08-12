@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: BigGreenSlime
   m_EditorClassIdentifier: 
   monsterPrefab: {fileID: 8067984256520238961, guid: dd2fa99f94bc62c4f9599cba5f7b9754, type: 3}
-  maxHP: 25
+  maxHP: 40
   valueCost: 4
   attackCooldown: 2
-  damage: 0
+  damage: 1
   index: 0

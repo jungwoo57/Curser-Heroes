@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Unity.Collections;
 using UnityEngine;
 
 public class BigSlime : BaseMonster

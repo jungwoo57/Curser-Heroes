@@ -12,17 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad7c51b5ed48a1447976c84327ca1842, type: 3}
   m_Name: CarrotBlade
   m_EditorClassIdentifier: 
-  weaponName: CarrotBlade
+  weaponName: "\uB2F9\uADFC \uAC80"
   weaponImage: {fileID: 21300000, guid: 0a87083033aff8142ad77c8b34b248cf, type: 3}
   weaponDesc: "\uC7A5\uB09C\uCE58\uAE30 \uC88B\uC544\uD558\uB294 \uBAAC\uC2A4\uD130\uB4E4\uC774
     \uB2F9\uADFC\uC744 \uC88B\uC544\uD558\uB294 \uD1A0\uB07C \uC218\uC778 \uC18C\uB140\uC758
     \uB2F9\uADFC \uBC2D\uC744 \uC2B5\uACA9\uD588\uB2E4. \uD654\uAC00 \uB09C \uD1A0\uB07C
     \uC18C\uB140\uB294 \uB0A8\uC544\uC788\uB294 \uAC70\uB300\uD55C \uB2F9\uADFC\uC744
     \uD718\uB450\uB978\uB2E4."
-  upgradeCost: f40100009902000074030000970400001a0600001d080000ca0a0000590e00001513000061190000
-  unlockCost: 1500
+  upgradeCost: 2c01000033030000bb080000d51700000f4100009cb10000dfe40100b22b0500b01d0e005d892600
+  unlockCost: 50
   baseDamage: 6
-  damagePerLevel: 3
-  attackCooldown: 0.5
+  damagePerLevel: 4.8
+  attackCooldown: 0.1
   attackRange: 0.5
-  maxLives: 10
+  maxLives: 4

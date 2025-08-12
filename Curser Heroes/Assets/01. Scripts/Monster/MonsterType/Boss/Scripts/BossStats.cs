@@ -12,14 +12,14 @@ public class BossStats : MonoBehaviour
 
     public static event Action<BossStats> OnAnyMonsterDamaged;
 
-    private Animator animator;
+    protected Animator animator;
     private SpriteRenderer spriteRenderer;
     private Color originalColor;
     BossPatternController BossPatternController; // 보스 패턴 컨트롤러 참조
 
     
     
-    private void Awake()
+    protected virtual void Awake()
     {
         // 초기 체력 세팅
         currentHP = data.maxHP;
@@ -41,6 +41,11 @@ public class BossStats : MonoBehaviour
         animator.SetTrigger("BossDamage");  // 피격 애니메이션
         StartCoroutine(FlashEffect());
 
+        if (DamageTextManager.instance != null)
+        {
+            DamageTextManager.instance.ShowDamage(amount, this.transform.position);
+        }
+        
         if (currentHP <= 0)
             Die();
         
@@ -65,7 +70,7 @@ public class BossStats : MonoBehaviour
     }
 
     // 죽었을 때 호출
-    public void Die()
+    public virtual void Die()
     {
         if (BossPatternController != null)
             BossPatternController.IsDead = true;

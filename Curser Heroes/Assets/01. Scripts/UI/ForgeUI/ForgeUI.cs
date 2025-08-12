@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 public class ForgeUI : MonoBehaviour
@@ -15,7 +16,16 @@ public class ForgeUI : MonoBehaviour
     public TextMeshProUGUI weaponDesc;
     public TextMeshProUGUI weaponHp;
     public TextMeshProUGUI weaponAtk;
+    public TextMeshProUGUI upgradeWeaponAtk;
+    public TextMeshProUGUI currentWeaponAtk;
+    [SerializeField] private TextMeshProUGUI reinforceText;
+    [SerializeField] private TextMeshProUGUI unlockText;
 
+    [Header("이미지 목록")] 
+    [SerializeField] private Image goldImage;
+    [SerializeField] private Image jewelImage;
+    
+    
     [Header("무기 선택 이미지")] 
     public ForgeWeaponUI[] weaponUIs;
     
@@ -24,15 +34,25 @@ public class ForgeUI : MonoBehaviour
     public Button mainWeaponButton;
     public Button subWeaponButton;
     public Button unlockButton;
-   
+
+    [Header("텍스트 컬러")] 
+    [SerializeField] private Color enabledColor;
+    [SerializeField] private Color disableColor;
+
+
+    [Header("강화 표시 및 해금 이펙트")] 
+    [SerializeField] private GameObject[] upgradeDirection;
+    [SerializeField] private GameObject unlockDirection;
+    [SerializeField] private float effectDurationTime;
+    
     public bool isMain = true;
     public OwnedWeapon selectWeapon;
     public OwnedSubWeapon selectSubWeapon;
 	public WeaponData selectData;
 	public SubWeaponData selectSubData;
-	public Image GoldImage;
-	public Image JewelImage;
-
+	
+    
+    public TutorialImageUI tutorialImageUI;
     [SerializeField] private ScrollRect weaponScroll;
     private void OnEnable()
     {
@@ -41,11 +61,17 @@ public class ForgeUI : MonoBehaviour
         subWeaponButton.interactable = true;
         weaponScroll.verticalNormalizedPosition = 1.0f;
         Init();
+        if (!GameManager.Instance.useForge)
+        {
+            ClickHintButton();
+            GameManager.Instance.useForge = true;
+            GameManager.Instance.Save();
+        }
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !tutorialImageUI.gameObject.activeInHierarchy)
         {
             ClickExitButton();
         }
@@ -86,7 +112,6 @@ public class ForgeUI : MonoBehaviour
                 GameManager.Instance.UpgradeWeapon(selectWeapon.data);
                 UIUpdate();
             }
-            Debug.Log("무기강화");       
         }
         else
         {
@@ -95,8 +120,8 @@ public class ForgeUI : MonoBehaviour
                 GameManager.Instance.UpgradeWeapon(selectSubWeapon.data);
                 UIUpdate();
             }
-            Debug.Log("보조무기강화");    
         } //weapondata에 레벨이 존재해야 할 것 같음
+        ReinforceEffect();
     }
 
     public void OnClickUnlockWeapon()
@@ -119,6 +144,7 @@ public class ForgeUI : MonoBehaviour
                 selectSubData = selectSubWeapon.data;   //버그 픽스용 추가코드
             }
         }
+        UnlockEffect();
         unlockButton.gameObject.SetActive(false);
         reinforceButton.gameObject.SetActive(true);
         UpdateSelectUI();
@@ -126,99 +152,176 @@ public class ForgeUI : MonoBehaviour
     }
     public void UIUpdate()
     {
+        for (int i = 0; i < weaponUIs.Length; i++)
+        {
+            Button uiButton = weaponUIs[i].GetComponent<Button>();
+            uiButton.interactable = true;
+            Outline uiOutline = uiButton.GetComponent<Outline>();
+            uiOutline.enabled = false;
+            uiButton.gameObject.SetActive(false); // ui초기화 코드 추가 0804
+        }
+        reinforceButton.gameObject.SetActive(false);
         reinforceButton.interactable = true;
-        GoldImage.gameObject.SetActive(false);
-        JewelImage.gameObject.SetActive(false);
-        hasGoldText.gameObject.SetActive(false);
+        unlockButton.gameObject.SetActive(false); //추가
+        unlockButton.interactable = true;
         useGoldText.gameObject.SetActive(false);
-        hasJewelText.gameObject.SetActive(false);
         useJewelText.gameObject.SetActive(false);
+        weaponHp.gameObject.SetActive(false);
+        goldImage.gameObject.SetActive(false);
+        jewelImage.gameObject.SetActive(false);
+        
         if (isMain)
         {
+            for (int i = 0; i < GameManager.Instance.allMainWeapons.Count; i++)
+            {
+                Button uiButton = weaponUIs[i].GetComponent<Button>();
+                uiButton.gameObject.SetActive(true);
+                uiButton.interactable = true;
+                Outline uiOutline = uiButton.GetComponent<Outline>();
+                if (weaponUIs[i].mainData == selectData)
+                {
+                    uiButton.interactable = false;
+                    uiOutline.enabled = true;
+                }
+            }
             weaponDesc.text = selectData.weaponDesc;
+            weaponHp.gameObject.SetActive(true);
             weaponHp.text = ("체력 : ") + selectData.maxLives.ToString();
             hasGoldText.text = GameManager.Instance.GetGold().ToString();
             hasJewelText.text = GameManager.Instance.GetJewel().ToString();
             useJewelText.text = selectData.unlockCost.ToString();
             weaponImage.sprite = selectData.weaponImage;
-            if (selectWeapon != null)
+            reinforceText.color = enabledColor;
+            if (selectWeapon != null && selectWeapon.data != null)
             {
-                GoldImage.gameObject.SetActive(true);
-                weaponAtk.text = ("공격력 : ") + selectWeapon.levelDamage.ToString();
+                goldImage.gameObject.SetActive(true);
+                weaponAtk.text = ("공격력 : ") + (int)(selectWeapon.levelDamage);
+                currentWeaponAtk.text = ((int)selectWeapon.levelDamage).ToString();
                 if(selectWeapon.level <= 0) weaponName.text = selectData.weaponName;
-                else weaponName.text = selectData.weaponName + "   (" + (selectWeapon.level) + ")";
-                hasGoldText.gameObject.SetActive(true);
+                else weaponName.text = selectData.weaponName + "+" + (selectWeapon.level);
+                //hasGoldText.gameObject.SetActive(true);
                 useGoldText.gameObject.SetActive(true);
-                GoldImage.gameObject.SetActive(true);
+                reinforceButton.gameObject.SetActive(true);
+                goldImage.gameObject.SetActive(true);
+                //useGoldImage.gameObject.SetActive(true);
                 if (selectWeapon.level < 10)
                 {
-                    useGoldText.text = selectData.upgradeCost[selectWeapon.level].ToString();
+                    useGoldText.text =  selectData.upgradeCost[selectWeapon.level].ToString();
+                    upgradeWeaponAtk.text = ((int)(selectWeapon.levelDamage + selectData.damagePerLevel)).ToString();
                 }
                 else
                 {
-                    useGoldText.text = "최대레벨";
+                    useGoldText.text = "최대 레벨";
+                    upgradeWeaponAtk.text = "최대 레벨";
+                    goldImage.gameObject.SetActive(false);
+                    reinforceButton.interactable = false;
+                    reinforceText.color = disableColor;
                 }
 
-                if (GameManager.Instance.GetGold() < selectData.upgradeCost[selectWeapon.level >= 10 ? 9 : selectWeapon.level] || selectWeapon.level >=10)
+                //if (GameManager.Instance.GetGold() < selectData.upgradeCost[selectWeapon.level >= 10 ? 9 : selectWeapon.level] || selectWeapon.level >=10)
+                if(GameManager.Instance.GetGold() < selectData.upgradeCost[selectWeapon.level >= 10 ? 9 : selectWeapon.level] || selectWeapon.level >= 10)//10까지 강화가안되요
                 {
+                    //reinforceButton.gameObject.SetActive(false);
                     reinforceButton.interactable = false;
+                    reinforceText.color = disableColor;
                 }
             }
             else
             {
-                reinforceButton.gameObject.SetActive(false);
-                JewelImage.gameObject.SetActive(true);
-                weaponAtk.text = ("공격력 : ") + selectData.baseDamage.ToString();
+                unlockButton.gameObject.SetActive(true);
+                unlockText.color = enabledColor;
+                unlockButton.interactable = true;
+                weaponAtk.text = "공격력 : " + selectData.baseDamage.ToString();
+                currentWeaponAtk.text = "미해금";
+                upgradeWeaponAtk.text = selectData.baseDamage.ToString();
                 weaponName.text = selectData.weaponName;
-                hasJewelText.gameObject.SetActive(true);
                 useJewelText.gameObject.SetActive(true);
-                JewelImage.gameObject.SetActive(true);
+                unlockText.color = enabledColor;
+                jewelImage.gameObject.SetActive(true);
+                
                 if (GameManager.Instance.GetJewel() < selectData.unlockCost)
                 {
                     unlockButton.interactable = false;
+                    unlockText.color = disableColor;
                 }
             }
         }
             
         else
         {
+            for (int i = 0; i < GameManager.Instance.allSubWeapons.Count; i++)
+            {
+                Button uiButton = weaponUIs[i].GetComponent<Button>();
+                uiButton.gameObject.SetActive(true);
+                uiButton.interactable = true;
+                Outline uiOutline = uiButton.GetComponent<Outline>();
+                if (weaponUIs[i].subData == selectSubData)
+                {
+                    uiButton.interactable = false;
+                    uiOutline.enabled = true;
+                }
+            }
             weaponDesc.text = selectSubData.weaponDesc;
-            hasGoldText.text = GameManager.Instance.GetGold().ToString();
+            //hasGoldText.text = GameManager.Instance.GetGold().ToString();
             useGoldText.text = selectSubData.upgradeCost.ToString();
             weaponImage.sprite = selectSubData.weaponSprite;
-            hasJewelText.text = GameManager.Instance.GetJewel().ToString();
+            //hasJewelText.text = GameManager.Instance.GetJewel().ToString();
             useJewelText.text = selectSubData.unlockCost.ToString();
-            if (selectSubWeapon != null)
+            reinforceButton.gameObject.SetActive(true);
+            if (selectSubWeapon != null && selectSubWeapon.data !=null)
             {
                 if(selectSubWeapon.level <= 0) weaponName.text = selectSubData.weaponName;
-                else weaponName.text = selectSubData.weaponName + "   (" + (selectSubWeapon.level) + ")";
+                else weaponName.text = selectSubData.weaponName + "+" + (selectSubWeapon.level);
                 
-                weaponAtk.text = ("공격력 : ") + selectSubWeapon.levelDamage.ToString();
-                hasGoldText.gameObject.SetActive(true);
+                weaponAtk.text = ("공격력 : ") + (int)selectSubWeapon.levelDamage;
+                currentWeaponAtk.text = ((int)(selectSubWeapon.levelDamage)).ToString();
+                //hasGoldText.gameObject.SetActive(true);
                 useGoldText.gameObject.SetActive(true);
-                GoldImage.gameObject.SetActive(true);
+                goldImage.gameObject.SetActive(true);
+                //useGoldImage.gameObject.SetActive(true);
                 if (selectSubWeapon.level < 10)
                 {
                     useGoldText.text = selectSubData.upgradeCost[selectSubWeapon.level].ToString();
+                    upgradeWeaponAtk.text = ((int)(selectSubWeapon.levelDamage + selectSubData.damagePerLevel)).ToString();
+                    reinforceText.color = enabledColor;
                 }
                 else
                 {
-                    useGoldText.text = "최대레벨";
+                    useGoldText.text = "최대 레벨";
+                    upgradeWeaponAtk.text = "최대 레벨";
+                    goldImage.gameObject.SetActive(false);
+                    reinforceButton.interactable = false;
+                    reinforceText.color = disableColor;
                 }
 
                 if (GameManager.Instance.GetGold() < selectSubData.upgradeCost[selectSubWeapon.level >= 10 ? 9 : selectSubWeapon.level] || selectSubWeapon.level >=10)
                 {
+                    //reinforceButton.gameObject.SetActive(false);
                     reinforceButton.interactable = false;
+                    reinforceText.color = disableColor;
                 }
             }
             else
             {
                 weaponAtk.text = ("공격력 : ") + selectSubData.baseDamage.ToString();
+                unlockText.color = enabledColor;
+                unlockButton.gameObject.SetActive(true);
+                unlockButton.interactable = true;
+                //if(selectSubData.weaponName != selectSubWeapon)
+                currentWeaponAtk.text = "미해금";
+                upgradeWeaponAtk.text = selectSubData.baseDamage.ToString();
                 weaponName.text = selectSubData.weaponName;
-                hasJewelText.gameObject.SetActive(true);
+                //hasJewelText.gameObject.SetActive(true);
                 useJewelText.gameObject.SetActive(true);
-                JewelImage.gameObject.SetActive(true);
+                unlockButton.gameObject.SetActive(true);
+                jewelImage.gameObject.SetActive(true);
+                //useJewelImage.gameObject.SetActive(true);
                 weaponAtk.text = ("공격력 : ") + selectSubData.baseDamage.ToString();
+                if (GameManager.Instance.GetJewel() < selectSubData.unlockCost)
+                {
+                    unlockButton.interactable = false;
+                    unlockText.color = disableColor;
+                }
             }
         }
     }
@@ -253,6 +356,7 @@ public class ForgeUI : MonoBehaviour
                 weaponUIs[i].UpdateUI();
             } 
         }
+        UIUpdate();
     }
     public void ClickWeaponChangeButton()        //무기 변경
     {
@@ -271,5 +375,34 @@ public class ForgeUI : MonoBehaviour
         UIUpdate();
         UpdateSelectUI();
     }
+
+    public void ReinforceEffect()
+    {
+        for (int i = 0; i < upgradeDirection.Length; i++)
+        {
+            if (!upgradeDirection[i].activeInHierarchy)
+            {
+                upgradeDirection[i].gameObject.SetActive(true);
+                StartCoroutine(EffectTime(effectDurationTime, upgradeDirection[i]));
+                return;
+            }
+        }
+    }
     
+    private void UnlockEffect()
+    {
+        unlockDirection.gameObject.SetActive(true);
+        StartCoroutine(EffectTime(effectDurationTime, unlockDirection));
+    }
+
+    IEnumerator EffectTime(float durationTime, GameObject effect)
+    {
+        yield return new WaitForSeconds(durationTime);
+        effect.SetActive(false);
+    }
+
+    public void ClickHintButton()
+    {
+        tutorialImageUI.gameObject.SetActive(true);
+    }
 }

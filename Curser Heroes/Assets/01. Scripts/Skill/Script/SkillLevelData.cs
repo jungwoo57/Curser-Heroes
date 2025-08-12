@@ -7,4 +7,5 @@ public class SkillLevelData
     public int count;
     public float duration;
     public float cooldown;
+    public string description;
 }

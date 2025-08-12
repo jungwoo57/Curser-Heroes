@@ -25,13 +25,13 @@ public class GameManager : MonoBehaviour
     public List<PartnerData> allPartners;
     public List<SkillData> allSkills;// 모든 스킬
     
-    [SerializeField] private List<SkillData> _hasSkills = new List<SkillData>();
-    
+    [SerializeField] private List<SkillData> defaultSkills = new List<SkillData>();  // 처음부터 제공되는 스킬
+    [SerializeField] private List<SkillData> unlockedSkills = new List<SkillData>(); // 해금한 스킬
+
     [Header("보유 중인 무기 및 동료")]
     [SerializeField] public List<OwnedWeapon> ownedWeapons; // 소유 메인 무기
     [SerializeField] public List<OwnedSubWeapon> ownedSubWeapons; // 소유 보조 무기
     [SerializeField] public List<OwnedPartner> ownedPartners;
-    public List<SkillData> hasSkills => _hasSkills;
     public List<SkillData> skillPool = new List<SkillData>();
     
     [Header("장착 및 선택한 스킬")]
@@ -43,7 +43,23 @@ public class GameManager : MonoBehaviour
     [Header("기타 데이터")]
     [SerializeField] private int gold = 9999;
     [SerializeField]private int jewel = 0;
-    public int bestScore;
+    
+    [Header("튜토리얼 체크용")]
+    public bool useStage;
+    public bool useForge;
+    public bool useLab;
+    public bool useBar;
+    public bool useSkillList;
+    public bool useWeaponSelectList;
+    
+    public event Action OnGoldChanged;
+    public event Action OnJewelChanged;
+
+    public int startSessionGold;
+    public int startSessionJewel;
+    public int currentWave; 
+    public int bestWave;
+
     private void Awake()
     {
         if (instance == null)
@@ -51,8 +67,9 @@ public class GameManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
 
-            _hasSkills = new List<SkillData>(allSkills);
-            skillPool = new List<SkillData>(allSkills); //테스트 편의를 위해 잠시 모든 스킬의 데이터를 가져와 사용 
+            defaultSkills = allSkills.FindAll(skill => skill.isDefaultSkill);
+            unlockedSkills = new List<SkillData>(); // 저장된 스킬은 Load에서 복원
+            skillPool = new List<SkillData>(HasSkills); // 선택 풀은 제공 + 해금 스킬에서만
         }
         else
         {
@@ -62,6 +79,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        Load();
         if (ownedWeapons != null)
         {
             mainEquipWeapon = ownedWeapons[0];
@@ -76,19 +94,30 @@ public class GameManager : MonoBehaviour
         {
             equipPartner = ownedPartners[0];
         }
+        //Load();
     }
 
     public void AddGold(int amount)
     {
         gold += amount;
-        UIManager.Instance.battleUI.TextUpdate();
+        if (UIManager.Instance != null)
+        {
+            UIManager.Instance.battleUI.TextUpdate();
+        }
+
+        OnGoldChanged?.Invoke();
         Debug.Log($"골드 획득: {amount} / 총 골드: {gold}");
     }
 
     public void AddJewel(int amount)
     {
         jewel += amount;
-        UIManager.Instance.battleUI.TextUpdate();
+        if (UIManager.Instance != null)
+        {
+            UIManager.Instance.battleUI.TextUpdate();
+        }
+
+        OnJewelChanged?.Invoke();
         Debug.Log($"쥬얼 획득: {amount} / 총 쥬얼: {jewel}");
     }
 
@@ -106,10 +135,10 @@ public class GameManager : MonoBehaviour
     {
         if (weaponData.unlockCost <= jewel)
         {
-            jewel -= weaponData.unlockCost;
+            AddJewel(- weaponData.unlockCost);
             ownedWeapons.Add(new OwnedWeapon(weaponData));
         }
-
+        AudioManager.Instance.PlayButtonSound(buttonType.village);
         Save();
     }
 
@@ -118,7 +147,7 @@ public class GameManager : MonoBehaviour
 
         if (weaponData.unlockCost <= jewel)
         {
-            jewel -= weaponData.unlockCost;
+            AddJewel(- weaponData.unlockCost);
             ownedSubWeapons.Add(new OwnedSubWeapon(weaponData));
         }
         Save();
@@ -174,7 +203,8 @@ public class GameManager : MonoBehaviour
         int index = ownedWeapons.FindIndex(w => w.data.weaponName == data.weaponName);
         if (index >= 0 && ownedWeapons[index].level<10)
         {
-            gold -= data.upgradeCost[ownedWeapons[index].level];
+            //gold -= data.upgradeCost[ownedWeapons[index].level];
+            AddGold(-data.upgradeCost[ownedWeapons[index].level]);
             ownedWeapons[index].level++;
             Debug.Log(ownedWeapons[index].data.name + "업그레이드 완료" + ownedWeapons[index].level);
         }
@@ -182,6 +212,7 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("해당 데이터 없거나 레벨이 만랩");
         }
+        UpgradeSound();
         Save();
     }
     
@@ -190,7 +221,7 @@ public class GameManager : MonoBehaviour
         int index = ownedSubWeapons.FindIndex(w => w.data.weaponName == data.weaponName);
         if (index >= 0)
         {
-            gold -= data.upgradeCost[ownedSubWeapons[index].level];
+            AddGold(-data.upgradeCost[ownedSubWeapons[index].level]);
             ownedSubWeapons[index].level++;
             Debug.Log(ownedSubWeapons[index].data.name + "업그레이드 완료" + ownedSubWeapons[index].level);
         }
@@ -198,18 +229,31 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("해당 데이터 없음");
         }
+        UpgradeSound();
         Save();
     }
 
-   
-    public void UnlockSkill(SkillData skilldata)
+
+    public void UnlockSkill(SkillData skillData)
     {
-        if (skilldata.unlockCost <= jewel)
+        if (!unlockedSkills.Contains(skillData))
         {
-            jewel -= skilldata.unlockCost;
-            _hasSkills.Add(skilldata);
+            AddJewel(-skillData.unlockCost);
+            unlockedSkills.Add(skillData);
+
+           
+            if (!HasSkills.Contains(skillData))
+            {
+                if(jewel >= skillData.unlockCost)
+                {
+                    AddJewel(-skillData.unlockCost);
+                    HasSkills.Add(skillData);
+                }
+            }
+            UpgradeSound();
+
+            Save();
         }
-        Save();
     }
 
     public void UpgradePartner(PartnerData data)
@@ -217,56 +261,123 @@ public class GameManager : MonoBehaviour
         int index = ownedPartners.FindIndex(w => w.data.partnerName == data.partnerName);
         if (index >= 0)
         {
-            gold -= data.upgradeCost[ownedPartners[index].level];
+            AddGold(-data.upgradeCost[ownedPartners[index].level]);
             ownedPartners[index].level++;
         }
+        UpgradeSound();
         Save();
     }
     public void UnlockPartner(PartnerData partnerData)
     {
         if (partnerData.unlockCost <= jewel)
         {
-            jewel -= partnerData.unlockCost;
+            AddJewel(-partnerData.unlockCost);
             ownedPartners.Add(new OwnedPartner(partnerData));
         }
+        UpgradeSound();
         Save();
             
     }
-        
+    public List<SkillData> HasSkills
+    {
+        get
+        {
+            var all = new List<SkillData>(defaultSkills);
+            all.AddRange(unlockedSkills);
+            return all;
+        }
+    }
+
     [ContextMenu("TestSave")]
     public void Save()
     {
         if (!SaveLoadManager.instance) return;
         SaveData data = new SaveData();
-        data.hasSkills = _hasSkills;
+        data.unlockedSkills = unlockedSkills;
+        data.selectedSkills = selectSkills;
         data.ownedWeapons = ownedWeapons;
         data.ownedSubWeapons = ownedSubWeapons;
+        data.ownedPartners = ownedPartners;
         data.mainEquipWeapon = mainEquipWeapon;
         data.subEquipWeapon = subEquipWeapon;
         data.selectedSkills = selectSkills;
+        data.mainWeaponName.Clear();
+        data.subWeaponName.Clear();
+        data.partnerName.Clear();
+        for (int i = 0; i < ownedWeapons.Count; i++)
+        {
+            data.mainWeaponName.Add(ownedWeapons[i].data.weaponName);   
+        }
+        for (int i = 0; i < ownedSubWeapons.Count; i++)
+        {
+            data.subWeaponName.Add(ownedSubWeapons[i].data.weaponName);   
+        }
+        for (int i = 0; i < ownedPartners.Count; i++)
+        {
+            data.partnerName.Add(ownedPartners[i].data.partnerName);   
+        }
         data.gold = gold; 
         data.jewel = jewel;
-        data.bestScore = bestScore;
-
+        data.stage1bestWave = StageManager.Instance.bestWave[0];
+        data.stage1bestWave = StageManager.Instance.bestWave[1];
+        data.stage1bestWave = StageManager.Instance.bestWave[2];
+        data.useStage = useStage;
+        data.useForge = useForge;
+        data.useBar = useBar;
+        data.useLab = useLab;
+        data.useSkillList = useSkillList;
+        data.useWeaponSelectList = useWeaponSelectList;
+        
         SaveLoadManager.instance.Save(data);
     }
 
     [ContextMenu("Load")]
     public void Load()
     {
+        Debug.Log("여긴됨");
         SaveData loadData = new SaveData();
         loadData = SaveLoadManager.instance.Load();
         if (loadData == null) return;
-        _hasSkills = loadData.hasSkills;
+        Debug.Log("데이터 로드됨");
+        unlockedSkills = loadData.unlockedSkills ?? new List<SkillData>();
+        selectSkills = loadData.selectedSkills ?? new List<SkillData>();
+        skillPool = new List<SkillData>(HasSkills);
         ownedWeapons = loadData.ownedWeapons;
         ownedSubWeapons = loadData.ownedSubWeapons;
+        ownedPartners = loadData.ownedPartners;
         mainEquipWeapon = loadData.mainEquipWeapon;
         subEquipWeapon = loadData.subEquipWeapon;
+
+        for (int i = 0; i < ownedWeapons.Count; i++)
+        {
+           ownedWeapons[i].data = allMainWeapons.Find(w => w.weaponName == loadData.mainWeaponName[i]);
+        }
+        
+        for (int i = 0; i < ownedSubWeapons.Count; i++)
+        {
+            ownedSubWeapons[i].data = allSubWeapons.Find(w => w.weaponName == loadData.subWeaponName[i]);
+        }
+        
+        for (int i = 0; i < ownedPartners.Count; i++)
+        {
+            ownedPartners[i].data = allPartners.Find(w => w.partnerName == loadData.partnerName[i]);
+        }
         selectSkills =  loadData.selectedSkills;
         gold = loadData.gold;
         jewel = loadData.jewel;
-        bestScore = loadData.bestScore;
+        StageManager.Instance.bestWave[0] = loadData.stage1bestWave;
+        StageManager.Instance.bestWave[1] = loadData.stage2bestWave;
+        StageManager.Instance.bestWave[2] = loadData.stage3bestWave;
+        useStage = loadData.useStage;
+        useForge = loadData.useForge;
+        useBar = loadData.useBar;
+        useLab = loadData.useLab;
+        useSkillList = loadData.useSkillList;
+        useWeaponSelectList = loadData.useWeaponSelectList;
+        OnGoldChanged?.Invoke();
+        //bestScore = loadData.bestScore;
     }
+
 
     public void OnApplicationQuit()      //마을에서 게임 껏을 시 자동 저장
     {
@@ -274,5 +385,11 @@ public class GameManager : MonoBehaviour
         {
             Save();
         }
+    }
+
+    public void UpgradeSound()
+    {
+        if(AudioManager.Instance != null)
+            AudioManager.Instance.PlayButtonSound(buttonType.upgrade);
     }
 }

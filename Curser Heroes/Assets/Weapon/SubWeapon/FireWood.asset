@@ -12,11 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a595bcdfd8ab3e341af4dac3e68e0bbc, type: 3}
   m_Name: FireWood
   m_EditorClassIdentifier: 
-  weaponName: FireWood
+  useSound: {fileID: 8300000, guid: 8ce044143b00eb6489618e4ef02c4a73, type: 3}
+  useSoundVolume: 1
+  weaponName: "\uB098\uBB34 \uD1A0\uB9C9"
   weaponSprite: {fileID: 21300000, guid: bbc6fc2635d7b504b8cc2f04e3e0fbc7, type: 3}
-  weaponDesc: "\uBCC4\uB3C4\uC758 \uD6A8\uACFC \uC5C6\uC74C."
+  weaponDesc: "\uB9C8\uC6B0\uC2A4\uB97C 1\uCD08\uAC04 \uAFB9 \uB20C\uB7EC \uCDA9\uC804\uD55C
+    \uD6C4, \uAC00\uAE4C\uC6B4 \uC801\uC5D0\uAC8C \uD22C\uC0AC\uCCB4\uB97C \uBC1C\uC0AC\uD558\uB294
+    \uBCF4\uC870 \uBB34\uAE30. "
   upgradeCost: 8a020000390300001704000031050000970600005e080000a00a00007e0d000022110000c2150000
-  unlockCost: 1500
+  unlockCost: 150
   baseDamage: 5
   damagePerLevel: 1.5
   cooldown: 0.5
@@ -25,11 +29,20 @@ MonoBehaviour:
   rangeShape: 0
   speed: 0
   rotateWithDirection: 0
-  projectilePrefab: {fileID: 0}
+  projectilePrefab: {fileID: 8395948514203269239, guid: 34419eea872f55249af1b972bb31b202, type: 3}
   projectileSpeed: 10
   projectileMaxDistance: 8
   rangeType: 0
   maxAmmo: 0
   reloadTime: 0
-  manaCost: 0
-  requiredChargeTime: 3
+  manaCost: 5
+  requiredChargeTime: 1
+  ForceVisualPrefab: {fileID: 0}
+  LineVisualPrefab: {fileID: 0}
+  effectWidth: 1.5
+  effectDuration: 0.2
+  effectRadius: 3
+  subeffect: 0
+  burnDamagePerSecond: 0
+  burnDuration: 0
+  stunDuration: 1

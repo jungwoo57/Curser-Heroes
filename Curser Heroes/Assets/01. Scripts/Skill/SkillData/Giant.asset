@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 313662ea31e2a54469b9f802318e0975, type: 3}
+  m_Name: Giant
+  m_EditorClassIdentifier: 
+  skillName: "\uAC70\uC778"
+  icon: {fileID: 21300000, guid: 8a4c8ff613464cb40a1e5f90b361bdd7, type: 3}
+  type: 2
+  maxLevel: 1
+  description: "\uCEE4\uC11C \uD06C\uAE30\uAC00 \uCEE4\uC9C0\uACE0, \uCD5C\uB300
+    \uBAA9\uC228 1 \uC0C1\uC2B9"
+  skillPrefab: {fileID: 4821872187679514769, guid: edf0815ee98d0524eade1525fa71cd89, type: 3}
+  animClip: {fileID: 0}
+  audioClip: {fileID: 0}
+  levelDataList:
+  - level: 1
+    damage: 0
+    sizeMultiplier: 0
+    count: 0
+    duration: 0
+    cooldown: 0
+    description: "\uCEE4\uC11C \uD06C\uAE30\uAC00 \uCEE4\uC9C0\uACE0, \uCD5C\uB300
+      \uBAA9\uC228 1 \uC0C1\uC2B9"
+  unlockCost: 35
+  isDefaultSkill: 0

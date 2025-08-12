@@ -1,63 +1,82 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
+[RequireComponent(typeof(SpriteRenderer))]
 public class SubWeaponFollower : MonoBehaviour
 {
-    private Transform target;
+    private Transform followTarget;
+    private float currentAngle, angleOffset;
+    private Coroutine flickerCoroutine;
     private SpriteRenderer spriteRenderer;
+    private Color originalColor;
 
     public float followDistance = 1.5f;
-    public float rotationSpeed = 180f;
+    public float rotationSpeed = 360f;
 
     void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        originalColor = spriteRenderer.color;
     }
 
-    public void SetTarget(Transform newTarget)
+    public void Init(SubWeaponData data, float offset = 0f)
     {
-        target = newTarget;
+        if (spriteRenderer != null && data.weaponSprite != null)
+            spriteRenderer.sprite = data.weaponSprite;
+        angleOffset = offset;
+        currentAngle = offset;
     }
 
-    public void SetSprite(Sprite sprite)
+    public void SetMainWeapon(Transform target, float offset)
     {
-        if (spriteRenderer != null && sprite != null)
-            spriteRenderer.sprite = sprite;
+        followTarget = target;
+        angleOffset = offset;
+        currentAngle = offset;
     }
-
-    private SubWeaponData weaponData;
-
-    public void Init(SubWeaponData data)
-    {
-        weaponData = data;
-
-        // 스프라이트 자동 설정
-        if (spriteRenderer == null)
-            spriteRenderer = GetComponent<SpriteRenderer>();
-
-        if (weaponData != null && weaponData.weaponSprite != null)
-        {
-            spriteRenderer.sprite = weaponData.weaponSprite;
-        }
-    }
-
-
 
     void Update()
     {
-        //  커서 위치 기준으로 회전 궤도 계산
-        Vector3 cursorWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        cursorWorldPos.z = 0f;
+        if (followTarget == null) return;
+        currentAngle = (currentAngle + rotationSpeed * Time.deltaTime) % 360f;
+        float rad = currentAngle * Mathf.Deg2Rad;
+        transform.position = followTarget.position
+                           + new Vector3(Mathf.Cos(rad), Mathf.Sin(rad), 0f)
+                             * followDistance;
+    }
 
-        float angle = Time.time * rotationSpeed;
-        Vector3 offset = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0f) * followDistance;
+    // 충전 시작하면 깜빡이기
+    public void StartCharging()
+    {
+        if (flickerCoroutine == null)
+            flickerCoroutine = StartCoroutine(FlickerWhite());
+    }
 
-        transform.position = cursorWorldPos + offset;
-
-        if (target != null)
+    // 깜빡 멈추고 원래 색으로
+    public void StopCharging()
+    {
+        if (flickerCoroutine != null)
         {
-            Vector3 dir = target.position - transform.position;
-            float zRot = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(0f, 0f, zRot);
+            StopCoroutine(flickerCoroutine);
+            flickerCoroutine = null;
+        }
+        spriteRenderer.color = originalColor;
+    }
+
+    // 완전 충전되면 빨간색으로
+    public void SetCharged()
+    {
+        StopCharging();
+        spriteRenderer.color = Color.red;
+    }
+
+    private IEnumerator FlickerWhite()
+    {
+        while (true)
+        {
+            spriteRenderer.color = Color.white;
+            yield return new WaitForSeconds(0.1f);
+            spriteRenderer.color = originalColor;
+            yield return new WaitForSeconds(0.1f);
         }
     }
 }

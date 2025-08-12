@@ -46,4 +46,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageText: {fileID: 7693586619190859948, guid: 07dca9be3ae09394e8c4dee942769a0c, type: 3}
   damageCanvas: {fileID: 0}
+  stunCanvas: {fileID: 0}
   time: 0
+  offset: 0
+  stunImage: {fileID: 0}
+  stunSprite: {fileID: 0}
+  stunOffset: 1
+  burnCanvas: {fileID: 0}
+  burnImage: {fileID: 0}
+  burnOffset: 1

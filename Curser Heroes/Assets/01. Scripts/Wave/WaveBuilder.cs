@@ -1,15 +1,14 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public static class WaveBuilder
 {
-    public static List<MonsterData> BuildWaveEntry(WaveEntry waveData, List<MonsterData> globalPool)
+    public static List<MonsterData> BuildWave(int wave, List<MonsterData> monsterPool)
     {
-        int waveValue = waveData.WaveValue;
-        int valueRange = 2 + (waveData.wave / 10);
+        int waveValue = WaveUtils.GetWaveValue(wave);
+        int valueRange = 2 + (wave / 10);
         int monsterCount = 10;
 
-        List<MonsterData> usePool = globalPool;
         List<MonsterData> spawnQueue = new List<MonsterData>();
         int remainingValue = waveValue;
 
@@ -19,7 +18,7 @@ public static class WaveBuilder
             int maxAllowed = Mathf.Min(valueRange, remainingValue - remainingMonsters);
             if (maxAllowed < 1) maxAllowed = 1;
 
-            List<MonsterData> valid = usePool.FindAll(m => m != null && m.valueCost <= maxAllowed);
+            List<MonsterData> valid = monsterPool.FindAll(m => m != null && m.valueCost <= maxAllowed);
             if (valid.Count == 0) break;
 
             MonsterData selected = valid[Random.Range(0, valid.Count)];
