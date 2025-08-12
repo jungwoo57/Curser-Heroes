@@ -7,6 +7,7 @@ public class Octopus_Ink : MonoBehaviour
     public float speed;
     private Vector3 direction;
     private int damage;
+    [SerializeField] private Collider2D col;
     [SerializeField] private GameObject darkImage;
     [SerializeField] private float blackTime;
     // 투사체 초기화 (방향, 데미지)
@@ -35,7 +36,7 @@ public class Octopus_Ink : MonoBehaviour
                 StartCoroutine(ActiveBlack());
                 WeaponManager.Instance.TakeWeaponLifeDamage();
                 Debug.Log("투사체 충돌: 무기 내구도 감소!");
-                Destroy(gameObject); // 즉시 파괴, 충돌했을 때만
+                col.enabled = false; // 즉시 파괴, 충돌했을 때만
             }
 
             //Destroy(gameObject); // 즉시 파괴
@@ -48,5 +49,6 @@ public class Octopus_Ink : MonoBehaviour
         darkImage.SetActive(true);
         yield return new WaitForSeconds(blackTime);
         darkImage.SetActive(false);
+        Destroy(gameObject);
     }
 }
