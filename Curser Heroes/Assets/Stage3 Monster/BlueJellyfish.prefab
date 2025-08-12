@@ -53,7 +53,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   isDead: 0
-  deathTime: 1
+  deathTime: 2
   monsterData: {fileID: 11400000, guid: 5eff196f717213e45ad278965796b6b7, type: 2}
   attackOffset: {x: 0, y: 0.5}
   attackRange: 1
@@ -62,6 +62,7 @@ MonoBehaviour:
     m_Bits: 64
   explosionOffset: {x: 0, y: 0.5}
   explosionRadius: 1.5
+  delayTime: 1
 --- !u!212 &-7993431780140251505
 SpriteRenderer:
   m_ObjectHideFlags: 0

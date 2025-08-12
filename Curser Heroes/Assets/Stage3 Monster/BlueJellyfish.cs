@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class BlueJellyfish : BaseMonster
 {
@@ -13,6 +14,7 @@ public class BlueJellyfish : BaseMonster
     [SerializeField] private Vector2 explosionOffset = new Vector2(0, 0.5f);
     [SerializeField] private float explosionRadius = 2f;
 
+    [SerializeField] private float delayTime;
     private void Awake()
     {
         var col = GetComponent<Collider2D>();
@@ -48,10 +50,16 @@ public class BlueJellyfish : BaseMonster
     protected override void Die()
     {
         if (isDead) return;
-        Explode();
+        StartCoroutine(DelayExplode());
         base.Die();  
     }
-
+    
+    private IEnumerator DelayExplode()
+    {
+        yield return new WaitForSeconds(delayTime);
+        Explode();
+    }
+    
     private void Explode()
     {
         Vector2 explodeOrigin = (Vector2)transform.position + explosionOffset;
