@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Scolpion_Pink
   m_EditorClassIdentifier: 
   monsterPrefab: {fileID: 8297811629679388327, guid: abf2b070bc7b04440b49dcb37ea32b39, type: 3}
-  maxHP: 172
+  maxHP: 132
   valueCost: 3
-  attackCooldown: 2
+  attackCooldown: 5
   damage: 1
   index: 0

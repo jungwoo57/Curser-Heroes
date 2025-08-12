@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: MeerpokkatFamily
   m_EditorClassIdentifier: 
   monsterPrefab: {fileID: 5387247005826367704, guid: 5a92d2dd4ec50ec408e3105b1020851e, type: 3}
-  maxHP: 115
+  maxHP: 75
   valueCost: 2
-  attackCooldown: 2
+  attackCooldown: 5
   damage: 1
   index: 0
