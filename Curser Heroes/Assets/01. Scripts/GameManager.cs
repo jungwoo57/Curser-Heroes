@@ -319,8 +319,8 @@ public class GameManager : MonoBehaviour
         data.gold = gold; 
         data.jewel = jewel;
         data.stage1bestWave = StageManager.Instance.bestWave[0];
-        data.stage1bestWave = StageManager.Instance.bestWave[1];
-        data.stage1bestWave = StageManager.Instance.bestWave[2];
+        data.stage2bestWave = StageManager.Instance.bestWave[1];
+        data.stage3bestWave = StageManager.Instance.bestWave[2];
         data.useStage = useStage;
         data.useForge = useForge;
         data.useBar = useBar;
@@ -334,11 +334,9 @@ public class GameManager : MonoBehaviour
     [ContextMenu("Load")]
     public void Load()
     {
-        Debug.Log("여긴됨");
         SaveData loadData = new SaveData();
         loadData = SaveLoadManager.instance.Load();
         if (loadData == null) return;
-        Debug.Log("데이터 로드됨");
         unlockedSkills = loadData.unlockedSkills ?? new List<SkillData>();
         selectSkills = loadData.selectedSkills ?? new List<SkillData>();
         skillPool = new List<SkillData>(HasSkills);
@@ -365,6 +363,7 @@ public class GameManager : MonoBehaviour
         selectSkills =  loadData.selectedSkills;
         gold = loadData.gold;
         jewel = loadData.jewel;
+        Debug.Log(loadData.stage1bestWave + loadData.stage2bestWave+ loadData.stage3bestWave);
         StageManager.Instance.bestWave[0] = loadData.stage1bestWave;
         StageManager.Instance.bestWave[1] = loadData.stage2bestWave;
         StageManager.Instance.bestWave[2] = loadData.stage3bestWave;

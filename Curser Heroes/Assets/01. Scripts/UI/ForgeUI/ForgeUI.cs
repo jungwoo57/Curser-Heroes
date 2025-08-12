@@ -307,6 +307,7 @@ public class ForgeUI : MonoBehaviour
                 unlockText.color = enabledColor;
                 unlockButton.gameObject.SetActive(true);
                 unlockButton.interactable = true;
+                reinforceButton.gameObject.SetActive(false);
                 //if(selectSubData.weaponName != selectSubWeapon)
                 currentWeaponAtk.text = "미해금";
                 upgradeWeaponAtk.text = selectSubData.baseDamage.ToString();

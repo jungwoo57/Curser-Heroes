@@ -62,6 +62,7 @@ MonoBehaviour:
     m_Bits: 64
   explosionOffset: {x: 0, y: 0.5}
   explosionRadius: 2
+  delayTime: 1
   bluePrefab: {fileID: 9070497624694108354, guid: ebda66f97e9f8424792be286632771cf, type: 3}
   spawnCount: 5
 --- !u!212 &4443567095666667195
