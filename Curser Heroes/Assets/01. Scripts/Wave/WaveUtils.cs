@@ -2,7 +2,7 @@
 
 public static class WaveUtils
 {
-    public static bool IsBossWave(int wave) => wave % 5 == 0;
+    public static bool IsBossWave(int wave) => wave % 20 == 0;
 
     public static int GetWaveValue(int wave) => 30 + (wave - 1) * 2;
 
