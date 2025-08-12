@@ -125,13 +125,7 @@ public class AoEFieldSkill : MonoBehaviour
 
 
 
-        if (audioSource != null && skillInstance.skill.audioClip != null)
-
-        {
-
-            audioSource.PlayOneShot(skillInstance.skill.audioClip);
-
-        }
+        
 
 
 
@@ -144,7 +138,13 @@ public class AoEFieldSkill : MonoBehaviour
             if (col.TryGetComponent(out BaseMonster baseMonster))
 
             {
+                if (audioSource != null && skillInstance.skill.audioClip != null)
 
+                {
+
+                    audioSource.PlayOneShot(skillInstance.skill.audioClip);
+
+                }
                 baseMonster.TakeDamage(info.damage);
 
                 continue;
@@ -158,7 +158,13 @@ public class AoEFieldSkill : MonoBehaviour
             if (col.TryGetComponent(out BossStats boss))
 
             {
+                if (audioSource != null && skillInstance.skill.audioClip != null)
 
+                {
+
+                    audioSource.PlayOneShot(skillInstance.skill.audioClip);
+
+                }
                 boss.TakeDamage(info.damage);
 
             }
