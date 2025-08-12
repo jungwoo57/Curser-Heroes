@@ -155,7 +155,6 @@ public class LabPanel : MonoBehaviour
            || GameManager.Instance.GetJewel() <= selectSkill.unlockCost)
         {
             unlockButton.interactable = false;
-            useJewelImage.gameObject.SetActive(false);
         }
         else
         {

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Spider
   m_EditorClassIdentifier: 
   monsterPrefab: {fileID: 6708495764094813773, guid: edda7e2185d30584b8bed8651293de3b, type: 3}
-  maxHP: 174
+  maxHP: 134
   valueCost: 3
-  attackCooldown: 2
+  attackCooldown: 5
   damage: 1
   index: 0
