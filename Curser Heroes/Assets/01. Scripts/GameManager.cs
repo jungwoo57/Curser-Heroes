@@ -271,7 +271,7 @@ public class GameManager : MonoBehaviour
     {
         if (partnerData.unlockCost <= jewel)
         {
-            jewel -= partnerData.unlockCost;
+            AddJewel(-partnerData.unlockCost);
             ownedPartners.Add(new OwnedPartner(partnerData));
         }
         UpgradeSound();
@@ -344,6 +344,7 @@ public class GameManager : MonoBehaviour
         skillPool = new List<SkillData>(HasSkills);
         ownedWeapons = loadData.ownedWeapons;
         ownedSubWeapons = loadData.ownedSubWeapons;
+        ownedPartners = loadData.ownedPartners;
         mainEquipWeapon = loadData.mainEquipWeapon;
         subEquipWeapon = loadData.subEquipWeapon;
 
