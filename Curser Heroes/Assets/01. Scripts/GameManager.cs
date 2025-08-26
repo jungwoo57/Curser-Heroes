@@ -106,7 +106,7 @@ public class GameManager : MonoBehaviour
         }
 
         OnGoldChanged?.Invoke();
-        Debug.Log($"골드 획득: {amount} / 총 골드: {gold}");
+       
     }
 
     public void AddJewel(int amount)
@@ -118,7 +118,7 @@ public class GameManager : MonoBehaviour
         }
 
         OnJewelChanged?.Invoke();
-        Debug.Log($"쥬얼 획득: {amount} / 총 쥬얼: {jewel}");
+       
     }
 
     public int GetGold()
@@ -206,7 +206,7 @@ public class GameManager : MonoBehaviour
             //gold -= data.upgradeCost[ownedWeapons[index].level];
             AddGold(-data.upgradeCost[ownedWeapons[index].level]);
             ownedWeapons[index].level++;
-            Debug.Log(ownedWeapons[index].data.name + "업그레이드 완료" + ownedWeapons[index].level);
+      
         }
         else
         {
@@ -223,7 +223,7 @@ public class GameManager : MonoBehaviour
         {
             AddGold(-data.upgradeCost[ownedSubWeapons[index].level]);
             ownedSubWeapons[index].level++;
-            Debug.Log(ownedSubWeapons[index].data.name + "업그레이드 완료" + ownedSubWeapons[index].level);
+            
         }
         else
         {
